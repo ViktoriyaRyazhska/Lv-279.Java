@@ -28,7 +28,7 @@ public class DemoTasksRef {
 			}
 		}
 
-		Command cmd = null;
+		Command cmd;
 
 
 		do {
@@ -42,8 +42,6 @@ public class DemoTasksRef {
 
 			if (cmd != null) {
 				cmd.execute();
-				cmd = null;
-				taskName = "";
 			}
 
 		} while (true);
