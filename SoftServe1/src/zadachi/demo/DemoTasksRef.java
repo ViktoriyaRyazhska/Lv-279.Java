@@ -40,9 +40,7 @@ public class DemoTasksRef {
 			if (taskName.equalsIgnoreCase("exit"))
 				break;
 
-			if (cmd != null) {
-				cmd.execute();
-			}
+			if (cmd != null) cmd.execute();
 
 		} while (true);
 
