@@ -1,4 +1,4 @@
-class Main{
+class MainTest{
 
 	
 
