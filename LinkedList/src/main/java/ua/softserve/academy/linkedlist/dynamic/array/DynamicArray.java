@@ -12,6 +12,8 @@ package ua.softserve.academy.linkedlist.dynamic.array;
 
 import ua.softserve.academy.linkedlist.dynamic.array.interfaces.IDynamicArray;
 
+import java.util.Arrays;
+
 //TODO IndexOf - Get - Contains - Remove - Size
 
 /**
@@ -41,11 +43,24 @@ public class DynamicArray implements IDynamicArray{
 
     @Override
     public void add(String item) {
-
+        if (size==items.length){
+            growArray();
+        }
+        items[size]=item;
+        size++;
     }
 
     @Override
     public void insert(int index, String item) {
+        if (index > size || index < 0){
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + size);
+        }
+        if (size==items.length){
+            growArray();
+        }
+        System.arraycopy(items,0,items,0,index);
+        System.arraycopy(items,index,items,index+1,size-index);
+        items[index]=item;
 
     }
 
@@ -98,11 +113,20 @@ public class DynamicArray implements IDynamicArray{
 
     @Override
     public void growArray() {
-
+        String newItems[] = new String[items.length*2];
+        System.arraycopy(items, 0, newItems, 0, size);
+        items=newItems;
     }
 
     private boolean checkIndex(int index){
         return ( (index > (size - 1)) || (index < 0) );
+    }
+
+    @Override
+    public String toString() {
+        return "DynamicArray{" +
+                "items=" + Arrays.toString(items) +
+                '}';
     }
 }
 
