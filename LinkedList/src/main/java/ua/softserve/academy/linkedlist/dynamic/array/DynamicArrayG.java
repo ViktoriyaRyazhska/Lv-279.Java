@@ -137,7 +137,10 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
 
     @Override
     public void clear() {
-
+        for (int i = 0; i < size; i++){
+            items[i] = null;
+        }
+        size = 0;
     }
 
     @Override
@@ -149,6 +152,9 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
 
     @Override
     public String toString() {
+        if (size==0){
+            return "DynamicArray{items=[]}";
+        }
         StringBuilder stringBuilder = new StringBuilder("DynamicArray{items=[");
         for (int i = 0; i < size-1; i++){
             stringBuilder.append(items[i].toString() + ", ");
