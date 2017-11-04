@@ -41,7 +41,12 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
      * @param capacity - no comments:).
      */
     public DynamicArrayG(int capacity) {
-        items = (T[])new Object[capacity];
+        if (capacity<=MAX_CAPACITY){
+            items = (T[])new Object[capacity];
+        }
+        else {
+            items = (T[])new Object[MAX_CAPACITY];
+        }
         size = 0;
     }
 
@@ -52,6 +57,9 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
      */
     @Override
     public void add(T item) {
+        if (size==MAX_CAPACITY){
+            System.out.println("Already full!");
+        }
         if (size == items.length){
             growArray();
         }
@@ -174,6 +182,11 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
     public int growArray() {
         if ((items.length * 2) <= MAX_CAPACITY) {
             T newItems[] = (T[]) new Object[items.length * 2];
+            System.arraycopy(items, 0, newItems, 0, size);
+            items = newItems;
+        }
+        else {
+            T newItems[] = (T[]) new Object[MAX_CAPACITY];
             System.arraycopy(items, 0, newItems, 0, size);
             items = newItems;
         }
