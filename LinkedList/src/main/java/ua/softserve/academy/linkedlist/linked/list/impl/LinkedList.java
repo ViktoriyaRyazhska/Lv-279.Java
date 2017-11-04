@@ -1,23 +1,27 @@
 package ua.softserve.academy.linkedlist.linked.list.impl;
 
 import ua.softserve.academy.linkedlist.linked.list.List;
+import ua.softserve.academy.linkedlist.linked.list.Node;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
-public class LinkedList<String> implements List<String>, Iterable {
+public class LinkedList<T> implements List<T> {
 
-    private Node<String> first;
+
+
+    private Node<T> first;
     private int size;
-    private Node<String> last;
+    private Node<T> last;
 
     public LinkedList() {
-        first = last = new Node(null, null, null);
+        first = last = new Node<T>(null, null, null);
     }
 
-    public LinkedList(String... elems) {
-        for (String elem : elems) {
+    @SafeVarargs
+    public LinkedList(T... elems) {
+        for (T elem : elems) {
             add(elem);
         }
     }
@@ -26,11 +30,11 @@ public class LinkedList<String> implements List<String>, Iterable {
         return size;
     }
 
-    public boolean contains(String value) {
+    public boolean contains(T value) {
         if (value == null) {
             throw new IllegalArgumentException("Null argument");
         }
-        Node<String> el = first;
+        Node<T> el = first;
         for (int i = 0; i < size; i++) {
             if (el.getValue().equals(value)) return true;
             el = el.getNext();
@@ -69,17 +73,17 @@ public class LinkedList<String> implements List<String>, Iterable {
         }
     }
 
-    public void add(String elem) {
+    public void add(T elem) {
         if (elem == null) {
             throw new IllegalArgumentException("Null argument");
         } else {
             if (size == 0) {
-                Node<String> newElem = new Node<String>(null, elem, null);
+                Node<T> newElem = new Node<T>(null, elem, null);
                 first = newElem;
                 last = newElem;
                 size++;
             } else {
-                Node<String> newElem = new Node<String>(last, elem, null);
+                Node<T> newElem = new Node<T>(last, elem, null);
                 last.setNext(newElem);
                 last = newElem;
                 size++;
@@ -87,97 +91,12 @@ public class LinkedList<String> implements List<String>, Iterable {
         }
     }
 
-    public Iterator iterator() {
-        return new Iterator() {
-            private Node<String> currentNode = first;
 
-            public boolean hasNext() {
-                return currentNode.getNext() != null;
-            }
-
-            public String next() {
-                if (hasNext()) {
-                    currentNode = currentNode.getNext();
-                    return currentNode.getValue();
-                } else throw new NoSuchElementException();
-
-            }
-
-            public boolean hasPrevious() {
-                return currentNode.getPrevious() != null;
-            }
-
-            public String previous() {
-                if (hasPrevious()) {
-                    currentNode = currentNode.getPrevious();
-                    return currentNode.getValue();
-                } else throw new NoSuchElementException();
-
-            }
-
-
-
-
-            public void insert(String value) {
-                Node<String> newElem = new Node<String>(currentNode.getPrevious(), value, currentNode);
-                currentNode.getPrevious().setNext(newElem);
-                currentNode.setPrevious(newElem);
-                currentNode = newElem;
-                size++;
-            }
-
-            public void set(String value) {
-                currentNode.setValue(value);
-            }
-        };
+    @Override
+    public boolean remove(T value) {
+        return false;
     }
-
-    class Node<String> {
-
-        private Node<String> previous;
-        private String value;
-        private Node<String> next;
-
-        public boolean isSingle() {
-            return isFirst() && isLast();
-        }
-
-        public boolean isFirst() {
-            return previous == null;
-        }
-
-        public boolean isLast() {
-            return next == null;
-        }
-
-        public Node(Node<String> previous, String value, Node<String> next) {
-            this.previous = previous;
-            this.value = value;
-            this.next = next;
-        }
-
-        public Node<String> getPrevious() {
-            return previous;
-        }
-
-        public void setPrevious(Node<String> previous) {
-            this.previous = previous;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
-
-        public Node<String> getNext() {
-            return next;
-        }
-
-        public void setNext(Node<String> next) {
-            this.next = next;
-        }
+    public Iterator iterator() {
+        return new LinkedListIterator(first,size);
     }
 }
