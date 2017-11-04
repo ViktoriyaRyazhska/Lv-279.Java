@@ -1,6 +1,6 @@
-package ua.softserve.academy.linkedlist.linked.list;
+package ua.softserve.academy.linkedlist.linked.list.impl;
 
-import ua.softserve.academy.linkedlist.linked.list.interfaces.List;
+import ua.softserve.academy.linkedlist.linked.list.List;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
