@@ -1,5 +1,5 @@
 /*
-* IDynamicArray
+* IDynamicArrayG
 *
 * Version 1.0-SNAPSHOT
 *

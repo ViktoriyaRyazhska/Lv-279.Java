@@ -20,7 +20,7 @@ import ua.softserve.academy.linkedlist.dynamic.array.interfaces.IDynamicArray;
  * Default capacity = 10;
  *
  * */
-public class DynamicArray implements IDynamicArray{
+public class DynamicArray implements IDynamicArray {
 
     private static final int DEFAULT_CAPACITY = 10;
 
