@@ -23,6 +23,7 @@ import ua.softserve.academy.linkedlist.dynamic.array.interfaces.IDynamicArray;
 public class DynamicArray implements IDynamicArray {
 
     private static final int DEFAULT_CAPACITY = 10;
+    private static final int MAX_CAPACITY = 102400000;
 
     private String[] items;
     private int size;
@@ -164,12 +165,17 @@ public class DynamicArray implements IDynamicArray {
     /**
      * Copies an array from the String source array, beginning at the
      * specified position, to the specified position of the destination array.
+     * @return new capacity. If new capacity stay as old it means
+     * we already have the maximum capacity.
      */
     @Override
-    public void growArray() {
-        String newItems[] = new String[items.length*2];
-        System.arraycopy(items, 0, newItems, 0, size);
-        items=newItems;
+    public int growArray() {
+        if ((items.length * 2) <= MAX_CAPACITY) {
+            String newItems[] = new String[items.length*2];
+            System.arraycopy(items, 0, newItems, 0, size);
+            items=newItems;
+        }
+        return items.length;
     }
 
     @Override
@@ -185,6 +191,10 @@ public class DynamicArray implements IDynamicArray {
         return stringBuilder.toString();
     }
 
+    /**
+     * Method getCapacity - returns current capacity
+     * @return current capacity
+     */
     @Override
     public int getCapacity(){
         return items.length;
