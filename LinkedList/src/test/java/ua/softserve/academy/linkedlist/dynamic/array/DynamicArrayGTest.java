@@ -138,7 +138,7 @@ public class DynamicArrayGTest {
 
     @Test
     public void growArrayInv() throws Exception {
-        dag = new DynamicArrayG<>(100000);
+        dag = new DynamicArrayG<>(Integer.MAX_VALUE);
         int sizeBefore = dag.getCapacity();
         int sizeAfter = dag.growArray();
         while (sizeBefore != sizeAfter) {
@@ -146,6 +146,45 @@ public class DynamicArrayGTest {
             sizeBefore = dag.getCapacity();
             sizeAfter = dag.growArray();
         }
+    }
+
+    @Test
+    public void removeTest() throws Exception {
+        dag.add(new Person(20,"Ivan"));
+        dag.add(new Person(25,"Nadia"));
+        dag.add(new Person(30,"Foma"));
+        dag.remove(1);
+        assertEquals("Ivan", dag.get(0).name);
+        assertEquals("Foma", dag.get(1).name);
+    }
+
+    @Test
+    public void containsTest() throws Exception {
+        Person p1=new Person(20,"Ivan");
+        Person p2=new Person(25,"Nadia");
+        dag.add(p1);
+        dag.add(p2);
+        assertEquals(true, dag.contains(p1));
+        assertEquals(true, dag.contains(p2));
+    }
+
+    @Test
+    public void indexOfTest() throws Exception {
+        Person p1=new Person(20,"Ivan");
+        Person p2=new Person(25,"Nadia");
+        dag.add(p1);
+        dag.add(p2);
+        assertEquals(0, dag.indexOf(p1));
+        assertEquals(1, dag.indexOf(p2));
+    }
+
+    @Test
+    public void size() throws Exception {
+        dag.add(new Person(20,"Ivan"));
+        dag.add(new Person(25,"Nadia"));
+        dag.add(new Person(30,"Foma"));
+        dag.remove(1);
+        assertEquals(2, dag.size());
     }
 
 }

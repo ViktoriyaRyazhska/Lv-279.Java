@@ -124,5 +124,42 @@ public class DynamicArrayTest {
             sizeAfter = da.growArray();
         }
     }
+    @Test
+    public void removeTest() throws Exception {
+        da.add("Ivan");
+        da.add("Nadia");
+        da.add("Foma");
+        da.remove(1);
+        assertEquals("Ivan", da.get(0));
+        assertEquals("Foma", da.get(1));
+    }
 
+    @Test
+    public void containsTest() throws Exception {
+        String p1=new String("Ivan");
+        String p2=new String("Nadia");
+        da.add(p1);
+        da.add(p2);
+        assertEquals(true, da.contains(p1));
+        assertEquals(true, da.contains(p2));
+    }
+
+    @Test
+    public void indexOfTest() throws Exception {
+        String p1=new String("Ivan");
+        String p2=new String("Nadia");
+        da.add(p1);
+        da.add(p2);
+        assertEquals(0, da.indexOf(p1));
+        assertEquals(1, da.indexOf(p2));
+    }
+
+    @Test
+    public void size() throws Exception {
+        da.add("Ivan");
+        da.add("Nadia");
+        da.add("Foma");
+        da.remove(1);
+        assertEquals(2, da.size());
+    }
 }

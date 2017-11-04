@@ -40,7 +40,12 @@ public class DynamicArray implements IDynamicArray {
      * @param capacity - no comments:).
      */
     public DynamicArray(int capacity) {
-        items = new String[capacity];
+        if (capacity<=MAX_CAPACITY) {
+            items = new String[capacity];
+        }
+        else {
+            items=new String[MAX_CAPACITY];
+        }
         size = 0;
     }
 
@@ -51,6 +56,10 @@ public class DynamicArray implements IDynamicArray {
      */
     @Override
     public void add(String item) {
+        if (size==MAX_CAPACITY){
+            System.out.println("Already full!");
+            return;
+        }
         if (size == items.length){
             growArray();
         }
@@ -172,6 +181,11 @@ public class DynamicArray implements IDynamicArray {
     public int growArray() {
         if ((items.length * 2) <= MAX_CAPACITY) {
             String newItems[] = new String[items.length*2];
+            System.arraycopy(items, 0, newItems, 0, size);
+            items=newItems;
+        }
+        else {
+            String newItems[] = new String[MAX_CAPACITY];
             System.arraycopy(items, 0, newItems, 0, size);
             items=newItems;
         }
