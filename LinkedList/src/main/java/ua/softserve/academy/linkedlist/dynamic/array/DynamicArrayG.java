@@ -59,6 +59,7 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
     public void add(T item) {
         if (size==MAX_CAPACITY){
             System.out.println("Already full!");
+            return;
         }
         if (size == items.length){
             growArray();
