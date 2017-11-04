@@ -66,9 +66,9 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
      * @return the element index of the element wanted to be inserted
      */
     @Override
-    public int insert(int index, T item){
+    public T insert(int index, T item){
         if (index > size || index < 0){
-            return index;
+            return null;
         }
         if (size == items.length){
             growArray();
@@ -77,7 +77,7 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
         System.arraycopy(items, index, items,index+1,size-index);
         size++;
         items[index] = item;
-        return index;
+        return item;
     }
 
     /**

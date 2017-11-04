@@ -66,9 +66,9 @@ public class DynamicArray implements IDynamicArray {
      * @return the element index of the element wanted to be inserted
      */
     @Override
-    public int insert(int index, String item) {
+    public String insert(int index, String item) {
         if (index > size || index < 0){
-            return index;
+            return null;
         }
         if (size==items.length){
             growArray();
@@ -77,7 +77,7 @@ public class DynamicArray implements IDynamicArray {
         System.arraycopy(items,index,items,index+1,size-index);
         items[index]=item;
         size++;
-        return index;
+        return item;
     }
 
     /**
