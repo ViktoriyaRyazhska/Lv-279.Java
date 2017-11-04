@@ -8,6 +8,7 @@ import java.util.List;
 class Main{
 	public static void main(String[] args) {
 		IDynamicArray iDynamicArray=new DynamicArray();
+		System.out.println(iDynamicArray);
 
 		for (int i=0;i<10;i++) {
 			iDynamicArray.add("aaa"+i);
