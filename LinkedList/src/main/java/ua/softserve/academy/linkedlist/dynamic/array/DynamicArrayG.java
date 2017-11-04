@@ -53,9 +53,9 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
     }
 
     @Override
-    public int insert(int index, T item){
+    public T insert(int index, T item){
         if (index > size || index < 0){
-            return -1;
+            return null;
         }
         if (size == items.length){
             growArray();
@@ -64,7 +64,7 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
         System.arraycopy(items, index, items,index+1,size-index);
         size++;
         items[index] = item;
-        return index;
+        return item;
     }
 
     /**
@@ -87,16 +87,17 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
      * <br><b>>=0</b> Item successfully deleted
      */
     @Override
-    public int remove(int index) {
+    public T remove(int index) {
         if ((index > (size - 1)) || (index < 0)){
-            return -1;
+            return null;
         }
+        T removed = items[index];
         for (int i = index; i < (size - 1); i++){
             items[i] = items[i+1];
         }
         size--;
         items[size] = null;
-        return index;
+        return removed;
     }
 
     /**
@@ -161,5 +162,10 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
         }
         stringBuilder.append(items[size-1].toString() + "]}");
         return stringBuilder.toString();
+    }
+
+    @Override
+    public int getCapacity(){
+        return items.length;
     }
 }

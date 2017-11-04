@@ -13,7 +13,7 @@ package ua.softserve.academy.linkedlist.dynamic.array.interfaces;
 public interface IDynamicArray {
 
     void add(String item);
-    void insert(int index, String item);
+    String insert(int index, String item);
     /**
      * Method get - returns item by the specified index
      * @param index specified index
@@ -26,7 +26,7 @@ public interface IDynamicArray {
      * @return <b>-1</b> it means we cannot find an item by this index
      * <br><b>>=0</b> Item successfully deleted
      */
-    int remove(int index);
+    String remove(int index);
     /**
      * Method contains - checks the presence of an item
      * @param item specified item
@@ -47,5 +47,7 @@ public interface IDynamicArray {
     int size();
     void clear();
     void growArray();
+
+    int getCapacity();
 
 }

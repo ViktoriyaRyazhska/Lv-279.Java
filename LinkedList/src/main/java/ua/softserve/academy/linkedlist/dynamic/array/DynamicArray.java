@@ -53,9 +53,9 @@ public class DynamicArray implements IDynamicArray {
     }
 
     @Override
-    public void insert(int index, String item) {
+    public String insert(int index, String item) {
         if (index > size || index < 0){
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + size);
+            return null;
         }
         if (size==items.length){
             growArray();
@@ -64,6 +64,7 @@ public class DynamicArray implements IDynamicArray {
         System.arraycopy(items,index,items,index+1,size-index);
         items[index]=item;
         size++;
+        return item;
     }
 
     /**
@@ -86,16 +87,17 @@ public class DynamicArray implements IDynamicArray {
      * <br><b>>=0</b> Item successfully deleted
      */
     @Override
-    public int remove(int index) {
+    public String remove(int index) {
         if ((index > (size - 1)) || (index < 0)){
-            return -1;
+            return null;
         }
+        String removed = items[index];
         for (int i = index; i < (size - 1); i++){
             items[i] = items[i+1];
         }
         items[size-1] = null;
         size--;
-        return index;
+        return removed;
     }
 
     /**
@@ -160,5 +162,10 @@ public class DynamicArray implements IDynamicArray {
         }
         stringBuilder.append(items[size-1] + "]}");
         return stringBuilder.toString();
+    }
+
+    @Override
+    public int getCapacity(){
+        return items.length;
     }
 }

@@ -13,7 +13,7 @@ package ua.softserve.academy.linkedlist.dynamic.array.interfaces;
 public interface IDynamicArrayG<T> {
 
     void add(T item);
-    int insert(int index, T item);
+    T insert(int index, T item);
     /**
      * Method get - returns item by the specified index
      * @param index specified index
@@ -26,7 +26,7 @@ public interface IDynamicArrayG<T> {
      * @return <b>-1</b> it means we cannot find an item by this index
      * <br><b>>=0</b> Item successfully deleted
      */
-    int remove(int index);
+    T remove(int index);
     /**
      * Method contains - checks the presence of an item
      * @param item specified item
@@ -47,5 +47,7 @@ public interface IDynamicArrayG<T> {
     int size();
     void clear();
     void growArray();
+
+    int getCapacity();
 
 }
