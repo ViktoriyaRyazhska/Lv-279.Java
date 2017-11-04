@@ -17,7 +17,7 @@ import java.util.Iterator;
 /**
  * Circular linked list class.
  */
-public class CircularLinkedList<T> implements ICircularLinkedList<T>, Iterable<T> {
+public class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
     private class Node<T>{
         private Node<T> next;
@@ -59,7 +59,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T>, Iterable<T
 
         @Override
         public String toString() {
-            return "{" + ((item == null)?null:item)  + '}';
+            return "" + (item);
         }
 
         @Override
@@ -93,19 +93,27 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T>, Iterable<T
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
+
+            private Node<T> current = first;
+
             @Override
             public void remove() {
-
+                Node<T> prev = current.getPrev();
+                Node<T> next = current.getNext();
+                prev.setNext(next);
+                next.setPrev(prev);
             }
 
             @Override
             public boolean hasNext() {
-                return false;
+                current = current.getNext();
+                return (last != null);
             }
 
             @Override
             public T next() {
-                return null;
+                T item = current.getItem();
+                return item;
             }
         };
     }
@@ -114,31 +122,74 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T>, Iterable<T
     public void add(T item) {
         if (first == null){
             first = new Node<>(null, null, item);
+            first.setNext(first);
+            first.setPrev(first);
         } else if (last == null){
             last = new Node<>(first, first, item);
+            first.setNext(last);
         } else {
-            last = new Node<>(last, first, item);
+            Node<T> node = new Node<>(last, first, item);
+            last.setNext(node);
+            last = node;
         }
         size++;
     }
 
+    /**
+     * Removes the first occurrence of the specified item from this list, if it is present.
+     * @param item specified item
+     * @return removed item or null if the specified item wasn't found
+     */
     @Override
     public T remove(T item) {
+        Iterator<T> iterator = this.iterator();
+        for(int i = 0; i < size; i++){
+            T current = iterator.next();
+            if (current.equals(item)){
+                iterator.remove();
+                size--;
+                return current;
+            }
+            iterator.hasNext();
+        }
         return null;
     }
 
     @Override
     public boolean contains(T item) {
+        Iterator<T> iterator = this.iterator();
+        for(int i = 0; i < size; i++){
+            T current = iterator.next();
+            iterator.hasNext();
+            if (current.equals(item)){
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public void clear() {
+        first = null;
+        last = null;
+        size = 0;
+    }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("CircularLinkedList{items=[");
+        Iterator<T> iterator = this.iterator();
+        for(int i = 0; i < size; i++){
+            T current = iterator.next();
+            iterator.hasNext();
+            sb.append(current + " ");
+        }
+        sb.append("]}");
+        return sb.toString();
     }
 }

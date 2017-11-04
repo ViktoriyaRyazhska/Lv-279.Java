@@ -10,7 +10,7 @@
 
 package ua.softserve.academy.linkedlist.circular.linked.list.interfaces;
 
-public interface ICircularLinkedList<T> {
+public interface ICircularLinkedList<T> extends Iterable<T>{
 //    Add(item) for appending items in the end of Circular Linked List.
 //    the function Remove(value) for removing items from the Circular Linked List.
 //    the function Next() for getting items from the Circular Linked List and moving to next item in the list.
