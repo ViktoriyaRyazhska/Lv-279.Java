@@ -65,7 +65,20 @@ public class DynamicArray implements IDynamicArray {
      * @param item element to be stored at the specified position
      * @return the element index of the element wanted to be inserted
      */
-
+    @Override
+    public int insert(int index, String item) {
+        if (index > size || index < 0){
+            return index;
+        }
+        if (size==items.length){
+            growArray();
+        }
+        System.arraycopy(items,0,items,0,index);
+        System.arraycopy(items,index,items,index+1,size-index);
+        items[index]=item;
+        size++;
+        return index;
+    }
 
     /**
      * Method get - returns item by the specified index

@@ -65,7 +65,20 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
      * @param item element to be stored at the specified position
      * @return the element index of the element wanted to be inserted
      */
-
+    @Override
+    public int insert(int index, T item){
+        if (index > size || index < 0){
+            return index;
+        }
+        if (size == items.length){
+            growArray();
+        }
+        System.arraycopy(items,0,items,0, index);
+        System.arraycopy(items, index, items,index+1,size-index);
+        size++;
+        items[index] = item;
+        return index;
+    }
 
     /**
      * Method get - returns item by the specified index

@@ -13,7 +13,7 @@ package ua.softserve.academy.linkedlist.dynamic.array.interfaces;
 public interface IDynamicArrayG<T> {
 
     void add(T item);
-    T insert(int index, T item);
+    int insert(int index, T item);
     /**
      * Method get - returns item by the specified index
      * @param index specified index
