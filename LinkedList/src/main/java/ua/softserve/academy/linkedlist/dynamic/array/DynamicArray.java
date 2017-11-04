@@ -18,12 +18,13 @@ import ua.softserve.academy.linkedlist.dynamic.array.interfaces.IDynamicArray;
  * Made by using dynamic array.
  * First index = 0.
  * Default capacity = 10;
+ * Maximum capacity = 51200000;
  *
  * */
 public class DynamicArray implements IDynamicArray {
 
     private static final int DEFAULT_CAPACITY = 10;
-    private static final int MAX_CAPACITY = 102400000;
+    private static final int MAX_CAPACITY = 51200000;
 
     private String[] items;
     private int size;
@@ -184,7 +185,7 @@ public class DynamicArray implements IDynamicArray {
             System.arraycopy(items, 0, newItems, 0, size);
             items=newItems;
         }
-        else {
+        else if (items.length < MAX_CAPACITY){
             String newItems[] = new String[MAX_CAPACITY];
             System.arraycopy(items, 0, newItems, 0, size);
             items=newItems;

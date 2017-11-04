@@ -138,11 +138,39 @@ public class DynamicArrayGTest {
 
     @Test
     public void growArrayInv() throws Exception {
+        dag = new DynamicArrayG<>(100000);
+        int sizeBefore = dag.getCapacity();
+        int sizeAfter = dag.growArray();
+        while (sizeBefore != sizeAfter) {
+            assertEquals(sizeBefore * 2, sizeAfter);
+            sizeBefore = dag.getCapacity();
+            sizeAfter = dag.growArray();
+        }
+    }
+
+    @Test
+    public void growArrayInv2() throws Exception {
         dag = new DynamicArrayG<>(Integer.MAX_VALUE);
         int sizeBefore = dag.getCapacity();
         int sizeAfter = dag.growArray();
         while (sizeBefore != sizeAfter) {
             assertEquals(sizeBefore * 2, sizeAfter);
+            sizeBefore = dag.getCapacity();
+            sizeAfter = dag.growArray();
+        }
+    }
+
+    @Test
+    public void growArrayInv3() throws Exception {
+        dag = new DynamicArrayG<>(51200000 - 10);
+        int sizeBefore = dag.getCapacity();
+        int sizeAfter = dag.growArray();
+        while (sizeBefore != sizeAfter) {
+            if (sizeBefore * 2 > 51200000) {
+                assertEquals(51200000, sizeAfter);
+            } else {
+                assertEquals(sizeBefore * 2, sizeAfter);
+            }
             sizeBefore = dag.getCapacity();
             sizeAfter = dag.growArray();
         }

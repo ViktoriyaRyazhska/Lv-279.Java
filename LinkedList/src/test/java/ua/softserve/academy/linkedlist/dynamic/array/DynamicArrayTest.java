@@ -119,11 +119,42 @@ public class DynamicArrayTest {
         int sizeBefore = da.getCapacity();
         int sizeAfter = da.growArray();
         while (sizeBefore != sizeAfter) {
+            System.out.println("in");
+            assertEquals(sizeBefore * 2, sizeAfter);
+            sizeBefore = da.getCapacity();
+            sizeAfter = da.growArray();
+            System.out.println(sizeAfter);
+        }
+    }
+
+    @Test
+    public void growArrayInv2() throws Exception {
+        da = new DynamicArray(Integer.MAX_VALUE);
+        int sizeBefore = da.getCapacity();
+        int sizeAfter = da.growArray();
+        while (sizeBefore != sizeAfter) {
             assertEquals(sizeBefore * 2, sizeAfter);
             sizeBefore = da.getCapacity();
             sizeAfter = da.growArray();
         }
     }
+
+    @Test
+    public void growArrayInv3() throws Exception {
+        da = new DynamicArray(51200000 - 10);
+        int sizeBefore = da.getCapacity();
+        int sizeAfter = da.growArray();
+        while (sizeBefore != sizeAfter) {
+            if (sizeBefore * 2 > 51200000) {
+                assertEquals(51200000, sizeAfter);
+            } else {
+                assertEquals(sizeBefore * 2, sizeAfter);
+            }
+            sizeBefore = da.getCapacity();
+            sizeAfter = da.growArray();
+        }
+    }
+
     @Test
     public void removeTest() throws Exception {
         da.add("Ivan");

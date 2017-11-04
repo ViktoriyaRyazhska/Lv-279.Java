@@ -41,7 +41,7 @@ public class CircularLinkedListTest {
         list.add("b");
         System.out.println(list.size());
         System.out.println(list);
-        list.remove("c");
+        System.out.println(list.remove("c"));
         System.out.println(list.size());
         System.out.println(list);
     }

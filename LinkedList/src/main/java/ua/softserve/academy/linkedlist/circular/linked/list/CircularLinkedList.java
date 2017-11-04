@@ -30,9 +30,6 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
             this.item = item;
         }
 
-        public Node() {
-        }
-
         public Node<T> getNext() {
             return next;
         }
@@ -90,6 +87,10 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     public CircularLinkedList() {
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -106,7 +107,9 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
             @Override
             public boolean hasNext() {
-                current = current.getNext();
+                if (current != null) {
+                    current = current.getNext();
+                }
                 return (last != null);
             }
 
@@ -118,6 +121,10 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
         };
     }
 
+    /**
+     *
+     * @param item
+     */
     @Override
     public void add(T item) {
         if (first == null){
@@ -155,6 +162,11 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
         return null;
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean contains(T item) {
         Iterator<T> iterator = this.iterator();
@@ -168,11 +180,18 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     *
+     */
     @Override
     public void clear() {
         first = null;
@@ -180,6 +199,10 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
         size = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("CircularLinkedList{items=[");
