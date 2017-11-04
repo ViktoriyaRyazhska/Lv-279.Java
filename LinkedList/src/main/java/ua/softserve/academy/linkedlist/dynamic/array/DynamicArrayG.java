@@ -43,6 +43,11 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
         size = 0;
     }
 
+    /**
+     * Appends the specified element to the end of this list.
+     *
+     * @param item element to be appended to this list
+     */
     @Override
     public void add(T item) {
         if (size == items.length){
@@ -52,10 +57,18 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
         size++;
     }
 
+    /**
+     * Replaces the element at the specified position in this list with
+     * the specified element.
+     *
+     * @param index index of the element to replace
+     * @param item element to be stored at the specified position
+     * @return the element index of the element wanted to be inserted
+     */
     @Override
     public int insert(int index, T item){
         if (index > size || index < 0){
-            return -1;
+            return index;
         }
         if (size == items.length){
             growArray();
@@ -133,8 +146,13 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
     @Override
     public int size() {
         return size;
+
     }
 
+    /**
+     * Removes all of the elements from this list.  The list will
+     * be empty after this call returns.
+     */
     @Override
     public void clear() {
         for (int i = 0; i < size; i++){
@@ -143,6 +161,10 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
         size = 0;
     }
 
+    /**
+     * Copies an array from the specified source array, beginning at the
+     * specified position, to the specified position of the destination array.
+     */
     @Override
     public void growArray() {
         T newItems[] = (T[])new Object[items.length*2];

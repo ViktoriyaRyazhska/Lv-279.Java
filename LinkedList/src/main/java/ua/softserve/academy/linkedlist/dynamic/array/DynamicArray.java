@@ -43,6 +43,11 @@ public class DynamicArray implements IDynamicArray{
         size = 0;
     }
 
+    /**
+     * Appends the String element to the end of this list.
+     *
+     * @param item element to be appended to this list
+     */
     @Override
     public void add(String item) {
         if (size == items.length){
@@ -52,10 +57,18 @@ public class DynamicArray implements IDynamicArray{
         size++;
     }
 
+    /**
+     * Replaces the element at the specified position in this list with
+     * the String element.
+     *
+     * @param index index of the element to replace
+     * @param item element to be stored at the specified position
+     * @return the element index of the element wanted to be inserted
+     */
     @Override
-    public void insert(int index, String item) {
+    public int insert(int index, String item) {
         if (index > size || index < 0){
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + size);
+            return index;
         }
         if (size==items.length){
             growArray();
@@ -64,6 +77,7 @@ public class DynamicArray implements IDynamicArray{
         System.arraycopy(items,index,items,index+1,size-index);
         items[index]=item;
         size++;
+        return index;
     }
 
     /**
@@ -134,6 +148,10 @@ public class DynamicArray implements IDynamicArray{
         return size;
     }
 
+    /**
+     * Removes all of the elements from this list.  The list will
+     * be empty after this call returns.
+     */
     @Override
     public void clear() {
         for (int i = 0; i < size; i++){
@@ -142,6 +160,10 @@ public class DynamicArray implements IDynamicArray{
         size = 0;
     }
 
+    /**
+     * Copies an array from the String source array, beginning at the
+     * specified position, to the specified position of the destination array.
+     */
     @Override
     public void growArray() {
         String newItems[] = new String[items.length*2];
