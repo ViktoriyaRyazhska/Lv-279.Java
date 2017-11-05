@@ -49,7 +49,7 @@ public class Node<T> {
     }
 
     public void deleteNextLink(){
-       this.next.previous = this.previous;
+       getNext().setPrevious(getPrevious());;
     }
 
     public void deletePreviousLink(){

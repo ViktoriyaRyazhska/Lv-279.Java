@@ -34,7 +34,8 @@ public class NodeTest {
 
     @Test
     public void isSingle() throws Exception {
-
+        Node<String> someNode = new Node<>(null,"1",null);
+        assertEquals(true,someNode.isSingle());
     }
 
     @Test
