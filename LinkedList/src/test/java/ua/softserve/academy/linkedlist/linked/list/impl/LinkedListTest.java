@@ -31,6 +31,8 @@ public class LinkedListTest {
         assertEquals("Tom", stringLinkedList.get(0));
     }
 
+
+
     @Test(expected = IndexOutOfBoundsException.class)
     public void getNegative() throws Exception {
         stringLinkedList.get(-1);
@@ -39,6 +41,12 @@ public class LinkedListTest {
     @Test
     public void size() throws Exception {
         assertEquals(3, stringLinkedList.size());
+    }
+
+    @Test
+    public void isEmpty() throws Exception {
+        assertEquals(true, new LinkedList<>().isEmpty());
+
     }
 
     @Test
@@ -75,6 +83,19 @@ public class LinkedListTest {
         assertEquals("Jack", stringLinkedList.get(1));
     }
 
+    @Test
+    public void removeSingle() throws Exception {
+        stringLinkedList = new LinkedList<>();
+        stringLinkedList.add("Bob");
+        assertEquals(true, stringLinkedList.remove("Bob"));
+
+    }
+
+    @Test
+    public void removeLast() throws Exception {
+       assertEquals(true, stringLinkedList.remove("Jack"));
+
+    }
     @Test
     public void remove_TrueFalse() throws Exception {
         assertEquals(false, stringLinkedList.remove("Ted"));
@@ -140,6 +161,7 @@ public class LinkedListTest {
         stringLinkedList = new LinkedList<>();
         stringLinkedList.backwardIterator().next();
     }
+
 
     @Test
     public void backwardIteratorHasNext() throws Exception {
