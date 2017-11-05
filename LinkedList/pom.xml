@@ -8,8 +8,8 @@
 
   <build>
   <plugins>
-    <plugin>
-      <!-- Build an executable JAR -->
+    <!--<plugin>
+      &lt;!&ndash; Build an executable JAR &ndash;&gt;
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-jar-plugin</artifactId>
       <version>3.0.2</version>
@@ -22,7 +22,7 @@
           </manifest>
         </archive>
       </configuration>
-    </plugin>
+    </plugin>-->
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
