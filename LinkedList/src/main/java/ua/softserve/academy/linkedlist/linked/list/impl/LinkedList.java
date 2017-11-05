@@ -1,6 +1,5 @@
 package ua.softserve.academy.linkedlist.linked.list.impl;
 
-import ua.softserve.academy.linkedlist.linked.list.List;
 import ua.softserve.academy.linkedlist.linked.list.Node;
 
 import java.util.Iterator;
@@ -8,14 +7,14 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
-public class LinkedList<T> implements List<T> {
+public class LinkedList<T> {
 
     private Node<T> first;
     private int size;
     private Node<T> last;
 
     public LinkedList() {
-        first = last = new Node<T>(null, null, null);
+        first = last = null;
     }
 
     @SafeVarargs
@@ -31,7 +30,7 @@ public class LinkedList<T> implements List<T> {
 
     private boolean checkIndex(int index) {
 
-        return index >= 0 && index < size;
+        return (index >= 0) && (index < size);
     }
 
     public T get(int index) {
@@ -58,25 +57,8 @@ public class LinkedList<T> implements List<T> {
     }
 
     public boolean contains(T value) {
-
-
-       return containsNode(value)!=null;
-        /*
-        if (value != null) {
-            if (containsNode(value) != null) {
-                return true;
-            }
-        }
-           /*
-            for (Node<T> elem = first; elem!=null ; elem = elem.getNext()) {
-                if (elem.getValue().equals(value)) {
-                    return true;
-                }
-            }
-        }*/
-       // return false;
+        return containsNode(value) != null;
     }
-
 
     private Node<T> containsNode(T value) {
         if (value != null) {
@@ -90,27 +72,51 @@ public class LinkedList<T> implements List<T> {
     }
 
     private void repositioningForRemoving(Node<T> el) {
-        el.getPrevious().setNext(el.getNext());
-        el.getNext().setPrevious(el.getPrevious());
-        el.setNext(null);
-        el.setPrevious(null);
-        el.setValue(null);
+
+        if (el.isSingle()) {
+            deleteNode(el);
+        } else {
+            if (el.isFirst()) {
+                first = el.getNext();
+                el.deleteNextLink();
+                deleteNode(el);
+            } else if (el.isLast()) {
+                last = el.getPrevious();
+                el.deletePreviousLink();
+                deleteNode(el);
+            } else {
+                el.deleteNextLink();
+                el.deletePreviousLink();
+                deleteNode(el);
+            }
+        }
+    }
+
+    private void deleteNode(Node node) {
+        node.setNext(null);
+        node.setPrevious(null);
+        node.setValue(null);
         size--;
+
     }
 
     public boolean remove(T value) {
-
 
         if (value != null) {
 
             for (Node<T> elem = first; elem != null; elem = elem.getNext()) {
                 if (elem.getValue().equals(value)) {
+
                     repositioningForRemoving(elem);
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    public boolean isEmpty() {
+        return (first == last) && (size == 0);
     }
 
     public void clear() {
@@ -122,7 +128,7 @@ public class LinkedList<T> implements List<T> {
             elem.setValue(null);
             elem = next;
         }
-        first = last = new Node<T>(null, null, null);
+        first = last = null;
         size = 0;
     }
 
@@ -148,89 +154,102 @@ public class LinkedList<T> implements List<T> {
         if (elem == null) {
             throw new IllegalArgumentException("Null argument");
         } else {
-            Node<T> newElem = new Node<T>(el.getPrevious(), elem, el);
-            el.getPrevious().setNext(newElem);
-            el.setPrevious(newElem);
-            size++;
+
+            if (el.getPrevious() == null) {
+                Node<T> newElem = new Node<T>(el.getPrevious(), elem, el);
+                el.setPrevious(newElem);
+                first = newElem;
+            } else {
+                Node<T> newElem = new Node<T>(el.getPrevious(), elem, el);
+
+                el.getPrevious().setNext(newElem);
+                el.setPrevious(newElem);
+                size++;
+            }
         }
     }
 
 
-    public Iterator<T> forwardIterator() {
+    public LinkedListIterator<T> forwardIterator() {
 
-        return new Iterator<T>() {
-            private Node<T> elem = first;
-
-            public boolean hasNext() {
-                return elem.getNext() != null;
+        return new LinkedListIterator<T>(first) {
+            @Override
+            public boolean hasPrevious() {
+                return hasNext();
             }
 
-            public T next() {
-                if (hasNext()) {
-                    elem = elem.getNext();
-                    return elem.getValue();
-                } else throw new NoSuchElementException();
+            @Override
+            public T previous() {
+                return next();
             }
 
-            public void set(T value) {
-                if (elem == null) {
-                    throw new IllegalArgumentException("Null argument");
-                }
-                elem.setValue(value);
-            }
-
+            @Override
             public void insert(T value) {
-                repositioningForAdding(elem, value);
-            }
 
+                if (this.getCurrent().getValue() == null) next();
+                LinkedList.this.repositioningForAdding(this.getCurrent(), value);
+            }
         };
     }
 
-    public Iterator backwardIterator() {
 
-        return new Iterator<T>() {
-            private Node<T> elem = last;
+    public LinkedListIterator backwardIterator() {
 
+        return new LinkedListIterator<T>(last) {
+
+            @Override
             public boolean hasNext() {
                 return hasPrevious();
             }
 
+            @Override
             public T next() {
                 return previous();
-
             }
 
-            public boolean hasPrevious() {
-                return elem.getPrevious() != null;
-            }
-
-            public T previous() {
-                if (hasPrevious()) {
-                    elem = elem.getPrevious();
-                    return elem.getValue();
-                } else throw new NoSuchElementException();
-            }
-
-            public void set(T value) {
-                if (elem == null) {
-                    throw new IllegalArgumentException("Null argument");
-                }
-                elem.setValue(value);
-            }
-
+            @Override
             public void insert(T value) {
-                repositioningForAdding(elem, value);
+
+                if (this.getCurrent().getValue() == null) next();
+                LinkedList.this.repositioningForAdding(this.getCurrent(), value);
             }
 
         };
     }
 
+    public static void main(String[] args) {
+        LinkedList<String> list1 = new LinkedList<>("a", "b", "c");
 
-    public Iterator iterator() {
-        return new LinkedListIterator(first, size, last);
+        LinkedList<String> list = new LinkedList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.remove("b");
+        LinkedListIterator<String> iterator = list.forwardIterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+
+
+        }
+/*
+        LinkedListIterator<String> iterator2 = list.forwardIterator();
+        System.out.println(list.contains("1"));
+        while (iterator2.hasNext()) {
+            ;
+
+            System.out.println(iterator2.next());
+
+        }
+        /*
+        LinkedListIterator<String> iterator2 = list.forwardIterator();
+        while (iterator2.hasNext()){
+            String s = iterator2.next();
+            System.out.println(s);
+
+        }
+*/
+
     }
 
-    public Iterator iteratorBackWard() {
-        return new LinkedListIterator(last, size, first);
-    }
 }

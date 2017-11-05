@@ -47,4 +47,11 @@ public class Node<T> {
     public void setNext(Node<T> next) {
         this.next = next;
     }
+
+    public void deleteNextLink(){
+       this.next.previous = this.previous;
+    }
+    public void deletePreviousLink(){
+        getPrevious().setNext(this.getNext());
+    }
 }

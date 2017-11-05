@@ -126,6 +126,7 @@ public class LinkedListTest {
     @Test
     public void hasNext_ifOnly1ObjPresent() throws Exception {
         stringLinkedList = new LinkedList<>();
+        stringLinkedList.add("a");
         assertEquals(true, stringLinkedList.forwardIterator().hasNext());
     }
 
