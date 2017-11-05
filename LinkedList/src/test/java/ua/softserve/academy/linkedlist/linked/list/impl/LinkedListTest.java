@@ -152,8 +152,5 @@ public class LinkedListTest {
         assertEquals(false, stringLinkedList.backwardIterator().hasNext());
     }
 
-    @Test
-    public void forwardIteratorSet() throws Exception {
-        //stringLinkedList.forwardIterator().
-    }
+
 }

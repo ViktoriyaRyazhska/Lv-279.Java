@@ -11,15 +11,12 @@ public class LinkedListIterator<T> implements ListIterator<T> {
     private Node<T> currentNode;
 
 
-    public LinkedListIterator() {
 
-        this.currentNode  = new Node<>(null, null, null);
-
-    }
 
     public LinkedListIterator(Node<T> node) {
-        if (node == null) this.currentNode = new Node<>(null, null, null);
-
+        if (node == null) {
+            this.currentNode = new Node<>(null, null, null);
+        }
         else {
             if (node.getPrevious() == null) {
                 this.currentNode = new Node<>(null, null, node);
@@ -27,8 +24,6 @@ public class LinkedListIterator<T> implements ListIterator<T> {
             } else if (node.getNext() == null) {
                 this.currentNode = new Node<>(node, null, null);
 
-            } else {
-                currentNode = node;
             }
         }
     }

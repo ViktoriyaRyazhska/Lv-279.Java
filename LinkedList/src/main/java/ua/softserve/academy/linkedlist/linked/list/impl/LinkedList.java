@@ -217,39 +217,5 @@ public class LinkedList<T> {
         };
     }
 
-    public static void main(String[] args) {
-        LinkedList<String> list1 = new LinkedList<>("a", "b", "c");
-
-        LinkedList<String> list = new LinkedList<>();
-        list.add("a");
-        list.add("b");
-        list.add("c");
-        list.remove("b");
-        LinkedListIterator<String> iterator = list.forwardIterator();
-
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-
-
-        }
-/*
-        LinkedListIterator<String> iterator2 = list.forwardIterator();
-        System.out.println(list.contains("1"));
-        while (iterator2.hasNext()) {
-            ;
-
-            System.out.println(iterator2.next());
-
-        }
-        /*
-        LinkedListIterator<String> iterator2 = list.forwardIterator();
-        while (iterator2.hasNext()){
-            String s = iterator2.next();
-            System.out.println(s);
-
-        }
-*/
-
-    }
 
 }
