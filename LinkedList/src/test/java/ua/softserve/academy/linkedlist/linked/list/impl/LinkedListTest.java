@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.*;
 
 
@@ -59,7 +61,7 @@ public class LinkedListTest {
         stringLinkedList.remove("Bob");
         assertEquals(2, stringLinkedList.size());
         assertEquals("Tom", stringLinkedList.get(0));
-       assertEquals("Jack", stringLinkedList.get(1));
+        assertEquals("Jack", stringLinkedList.get(1));
     }
 
     @Test
@@ -80,5 +82,27 @@ public class LinkedListTest {
         assertEquals("Steve", stringLinkedList.get(3));
     }
 
+    @Test
+    public void next() throws Exception {
+        assertEquals("Tom", stringLinkedList.forwardIterator().next());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void next_ifLinkedListEmpty() throws Exception {
+        stringLinkedList = new LinkedList<>();
+        stringLinkedList.forwardIterator().next();
+    }
+
+    @Test
+    public void hasNext_ifLinkedListEmpty() throws Exception {
+        stringLinkedList = new LinkedList<>();
+        assertEquals(false, stringLinkedList.forwardIterator().hasNext());
+    }
+
+    @Test
+    public void hasNext_ifOnly1ObjPresent() throws Exception {
+        stringLinkedList = new LinkedList<>();
+        assertEquals(true, stringLinkedList.forwardIterator().hasNext());
+    }
 
 }
