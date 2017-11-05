@@ -11,7 +11,6 @@ import java.util.NoSuchElementException;
 public class LinkedList<T> implements List<T> {
 
 
-
     private Node<T> first;
     private int size;
     private Node<T> last;
@@ -61,45 +60,48 @@ public class LinkedList<T> implements List<T> {
 
     public boolean contains(T value) {
         if (value == null) {
-            throw new IllegalArgumentException("Null argument");
-        }
-        Node<T> el = first;
-        for (int i = 0; i < size; i++) {
-            if (el.getValue().equals(value)) return true;
-            el = el.getNext();
+            Node<T> el = first;
+            for (int i = 0; i < size; i++) {
+                if (el.getValue().equals(value)) return true;
+                el = el.getNext();
+            }
         }
         return false;
     }
 
-    private void repositioningForRemoving(Node<String> el) {
+    private void repositioningForRemoving(Node<T> el) {
         el.getPrevious().setNext(el.getNext());
         el.getNext().setPrevious(el.getPrevious());
         el.setNext(null);
         el.setPrevious(null);
+        el.setValue(null);
         size--;
     }
 
     public boolean remove(T value) {
-        if (value == null) {
-            return false;
-        }
-        Node elem = first;
-        for (int i = 0; i < size; i++) {
-            if (elem.getValue().equals(value)) {
-                repositioningForRemoving(elem);
-                return true;
+        if (value != null) {
+
+            for (Node<T> elem = first; elem!=null ; elem = elem.getNext()) {
+                if (elem.getValue().equals(value)) {
+                    repositioningForRemoving(elem);
+                    return true;
+                }
             }
-            elem.getNext();
         }
         return false;
     }
 
     public void clear() {
         Node elem = first;
-        for (int i = 0; i < size; i++) {
-            repositioningForRemoving(elem);
-            elem.getNext();
+        while (!elem.isLast()) {
+            Node<T> next = elem.getNext();
+            elem.setNext(null);
+            elem.setPrevious(null);
+            elem.setValue(null);
+            elem = next;
         }
+        first = last = new Node<T>(null, null, null);
+        size = 0;
     }
 
     public void add(T elem) {
@@ -119,6 +121,7 @@ public class LinkedList<T> implements List<T> {
             size++;
         }
     }
+
     private void repositioningForAdding(Node<T> el, T elem) {
         if (elem == null) {
             throw new IllegalArgumentException("Null argument");
@@ -146,14 +149,16 @@ public class LinkedList<T> implements List<T> {
                     return elem.getValue();
                 } else throw new NoSuchElementException();
             }
+
             public void set(T value) {
                 if (elem == null) {
                     throw new IllegalArgumentException("Null argument");
                 }
                 elem.setValue(value);
             }
+
             public void insert(T value) {
-                repositioningForAdding(elem,value);
+                repositioningForAdding(elem, value);
             }
 
         };
@@ -165,20 +170,20 @@ public class LinkedList<T> implements List<T> {
             private Node<T> elem = last;
 
             public boolean hasNext() {
-                return false;   //or hasPrevious()
+                return hasPrevious();
             }
 
             public T next() {
-                throw new NoSuchElementException(); // or  previous()
+                return previous();
 
             }
 
-            public boolean hasPrevious(){
+            public boolean hasPrevious() {
                 return elem.getPrevious() != null;
             }
 
             public T previous() {
-                if(hasPrevious()){
+                if (hasPrevious()) {
                     elem = elem.getPrevious();
                     return elem.getValue();
                 } else throw new NoSuchElementException();
@@ -186,12 +191,12 @@ public class LinkedList<T> implements List<T> {
         };
     }
 
-    /*
-      public Iterator iterator() {
-        return new LinkedListIterator(first,size);
+
+    public Iterator iterator() {
+        return new LinkedListIterator(first, size, last);
     }
 
     public Iterator iteratorBackWard() {
-        return new LinkedListIterator(last,size);
-    }*/
+        return new LinkedListIterator(last, size, first);
+    }
 }

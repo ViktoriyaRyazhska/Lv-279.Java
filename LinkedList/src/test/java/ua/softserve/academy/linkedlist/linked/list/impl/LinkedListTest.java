@@ -59,7 +59,7 @@ public class LinkedListTest {
         stringLinkedList.remove("Bob");
         assertEquals(2, stringLinkedList.size());
         assertEquals("Tom", stringLinkedList.get(0));
-        assertEquals("Jack", stringLinkedList.get(1));
+       assertEquals("Jack", stringLinkedList.get(1));
     }
 
     @Test
