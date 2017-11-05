@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 
 public class LinkedList<T> implements List<T> {
 
-
     private Node<T> first;
     private int size;
     private Node<T> last;
@@ -59,14 +58,35 @@ public class LinkedList<T> implements List<T> {
     }
 
     public boolean contains(T value) {
-        if (value == null) {
-            Node<T> el = first;
-            for (int i = 0; i < size; i++) {
-                if (el.getValue().equals(value)) return true;
-                el = el.getNext();
+
+
+       return containsNode(value)!=null;
+        /*
+        if (value != null) {
+            if (containsNode(value) != null) {
+                return true;
             }
         }
-        return false;
+           /*
+            for (Node<T> elem = first; elem!=null ; elem = elem.getNext()) {
+                if (elem.getValue().equals(value)) {
+                    return true;
+                }
+            }
+        }*/
+       // return false;
+    }
+
+
+    private Node<T> containsNode(T value) {
+        if (value != null) {
+            for (Node<T> elem = first; elem != null; elem = elem.getNext()) {
+                if (elem.getValue().equals(value)) {
+                    return elem;
+                }
+            }
+        }
+        return null;
     }
 
     private void repositioningForRemoving(Node<T> el) {
@@ -79,9 +99,11 @@ public class LinkedList<T> implements List<T> {
     }
 
     public boolean remove(T value) {
+
+
         if (value != null) {
 
-            for (Node<T> elem = first; elem!=null ; elem = elem.getNext()) {
+            for (Node<T> elem = first; elem != null; elem = elem.getNext()) {
                 if (elem.getValue().equals(value)) {
                     repositioningForRemoving(elem);
                     return true;
@@ -188,6 +210,18 @@ public class LinkedList<T> implements List<T> {
                     return elem.getValue();
                 } else throw new NoSuchElementException();
             }
+
+            public void set(T value) {
+                if (elem == null) {
+                    throw new IllegalArgumentException("Null argument");
+                }
+                elem.setValue(value);
+            }
+
+            public void insert(T value) {
+                repositioningForAdding(elem, value);
+            }
+
         };
     }
 
