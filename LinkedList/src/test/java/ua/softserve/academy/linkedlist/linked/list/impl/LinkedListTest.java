@@ -42,6 +42,12 @@ public class LinkedListTest {
     }
 
     @Test
+    public void constructor() throws Exception {
+        stringLinkedList = new LinkedList<>("Tom", "Bob", "Jack");
+        assertEquals(3, stringLinkedList.size());
+    }
+
+    @Test
     public void size_ifRemoveObj() throws Exception {
         stringLinkedList.remove("Tom");
         assertEquals(2, stringLinkedList.size());
@@ -94,6 +100,12 @@ public class LinkedListTest {
         assertEquals("Steve", stringLinkedList.get(3));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void addNull() throws Exception {
+        stringLinkedList.add(null);
+        fail("Null argument");
+    }
+
     @Test
     public void next() throws Exception {
         assertEquals("Tom", stringLinkedList.forwardIterator().next());
@@ -117,4 +129,30 @@ public class LinkedListTest {
         assertEquals(true, stringLinkedList.forwardIterator().hasNext());
     }
 
+    @Test
+    public void backwardIteratorNext() throws Exception {
+        assertEquals("Jack", stringLinkedList.backwardIterator().next());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void backwardIteratorIfEmptyNext() throws Exception {
+        stringLinkedList = new LinkedList<>();
+        stringLinkedList.backwardIterator().next();
+    }
+
+    @Test
+    public void backwardIteratorHasNext() throws Exception {
+        assertEquals(true, stringLinkedList.backwardIterator().hasNext());
+    }
+
+    @Test
+    public void backwardIteratorIfEmptyHasNext() throws Exception {
+        stringLinkedList = new LinkedList<>();
+        assertEquals(false, stringLinkedList.backwardIterator().hasNext());
+    }
+
+    @Test
+    public void forwardIteratorSet() throws Exception {
+        //stringLinkedList.forwardIterator().
+    }
 }
