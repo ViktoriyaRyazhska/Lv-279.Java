@@ -101,6 +101,17 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
             public void remove() {
                 Node<T> prev = current.getPrev();
                 Node<T> next = current.getNext();
+                if (first == last) {
+                    first = null;
+                    last = null;
+                    return;
+                }
+                if (current == first){
+                    first = next;
+                }
+                if (current == last) {
+                    last = prev;
+                }
                 prev.setNext(next);
                 next.setPrev(prev);
             }
@@ -134,10 +145,12 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
         } else if (last == null){
             last = new Node<>(first, first, item);
             first.setNext(last);
+            first.setPrev(last);
         } else {
             Node<T> node = new Node<>(last, first, item);
             last.setNext(node);
             last = node;
+            first.setPrev(last);
         }
         size++;
     }
@@ -153,6 +166,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
         for(int i = 0; i < size; i++){
             T current = iterator.next();
             if (current.equals(item)){
+                System.out.println(current);
                 iterator.remove();
                 size--;
                 return current;

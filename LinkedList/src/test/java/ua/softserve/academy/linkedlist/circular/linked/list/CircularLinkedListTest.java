@@ -47,6 +47,19 @@ public class CircularLinkedListTest {
     }
 
     @Test
+    public void remove2() throws Exception {
+        ICircularLinkedList<String> list = new CircularLinkedList<>();
+        list.add("c");
+        list.add("b");
+        System.out.println(list);
+        list.remove("b");
+        list.remove("c");
+        System.out.println(list);
+        list.add("a");
+        System.out.println(list);
+    }
+
+    @Test
     public void contains() throws Exception {
         ICircularLinkedList<String> list = new CircularLinkedList<>();
         list.add("a");
