@@ -41,6 +41,12 @@ public class LinkedListTest {
         assertEquals(3, stringLinkedList.size());
     }
 
+    @Test
+    public void size_ifRemoveObj() throws Exception {
+        stringLinkedList.remove("Tom");
+        assertEquals(2, stringLinkedList.size());
+    }
+
     @Test(expected = NullPointerException.class)
     public void nullSize() throws Exception {
         stringLinkedList = null;
@@ -59,9 +65,15 @@ public class LinkedListTest {
     @Test
     public void remove() throws Exception {
         stringLinkedList.remove("Bob");
-        assertEquals(2, stringLinkedList.size());
         assertEquals("Tom", stringLinkedList.get(0));
         assertEquals("Jack", stringLinkedList.get(1));
+    }
+
+    @Test
+    public void remove_TrueFalse() throws Exception {
+        assertEquals(false, stringLinkedList.remove("Ted"));
+        assertEquals(true, stringLinkedList.remove("Bob"));
+
     }
 
     @Test
