@@ -61,7 +61,7 @@ public class LinkedListIterator<T> implements ListIterator<T> {
 
     @Override
     public void add(T elem) {
-
+           insert(elem);
     }
 
     @Override
@@ -71,13 +71,18 @@ public class LinkedListIterator<T> implements ListIterator<T> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
-
+/*
     @Override
     public boolean contains(T value) {
-        return false;
-    }
+        if (value == null) {
+            throw new IllegalArgumentException("Null argument");
+        }
+        while (hasPrevious()){
+
+        }
+    }*/
 
     @Override
     public void clear() {
