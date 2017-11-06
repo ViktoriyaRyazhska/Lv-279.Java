@@ -114,6 +114,8 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
                 }
                 prev.setNext(next);
                 next.setPrev(prev);
+                current = prev;
+                size--;
             }
 
             @Override
@@ -168,7 +170,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
             if (current.equals(item)){
                 System.out.println(current);
                 iterator.remove();
-                size--;
+//                size--;
                 return current;
             }
             iterator.hasNext();
