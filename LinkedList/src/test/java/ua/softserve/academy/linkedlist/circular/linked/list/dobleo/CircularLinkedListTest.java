@@ -7,13 +7,12 @@
 *
 * All rights reserved by DoubleO Team (Team#1)
 * */
-package ua.softserve.academy.linkedlist.circular.linked.list;
+package ua.softserve.academy.linkedlist.circular.linked.list.dobleo;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.softserve.academy.linkedlist.circular.linked.list.interfaces.ICircularLinkedList;
 
-import java.util.Iterator;
+import ua.softserve.academy.linkedlist.circular.linked.list.dobleo.interfaces.ICircularLinkedList;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +21,7 @@ public class CircularLinkedListTest {
 
     @Before
     public void init(){
-        list =new CircularLinkedList<>();
+        list = new CircularLinkedList<>();
     }
 
     @Test
@@ -45,12 +44,19 @@ public class CircularLinkedListTest {
         ICircularLinkedList<String> list = new CircularLinkedList<>();
         list.add("c");
         list.add("b");
-        System.out.println(list);
+        assertEquals(true, list.contains("c"));
+        assertEquals(true, list.contains("b"));
         list.remove("b");
+        assertEquals(false, list.contains("b"));
         list.remove("c");
-        System.out.println(list);
-        list.add("a");
-        System.out.println(list);
+        assertEquals(false, list.contains("c"));
+        assertEquals(0, list.size());
+        list.add("b");
+        list.add("c");
+        list.add("d");
+        assertEquals(true, list.contains("c"));
+        assertEquals(true, list.contains("b"));
+        assertEquals(true, list.contains("d"));
     }
 
     @Test

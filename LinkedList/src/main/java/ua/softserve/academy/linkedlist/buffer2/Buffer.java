@@ -1,23 +1,25 @@
-/*
-* CircularLinkedList
-*
-* Version 1.0-SNAPSHOT
-*
-* 04.11.17
-*
-* All rights reserved by DoubleO Team (Team#1)
-* */
+package jar;
 
-package ua.softserve.academy.linkedlist.circular.linked.list;
-
-import ua.softserve.academy.linkedlist.circular.linked.list.interfaces.ICircularLinkedList;
+import jar.interfaces.IQueueOperation;
 
 import java.util.Iterator;
 
 /**
- * Circular linked list class.
+ * Created by yaoun on 05.11.2017.
  */
-public class CircularLinkedList<T> implements ICircularLinkedList<T> {
+public class Buffer<T> implements IQueueOperation<T> {
+
+    public boolean hasNext() {
+        return false;
+    }
+
+    public T next() {
+        return null;
+    }
+
+    public void remove() {
+
+    }
 
     private class Node<T>{
         private Node<T> next;
@@ -80,24 +82,11 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
         }
     }
 
-    private Node<T> first;
-    private Node<T> last;
-    private int size;
-
-    public CircularLinkedList() {
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public Iterator<T> iterator() {
+    /*public Iterator<T> iterator() {
         return new Iterator<T>() {
 
             private Node<T> current = first;
 
-            @Override
             public void remove() {
                 Node<T> prev = current.getPrev();
                 Node<T> next = current.getNext();
@@ -116,117 +105,84 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
                 next.setPrev(prev);
             }
 
-            @Override
             public boolean hasNext() {
-                if (current != null) {
+                if (current.getNext() != null || current.getNext() != first || current != null) {
                     current = current.getNext();
                 }
                 return (last != null);
             }
 
-            @Override
             public T next() {
                 T item = current.getItem();
                 return item;
             }
         };
-    }
+    }*/
 
-    /**
-     *
-     * @param item
-     */
-    @Override
-    public void add(T item) {
-        if (first == null){
-            first = new Node<>(null, null, item);
-            first.setNext(first);
-            first.setPrev(first);
-        } else if (last == null){
-            last = new Node<>(first, first, item);
+    private Node<T> first;
+    private Node<T> last;
+    private Node<T> curr;
+    private int size;
+
+
+    public void enqueue(T val) {
+        if (first==null) {
+           first = new Node<T>(null,null,val);
+           first.setNext(first);
+           first.setPrev(first);
+        }
+        else if (last==null) {
+            last = new Node<T>(first,first,val);
             first.setNext(last);
             first.setPrev(last);
-        } else {
-            Node<T> node = new Node<>(last, first, item);
-            last.setNext(node);
-            last = node;
+        }
+        else {
+            Node<T> obj = new Node<T>(last,first,val);
+            last.setNext(obj);
+            last = obj;
             first.setPrev(last);
         }
         size++;
     }
 
-    /**
-     * Removes the first occurrence of the specified item from this list, if it is present.
-     * @param item specified item
-     * @return removed item or null if the specified item wasn't found
-     */
-    @Override
-    public T remove(T item) {
-        Iterator<T> iterator = this.iterator();
-        for(int i = 0; i < size; i++){
-            T current = iterator.next();
-            if (current.equals(item)){
-                System.out.println(current);
-                iterator.remove();
-                size--;
-                return current;
-            }
-            iterator.hasNext();
-        }
-        return null;
+    public void dequeue() {
+        first = first.getNext();
+        size--;
     }
 
-    /**
-     *
-     * @param item
-     * @return
-     */
-    @Override
-    public boolean contains(T item) {
-        Iterator<T> iterator = this.iterator();
-        for(int i = 0; i < size; i++){
-            T current = iterator.next();
-            iterator.hasNext();
-            if (current.equals(item)){
-                return true;
+    public T peak() {
+        if (first!=null) {
+            curr = first;
+            dequeue();
+            return curr.getItem();
+        }
+        else {
+            return null; //solve bad value
+        }
+    }
+
+    public boolean contains(T val) {
+        if (first!=null) {
+            curr = first;
+
+            while (curr.getNext() != first) {
+                if (curr.getItem().equals(val)) {
+                    return true;
+                }
+                curr = curr.getNext();
             }
         }
         return false;
     }
 
-    /**
-     *
-     * @return
-     */
-    @Override
     public int size() {
         return size;
     }
 
-    /**
-     *
-     */
-    @Override
-    public void clear() {
-        first = null;
-        last = null;
-        size = 0;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("CircularLinkedList{items=[");
-        Iterator<T> iterator = this.iterator();
-        for(int i = 0; i < size; i++){
-            T current = iterator.next();
-            iterator.hasNext();
-            sb.append(current + " ");
+    public boolean isEmpty() {
+        if (first!=null){
+            return false;
         }
-        sb.append("]}");
-        return sb.toString();
+        return true;
     }
 }

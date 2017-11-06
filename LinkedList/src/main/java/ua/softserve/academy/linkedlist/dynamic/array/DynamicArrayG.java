@@ -13,15 +13,13 @@ package ua.softserve.academy.linkedlist.dynamic.array;
 import ua.softserve.academy.linkedlist.dynamic.array.interfaces.IDynamicArrayG;
 
 /**
- *
  * Dynamic Array class.
  * Made by using dynamic array.
  * First index = 0.
  * Default capacity = 10;
  * Max capacity = 51200000;
- *
  * */
-public class DynamicArrayG<T> implements IDynamicArrayG<T>{
+public class DynamicArrayG<T> implements IDynamicArrayG<T> {
 
     private static final int DEFAULT_CAPACITY = 10;
     private static final int MAX_CAPACITY = 51200000;
@@ -52,7 +50,6 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
 
     /**
      * Appends the specified element to the end of this list.
-     *
      * @param item element to be appended to this list
      */
     @Override
@@ -158,7 +155,6 @@ public class DynamicArrayG<T> implements IDynamicArrayG<T>{
     @Override
     public int size() {
         return size;
-
     }
 
     /**
