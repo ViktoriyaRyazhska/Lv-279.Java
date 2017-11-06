@@ -8,9 +8,7 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package ua.softserve.academy.sorting;
-
-import ua.softserve.academy.sorting.merge.sort.DemoClassForMergeSort;
+package ua.softserve.academy.sorting.merge.sort;
 
 public class Main {
 
