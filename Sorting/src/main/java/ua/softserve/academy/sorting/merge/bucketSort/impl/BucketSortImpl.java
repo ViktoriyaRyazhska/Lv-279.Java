@@ -1,13 +1,9 @@
 package ua.softserve.academy.sorting.merge.bucketSort.impl;
 
-import org.omg.CORBA.BAD_CONTEXT;
 import ua.softserve.academy.sorting.merge.bucketSort.BucketSort;
 
-import javax.sound.midi.Soundbank;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class BucketSortImpl implements BucketSort {
