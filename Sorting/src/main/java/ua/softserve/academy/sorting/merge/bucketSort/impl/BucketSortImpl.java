@@ -19,8 +19,8 @@ public class BucketSortImpl implements BucketSort{
     @Override
     public  int msBits(int[] array, int index) {
 
-        int minValue = array[0];
-        int maxValue = array[0];
+        double minValue = array[0];
+        double maxValue = array[0];
         for (int i = 1; i < array.length; i++) {
             if (array[i] < minValue) {
                 minValue = array[i];
@@ -28,13 +28,13 @@ public class BucketSortImpl implements BucketSort{
                 maxValue = array[i];
             }
         }
-        return  (int) Math.floor(BUCKET_COUNT*(array[index]-minValue)/(maxValue-minValue));
+        return  (int) Math.floor(BUCKET_COUNT*((array[index]-minValue+0.1)/(maxValue+0.2-minValue)));
     }
 
     @Override
     public int[] bucketSort(int[] array) {
 
-        BUCKET_COUNT = Math.round(array.length/3);
+        BUCKET_COUNT = (int)Math.ceil(((double) array.length)/3.0);
 
 
         int bucketCount = BUCKET_COUNT;
@@ -45,7 +45,8 @@ public class BucketSortImpl implements BucketSort{
 
         // Distribute input array values into buckets
         for (int i = 0; i < array.length; i++) {
-            buckets.get(msBits(array,i)).add(array[i]);
+            int index =   msBits(array,i);
+            buckets.get(index).add(array[i]);
         }
 
         // Sort buckets and place back into input array
