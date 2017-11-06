@@ -10,15 +10,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class BucketSortImpl implements BucketSort{
-
-    public static void main(String[] args) {
-
-    }
-    static int BUCKET_COUNT;
+public class BucketSortImpl implements BucketSort {
+    private static int BUCKET_COUNT;
 
     @Override
-    public  int msBits(int[] array, int index) {
+    public int msBits(int[] array, int index) {
 
         double minValue = array[0];
         double maxValue = array[0];
@@ -29,13 +25,13 @@ public class BucketSortImpl implements BucketSort{
                 maxValue = array[i];
             }
         }
-        return  (int) Math.floor(BUCKET_COUNT*((array[index]-minValue+0.1)/(maxValue+0.2-minValue)));
+        return (int) Math.floor(BUCKET_COUNT * ((array[index] - minValue + 0.1) / (maxValue + 0.2 - minValue)));
     }
 
     @Override
     public int[] bucketSort(int[] array) {
 
-        BUCKET_COUNT = (int)Math.ceil(((double) array.length)/3.0);
+        BUCKET_COUNT = (int) Math.ceil(((double) array.length) / 3.0);
 
 
         int bucketCount = BUCKET_COUNT;
@@ -46,10 +42,10 @@ public class BucketSortImpl implements BucketSort{
 
         // Distribute input array values into buckets
         for (int i = 0; i < array.length; i++) {
-            buckets.get(msBits(array,i)).add(array[i]);
+            buckets.get(msBits(array, i)).add(array[i]);
         }
         System.out.println("Contents of buckets");
-      buckets.forEach(x-> System.out.print(x));
+        buckets.forEach(System.out::print);
         System.out.println();
         System.out.println("*******************");
         // Sort buckets and place back into input array
@@ -61,7 +57,7 @@ public class BucketSortImpl implements BucketSort{
             Arrays.sort(bucketArray);
             System.out.print(Arrays.asList(bucketArray));
             for (int j = 0; j < bucketArray.length; j++) {
-                array[currentIndex++] =bucketArray[j];
+                array[currentIndex++] = bucketArray[j];
             }
         }
         System.out.println();
