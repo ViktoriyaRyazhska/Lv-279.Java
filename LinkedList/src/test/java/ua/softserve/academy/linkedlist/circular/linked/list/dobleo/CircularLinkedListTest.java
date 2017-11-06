@@ -7,11 +7,11 @@
 *
 * All rights reserved by DoubleO Team (Team#1)
 * */
-package ua.softserve.academy.linkedlist.circular.linked.list;
+package ua.softserve.academy.linkedlist.circular.linked.list.dobleo;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.softserve.academy.linkedlist.circular.linked.list.dobleo.CircularLinkedList;
+
 import ua.softserve.academy.linkedlist.circular.linked.list.dobleo.interfaces.ICircularLinkedList;
 
 import static org.junit.Assert.*;
