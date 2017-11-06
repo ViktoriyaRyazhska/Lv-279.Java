@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ua.softserve.academy.linkedlist.circular.linked.list.interfaces.ICircularLinkedList;
 
+import java.ua.softserve.academy.linkedlist.circular.linked.list.dobleo.CircularLinkedList;
 import java.util.Iterator;
 
 import static org.junit.Assert.*;
