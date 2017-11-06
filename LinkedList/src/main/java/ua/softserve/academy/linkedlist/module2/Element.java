@@ -1,4 +1,4 @@
-package module2;
+package ua.softserve.academy.linkedlist.module2;
 
 public class Element<T> {
     private T data;

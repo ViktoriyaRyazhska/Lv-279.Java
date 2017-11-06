@@ -1,4 +1,4 @@
-package module2;
+package ua.softserve.academy.linkedlist.module2;
 
 /**
  * Interface that contains method for Stack data structure.

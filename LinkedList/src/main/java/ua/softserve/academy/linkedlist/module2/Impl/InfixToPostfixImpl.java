@@ -1,6 +1,7 @@
-package module2.Impl;
+package ua.softserve.academy.linkedlist.module2.Impl;
 
-import module2.InfixToPostfix;
+
+import ua.softserve.academy.linkedlist.module2.InfixToPostfix;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Objects;
  * Class for transformation infix mathematical expression to postfix.
  * Class uses StackImpl for saving operators.
  */
-public class InfixToPostfixImpl implements InfixToPostfix{
+public class InfixToPostfixImpl implements InfixToPostfix {
     private StackImpl<String> stack = new StackImpl<>();
     private List<String> resultPostfixExpression = new LinkedList<>();
     private List<String> infixExpression;

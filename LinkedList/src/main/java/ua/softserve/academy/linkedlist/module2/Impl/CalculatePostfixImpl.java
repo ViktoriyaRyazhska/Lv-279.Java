@@ -1,4 +1,4 @@
-package module2.Impl;
+package ua.softserve.academy.linkedlist.module2.Impl;
 
 import java.util.List;
 

@@ -1,7 +1,8 @@
-package module2.Impl;
+package ua.softserve.academy.linkedlist.module2.Impl;
 
-import module2.Element;
-import module2.Stack;
+
+import ua.softserve.academy.linkedlist.module2.Element;
+import ua.softserve.academy.linkedlist.module2.Stack;
 
 /**
  * Class that realize Stack data structure.
