@@ -3,6 +3,7 @@ package ua.softserve.academy.sorting.merge.bucketSort.impl;
 import org.omg.CORBA.BAD_CONTEXT;
 import ua.softserve.academy.sorting.merge.bucketSort.BucketSort;
 
+import javax.sound.midi.Soundbank;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,20 +46,28 @@ public class BucketSortImpl implements BucketSort{
 
         // Distribute input array values into buckets
         for (int i = 0; i < array.length; i++) {
-            int index =   msBits(array,i);
-            buckets.get(index).add(array[i]);
+            buckets.get(msBits(array,i)).add(array[i]);
         }
-
+        System.out.println("Contents of buckets");
+      buckets.forEach(x-> System.out.print(x));
+        System.out.println();
+        System.out.println("*******************");
         // Sort buckets and place back into input array
+        System.out.println("Sorted buckets");
         int currentIndex = 0;
         for (int i = 0; i < buckets.size(); i++) {
             Integer[] bucketArray = new Integer[buckets.get(i).size()];
             bucketArray = buckets.get(i).toArray(bucketArray);
             Arrays.sort(bucketArray);
+            System.out.print(Arrays.asList(bucketArray));
             for (int j = 0; j < bucketArray.length; j++) {
-                array[currentIndex++] = bucketArray[j];
+                array[currentIndex++] =bucketArray[j];
             }
         }
+        System.out.println();
+        System.out.println("*******************");
+        System.out.println("Merged sorted array");
+        System.out.println(Arrays.toString(array));
         return array;
     }
 }
