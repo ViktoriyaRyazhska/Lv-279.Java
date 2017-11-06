@@ -31,9 +31,9 @@ public class BucketSortImpl implements BucketSort {
 
 
         int bucketCount = BUCKET_COUNT;
-        List<List<Integer>> buckets = new ArrayList<List<Integer>>(bucketCount);
+        List<List<Integer>> buckets = new ArrayList<>(bucketCount);
         for (int i = 0; i < bucketCount; i++) {
-            buckets.add(new ArrayList<Integer>());
+            buckets.add(new ArrayList<>());
         }
 
         // Distribute input array values into buckets
@@ -45,6 +45,7 @@ public class BucketSortImpl implements BucketSort {
         System.out.println();
         System.out.println("*******************");
         // Sort buckets and place back into input array
+
         System.out.println("Sorted buckets");
         int currentIndex = 0;
         for (int i = 0; i < buckets.size(); i++) {
@@ -56,6 +57,7 @@ public class BucketSortImpl implements BucketSort {
                 array[currentIndex++] = bucketArray[j];
             }
         }
+
         System.out.println();
         System.out.println("*******************");
         System.out.println("Merged sorted array");
