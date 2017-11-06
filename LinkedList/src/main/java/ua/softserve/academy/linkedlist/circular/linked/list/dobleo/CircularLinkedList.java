@@ -30,30 +30,6 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
             this.item = item;
         }
 
-        public Node<T> getNext() {
-            return next;
-        }
-
-        public Node<T> getPrev() {
-            return prev;
-        }
-
-        public void setPrev(Node<T> prev) {
-            this.prev = prev;
-        }
-
-        public void setNext(Node<T> next) {
-            this.next = next;
-        }
-
-        public T getItem() {
-            return item;
-        }
-
-        public void setItem(T item) {
-            this.item = item;
-        }
-
         @Override
         public String toString() {
             return "" + (item);
@@ -99,11 +75,12 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
             @Override
             public void remove() {
-                Node<T> prev = current.getPrev();
-                Node<T> next = current.getNext();
+                Node<T> prev = current.prev;
+                Node<T> next = current.next;
                 if (first == last) {
                     first = null;
                     last = null;
+                    size = 0;
                     return;
                 }
                 if (current == first){
@@ -112,23 +89,23 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
                 if (current == last) {
                     last = prev;
                 }
-                prev.setNext(next);
-                next.setPrev(prev);
-                current = prev;
+                prev.next = next;
+                next.prev = prev;
+                current = next;
                 size--;
             }
 
             @Override
             public boolean hasNext() {
                 if (current != null) {
-                    current = current.getNext();
+                    current = current.next;
                 }
                 return (last != null);
             }
 
             @Override
             public T next() {
-                T item = current.getItem();
+                T item = current.item;
                 return item;
             }
         };
@@ -142,17 +119,17 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     public void add(T item) {
         if (first == null){
             first = new Node<>(null, null, item);
-            first.setNext(first);
-            first.setPrev(first);
+            first.next = first;
+            first.prev = first;
         } else if (last == null){
             last = new Node<>(first, first, item);
-            first.setNext(last);
-            first.setPrev(last);
+            first.next = last;
+            first.prev = last;
         } else {
             Node<T> node = new Node<>(last, first, item);
-            last.setNext(node);
+            last.next = node;
             last = node;
-            first.setPrev(last);
+            first.prev = last;
         }
         size++;
     }
@@ -168,9 +145,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
         for(int i = 0; i < size; i++){
             T current = iterator.next();
             if (current.equals(item)){
-                System.out.println(current);
                 iterator.remove();
-//                size--;
                 return current;
             }
             iterator.hasNext();
@@ -223,7 +198,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder("CircularLinkedList{items=[");
         Iterator<T> iterator = this.iterator();
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             T current = iterator.next();
             iterator.hasNext();
             sb.append(current + " ");

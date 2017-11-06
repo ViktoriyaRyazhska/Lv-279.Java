@@ -16,13 +16,13 @@ import java.util.Iterator;
 
 public class JosephusProblem {
 
-    private static final int LIST_SIZE = 7;
+    public static int execute(int size) {
 
-    public static void main(String[] args) {
+        if (size < 1) return 0;
 
         ICircularLinkedList<Integer> list = new CircularLinkedList<>();
 
-        for (int i = 1; i <= LIST_SIZE; i++){
+        for (int i = 1; i <= size; i++){
             list.add(i);
         }
 
@@ -30,10 +30,9 @@ public class JosephusProblem {
         while (list.size() > 1){
             iterator.hasNext();
             iterator.remove();
-            iterator.hasNext();
         }
 
-        System.out.println(list);
+        return iterator.next();
 
     }
 
