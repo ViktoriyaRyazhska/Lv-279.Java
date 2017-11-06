@@ -96,6 +96,13 @@ public class LinkedListIteratorTest {
         assertEquals("Tommy", iterator.getCurrent().getValue());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void set_ifValueNull() throws Exception {
+        LinkedListIterator iterator = stringLinkedList.forwardIterator();
+        iterator.set(null);
+        fail("Null argument");
+    }
+
     @Test
     public void insertAtFirstPosForwardIterator() throws Exception {
         LinkedListIterator iterator = stringLinkedList.forwardIterator();
