@@ -21,6 +21,7 @@ public class JosephusProblemTest {
         assertEquals(7, JosephusProblem.execute(7));
         assertEquals(1, JosephusProblem.execute(1));
         assertEquals(0, JosephusProblem.execute(0));
+        assertEquals(0, JosephusProblem.execute(-10));
     }
 
 }

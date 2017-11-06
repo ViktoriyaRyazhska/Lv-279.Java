@@ -15,15 +15,26 @@ import ua.softserve.academy.linkedlist.circular.linked.list.dobleo.interfaces.IC
 import java.util.Iterator;
 
 /**
- * Circular linked list class.
+ * Circular linked list class. Implements ICircularLinkedList.
+ * @param <T> data type.
  */
 public class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
+    /**
+     * An element of list.
+     * @param <T> data type.
+     */
     private class Node<T>{
         private Node<T> next;
         private Node<T> prev;
         private T item;
 
+        /**
+         * Constructor of element.
+         * @param prev previous element.
+         * @param next next element.
+         * @param item value.
+         */
         public Node(Node<T> prev, Node<T> next, T item) {
             this.next = next;
             this.prev = prev;
@@ -32,7 +43,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
         @Override
         public String toString() {
-            return "" + (item);
+            return "" + item;
         }
 
         @Override
@@ -64,8 +75,8 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     }
 
     /**
-     *
-     * @return
+     * Implementation of Iterator.
+     * @return new instance of Iterator.
      */
     @Override
     public Iterator<T> iterator() {
@@ -73,6 +84,10 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
             private Node<T> current = null;
 
+            /**
+             * Implementation of remove method.
+             * Removes current element from the list.
+             */
             @Override
             public void remove() {
                 Node<T> prev = current.prev;
@@ -95,6 +110,11 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
                 size--;
             }
 
+            /**
+             * Moves iterator to next element.
+             * @return true - if next element is present.
+             *         false - if next element doesn't exist.
+             */
             @Override
             public boolean hasNext() {
                 if (current == null){
@@ -108,8 +128,15 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
                 return current != null;
             }
 
+            /**
+             * Returns value of current element.
+             * @return value of current element.
+             */
             @Override
             public T next() {
+                if (current == null){
+                    return null;
+                }
                 T item = current.item;
                 return item;
             }
@@ -117,7 +144,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     }
 
     /**
-     *
+     * Add new item at the end of the list.
      * @param item
      */
     @Override
@@ -141,8 +168,8 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
     /**
      * Removes the first occurrence of the specified item from this list, if it is present.
-     * @param item specified item
-     * @return removed item or null if the specified item wasn't found
+     * @param item specified item.
+     * @return removed item or null if the specified item wasn't found.
      */
     @Override
     public T remove(T item) {
@@ -159,9 +186,10 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     }
 
     /**
-     *
+     * Finds the specified item in the list.
      * @param item
-     * @return
+     * @return true - item was found.
+     *         false - item wasn't found.
      */
     @Override
     public boolean contains(T item) {
@@ -177,8 +205,8 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     }
 
     /**
-     *
-     * @return
+     * Return current size of the list.
+     * @return current size of the list.
      */
     @Override
     public int size() {
@@ -186,7 +214,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     }
 
     /**
-     *
+     * Removes all items from the list.
      */
     @Override
     public void clear() {
@@ -196,7 +224,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     }
 
     /**
-     *
+     * No comments:)
      * @return
      */
     @Override

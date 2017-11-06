@@ -1,14 +1,14 @@
 /*
 * MergeSort
 *
-* Version 1.0-SNAPSHOT
+* Version 1.0-SNAPSHOT using Comparable
 *
 * 05.11.17
 *
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package ua.softserve.academy.sorting.merge.sort;
+package ua.softserve.academy.sorting.merge.sort.interfaces;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
