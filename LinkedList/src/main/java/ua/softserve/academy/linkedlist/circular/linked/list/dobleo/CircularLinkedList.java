@@ -62,7 +62,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
     public CircularLinkedList() {
     }
-
+//TODO change hasNext()
     /**
      *
      * @return
