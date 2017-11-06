@@ -27,6 +27,7 @@ public class JosephusProblem {
         }
 
         Iterator<Integer> iterator = list.iterator();
+        iterator.hasNext();
         while (list.size() > 1){
             iterator.hasNext();
             iterator.remove();
