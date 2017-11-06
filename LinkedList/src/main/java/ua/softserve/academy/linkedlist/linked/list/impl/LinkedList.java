@@ -186,7 +186,9 @@ public class LinkedList<T> {
             @Override
             public void insert(T value) {
 
-                if (this.getCurrent().getValue() == null) next();
+                if (this.getCurrent().getValue() == null) {
+                    throw new NoSuchElementException();
+                }
                 LinkedList.this.repositioningForAdding(this.getCurrent(), value);
             }
         };
@@ -210,7 +212,7 @@ public class LinkedList<T> {
             @Override
             public void insert(T value) {
 
-                if (this.getCurrent().getValue() == null) next();
+                if (this.getCurrent().getValue() == null) {throw new NoSuchElementException();}
                 LinkedList.this.repositioningForAdding(this.getCurrent(), value);
             }
 

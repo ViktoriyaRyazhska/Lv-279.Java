@@ -19,7 +19,7 @@ public class NodeTest {
         value2 = "World!";
 
         previous = new Node<>(null, value, next);
-        next = new Node<>(previous, value2, null);
+        next = new Node<>(node, value2, null);
         node = new Node<>(previous,value, next);
     }
 
@@ -85,5 +85,27 @@ public class NodeTest {
         node.setNext(newNextNode);
         assertEquals(newNextNode, node.getNext());
     }
+
+    @Test
+    public void deletingNextLink() throws Exception {
+        node.deleteNextLink();
+        assertEquals("Hello",next.getPrevious().getValue());
+    }
+
+    @Test
+    public void deletingPrevLink() throws Exception {
+        node.deleteNextLink();
+        assertEquals("Hello",next.getPrevious().getValue());
+    }
+
+
+    @Test
+    public void etNext() throws Exception {
+        Node<String> newNextNode = new Node<>(null, "new next node", next);
+        node.setNext(newNextNode);
+        assertEquals(newNextNode, node.getNext());
+    }
+
+
 
 }

@@ -140,7 +140,7 @@ public class LinkedListIteratorTest {
         stringLinkedList.backwardIterator().next();
     }
 
-    @Test
+    @Test (expected = NoSuchElementException.class)
     public void insertIntoIteratorIfEmptyNext() throws Exception {
         stringLinkedList = new LinkedList<>();
         stringLinkedList.forwardIterator().insert("a");
