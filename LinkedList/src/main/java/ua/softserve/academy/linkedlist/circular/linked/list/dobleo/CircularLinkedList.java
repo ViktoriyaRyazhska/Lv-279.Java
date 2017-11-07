@@ -8,9 +8,11 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package java.ua.softserve.academy.linkedlist.circular.linked.list.dobleo;
+package ua.softserve.academy.linkedlist.circular.linked.list.dobleo;
 
 
+
+import ua.softserve.academy.linkedlist.circular.linked.list.dobleo.interfaces.ICircularLinkedList;
 
 import java.util.Iterator;
 
