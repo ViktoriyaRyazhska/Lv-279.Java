@@ -48,6 +48,11 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
             return "" + item;
         }
 
+        /**
+         *
+         * @param o
+         * @return
+         */
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
