@@ -1,7 +1,6 @@
 package ua.softserve.academy.algorithms.sorting.merge_sort;
 
 import ua.softserve.academy.algorithms.sorting.merge_sort.interfaces.MergeSortComparator;
-
 import java.util.Comparator;
 
 /**
