@@ -1,3 +1,12 @@
+/*
+* CircularLinkedListTest
+*
+* Version 1.0-SNAPSHOT
+*
+* 06.11.17
+*
+* All rights reserved by TeamBN (Team#2)
+* */
 package ua.softserve.academy.linkedlist.circular.linked.list.teambn;
 
 import org.junit.After;

@@ -40,5 +40,4 @@ public class JosephusProblem {
         }
         return iterator.next();
     }
-
 }

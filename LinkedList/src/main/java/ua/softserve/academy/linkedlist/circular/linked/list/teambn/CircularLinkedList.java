@@ -1,4 +1,4 @@
-package ua.softserve.academy.linkedlist.circular.linked.list.teambn;/*
+/*
 * CircularLinkedList
 *
 * Version 1.0-SNAPSHOT
@@ -7,6 +7,8 @@ package ua.softserve.academy.linkedlist.circular.linked.list.teambn;/*
 *
 * All rights reserved by TeamBN (Team#2)
 * */
+
+package ua.softserve.academy.linkedlist.circular.linked.list.teambn;
 
 import ua.softserve.academy.linkedlist.circular.linked.list.teambn.interfaces.ICircularLinkedList;
 
