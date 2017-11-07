@@ -45,11 +45,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
             return "" + item;
         }
 
-        /**
-         *
-         * @param o
-         * @return
-         */
+        /*
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -68,7 +64,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
             result = 31 * result + (prev != null ? prev.hashCode() : 0);
             result = 31 * result + (item != null ? item.hashCode() : 0);
             return result;
-        }
+        }*/
     }
 
     private Node<T> first;
@@ -86,7 +82,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     public Iterator<T> iterator() {
         return new Iterator<T>() {
 
-            private Node<T> current = null;
+            private Node<T> current = first;
 
             /**
              * Implementation of remove method.
@@ -94,46 +90,43 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
              */
             @Override
             public void remove() {
-                Node<T> prev = current.prev;
-                Node<T> next = current.next;
+                Node<T> removed = current.prev;
+                Node<T> prev = removed.prev;
+                Node<T> next = removed.next;
                 if (first == last) {
                     first = null;
                     last = null;
                     size = 0;
                     return;
                 }
-                if (current == first){
+                if (removed == first){
                     first = next;
+                    last.next = first;
                 }
-                if (current == last) {
+                if (removed == last) {
                     last = prev;
+                    first.prev = last;
                 }
                 prev.next = next;
                 next.prev = prev;
-                current = next;
                 size--;
             }
 
             /**
-             * Moves iterator to next element.
+             * Checks next element.
              * @return true - if next element is present.
              *         false - if next element doesn't exist.
              */
             @Override
             public boolean hasNext() {
-                if (current == null){
-                    if (first != null) {
-                        current = first;
-                        return true;
-                    }
+                if (current == null) {
                     return false;
                 }
-                current = current.next;
-                return current != null;
+                return current.next != null;
             }
 
             /**
-             * Returns value of current element.
+             * Returns value of current element and moves to next element.
              * @return value of current element.
              */
             @Override
@@ -142,6 +135,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
                     return null;
                 }
                 T item = current.item;
+                current = current.next;
                 return item;
             }
         };
@@ -179,7 +173,6 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     public T remove(T item) {
         Iterator<T> iterator = this.iterator();
         for(int i = 0; i < size; i++){
-            iterator.hasNext();
             T current = iterator.next();
             if (current.equals(item)){
                 iterator.remove();
@@ -199,7 +192,6 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     public boolean contains(T item) {
         Iterator<T> iterator = this.iterator();
         for(int i = 0; i < size; i++){
-            iterator.hasNext();
             T current = iterator.next();
             if (current.equals(item)){
                 return true;
@@ -236,7 +228,6 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
         StringBuilder sb = new StringBuilder("CircularLinkedList{items=[");
         Iterator<T> iterator = this.iterator();
         for (int i = 0; i < size; i++) {
-            iterator.hasNext();
             T current = iterator.next();
             sb.append(current + " ");
         }

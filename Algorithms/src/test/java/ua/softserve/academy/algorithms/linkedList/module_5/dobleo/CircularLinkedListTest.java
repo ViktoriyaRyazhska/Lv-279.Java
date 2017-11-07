@@ -29,6 +29,13 @@ public class CircularLinkedListTest {
     }
 
     @Test
+    public void hasNext() throws Exception {
+        assertEquals(false,list.iterator().hasNext());
+        list.add("a");
+        assertEquals(true,list.iterator().hasNext());
+    }
+
+    @Test
     public void remove() throws Exception {
         list.add("a");
         list.add("b");
@@ -82,7 +89,6 @@ public class CircularLinkedListTest {
         list.add("c");
         list.add("b");
         list.clear();
-        System.out.println(list);
         assertEquals(0, list.size());
         assertEquals(false, list.contains(null));
     }

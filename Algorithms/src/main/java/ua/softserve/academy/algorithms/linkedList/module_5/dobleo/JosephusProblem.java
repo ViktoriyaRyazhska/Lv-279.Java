@@ -32,9 +32,9 @@ public class JosephusProblem {
             list.add(i);
         }
         Iterator<Integer> iterator = list.iterator();
-        iterator.hasNext();
         while (list.size() > 1){
-            iterator.hasNext();
+            iterator.next();
+            iterator.next();
             iterator.remove();
         }
         return iterator.next();
