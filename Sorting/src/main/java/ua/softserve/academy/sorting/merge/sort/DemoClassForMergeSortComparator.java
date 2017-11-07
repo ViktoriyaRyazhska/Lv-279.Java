@@ -1,7 +1,7 @@
 /*
 * DemoClassForMergeSort
 *
-* Version 1.0-SNAPSHOT using Comparable
+* Version 1.0-SNAPSHOT using Comparator
 *
 * 05.11.17
 *
@@ -10,22 +10,30 @@
 
 package ua.softserve.academy.sorting.merge.sort;
 
-import ua.softserve.academy.sorting.merge.sort.interfaces.MergeSort;
+import ua.softserve.academy.sorting.merge.sort.interfaces.MergeSortComparator;
+
+import java.util.Comparator;
 
 /**
  * This is demo class of implementation MergeSort interface.
  * For this example we used inner class Person.
  */
-public class DemoClassForMergeSort implements MergeSort<DemoClassForMergeSort.Person> {
+public class DemoClassForMergeSortComparator implements MergeSortComparator<DemoClassForMergeSortComparator.Person> {
 
     private Person[] people;
+    private Comparator<Person> comparator;
 
     @Override
     public Person[] getArray() {
         return people;
     }
 
-    public static class Person implements Comparable<Person>{
+    @Override
+    public Comparator<Person> getComparator() {
+        return comparator;
+    }
+
+    public static class Person{
         private String name;
         private int age;
 
@@ -34,11 +42,11 @@ public class DemoClassForMergeSort implements MergeSort<DemoClassForMergeSort.Pe
             this.age = age;
         }
 
-        /*public String getName() {
+        public String getName() {
             return name;
         }
 
-        public void setName(String name) {
+        /*public void setName(String name) {
             this.name = name;
         }*/
 
@@ -67,15 +75,11 @@ public class DemoClassForMergeSort implements MergeSort<DemoClassForMergeSort.Pe
             result = 31 * result + age;
             return result;
         }*/
-
-        @Override
-        public int compareTo(Person person) {
-            return this.age - person.getAge();
-        }
     }
 
-    public DemoClassForMergeSort(int arraySize) {
+    public DemoClassForMergeSortComparator(int arraySize, Comparator<Person> comparator) {
         people = new Person[arraySize];
+        this.comparator = comparator;
     }
 
     public void setPersonByIndex(int index, Person person){
@@ -84,13 +88,17 @@ public class DemoClassForMergeSort implements MergeSort<DemoClassForMergeSort.Pe
 
     /*public Person getPersonByIndex(int index){
         return people[index];
-    }
+    }*/
 
-    public Person[] getPeople() {
+    /*public Person[] getPeople() {
         return people;
-    }
+    }*/
 
-    public void setPeople(Person[] people) {
+    /*public void setPeople(Person[] people) {
         this.people = people;
     }*/
+
+    public void setComparator(Comparator<Person> comparator) {
+        this.comparator = comparator;
+    }
 }

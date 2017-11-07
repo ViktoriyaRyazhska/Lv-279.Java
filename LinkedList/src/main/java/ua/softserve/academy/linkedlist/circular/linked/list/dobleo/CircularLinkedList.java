@@ -10,55 +10,42 @@
 
 package ua.softserve.academy.linkedlist.circular.linked.list.dobleo;
 
-
+import ua.softserve.academy.linkedlist.circular.linked.list.dobleo.interfaces.ICircularLinkedList;
 
 import ua.softserve.academy.linkedlist.circular.linked.list.dobleo.interfaces.ICircularLinkedList;
 
 import java.util.Iterator;
 
 /**
- * Circular linked list class.
+ * Circular linked list class. Implements ICircularLinkedList.
+ * @param <T> data type.
  */
 public class CircularLinkedList<T> implements ICircularLinkedList<T> {
 
+    /**
+     * An element of list.
+     * @param <T> data type.
+     */
     private class Node<T>{
         private Node<T> next;
         private Node<T> prev;
         private T item;
 
+        /**
+         * Constructor of element.
+         * @param prev previous element.
+         * @param next next element.
+         * @param item value.
+         */
         public Node(Node<T> prev, Node<T> next, T item) {
             this.next = next;
             this.prev = prev;
             this.item = item;
         }
 
-        public Node<T> getNext() {
-            return next;
-        }
-
-        public Node<T> getPrev() {
-            return prev;
-        }
-
-        public void setPrev(Node<T> prev) {
-            this.prev = prev;
-        }
-
-        public void setNext(Node<T> next) {
-            this.next = next;
-        }
-
-        public T getItem() {
-            return item;
-        }
-
-        public void setItem(T item) {
-            this.item = item;
-        }
-
         @Override
         public String toString() {
-            return "" + (item);
+            return "" + item;
         }
 
         @Override
@@ -90,22 +77,27 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     }
 
     /**
-     *
-     * @return
+     * Implementation of Iterator.
+     * @return new instance of Iterator.
      */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
 
-            private Node<T> current = first;
+            private Node<T> current = null;
 
+            /**
+             * Implementation of remove method.
+             * Removes current element from the list.
+             */
             @Override
             public void remove() {
-                Node<T> prev = current.getPrev();
-                Node<T> next = current.getNext();
+                Node<T> prev = current.prev;
+                Node<T> next = current.next;
                 if (first == last) {
                     first = null;
                     last = null;
+                    size = 0;
                     return;
                 }
                 if (current == first){
@@ -114,81 +106,99 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
                 if (current == last) {
                     last = prev;
                 }
-                prev.setNext(next);
-                next.setPrev(prev);
+                prev.next = next;
+                next.prev = prev;
+                current = next;
+                size--;
             }
 
+            /**
+             * Moves iterator to next element.
+             * @return true - if next element is present.
+             *         false - if next element doesn't exist.
+             */
             @Override
             public boolean hasNext() {
-                if (current != null) {
-                    current = current.getNext();
+                if (current == null){
+                    if (first != null) {
+                        current = first;
+                        return true;
+                    }
+                    return false;
                 }
-                return (last != null);
+                current = current.next;
+                return current != null;
             }
 
+            /**
+             * Returns value of current element.
+             * @return value of current element.
+             */
             @Override
             public T next() {
-                T item = current.getItem();
+                if (current == null){
+                    return null;
+                }
+                T item = current.item;
                 return item;
             }
         };
     }
 
     /**
-     *
+     * Add new item at the end of the list.
      * @param item
      */
     @Override
     public void add(T item) {
         if (first == null){
             first = new Node<>(null, null, item);
-            first.setNext(first);
-            first.setPrev(first);
+            first.next = first;
+            first.prev = first;
         } else if (last == null){
             last = new Node<>(first, first, item);
-            first.setNext(last);
-            first.setPrev(last);
+            first.next = last;
+            first.prev = last;
         } else {
             Node<T> node = new Node<>(last, first, item);
-            last.setNext(node);
+            last.next = node;
             last = node;
-            first.setPrev(last);
+            first.prev = last;
         }
         size++;
     }
 
     /**
      * Removes the first occurrence of the specified item from this list, if it is present.
-     * @param item specified item
-     * @return removed item or null if the specified item wasn't found
+     * @param item specified item.
+     * @return removed item or null if the specified item wasn't found.
      */
     @Override
     public T remove(T item) {
         Iterator<T> iterator = this.iterator();
         for(int i = 0; i < size; i++){
+            iterator.hasNext();
             T current = iterator.next();
             if (current.equals(item)){
-                System.out.println(current);
                 iterator.remove();
-                size--;
                 return current;
             }
-            iterator.hasNext();
         }
         return null;
     }
 
     /**
-     *
+     * Finds the specified item in the list.
      * @param item
-     * @return
+     * @return true - item was found.
+     *         false - item wasn't found.
      */
     @Override
     public boolean contains(T item) {
         Iterator<T> iterator = this.iterator();
         for(int i = 0; i < size; i++){
-            T current = iterator.next();
             iterator.hasNext();
+            T current = iterator.next();
             if (current.equals(item)){
                 return true;
             }
@@ -197,8 +207,8 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     }
 
     /**
-     *
-     * @return
+     * Return current size of the list.
+     * @return current size of the list.
      */
     @Override
     public int size() {
@@ -206,7 +216,7 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     }
 
     /**
-     *
+     * Removes all items from the list.
      */
     @Override
     public void clear() {
@@ -216,16 +226,16 @@ public class CircularLinkedList<T> implements ICircularLinkedList<T> {
     }
 
     /**
-     *
+     * No comments:)
      * @return
      */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("CircularLinkedList{items=[");
         Iterator<T> iterator = this.iterator();
-        for(int i = 0; i < size; i++){
-            T current = iterator.next();
+        for (int i = 0; i < size; i++) {
             iterator.hasNext();
+            T current = iterator.next();
             sb.append(current + " ");
         }
         sb.append("]}");

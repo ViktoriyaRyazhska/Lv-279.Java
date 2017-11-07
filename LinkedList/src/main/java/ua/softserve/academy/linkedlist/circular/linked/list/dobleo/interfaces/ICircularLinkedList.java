@@ -12,6 +12,10 @@ package ua.softserve.academy.linkedlist.circular.linked.list.dobleo.interfaces;
 
 public interface ICircularLinkedList<T> extends Iterable<T>{
 
+    /**
+     * Add new item at the end of the list.
+     * @param item
+     */
     void add(T item);
 
     /**
@@ -21,10 +25,23 @@ public interface ICircularLinkedList<T> extends Iterable<T>{
      */
     T remove(T item);
 
+    /**
+     * Finds the specified item in the list.
+     * @param item
+     * @return true - item was found.
+     *         false - item wasn't found.
+     */
     boolean contains(T item);
 
+    /**
+     * Return current size of the list.
+     * @return current size of the list.
+     */
     int size();
 
+    /**
+     * Removes all items from the list.
+     */
     void clear();
 
 }
