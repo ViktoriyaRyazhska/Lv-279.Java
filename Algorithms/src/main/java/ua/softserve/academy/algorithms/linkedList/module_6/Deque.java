@@ -8,9 +8,9 @@ public interface Deque<E> {
 
     int size();
 
-    E dequeueFirst();
+    boolean dequeueFirst();
 
-    E dequeueLast();
+    boolean dequeueLast();
 
     E peekFirst();
 
