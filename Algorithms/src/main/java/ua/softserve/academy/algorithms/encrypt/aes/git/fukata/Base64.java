@@ -8,7 +8,7 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package orok.encrypt.aes.git.fukata;
+package ua.softserve.academy.algorithms.encrypt.aes.git.fukata;
 
 /**
  * <p>Encodes and decodes to and from Base64 notation.</p>

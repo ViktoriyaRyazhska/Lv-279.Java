@@ -8,16 +8,14 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package orok.encrypt.aes;
+package ua.softserve.academy.algorithms.encrypt.aes;
 
 
 import org.apache.commons.codec.binary.Base64;
-import orok.encrypt.aes.com.androidsnippets.MCrypt;
 
 import java.io.UnsupportedEncodingException;
 
-import static orok.encrypt.aes.AESParams.fromDB;
-import static orok.encrypt.aes.AESParams.printBytesAsString;
+import static ua.softserve.academy.algorithms.encrypt.aes.AESParams.printBytesAsString;
 
 public class Some2 {
 

@@ -1,4 +1,4 @@
-package orok.encrypt.aes.com.medium;
+package ua.softserve.academy.algorithms.encrypt.aes.com.medium;
 
 import org.apache.commons.codec.binary.Base64;
 

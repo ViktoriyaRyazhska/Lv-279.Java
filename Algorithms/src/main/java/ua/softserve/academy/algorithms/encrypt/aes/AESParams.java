@@ -8,7 +8,7 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package orok.encrypt.aes;
+package ua.softserve.academy.algorithms.encrypt.aes;
 
 public class AESParams {
 

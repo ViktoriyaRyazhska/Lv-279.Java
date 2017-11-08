@@ -8,9 +8,9 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package orok.encrypt.aes.com.androidsnippets;
+package ua.softserve.academy.algorithms.encrypt.aes.com.androidsnippets;
 
-import orok.encrypt.aes.AESParams;
+import ua.softserve.academy.algorithms.encrypt.aes.AESParams;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;

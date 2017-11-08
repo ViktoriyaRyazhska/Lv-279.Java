@@ -8,9 +8,9 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package orok.encrypt.aes;
+package ua.softserve.academy.algorithms.encrypt.aes;
 
-import orok.encrypt.aes.com.androidsnippets.MCrypt;
+import ua.softserve.academy.algorithms.encrypt.aes.com.androidsnippets.MCrypt;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;

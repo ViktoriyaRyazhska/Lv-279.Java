@@ -1,6 +1,6 @@
-package orok.encrypt.aes.com.howtodoinjava;
+package ua.softserve.academy.algorithms.encrypt.aes.com.howtodoinjava;
 
-import orok.encrypt.aes.AESParams;
+import ua.softserve.academy.algorithms.encrypt.aes.AESParams;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
