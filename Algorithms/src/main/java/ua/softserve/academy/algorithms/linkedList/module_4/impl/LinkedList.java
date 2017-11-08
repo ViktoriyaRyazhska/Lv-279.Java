@@ -1,5 +1,6 @@
 package ua.softserve.academy.algorithms.linkedList.module_4.impl;
 
+
 import ua.softserve.academy.algorithms.linkedList.module_4.Node;
 
 import java.util.NoSuchElementException;
@@ -145,6 +146,29 @@ public class LinkedList<T> {
             last.setNext(newElem);
             last = newElem;
             size++;
+        }
+    }
+
+    public void add(int index, T elem) {
+
+        if (elem == null) {
+            throw new IllegalArgumentException("Null argument");
+        } else if ((size == 0) && (index == 0)) {
+            add(elem);
+        } else if (!checkIndex(index)) {
+            throw new IndexOutOfBoundsException();
+        } else if (index < size / 2) {
+
+            Node<T> el = first;
+            for (int i = 0; i < index; i++)
+                el = el.getNext();
+            repositioningForAdding(el, elem);
+        } else {
+            Node<T> el = last;
+            for (int i = size - 1; i > index; i--)
+                el = el.getPrevious();
+
+            repositioningForAdding(el, elem);
         }
     }
 
