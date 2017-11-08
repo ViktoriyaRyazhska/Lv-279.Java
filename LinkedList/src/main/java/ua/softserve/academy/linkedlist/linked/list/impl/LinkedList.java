@@ -150,6 +150,32 @@ public class LinkedList<T> {
             size++;
         }
     }
+    public void add(int index, T elem) {
+
+        if (elem == null) {
+            throw new IllegalArgumentException("Null argument");
+        }
+        if (!checkIndex(index)) throw new IndexOutOfBoundsException();
+
+        if (index < size / 2) {
+
+            Node<T> el = first;
+            for (int i = 0; i < index; i++)
+                el = el.getNext();
+            repositioningForAdding(el, elem);
+
+
+        } else {
+            Node<T> el = last;
+            for (int i = size - 1; i > index; i--)
+                el = el.getPrevious();
+
+            repositioningForAdding(el, elem);
+
+        }
+
+
+    }
 
     private void repositioningForAdding(Node<T> el, T elem) {
         if (elem == null) {
