@@ -109,7 +109,7 @@ public class LinkedListTest {
         assertEquals(0, stringLinkedList.size());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = NoSuchElementException.class)
     public void getAfterClear() throws Exception {
         stringLinkedList.clear();
         stringLinkedList.get(0);

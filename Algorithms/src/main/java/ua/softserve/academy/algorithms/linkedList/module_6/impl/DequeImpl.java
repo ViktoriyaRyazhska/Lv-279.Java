@@ -5,6 +5,7 @@ import ua.softserve.academy.algorithms.linkedList.module_6.Deque;
 
 
 public class DequeImpl<T> implements Deque<T>{
+
     private LinkedList<T> deque;
 
     public DequeImpl() {
@@ -28,29 +29,25 @@ public class DequeImpl<T> implements Deque<T>{
 
     @Override
     public boolean dequeueFirst() {
-        deque.remove(deque.get(0));
-        return true;
+
+        return  deque.remove(deque.get(0));
     }
 
     @Override
     public boolean dequeueLast() {
-        deque.remove(deque.get(deque.size()-1));
-        return true;
+
+        return deque.remove(deque.get(deque.size()-1));
     }
 
     @Override
     public T peekFirst(){
-        if(deque==null){
-            throw new NullPointerException();
-        }
+
         return deque.get(0);
     }
 
     @Override
     public T peekLast(){
-        if(deque==null){
-            throw new NullPointerException();
-        }
+
         return deque.get(deque.size()-1);
     }
 
