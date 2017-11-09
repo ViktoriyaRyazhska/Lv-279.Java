@@ -7,6 +7,14 @@ import ua.softserve.academy.algorithms.linkedList.module_6.Deque;
 public class DequeImpl<T> implements Deque<T>{
     private LinkedList<T> deque;
 
+    public DequeImpl() {
+        this.deque = new LinkedList<T>();
+    }
+
+    public DequeImpl(LinkedList<T> deque) {
+        this.deque = deque;
+    }
+
     @Override
     public void enqueueFirst(T value) {
         deque.add(0, value);

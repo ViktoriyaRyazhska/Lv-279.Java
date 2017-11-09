@@ -285,5 +285,9 @@ public class LinkedList<T> implements Deque<T>{
         };
     }
 
+    public static void main(String[] args) {
+        Deque<String> deque = new LinkedList<>("1","2","3","4");
+
+    }
 
 }
