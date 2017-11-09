@@ -7,6 +7,12 @@
     <groupId>ua.softserve</groupId>
     <artifactId>RAS</artifactId>
     <version>1.0</version>
+	
+	<properties>
+	
+        <java.version>1.8</java.version>
+		
+    </properties>
 
     <build>
         <plugins>
@@ -14,8 +20,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>java.version</source>
-                    <target>java.version</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
 
