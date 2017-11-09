@@ -17,4 +17,6 @@ public interface Deque<E> {
     E peekLast();
 
     boolean isEmpty();
+
+    boolean contains(E value);
 }
