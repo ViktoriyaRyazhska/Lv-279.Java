@@ -2,7 +2,8 @@ package ua.softserve.academy.algorithms.linkedList.module_6.impl;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.softserve.academy.algorithms.linkedList.module_6.Deque;
+import ua.softserve.academy.algorithms.linkedList.module_4.impl.LinkedList;
+
 
 import java.util.NoSuchElementException;
 
@@ -38,6 +39,7 @@ public class DequeImplTest {
     }
 
 
+
     @Test
     public void testContainsInEmptyDeque() throws Exception {
         deque = new DequeImpl<>();
@@ -48,6 +50,14 @@ public class DequeImplTest {
     public void testContains() throws Exception {
         assertFalse(deque.contains("0"));
         assertTrue(deque.contains("1"));
+    }
+
+
+    @Test
+    public void testCreateFromList() throws Exception {
+        deque = new DequeImpl<>(new LinkedList<String>("a","b","c"));
+        assertFalse(deque.isEmpty());
+        assertTrue(deque.contains("a"));
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -72,6 +82,45 @@ public class DequeImplTest {
     @Test
     public void testPeekLast() throws Exception {
         assertEquals("3", deque.peekLast());
+    }
+
+
+    @Test
+    public void testEnqueueFirst() throws Exception {
+          deque.enqueueFirst("0");
+        assertEquals("0", deque.peekFirst());
+    }
+
+    @Test
+    public void testEnqueueLast() throws Exception {
+        deque.enqueueLast("4");
+        assertEquals("4", deque.peekLast());
+    }
+
+    @Test
+    public void testDequeueFirst() throws Exception {
+        assertTrue( deque.dequeueFirst());
+        assertEquals("2", deque.peekFirst());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testDequeueFirstIfEmpty() throws Exception {
+        deque = new DequeImpl<>();
+        assertTrue( deque.dequeueFirst());
+
+    }
+
+    @Test
+    public void testDequeueLast() throws Exception {
+        assertTrue( deque.dequeueLast());
+        assertEquals("2", deque.peekLast());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testDequeueLastIfEmpty() throws Exception {
+        deque = new DequeImpl<>();
+        assertTrue( deque.dequeueFirst());
+
     }
 
 }
