@@ -34,7 +34,12 @@ public class LinkedList<T> {
 
     public T get(int index) {
 
-        if (!checkIndex(index)) throw new IndexOutOfBoundsException();
+        if (size() == 0) {
+            throw new NoSuchElementException();
+        }
+        if (!checkIndex(index)) {
+            throw new IndexOutOfBoundsException();
+        }
 
         if (index < size / 2) {
 
