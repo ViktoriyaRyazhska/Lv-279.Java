@@ -10,6 +10,8 @@
 package ua.softserve.academy.algorithms.linkedList.module_5.dobleo;
 
 import org.junit.Test;
+import ua.softserve.academy.algorithms.linkedList.module_5.doubleo.JosephusProblem;
+
 import static org.junit.Assert.*;
 
 public class JosephusProblemTest {

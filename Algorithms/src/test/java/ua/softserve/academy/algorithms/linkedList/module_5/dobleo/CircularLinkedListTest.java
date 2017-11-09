@@ -11,7 +11,8 @@ package ua.softserve.academy.algorithms.linkedList.module_5.dobleo;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.softserve.academy.algorithms.linkedList.module_5.dobleo.interfaces.ICircularLinkedList;
+import ua.softserve.academy.algorithms.linkedList.module_5.doubleo.CircularLinkedList;
+import ua.softserve.academy.algorithms.linkedList.module_5.doubleo.interfaces.ICircularLinkedList;
 import static org.junit.Assert.*;
 
 public class CircularLinkedListTest {
