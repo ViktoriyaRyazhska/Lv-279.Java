@@ -8,7 +8,7 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package ua.softserve.academy.algorithms.linkedList.module_5.dobleo.interfaces;
+package ua.softserve.academy.algorithms.linkedList.module_5.doubleo.interfaces;
 
 public interface ICircularLinkedList<T> extends Iterable<T>{
 

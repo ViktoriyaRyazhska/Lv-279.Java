@@ -16,12 +16,17 @@ public class Buffer implements BufferInterface {
     private class Item {
         private Item next;
         private Object value;
+
         public Item(Object value) {
             this.value = value;
         }
     }
 
-
+    /**
+     * Adds element value  in the Buffer.
+     *
+     * @param value adds in the buffer.
+     */
     @Override
     public void enqueue(Object value) {
         Item temp = new Item(value);
@@ -35,12 +40,20 @@ public class Buffer implements BufferInterface {
         size++;
     }
 
+    /**
+     * Removes the first elements from the Buffer.
+     */
     @Override
     public void dequeue() {
         first = first.next;
         size--;
     }
 
+    /**
+     * Returns the first element added to the Buffer
+     *
+     * @return first element added to the Buffer.
+     */
     @Override
     public Object peak() {
         Item temp = first;
@@ -49,6 +62,12 @@ public class Buffer implements BufferInterface {
         return temp.value;
     }
 
+    /**
+     * Checks if value exists in the Buffer.
+     *
+     * @param value
+     * @return returns true if value is found in the buffer.
+     */
     @Override
     public boolean contains(Object value) {
         Item temp = first;
@@ -62,11 +81,21 @@ public class Buffer implements BufferInterface {
         return false;
     }
 
+    /**
+     * Returns the number of items in the Buffer.
+     *
+     * @return int
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * Checks if Buffer is empty
+     *
+     * @return return true if Buffer is empty
+     */
     @Override
     public boolean isEmpty() {
         if (size == 0) {
@@ -76,6 +105,9 @@ public class Buffer implements BufferInterface {
         }
     }
 
+    /**
+     * @return Returns the String in which the value of the value field of all the elements in the queue is given through a comma
+     */
     @Override
     public String toString() {
         String str = "";

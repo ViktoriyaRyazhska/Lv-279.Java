@@ -8,9 +8,9 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package ua.softserve.academy.algorithms.linkedList.module_5.dobleo;
+package ua.softserve.academy.algorithms.linkedList.module_5.doubleo;
 
-import ua.softserve.academy.algorithms.linkedList.module_5.dobleo.interfaces.ICircularLinkedList;
+import ua.softserve.academy.algorithms.linkedList.module_5.doubleo.interfaces.ICircularLinkedList;
 import java.util.Iterator;
 
 /**
