@@ -1,4 +1,4 @@
-package ua.softserve.academy.algorithms.encrypt.aes.com.medium;
+package ua.softserve.academy.algorithms.encrypt.aes.notused.com.medium;
 
 import org.apache.commons.codec.binary.Base64;
 

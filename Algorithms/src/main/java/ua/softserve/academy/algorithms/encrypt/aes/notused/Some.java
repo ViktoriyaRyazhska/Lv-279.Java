@@ -8,9 +8,10 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package ua.softserve.academy.algorithms.encrypt.aes;
+package ua.softserve.academy.algorithms.encrypt.aes.notused;
 
-import ua.softserve.academy.algorithms.encrypt.aes.com.androidsnippets.MCrypt;
+import ua.softserve.academy.algorithms.encrypt.aes.AESParams;
+import ua.softserve.academy.algorithms.encrypt.aes.notused.com.androidsnippets.MCrypt;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;

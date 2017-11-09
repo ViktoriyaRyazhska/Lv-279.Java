@@ -1,4 +1,4 @@
-package ua.softserve.academy.algorithms.encrypt.aes.com.howtodoinjava;
+package ua.softserve.academy.algorithms.encrypt.aes.notused.com.howtodoinjava;
 
 import ua.softserve.academy.algorithms.encrypt.aes.AESParams;
 
@@ -45,7 +45,9 @@ public class AES {
             setKey(secret);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
+            byte[] bytes = cipher.doFinal(strToEncrypt.getBytes("UTF-8"));
+            System.out.println(new String(bytes));
+            return Base64.getEncoder().encodeToString(bytes);
         } catch (Exception e) {
             System.out.println("Error while encrypting: " + e.toString());
         }

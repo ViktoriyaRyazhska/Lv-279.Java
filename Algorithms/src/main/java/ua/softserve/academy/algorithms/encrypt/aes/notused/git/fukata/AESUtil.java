@@ -1,4 +1,4 @@
-package ua.softserve.academy.algorithms.encrypt.aes.git.fukata;
+package ua.softserve.academy.algorithms.encrypt.aes.notused.git.fukata;
 
 import ua.softserve.academy.algorithms.encrypt.aes.AESParams;
 

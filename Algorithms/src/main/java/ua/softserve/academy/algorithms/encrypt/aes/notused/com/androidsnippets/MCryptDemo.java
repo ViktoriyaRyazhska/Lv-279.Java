@@ -8,7 +8,7 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package ua.softserve.academy.algorithms.encrypt.aes.com.androidsnippets;
+package ua.softserve.academy.algorithms.encrypt.aes.notused.com.androidsnippets;
 
 import ua.softserve.academy.algorithms.encrypt.aes.AESParams;
 
@@ -20,7 +20,7 @@ public class MCryptDemo {
 
         MCrypt mCrypt = new MCrypt();
         byte[] encrypt = mCrypt.encrypt(message);
-        String hex = MCrypt.bytesToHex(encrypt);
+        String hex = new String(encrypt);
         System.out.println(hex);
         System.out.println();
         byte[] decrypt = mCrypt.decrypt(hex);

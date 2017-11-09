@@ -8,7 +8,7 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package ua.softserve.academy.algorithms.encrypt.aes.com.androidsnippets;
+package ua.softserve.academy.algorithms.encrypt.aes.notused.com.androidsnippets;
 
 import ua.softserve.academy.algorithms.encrypt.aes.AESParams;
 
@@ -24,14 +24,14 @@ public class MCrypt {
 
     private SecretKeySpec keyspec;
     private Cipher cipher;
-    private String SecretKey = AESParams.key;
+    public String SecretKey = AESParams.key;
 
     public MCrypt()
     {
         try {
-            keyspec = new SecretKeySpec(SecretKey.getBytes("UTF-8"), "AES");
+            keyspec = new SecretKeySpec(SecretKey.getBytes(), "AES");
             cipher = Cipher.getInstance("AES");
-        } catch (UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException e) {
+        } catch ( NoSuchAlgorithmException | NoSuchPaddingException e) {
             e.printStackTrace();
         }
     }
@@ -111,7 +111,7 @@ public class MCrypt {
 
 
 
-    private static String padString(String source)
+    public static String padString(String source)
     {
         char paddingChar = ' ';
         int size = 16;

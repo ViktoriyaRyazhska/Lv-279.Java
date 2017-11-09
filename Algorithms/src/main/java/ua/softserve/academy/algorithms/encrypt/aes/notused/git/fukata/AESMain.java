@@ -8,7 +8,7 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package ua.softserve.academy.algorithms.encrypt.aes.git.fukata;
+package ua.softserve.academy.algorithms.encrypt.aes.notused.git.fukata;
 
 import ua.softserve.academy.algorithms.encrypt.aes.AESParams;
 
