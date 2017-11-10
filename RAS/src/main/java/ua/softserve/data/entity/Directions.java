@@ -13,22 +13,92 @@ public class Directions {
 
     @NotNull
     @Column(name = "name")
-    private String name; // need fix COLLATE utf8_unicode_ci NOT NULL
+    private String name;
 
     @NotNull
-    @Column(name = "item", columnDefinition = "")
-    private String item; // need fix COLLATE utf8_unicode_ci NOT NULL
+    @Column(name = "item")
+    private String item;
 
     @Column(name = "crm_id")
-    private Integer crm_id; // need fix unsigned DEFAULT NULL
+    private Integer crm_id;
 
-    @Column(name = "ita", columnDefinition = "")
-    private byte ita; // need fix unsigned DEFAULT NULL
+    @Column(name = "ita")
+    private Byte ita;
 
     @Column(name = "vacancy", columnDefinition = "")
-    private byte vacancy; // need fix unsigned DEFAULT NULL
+    private Byte vacancy;
 
-    @Column(name = "status", columnDefinition = "")
-    private byte status; // need fix unsigned DEFAULT NULL
+    @Column(name = "status")
+    private Byte status;
 
+    public Directions() {}
+
+    public int getDirection_id() {
+        return direction_id;
+    }
+
+    public void setDirection_id(int direction_id) {
+        this.direction_id = direction_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public Integer getCrm_id() {
+        return crm_id;
+    }
+
+    public void setCrm_id(Integer crm_id) {
+        this.crm_id = crm_id;
+    }
+
+    public Byte getIta() {
+        return ita;
+    }
+
+    public void setIta(Byte ita) {
+        this.ita = ita;
+    }
+
+    public Byte getVacancy() {
+        return vacancy;
+    }
+
+    public void setVacancy(Byte vacancy) {
+        this.vacancy = vacancy;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Directions{" +
+                "direction_id=" + direction_id +
+                ", name='" + name + '\'' +
+                ", item='" + item + '\'' +
+                ", crm_id=" + crm_id +
+                ", ita=" + ita +
+                ", vacancy=" + vacancy +
+                ", status=" + status +
+                '}';
+    }
 }
