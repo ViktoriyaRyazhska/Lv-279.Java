@@ -35,7 +35,7 @@ public class Academy {
 
     @NotNull
     @Column(name = "name")
-    private String name; // need fix COLLATE utf8_unicode_ci
+    private String name;
 
     @NotNull
     @Column(name = "start_date")
@@ -69,6 +69,127 @@ public class Academy {
     @Column(name = "not_synchronized")
     private int not_synchronized;
 
+    public Academy() {}
+
+    public int getAcademy_id() {
+        return academy_id;
+    }
+
+    public void setAcademy_id(int academy_id) {
+        this.academy_id = academy_id;
+    }
+
+    public City getCity_id() {
+        return city_id;
+    }
+
+    public void setCity_id(City city_id) {
+        this.city_id = city_id;
+    }
+
+    public Directions getDirectionsSet() {
+        return directionsSet;
+    }
+
+    public void setDirectionsSet(Directions directionsSet) {
+        this.directionsSet = directionsSet;
+    }
+
+    public Technologies getTechnologiesSet() {
+        return technologiesSet;
+    }
+
+    public void setTechnologiesSet(Technologies technologiesSet) {
+        this.technologiesSet = technologiesSet;
+    }
+
+    public Academy_Stages getAcademy_stagesSet() {
+        return academy_stagesSet;
+    }
+
+    public void setAcademy_stagesSet(Academy_Stages academy_stagesSet) {
+        this.academy_stagesSet = academy_stagesSet;
+    }
+
+    public int getCrm_group() {
+        return crm_group;
+    }
+
+    public void setCrm_group(int crm_group) {
+        this.crm_group = crm_group;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Timestamp getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(Timestamp start_date) {
+        this.start_date = start_date;
+    }
+
+    public Timestamp getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(Timestamp end_date) {
+        this.end_date = end_date;
+    }
+
+    public int getFree() {
+        return free;
+    }
+
+    public void setFree(int free) {
+        this.free = free;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getHas_tech() {
+        return has_tech;
+    }
+
+    public void setHas_tech(int has_tech) {
+        this.has_tech = has_tech;
+    }
+
+    public int getHas_eng() {
+        return has_eng;
+    }
+
+    public void setHas_eng(int has_eng) {
+        this.has_eng = has_eng;
+    }
+
+    public int getHas_first() {
+        return has_first;
+    }
+
+    public void setHas_first(int has_first) {
+        this.has_first = has_first;
+    }
+
+    public int getNot_synchronized() {
+        return not_synchronized;
+    }
+
+    public void setNot_synchronized(int not_synchronized) {
+        this.not_synchronized = not_synchronized;
+    }
 
     @Override
     public String toString() {
