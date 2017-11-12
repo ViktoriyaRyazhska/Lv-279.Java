@@ -1,41 +1,30 @@
 package ua.softserve.repository.dao.impl;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 import ua.softserve.data.entity.Academy;
 import ua.softserve.repository.dao.AcademyDAO;
-import ua.softserve.util.HibernateUtil;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
+@Repository
 public class AcademyDAOImpl implements AcademyDAO {
-    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
-
-    protected Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
-    }
-
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public Academy getById(Integer id) {
-        Transaction transaction = sessionFactory.getCurrentSession().beginTransaction();
-        Academy academy = (Academy) getCurrentSession().get(Academy.class, id);
-        if (academy == null) {
-            System.out.println("Can't find the User where id = " + id);
-        }
-        transaction.commit();
-        return academy;
+        return em.find(Academy.class, id);
     }
 
     @Override
     public List<Academy> getAllAcademys() {
-        Transaction transaction = sessionFactory.getCurrentSession().beginTransaction();
-        List<Academy> academies = new ArrayList<>(getCurrentSession().createCriteria(Academy.class).list());
-        transaction.commit();
-
-        return academies;
+        CriteriaQuery<Academy> criteriaQuery = em.getCriteriaBuilder().createQuery(Academy.class);
+        @SuppressWarnings("unused")
+        Root<Academy> root = criteriaQuery.from(Academy.class);
+        return em.createQuery(criteriaQuery).getResultList();
     }
 }
