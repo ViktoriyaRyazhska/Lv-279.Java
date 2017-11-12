@@ -46,6 +46,7 @@ public class Encryptor {
 
     public static String decrypt(String value, String key) {
         byte[] json = Base64.decodeBase64(value);
+        System.out.println(new String(json));
         String[] split = new String(json).split("\"");
         String val = split[7];
         String mac = split[11];
@@ -58,7 +59,7 @@ public class Encryptor {
             if (s.charAt(i) == ':') {
                 if (start == -1) {
                     start = i;
-                } else if (end == -1) {
+                } else {
                     end = i;
                     break;
                 }
