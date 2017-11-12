@@ -10,9 +10,9 @@ public class Main {
     public static void main(String[] args) {
         AcademyDAO academyDAO = new AcademyDAOImpl();
 
-        List<Academy> academies = academyDAO.getAllAcademys();
-        academies.forEach(System.out::println);
+//        List<Academy> academies = academyDAO.getAllAcademys();
+//        academies.forEach(System.out::println);
 
-//        System.out.println(academyDAO.getById((Integer) 1));
+        System.out.println(academyDAO.getById((Integer) 1));
     }
 }
