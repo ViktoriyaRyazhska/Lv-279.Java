@@ -12,8 +12,8 @@
 
         <java.version>1.8</java.version>
 
-        <mysql.mysql-connector-java.version>5.1.37</mysql.mysql-connector-java.version>
-        <org.hibernate.hibernate-core.version>4.3.11.Final</org.hibernate.hibernate-core.version>
+        <mysql.mysql-connector-java.version>6.0.5</mysql.mysql-connector-java.version>
+        <org.hibernate.hibernate-core.version>5.2.9.Final</org.hibernate.hibernate-core.version>
 
     </properties>
 
@@ -37,24 +37,46 @@
 
     <dependencies>
 
+
+        <!-- Spring Context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.3.7.RELEASE</version>
+        </dependency>
+        <!-- Spring ORM -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>4.3.7.RELEASE</version>
+        </dependency>
+        <!-- Mysql Connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.mysql-connector-java.version}</version>
         </dependency>
-
+        <!-- Hibernate 5.2.9 Final -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${org.hibernate.hibernate-core.version}</version>
         </dependency>
 
-        <!--Then, to enable Hibernate to use its proxy model, we need the javassist as well:-->
+        <!--Then, to enable Hibernate to use its proxy model, we need the javassist as well-->
+        <!--<dependency>-->
+            <!--<groupId>org.javassist</groupId>-->
+            <!--<artifactId>javassist</artifactId>-->
+            <!--<version>3.18.2-GA</version>-->
+        <!--</dependency>-->
+
+        <!--Apache Commons DBCP-->
         <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.18.2-GA</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.1.1</version>
         </dependency>
+
 
     </dependencies>
 
