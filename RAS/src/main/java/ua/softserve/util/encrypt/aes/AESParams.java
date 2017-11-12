@@ -20,20 +20,6 @@ public class AESParams {
     public static final String fromDB4 = "eyJpdiI6IjJWeGFPM1Q0QmhYZG1EK1dYV2NPQVE9PSIsInZhbHVlIjoiWHM1eHMxTnVPdXlHcWVacGgrUlFQTEgyWDlEYjJRMlVIVGVIajlxUVI0MD0iLCJtYWMiOiI4YzNjYzhlNDVmOWZhYTVlZjJhZDYwNDBhYWEyZDE2ZTliNmU4ODkxNWEyMTdmYzBiZmI4MTg1Y2IzOWY4YzllIn0=";
     public static final String fromDB5 = "eyJpdiI6Ik5WXC83WHF4a2VDcnpZRjU1OEF0TVBRPT0iLCJ2YWx1ZSI6ImFNVk1mRjRNenArekVhdG1rXC9pZU92NmwyeTZMYmx1VUp2djlKTGRCeGRvPSIsIm1hYyI6IjFjZTM1ZTMyMzY0YTI5MWFlYjk2NzlmYWY1YTY0MGFkYzQwZmMxNGQ5OTY4MWQ3N2RmZjJhZjE5ZTk4ZTM2YTYifQ==";
 
-    public static void printBytesAsString(byte[] bytes) {
-        for (byte b : bytes) {
-            System.out.print((char) b);
-        }
-        System.out.println();
-    }
-
-    public static void printBytes(byte[] bytes) {
-        for (byte b : bytes) {
-            System.out.print(b + " ");
-        }
-        System.out.println();
-    }
-
     public static String bytesToHex(byte[] data) {
         if (data == null) {
             return null;
@@ -50,7 +36,6 @@ public class AESParams {
         return str;
     }
 
-
     public static byte[] hexToBytes(String str) {
         if (str == null) {
             return null;
@@ -66,19 +51,4 @@ public class AESParams {
         }
     }
 
-
-    public static String padString(String source) {
-        char paddingChar = ' ';
-        int size = 16;
-        int x = source.length() % size;
-        int padLength = size - x;
-
-        for (int i = 0; i < padLength; i++) {
-            source += paddingChar;
-        }
-
-        return source;
-    }
-
-}
 }
