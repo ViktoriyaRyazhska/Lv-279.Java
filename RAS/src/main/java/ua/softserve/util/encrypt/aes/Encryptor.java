@@ -24,6 +24,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
+/**
+ *
+ */
 public class Encryptor {
 
     public static String encrypt(String value, String key) {

@@ -10,6 +10,8 @@
 
 package ua.softserve.util.encrypt.aes;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class EncryptorDemo {
 
     public static void main(String[] args) throws Exception {
