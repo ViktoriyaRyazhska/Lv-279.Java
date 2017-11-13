@@ -16,7 +16,7 @@ public class Main {
 
         AcademyService personService = context.getBean(AcademyService.class);
 
-        //System.out.println(personService.getById(1));
+        System.out.println(personService.getById(1));
 
 //        List<Academy> academies = personService.getAllAcademys();
 //        academies.forEach(System.out::println);
