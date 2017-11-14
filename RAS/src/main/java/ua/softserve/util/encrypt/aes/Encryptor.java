@@ -18,6 +18,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -114,4 +116,18 @@ public class Encryptor {
         return valueBytes;
     }
 
+    public static void init(){
+        try {
+            if (Cipher.getMaxAllowedKeyLength("AES") < 256) {
+                Field field = Class.forName("javax.crypto.JceSecurity").getDeclaredField("isRestricted");
+                field.setAccessible(true);
+                Field modifiersField = Field.class.getDeclaredField("modifiers");
+                modifiersField.setAccessible(true);
+                modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+                field.set(null, false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

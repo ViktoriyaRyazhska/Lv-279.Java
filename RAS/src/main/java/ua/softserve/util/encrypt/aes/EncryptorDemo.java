@@ -10,11 +10,11 @@
 
 package ua.softserve.util.encrypt.aes;
 
-import org.apache.commons.codec.binary.Base64;
-
 public class EncryptorDemo {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+
+        Encryptor.init();
 
         String encrypted = Encryptor.encrypt("This is example how to use this util!", AESParams.key);
         String decrypted = Encryptor.decrypt(encrypted, AESParams.key);
@@ -23,6 +23,7 @@ public class EncryptorDemo {
         System.out.println(encrypted);
         System.out.println("Decrypted value:");
         System.out.println(decrypted);
+
     }
 
 }
