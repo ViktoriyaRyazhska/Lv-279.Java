@@ -39,8 +39,6 @@ public class Technology {
 
     private boolean ita;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "direction_id")
-    private Direction direction_id;
+    private int directiond_id;
 
 }

@@ -10,12 +10,8 @@
 
 package ua.softserve.util.geo;
 
-import com.google.maps.model.AddressComponent;
-import com.google.maps.model.AddressComponentType;
-import com.google.maps.model.GeocodingResult;
-
 public class GeoDecoding {
-    public static PlaceName parseResult(GeocodingResult r) {
+    /*public static PlaceName parseResult(GeocodingResult r) {
 
         PlaceName placeName = new PlaceName(); // simple POJO
 
@@ -35,12 +31,8 @@ public class GeoDecoding {
                     placeName.setCountry(ac.longName);
                 }
             }
-
-//            if(/* your condition */){ // got required data
-//                break;
-//            }
         }
 
         return placeName;
-    }
+    }*/
 }
