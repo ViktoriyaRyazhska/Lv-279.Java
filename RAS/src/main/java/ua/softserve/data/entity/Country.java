@@ -30,8 +30,8 @@ public class Country {
     @Column(name = "country_id")
     private int id;
 
-    @Column(nullable = false)
-    private String name;
+//    @Column(nullable = false)
+//    private String name;
 
     private boolean ita;
 

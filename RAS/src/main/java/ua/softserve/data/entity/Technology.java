@@ -1,12 +1,12 @@
-/*
-* Technology
+/* Technology
 *
 * Version 1.0-SNAPSHOT
 *
 * 15.11.17
 *
 * All rights reserved by DoubleO Team (Team#1)
-* */
+*/
+
 
 package ua.softserve.data.entity;
 
@@ -39,6 +39,7 @@ public class Technology {
 
     private boolean ita;
 
-    private int directiond_id;
+    @Column(name = "directiond_id")
+    private int directionId;
 
 }

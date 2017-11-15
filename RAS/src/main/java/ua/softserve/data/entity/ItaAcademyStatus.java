@@ -6,7 +6,8 @@
 * 15.11.17
 *
 * All rights reserved by DoubleO Team (Team#1)
-* */
+*/
+
 
 package ua.softserve.data.entity;
 
@@ -34,3 +35,4 @@ public class ItaAcademyStatus {
     private String name;
 
 }
+

@@ -8,6 +8,7 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
+
 package ua.softserve.data.entity;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +17,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Getter
 @Setter
@@ -28,22 +28,28 @@ public class ItaAcademy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ita_academy_id")
+    @Column(name = "it_academy_id")
     private int id;
 
     @OneToOne
+    @JoinColumn(name = "id")
     private User user;
 
     @OneToOne
+    @JoinColumn(name = "academy_id")
     private Academy academy;
 
     @OneToOne
+    @JoinColumn(name = "it_academy_slot_id")
     private ItaTimeSlots techSlot;
 
     @OneToOne
+    @JoinColumn(name = "it_academy_slot_id")
     private ItaTimeSlots engSlot;
 
     @OneToOne
+    @JoinColumn(name = "it_academy_status_id")
     private ItaAcademyStatus itaAcademyStatus;
 
 }
+

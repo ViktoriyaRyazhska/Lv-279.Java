@@ -1,12 +1,12 @@
-/*
-* ItaTimeSlots
+/* ItaTimeSlots
 *
 * Version 1.0-SNAPSHOT
 *
 * 15.11.17
 *
 * All rights reserved by DoubleO Team (Team#1)
-* */
+*/
+
 
 package ua.softserve.data.entity;
 
@@ -23,7 +23,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ita_time_slot")
+@Table(name = "ita_time_slots")
 public class ItaTimeSlots {
 
     @Id

@@ -1,12 +1,12 @@
-/*
-* Direction
+/* Direction
 *
 * Version 1.0-SNAPSHOT
 *
 * 14.11.17
 *
 * All rights reserved by DoubleO Team (Team#1)
-* */
+*/
+
 
 package ua.softserve.data.entity;
 

@@ -6,7 +6,8 @@
 * 14.11.17
 *
 * All rights reserved by DoubleO Team (Team#1)
-* */
+*/
+
 
 package ua.softserve.data.entity;
 
@@ -33,6 +34,7 @@ public class Academy {
     private int id;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
     private City city;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -60,3 +62,4 @@ public class Academy {
     private int free;
 
 }
+
