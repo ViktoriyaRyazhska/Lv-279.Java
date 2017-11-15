@@ -1,18 +1,28 @@
 package ua.softserve;
 
-import ua.softserve.data.entity.Academy;
-import ua.softserve.repository.dao.AcademyDAO;
-import ua.softserve.repository.dao.impl.AcademyDAOImpl;
-
-import java.util.List;
+import ua.softserve.data.entity.City;
+import ua.softserve.data.entity.Country;
+import ua.softserve.repository.dao.GenericDAO;
+import ua.softserve.repository.dao.impl.GenericDAOImpl;
 
 public class Main {
     public static void main(String[] args) {
-        AcademyDAO academyDAO = new AcademyDAOImpl();
 
-//        List<Academy> academies = academyDAO.getAllAcademys();
-//        academies.forEach(System.out::println);
+        City city1 = new City();
+        city1.setName("Lviv");
 
-        System.out.println(academyDAO.getById((Integer) 1));
+        Country country1 = new Country();
+        country1.setName("Ukraine");
+        country1.setIta(true);
+
+        city1.setCountry(country1);
+        city1.setIta(true);
+
+        GenericDAO cityDAO = new GenericDAOImpl(City.class);
+        GenericDAO countryDAO = new GenericDAOImpl(Country.class);
+
+        countryDAO.save(country1);
+        cityDAO.save(city1);
+
     }
 }

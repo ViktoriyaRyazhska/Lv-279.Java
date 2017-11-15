@@ -1,9 +1,9 @@
 /*
-* City
+* ItaAcademyStatus
 *
 * Version 1.0-SNAPSHOT
 *
-* 14.11.17
+* 15.11.17
 *
 * All rights reserved by DoubleO Team (Team#1)
 * */
@@ -11,8 +11,8 @@
 package ua.softserve.data.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -22,21 +22,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "city")
-public class City {
+@Table(name = "ita_academy_statuses")
+public class ItaAcademyStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "city_id")
+    @Column(name = "it_academy_status_id")
     private int id;
 
-    @Column(nullable = false)
+    @Column(name = "crm_status", nullable = false)
     private String name;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id")
-    private Country country;
-
-    private boolean ita;
 
 }

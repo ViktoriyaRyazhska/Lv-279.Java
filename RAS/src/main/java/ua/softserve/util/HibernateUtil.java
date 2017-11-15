@@ -1,39 +1,48 @@
+/*
+* HibernateUtil
+*
+* Version 1.0-SNAPSHOT
+*
+* 15.11.17
+*
+* All rights reserved by DoubleO Team (Team#1)
+* */
+
 package ua.softserve.util;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-
+import ua.softserve.data.entity.*;
 
 public class HibernateUtil {
-    //XML based configuration
-    private static SessionFactory sessionFactory;
 
-    private static SessionFactory buildSessionFactory() {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure("hibernate.cfg.xml");
-            System.out.println("Hibernate Configuration loaded");
+    private static SessionFactory sessionFactory = null;
 
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-            System.out.println("Hibernate serviceRegistry created");
-
-            SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-            return sessionFactory;
-        }
-        catch (Throwable ex) {
-            // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+    private HibernateUtil() {
     }
 
     public static SessionFactory getSessionFactory() {
-        if(sessionFactory == null) sessionFactory = buildSessionFactory();
+        if (sessionFactory == null) {
+            sessionFactory = new Configuration()
+                    .configure()
+                    .addAnnotatedClass(Academy.class)
+                    .addAnnotatedClass(AcademyStage.class)
+                    .addAnnotatedClass(City.class)
+                    .addAnnotatedClass(Country.class)
+                    .addAnnotatedClass(Direction.class)
+                    .addAnnotatedClass(ItaAcademy.class)
+                    .addAnnotatedClass(ItaAcademyStatus.class)
+                    .addAnnotatedClass(ItaTimeSlots.class)
+                    .addAnnotatedClass(Technology.class)
+                    .addAnnotatedClass(User.class)
+                    .buildSessionFactory();
+        }
         return sessionFactory;
     }
 
+    public static void closeSessionFactory() {
+        if (sessionFactory != null) {
+            sessionFactory.close();
+        }
+    }
 }
-

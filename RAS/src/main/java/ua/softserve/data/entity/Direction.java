@@ -1,5 +1,5 @@
 /*
-* City
+* Direction
 *
 * Version 1.0-SNAPSHOT
 *
@@ -10,10 +10,7 @@
 
 package ua.softserve.data.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -22,21 +19,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "city")
-public class City {
+@Table(name = "directions")
+public class Direction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "city_id")
+    @Column(name = "direction_id")
     private int id;
 
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id")
-    private Country country;
-
     private boolean ita;
+
 
 }

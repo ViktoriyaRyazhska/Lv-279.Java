@@ -1,5 +1,5 @@
 /*
-* City
+* ItaAcademy
 *
 * Version 1.0-SNAPSHOT
 *
@@ -16,27 +16,34 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "city")
-public class City {
+@Table(name = "ita_academy")
+public class ItaAcademy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "city_id")
+    @Column(name = "ita_academy_id")
     private int id;
 
-    @Column(nullable = false)
-    private String name;
+    @OneToOne
+    private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id")
-    private Country country;
+    @OneToOne
+    private Academy academy;
 
-    private boolean ita;
+    @OneToOne
+    private ItaTimeSlots techSlot;
+
+    @OneToOne
+    private ItaTimeSlots engSlot;
+
+    @OneToOne
+    private ItaAcademyStatus itaAcademyStatus;
 
 }
