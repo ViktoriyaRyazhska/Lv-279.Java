@@ -1,65 +1,101 @@
-/*
-* Academy
-*
-* Version 1.0-SNAPSHOT
-*
-* 14.11.17
-*
-* All rights reserved by DoubleO Team (Team#1)
-*/
-
-
 package ua.softserve.persistence.entity;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
+import javax.validation.constraints.NotNull;
+
+import java.sql.Timestamp;
+
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "academy")
 public class Academy {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "academy_id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int academy_id;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "city_id", insertable = false, updatable = false)
-//    private City city;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "direction_id")
-//    private Direction direction;
-//
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "technology_id")
-//    private Technology technology;
-//
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "stage_id")
-//    private AcademyStage stage;
+    @ManyToOne
+    @JoinColumn(name = "direction_id")
+    private Directions directions;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "technology_id")
+    private Technologies technologies;
+
+
+    @ManyToOne
+    @JoinColumn(name = "stage_id")
+    private Academy_Stages academy_stages;
+
+    @NotNull
+    @Column(name = "crm_group")
+    private int crm_group;
+
+    @NotNull
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "start_date", nullable = false)
-    private Date startDate;
+    @NotNull
+    @Column(name = "start_date")
+    private Timestamp start_date;//need fix
 
-    @Column(name = "end_date", nullable = false)
-    private Date endDate;
+    @NotNull
+    @Column(name = "end_date")
+    private Timestamp end_date;//need fix
 
-    @Column(nullable = false)
+    @NotNull
+    @Column(name = "free")
     private int free;
 
+    @NotNull
+    @Column(name = "status")
+    private int status;
+
+    @NotNull
+    @Column(name = "has_tech")
+    private int has_tech;
+
+    @NotNull
+    @Column(name = "has_eng")
+    private int has_eng;
+
+    @NotNull
+    @Column(name = "has_first")
+    private int has_first;
+
+    @NotNull
+    @Column(name = "not_synchronized")
+    private int not_synchronized;
+
+
+    @Override
+    public String toString() {
+        return "Academy{" +
+                "academy_id=" + academy_id +
+                ", city_id=" + city.getCity_id() +
+                ", directionsSet=" + directions.getName() +
+                ", technologiesSet=" + technologies.getName() +
+                ", academy_stagesSet=" + academy_stages.getName() +
+                ", crm_group=" + crm_group +
+                ", name='" + name + '\'' +
+                ", start_date=" + start_date.toLocalDateTime().toLocalDate() +
+                ", end_date=" + end_date.toLocalDateTime().toLocalDate() +
+                ", free=" + free +
+                ", status=" + status +
+                ", has_tech=" + has_tech +
+                ", has_eng=" + has_eng +
+                ", has_first=" + has_first +
+                ", not_synchronized=" + not_synchronized +
+                '}';
+    }
 }
 
