@@ -4,6 +4,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import ua.softserve.config.DataConfig;
 import ua.softserve.config.ServiceConf;
 import ua.softserve.persistence.entity.User;
+import ua.softserve.service.AcademyService;
 import ua.softserve.service.UserService;
 
 public class MainService {
@@ -13,11 +14,10 @@ public class MainService {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(ServiceConf.class, DataConfig.class);
 
-        UserService personService = context.getBean(UserService.class);
+        AcademyService academyService = context.getBean(AcademyService.class);
 
-        for (User user : personService.findAll()) {
-            System.out.println(user.getFirstName());
-        }
+            System.out.println(academyService.getById(1));
+
 
     }
 
