@@ -17,6 +17,7 @@ public class City {
 
     @NotNull
     @Column(name = "crm_id")
+    @JoinColumn(foreignKey = @ForeignKey(foreignKeyDefinition = ""))
     private int crm_id;
 
     @Column(name = "country_id")
