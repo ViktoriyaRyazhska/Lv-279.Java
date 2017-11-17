@@ -10,6 +10,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ua.softserve.util.encrypt.aes.Encryptor;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -17,7 +18,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("ua.softserve.repository.dao")
+@EnableJpaRepositories("ua.softserve.persistence.dao")
 public class DataConfig {
 
     @Bean
@@ -27,6 +28,7 @@ public class DataConfig {
         dataSource.setUrl("jdbc:mysql://localhost:3306/ss_ps_db?autoReconnect=true&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
+        Encryptor.init();
         return dataSource;
     }
 
@@ -43,7 +45,7 @@ public class DataConfig {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
         factoryBean.setJpaVendorAdapter(vendorAdapter());
-        factoryBean.setPackagesToScan("ua.softserve.data.entity");
+        factoryBean.setPackagesToScan("ua.softserve.persistence.entity");
         Properties properties = new Properties();
         properties.put("hibernate.hbm2ddl.auto", "update");
         factoryBean.setJpaProperties(properties);

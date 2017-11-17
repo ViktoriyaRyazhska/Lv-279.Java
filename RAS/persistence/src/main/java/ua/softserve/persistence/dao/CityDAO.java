@@ -10,20 +10,13 @@
 
 package ua.softserve.persistence.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import ua.softserve.persistence.entity.City;
 
 import java.util.List;
 
-public interface CityDAO {
+public interface CityDAO extends JpaRepository<City, Integer> {
 
-    void save(City product);
 
-    City findOne(int id);
-
-    List<City> findAll();
-
-    City update(City product);
-
-    void remove(City product);
 
 }

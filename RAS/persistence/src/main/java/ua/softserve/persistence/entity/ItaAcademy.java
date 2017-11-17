@@ -27,13 +27,13 @@ import javax.persistence.*;
 public class ItaAcademy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "it_academy_id")
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "id")
-    private User user;
+//    @OneToOne
+//    @JoinColumn(name = "id")
+//    private User user;
 
 //    @OneToOne
 //    @JoinColumn(name = "academy_id")

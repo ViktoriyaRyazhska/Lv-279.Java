@@ -10,18 +10,18 @@
 
 package ua.softserve.service;
 
+import ua.softserve.persistence.entity.City;
+
 import java.util.List;
 
 public interface CityService {
 
-//    void save(City product);
-//
-//    City findOne(int id);
-//
-//    List<City> findAll();
-//
-//    City update(City product);
-//
-//    void remove(City product);
+    void save(City city);
+
+    City findOne(int id);
+
+    List<City> findAll();
+
+    void remove(City city);
 
 }

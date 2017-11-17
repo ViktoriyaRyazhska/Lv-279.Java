@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import ua.softserve.util.encrypt.aes.EncryptConverter;
 
 import javax.persistence.*;
 
@@ -36,15 +37,19 @@ public class User {
     @Column(name = "user_name", nullable = false)
     private String userName;
 
+    @Convert(converter = EncryptConverter.class)
     @Column(nullable = false)
     private String email;
 
+    @Convert(converter = EncryptConverter.class)
     @Column(name = "first_name")
     private String firstName;
 
+    @Convert(converter = EncryptConverter.class)
     @Column(name = "last_name")
     private String lastName;
 
+    @Convert(converter = EncryptConverter.class)
     private String phone;
 
 }
