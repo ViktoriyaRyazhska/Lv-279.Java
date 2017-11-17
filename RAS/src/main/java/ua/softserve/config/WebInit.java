@@ -16,9 +16,7 @@ public class WebInit implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.register(WebConfig.class);
 
-
         DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
-
         ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcherServlet", dispatcherServlet);
         registration.setLoadOnStartup(1);
         registration.addMapping("/");
