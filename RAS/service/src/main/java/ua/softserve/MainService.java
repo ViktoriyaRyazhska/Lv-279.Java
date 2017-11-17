@@ -3,7 +3,6 @@ package ua.softserve;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ua.softserve.config.DataConfig;
 import ua.softserve.config.ServiceConf;
-import ua.softserve.persistence.dao.UserDAO;
 import ua.softserve.persistence.entity.User;
 import ua.softserve.service.UserService;
 

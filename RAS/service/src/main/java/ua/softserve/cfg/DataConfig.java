@@ -1,4 +1,4 @@
-package ua.softserve.config;
+package ua.softserve.cfg;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,6 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import ua.softserve.util.encrypt.aes.Encryptor;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -22,11 +21,8 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("ua.softserve.persistence.dao")
-<<<<<<< HEAD
-=======
 @PropertySource({"classpath:persistence-mysql.properties"})
-@ComponentScan(basePackages = {"ua.softserve.persistence.entity", "ua.softserve.persistence.dao"})
->>>>>>> 411942cd0a53bd6974f20d412633429cda050686
+@ComponentScan//(basePackages = {"ua.softserve.persistence.entity", "ua.softserve.persistence.dao","ua.softserve.service"})
 public class DataConfig {
 
     @Autowired
@@ -35,18 +31,10 @@ public class DataConfig {
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-<<<<<<< HEAD
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/ss_ps_db?autoReconnect=true&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
-        Encryptor.init();
-=======
         dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
         dataSource.setUrl(env.getProperty("jdbc.url"));
         dataSource.setUsername(env.getProperty("jdbc.user"));
         dataSource.setPassword(env.getProperty("jdbc.pass"));
->>>>>>> 411942cd0a53bd6974f20d412633429cda050686
         return dataSource;
     }
 
@@ -55,20 +43,12 @@ public class DataConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
-<<<<<<< HEAD
-        factoryBean.setJpaVendorAdapter(vendorAdapter());
-        factoryBean.setPackagesToScan("ua.softserve.persistence.entity");
-        Properties properties = new Properties();
-        properties.put("hibernate.hbm2ddl.auto", "update");
-        factoryBean.setJpaProperties(properties);
-=======
         factoryBean.setPackagesToScan("ua.softserve.persistence.entity");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         factoryBean.setJpaVendorAdapter(vendorAdapter);
         factoryBean.setJpaProperties(additionalProperties());
 
->>>>>>> 411942cd0a53bd6974f20d412633429cda050686
         return factoryBean;
     }
 

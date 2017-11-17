@@ -1,38 +1,36 @@
-/*
-* Country
-*
-* Version 1.0-SNAPSHOT
-*
-* 14.11.17
-*
-* All rights reserved by DoubleO Team (Team#1)
-* */
-
 package ua.softserve.persistence.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "country")
 public class Country {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "country_id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int country_id;
 
-//    @Column(nullable = false)
-//    private String name;
+    @NotNull
+    @Column(name = "crm_id")
+    private int crm_id;
 
-    private boolean ita;
+    @Column(name = "code")
+    private String code;
 
+    @Column(name = "hot_line")
+    private String hot_line;
+
+    @Column(name = "status")
+    private Byte status;
+
+    @Column(name = "ita")
+    private Integer ita;
+
+    @Column(name = "vacancy")
+    private Integer vacancy;
 }
