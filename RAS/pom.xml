@@ -20,23 +20,6 @@
 
         <java.version>1.8</java.version>
 
-        <mysql.mysql-connector-java.version>6.0.5</mysql.mysql-connector-java.version>
-        <org.hibernate.hibernate-core.version>5.2.9.Final</org.hibernate.hibernate-core.version>
-
-        <spring-context.version>4.3.7.RELEASE</spring-context.version>
-        <spring-orm.version>4.3.7.RELEASE</spring-orm.version>
-        <spring-web.version>4.3.7.RELEASE</spring-web.version>
-        <spring-webmvc.version>4.3.7.RELEASE</spring-webmvc.version>
-        <spring-data-jpa.version>2.0.0.RELEASE</spring-data-jpa.version>
-
-        <commons-codec.version>1.6</commons-codec.version>
-
-        <validation-api.version>1.0.0.GA</validation-api.version>
-
-        <lombok.version>1.16.16</lombok.version>
-
-        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-
     </properties>
 
     <build>
@@ -52,86 +35,86 @@
         </plugins>
     </build>
 
-    <dependencies>
+    <!--<dependencies>-->
 
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring-context.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring-orm.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring-web.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring-webmvc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>${spring-data-jpa.version}</version>
-        </dependency>
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>org.springframework</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>spring-context</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${spring-context.version}</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>org.springframework</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>spring-orm</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${spring-orm.version}</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>org.springframework</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>spring-web</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${spring-web.version}</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>org.springframework</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>spring-webmvc</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${spring-webmvc.version}</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>org.springframework.data</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>spring-data-jpa</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${spring-data-jpa.version}</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.mysql-connector-java.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${org.hibernate.hibernate-core.version}</version>
-        </dependency>
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>mysql</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>mysql-connector-java</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${mysql.mysql-connector-java.version}</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>org.hibernate</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>hibernate-core</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${org.hibernate.hibernate-core.version}</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
 
-        <!-- For Encryptor, add Base64 from org.apache.commons.codec.binary -->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>${commons-codec.version}</version>
-        </dependency>
+        <!--&lt;!&ndash; For Encryptor, add Base64 from org.apache.commons.codec.binary &ndash;&gt;-->
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>commons-codec</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>commons-codec</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${commons-codec.version}</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
 
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>${validation-api.version}</version>
-        </dependency>
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>javax.validation</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>validation-api</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${validation-api.version}</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>org.projectlombok</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>lombok</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${lombok.version}</version>&ndash;&gt;-->
+            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${javax.servlet-api.version}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>javax.servlet</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>javax.servlet-api</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${javax.servlet-api.version}</version>&ndash;&gt;-->
+            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>javax.servlet</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>jstl</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>1.2</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
 
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>2.3.1</version>
-        </dependency>
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>javax.servlet.jsp</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>javax.servlet.jsp-api</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>2.3.1</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
 
-    </dependencies>
+    <!--</dependencies>-->
 
 
 </project>
