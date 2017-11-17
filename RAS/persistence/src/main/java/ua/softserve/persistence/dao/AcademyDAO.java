@@ -1,12 +1,8 @@
 package ua.softserve.persistence.dao;
 
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import ua.softserve.persistence.entity.Academy;
 
-import java.util.List;
-
-public interface AcademyDAO {
-    Academy getById(Integer id);
-
-    List<Academy> getAllAcademys();
+public interface AcademyDAO extends JpaRepository<Academy, Integer> {
 }
