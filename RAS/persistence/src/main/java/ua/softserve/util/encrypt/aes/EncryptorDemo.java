@@ -14,7 +14,7 @@ public class EncryptorDemo {
 
     public static void main(String[] args) {
 
-//        Encryptor.init();
+        Encryptor.init();
 
         String encrypted = Encryptor.encrypt("This is example how to use this util!", AESParams.key);
         String decrypted = Encryptor.decrypt(encrypted, AESParams.key);

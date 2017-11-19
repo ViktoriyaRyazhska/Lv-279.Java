@@ -16,14 +16,14 @@ public class City {
     private int city_id;
 
     @NotNull
-    @Column(name = "crm_id")
+    //@Column(name = "crm_id")
     @JoinColumn(foreignKey = @ForeignKey(foreignKeyDefinition = ""))
     private int crm_id;
 
     @Column(name = "country_id")
     private Integer country_id;
 
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "TINYINT(1)")
     private Byte status;
 
     @Column(name = "ita")
