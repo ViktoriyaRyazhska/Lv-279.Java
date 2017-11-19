@@ -3,8 +3,10 @@ package ua.softserve;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ua.softserve.config.DataConfig;
 import ua.softserve.config.ServiceConf;
+import ua.softserve.persistence.entity.History;
 import ua.softserve.persistence.entity.User;
 import ua.softserve.service.AcademyService;
+import ua.softserve.service.HistoryService;
 import ua.softserve.service.UserService;
 
 public class MainService {
@@ -14,9 +16,16 @@ public class MainService {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(ServiceConf.class, DataConfig.class);
 
-        AcademyService academyService = context.getBean(AcademyService.class);
+//        AcademyService academyService = context.getBean(AcademyService.class);
+//
+//            System.out.println(academyService.getById(1));
 
-            System.out.println(academyService.getById(1));
+        HistoryService historyService = context.getBean(HistoryService.class);
+
+        for (History history:historyService.getAll()) {
+            System.out.println(history.toString());
+
+        }
 
 
     }
