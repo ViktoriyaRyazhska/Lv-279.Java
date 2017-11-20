@@ -14,7 +14,7 @@ public class AcademyServiceImpl implements AcademyService {
     @Autowired
     private AcademyDAO academyDAO;
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public Academy getById(Integer id) {
         return academyDAO.findOne(id);

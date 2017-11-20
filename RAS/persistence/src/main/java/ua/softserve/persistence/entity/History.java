@@ -42,10 +42,10 @@ public class History {
     @Column(name = "end_date")
     private Timestamp endDate;
 
-    @Column(name = "stage")
+   // @Column(name = "stage")
     private String stage;
 
-    @Column(name = "direction")
+   //@Column(name = "direction")
     private String direction;
 
     @Column(name = "modify_date")

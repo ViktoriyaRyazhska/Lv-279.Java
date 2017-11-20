@@ -16,14 +16,12 @@ public class MainPersistence {
 
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(DataConfig.class);
-
 //        UserDAO personService = context.getBean(UserDAO.class);
 //
 //        for (User user : personService.findAll()) {
 //            System.out.println(user.getFirstName());
 //        }
         AcademyDAO academyDAO = context.getBean(AcademyDAO.class);
-
         System.out.println(academyDAO.findOne(1));
 
 //        HistoryDAO historyDAO = context.getBean(HistoryDAO.class);
@@ -32,7 +30,6 @@ public class MainPersistence {
 //            System.out.println(history.toString());
 //
 //        }
-
     }
 
 }

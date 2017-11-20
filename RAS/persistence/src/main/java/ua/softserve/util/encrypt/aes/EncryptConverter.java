@@ -15,12 +15,12 @@ import javax.persistence.Converter;
 
 @Converter
 public class EncryptConverter implements AttributeConverter<String, String> {
-    @Override
+
     public String convertToDatabaseColumn(String s) {
         return Encryptor.encrypt(s,AESParams.key);
     }
 
-    @Override
+
     public String convertToEntityAttribute(String s) {
         return Encryptor.decrypt(s,AESParams.key);
     }
