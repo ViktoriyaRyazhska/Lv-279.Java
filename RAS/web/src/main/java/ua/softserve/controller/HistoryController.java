@@ -14,14 +14,10 @@ public class HistoryController {
     @Autowired
     private HistoryService historyService;
 
-//    @GetMapping("/")
-//    public String init() {
-//        return "index";
-//    }
 
     @GetMapping("/showHistory")
     public String showHistory(Model model) {
-        List<History> allHistory = historyService.getAll();
+        List<History> allHistory = historyService.findByCrmGroup(428);
         model.addAttribute("allHistory", allHistory);
         return "showHistory";
     }

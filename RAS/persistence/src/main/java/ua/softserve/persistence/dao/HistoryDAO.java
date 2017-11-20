@@ -8,5 +8,6 @@ import java.util.List;
 public interface HistoryDAO extends JpaRepository<History, Integer> {
 
     List<History> findByAcademyName(String name);
+    List<History> findByCrmGroup(int crm);
 
 }

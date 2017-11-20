@@ -3,25 +3,26 @@
 <html>
 <head>
     <title>History</title>
-    <style>
+    <link rel="stylesheet" href="/mycss/main.css">
+    <%--<style>
         table {
-            width: 100%; /* Ширина таблицы */
-            background: white; /* Цвет фона таблицы */
-            color: black; /* Цвет текста */
-            border-spacing: 1px; /* Расстояние между ячейками */
+            width: 100%;
+            background: white;
+            color: black;
+            border-spacing: 1px
         }
         th {
-            background: lightskyblue; /* Цвет фона ячеек */
-            padding: 5px; /* Поля вокруг текста */
+            background: lightskyblue;
+            padding: 5px;
 
         }
         td{
-            background: ghostwhite; /* Цвет фона ячеек */
-            padding: 5px; /* Поля вокруг текста */
+            background: ghostwhite;
+            padding: 5px;
             text-align: center;
 
         }
-    </style>
+    </style>--%>
     </head>
 <body>
 <table >
@@ -31,7 +32,7 @@
         <th>Name for site</th>
         <th>Location</th>
         <th>Start Date</th>
-        <th>End Date</th>
+        <th>End Date</th>`
         <th>Status</th>
         <th>Common Direction</th>
         <th>Modify Date</th>
@@ -52,6 +53,7 @@
         </tr>
     </c:forEach>
 </table>
+
 </body>
 </html>
 

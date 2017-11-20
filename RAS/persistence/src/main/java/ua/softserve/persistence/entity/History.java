@@ -24,14 +24,17 @@ public class History {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "crm_group")
+    private int crmGroup;
+
     @Column(name = "academy_name")
     private String academyName;
 
     @Column(name = "name_for_site")
     private String nameForSite;
 
-    @Column(name = "location")
-    private int location;
+//    @Column(name = "location")
+    private String location;
 
     @Column(name = "start_date")
     private Timestamp sartDate;

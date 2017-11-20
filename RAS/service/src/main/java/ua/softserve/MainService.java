@@ -22,7 +22,7 @@ public class MainService {
 
         HistoryService historyService = context.getBean(HistoryService.class);
 
-        for (History history:historyService.getAll()) {
+        for (History history:historyService.findByCrmGroup(428)) {
             System.out.println(history.toString());
 
         }

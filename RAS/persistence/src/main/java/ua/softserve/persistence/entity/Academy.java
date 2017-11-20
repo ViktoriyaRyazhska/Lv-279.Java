@@ -10,8 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "academy")
 public class Academy {
@@ -36,6 +35,14 @@ public class Academy {
     @JoinColumn(name = "stage_id")
     private Academy_Stages academy_stages;
 
+    @ManyToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
+
+    @OneToOne
+    @JoinColumn(name = "student_group_count_id")
+    private Student_Group_Count student_group_count;
+
     @NotNull
     @Column(name = "crm_group")
     private int crm_group;
@@ -46,11 +53,11 @@ public class Academy {
 
     @NotNull
     @Column(name = "start_date")
-    private Timestamp start_date;//need fix
+    private Timestamp start_date;
 
     @NotNull
     @Column(name = "end_date")
-    private Timestamp end_date;//need fix
+    private Timestamp end_date;
 
     @NotNull
     @Column(name = "free")
@@ -85,6 +92,8 @@ public class Academy {
                 ", directionsSet=" + directions.getName() +
                 ", technologiesSet=" + technologies.getName() +
                 ", academy_stagesSet=" + academy_stages.getName() +
+                ", profileInfo=" + profile.getProfile_name() +
+                ", student_group_count=" + student_group_count +
                 ", crm_group=" + crm_group +
                 ", name='" + name + '\'' +
                 ", start_date=" + start_date.toLocalDateTime().toLocalDate() +

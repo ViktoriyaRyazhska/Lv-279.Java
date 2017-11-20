@@ -18,8 +18,14 @@ public class HistoryServiceImpl implements HistoryService {
         return historyDAO.findByAcademyName(name);
     }
 
+    @Transactional
     @Override
     public List<History> getAll() {
         return historyDAO.findAll();
+    }
+    @Transactional
+    @Override
+    public List<History> findByCrmGroup(int crm) {
+        return historyDAO.findByCrmGroup(crm);
     }
 }
