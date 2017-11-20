@@ -17,7 +17,7 @@ public class HistoryController {
 
     @GetMapping("/showHistory")
     public String showHistory(Model model) {
-        List<History> allHistory = historyService.findByCrmGroup(428);
+        List<History> allHistory = historyService.findAll();
         model.addAttribute("allHistory", allHistory);
         return "showHistory";
     }

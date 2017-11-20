@@ -20,7 +20,7 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Transactional
     @Override
-    public List<History> getAll() {
+    public List<History> findAll() {
         return historyDAO.findAll();
     }
     @Transactional
