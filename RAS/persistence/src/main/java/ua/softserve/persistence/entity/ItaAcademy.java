@@ -47,7 +47,7 @@ public class ItaAcademy {
         return "ItaAcademy{" +
                 "it_academy_id=" + it_academy_id +
                 ", user=" + user +
-                ", academy=" + academy +
+                ", academy=" + academy+
                 ", itaAcademyStatus=" + itaAcademyStatus +
                 '}';
     }
