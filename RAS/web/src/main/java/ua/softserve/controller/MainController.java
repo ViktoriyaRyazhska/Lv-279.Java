@@ -14,13 +14,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.User;
+import ua.softserve.service.AcademyService;
 import ua.softserve.service.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    AcademyService academyService;
 
     @Autowired
     private UserService userService;
@@ -35,5 +43,12 @@ public class MainController {
         List<User> allUsers = userService.findAll();
         model.addAttribute("allUsers", allUsers);
         return "showUsers";
+    }
+
+    @RequestMapping(value = "/user",method = RequestMethod.GET)
+    public String getAllAcademies(Model model) {
+        List<Academy> list = academyService.getAllAcademys();
+        model.addAttribute("listA", list.stream().limit(20).collect(Collectors.toList()));
+        return "allAcademies";
     }
 }

@@ -16,16 +16,16 @@ public class MainService {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(ServiceConf.class, DataConfig.class);
 
-//        AcademyService academyService = context.getBean(AcademyService.class);
+        AcademyService academyService = context.getBean(AcademyService.class);
+
+        System.out.println(academyService.getById(1));
+
+//        HistoryService historyService = context.getBean(HistoryService.class);
 //
-//            System.out.println(academyService.getById(1));
-
-        HistoryService historyService = context.getBean(HistoryService.class);
-
-        for (History history:historyService.findByCrmGroup(428)) {
-            System.out.println(history.toString());
-
-        }
+//        for (History history:historyService.findByCrmGroup(428)) {
+//            System.out.println(history.toString());
+//
+//        }
 
 
     }

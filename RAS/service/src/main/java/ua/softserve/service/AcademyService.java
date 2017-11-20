@@ -9,4 +9,6 @@ public interface AcademyService {
     Academy getById(Integer id);
 
     List<Academy> getAllAcademys();
+
+    List<Academy> findAllByName(String name);
 }

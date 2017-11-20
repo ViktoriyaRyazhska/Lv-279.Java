@@ -3,8 +3,10 @@ package ua.softserve;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ua.softserve.config.DataConfig;
+import ua.softserve.persistence.dao.AcademyDAO;
 import ua.softserve.persistence.dao.HistoryDAO;
 import ua.softserve.persistence.dao.UserDAO;
+import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.History;
 import ua.softserve.persistence.entity.User;
 
@@ -20,14 +22,16 @@ public class MainPersistence {
 //        for (User user : personService.findAll()) {
 //            System.out.println(user.getFirstName());
 //        }
+        AcademyDAO academyDAO = context.getBean(AcademyDAO.class);
 
+        System.out.println(academyDAO.findOne(1));
 
-        HistoryDAO historyDAO = context.getBean(HistoryDAO.class);
-
-        for (History history:historyDAO.findAll() ) {
-            System.out.println(history.toString());
-
-        }
+//        HistoryDAO historyDAO = context.getBean(HistoryDAO.class);
+//
+//        for (History history:historyDAO.findAll() ) {
+//            System.out.println(history.toString());
+//
+//        }
 
     }
 

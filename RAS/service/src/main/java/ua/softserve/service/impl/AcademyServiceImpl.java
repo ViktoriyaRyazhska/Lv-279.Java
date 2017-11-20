@@ -25,4 +25,9 @@ public class AcademyServiceImpl implements AcademyService {
     public List<Academy> getAllAcademys() {
         return academyDAO.findAll();
     }
+
+    @Override
+    public List<Academy> findAllByName(String name) {
+        return academyDAO.findAllByName(name);
+    }
 }
