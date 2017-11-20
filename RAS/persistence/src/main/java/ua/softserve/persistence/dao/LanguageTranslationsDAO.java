@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface LanguageTranslationsDAO extends JpaRepository<LanguageTranslations, Integer> {
 
-    @Query("select lt from Language_Translations lt where lt.tag like 'city' and lt.local like 'en'")
+    @Query("select lt from LanguageTranslations lt where lt.tag like 'city' and lt.local like 'en'")
     List<LanguageTranslations> getAllLanguageTranslationsName();
 
-    @Query("select lt.trasnlation from Language_Translations lt where lt.tag like 'city' and lt.local like 'en'")
+    @Query("select lt.trasnlation from LanguageTranslations lt where lt.tag like 'city' and lt.local like 'en'")
     List<String> getTranslations();
 }
