@@ -17,7 +17,7 @@ public class AcademyServiceImpl implements AcademyService {
     @Transactional(readOnly = true)
     @Override
     public Academy getById(Integer id) {
-        return academyDAO.getOne(   id);
+        return academyDAO.findOne(id);
     }
 
     @Transactional
