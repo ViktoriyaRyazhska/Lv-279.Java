@@ -1,12 +1,7 @@
 package ua.softserve.persistence.entity;
 
 
-
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -16,6 +11,7 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "history")
 public class History {
@@ -33,7 +29,7 @@ public class History {
     @Column(name = "name_for_site")
     private String nameForSite;
 
-//    @Column(name = "location")
+    //    @Column(name = "location")
     private String location;
 
     @Column(name = "start_date")
@@ -42,10 +38,10 @@ public class History {
     @Column(name = "end_date")
     private Timestamp endDate;
 
-   // @Column(name = "stage")
+    // @Column(name = "stage")
     private String stage;
 
-   //@Column(name = "direction")
+    //@Column(name = "direction")
     private String direction;
 
     @Column(name = "modify_date")
@@ -54,19 +50,5 @@ public class History {
     @Column(name = "modify_by")
     private String modifyBy;
 
-    @Override
-    public String toString() {
-        return "History{" +
-                "id=" + id +
-                ", academyName='" + academyName + '\'' +
-                ", nameForSite='" + nameForSite + '\'' +
-                ", location=" + location +
-                ", sartDate=" + sartDate +
-                ", endDate=" + endDate +
-                ", stage=" + stage +
-                ", direction=" + direction +
-                ", modifyDate=" + modifyDate +
-                ", modifyBy='" + modifyBy + '\'' +
-                '}';
-    }
+
 }
