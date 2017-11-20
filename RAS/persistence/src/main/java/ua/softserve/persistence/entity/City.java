@@ -16,12 +16,11 @@ public class City {
     private int city_id;
 
     @NotNull
-    //@Column(name = "crm_id")
     @JoinColumn(foreignKey = @ForeignKey(foreignKeyDefinition = ""))
     private int crm_id;
 
     @Column(name = "country_id")
-    private Integer country_id;
+    private Integer countryId;
 
     @Column(name = "status", columnDefinition = "TINYINT(1)")
     private Byte status;
@@ -33,7 +32,7 @@ public class City {
     private Integer vacancy;
 
     @Column(name = "state_id", columnDefinition = "INT(11) UNSIGNED")
-    private Integer state_id;
+    private Integer stateId;
 
     public City() {}
 

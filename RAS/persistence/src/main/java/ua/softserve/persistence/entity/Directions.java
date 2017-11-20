@@ -26,7 +26,7 @@ public class Directions {
     private String item;
 
     @Column(name = "crm_id")
-    private Integer crm_id;
+    private Integer crmId;
 
     @Column(name = "ita")
     private Byte ita;

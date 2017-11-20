@@ -28,7 +28,7 @@ public class LanguageTranslations {
 
     @NotNull
     @Column(name = "item_id")
-    private int item_id;
+    private int itemId;
 
     @NotNull
     @Column(name = "tag")
