@@ -34,7 +34,7 @@ public class Academy {
 
     @ManyToOne
     @JoinColumn(name = "stage_id")
-    private Academy_Stages academy_stages;
+    private AcademyStages academy_stages;
 
     @ManyToOne
     @JoinColumn(name = "profile_id")
@@ -42,7 +42,7 @@ public class Academy {
 
     @OneToOne
     @JoinColumn(name = "student_group_count_id")
-    private Student_Group_Count student_group_count;
+    private StudentGroupCount student_group_count;
 
     @NotNull
     @Column(name = "crm_group")
