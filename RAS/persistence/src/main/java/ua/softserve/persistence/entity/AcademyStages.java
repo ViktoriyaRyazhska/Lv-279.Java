@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Entity
 @Table(name = "academy_stages")
-public class Academy_Stages {
+public class AcademyStages {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int stage_id;
@@ -25,5 +25,5 @@ public class Academy_Stages {
     @Column(name = "sort")
     private byte sort;
 
-    public Academy_Stages() {}
+    public AcademyStages() {}
 }

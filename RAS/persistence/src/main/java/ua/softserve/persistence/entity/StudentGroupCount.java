@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter @Setter
 @Entity
 @Table(name = "student_group_count")
-public class Student_Group_Count {
+public class StudentGroupCount {
     @Id
     @GeneratedValue
     @Column(name = "student_group_count_id")
@@ -29,5 +29,5 @@ public class Student_Group_Count {
     @Column(name = "students_actual")
     private int students_actual;
 
-    public Student_Group_Count() {}
+    public StudentGroupCount() {}
 }
