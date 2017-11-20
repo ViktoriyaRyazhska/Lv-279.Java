@@ -3,8 +3,7 @@ package ua.softserve;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ua.softserve.config.DataConfig;
 import ua.softserve.config.ServiceConf;
-import ua.softserve.persistence.entity.User;
-import ua.softserve.service.UserService;
+import ua.softserve.service.LanguageTranslationsService;
 
 public class MainService {
 
@@ -13,11 +12,17 @@ public class MainService {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(ServiceConf.class, DataConfig.class);
 
-        UserService personService = context.getBean(UserService.class);
+        LanguageTranslationsService languageTranslationsService = context.getBean(LanguageTranslationsService.class);
 
-        for (User user : personService.findAll()) {
-            System.out.println(user.getFirstName());
-        }
+        System.out.println(languageTranslationsService.getTranslations());
+
+//        HistoryService historyService = context.getBean(HistoryService.class);
+//
+//        for (History history:historyService.findByCrmGroup(428)) {
+//            System.out.println(history.toString());
+//
+//        }
+
 
     }
 

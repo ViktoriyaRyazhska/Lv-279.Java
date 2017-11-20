@@ -22,7 +22,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("ua.softserve.persistence.dao")
-@PropertySource({"classpath:persistence-mysql.properties"})
+@PropertySource("classpath:persistence-mysql.properties")
 public class DataConfig {
 
     @Autowired
@@ -30,12 +30,13 @@ public class DataConfig {
 
     @Bean
     public DataSource dataSource(){
+
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
         dataSource.setUrl(env.getProperty("jdbc.url"));
         dataSource.setUsername(env.getProperty("jdbc.user"));
         dataSource.setPassword(env.getProperty("jdbc.pass"));
-        Encryptor.init();
+       Encryptor.init();
         return dataSource;
     }
 

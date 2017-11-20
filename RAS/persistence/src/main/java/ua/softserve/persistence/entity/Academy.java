@@ -10,11 +10,11 @@ import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "academy")
 public class Academy {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int academy_id;
@@ -34,11 +34,19 @@ public class Academy {
 
     @ManyToOne
     @JoinColumn(name = "stage_id")
-    private Academy_Stages academy_stages;
+    private AcademyStages academy_stages;
+
+    @ManyToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
+
+    @OneToOne
+    @JoinColumn(name = "student_group_count_id")
+    private StudentGroupCount student_group_count;
 
     @NotNull
     @Column(name = "crm_group")
-    private int crm_group;
+    private int crmGroup;
 
     @NotNull
     @Column(name = "name")
@@ -46,11 +54,11 @@ public class Academy {
 
     @NotNull
     @Column(name = "start_date")
-    private Timestamp start_date;//need fix
+    private Timestamp startDate;
 
     @NotNull
     @Column(name = "end_date")
-    private Timestamp end_date;//need fix
+    private Timestamp endDate;
 
     @NotNull
     @Column(name = "free")
@@ -62,39 +70,36 @@ public class Academy {
 
     @NotNull
     @Column(name = "has_tech")
-    private int has_tech;
+    private int hasTech;
 
     @NotNull
     @Column(name = "has_eng")
-    private int has_eng;
+    private int hasEng;
 
     @NotNull
     @Column(name = "has_first")
-    private int has_first;
+    private int hasFirst;
 
     @NotNull
     @Column(name = "not_synchronized")
-    private int not_synchronized;
+    private int notSynchronized;
 
 
     @Override
     public String toString() {
         return "Academy{" +
-                "academy_id=" + academy_id +
+                "academyId=" + academy_id +
                 ", city_id=" + city.getCity_id() +
                 ", directionsSet=" + directions.getName() +
                 ", technologiesSet=" + technologies.getName() +
                 ", academy_stagesSet=" + academy_stages.getName() +
-                ", crm_group=" + crm_group +
+//                ", profile=" + profile.getProfile_name() +
+//                ", student_group_count=" + student_group_count +
                 ", name='" + name + '\'' +
-                ", start_date=" + start_date.toLocalDateTime().toLocalDate() +
-                ", end_date=" + end_date.toLocalDateTime().toLocalDate() +
+                ", startDate=" + startDate.toLocalDateTime().toLocalDate() +
+                ", endDate=" + endDate.toLocalDateTime().toLocalDate() +
                 ", free=" + free +
                 ", status=" + status +
-                ", has_tech=" + has_tech +
-                ", has_eng=" + has_eng +
-                ", has_first=" + has_first +
-                ", not_synchronized=" + not_synchronized +
                 '}';
     }
 }

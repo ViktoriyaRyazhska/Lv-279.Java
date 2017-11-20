@@ -13,14 +13,26 @@ package ua.softserve.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.User;
+import ua.softserve.service.AcademyService;
+import ua.softserve.service.LanguageTranslationsService;
 import ua.softserve.service.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    AcademyService academyService;
+
+    @Autowired
+    LanguageTranslationsService languageTranslationsService;
 
     @Autowired
     private UserService userService;
@@ -37,15 +49,11 @@ public class MainController {
         return "showUsers";
     }
 
-    @PostMapping("/addUser")
-    public String addUser(@RequestParam String userName) {
-        User user = userService.findOne(23513);
-        user.setFirstName(userName);
-        user.setId(0);
-        userService.save(user);
-        return "index";
+    @RequestMapping(value = "/user",method = RequestMethod.GET)
+    public String getAllAcademies(Model model) {
+        List<Academy> list = academyService.getAllAcademys();
+        model.addAttribute("listA", list.stream().limit(20).collect(Collectors.toList()));
+        model.addAttribute("cities", languageTranslationsService.getTranslations());
+        return "allAcademies";
     }
-
-
-
 }

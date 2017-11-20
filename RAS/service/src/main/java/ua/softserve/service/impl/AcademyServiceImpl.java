@@ -3,8 +3,9 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.dao.AcadeTestJpa;
+import ua.softserve.persistence.dao.AcademyDAO;
 import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.entity.Directions;
 import ua.softserve.service.AcademyService;
 
 import java.util.List;
@@ -12,9 +13,9 @@ import java.util.List;
 @Service
 public class AcademyServiceImpl implements AcademyService {
     @Autowired
-    private AcadeTestJpa academyDAO;
+    private AcademyDAO academyDAO;
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public Academy getById(Integer id) {
         return academyDAO.findOne(id);
@@ -24,5 +25,15 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public List<Academy> getAllAcademys() {
         return academyDAO.findAll();
+    }
+
+    @Override
+    public List<Academy> findAllByName(String name) {
+        return academyDAO.findAllByName(name);
+    }
+
+    @Override
+    public void save(Academy academy) {
+        academyDAO.save(academy);
     }
 }
