@@ -13,7 +13,7 @@ package ua.softserve.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.entity.User;
 import ua.softserve.service.UserService;
 
@@ -36,4 +36,16 @@ public class MainController {
         model.addAttribute("allUsers", allUsers);
         return "showUsers";
     }
+
+    @PostMapping("/addUser")
+    public String addUser(@RequestParam String userName) {
+        User user = userService.findOne(23513);
+        user.setFirstName(userName);
+        user.setId(0);
+        userService.save(user);
+        return "index";
+    }
+
+
+
 }
