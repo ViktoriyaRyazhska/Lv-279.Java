@@ -89,16 +89,16 @@ public class Academy {
     public String toString() {
         return "Academy{" +
                 "academy_id=" + academy_id +
-                ", city=" + city +
-                ", directions=" + directions +
-                ", technologies=" + technologies +
-                ", academy_stages=" + academy_stages +
-                ", profile=" + profile +
-                ", student_group_count=" + student_group_count +
+                ", city_id=" + city.getCity_id() +
+                ", directionsSet=" + directions.getName() +
+                ", technologiesSet=" + technologies.getName() +
+                ", academy_stagesSet=" + academy_stages.getName() +
+//                ", profile=" + profile.getProfile_name() +
+//                ", student_group_count=" + student_group_count +
                 ", crm_group=" + crm_group +
                 ", name='" + name + '\'' +
-                ", start_date=" + start_date +
-                ", end_date=" + end_date +
+                ", start_date=" + start_date.toLocalDateTime().toLocalDate() +
+                ", end_date=" + end_date.toLocalDateTime().toLocalDate() +
                 ", free=" + free +
                 ", status=" + status +
                 ", has_tech=" + has_tech +
