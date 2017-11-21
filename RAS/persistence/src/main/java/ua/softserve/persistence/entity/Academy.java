@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 public class Academy {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private int academy_id;
 
     @ManyToOne

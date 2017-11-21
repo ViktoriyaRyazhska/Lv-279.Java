@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.softserve.persistence.dao.LanguageTranslationsDAO;
+import ua.softserve.persistence.dto.LanguageTranslationDTO;
 import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.entity.LanguageTranslations;
 import ua.softserve.persistence.entity.User;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.LanguageTranslationsService;
 import ua.softserve.service.UserService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +37,9 @@ public class MainController {
 
     @Autowired
     LanguageTranslationsService languageTranslationsService;
+
+    @Autowired
+    LanguageTranslationDTO languageTranslationDTO;
 
     @Autowired
     private UserService userService;
@@ -54,7 +60,9 @@ public class MainController {
     public String getAllAcademies(Model model) {
         List<Academy> list = academyService.getAllAcademys();
         model.addAttribute("listA", list.stream().limit(20).collect(Collectors.toList()));
-        model.addAttribute("cities", languageTranslationsService.getTranslations());
+        List<LanguageTranslations> translations = languageTranslationsService.getAllLanguageTranslationsName();
+        HashMap<Integer, String> cityHashMap = languageTranslationDTO.convertListToHashMap(translations);
+        model.addAttribute("cities", cityHashMap);
         return "allAcademies";
     }
 }

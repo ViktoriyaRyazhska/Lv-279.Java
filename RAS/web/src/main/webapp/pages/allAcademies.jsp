@@ -1,3 +1,4 @@
+<%@ page import="java.util.HashMap" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"
          language="java"%>
@@ -108,7 +109,6 @@
 
             </select>
         </td>
-        <td><input type="text" name="paymentStatus"></td>
         <td></td>
     </tr>
     </thead>
@@ -120,7 +120,7 @@
             <td>${list.technologies.name}</td>
             <td>${list.profile.profile_name}</td>
             <td>${list.free == 1 ? "Free" : "Paid"}</td>
-            <td>---</td>
+            <td>${cities[list.city.city_id]}</td>
             <td>${list.start_date}</td>
             <td>${list.end_date}</td>
             <td>${list.academy_stages.name}</td>
