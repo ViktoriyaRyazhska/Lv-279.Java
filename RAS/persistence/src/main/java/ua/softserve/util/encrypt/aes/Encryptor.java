@@ -11,6 +11,9 @@
 package ua.softserve.util.encrypt.aes;
 
 import org.apache.commons.codec.binary.Base64;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
@@ -66,18 +69,24 @@ public class Encryptor {
      * @throws IllegalArgumentException can be "Incorrect value" or "Mac validation failed"
      */
     public static String decrypt(String value, String key) throws IllegalArgumentException {
-        byte[] json = Base64.decodeBase64(value);
-        String[] split = new String(json).split("\"");
-        if (split.length != CORRECT_JSON_LENGTH) {
+        byte[] jsonVal = Base64.decodeBase64(value);
+        String iv;
+        String val;
+        String mac;
+        try {
+            JSONObject json = (JSONObject) new JSONParser().parse(new String(jsonVal));
+            iv = (String) json.get("iv");
+            val = (String) json.get("value");
+            mac = (String) json.get("mac");
+        } catch (ParseException e) {
+            e.printStackTrace();
             throw new IllegalArgumentException("< Incorrect value >");
         }
-        String val = split[VALUE_POS_IN_JSON];
-        String mac = split[MAC_POS_IN_JSON];
-        if (!validMac(mac, split[IV_POS_IN_JSON], val, key)) {
+        if (!validMac(mac, iv, val, key)) {
             throw new IllegalArgumentException("< Mac validation failed >");
         }
-        byte[] iv = Base64.decodeBase64(split[IV_POS_IN_JSON]);
-        byte[] decrypted = deCrypt(val, key, iv);
+        byte[] ivB = Base64.decodeBase64(iv);
+        byte[] decrypted = deCrypt(val, key, ivB);
         return new String(unserialize(decrypted));
     }
 
@@ -109,11 +118,7 @@ public class Encryptor {
      * @return
      */
     private static boolean validMac(String mac, String iv, String val, String key) {
-        String mac1 = hashHmac(
-                (iv + val).replace("\\", "").getBytes(),
-                key.getBytes()
-        );
-        return mac.equalsIgnoreCase(mac1);
+        return mac.equalsIgnoreCase(hashHmac((iv + val).getBytes(),key.getBytes()));
     }
 
     /**
