@@ -10,7 +10,9 @@ import java.util.List;
 @Repository
 public interface ItaAcademyDao extends JpaRepository<ItaAcademy,Integer> {
 
-//    List<ItaAcademy> findItaAcademiesByAcademy_AcademyId(int academyId);
-//
-//    ItaAcademy  findItaAcademyByAcademy_AcademyIdAndUser_Id(int academyId, int userId);
+
+    List<ItaAcademy> findItaAcademiesByAcademy(int academy_Id);
+
+
+    ItaAcademy  findItaAcademyByAcademyAndUser(int academy_Id, int id);
 }

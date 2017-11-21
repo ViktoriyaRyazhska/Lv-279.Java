@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.dao.AcademyDAO;
 import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.entity.Directions;
 import ua.softserve.service.AcademyService;
 
 import java.util.List;
@@ -24,5 +25,15 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public List<Academy> getAllAcademys() {
         return academyDAO.findAll();
+    }
+
+    @Override
+    public List<Academy> findAllByName(String name) {
+        return academyDAO.findAllByName(name);
+    }
+
+    @Override
+    public void save(Academy academy) {
+        academyDAO.save(academy);
     }
 }

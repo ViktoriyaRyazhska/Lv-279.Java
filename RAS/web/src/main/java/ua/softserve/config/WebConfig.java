@@ -22,10 +22,14 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     }
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
-// шлях який ти юзаєш на пейджі
                 .addResourceHandler("/mycss/**")
-// шлях де воно лежить
                 .addResourceLocations("/static/css/");
+        registry
+                .addResourceHandler("/bs/css/**")
+                .addResourceLocations("/static/css/");
+        registry
+                .addResourceHandler("/bs/js/**")
+                .addResourceLocations("/static/js/");
     }
 
 }

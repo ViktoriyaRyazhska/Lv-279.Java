@@ -2,6 +2,7 @@ package ua.softserve.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -35,7 +36,7 @@ public class DataConfig {
         dataSource.setUrl(env.getProperty("jdbc.url"));
         dataSource.setUsername(env.getProperty("jdbc.user"));
         dataSource.setPassword(env.getProperty("jdbc.pass"));
-       Encryptor.init();
+        Encryptor.init();
         return dataSource;
     }
 
