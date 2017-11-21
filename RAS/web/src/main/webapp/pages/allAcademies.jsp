@@ -29,7 +29,7 @@
         <th>Profile</th>
         <th>Payment Status</th>
         <th>Location</th>
-        <th>Strart Date</th>
+        <th>Start Date</th>
         <th>End Date</th>
         <th>Status</th>
         <th>Experts</th>
@@ -38,7 +38,6 @@
         <th>Students Actual</th>
         <th>Hired - Not Graduate</th>
         <th>Common Direction</th>
-        <th>Payment Status</th>
         <th>Interviewer Feedback</th>
     </tr>
     <tr>
@@ -119,18 +118,19 @@
             <td>---</td>
             <td id="site">${list.name}</td>
             <td>${list.technologies.name}</td>
-            <td>---</td>
-            <td>${list.free}</td>
+            <td>${list.profile.profile_name}</td>
+            <td>${list.free == 1 ? "Free" : "Paid"}</td>
             <td>---</td>
             <td>${list.start_date}</td>
             <td>${list.end_date}</td>
             <td>${list.academy_stages.name}</td>
             <td>---</td>
-            <td>---</td>
-            <td>---</td>
-            <td>---</td>
+            <td>${list.student_group_count.students_planned_to_graduate}</td>
+            <td>${list.student_group_count.students_planned_to_enrollment}</td>
+            <td>${list.student_group_count.students_actual}</td>
             <td>---</td>
             <td>${list.directions.name}</td>
+            <td>---</td>
         </tr>
     </c:forEach>
     </tbody>

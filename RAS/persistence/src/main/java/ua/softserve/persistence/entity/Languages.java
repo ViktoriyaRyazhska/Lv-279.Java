@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter @Setter
 @ToString
 @Entity
-@Table(name = "language_translations")
+@Table(name = "languages")
 public class Languages {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

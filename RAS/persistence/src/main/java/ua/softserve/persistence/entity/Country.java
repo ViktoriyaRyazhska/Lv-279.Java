@@ -17,13 +17,13 @@ public class Country {
 
     @NotNull
     @Column(name = "crm_id")
-    private int crm_id;
+    private int crmId;
 
     @Column(name = "code")
     private String code;
 
     @Column(name = "hot_line")
-    private String hot_line;
+    private String hotLine;
 
     @Column(name = "status")
     private Byte status;

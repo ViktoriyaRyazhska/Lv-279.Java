@@ -17,11 +17,11 @@ public class Profile {
     @Id
     @GeneratedValue
     @Column(name = "profile_id")
-    private int profile_id;
+    private int profileId;
 
     @NotNull
     @Column(name = "profile_name")
-    private String profile_name;
+    private String profileName;
 
     public Profile() {}
 }

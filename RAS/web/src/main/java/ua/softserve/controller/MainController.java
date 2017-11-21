@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.User;
 import ua.softserve.service.AcademyService;
+import ua.softserve.service.LanguageTranslationsService;
 import ua.softserve.service.UserService;
 
 import java.util.List;
@@ -29,6 +30,9 @@ public class MainController {
 
     @Autowired
     AcademyService academyService;
+
+    @Autowired
+    LanguageTranslationsService languageTranslationsService;
 
     @Autowired
     private UserService userService;
@@ -49,6 +53,7 @@ public class MainController {
     public String getAllAcademies(Model model) {
         List<Academy> list = academyService.getAllAcademys();
         model.addAttribute("listA", list.stream().limit(20).collect(Collectors.toList()));
+        model.addAttribute("cities", languageTranslationsService.getTranslations());
         return "allAcademies";
     }
 }
