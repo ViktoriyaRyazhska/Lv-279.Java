@@ -35,7 +35,7 @@ public class DataConfig {
         dataSource.setUrl(env.getProperty("jdbc.url"));
         dataSource.setUsername(env.getProperty("jdbc.user"));
         dataSource.setPassword(env.getProperty("jdbc.pass"));
-       Encryptor.init();
+        Encryptor.init();
         return dataSource;
     }
 
