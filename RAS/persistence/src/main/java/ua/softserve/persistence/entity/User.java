@@ -52,4 +52,8 @@ public class User {
     @Convert(converter = EncryptConverter.class)
     private String phone;
 
+    private String salt = "_";
+
+    private String password = "_";
+
 }
