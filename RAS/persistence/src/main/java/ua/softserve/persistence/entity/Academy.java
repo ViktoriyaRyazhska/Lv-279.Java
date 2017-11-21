@@ -17,7 +17,8 @@ public class Academy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int academy_id;
+    @Column (name = "academy_id")
+    private int academyId;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
@@ -88,7 +89,7 @@ public class Academy {
     @Override
     public String toString() {
         return "Academy{" +
-                "academy_id=" + academy_id +
+                "academyId=" + academyId +
                 ", city=" + city +
                 ", directions=" + directions +
                 ", technologies=" + technologies +

@@ -10,6 +10,7 @@
     <a href="/showUsers"><button>All users</button></a>
     <%--<a href="/showHistory">All history</a>--%>
     <a href="/showHistory"><button>All History</button></a>
+    <a href="/showItaAcademyById"><button>ItaAcademy</button></a>
     <a href="/showFeedbacks"><button>All Feedback</button></a>
 </body>
 </html>

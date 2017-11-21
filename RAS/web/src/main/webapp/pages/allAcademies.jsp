@@ -123,11 +123,11 @@
             <td>${cities[list.city.city_id]}</td>
             <td>${list.start_date}</td>
             <td>${list.end_date}</td>
-            <td>${list.academy_stages.name}</td>
+            <td>${list.academyStages.name}</td>
             <td>---</td>
-            <td>${list.student_group_count.students_planned_to_graduate}</td>
-            <td>${list.student_group_count.students_planned_to_enrollment}</td>
-            <td>${list.student_group_count.students_actual}</td>
+            <td>${list.studentGroupCount.students_planned_to_graduate}</td>
+            <td>${list.studentGroupCount.students_planned_to_enrollment}</td>
+            <td>${list.studentGroupCount.students_actual}</td>
             <td>---</td>
             <td>${list.directions.name}</td>
             <td>---</td>

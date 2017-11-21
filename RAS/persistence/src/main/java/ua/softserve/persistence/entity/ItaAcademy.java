@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.*;
 
 @Getter
@@ -27,49 +28,32 @@ import javax.persistence.*;
 public class ItaAcademy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int it_academy_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "it_academy_id")
+    private Integer itAcademyId;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
+    @ManyToOne // (targetEntity = User.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "academy_id")
+    @ManyToOne //(fetch=FetchType.EAGER)
+    @JoinColumn(name = "academyId", referencedColumnName = "academyId")
     private Academy academy;
 
 
-    @Column(name="it_academy_status_id")
+    @Column(name = "it_academy_status_id")
     private Integer itaAcademyStatus;
+
 
     @Override
     public String toString() {
         return "ItaAcademy{" +
-                "it_academy_id=" + it_academy_id +
-                ", user=" + user +
-                ", academy=" + academy+
+                "itAcademyId=" + itAcademyId +
+                ", user=" + user.getId() +
+                ", academy=" + academy.getAcademyId() +
                 ", itaAcademyStatus=" + itaAcademyStatus +
                 '}';
     }
-//    @OneToOne
-//    @JoinColumn(name = "id")
-//    private User user;
-
-//    @OneToOne
-//    @JoinColumn(name = "academy_id")
-//    private Academy academy;
-
-//    @OneToOne
-//    @JoinColumn(name = "it_academy_slot_id")
-//    private ItaTimeSlots tech_slot_id;
-//
-//    @OneToOne
-//    @JoinColumn(name = "it_academy_slot_id", insertable = false, updatable = false)
-//    private ItaTimeSlots eng_slot_id;
-
-//    @OneToOne
-//    @JoinColumn(name = "it_academy_slot_id", insertable = false, updatable = false)
-//    private ItaAcademyStatus itaAcademyStatus;
 
 }
 
