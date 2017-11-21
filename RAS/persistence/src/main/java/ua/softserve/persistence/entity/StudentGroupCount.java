@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 @Getter @Setter
 @Entity
-@Table(name = "student_group_count")
+@Table(name = "studentGroupCount")
 public class StudentGroupCount {
     @Id
     @GeneratedValue

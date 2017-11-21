@@ -84,9 +84,9 @@ public class AcademyController {
 
 //        model.addAttribute("direction", academy.getDirections());
 //        model.addAttribute("technologie", academy.getTechnologies());
-//        model.addAttribute("academyStages", academy.getAcademy_stages());
+//        model.addAttribute("academyStages", academy.getAcademyStages());
 //        model.addAttribute("profile", academy.getProfile());
-////        model.addAttribute("student_group_count", academy.getStudent_group_count());
+////        model.addAttribute("studentGroupCount", academy.getStudentGroupCount());
 //        model.addAttribute("name", academy.getName());
 //        model.addAttribute("startDate", academy.getStartDate());
 //        model.addAttribute("endDate", academy.getEndDate());

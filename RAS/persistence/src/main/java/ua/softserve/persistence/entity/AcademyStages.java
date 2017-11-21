@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Entity
-@Table(name = "academy_stages")
+@Table(name = "academyStages")
 public class AcademyStages {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
