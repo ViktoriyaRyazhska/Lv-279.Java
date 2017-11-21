@@ -26,7 +26,7 @@ public class LanguageTranslationDTOImpl implements LanguageTranslationDTO {
 
     public HashMap<Integer, String> convertListToHashMap(List<LanguageTranslations> languageTranslations){
         for(LanguageTranslations languageTranslation : languageTranslations){
-            getCityMap().put(languageTranslation.getItem_id(), languageTranslation.getTrasnlation());
+            getCityMap().put(languageTranslation.getItemId(), languageTranslation.getTrasnlation());
         }
         return getCityMap();
     }

@@ -52,10 +52,10 @@ public class Technologies {
     private String name;
 
     @Column(name = "directiond_id", columnDefinition = "INT(11) UNSIGNED")
-    private int directiond_id;
+    private int directiondId;
 
     @Column(name = "crm_id")
-    private Integer crm_id;
+    private Integer crmId;
 
     @Column(name = "activeGroups")
     private Integer activeGroups;

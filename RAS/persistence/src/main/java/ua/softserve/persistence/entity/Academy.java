@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "academy")
 public class Academy {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int academy_id;
@@ -45,7 +46,7 @@ public class Academy {
 
     @NotNull
     @Column(name = "crm_group")
-    private int crm_group;
+    private int crmGroup;
 
     @NotNull
     @Column(name = "name")
@@ -53,11 +54,11 @@ public class Academy {
 
     @NotNull
     @Column(name = "start_date")
-    private Timestamp start_date;
+    private Timestamp startDate;
 
     @NotNull
     @Column(name = "end_date")
-    private Timestamp end_date;
+    private Timestamp endDate;
 
     @NotNull
     @Column(name = "free")
@@ -69,41 +70,36 @@ public class Academy {
 
     @NotNull
     @Column(name = "has_tech")
-    private int has_tech;
+    private int hasTech;
 
     @NotNull
     @Column(name = "has_eng")
-    private int has_eng;
+    private int hasEng;
 
     @NotNull
     @Column(name = "has_first")
-    private int has_first;
+    private int hasFirst;
 
     @NotNull
     @Column(name = "not_synchronized")
-    private int not_synchronized;
+    private int notSynchronized;
 
 
     @Override
     public String toString() {
         return "Academy{" +
-                "academy_id=" + academy_id +
+                "academyId=" + academy_id +
                 ", city_id=" + city.getCity_id() +
                 ", directionsSet=" + directions.getName() +
                 ", technologiesSet=" + technologies.getName() +
                 ", academy_stagesSet=" + academy_stages.getName() +
 //                ", profile=" + profile.getProfile_name() +
 //                ", student_group_count=" + student_group_count +
-                ", crm_group=" + crm_group +
                 ", name='" + name + '\'' +
-                ", start_date=" + start_date.toLocalDateTime().toLocalDate() +
-                ", end_date=" + end_date.toLocalDateTime().toLocalDate() +
+                ", startDate=" + startDate.toLocalDateTime().toLocalDate() +
+                ", endDate=" + endDate.toLocalDateTime().toLocalDate() +
                 ", free=" + free +
                 ", status=" + status +
-                ", has_tech=" + has_tech +
-                ", has_eng=" + has_eng +
-                ", has_first=" + has_first +
-                ", not_synchronized=" + not_synchronized +
                 '}';
     }
 }

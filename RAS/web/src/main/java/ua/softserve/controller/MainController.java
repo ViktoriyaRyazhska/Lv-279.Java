@@ -16,8 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ua.softserve.persistence.dao.LanguageTranslationsDAO;
 import ua.softserve.persistence.dto.LanguageTranslationDTO;
+
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.LanguageTranslations;
 import ua.softserve.persistence.entity.User;
