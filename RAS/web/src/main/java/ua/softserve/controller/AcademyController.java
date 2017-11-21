@@ -6,14 +6,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -62,7 +63,14 @@ public class AcademyController {
         List<Technologies> technologie = technologieService.findAll();
         List<Profile> profile = profileService.findAll();
 
+        Academy academy = academyService.getById(796);
 
+
+        //        model.addAttribute("student_group_count", academy.getStudent_group_count());
+        model.addAttribute("name", academy.getName());
+        model.addAttribute("startDate", academy.getStartDate());
+        model.addAttribute("endDate", academy.getEndDate());
+        model.addAttribute("free", academy.getFree());
         model.addAttribute("academyStages", academyStages);
         model.addAttribute("cityNames", cityNames);
         model.addAttribute("direction", direction);
@@ -70,5 +78,29 @@ public class AcademyController {
         model.addAttribute("profile", profile);
         return "group";
     }
+
+
+//    @RequestMapping(value = "/addGroup", method = RequestMethod.POST)
+//    public String submit(@Valid @ModelAttribute("academy") final Academy academy, final BindingResult result, final ModelMap model) {
+//        if (result.hasErrors()) {
+//            return "error";
+//        }
+//        model.addAttribute("cityNames", academy.getCity());
+//        model.addAttribute("direction", academy.getDirections());
+//        model.addAttribute("technologie", academy.getTechnologies());
+//        model.addAttribute("academyStages", academy.getAcademy_stages());
+//        model.addAttribute("profile", academy.getProfile());
+////        model.addAttribute("student_group_count", academy.getStudent_group_count());
+//        model.addAttribute("name", academy.getName());
+//        model.addAttribute("startDate", academy.getStartDate());
+//        model.addAttribute("endDate", academy.getEndDate());
+//        model.addAttribute("free", academy.getFree());
+//
+//        academyService.save(academy);
+//        return "academy";
+//    }
+
+
+
 }
 
