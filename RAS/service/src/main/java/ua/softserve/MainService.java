@@ -20,13 +20,18 @@ public class MainService {
 //
 //            System.out.println(academyService.getById(1));
 
-        HistoryService historyService = context.getBean(HistoryService.class);
+//        HistoryService historyService = context.getBean(HistoryService.class);
+//
+//        for (History history:historyService.findByCrmGroup(428)) {
+//            System.out.println(history.toString());
+//
+//        }
 
-        for (History history:historyService.findByCrmGroup(428)) {
-            System.out.println(history.toString());
+        UserService userService = context.getBean(UserService.class);
+        for (User user: userService.findAll()) {
+            System.out.println(user.getFirstName());
 
         }
-
 
     }
 
