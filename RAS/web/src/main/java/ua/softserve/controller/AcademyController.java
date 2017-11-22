@@ -4,18 +4,14 @@ package ua.softserve.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.persistence.dto.LanguageTranslationDTO;
 import ua.softserve.dto.AcademyDTO;
+import ua.softserve.persistence.dto.LanguageTranslationDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 import ua.softserve.service.editor.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +35,9 @@ public class AcademyController {
 
     @Autowired
     LanguageTranslationsService languageTranslationsService;
+
+    @Autowired
+    LanguageTranslationDTO languageTranslationDTO;
 
     @Autowired
     AcademyStagesEditor academyStagesEditor;
@@ -120,9 +119,6 @@ public class AcademyController {
 
         return "index";
     }
-
-
-
 
 
     @RequestMapping(value = "/allGroupsInf",method = RequestMethod.GET)

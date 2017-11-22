@@ -17,7 +17,7 @@ import java.util.List;
 public class Academy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "academy_id")
     private Integer academyId;
 
@@ -123,8 +123,8 @@ public class Academy {
                 ", studentGroupCount=" + studentGroupCount +
                 ", crmGroup=" + crmGroup +
                 ", name='" + name + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
+                ", startDate=" + startDate.toLocalDateTime().toLocalDate() +
+                ", endDate=" + endDate.toLocalDateTime().toLocalDate() +
                 ", free=" + free +
                 ", status=" + status +
                 ", hasTech=" + hasTech +

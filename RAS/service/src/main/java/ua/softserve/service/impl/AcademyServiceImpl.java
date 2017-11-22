@@ -125,8 +125,6 @@ public class AcademyServiceImpl implements AcademyService {
     public Academy findWithEmployeeInterviewers(int id) {
         return academyDAO.findWithEmployeeInterviewers(id);
     }
-}
-
 
     private Timestamp convertStringToTimestamp(String date){
         LocalDate localDate = LocalDate.parse(date);
