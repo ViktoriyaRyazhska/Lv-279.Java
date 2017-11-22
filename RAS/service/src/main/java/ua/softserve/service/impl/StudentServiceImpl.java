@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
+
+    final static int STATUS_OF_STUDENT_IN_GROUP = 6;
+
     @Autowired
     private StudentRepository studentRepository;
 
@@ -21,14 +24,10 @@ public class StudentServiceImpl implements StudentService {
         if (academyId == null) {
             throw new IllegalArgumentException("Academy Id cannot be null!");
         }
-        //Status 6 means that user is a student of group
-        Integer status = 6;
 
-        List<Student> students = studentRepository
-                .findAllByItaAcademy_Academy_AcademyIdAndItaAcademy_ItaAcademyStatus(academyId, status);
-
-        List<StudentsViewDto> studentsViewDtos = students.stream().map(x->fromStudentToDto(x)).collect(Collectors.toList());
-        return studentsViewDtos;
+        return studentRepository
+                .findStudentsByAcademyAndStatus(academyId,STATUS_OF_STUDENT_IN_GROUP)
+                .stream().map(x->fromStudentToDto(x)).collect(Collectors.toList());
     }
 
 
