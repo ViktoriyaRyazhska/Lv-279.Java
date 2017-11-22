@@ -87,7 +87,7 @@ public class AcademyController {
 
 
     @RequestMapping(value = "/group", method = RequestMethod.GET)
-    public String getAllStatuses(Model model) {
+    public String showModel(Model model) {
         model.addAttribute("academyDTO", new AcademyDTO());
 
         List<AcademyStages> academyStages = academyStagesService.getAllAcademyStagesService();
@@ -102,7 +102,7 @@ public class AcademyController {
         model.addAttribute("technologie", technologie);
         model.addAttribute("profile", profile);
         model.addAttribute("studentGroupCount", new StudentGroupCount());
-        return "group";
+        return "addGroup";
     }
 
     @PostMapping("/addGroup")
