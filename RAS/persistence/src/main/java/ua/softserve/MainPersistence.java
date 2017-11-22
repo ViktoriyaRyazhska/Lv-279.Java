@@ -4,9 +4,6 @@ package ua.softserve;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ua.softserve.config.DataConfig;
 
-import ua.softserve.persistence.dao.*;
-import ua.softserve.persistence.entity.*;
-
 import ua.softserve.persistence.dao.LanguageTranslationsDAO;
 
 
@@ -20,6 +17,7 @@ public class MainPersistence {
 
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(DataConfig.class);
+
         LanguageTranslationsDAO language_translationsDAO = context.getBean(LanguageTranslationsDAO.class);
 
 
@@ -43,7 +41,6 @@ public class MainPersistence {
 //            System.out.println(history.toString());
 //
 //        }
-
     }
 
 }

@@ -17,4 +17,15 @@ public interface AcademyService {
     void save(Academy user);
 
     void saveDTO(AcademyDTO academyDTO);
+
+    void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
+
+    Academy findOne(int id);
+
+    Academy findWithEmployeeTeacher(int id);
+
+    Academy findWithEmployeeExperts(int id);
+
+    Academy findWithEmployeeInterviewers(int id);
+
 }

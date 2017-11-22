@@ -13,11 +13,6 @@ public class LanguageTranslationsServiceImpl implements LanguageTranslationsServ
     LanguageTranslationsDAO languageTranslationsDAO;
 
     @Override
-    public List<String> getTranslations() {
-        return languageTranslationsDAO.getTranslations();
-    }
-
-    @Override
     public List<LanguageTranslations> getAllLanguageTranslationsName() {
         return languageTranslationsDAO.getAllLanguageTranslationsName();
     }

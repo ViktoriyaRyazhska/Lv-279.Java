@@ -8,7 +8,6 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 
-
 @Getter @Setter
 @ToString
 @Entity

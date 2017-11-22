@@ -12,4 +12,6 @@ public interface ProfileService {
     List<Profile> findAll();
 
     void remove(Profile user);
+
+    List<String> findProfileNames();
 }

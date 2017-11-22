@@ -12,5 +12,7 @@ public interface DirectionService {
 
     List<Directions> findAll();
 
+    List<String> findDirectionsName();
+
     void remove(Directions user);
 }

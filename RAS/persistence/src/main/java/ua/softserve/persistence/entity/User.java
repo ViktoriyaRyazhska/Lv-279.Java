@@ -28,11 +28,13 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    private Integer id;
 
 //    @OneToOne
 //    @JoinColumn(name = "country_id")
 //    private Country country;
+
 
     @Column(name = "user_name", nullable = false)
     private String userName;
@@ -55,5 +57,8 @@ public class User {
     private String salt = "_";
 
     private String password = "_";
+
+
+
 
 }
