@@ -14,8 +14,9 @@ import javax.validation.constraints.NotNull;
 @Table(name = "languages")
 public class Languages {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int language_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "language_id")
+    private int languageId;
 
     @NotNull
     @Column(name = "local")

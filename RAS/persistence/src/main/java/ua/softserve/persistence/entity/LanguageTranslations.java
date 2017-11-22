@@ -15,8 +15,9 @@ import javax.validation.constraints.NotNull;
 public class LanguageTranslations {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int translation_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "translation_id")
+    private int translationId;
 
     @ManyToOne
     @JoinColumn(name = "language_id")

@@ -1,7 +1,7 @@
 package ua.softserve.service;
 
 
-import ua.softserve.persistence.dto.Impl.AcademyDTO;
+import ua.softserve.persistence.dto.AcademyDTO;
 import ua.softserve.persistence.entity.Academy;
 
 import java.util.List;
@@ -26,5 +26,7 @@ public interface AcademyService {
     Academy findWithEmployeeExperts(int id);
 
     Academy findWithEmployeeInterviewers(int id);
+
+    List<Academy> findWithEmployeeExperts();
 
 }

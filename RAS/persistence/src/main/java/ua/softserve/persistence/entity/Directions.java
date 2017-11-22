@@ -7,15 +7,15 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
+@Getter @Setter
 @ToString
 @Entity
 @Table(name = "directions")
 public class Directions {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int direction_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "direction_id")
+    private int directionId;
 
     @NotNull
     @Column(name = "name")

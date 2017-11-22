@@ -1,7 +1,4 @@
-package ua.softserve.persistence.dto.Impl;
-
-import java.sql.Timestamp;
-
+package ua.softserve.persistence.dto;
 
 import lombok.*;
 import ua.softserve.persistence.entity.*;
@@ -23,9 +20,7 @@ public class AcademyDTO {
     private Directions direction;
     private Technologies technologie;
     private Profile profile;
-//    private String planedToGraduate;
-//    private String planedToEnrollment;
-//    private String countActual;
-    private StudentGroupCount studentGroupCount;
-
+    private int studentsPlannedToGraduate;
+    private int studentsPlannedToEnrollment;
+    private int studentsActual;
 }
