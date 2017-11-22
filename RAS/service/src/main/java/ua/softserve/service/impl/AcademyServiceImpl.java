@@ -3,12 +3,13 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.dto.AcademyDTO;
+import ua.softserve.persistence.dto.Impl.AcademyDTO;
 import ua.softserve.persistence.dao.AcademyDAO;
 import ua.softserve.persistence.entity.Academy;
-import ua.softserve.persistence.entity.Directions;
+import ua.softserve.persistence.entity.City;
 import ua.softserve.persistence.entity.Employee;
 import ua.softserve.service.AcademyService;
+import ua.softserve.service.CityService;
 import ua.softserve.service.EmployeeService;
 
 import java.sql.Timestamp;
@@ -19,6 +20,10 @@ import java.util.List;
 public class AcademyServiceImpl implements AcademyService {
     @Autowired
     private AcademyDAO academyDAO;
+
+    @Autowired
+    CityService cityService;
+
 
     @Transactional(readOnly = true)
     @Override
@@ -47,7 +52,10 @@ public class AcademyServiceImpl implements AcademyService {
     @Transactional
     @Override
     public void saveDTO(AcademyDTO academyDTO) {
+        System.out.println(getCity(academyDTO.getCityNames()));
+
         Academy academy = new Academy();
+        academy.setCity(getCity(academyDTO.getCityNames()));
         academy.setDirections(academyDTO.getDirection());
         academy.setTechnologies(academyDTO.getTechnologie());
         academy.setAcademyStages(academyDTO.getAcademyStages());
@@ -62,8 +70,23 @@ public class AcademyServiceImpl implements AcademyService {
         academy.setHasFirst(0);
         academy.setNotSynchronized(0);
 
-            academyDAO.save(academy);
+        System.out.println(academy);
+
+            //academyDAO.save(academy);
     }
+
+
+    private Timestamp convertStringToTimestamp(String date){
+        LocalDate localDate = LocalDate.parse(date);
+        Timestamp timestamp = Timestamp.valueOf(localDate.atStartOfDay());
+        return timestamp;
+    }
+
+    private City getCity(String id){
+        return cityService.findOne(Integer.parseInt(id));
+    }
+
+
 
     @Transactional
     @Override
@@ -126,10 +149,5 @@ public class AcademyServiceImpl implements AcademyService {
         return academyDAO.findWithEmployeeInterviewers(id);
     }
 
-    private Timestamp convertStringToTimestamp(String date){
-        LocalDate localDate = LocalDate.parse(date);
-        Timestamp timestamp = Timestamp.valueOf(localDate.atStartOfDay());
-        return timestamp;
-    }
 }
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.dto.AcademyDTO;
+import ua.softserve.persistence.dto.Impl.AcademyDTO;
 import ua.softserve.persistence.dto.LanguageTranslationDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
@@ -108,11 +108,6 @@ public class AcademyController {
     @PostMapping("/addGroup")
     public String addGroup(@ModelAttribute AcademyDTO academyDTO) {
 
-
-//        int cityId = academyDTO.ge;
-//        City city = cityService.findOne(cityId);
-//
-//
         System.out.println(academyDTO);
 
         //academyService.saveDTO(academyDTO);
