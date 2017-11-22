@@ -15,7 +15,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "student_id")
+    @Column(name = "student_id")
     private Integer studentId;
 
     @NotNull
@@ -92,12 +92,13 @@ public class Student {
     @Column(name = "interviewer_comment")
     private String interviewerComment;
 
-    @Column(name = "teacher_student_feedback_id")
-    private Feedback  teacherFeedback ;
+    @OneToOne
+    @JoinColumn(name = "teacher_student_feedback_id")
+    private Feedback teacherFeedback;
 
-    @Column(name = "expert_student_feedback_id")
-    private Feedback  expertFeedback ;
-
+    @OneToOne
+    @JoinColumn(name = "expert_student_feedback_id")
+    private Feedback expertFeedback;
 
 
 }
