@@ -1,5 +1,5 @@
-<%@ page import="java.util.HashMap" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"
          language="java"%>
 <!DOCTYPE html>
@@ -20,126 +20,118 @@
 
 </head>
 <body>
-
-<table class="table table-condensed table-hover table-responsive table-bordered">
-    <thead>
-    <tr>
-        <th>Group name</th>
-        <th>Name For Site</th>
-        <th>Direction</th>
-        <th>Profile</th>
-        <th>Payment Status</th>
-        <th>Location</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Status</th>
-        <th>Experts</th>
-        <th>Students Planned To Graduate</th>
-        <th>Students Planned for Enrolment</th>
-        <th>Students Actual</th>
-        <th>Hired - Not Graduate</th>
-        <th>Common Direction</th>
-        <th>Interviewer Feedback</th>
-    </tr>
-    <tr>
-        <td>
-            <div class="input-group">
-                <input type="text" class="form-control" id="searchGroup" name="search" placeholder="Search"/>
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                        <%--<i class="glyphicon glyphicon-search"></i>--%>
-                    </button>
-                </div>
-            </div>
-        </td>
-        <td>
-            <div class="input-group">
-                <input type="text" class="form-control" id="searchSite" name="search" placeholder="Search"/>
-                <div class="input-group-btn">
-                    <button class="btn btn-default" id="searchSiteButton" type="submit">
-                        <%--<i class="glyphicon glyphicon-search"></i>--%>
-                    </button>
-                </div>
-            </div>
-        </td>
-        <td>
-            <select name="direction">
-
-            </select>
-        </td>
-        <td>
-            <select name="profile">
-
-            </select>
-        </td>
-        <td>
-            <select name="paymentStatus">
-
-            </select>
-        </td>
-        <td>
-            <select name="location">
-
-            </select>
-        </td>
-        <td>
-            <select name="strartDate">
-
-            </select>
-        </td>
-        <td>
-            <select name="endDate">
-
-            </select>
-        </td>
-        <td>
-            <select name="status"></select>
-        </td>
-        <td>
-            <select name="experts">
-
-            </select>
-        </td>
-        <td><input type="text" name="studentsPlannedToGraduate"></td>
-        <td><input type="text" name="studentsPlannedForEnrolment"></td>
-        <td><input type="text" name="studentsActual"></td>
-        <td><input type="text" name="hiredNotGraduate"></td>
-        <td>
-            <select name="commonDirection">
-
-            </select>
-        </td>
-        <td></td>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${listA}" var="list">
-        <tr id="rows">
-            <td>---</td>
-            <td id="site">${list.name}</td>
-            <td>${list.technologies.name}</td>
-            <td>${list.profile.profile_name}</td>
-            <td>${list.free == 1 ? "Free" : "Paid"}</td>
-            <td>${cities[list.city.city_id]}</td>
-            <td>${list.start_date}</td>
-            <td>${list.end_date}</td>
-            <td>${list.academy_stages.name}</td>
-            <td>---</td>
-            <td>${list.student_group_count.students_planned_to_graduate}</td>
-            <td>${list.student_group_count.students_planned_to_enrollment}</td>
-            <td>${list.student_group_count.students_actual}</td>
-            <td>---</td>
-            <td>${list.directions.name}</td>
-            <td>---</td>
+    <table class="table table-condensed table-hover table-responsive">
+        <thead>
+        <tr>
+            <th>Group name</th>
+            <th>Name For Site</th>
+            <th>Direction</th>
+            <th>Profile</th>
+            <th>Payment Status</th>
+            <th>Location</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Experts</th>
+            <th>Students Planned To Graduate</th>
+            <th>Students Planned for Enrolment</th>
+            <th>Students Actual</th>
+            <th>Hired - Not Graduate</th>
+            <th>Common Direction</th>
+            <th>Interviewer Feedback</th>
         </tr>
-    </c:forEach>
-    </tbody>
+        <tr>
+            <td>
+                <input type="text" class="form-control" placeholder="#" >
+            </td>
+            <td>
+                <input type="text" class="form-control" placeholder="#" >
+            </td>
+            <td>
+                <div class="col-3">
+                    <form:select id="direction" class="form-control input-sm" path="directions">
+                        <form:option value="">Directions</form:option>
+                        <form:options items="${directions}" />
+                    </form:select>
+                </div>
+            </td>
+            <td>
+                <div class="col-3">
+                    <form:select id="profile" class="form-control input-sm" path="profileNames">
+                        <form:option value="">ProfileNames</form:option>
+                        <form:options items="${profileNames}" />
+                    </form:select>
+                </div>
+            </td>
+            <td>
+                <select name="paymentStatus">
+
+                </select>
+            </td>
+            <td>
+                <select name="location">
+
+                </select>
+            </td>
+            <td>
+                <select name="strartDate">
+
+                </select>
+            </td>
+            <td>
+                <select name="endDate">
+
+                </select>
+            </td>
+            <td>
+                <select name="status"></select>
+            </td>
+            <td>
+                <select name="experts">
+
+                </select>
+            </td>
+            <td><input type="text" name="studentsPlannedToGraduate"></td>
+            <td><input type="text" name="studentsPlannedForEnrolment"></td>
+            <td><input type="text" name="studentsActual"></td>
+            <td><input type="text" name="hiredNotGraduate"></td>
+            <td>
+                <select name="commonDirection">
+
+                </select>
+            </td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${listA}" var="list">
+            <tr id="rows">
+                <td>---</td>
+                <td id="site">${list.name}</td>
+                <td>${list.technologies.name}</td>
+                <td>${list.profile.profileName}</td>
+                <td>${list.free == 1 ? "Free" : "Paid"}</td>
+                <td>${cities[list.city.city_id]}</td>
+                <td>${list.startDate}</td>
+                <td>${list.endDate}</td>
+                <td>${list.academyStages.name}</td>
+                <td>---</td>
+                <td>${list.studentGroupCount.studentsPlannedToGraduate}</td>
+                <td>${list.studentGroupCount.studentsPlannedToEnrollment}</td>
+                <td>${list.studentGroupCount.studentsActual}</td>
+                <td>---</td>
+                <td>${list.directions.name}</td>
+                <td>---</td>
+            </tr>
+        </c:forEach>
+        </tbody>
 
 
-</table>
+    </table>
+
 
 <script>
-    $("button").click(function(){
+    $("input").change(function(){
         $.ajax({
             url: "/searchSite",
             type: "POST",
@@ -150,9 +142,7 @@
     });
     function changeList(list) {
         console.log(list);
-        if ($("tr[id='rows'] td[id='site']").text != "${list.name}"){
-            $(this).remove();
-        }
+            listA = list;
     }
 </script>
 

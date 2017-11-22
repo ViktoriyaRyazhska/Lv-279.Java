@@ -21,10 +21,6 @@ public class MainService {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(ServiceConf.class, DataConfig.class);
 
-        LanguageTranslationsService languageTranslationsService = context.getBean(LanguageTranslationsService.class);
-
-        System.out.println(languageTranslationsService.getTranslations());
-
 //        HistoryService historyService = context.getBean(HistoryService.class);
 //
 //        for (History history:historyService.findByCrmGroup(428)) {

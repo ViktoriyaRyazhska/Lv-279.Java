@@ -11,5 +11,6 @@
     <%--<a href="/showHistory">All history</a>--%>
     <a href="/showHistory"><button>All History</button></a>
     <a href="/showFeedbacks"><button>All Feedback</button></a>
+    <a href="/allGroupsInf"><button>Information about groups</button></a>
 </body>
 </html>

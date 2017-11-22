@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ua.softserve.persistence.dto.LanguageTranslationDTO;
 
 import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.entity.Directions;
 import ua.softserve.persistence.entity.LanguageTranslations;
 import ua.softserve.persistence.entity.User;
 import ua.softserve.service.AcademyService;
@@ -31,15 +32,6 @@ import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
-
-    @Autowired
-    AcademyService academyService;
-
-    @Autowired
-    LanguageTranslationsService languageTranslationsService;
-
-    @Autowired
-    LanguageTranslationDTO languageTranslationDTO;
 
     @Autowired
     private UserService userService;
@@ -56,13 +48,5 @@ public class MainController {
         return "showUsers";
     }
 
-    @RequestMapping(value = "/user",method = RequestMethod.GET)
-    public String getAllAcademies(Model model) {
-        List<Academy> list = academyService.getAllAcademys();
-        model.addAttribute("listA", list.stream().limit(20).collect(Collectors.toList()));
-        List<LanguageTranslations> translations = languageTranslationsService.getAllLanguageTranslationsName();
-        HashMap<Integer, String> cityHashMap = languageTranslationDTO.convertListToHashMap(translations);
-        model.addAttribute("cities", cityHashMap);
-        return "allAcademies";
-    }
+
 }
