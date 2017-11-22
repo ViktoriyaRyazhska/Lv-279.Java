@@ -2,10 +2,12 @@ package ua.softserve.persistence.dto.Impl;
 
 import java.sql.Timestamp;
 
+
 import lombok.*;
 import ua.softserve.persistence.entity.*;
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

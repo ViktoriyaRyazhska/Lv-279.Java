@@ -11,7 +11,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "academy")
 public class Academy {
