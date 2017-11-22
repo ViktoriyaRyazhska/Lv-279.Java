@@ -6,14 +6,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @ToString
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "city")
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int city_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "city_id")
+    private int cityId;
 
     @NotNull
     @Column(name = "crm_id")

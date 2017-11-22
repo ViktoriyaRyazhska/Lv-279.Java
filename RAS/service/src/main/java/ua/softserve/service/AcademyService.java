@@ -1,7 +1,7 @@
 package ua.softserve.service;
 
 
-import ua.softserve.persistence.dto.Impl.AcademyDTO;
+import ua.softserve.persistence.dto.AcademyDTO;
 import ua.softserve.persistence.entity.Academy;
 
 import java.util.List;
