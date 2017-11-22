@@ -101,6 +101,75 @@
                 </select>
             </td>
             <td></td>
+        <td>
+            <select name="direction">
+
+            </select>
+        </td>
+        <td>
+            <select name="profile">
+
+            </select>
+        </td>
+        <td>
+            <select name="paymentStatus">
+
+            </select>
+        </td>
+        <td>
+            <select name="location">
+
+            </select>
+        </td>
+        <td>
+            <select name="strartDate">
+
+            </select>
+        </td>
+        <td>
+            <select name="endDate">
+
+            </select>
+        </td>
+        <td>
+            <select name="status"></select>
+        </td>
+        <td>
+            <select name="experts">
+
+            </select>
+        </td>
+        <td><input type="text" name="studentsPlannedToGraduate"></td>
+        <td><input type="text" name="studentsPlannedForEnrolment"></td>
+        <td><input type="text" name="studentsActual"></td>
+        <td><input type="text" name="hiredNotGraduate"></td>
+        <td>
+            <select name="commonDirection">
+
+            </select>
+        </td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${listA}" var="list">
+        <tr id="rows">
+            <td>---</td>
+            <td id="site">${list.name}</td>
+            <td>${list.technologies.name}</td>
+            <td>${list.profile.profile_name}</td>
+            <td>${list.free == 1 ? "Free" : "Paid"}</td>
+            <td>${cities[list.city.city_id]}</td>
+            <td>${list.start_date}</td>
+            <td>${list.end_date}</td>
+            <td>${list.academyStages.name}</td>
+            <td>---</td>
+            <td>${list.studentGroupCount.students_planned_to_graduate}</td>
+            <td>${list.studentGroupCount.students_planned_to_enrollment}</td>
+            <td>${list.studentGroupCount.students_actual}</td>
+            <td>---</td>
+            <td>${list.directions.name}</td>
+            <td>---</td>
         </tr>
         </thead>
         <tbody>
