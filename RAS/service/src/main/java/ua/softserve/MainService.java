@@ -28,7 +28,8 @@ public class MainService {
 //
 //        }
 
-
+        AcademyService bean = context.getBean(AcademyService.class);
+        System.out.println(bean.findWithEmployeeExperts(1).getExperts());
 
     }
 

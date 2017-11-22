@@ -12,6 +12,7 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 import ua.softserve.service.editor.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,11 +80,11 @@ public class AcademyController {
 //    }
 //
 //
-//    @RequestMapping(value = "/searchSite",method = RequestMethod.POST, produces = {"application/json"})
-//    public List<Academy> searchSite(HttpServletRequest request) {
-//        List<Academy> list = academyService.findAllByName(request.getParameter("searchPhrase"));
-//        return list;
-//    }
+    @RequestMapping(value = "/searchSite",method = RequestMethod.POST, produces = {"application/json"})
+    public List<Academy> searchSite(HttpServletRequest request) {
+        List<Academy> list = academyService.findAllByName(request.getParameter("searchPhrase"));
+        return list;
+    }
 
 
     @RequestMapping(value = "/group", method = RequestMethod.GET)
@@ -118,7 +119,7 @@ public class AcademyController {
 
     @RequestMapping(value = "/allGroupsInf",method = RequestMethod.GET)
     public String getAllAcademies(Model model) {
-        List<Academy> list = academyService.getAllAcademys();
+        List<Academy> list = academyService.findWithEmployeeExperts();
         model.addAttribute("listA", list.stream().limit(20).collect(Collectors.toList()));
         List<LanguageTranslations> translations = languageTranslationsService.getAllLanguageTranslationsName();
         HashMap<Integer, String> cityHashMap = languageTranslationDTO.convertListToHashMap(translations);

@@ -149,5 +149,10 @@ public class AcademyServiceImpl implements AcademyService {
         return academyDAO.findWithEmployeeInterviewers(id);
     }
 
+    @Override
+    public  List<Academy> findWithEmployeeExperts() {
+        return academyDAO.findWithEmployeeExperts();
+    }
+
 }
 
