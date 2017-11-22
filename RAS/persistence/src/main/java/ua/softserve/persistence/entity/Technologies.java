@@ -54,7 +54,7 @@ public class Technologies {
     @Column(name = "directiond_id", columnDefinition = "INT(11) UNSIGNED")
     private int directiondId;
 
-    @Column(name = "crm_id")
+    @Column(name = "crmId")
     private Integer crmId;
 
     @Column(name = "activeGroups")

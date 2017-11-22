@@ -16,8 +16,8 @@ public class City {
     private int city_id;
 
     @NotNull
-    @JoinColumn(foreignKey = @ForeignKey(foreignKeyDefinition = ""))
-    private int crm_id;
+    @JoinColumn(name = "crm_Id", foreignKey = @ForeignKey(foreignKeyDefinition = ""))
+    private int crmId;
 
     @Column(name = "country_id")
     private Integer countryId;
