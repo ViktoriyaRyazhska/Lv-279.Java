@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.persistence.dto.Impl.AcademyDTO;
+import ua.softserve.persistence.dto.AcademyDTO;
 import ua.softserve.persistence.dto.LanguageTranslationDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
@@ -33,6 +33,9 @@ public class AcademyController {
 
     @Autowired
     ProfileService profileService;
+
+    @Autowired
+    StudentGroupCountService studentGroupCountService;
 
     @Autowired
     LanguageTranslationsService languageTranslationsService;
@@ -111,7 +114,7 @@ public class AcademyController {
 
         System.out.println(academyDTO);
 
-        //academyService.saveDTO(academyDTO);
+        academyService.saveDTO(academyDTO);
 
         return "index";
     }
