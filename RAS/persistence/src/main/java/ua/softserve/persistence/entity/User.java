@@ -58,7 +58,8 @@ public class User {
 
     private String password = "_";
 
-
+    @Column(name = "eng_level")
+    private Integer englishLevel;
 
 
 }
