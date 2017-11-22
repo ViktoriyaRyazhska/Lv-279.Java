@@ -1,7 +1,6 @@
 package ua.softserve.service;
 
 import org.springframework.data.domain.Page;
-import ua.softserve.persistence.dao.TestGroupDAO;
 import ua.softserve.persistence.entity.Employee;
 
 import java.util.List;

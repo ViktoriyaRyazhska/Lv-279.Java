@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.dao.EmployeeDAO;
 import ua.softserve.persistence.dao.EmployeeSimpleRepositoryDAO;
-import ua.softserve.persistence.dao.TestGroupDAO;
 import ua.softserve.persistence.entity.Employee;
 import ua.softserve.service.EmployeeService;
 

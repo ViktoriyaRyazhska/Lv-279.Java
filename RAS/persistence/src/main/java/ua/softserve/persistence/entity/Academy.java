@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Getter @Setter
@@ -84,6 +85,30 @@ public class Academy {
     @NotNull
     @Column(name = "not_synchronized")
     private int notSynchronized;
+
+    @ManyToMany(cascade =  CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "teacher_academy",
+            joinColumns = {@JoinColumn(name = "academy_id")},
+            inverseJoinColumns = {@JoinColumn(name = "employee_id")}
+    )
+    private List<Employee> teachers;
+
+    @ManyToMany(cascade =  CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "expert_academy",
+            joinColumns = {@JoinColumn(name = "academy_id")},
+            inverseJoinColumns = {@JoinColumn(name = "employee_id")}
+    )
+    private List<Employee> experts;
+
+    @ManyToMany(cascade =  CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "interviewer_academy",
+            joinColumns = {@JoinColumn(name = "academy_id")},
+            inverseJoinColumns = {@JoinColumn(name = "employee_id")}
+    )
+    private List<Employee> interviewers;
 
 
     @Override

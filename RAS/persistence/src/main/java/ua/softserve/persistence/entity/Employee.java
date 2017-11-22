@@ -34,13 +34,13 @@ public class Employee {
     private ItaRole itarole;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "teachers")
-    private List<TestGroup> testGroupList1;
+    private List<Academy> testGroupList1;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "experts")
-    private List<TestGroup> testGroupList2;
+    private List<Academy> testGroupList2;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "interviewers")
-    private List<TestGroup> testGroupList3;
+    private List<Academy> testGroupList3;
 
     @Override
     public String toString() {

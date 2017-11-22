@@ -5,26 +5,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.persistence.dao.EmployeeDAO;
-import ua.softserve.persistence.dao.TestGroupDAO;
 import ua.softserve.persistence.entity.Employee;
-import ua.softserve.persistence.entity.TestGroup;
+import ua.softserve.service.AcademyService;
 import ua.softserve.service.EmployeeService;
-import ua.softserve.service.TestGroupService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
     @Autowired
-    TestGroupService testGroupService;
-    @Autowired
-    TestGroupDAO testGroupDAO;
+    AcademyService academyService;
 
-    static final int id=3;
+    static final int id=1;
 
     @GetMapping(value = "/pages-{pageNumber}-{role}")
     public String getRunbookPage(@PathVariable Integer pageNumber,
@@ -67,7 +59,7 @@ public class EmployeeController {
     @PostMapping("/include-{role}")
     public String includeEmployees(@RequestParam("arr") int[] arr,
                                    @PathVariable String role){
-        testGroupService.saveCustom(id,role,arr,employeeService);
+        academyService.saveCustom(id,role,arr,employeeService);
         return "index";
     }
 
