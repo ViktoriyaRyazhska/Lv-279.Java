@@ -34,7 +34,7 @@ public class CityServiceImpl implements CityService {
     @Override
     @Transactional(readOnly = true)
     public City findOne(int id) {
-        return cityDAO.getOne(id);
+        return cityDAO.findOne(id);
     }
 
     @Override
