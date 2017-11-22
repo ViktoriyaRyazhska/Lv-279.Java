@@ -32,12 +32,12 @@ public class ItaAcademy {
     @Column(name = "it_academy_id")
     private Integer itAcademyId;
 
-    @ManyToOne // (targetEntity = User.class, fetch=FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne //(fetch=FetchType.EAGER)
-    @JoinColumn(name = "academyId", referencedColumnName = "academyId")
+    @ManyToOne
+    @JoinColumn(name = "academy_id")
     private Academy academy;
 
 

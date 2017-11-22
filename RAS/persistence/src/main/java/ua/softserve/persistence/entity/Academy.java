@@ -18,7 +18,7 @@ public class Academy {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column (name = "academy_id")
-    private int academyId;
+    private Integer academyId;
 
     @ManyToOne
     @JoinColumn(name = "city_id")

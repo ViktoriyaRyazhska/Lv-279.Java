@@ -12,10 +12,10 @@ import ua.softserve.persistence.entity.User;
 import java.util.List;
 
 @Repository
-public interface ItaAcademyDao extends JpaRepository<ItaAcademy,Integer> {
+public interface ItaAcademyRepository extends JpaRepository<ItaAcademy, Integer> {
 
 
-      @Query ("select it from ItaAcademy as it where it.academy.academyId = :academyId")
+    @Query("select it from ItaAcademy as it where it.academy.academyId = :academyId")
     List<ItaAcademy> findItaAcademiesByAcademy(@Param("academyId") Integer academyId);
 
 
