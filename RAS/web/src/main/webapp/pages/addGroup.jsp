@@ -22,7 +22,7 @@
                 <td><form:input type="text" path="nameForSite" placeholder="Site for Name"/></td>
             </tr>
             <tr>
-                <td><form:select path="academyStages" items="${academyStages}" itemValue="stage_id"
+                <td><form:select path="academyStages" items="${academyStages}" itemValue="stageId"
                                  itemLabel="name"/>Status</td>
             </tr>
             <tr>
@@ -47,19 +47,19 @@
                 </td>
             </tr>
             <tr>
-                <td><form:select path="direction" items="${direction}" itemValue="direction_id" itemLabel="name"/></td>
+                <td><form:select path="direction" items="${direction}" itemValue="directionId" itemLabel="name"/></td>
             </tr>
             <tr>
-                <td><form:select path="technologie" items="${technologie}" itemValue="technology_id"
+                <td><form:select path="technologie" items="${technologie}" itemValue="technologyId"
                                  itemLabel="name"/></td>
             </tr>
             <tr>
                 <td><form:select path="profile" items="${profile}" itemValue="profileId" itemLabel="profileName"/></td>
             </tr>
             <tr>
-                <td><form:input type="number" path="studentGroupCount.studentsPlannedToGraduate" placeholder="Planned to Graduate"/></td>
-                <td><form:input type="number" path="studentGroupCount.studentsPlannedToEnrollment" placeholder="Students Planned to Enrollment"/></td>
-                <td><form:input type="number" path="studentGroupCount.studentsActual" placeholder="Students Count Actual"/></td>
+                <td><form:input type="number" path="studentsPlannedToGraduate" placeholder="Planned to Graduate"/></td>
+                <td><form:input type="number" path="studentsPlannedToEnrollment" placeholder="Students Planned to Enrollment"/></td>
+                <td><form:input type="number" path="studentsActual" placeholder="Students Count Actual"/></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Save Group"/></td>
