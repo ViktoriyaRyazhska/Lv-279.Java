@@ -20,7 +20,7 @@ import java.util.List;
 public class ItaAcademyController {
 
     @Autowired
-    ItaAcademyService itaAcademyService;
+   private ItaAcademyService itaAcademyService;
 
     @GetMapping("/users/{id}")
     public String showUsers(@PathVariable("id") Integer academyId,Model model) {

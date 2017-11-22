@@ -24,7 +24,7 @@ public class ItaAcademyServiceImpl implements ItaAcademyService {
             throw  new IllegalArgumentException("Academy Id cannot be null!");
         }
 
-        return itaAcademyRepository.findItaAcademiesByAcademy(academyId);
+        return itaAcademyRepository.findAllByAcademy_AcademyId(academyId);
     }
 
     @Transactional(readOnly = true)
