@@ -33,6 +33,11 @@ public class DirectionServiceImpl implements DirectionService {
         return directionDao.findAll();
     }
 
+    @Override
+    public List<String> findDirectionsName() {
+        return directionDao.findDirectionsName();
+    }
+
     @Transactional
     @Override
     public void remove(Directions direction) {

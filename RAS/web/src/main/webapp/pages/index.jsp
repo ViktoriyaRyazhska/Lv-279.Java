@@ -12,5 +12,6 @@
     <a href="/showHistory"><button>All History</button></a>
     <a href="/showItaAcademyById"><button>ItaAcademy</button></a>
     <a href="/showFeedbacks"><button>All Feedback</button></a>
+    <a href="/allGroupsInf"><button>Information about groups</button></a>
 </body>
 </html>

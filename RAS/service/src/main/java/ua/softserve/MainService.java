@@ -28,7 +28,6 @@ public class MainService {
         List<User> list = itaAcademyService.getAllUsersOfAcademy(796);
 
        list.forEach(x-> System.out.println(x.getEmail()));
-
 //        HistoryService historyService = context.getBean(HistoryService.class);
 //
 //        for (History history:historyService.findByCrmGroup(428)) {

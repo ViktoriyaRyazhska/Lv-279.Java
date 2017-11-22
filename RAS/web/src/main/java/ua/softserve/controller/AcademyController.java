@@ -2,20 +2,20 @@ package ua.softserve.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import ua.softserve.persistence.dto.LanguageTranslationDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AcademyController {
@@ -36,6 +36,9 @@ public class AcademyController {
 
     @Autowired
     LanguageTranslationsService languageTranslationsService;
+
+    @Autowired
+    LanguageTranslationDTO languageTranslationDTO;
 
 //    @RequestMapping(value = "/academy/{academyId}",method = RequestMethod.GET, produces = {"application/json"})
 //    public ResponseEntity<Academy> getAcademy(@PathVariable Integer academyId) {
@@ -94,6 +97,20 @@ public class AcademyController {
 
         academyService.save(academy);
         return "academy";
+    }
+
+    @RequestMapping(value = "/allGroupsInf",method = RequestMethod.GET)
+    public String getAllAcademies(Model model) {
+        List<Academy> list = academyService.getAllAcademys();
+        model.addAttribute("listA", list.stream().limit(20).collect(Collectors.toList()));
+        List<LanguageTranslations> translations = languageTranslationsService.getAllLanguageTranslationsName();
+        HashMap<Integer, String> cityHashMap = languageTranslationDTO.convertListToHashMap(translations);
+        List<String> direction = directionService.findDirectionsName();
+        List<String> profileNames = profileService.findProfileNames();
+        model.addAttribute("cities", cityHashMap);
+        model.addAttribute("directions", direction);
+        model.addAttribute("profileNames", profileNames);
+        return "allAcademies";
     }
 
 
