@@ -16,7 +16,7 @@ public class Country {
     private int country_id;
 
     @NotNull
-    @Column(name = "crmId")
+    @Column(name = "crm_id")
     private int crmId;
 
     @Column(name = "code")
