@@ -12,4 +12,6 @@ public interface StudentService {
     StudentsViewDto fromStudentToDto(Student student);
 
     void saveResults(StudentsViewDto studentsViewDto);
+
+    void saveAllStudents(List<StudentsViewDto> studentsViewDto);
 }

@@ -30,6 +30,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void saveAllStudents(List<StudentsViewDto> studentsViewDto) {
+        studentsViewDto.forEach(x->saveResults(x));
+    }
+
+    @Override
     public StudentsViewDto fromStudentToDto(Student student) {
         StudentsViewDto studentsViewDto = new StudentsViewDto();
 
