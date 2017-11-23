@@ -4,7 +4,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-
 <html lang="en">
 <head>
     <%--<link rel="stylesheet" href="/bs/css/bootstrap.min.css">--%>
@@ -132,27 +131,12 @@
                 <div>
                 </div>
                 <div align="center">
-                    <input type="submit" value="Save Group" class="btn btn-primary" />
+                    <input type="submit" value="Save Group" class="btn btn-primary"/>
                 </div>
             </form:form>
-
         </div>
-
     </div>
 </div>
-
-
-<script>
-    //    $(".payment-select").click(function(){
-    //        console.log('click');
-    //    });
-
-    $().button('toggle');
-
-
-    //$().button('toggle');
-</script>
-
 </body>
 
 </html>
