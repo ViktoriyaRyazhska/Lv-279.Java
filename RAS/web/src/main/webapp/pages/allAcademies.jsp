@@ -101,7 +101,7 @@
         <td>${list.technologies.name}</td>
         <td>${list.profile.profileName}</td>
         <td>${list.free == 1 ? "Free" : "Paid"}</td>
-        <td>${cities[list.city.city_id]}</td>
+        <td>${cities[list.city.cityId]}</td>
         <td>${list.startDate}</td>
         <td>${list.endDate}</td>
         <td>${list.academyStages.name}</td>

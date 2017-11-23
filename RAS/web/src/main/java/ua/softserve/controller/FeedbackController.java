@@ -6,19 +6,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.dto.FeedbackDTO;
+import ua.softserve.persistence.dto.StudentsViewDto;
 import ua.softserve.persistence.entity.Feedback;
 import ua.softserve.persistence.entity.Mark;
+import ua.softserve.persistence.entity.Student;
 import ua.softserve.service.FeedbackService;
 import ua.softserve.service.MarkService;
+import ua.softserve.service.StudentService;
 import ua.softserve.service.editor.MarkEditor;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/feedback")
 public class FeedbackController {
     @Autowired
     private FeedbackService feedbackService;
+
+    @Autowired
+    private StudentService studentService;
 
     @Autowired
     private MarkService markService;
@@ -45,6 +54,15 @@ public class FeedbackController {
         model.addAttribute("gettingThingsDone", gettingThingsDone);
         model.addAttribute("activeCommunicator", activeCommunicator);
 
+        List<Mark> markList = markService.findAll();
+        Map<Integer,String> map = new HashMap<>();
+        List<Integer> indx = new ArrayList<>();
+        for (int i = 1; i <= markList.size(); i++) {
+            indx.add(i);
+            map.put(markList.get(i-1).getId(), markList.get(i-1).getDescription());
+        }
+        model.addAttribute("mapAP", map);
+        model.addAttribute("indxList", indx);
         return "feedback-form";
     }
 
@@ -61,6 +79,13 @@ public class FeedbackController {
         List<Feedback> allFeedback = feedbackService.findAll();
         model.addAttribute("allFeedback", allFeedback);
         return "showFeedbacks";
+    }
+
+    @RequestMapping(value = "/allGroupStudentFeedback",method = RequestMethod.GET)
+    public String getGroupAllFeedback(Model model) {
+        List<StudentsViewDto> students = studentService.getAllStudentsOfAcademy(796);
+        model.addAttribute("allStudent", students);
+        return "student-of-group-feedback";
     }
 
     @InitBinder("feedbackDTO")
