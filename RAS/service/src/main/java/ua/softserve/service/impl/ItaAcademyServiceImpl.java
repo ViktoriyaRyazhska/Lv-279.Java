@@ -3,36 +3,83 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.softserve.persistence.dao.ItaAcademyDao;
+import ua.softserve.persistence.dao.ItaAcademyRepository;
 import ua.softserve.persistence.entity.ItaAcademy;
+import ua.softserve.persistence.entity.User;
 import ua.softserve.service.ItaAcademyService;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+import ua.softserve.service.StudentService;
+
 import java.util.List;
 
 @Service
 public class ItaAcademyServiceImpl implements ItaAcademyService {
 
+    public final static int STATUS_OF_STUDENT_IN_GROUP = 6;
+    public final static int STATUS_OF_REJECTED_STUDENT_IN_GROUP = 8;
+
     @Autowired
-    private ItaAcademyDao itaAcademyDao;
+    private ItaAcademyRepository itaAcademyRepository;
 
-    @Transactional
-    public List<ItaAcademy> getAllByAcademy(int academyId) {
+    @Transactional(readOnly = true)
+    public List<ItaAcademy> getAllItaAcademyByAcademy(Integer academyId) {
+        if (academyId == null) {
+            throw new IllegalArgumentException("Academy Id cannot be null!");
+        }
 
-        return itaAcademyDao.findItaAcademiesByAcademy(academyId);
+        return itaAcademyRepository.findAllByAcademy_AcademyId(academyId);
+    }
+
+    @Transactional(readOnly = true)
+    public ItaAcademy getItaAcademyById(Integer id) {
+        if (id == null) {
+            throw new IllegalArgumentException("ItaAcademy Id cannot be null!");
+        }
+        ItaAcademy itaAcademy = itaAcademyRepository.findOne(id);
+        return itaAcademy;
     }
 
     @Transactional
-    public ItaAcademy getItaAcademyById(int id) {
-        return itaAcademyDao.getOne(id);
+    public List<User> getAllUsersOfAcademy(Integer academyId) {
+        if (academyId == null) {
+            throw new IllegalArgumentException("Academy Id cannot be null!");
+        }
+        List<User> users = itaAcademyRepository.findAllUsersByAcademy(academyId);
+        return users;
     }
 
+
+    @Override
+    public void setUserStatusInAcademy(Integer academyId, Integer userId, Integer status) {
+        ItaAcademy itaAcademy = itaAcademyRepository.findItaAcademyByAcademyAndUser(academyId, userId);
+        if (itaAcademy != null) {
+            itaAcademy.setItaAcademyStatus(status);
+            itaAcademyRepository.save(itaAcademy);
+        }
+    }
 
     @Transactional
-    public void updateItaAcademyUserStatus(int itaAcademyStatus, int academyId, int userId) {
-        ItaAcademy itaAcademy = itaAcademyDao.findItaAcademyByAcademyAndUser(academyId,userId);
-        itaAcademy.setItaAcademyStatus(itaAcademyStatus);
-        itaAcademyDao.save(itaAcademy);
+    public void addUserInAcademy(Integer academyId, Integer userId) {
+        if (academyId == null) {
+            throw new IllegalArgumentException("Academy Id cannot be null!");
+        }
+        if (userId == null) {
+            throw new IllegalArgumentException("User Id cannot be null!");
+        }
+        setUserStatusInAcademy(academyId, userId, STATUS_OF_STUDENT_IN_GROUP);
     }
+
+    @Override
+    public void deleteUserInAcademy(Integer academyId, Integer userId) {
+        if (academyId == null) {
+            throw new IllegalArgumentException("Academy Id cannot be null!");
+        }
+        if (userId == null) {
+            throw new IllegalArgumentException("User Id cannot be null!");
+        }
+        setUserStatusInAcademy(academyId, userId, STATUS_OF_REJECTED_STUDENT_IN_GROUP);
+    }
+
 
 }

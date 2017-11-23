@@ -10,7 +10,4 @@ public interface LanguageTranslationsDAO extends JpaRepository<LanguageTranslati
 
     @Query("select lt from LanguageTranslations lt where lt.tag like 'city' and lt.local like 'en'")
     List<LanguageTranslations> getAllLanguageTranslationsName();
-
-    @Query("select lt.trasnlation from LanguageTranslations lt where lt.tag like 'city' and lt.local like 'en'")
-    List<String> getTranslations();
 }

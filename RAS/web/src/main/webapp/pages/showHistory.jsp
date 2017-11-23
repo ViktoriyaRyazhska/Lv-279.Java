@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>History</title>
-    <link rel="stylesheet" href="/mycss/main.css">
+    <link rel="stylesheet" href="/bs/css/bootstrap.min.css">
     <%--<style>
         table {
             width: 100%;
@@ -25,7 +25,7 @@
     </style>--%>
     </head>
 <body>
-<table >
+<table class="table table-condensed" >
     <caption><h1>History</h1></caption>
     <tr>
         <th>Group name</th>

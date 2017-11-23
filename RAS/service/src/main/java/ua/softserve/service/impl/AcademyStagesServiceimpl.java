@@ -20,4 +20,19 @@ public class AcademyStagesServiceimpl implements AcademyStagesService {
     public List<AcademyStages> getAllAcademyStagesService() {
         return academyStagesDAO.findAll();
     }
+
+    @Override
+    public void save(AcademyStages academyStages) {
+        academyStagesDAO.save(academyStages);
+    }
+
+    @Override
+    public AcademyStages findOne(int id) {
+        return academyStagesDAO.findOne(id);
+    }
+
+    @Override
+    public void remove(AcademyStages academyStages) {
+        academyStagesDAO.delete(academyStages);
+    }
 }

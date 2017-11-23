@@ -2,20 +2,20 @@ package ua.softserve.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import ua.softserve.persistence.dto.AcademyDTO;
+import ua.softserve.persistence.dto.LanguageTranslationDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
+import ua.softserve.service.editor.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AcademyController {
@@ -35,19 +35,54 @@ public class AcademyController {
     ProfileService profileService;
 
     @Autowired
+    StudentGroupCountService studentGroupCountService;
+
+    @Autowired
     LanguageTranslationsService languageTranslationsService;
+
+    @Autowired
+    LanguageTranslationDTO languageTranslationDTO;
+
+    @Autowired
+    AcademyStagesEditor academyStagesEditor;
+
+    @Autowired
+    CityEditor cityEditor;
+
+    @Autowired
+    DirectionEditor directionEditor;
+
+    @Autowired
+    ProfileEditor profileEditor;
+
+    @Autowired
+    StudentGroupCountEditor studentGroupCountEditor;
+
+    @Autowired
+    TechnologieEditor technologieEditor;
+
+
+    @InitBinder("academyDTO")
+    public void binder(WebDataBinder binder) {
+        binder.registerCustomEditor(AcademyStages.class,"academyStages", academyStagesEditor);
+        binder.registerCustomEditor(Directions.class,"direction", directionEditor);
+        binder.registerCustomEditor(LanguageTranslations.class,"cityNames", cityEditor);
+        binder.registerCustomEditor(Profile.class,"profile", profileEditor);
+        binder.registerCustomEditor(StudentGroupCount.class,"studentGroupCount", studentGroupCountEditor);
+        binder.registerCustomEditor(Technologies.class,"technologie", technologieEditor);
+    }
 
 //    @RequestMapping(value = "/academy/{academyId}",method = RequestMethod.GET, produces = {"application/json"})
 //    public ResponseEntity<Academy> getAcademy(@PathVariable Integer academyId) {
 //        return new ResponseEntity<Academy>(academyService.getById(academyId), HttpStatus.OK);
 //    }
 
-    @RequestMapping(value = "/academy/{academyId}",method = RequestMethod.GET, produces = {"application/json"})
-    public String getAcademy(@PathVariable Integer academyId) {
-        return academyService.getById(academyId).toString();
-    }
-
-
+//    @RequestMapping(value = "/academy/{academyId}",method = RequestMethod.GET, produces = {"application/json"})
+//    public String getAcademy(@PathVariable Integer academyId) {
+//        return academyService.getById(academyId).toString();
+//    }
+//
+//
     @RequestMapping(value = "/searchSite",method = RequestMethod.POST, produces = {"application/json"})
     public List<Academy> searchSite(HttpServletRequest request) {
         List<Academy> list = academyService.findAllByName(request.getParameter("searchPhrase"));
@@ -55,50 +90,49 @@ public class AcademyController {
     }
 
 
-    @RequestMapping(value = "/group",method = RequestMethod.GET)
-    public String getAllStatuses(Model model) {
+    @RequestMapping(value = "/group", method = RequestMethod.GET)
+    public String showModel(Model model) {
+        model.addAttribute("academyDTO", new AcademyDTO());
+
         List<AcademyStages> academyStages = academyStagesService.getAllAcademyStagesService();
         List<LanguageTranslations> cityNames = languageTranslationsService.getAllLanguageTranslationsName();
         List<Directions> direction = directionService.findAll();
         List<Technologies> technologie = technologieService.findAll();
         List<Profile> profile = profileService.findAll();
 
-        Academy academy = academyService.getById(796);
-
-
-        //        model.addAttribute("student_group_count", academy.getStudent_group_count());
-        model.addAttribute("name", academy.getName());
-        model.addAttribute("startDate", academy.getStartDate());
-        model.addAttribute("endDate", academy.getEndDate());
-        model.addAttribute("free", academy.getFree());
         model.addAttribute("academyStages", academyStages);
         model.addAttribute("cityNames", cityNames);
         model.addAttribute("direction", direction);
         model.addAttribute("technologie", technologie);
         model.addAttribute("profile", profile);
-        return "group";
+        model.addAttribute("studentGroupCount", new StudentGroupCount());
+        return "addGroup";
+    }
+
+    @PostMapping("/addGroup")
+    public String addGroup(@ModelAttribute AcademyDTO academyDTO) {
+
+        System.out.println(academyDTO);
+
+        academyService.saveDTO(academyDTO);
+
+        return "index";
     }
 
 
-//    @RequestMapping(value = "/addGroup", method = RequestMethod.POST)
-//    public String submit(@Valid @ModelAttribute("academy") final Academy academy, final BindingResult result, final ModelMap model) {
-//        if (result.hasErrors()) {
-//            return "error";
-//        }
-//        model.addAttribute("cityNames", academy.getCity());
-//        model.addAttribute("direction", academy.getDirections());
-//        model.addAttribute("technologie", academy.getTechnologies());
-//        model.addAttribute("academyStages", academy.getAcademy_stages());
-//        model.addAttribute("profile", academy.getProfile());
-////        model.addAttribute("student_group_count", academy.getStudent_group_count());
-//        model.addAttribute("name", academy.getName());
-//        model.addAttribute("startDate", academy.getStartDate());
-//        model.addAttribute("endDate", academy.getEndDate());
-//        model.addAttribute("free", academy.getFree());
-//
-//        academyService.save(academy);
-//        return "academy";
-//    }
+    @RequestMapping(value = "/allGroupsInf",method = RequestMethod.GET)
+    public String getAllAcademies(Model model) {
+        List<Academy> list = academyService.findWithEmployeeExperts();
+        model.addAttribute("listA", list.stream().limit(20).collect(Collectors.toList()));
+        List<LanguageTranslations> translations = languageTranslationsService.getAllLanguageTranslationsName();
+        HashMap<Integer, String> cityHashMap = languageTranslationDTO.convertListToHashMap(translations);
+        List<String> direction = directionService.findDirectionsName();
+        List<String> profileNames = profileService.findProfileNames();
+        model.addAttribute("cities", cityHashMap);
+        model.addAttribute("directions", direction);
+        model.addAttribute("profileNames", profileNames);
+        return "allAcademies";
+    }
 
 
 

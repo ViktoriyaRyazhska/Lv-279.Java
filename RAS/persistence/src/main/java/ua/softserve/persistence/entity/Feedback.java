@@ -12,23 +12,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "feedback")
+@Table(name = "ssu_student_feedback")
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "feedback_id")
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "it_academy_id")
-    private ItaAcademy itaAcademy;
-
     @ManyToOne
     @JoinColumn(name = "learning_ability")
     private Mark learningAbility;
 
     @ManyToOne
-    @JoinColumn(name = "overall_technical_competence")
+    @JoinColumn(name = "technical_competence")
     private Mark overallTechnicalCompetence;
 
     @ManyToOne
@@ -47,7 +43,7 @@ public class Feedback {
     @JoinColumn(name = "active_communicator")
     private Mark activeCommunicator;
 
-    @Column(name = "summary")
+    @Column(name = "summary_comment")
     private String summary;
 
     @Override

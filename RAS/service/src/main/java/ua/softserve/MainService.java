@@ -12,6 +12,8 @@ import ua.softserve.service.*;
 
 import ua.softserve.service.LanguageTranslationsService;
 
+import java.util.List;
+
 
 public class MainService {
 
@@ -21,21 +23,10 @@ public class MainService {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(ServiceConf.class, DataConfig.class);
 
-        LanguageTranslationsService languageTranslationsService = context.getBean(LanguageTranslationsService.class);
+        ItaAcademyService itaAcademyService = context.getBean(ItaAcademyService.class);
 
-//        HistoryService historyService = context.getBean(HistoryService.class);
-//
-//        for (History history:historyService.findByCrmGroup(428)) {
-//            System.out.println(history.toString());
-//
-//        }
+        List<User> list = itaAcademyService.getAllUsersOfAcademy(796);
 
-        UserService userService = context.getBean(UserService.class);
-        for (User user : userService.findAll()) {
-            System.out.println(user.getFirstName());
-
-
-        }
 
     }
 }
