@@ -2,59 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
-<%--<html lang="en">--%>
-<%--<head>--%>
-<%--<meta charset="UTF-8">--%>
-<%--<title>Add Feedback</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-
-<%--<form:form method="post" action="processForm" modelAttribute="feedbackDTO">--%>
-
-<%--Learning ability:--%>
-
-
-<%--<br><br>--%>
-
-
-<%--Overall technical competence:--%>
-
-
-<%--<br><br>--%>
-
-
-<%--Passional initiative:--%>
-
-
-<%--<br><br>--%>
-
-
-<%--Team work:--%>
-
-
-<%--<br><br>--%>
-
-<%--Getting things done:--%>
-
-
-<%--<br><br>--%>
-
-<%--Active Communicator:--%>
-
-
-<%--<br><br>--%>
-
-<%--Summary: <form:input path="summary"/>--%>
-
-<%--<br><br>--%>
-
-<%--<input type="submit" value="Submit"/>--%>
-<%--</form:form>--%>
-<%--</body>--%>
-<%--</html>--%>
-
-
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/bs/css/bootstrap.min.css">
