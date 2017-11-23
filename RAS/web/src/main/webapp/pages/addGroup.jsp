@@ -18,7 +18,7 @@
     <h4 align="center"><strong>Add Group</strong></h4>
     <div class="col-lg-12 well" id="form-test">
         <div class="row">
-            <form:form method="post" action="/group/addGroup" modelAttribute="academyDTO" id="test-form">
+            <form:form method="post" action="${contextPath}/group/addGroup" modelAttribute="academyDTO" id="test-form">
                 <div class="col-sm-12" id="form-div">
                     <ul class="col-sm-6 form-group" id="UL_left_column">
                         <li>
