@@ -8,16 +8,19 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "academy")
 public class Academy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int academy_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "academy_id")
+    private Integer academyId;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
@@ -34,7 +37,7 @@ public class Academy {
 
     @ManyToOne
     @JoinColumn(name = "stage_id")
-    private AcademyStages academy_stages;
+    private AcademyStages academyStages;
 
     @ManyToOne
     @JoinColumn(name = "profile_id")
@@ -42,7 +45,7 @@ public class Academy {
 
     @OneToOne
     @JoinColumn(name = "student_group_count_id")
-    private StudentGroupCount student_group_count;
+    private StudentGroupCount studentGroupCount;
 
     @NotNull
     @Column(name = "crm_group")
@@ -84,22 +87,51 @@ public class Academy {
     @Column(name = "not_synchronized")
     private int notSynchronized;
 
+    @ManyToMany(cascade =  CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "teacher_academy",
+            joinColumns = {@JoinColumn(name = "academy_id")},
+            inverseJoinColumns = {@JoinColumn(name = "employee_id")}
+    )
+    private List<Employee> teachers;
+
+    @ManyToMany(cascade =  CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "expert_academy",
+            joinColumns = {@JoinColumn(name = "academy_id")},
+            inverseJoinColumns = {@JoinColumn(name = "employee_id")}
+    )
+    private List<Employee> experts;
+
+    @ManyToMany(cascade =  CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "interviewer_academy",
+            joinColumns = {@JoinColumn(name = "academy_id")},
+            inverseJoinColumns = {@JoinColumn(name = "employee_id")}
+    )
+    private List<Employee> interviewers;
+
 
     @Override
     public String toString() {
         return "Academy{" +
-                "academyId=" + academy_id +
-                ", city_id=" + city.getCity_id() +
-                ", directionsSet=" + directions.getName() +
-                ", technologiesSet=" + technologies.getName() +
-                ", academy_stagesSet=" + academy_stages.getName() +
-//                ", profile=" + profile.getProfile_name() +
-//                ", student_group_count=" + student_group_count +
+                "academyId=" + academyId +
+                ", city=" + city +
+                ", directions=" + directions +
+                ", technologies=" + technologies +
+                ", academyStages=" + academyStages +
+                ", profile=" + profile +
+                ", studentGroupCount=" + studentGroupCount +
+                ", crmGroup=" + crmGroup +
                 ", name='" + name + '\'' +
                 ", startDate=" + startDate.toLocalDateTime().toLocalDate() +
                 ", endDate=" + endDate.toLocalDateTime().toLocalDate() +
                 ", free=" + free +
                 ", status=" + status +
+                ", hasTech=" + hasTech +
+                ", hasEng=" + hasEng +
+                ", hasFirst=" + hasFirst +
+                ", notSynchronized=" + notSynchronized +
                 '}';
     }
 }

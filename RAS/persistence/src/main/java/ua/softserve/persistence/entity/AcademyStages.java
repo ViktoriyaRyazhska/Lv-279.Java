@@ -8,14 +8,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @ToString
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "academy_stages")
 public class AcademyStages {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int stage_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "stage_id")
+    private int stageId;
 
     @NotNull
     @Column(name = "name")

@@ -38,4 +38,9 @@ public class ProfileServiceImpl implements ProfileService {
     public void remove(Profile profile) {
         profileDAO.delete(profile);
     }
+
+    @Override
+    public List<String> findProfileNames() {
+        return profileDAO.findProfileNames();
+    }
 }

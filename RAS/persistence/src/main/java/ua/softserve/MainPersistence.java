@@ -4,10 +4,8 @@ package ua.softserve;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ua.softserve.config.DataConfig;
 
-import ua.softserve.persistence.dao.*;
-import ua.softserve.persistence.entity.*;
-
 import ua.softserve.persistence.dao.LanguageTranslationsDAO;
+import ua.softserve.persistence.dao.StudentRepository;
 
 
 import java.util.List;
@@ -20,10 +18,11 @@ public class MainPersistence {
 
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(DataConfig.class);
-        LanguageTranslationsDAO language_translationsDAO = context.getBean(LanguageTranslationsDAO.class);
+
+        StudentRepository studentRepository = context.getBean(StudentRepository.class);
 
 
-        List list = language_translationsDAO.getAllLanguageTranslationsName();
+        List list = studentRepository.findStudentsByAcademyAndStatus(796,6);
         System.out.println(list);
 
 
@@ -43,7 +42,6 @@ public class MainPersistence {
 //            System.out.println(history.toString());
 //
 //        }
-
     }
 
 }

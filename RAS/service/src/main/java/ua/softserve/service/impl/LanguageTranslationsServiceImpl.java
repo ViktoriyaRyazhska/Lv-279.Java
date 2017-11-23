@@ -1,10 +1,9 @@
-package ua.softserve.service.impl;
+package ua.softserve.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.softserve.persistence.dao.LanguageTranslationsDAO;
 import ua.softserve.persistence.entity.LanguageTranslations;
-import ua.softserve.service.LanguageTranslationsService;
 
 import java.util.List;
 
@@ -14,13 +13,23 @@ public class LanguageTranslationsServiceImpl implements LanguageTranslationsServ
     LanguageTranslationsDAO languageTranslationsDAO;
 
     @Override
-    public List<String> getTranslations() {
-        return languageTranslationsDAO.getTranslations();
+    public List<LanguageTranslations> getAllLanguageTranslationsName() {
+        return languageTranslationsDAO.getAllLanguageTranslationsName();
     }
 
     @Override
-    public List<LanguageTranslations> getAllLanguageTranslationsName() {
-        return languageTranslationsDAO.getAllLanguageTranslationsName();
+    public void save(LanguageTranslations languageTranslations) {
+        languageTranslationsDAO.save(languageTranslations);
+    }
+
+    @Override
+    public LanguageTranslations findOne(int id) {
+        return languageTranslationsDAO.findOne(id);
+    }
+
+    @Override
+    public void remove(LanguageTranslations languageTranslations) {
+        languageTranslationsDAO.delete(languageTranslations);
     }
 
 

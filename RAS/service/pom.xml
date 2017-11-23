@@ -27,12 +27,16 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+<<<<<<< HEAD
             <version>1.16.18</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.18</version>
+=======
+            <version>RELEASE</version>
+>>>>>>> b751160f764374ecf3e54a591fe5a1425f5ef341
         </dependency>
 
     </dependencies>
