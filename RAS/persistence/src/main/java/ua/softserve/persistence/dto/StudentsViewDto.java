@@ -29,7 +29,6 @@ public class StudentsViewDto {
     private Double test10;
     private Double englishGrammar; //language
     private Double interviewerScore;
-
 }
 
 

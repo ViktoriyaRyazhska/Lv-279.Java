@@ -1,4 +1,4 @@
-package ua.softserve.dto;
+package ua.softserve.persistence.dto;
 
 
 import lombok.*;

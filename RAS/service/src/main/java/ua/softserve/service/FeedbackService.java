@@ -1,6 +1,6 @@
 package ua.softserve.service;
 
-import ua.softserve.dto.FeedbackDTO;
+import ua.softserve.persistence.dto.FeedbackDTO;
 import ua.softserve.persistence.entity.Feedback;
 
 import java.util.List;

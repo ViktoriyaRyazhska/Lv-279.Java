@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.dto.FeedbackDTO;
+import ua.softserve.persistence.dto.FeedbackDTO;
 import ua.softserve.persistence.entity.Feedback;
 import ua.softserve.persistence.entity.Mark;
 import ua.softserve.service.FeedbackService;
