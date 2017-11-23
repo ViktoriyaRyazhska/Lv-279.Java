@@ -14,16 +14,10 @@ import java.util.List;
 @Repository
 public interface ItaAcademyRepository extends JpaRepository<ItaAcademy, Integer> {
 
-//
-//    @Query("select it from ItaAcademy as it where it.academy.academyId = :academyId")
-//    List<ItaAcademy> findItaAcademiesByAcademy(@Param("academyId") Integer academyId);
+    List<ItaAcademy> findAllByAcademy_AcademyId(Integer academyId);
 
-    List<ItaAcademy> findAllByAcademy_AcademyId( Integer academyId);
+    @Query("select it.user from ItaAcademy as it where it.itaAcademyStatus = 6 and it.academy.academyId = :academyId")
+    List<User> findAllUsersByAcademy(@Param("academyId") Integer academyId);
 
-    @Query ("select it.user from ItaAcademy as it where it.itaAcademyStatus = 6 and it.academy.academyId = :academyId")
-    List<User>  findAllUsersByAcademy(@Param("academyId") Integer academyId);
-
-
-
-    ItaAcademy  findItaAcademyByAcademyAndUser(int academyId, int id);
+    ItaAcademy findItaAcademyByAcademyAndUser(int academyId, int id);
 }

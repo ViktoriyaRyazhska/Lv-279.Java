@@ -29,4 +29,6 @@ public interface AcademyDAO extends JpaRepository<Academy, Integer> {
 
     @Query("from Academy t left outer join fetch t.interviewers where t.academyId=:id")
     Academy findWithEmployeeInterviewers(@Param("id")int id);
+
+
 }

@@ -11,7 +11,7 @@
 
     <a href="${contextPath}/showUsers"><button>All users</button></a>
     <a href="${contextPath}/showHistory"><button>All History</button></a>
-    <a href="${contextPath}/showItaAcademyById"><button>ItaAcademy</button></a>
+    <a href="${contextPath}/students"><button>Students</button></a>
     <a href="${contextPath}/allGroupsInf"><button>Information about groups</button></a>
     <a href="${contextPath}/feedback/showFeedbacks"><button>All Feedback</button></a>
     <a href="${contextPath}/feedback/addFeedback"><button>add Feedback</button></a>
