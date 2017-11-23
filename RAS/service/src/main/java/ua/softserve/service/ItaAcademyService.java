@@ -18,5 +18,5 @@ public interface ItaAcademyService {
 
     void deleteUserInAcademy(Integer academyId, Integer userId);
 
-    void setUserStatusInAcademy(Integer academyId, Integer userId, Integer status);
+
 }

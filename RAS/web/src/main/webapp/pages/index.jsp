@@ -15,6 +15,7 @@
     <a href="${contextPath}/allGroupsInf"><button>Information about groups</button></a>
     <a href="feedback/showFeedbacks"><button>All Feedback</button></a>
     <a href="feedback/addFeedback"><button>add Feedback</button></a>
+    <a href="/group"><button>Add Group</button></a>
 
 </body>
 </html>

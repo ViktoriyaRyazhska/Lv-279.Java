@@ -29,6 +29,7 @@ public class StudentServiceImpl implements StudentService {
                 .stream().map(x->fromStudentToDto(x)).collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public void saveAllStudents(List<StudentsViewDto> studentsViewDto) {
         studentsViewDto.forEach(x->saveResults(x));
@@ -58,6 +59,9 @@ public class StudentServiceImpl implements StudentService {
         studentsViewDto.setTest10(student.getTestTen());
         studentsViewDto.setEnglishGrammar(student.getLanguage());
 
+        studentsViewDto.setTeacherFeedback(student.getTeacherFeedback());
+        studentsViewDto.setExpertFeedback(student.getExpertFeedback());
+
         return studentsViewDto;
     }
 
@@ -78,7 +82,8 @@ public class StudentServiceImpl implements StudentService {
         student.setTeacherScore(studentsViewDto.getTeacherScore());
         student.setExpertScore(studentsViewDto.getExpertScore());
         student.setInterviewerScore(studentsViewDto.getInterviewerScore());
-
+        student.setTeacherFeedback(studentsViewDto.getTeacherFeedback());
+        student.setExpertFeedback(studentsViewDto.getExpertFeedback());
         studentRepository.save(student);
     }
 }

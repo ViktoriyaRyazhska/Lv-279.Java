@@ -9,6 +9,7 @@ import ua.softserve.config.DataConfig;
 import ua.softserve.persistence.dao.AcademyDAO;
 import ua.softserve.persistence.dao.LanguageTranslationsDAO;
 import ua.softserve.persistence.dao.StudentRepository;
+import ua.softserve.persistence.entity.Student;
 
 
 import java.awt.print.Pageable;
@@ -22,10 +23,6 @@ public class MainPersistence {
 
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(DataConfig.class);
-
-        AcademyDAO bean = context.getBean(AcademyDAO.class);
-        PageRequest pageRequest = new PageRequest(0, 10);
-        System.out.println(bean.findAll(pageRequest));
     }
 
 }
