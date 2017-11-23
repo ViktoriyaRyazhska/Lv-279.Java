@@ -25,7 +25,7 @@
     </style>--%>
     </head>
 <body>
-<table class="table table-condensed" >
+<table class="table table-condensed table-hover table-responsive table-bordered table-striped">
     <caption><h1>History</h1></caption>
     <tr>
         <th>Group name</th>
