@@ -1,6 +1,8 @@
 package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.dto.AcademyDTO;
@@ -13,14 +15,16 @@ import ua.softserve.service.CityService;
 import ua.softserve.service.EmployeeService;
 import ua.softserve.service.StudentGroupCountService;
 
+import java.awt.print.Pageable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
+    private static final int MAXROW = 10;
     @Autowired
-    private AcademyDAO academyDAO;
+    AcademyDAO academyDAO;
 
     @Autowired
     CityService cityService;
@@ -156,8 +160,13 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Override
     public  List<Academy> findWithEmployeeExperts() {
-        return academyDAO.findWithEmployeeExperts();
-    }
+        List<Academy> withEmployeeExperts = academyDAO.findWithEmployeeExperts();
+        if(withEmployeeExperts == null) {
+            throw new RuntimeException("There is no data in database");
+        }else {
+            return withEmployeeExperts;
+        }
 
+    }
 }
 
