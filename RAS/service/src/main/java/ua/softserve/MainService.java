@@ -24,6 +24,13 @@ public class MainService {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(ServiceConf.class, DataConfig.class);
 
+//        StudentService studentRepository = context.getBean(StudentService.class);
+//
+//
+//        List<StudentsViewDto> list = studentRepository.getAllStudentsOfAcademy(796);
+//        System.out.println(list.size());
+//
+//        list.forEach(x-> System.out.println(x.getStudentId()));
 
     }
 }
