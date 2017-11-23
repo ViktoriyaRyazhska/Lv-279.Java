@@ -33,11 +33,11 @@
             <td>${history.academyName}</td>
             <td>${history.nameForSite}</td>
             <td>${history.location}</td>
-            <td>${history.sartDate.month+1}/${history.sartDate.date}/${history.sartDate.year+1900}</td>
-            <td>${history.endDate.month+1}/${history.endDate.date}/${history.endDate.year+1900}</td>
+            <td>${history.sartDate}</td>
+            <td>${history.endDate}</td>
             <td>${history.stage}</td>
             <td>${history.direction}</td>
-            <td>${history.modifyDate.month+1}/${history.modifyDate.date}/${history.modifyDate.year+1900}</td>
+            <td>${history.modifyDate}</td>
             <td>${history.modifyBy}</td>
         </tr>
     </c:forEach>

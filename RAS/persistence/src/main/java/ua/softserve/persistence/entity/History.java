@@ -29,7 +29,6 @@ public class History {
     @Column(name = "name_for_site")
     private String nameForSite;
 
-    //    @Column(name = "location")
     private String location;
 
     @Column(name = "start_date")
@@ -38,10 +37,8 @@ public class History {
     @Column(name = "end_date")
     private Timestamp endDate;
 
-    // @Column(name = "stage")
     private String stage;
 
-    //@Column(name = "direction")
     private String direction;
 
     @Column(name = "modify_date")

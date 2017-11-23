@@ -4,6 +4,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import ua.softserve.config.DataConfig;
 import ua.softserve.config.ServiceConf;
 
+import ua.softserve.persistence.dto.HistoryDTO;
 import ua.softserve.persistence.dto.StudentsViewDto;
 import ua.softserve.persistence.entity.Feedback;
 import ua.softserve.persistence.entity.History;
@@ -23,7 +24,6 @@ public class MainService {
 
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(ServiceConf.class, DataConfig.class);
-
 
     }
 }
