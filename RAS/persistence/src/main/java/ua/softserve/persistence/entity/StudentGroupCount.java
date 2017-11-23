@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "student_group_count")
 public class StudentGroupCount {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_group_count_id")
     private int studentGroupCountId;
 
