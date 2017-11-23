@@ -44,6 +44,9 @@ public class MainController {
     @GetMapping("/showUsers")
     public String showUsers(Model model) {
         List<User> allUsers = userService.findAll();
+        for (User user:allUsers) {
+            System.out.println(user.getFirstName());
+        }
         model.addAttribute("allUsers", allUsers);
         return "showUsers";
     }

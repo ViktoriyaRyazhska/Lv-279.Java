@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class Profile {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "profile_id")
     private int profileId;
 
