@@ -10,6 +10,7 @@ import ua.softserve.persistence.dao.AcademyDAO;
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.City;
 import ua.softserve.persistence.entity.Employee;
+import ua.softserve.persistence.entity.StudentGroupCount;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.CityService;
 import ua.softserve.service.EmployeeService;
@@ -77,24 +78,36 @@ public class AcademyServiceImpl implements AcademyService {
         academy.setHasFirst(0);
         academy.setNotSynchronized(0);
 
-
-
-//        System.out.println(academy);
-
-            academyDAO.save(academy);
+        academyDAO.save(academy);
     }
 
 
-    private Timestamp convertStringToTimestamp(String date){
-        LocalDate localDate = LocalDate.parse(date);
-        Timestamp timestamp = Timestamp.valueOf(localDate.atStartOfDay());
+    private Timestamp convertStringToTimestamp(String date) {
+        if (date == null) {
+            throw new IllegalArgumentException("Date can't be null");
+        } else if (date.isEmpty()) {
+            throw new IllegalArgumentException("Date can't be empty");
+        }
+
+        LocalDate localDate = null;
+        Timestamp timestamp = null;
+
+        try {
+            localDate = LocalDate.parse(date);
+            timestamp = Timestamp.valueOf(localDate.atStartOfDay());
+        } catch (ClassCastException e) {
+            System.err.println(e);
+        }
         return timestamp;
     }
 
-    private City getCity(String id){
-        return cityService.findOne(Integer.parseInt(id));
+    private City getCity(String id) {
+        City city = cityService.findOne(Integer.parseInt(id));
+        if (city == null) {
+            throw new NullPointerException("Can't find city with id = " + id);
+        }
+        return city;
     }
-
 
 
     @Transactional
@@ -102,20 +115,19 @@ public class AcademyServiceImpl implements AcademyService {
     public void saveCustom(int id, String role, int[] arr, EmployeeService employeeService) {
         List<Employee> employees;
         Academy academy;
-        if (role.equals("Teacher")){
-            academy=academyDAO.findWithEmployeeTeacher(id);
-            employees=academy.getTeachers();
+        if (role.equals("Teacher")) {
+            academy = academyDAO.findWithEmployeeTeacher(id);
+            employees = academy.getTeachers();
             for (int i : arr) {
-                if (!employees.contains(employeeService.findOne(i))){
+                if (!employees.contains(employeeService.findOne(i))) {
                     employees.add(employeeService.findOne(i));
                 }
             }
             academy.setTeachers(employees);
             academyDAO.save(academy);
-        }
-        else if (role.equals("Expert")){
-            academy=academyDAO.findWithEmployeeExperts(id);
-            employees=academy.getExperts();
+        } else if (role.equals("Expert")) {
+            academy = academyDAO.findWithEmployeeExperts(id);
+            employees = academy.getExperts();
             for (int i : arr) {
                 if (!employees.contains(employeeService.findOne(i))) {
                     employees.add(employeeService.findOne(i));
@@ -123,10 +135,9 @@ public class AcademyServiceImpl implements AcademyService {
             }
             academy.setExperts(employees);
             academyDAO.save(academy);
-        }
-        else if (role.equals("Interviewer")){
-            academy=academyDAO.findWithEmployeeInterviewers(id);
-            employees=academy.getInterviewers();
+        } else if (role.equals("Interviewer")) {
+            academy = academyDAO.findWithEmployeeInterviewers(id);
+            employees = academy.getInterviewers();
             for (int i : arr) {
                 if (!employees.contains(employeeService.findOne(i))) {
                     employees.add(employeeService.findOne(i));
@@ -134,8 +145,7 @@ public class AcademyServiceImpl implements AcademyService {
             }
             academy.setInterviewers(employees);
             academyDAO.save(academy);
-        }
-        else throw new IllegalArgumentException();
+        } else throw new IllegalArgumentException();
     }
 
     @Override
@@ -159,11 +169,11 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     @Override
-    public  List<Academy> findWithEmployeeExperts() {
+    public List<Academy> findWithEmployeeExperts() {
         List<Academy> withEmployeeExperts = academyDAO.findWithEmployeeExperts();
-        if(withEmployeeExperts == null) {
+        if (withEmployeeExperts == null) {
             throw new RuntimeException("There is no data in database");
-        }else {
+        } else {
             return withEmployeeExperts;
         }
 
