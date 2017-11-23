@@ -19,9 +19,9 @@ public class Feedback {
     @Column(name = "feedback_id")
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "it_academy_id")
-    private ItaAcademy itaAcademy;
+//    @OneToOne
+//    @JoinColumn(name = "it_academy_id")
+//    private ItaAcademy itaAcademy;
 
     @ManyToOne
     @JoinColumn(name = "learning_ability")

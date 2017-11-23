@@ -25,4 +25,9 @@ public class MarkServiceImpl implements MarkService {
     public List<Mark> findAll() {
        return markDAO.findAll();
     }
+
+    @Override
+    public Mark findOne(int id) {
+        return markDAO.findOne(id);
+    }
 }
