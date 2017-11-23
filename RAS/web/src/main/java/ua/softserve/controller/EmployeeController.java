@@ -72,7 +72,6 @@ public class EmployeeController {
             return "redirect:/group-"+groupId+"/pages-1-"+role;
         }
         academyService.saveCustom(groupId,role,arr,employeeService);
-        return "index";
+        return "redirect:/group-"+groupId+"/pages-1-"+role;
     }
-
 }
