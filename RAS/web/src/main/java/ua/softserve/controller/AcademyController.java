@@ -33,6 +33,9 @@ public class AcademyController {
     ProfileService profileService;
 
     @Autowired
+    StudentGroupCountService studentGroupCountService;
+
+    @Autowired
     LanguageTranslationsService languageTranslationsService;
 
     @Autowired
@@ -105,7 +108,7 @@ public class AcademyController {
 
         System.out.println(academyDTO);
 
-        //academyService.saveDTO(academyDTO);
+        academyService.saveDTO(academyDTO);
 
         return "index";
     }

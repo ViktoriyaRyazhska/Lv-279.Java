@@ -5,70 +5,104 @@
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+    <link rel="stylesheet" href="/bs/css/bootstrap.min.css">
+    <script type="text/javascript" src="/bs/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 <div class="container">
-
-
-    <form:form method="post" action="/addGroup" modelAttribute="academyDTO" >
-        <table>
-            <tr>
-                <td><form:input type="text" path="grName" placeholder="Group Name"/></td>
-            </tr>
-            <tr>
-                <td><form:input type="text" path="nameForSite" placeholder="Site for Name"/></td>
-            </tr>
-            <tr>
-                <td><form:select path="academyStages" items="${academyStages}" itemValue="stage_id"
-                                 itemLabel="name"/>Status</td>
-            </tr>
-            <tr>
-                <td><form:input type="date" path="startDate"/></td>
-            </tr>
-            <tr>
-                <td><form:input type="date" path="endDate"/></td>
-            </tr>
-            <tr>
-                <td><form:select path="cityNames" items="${cityNames}" itemValue="itemId"
-                                 itemLabel="trasnlation"/></td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="payment-class">
-                    <form:radiobutton path="payment" value="0" id="payment-free"/>
-                    <label for="payment-free">Open Group</label>
-                    <form:radiobutton path="payment" value="1" id="payment-paid"/>
-                    <label for="payment-paid">Founded by SoftServe</label>
+    <div class="col-lg-12 well">
+        <div class="row">
+            <h4>Add Group</h4>
+            <form:form method="post" action="/addGroup" modelAttribute="academyDTO">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <form:input type="text" path="grName" placeholder="Group Name"
+                                        class="form-control"/>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <form:input type="text" path="nameForSite" placeholder="Site for Name"
+                                        class="form-control"/>
+                        </div>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td><form:select path="direction" items="${direction}" itemValue="direction_id" itemLabel="name"/></td>
-            </tr>
-            <tr>
-                <td><form:select path="technologie" items="${technologie}" itemValue="technology_id"
-                                 itemLabel="name"/></td>
-            </tr>
-            <tr>
-                <td><form:select path="profile" items="${profile}" itemValue="profileId" itemLabel="profileName"/></td>
-            </tr>
-            <tr>
-                <td><form:input type="number" path="studentGroupCount.studentsPlannedToGraduate" placeholder="Planned to Graduate"/></td>
-                <td><form:input type="number" path="studentGroupCount.studentsPlannedToEnrollment" placeholder="Students Planned to Enrollment"/></td>
-                <td><form:input type="number" path="studentGroupCount.studentsActual" placeholder="Students Count Actual"/></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Save Group"/></td>
-            </tr>
-        </table>
-    </form:form>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <form:select path="academyStages" items="${academyStages}" itemValue="stageId"
+                                         itemLabel="name" class="form-control"/>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <form:select path="cityNames" items="${cityNames}" itemValue="itemId"
+                                         itemLabel="trasnlation" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <form:input type="date" path="startDate" class="form-control"/>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <form:input type="date" path="endDate" class="form-control"/>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <form:radiobutton path="payment" value="0" id="payment-free" autocomplete="off"/>
+                            <label class="btn btn-primary active" for="payment-free">Open Group</label>
+                            <form:radiobutton path="payment" value="1" id="payment-paid"/>
+                            <label class="btn btn-primary" for="payment-paid">Founded by SoftServe</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <form:select path="direction" items="${direction}" itemValue="directionId"
+                                         itemLabel="name"
+                                         class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <form:select path="technologie" items="${technologie}" itemValue="technologyId"
+                                         itemLabel="name" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <form:select path="profile" items="${profile}" itemValue="profileId"
+                                         itemLabel="profileName"
+                                         class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-1 form-group">
+                            <form:input type="number" path="studentsPlannedToGraduate"
+                                        placeholder="Planned to Graduate" class="form-control"/>
+                        </div>
+                        <div class="col-sm-1 form-group">
+                            <form:input type="number" path="studentsPlannedToEnrollment"
+                                        placeholder="Students Planned to Enrollment" class="form-control"/>
+                        </div>
+                        <div class="col-sm-1 form-group">
+                            <form:input type="number" path="studentsActual" placeholder="Students Count Actual"
+                                        class="form-control"/>
+                        </div>
+                    </div>
+                    <input type="submit" value="Save Group"/>
+                </div>
+            </form:form>
+        </div>
+
+    </div>
 </div>
 
 
+<script>
+
+</script>
 </body>
 </html>
 

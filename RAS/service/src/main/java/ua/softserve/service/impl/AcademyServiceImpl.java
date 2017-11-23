@@ -11,6 +11,7 @@ import ua.softserve.persistence.entity.Employee;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.CityService;
 import ua.softserve.service.EmployeeService;
+import ua.softserve.service.StudentGroupCountService;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -23,6 +24,9 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Autowired
     CityService cityService;
+
+    @Autowired
+    StudentGroupCountService studentGroupCountService;
 
 
     @Transactional(readOnly = true)
@@ -52,9 +56,8 @@ public class AcademyServiceImpl implements AcademyService {
     @Transactional
     @Override
     public void saveDTO(AcademyDTO academyDTO) {
-        System.out.println(getCity(academyDTO.getCityNames()));
-
         Academy academy = new Academy();
+        academy.setStudentGroupCount(studentGroupCountService.saveDTO(academyDTO));
         academy.setCity(getCity(academyDTO.getCityNames()));
         academy.setDirections(academyDTO.getDirection());
         academy.setTechnologies(academyDTO.getTechnologie());
@@ -70,9 +73,10 @@ public class AcademyServiceImpl implements AcademyService {
         academy.setHasFirst(0);
         academy.setNotSynchronized(0);
 
-        System.out.println(academy);
 
-            //academyDAO.save(academy);
+//        System.out.println(academy);
+
+            academyDAO.save(academy);
     }
 
 

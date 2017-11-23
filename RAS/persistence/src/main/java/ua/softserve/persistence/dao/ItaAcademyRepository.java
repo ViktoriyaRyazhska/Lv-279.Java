@@ -25,5 +25,5 @@ public interface ItaAcademyRepository extends JpaRepository<ItaAcademy, Integer>
 
 
 
-    ItaAcademy  findItaAcademyByAcademyAndUser(int academy_Id, int id);
+    ItaAcademy  findItaAcademyByAcademyAndUser(int academyId, int id);
 }
