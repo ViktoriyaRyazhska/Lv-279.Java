@@ -18,7 +18,7 @@
         <h4>Add Feedback</h4>
         <h4></h4>
         <div class="row">
-            <form:form method="post" action="processForm" modelAttribute="feedbackDTO">
+            <form:form method="post" action="${contextPath}/feedback/processForm" modelAttribute="feedbackDTO">
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-2 form-group">
