@@ -16,11 +16,10 @@ public class EmployeeController {
     @Autowired
     AcademyService academyService;
 
-    static final int id=1;
-
-    @GetMapping(value = "/pages-{pageNumber}-{role}")
+    @GetMapping(value = "/group-{groupId}/pages-{pageNumber}-{role}")
     public String getRunbookPage(@PathVariable Integer pageNumber,
                                  @PathVariable String role,
+                                 @PathVariable int groupId,
                                  Model model){
         Page<Employee> page = employeeService.getEmployeeLog(pageNumber,role);
 
@@ -34,15 +33,18 @@ public class EmployeeController {
         model.addAttribute("endIndex", end);
         model.addAttribute("currentIndex", current);
         model.addAttribute("role",role);
+        model.addAttribute("groupId",groupId);
 
         return "showEmployees";
     }
 
-    @GetMapping("/pages-1-{role}-search")
+    @GetMapping("/group-{groupId}/pages-1-{role}-search")
     public String searchEngNames(@PathVariable String role,
-                                 @RequestParam("texttosearch") String texttosearch,
+                                 @PathVariable int groupId,
+                                 @RequestParam("firstname") String firstname,
+                                 @RequestParam("lastname") String lastname,
                                  Model model){
-        Page<Employee> page = employeeService.getEmployeeLogFromFirstOrLastName(1,texttosearch,texttosearch,role);
+        Page<Employee> page = employeeService.getEmployeeLogFromInput(1,firstname,lastname,role);
         int current = page.getNumber() + 1;
         int begin = Math.max(1, current - 5);
         int end = Math.min(begin + 10, page.getTotalPages());
@@ -53,13 +55,18 @@ public class EmployeeController {
         model.addAttribute("endIndex", end);
         model.addAttribute("currentIndex", current);
         model.addAttribute("role",role);
+        model.addAttribute("groupId",groupId);
+        model.addAttribute("modelfirstname",firstname);
+        model.addAttribute("modellastname",lastname);
+
         return "showEmployees";
     }
 
-    @PostMapping("/include-{role}")
+    @PostMapping("/group-{groupId}/include-{role}")
     public String includeEmployees(@RequestParam("arr") int[] arr,
-                                   @PathVariable String role){
-        academyService.saveCustom(id,role,arr,employeeService);
+                                   @PathVariable String role,
+                                   @PathVariable int groupId){
+        academyService.saveCustom(groupId,role,arr,employeeService);
         return "index";
     }
 
