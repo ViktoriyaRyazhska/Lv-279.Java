@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request"/>
 <html>
 <head>
     <title>Hello world</title>
@@ -10,7 +12,7 @@
     <a href="/showUsers"><button>All users</button></a>
     <a href="/showHistory"><button>All History</button></a>
     <a href="/showItaAcademyById"><button>ItaAcademy</button></a>
-    <a href="/allGroupsInf"><button>Information about groups</button></a>
+    <a href="${contextPath}/allGroupsInf"><button>Information about groups</button></a>
     <a href="feedback/showFeedbacks"><button>All Feedback</button></a>
     <a href="feedback/addFeedback"><button>add Feedback</button></a>
 

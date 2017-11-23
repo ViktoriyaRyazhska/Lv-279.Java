@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ua.softserve.persistence.dao.ItaAcademyRepository;
 import ua.softserve.persistence.entity.ItaAcademy;
 import ua.softserve.persistence.entity.User;
+import ua.softserve.service.AcademyService;
 import ua.softserve.service.ItaAcademyService;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,9 @@ public class ItaAcademyServiceImpl implements ItaAcademyService {
 
     @Autowired
     private ItaAcademyRepository itaAcademyRepository;
+
+    @Autowired
+    private AcademyService academyService;
 
     @Transactional(readOnly = true)
     public List<ItaAcademy> getAllItaAcademyByAcademy(Integer academyId) {
@@ -50,8 +54,7 @@ public class ItaAcademyServiceImpl implements ItaAcademyService {
     }
 
 
-    @Override
-    public void setUserStatusInAcademy(Integer academyId, Integer userId, Integer status) {
+    private void setUserStatusInAcademy(Integer academyId, Integer userId, Integer status) {
         ItaAcademy itaAcademy = itaAcademyRepository.findItaAcademyByAcademyAndUser(academyId, userId);
         if (itaAcademy != null) {
             itaAcademy.setItaAcademyStatus(status);
@@ -59,7 +62,9 @@ public class ItaAcademyServiceImpl implements ItaAcademyService {
         }
     }
 
+
     @Transactional
+    @Override
     public void addUserInAcademy(Integer academyId, Integer userId) {
         if (academyId == null) {
             throw new IllegalArgumentException("Academy Id cannot be null!");
@@ -68,8 +73,12 @@ public class ItaAcademyServiceImpl implements ItaAcademyService {
             throw new IllegalArgumentException("User Id cannot be null!");
         }
         setUserStatusInAcademy(academyId, userId, STATUS_OF_STUDENT_IN_GROUP);
+
+        int studentCount = academyService.getById(academyId).getStudentGroupCount().getStudentsActual();
+        academyService.getById(academyId).getStudentGroupCount().setStudentsActual(++studentCount);
     }
 
+    @Transactional
     @Override
     public void deleteUserInAcademy(Integer academyId, Integer userId) {
         if (academyId == null) {
@@ -79,6 +88,11 @@ public class ItaAcademyServiceImpl implements ItaAcademyService {
             throw new IllegalArgumentException("User Id cannot be null!");
         }
         setUserStatusInAcademy(academyId, userId, STATUS_OF_REJECTED_STUDENT_IN_GROUP);
+
+        int studentCount = academyService.getById(academyId).getStudentGroupCount().getStudentsActual();
+        if(studentCount>0) {
+            academyService.getById(academyId).getStudentGroupCount().setStudentsActual(--studentCount);
+        }
     }
 
 

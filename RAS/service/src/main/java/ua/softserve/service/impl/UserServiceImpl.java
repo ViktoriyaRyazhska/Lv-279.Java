@@ -40,7 +40,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public List<User> findAll() {
-        return userDAO.findAll();
+        List<User> all = userDAO.findAll();
+        for (User user:all) {
+            System.out.println(user.getFirstName());
+        }
+        return all;
 
     }
 

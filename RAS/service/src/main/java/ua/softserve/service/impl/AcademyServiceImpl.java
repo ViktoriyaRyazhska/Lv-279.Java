@@ -74,6 +74,7 @@ public class AcademyServiceImpl implements AcademyService {
         academy.setNotSynchronized(0);
 
 
+
 //        System.out.println(academy);
 
             academyDAO.save(academy);

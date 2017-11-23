@@ -30,8 +30,8 @@ public class StudentsViewDto {
     private Double test10;
     private Double englishGrammar; //language
     private Double interviewerScore;
-    private Feedback teacherFeedback;
-    private Feedback expertFeedback;
+    private Feedback teacherFeedback = new Feedback();
+    private Feedback expertFeedback  = new Feedback();
 }
 
 
