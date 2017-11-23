@@ -17,7 +17,7 @@ public class Mark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mark_id")
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "characteristic_id")

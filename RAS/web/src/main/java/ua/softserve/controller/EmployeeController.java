@@ -63,9 +63,14 @@ public class EmployeeController {
     }
 
     @PostMapping("/group-{groupId}/include-{role}")
-    public String includeEmployees(@RequestParam("arr") int[] arr,
+    public String includeEmployees(@RequestParam(required = false) int[] arr,
                                    @PathVariable String role,
-                                   @PathVariable int groupId){
+                                   @PathVariable int groupId,
+                                   Model model){
+        if (arr==null){
+            model.addAttribute("checkforarr",arr);
+            return "redirect:/group-"+groupId+"/pages-1-"+role;
+        }
         academyService.saveCustom(groupId,role,arr,employeeService);
         return "index";
     }

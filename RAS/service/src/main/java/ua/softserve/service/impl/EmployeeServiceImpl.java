@@ -7,11 +7,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.dao.EmployeeDAO;
-import ua.softserve.persistence.dao.EmployeeSimpleRepositoryDAO;
 import ua.softserve.persistence.entity.Employee;
 import ua.softserve.service.EmployeeService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,8 +17,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     static final int MAXROW=8;
     @Autowired
     private EmployeeDAO employeeDAO;
-    @Autowired
-    private EmployeeSimpleRepositoryDAO simpleRepositoryDAO;
 
     @Transactional
     @Override
@@ -38,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Page<Employee> getEmployeeLog(Integer pageNumber,String role) {
         PageRequest pageRequest=new PageRequest(pageNumber -1,MAXROW,Sort.Direction.ASC,"firstname","lastname");
-        return simpleRepositoryDAO.findEmployeesByItaroleRole(role,pageRequest);
+        return employeeDAO.findEmployeesByItaroleRole(role,pageRequest);
     }
 
     @Transactional
@@ -46,16 +42,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Page<Employee> getEmployeeLogFromInput(Integer pageNumber, String firstname, String lastname, String role) {
         PageRequest pageRequest=new PageRequest(pageNumber -1,MAXROW,Sort.Direction.ASC,"firstname","lastname");
         if (!firstname.equals("") && !lastname.equals("")){
-            return simpleRepositoryDAO.findEmployeesByItaroleRoleAndFirstnameLikeAndLastnameLike(role,firstname,lastname,pageRequest);
+            return employeeDAO.findEmployeesByItaroleRoleAndFirstnameLikeAndLastnameLike(role,firstname,lastname,pageRequest);
         }
         else if (!firstname.equals("") && lastname.equals("")){
-            return simpleRepositoryDAO.findEmployeesByItaroleRoleAndFirstnameLike(role,firstname,pageRequest);
+            return employeeDAO.findEmployeesByItaroleRoleAndFirstnameLike(role,firstname,pageRequest);
         }
         else if (firstname.equals("") && !lastname.equals("")){
-            return simpleRepositoryDAO.findEmployeesByItaroleRoleAndLastnameLike(role,lastname,pageRequest);
+            return employeeDAO.findEmployeesByItaroleRoleAndLastnameLike(role,lastname,pageRequest);
         }
         else {
-            return simpleRepositoryDAO.findEmployeesByItaroleRole(role,pageRequest);
+            return employeeDAO.findEmployeesByItaroleRole(role,pageRequest);
         }
     }
 

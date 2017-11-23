@@ -14,25 +14,29 @@ import java.util.stream.Collectors;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    final static int STATUS_OF_STUDENT_IN_GROUP = 6;
-
     @Autowired
     private StudentRepository studentRepository;
 
     @Transactional
+    @Override
     public List<StudentsViewDto> getAllStudentsOfAcademy(Integer academyId) {
         if (academyId == null) {
             throw new IllegalArgumentException("Academy Id cannot be null!");
         }
 
         return studentRepository
-                .findStudentsByAcademyAndStatus(academyId,STATUS_OF_STUDENT_IN_GROUP)
+                .findStudentsByAcademyAndStatus(academyId,ItaAcademyServiceImpl.STATUS_OF_STUDENT_IN_GROUP)
                 .stream().map(x->fromStudentToDto(x)).collect(Collectors.toList());
     }
 
+    @Transactional
+    @Override
+    public void saveAllStudents(List<StudentsViewDto> studentsViewDto) {
+        studentsViewDto.forEach(x->saveResults(x));
+    }
 
-    private StudentsViewDto fromStudentToDto(Student student) {
-
+    @Override
+    public StudentsViewDto fromStudentToDto(Student student) {
         StudentsViewDto studentsViewDto = new StudentsViewDto();
 
         studentsViewDto.setStudentId(student.getStudentId());
@@ -55,7 +59,31 @@ public class StudentServiceImpl implements StudentService {
         studentsViewDto.setTest10(student.getTestTen());
         studentsViewDto.setEnglishGrammar(student.getLanguage());
 
+        studentsViewDto.setTeacherFeedback(student.getTeacherFeedback());
+        studentsViewDto.setExpertFeedback(student.getExpertFeedback());
+
         return studentsViewDto;
     }
 
+    @Transactional
+    public void saveResults(StudentsViewDto studentsViewDto){
+        if (studentsViewDto == null) {
+            throw new IllegalArgumentException("Student cannot be null!");
+        }
+
+        Student student = studentRepository.findOne(studentsViewDto.getStudentId());
+        student.setTestOne(studentsViewDto.getTest1());
+        student.setTestTwo(studentsViewDto.getTest2());
+        student.setTestThree(studentsViewDto.getTest3());
+        student.setTestFour(studentsViewDto.getTest4());
+        student.setTestFive(studentsViewDto.getTest5());
+        student.setTestNine(studentsViewDto.getTest9());
+        student.setTestTen(studentsViewDto.getTest10());
+        student.setTeacherScore(studentsViewDto.getTeacherScore());
+        student.setExpertScore(studentsViewDto.getExpertScore());
+        student.setInterviewerScore(studentsViewDto.getInterviewerScore());
+        student.setTeacherFeedback(studentsViewDto.getTeacherFeedback());
+        student.setExpertFeedback(studentsViewDto.getExpertFeedback());
+        studentRepository.save(student);
+    }
 }

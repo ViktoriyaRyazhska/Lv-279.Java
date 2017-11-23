@@ -14,5 +14,9 @@ public interface ItaAcademyService {
 
     List<User> getAllUsersOfAcademy(Integer academyId);
 
-    void updateItaAcademyUserStatus(int itaAcademyStatus, int academyId, int userId);
+    void addUserInAcademy(Integer academyId, Integer userId);
+
+    void deleteUserInAcademy(Integer academyId, Integer userId);
+
+
 }

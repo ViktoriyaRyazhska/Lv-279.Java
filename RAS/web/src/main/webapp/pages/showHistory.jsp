@@ -3,36 +3,25 @@
 <html>
 <head>
     <title>History</title>
-    <link rel="stylesheet" href="/mycss/main.css">
-    <%--<style>
-        table {
-            width: 100%;
-            background: white;
-            color: black;
-            border-spacing: 1px
-        }
-        th {
-            background: lightskyblue;
-            padding: 5px;
+    <link rel="stylesheet" href="/bs/css/bootstrap.min.css">
+    <style>
 
-        }
-        td{
-            background: ghostwhite;
-            padding: 5px;
+        td, th {
             text-align: center;
-
         }
-    </style>--%>
-    </head>
+    </style>
+</head>
 <body>
-<table >
+
+<table class="table table-condensed table-hover table-responsive table-bordered table-striped">
     <caption><h1>History</h1></caption>
     <tr>
         <th>Group name</th>
         <th>Name for site</th>
         <th>Location</th>
         <th>Start Date</th>
-        <th>End Date</th>`
+        <th>End Date</th>
+        `
         <th>Status</th>
         <th>Common Direction</th>
         <th>Modify Date</th>

@@ -22,11 +22,11 @@
         <form action="/group-${groupId}/pages-1-${role}-search" method="get">
             <input type="text" name="firstname" value="${modelfirstname}">
             <input type="text" name="lastname" value="${modellastname}">
-            <button>Search</button>
+            <button class="btn btn-primary">Search</button>
         </form>
     </div>
     <c:choose>
-        <c:when test="${deploymentLog.numberOfElements==0 or deploymentLog.numberOfElements==null}">
+        <c:when test="${deploymentLog.numberOfElements==0}">
             <h3>Invalid input, try again!</h3>
             <a href="/group-${groupId}/pages-1-${role}">Back to list</a>
         </c:when>
