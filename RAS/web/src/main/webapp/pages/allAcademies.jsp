@@ -35,7 +35,7 @@
             <input type="text" class="form-control" placeholder="#">
         </td>
         <td>
-            <input type="text" class="form-control" placeholder="#">
+            <input id="searchSite" type="text" class="form-control" placeholder="#">
         </td>
         <td>
             <div class="col-3">
@@ -101,7 +101,7 @@
         <td>${list.technologies.name}</td>
         <td>${list.profile.profileName}</td>
         <td>${list.free == 1 ? "Free" : "Paid"}</td>
-        <td>${cities[list.city.city_id]}</td>
+        <td>${cities[list.city.cityId]}</td>
         <td>${list.startDate}</td>
         <td>${list.endDate}</td>
         <td>${list.academyStages.name}</td>
@@ -127,8 +127,11 @@
         $.ajax({
             url: "/searchSite",
             type: "POST",
-            dataType: "json",
-            data: ({searchPhrase: $("#searchSite").val()}),
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType : "json",
+            data: ({searchPhrase: $("input[id = 'searchSite']").val()}),
             success: changeList
         });
     });
