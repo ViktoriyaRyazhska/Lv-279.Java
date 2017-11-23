@@ -14,10 +14,6 @@ import java.util.stream.Collectors;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    final static int STATUS_OF_STUDENT_IN_GROUP = 6;
-
-
-
     @Autowired
     private StudentRepository studentRepository;
 
@@ -29,7 +25,7 @@ public class StudentServiceImpl implements StudentService {
         }
 
         return studentRepository
-                .findStudentsByAcademyAndStatus(academyId,STATUS_OF_STUDENT_IN_GROUP)
+                .findStudentsByAcademyAndStatus(academyId,ItaAcademyServiceImpl.STATUS_OF_STUDENT_IN_GROUP)
                 .stream().map(x->fromStudentToDto(x)).collect(Collectors.toList());
     }
 
