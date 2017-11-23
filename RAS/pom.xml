@@ -23,6 +23,7 @@
     </properties>
 
     <build>
+        <finalName>Lv279Java</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
