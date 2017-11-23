@@ -11,9 +11,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/bs/css/bootstrap.min.css">
     <script type="text/javascript" src="/bs/js/bootstrap.min.js"></script>
+
+    <style>
+        th,td, caption{
+            text-align: center;
+            vertical-align: center;
+            padding: 5px;
+        }
+        table{
+            margin-top: 1px;
+            margin-left: 1px;
+            margin-right: 1px;
+        }
+        body{
+
+        }
+    </style>
 </head>
 <body>
-<table class="table table-condensed table-hover table-bordered table-responsive">
+<table class="table table-condensed table-hover table-bordered table-responsive table-striped">
+    <caption><h1>Information about academies</h1></caption>
     <thead>
     <tr>
         <th>Group name</th>
@@ -42,34 +59,31 @@
         </td>
         <td>
             <div>
-                <form:select id="direction" class="form-control input-sm" path="directions">
-                    <form:option value="">Directions</form:option>
-                    <form:options items="${directions}"/>
-                </form:select>
+                <form:select path="technologie" items="${technologie}"
+                             itemLabel="name" class="form-control"/>
             </div>
         </td>
         <td>
             <div>
-                <form:select id="profile" class="form-control input-sm" path="profileNames">
-                    <form:option value="">ProfileNames</form:option>
-                    <form:options items="${profileNames}"/>
-                </form:select>
+                <form:select path="profile" items="${profile}"
+                             itemLabel="profileName" class="form-control"/>
             </div>
         </td>
         <td>
             <div>
                 <select id="paymentStatus" class="form-control input-sm">
-                    <%--<form:option value="">ProfileNames</form:option>--%>
-                    <%--<form:options items="${profileNames}"/>--%>
+                    <option value="status">Payment Status</option>
+                    <option item="Paid">Paid</option>
+                    <option item="Free">Free</option>
                 </select>
             </div>
         </td>
         <td>
             <div>
-                <select id="location" class="form-control input-sm">
-                    <%--<form:option value="">ProfileNames</form:option>--%>
-                    <%--<form:options items="${profileNames}"/>--%>
-                </select>
+                <div>
+                    <form:select path="cityNames" items="${cityNames}" itemValue="itemId"
+                                 itemLabel="trasnlation" class="form-control"/>
+                </div>
             </div>
         </td>
         <td>
@@ -122,8 +136,9 @@
     <tbody>
     <%
         int i = 0;
+        int j = 0;
     %>
-    <c:forEach items="${listA}" var="list">
+    <c:forEach items="${academies}" var="list">
     <tr id="rows">
         <td>---</td>
         <td id="site">${list.name}</td>
@@ -133,19 +148,24 @@
         <td>${cities[list.city.cityId]}</td>
         <td>
             <%
-                List<Academy> startTime = (List<Academy>)request.getAttribute("listA");
+                List<Academy> startTime = (List<Academy>)request.getAttribute("academies");
                 String startDate = startTime.get(i).getStartDate().toString();
-                String[] start = startDate.split(" ");
+                String[] start  = startDate.split(" ");
                 out.print(start[0]);
+                i++;
             %>
         </td>
+
+
         <td>
             <%
-                List<Academy> endTime = (List<Academy>)request.getAttribute("listA");
-                String endDate = endTime.get(i).getEndDate().toString();
-                String[] end = startDate.split(" ");
+                List<Academy> endTime = (List<Academy>)request.getAttribute("academies");
+                String endDate = endTime.get(j).getEndDate().toString();
+                String[] end = endDate.split(" ");
                 out.print(end[0]);
+                j++;
             %>
+
         </td>
         <td>${list.academyStages.name}</td>
         <td>
