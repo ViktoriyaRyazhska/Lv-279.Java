@@ -1,6 +1,7 @@
 package ua.softserve.persistence.dto;
 
 import lombok.*;
+import ua.softserve.persistence.entity.Feedback;
 
 
 @Getter
@@ -29,6 +30,8 @@ public class StudentsViewDto {
     private Double test10;
     private Double englishGrammar; //language
     private Double interviewerScore;
+    private Feedback teacherFeedback = new Feedback();
+    private Feedback expertFeedback  = new Feedback();
 }
 
 
