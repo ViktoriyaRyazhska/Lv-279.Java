@@ -4,27 +4,15 @@
 <head>
     <title>History</title>
     <link rel="stylesheet" href="/bs/css/bootstrap.min.css">
-    <%--<style>
-        table {
-            width: 100%;
-            background: white;
-            color: black;
-            border-spacing: 1px
-        }
-        th {
-            background: lightskyblue;
-            padding: 5px;
+    <style>
 
-        }
-        td{
-            background: ghostwhite;
-            padding: 5px;
+        td, th {
             text-align: center;
-
         }
-    </style>--%>
-    </head>
+    </style>
+</head>
 <body>
+
 <table class="table table-condensed table-hover table-responsive table-bordered table-striped">
     <caption><h1>History</h1></caption>
     <tr>
@@ -32,7 +20,8 @@
         <th>Name for site</th>
         <th>Location</th>
         <th>Start Date</th>
-        <th>End Date</th>`
+        <th>End Date</th>
+        `
         <th>Status</th>
         <th>Common Direction</th>
         <th>Modify Date</th>
@@ -44,11 +33,11 @@
             <td>${history.academyName}</td>
             <td>${history.nameForSite}</td>
             <td>${history.location}</td>
-            <td>${history.sartDate}</td>
-            <td>${history.endDate}</td>
+            <td>${history.sartDate.month+1}/${history.sartDate.date}/${history.sartDate.year+1900}</td>
+            <td>${history.endDate.month+1}/${history.endDate.date}/${history.endDate.year+1900}</td>
             <td>${history.stage}</td>
             <td>${history.direction}</td>
-            <td>${history.modifyDate}</td>
+            <td>${history.modifyDate.month+1}/${history.modifyDate.date}/${history.modifyDate.year+1900}</td>
             <td>${history.modifyBy}</td>
         </tr>
     </c:forEach>
