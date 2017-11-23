@@ -43,9 +43,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public Page<Employee> getEmployeeLogFromFirstOrLastName(Integer pageNumber, String firstname, String lastname, String role) {
+    public Page<Employee> getEmployeeLogFromInput(Integer pageNumber, String firstname, String lastname, String role) {
         PageRequest pageRequest=new PageRequest(pageNumber -1,MAXROW,Sort.Direction.ASC,"firstname","lastname");
-        return simpleRepositoryDAO.findEmployeesByItaroleRoleAndFirstnameOrLastnameLike(role,firstname,lastname,pageRequest);
+        if (!firstname.equals("") && !lastname.equals("")){
+            return simpleRepositoryDAO.findEmployeesByItaroleRoleAndFirstnameLikeAndLastnameLike(role,firstname,lastname,pageRequest);
+        }
+        else if (!firstname.equals("") && lastname.equals("")){
+            return simpleRepositoryDAO.findEmployeesByItaroleRoleAndFirstnameLike(role,firstname,pageRequest);
+        }
+        else if (firstname.equals("") && !lastname.equals("")){
+            return simpleRepositoryDAO.findEmployeesByItaroleRoleAndLastnameLike(role,lastname,pageRequest);
+        }
+        else {
+            return simpleRepositoryDAO.findEmployeesByItaroleRole(role,pageRequest);
+        }
     }
 
     @Transactional
