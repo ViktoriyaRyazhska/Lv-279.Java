@@ -6,6 +6,7 @@ import ua.softserve.config.DataConfig;
 
 import ua.softserve.persistence.dao.LanguageTranslationsDAO;
 import ua.softserve.persistence.dao.StudentRepository;
+import ua.softserve.persistence.entity.Student;
 
 
 import java.util.List;
@@ -22,8 +23,8 @@ public class MainPersistence {
         StudentRepository studentRepository = context.getBean(StudentRepository.class);
 
 
-        List list = studentRepository.findStudentsByAcademyAndStatus(796,6);
-        System.out.println(list);
+        List<Student> list = studentRepository.findStudentsByAcademyAndStatus(796,6);
+        System.out.println(list.get(1).getTestFive());
 
 
 //        UserDAO personService = context.getBean(UserDAO.class);

@@ -58,6 +58,9 @@ public class StudentServiceImpl implements StudentService {
         studentsViewDto.setTest10(student.getTestTen());
         studentsViewDto.setEnglishGrammar(student.getLanguage());
 
+        studentsViewDto.setTeacherFeedback(student.getTeacherFeedback());
+        studentsViewDto.setExpertFeedback(student.getExpertFeedback());
+
         return studentsViewDto;
     }
 

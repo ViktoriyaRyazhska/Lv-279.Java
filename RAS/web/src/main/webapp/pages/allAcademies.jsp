@@ -1,7 +1,10 @@
+<%@ page import="ua.softserve.persistence.entity.Academy" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"
          language="java" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +13,7 @@
     <script type="text/javascript" src="/bs/js/bootstrap.min.js"></script>
 </head>
 <body>
-<table class="table table-condensed table-hover table-responsive">
+<table class="table table-condensed table-hover table-bordered table-responsive">
     <thead>
     <tr>
         <th>Group name</th>
@@ -38,7 +41,7 @@
             <input id="searchSite" type="text" class="form-control" placeholder="#">
         </td>
         <td>
-            <div class="col-3">
+            <div>
                 <form:select id="direction" class="form-control input-sm" path="directions">
                     <form:option value="">Directions</form:option>
                     <form:options items="${directions}"/>
@@ -46,7 +49,7 @@
             </div>
         </td>
         <td>
-            <div class="col-3">
+            <div>
                 <form:select id="profile" class="form-control input-sm" path="profileNames">
                     <form:option value="">ProfileNames</form:option>
                     <form:options items="${profileNames}"/>
@@ -54,46 +57,72 @@
             </div>
         </td>
         <td>
-            <select name="paymentStatus">
-
-            </select>
+            <div>
+                <select id="paymentStatus" class="form-control input-sm">
+                    <%--<form:option value="">ProfileNames</form:option>--%>
+                    <%--<form:options items="${profileNames}"/>--%>
+                </select>
+            </div>
         </td>
         <td>
-            <select name="location">
-
-            </select>
+            <div>
+                <select id="location" class="form-control input-sm">
+                    <%--<form:option value="">ProfileNames</form:option>--%>
+                    <%--<form:options items="${profileNames}"/>--%>
+                </select>
+            </div>
         </td>
         <td>
-            <select name="strartDate">
-
-            </select>
+            <div>
+                <select id="strartDate" class="form-control input-sm">
+                    <%--<form:option value="">ProfileNames</form:option>--%>
+                    <%--<form:options items="${profileNames}"/>--%>
+                </select>
+            </div>
         </td>
         <td>
-            <select name="endDate">
-
-            </select>
+            <div>
+                <select id="endDate" class="form-control input-sm">
+                    <%--<form:option value="">ProfileNames</form:option>--%>
+                    <%--<form:options items="${profileNames}"/>--%>
+                </select>
+            </div>
         </td>
         <td>
-            <select name="status"></select>
+            <div>
+                <select id="status" class="form-control input-sm">
+                    <%--<form:option value="">ProfileNames</form:option>--%>
+                    <%--<form:options items="${profileNames}"/>--%>
+                </select>
+            </div>
         </td>
         <td>
-            <select name="experts">
-
-            </select>
+            <div>
+                <select id="experts" class="form-control input-sm">
+                    <%--<form:option value="">ProfileNames</form:option>--%>
+                    <%--<form:options items="${profileNames}"/>--%>
+                </select>
+            </div>
         </td>
-        <td><input type="text" name="studentsPlannedToGraduate"></td>
-        <td><input type="text" name="studentsPlannedForEnrolment"></td>
-        <td><input type="text" name="studentsActual"></td>
-        <td><input type="text" name="hiredNotGraduate"></td>
+        <td><input type="text" class="form-control" name="studentsPlannedToGraduate"></td>
+        <td><input type="text" class="form-control" name="studentsPlannedForEnrolment"></td>
+        <td><input type="text" class="form-control" name="studentsActual"></td>
+        <td><input type="text" class="form-control" name="hiredNotGraduate"></td>
         <td>
-            <select name="commonDirection">
-
-            </select>
+            <div>
+                <select id="commonDirection" class="form-control input-sm">
+                    <%--<form:option value="">ProfileNames</form:option>--%>
+                    <%--<form:options items="${profileNames}"/>--%>
+                </select>
+            </div>
         </td>
         <td></td>
     </tr>
     </thead>
     <tbody>
+    <%
+        int i = 0;
+    %>
     <c:forEach items="${listA}" var="list">
     <tr id="rows">
         <td>---</td>
@@ -102,8 +131,22 @@
         <td>${list.profile.profileName}</td>
         <td>${list.free == 1 ? "Free" : "Paid"}</td>
         <td>${cities[list.city.cityId]}</td>
-        <td>${list.startDate}</td>
-        <td>${list.endDate}</td>
+        <td>
+            <%
+                List<Academy> startTime = (List<Academy>)request.getAttribute("listA");
+                String startDate = startTime.get(i).getStartDate().toString();
+                String[] start = startDate.split(" ");
+                out.print(start[0]);
+            %>
+        </td>
+        <td>
+            <%
+                List<Academy> endTime = (List<Academy>)request.getAttribute("listA");
+                String endDate = endTime.get(i).getEndDate().toString();
+                String[] end = startDate.split(" ");
+                out.print(end[0]);
+            %>
+        </td>
         <td>${list.academyStages.name}</td>
         <td>
             <c:forEach items="${list.experts}" var="expert">
@@ -125,7 +168,7 @@
 <script>
     $("input").change(function () {
         $.ajax({
-            url: "/searchSite",
+            url: "${contextPath}/searchSite",
             type: "POST",
             contentType: false,
             cache: false,
