@@ -11,6 +11,8 @@ import ua.softserve.persistence.dto.LanguageTranslationDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 import ua.softserve.service.editor.*;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -116,15 +118,27 @@ public class AcademyController {
 
     @RequestMapping(value = "/allGroupsInf",method = RequestMethod.GET)
     public String getAllAcademies(Model model) {
-        List<Academy> list = academyService.findWithEmployeeExperts();
-        model.addAttribute("listA", list.stream().limit(20).collect(Collectors.toList()));
+        List<Academy> academies = academyService.findWithEmployeeExperts();
+        Collections.reverse(academies);
+        model.addAttribute("academies", academies.stream().limit(20).collect(Collectors.toList()));
+
         List<LanguageTranslations> translations = languageTranslationsService.getAllLanguageTranslationsName();
         HashMap<Integer, String> cityHashMap = languageTranslationDTO.convertListToHashMap(translations);
-        List<String> direction = directionService.findDirectionsName();
-        List<String> profileNames = profileService.findProfileNames();
         model.addAttribute("cities", cityHashMap);
-        model.addAttribute("directions", direction);
-        model.addAttribute("profileNames", profileNames);
+
+
+        List<AcademyStages> academyStages = academyStagesService.getAllAcademyStagesService();
+        List<LanguageTranslations> cityNames = languageTranslationsService.getAllLanguageTranslationsName();
+        List<Directions> direction = directionService.findAll();
+        List<Technologies> technologie = technologieService.findAll();
+        List<Profile> profile = profileService.findAll();
+
+        model.addAttribute("academyStages", academyStages);
+        model.addAttribute("cityNames", cityNames);
+        model.addAttribute("direction", direction);
+        model.addAttribute("technologie", technologie);
+        model.addAttribute("profile", profile);
+        model.addAttribute("studentGroupCount", new StudentGroupCount());
         return "allAcademies";
     }
 
