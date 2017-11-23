@@ -17,6 +17,7 @@ public class FeedbackDTO {
     private Mark gettingThingsDone;
     private Mark activeCommunicator;
     private String summary;
+    private int proficient;
 }
 
 
