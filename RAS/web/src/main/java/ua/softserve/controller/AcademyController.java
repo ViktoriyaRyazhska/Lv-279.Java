@@ -103,7 +103,7 @@ public class AcademyController {
         return "addGroup";
     }
 
-    @PostMapping("/addGroup")
+    @PostMapping("/group/addGroup")
     public String addGroup(@ModelAttribute AcademyDTO academyDTO) {
 
         System.out.println(academyDTO);
