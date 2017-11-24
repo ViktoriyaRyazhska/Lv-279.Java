@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" language="java" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,14 +12,14 @@
 
     <title>Add Student to Group</title>
 
-    <link href="/bs/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/bs/css/students.css" rel="stylesheet">
 </head>
 
 <body>
 <div class="container">
 
-    <form method="post" action="/students/${academyId}/add" name="addStudents" class="form-inline">
+    <form method="post" action="${contextPath}/students/${academyId}/add" name="addStudents" class="form-inline">
         <div class="page-header">
             <h2>Add Student to Group</h2>
             <p>Please, select students.</p>
