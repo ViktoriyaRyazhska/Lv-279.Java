@@ -34,5 +34,7 @@ public interface StudentService {
 
     Student findById(Integer studentId);
 
+    List<Student> getStudentFromGroup(Integer groupId);
+
     Student save(Student student);
 }

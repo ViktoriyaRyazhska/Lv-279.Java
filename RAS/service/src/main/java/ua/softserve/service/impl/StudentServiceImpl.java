@@ -139,6 +139,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional
     @Override
+    public List<Student> getStudentFromGroup(Integer groupId) {
+        return studentRepository.findStudentsByAcademyAndStatus(groupId , STATUS_OF_STUDENT_IN_GROUP);
+    }
+
+    @Transactional
+    @Override
     public Student save(Student student) {
         return studentRepository.save(student);
     }

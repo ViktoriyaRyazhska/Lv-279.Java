@@ -43,7 +43,7 @@
         </c:url>
 
         <tr id="rows">
-            <td>${student.firstName} ${student.lastName}</td>
+            <td>${student.itaAcademy.user.firstName} ${student.itaAcademy.user.firstName}</td>
             <td>
                 <a href="${addTeacherFeedback}">Teacher Feedback</a>
                 |

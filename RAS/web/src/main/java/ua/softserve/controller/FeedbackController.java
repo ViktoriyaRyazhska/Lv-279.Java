@@ -89,7 +89,7 @@ public class FeedbackController {
             studentService.save(student);
         }
 
-        List<StudentsViewDto> students = studentService.getAllStudentsOfAcademy(796);
+        List<Student> students = studentService.getStudentFromGroup(796);
         model.addAttribute("allStudent", students);
         return "student-of-group-feedback";
     }
@@ -139,7 +139,7 @@ public class FeedbackController {
 
     @RequestMapping(value = "/allGroupStudentFeedback",method = RequestMethod.GET)
     public String getGroupAllFeedback(Model model) {
-        List<StudentsViewDto> students = studentService.getAcceptedStudentsOfAcademy(796);
+        List<Student> students = studentService.getStudentFromGroup(796);
         model.addAttribute("allStudent", students);
         return "student-of-group-feedback";
     }
