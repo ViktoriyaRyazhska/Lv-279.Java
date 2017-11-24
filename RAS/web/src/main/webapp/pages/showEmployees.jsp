@@ -96,7 +96,7 @@
                         </c:choose>
                     </ul>
                 </div>
-                <a href="${contextPath}/group-${groupId}">Back to group</a>
+                <a href="${contextPath}/students">Back to group</a>
             </c:otherwise>
         </c:choose>
         </div>
