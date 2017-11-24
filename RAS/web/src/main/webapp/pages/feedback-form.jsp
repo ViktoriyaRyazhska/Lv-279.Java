@@ -9,7 +9,8 @@
 
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/bs/css/bootstrap.min.css">
+    <%--<link rel="stylesheet" href="/bs/css/bootstrap.min.css">--%>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script type="text/javascript" src="/bs/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -17,7 +18,7 @@
     <div class="col-lg-12 well">
         <h4>Add Feedback</h4>
         <div class="row">
-            <form:form method="post" action="processForm" modelAttribute="feedbackDTO">
+            <form:form method="post" action="${contextPath}/feedback/processForm" modelAttribute="feedbackDTO">
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-2 form-group">

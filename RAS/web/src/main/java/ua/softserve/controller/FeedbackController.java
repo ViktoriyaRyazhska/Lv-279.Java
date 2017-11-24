@@ -139,7 +139,7 @@ public class FeedbackController {
 
     @RequestMapping(value = "/allGroupStudentFeedback",method = RequestMethod.GET)
     public String getGroupAllFeedback(Model model) {
-        List<StudentsViewDto> students = studentService.getAllStudentsOfAcademy(796);
+        List<StudentsViewDto> students = studentService.getAcceptedStudentsOfAcademy(796);
         model.addAttribute("allStudent", students);
         return "student-of-group-feedback";
     }

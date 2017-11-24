@@ -1,12 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request"/>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/bs/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/bs/css/addGroup.css">
+    <%--<link rel="stylesheet" href="/bs/css/bootstrap.min.css">--%>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <%--<link rel="stylesheet" href="/bs/css/addGroup.css">--%>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="/bs/js/bootstrap.min.js"></script>
@@ -16,7 +18,7 @@
     <h4 align="center"><strong>Add Group</strong></h4>
     <div class="col-lg-12 well" id="form-test">
         <div class="row">
-            <form:form method="post" action="/group/addGroup" modelAttribute="academyDTO" id="test-form">
+            <form:form method="post" action="${contextPath}/group/addGroup" modelAttribute="academyDTO" id="test-form">
                 <div class="col-sm-12" id="form-div">
                     <ul class="col-sm-6 form-group" id="UL_left_column">
                         <li>
@@ -129,27 +131,12 @@
                 <div>
                 </div>
                 <div align="center">
-                    <input type="submit" value="Save Group" class="btn btn-primary" />
+                    <input type="submit" value="Save Group" class="btn btn-primary"/>
                 </div>
             </form:form>
-
         </div>
-
     </div>
 </div>
-
-
-<script>
-    //    $(".payment-select").click(function(){
-    //        console.log('click');
-    //    });
-
-    $().button('toggle');
-
-
-    //$().button('toggle');
-</script>
-
 </body>
 
 </html>

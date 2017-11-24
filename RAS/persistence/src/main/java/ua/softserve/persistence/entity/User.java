@@ -35,7 +35,6 @@ public class User {
 //    @JoinColumn(name = "country_id")
 //    private Country country;
 
-
     @Column(name = "user_name", nullable = false)
     private String userName;
 
@@ -60,8 +59,4 @@ public class User {
 
     @Column(name = "eng_level")
     private Integer englishLevel;
-
-
-
-
 }

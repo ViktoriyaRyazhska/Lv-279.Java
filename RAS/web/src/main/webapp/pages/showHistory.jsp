@@ -3,7 +3,8 @@
 <html>
 <head>
     <title>History</title>
-    <link rel="stylesheet" href="/bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <%--<link rel="stylesheet" href="/bs/css/bootstrap.min.css">--%>
     <style>
         td, th, caption {
             text-align: center;

@@ -3,18 +3,7 @@
 }
 
 #UL_left_column {
-    /*box-sizing: border-box;*/
-    /*display: flex;*/
-    /*height: 523.556px;*/
-    /*min-height: auto;*/
-    /*min-width: auto;*/
-    /*text-rendering: geometricPrecision;*/
-    /*width: 441px;   */
-    /*align-content: stretch;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
-    /*perspective-origin: 220.5px 261.778px;*/
-    /*transform-origin: 220.5px 261.778px;*/
+
     border-right: 1px solid rgb(204, 204, 204);
     flex-flow: column wrap;
     font: normal normal 400 normal 16px / 16px "Roboto Condensed", "SF Compact Display", "Helvetica Neue Condensed", sans-serif;
@@ -24,19 +13,6 @@
 }
 
 #UL_right_column {
-    /*box-sizing: border-box;*/
-    /*display: flex;*/
-    /*height: 366.333px;*/
-    /*min-height: auto;*/
-    /*min-width: auto;*/
-    /*text-rendering: geometricPrecision;*/
-    /*width: 440px;*/
-    /*align-content: stretch;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
-    /*perspective-origin: 220px 183.167px;*/
-    /*transform-origin: 220px 183.167px;*/
-    /*flex-flow: column wrap;*/
     font: normal normal 400 normal 16px / 16px "Roboto Condensed", "SF Compact Display", "Helvetica Neue Condensed", sans-serif;
     list-style: none outside none;
     margin: 0px;
@@ -53,6 +29,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 #testqwe{
 margin-top: 15px;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
 }
 
 

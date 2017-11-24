@@ -23,13 +23,24 @@ public class StudentGroupCountServiceImpl implements StudentGroupCountService {
 
     @Transactional
     @Override
-    public StudentGroupCount saveDTO(AcademyDTO academyDTO){
-        StudentGroupCount studentGroupCount = new StudentGroupCount();
-        studentGroupCount.setStudentsPlannedToGraduate(academyDTO.getStudentsPlannedToGraduate());
-        studentGroupCount.setStudentsPlannedToEnrollment(academyDTO.getStudentsPlannedToEnrollment());
-        studentGroupCount.setStudentsActual(academyDTO.getStudentsActual());
-        save(studentGroupCount);
-        return studentGroupCount;
+    public StudentGroupCount saveDTO(AcademyDTO academyDTO) {
+        StudentGroupCount studentGroupCount;
+        if (academyDTO.getStudentsPlannedToGraduate() < 1) {
+            throw new IllegalArgumentException("Field \'Students Planned to Graduate\' can't be less than 1");
+        }
+        if (academyDTO.getStudentsPlannedToEnrollment() < 1) {
+            throw new IllegalArgumentException("Field \'Students Planned to Enrollment\' can't be less than 1");
+        }
+        if (academyDTO.getStudentsActual() < 1) {
+            throw new IllegalArgumentException("Field \'Students Actual\' can't be less than 1");
+        } else {
+            studentGroupCount = new StudentGroupCount();
+            studentGroupCount.setStudentsPlannedToGraduate(academyDTO.getStudentsPlannedToGraduate());
+            studentGroupCount.setStudentsPlannedToEnrollment(academyDTO.getStudentsPlannedToEnrollment());
+            studentGroupCount.setStudentsActual(academyDTO.getStudentsActual());
+            save(studentGroupCount);
+            return studentGroupCount;
+        }
     }
 
     @Override
