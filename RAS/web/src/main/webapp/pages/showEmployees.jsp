@@ -10,10 +10,10 @@
     <%--<link rel="stylesheet" href="/bs/css/employee.css">--%>
 </head>
 <body>
-<c:url var="firstUrl" value="${contextPath}/group-${groupId}/pages-1-${role}" />
-<c:url var="lastUrl" value="${contextPath}/group-${groupId}/pages-${deploymentLog.totalPages}-${role}" />
-<c:url var="prevUrl" value="${contextPath}/group-${groupId}/pages-${currentIndex - 1}-${role}" />
-<c:url var="nextUrl" value="${contextPath}/group-${groupId}/pages-${currentIndex + 1}-${role}" />
+<c:url var="firstUrl" value="/group-${groupId}/pages-1-${role}" />
+<c:url var="lastUrl" value="/group-${groupId}/pages-${deploymentLog.totalPages}-${role}" />
+<c:url var="prevUrl" value="/group-${groupId}/pages-${currentIndex - 1}-${role}" />
+<c:url var="nextUrl" value="/group-${groupId}/pages-${currentIndex + 1}-${role}" />
 <div class="container">
     <div class="col-lg-6 well">
         <div class="customcontainer">
@@ -74,7 +74,7 @@
                             </c:otherwise>
                         </c:choose>
                         <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
-                            <c:url var="pageUrl" value="${contextPath}/group-${groupId}/pages-${i}-${role}" />
+                            <c:url var="pageUrl" value="/group-${groupId}/pages-${i}-${role}" />
                             <c:choose>
                                 <c:when test="${i == currentIndex}">
                                     <li class="active"><a href="${pageUrl}"><c:out value="${i}" /></a></li>
