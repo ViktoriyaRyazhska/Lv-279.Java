@@ -24,6 +24,8 @@ public interface StudentService {
      */
     List<StudentsShortViewDto> getStudentsOfAcademy(Integer academyId);
 
+    void deleteStudentsFromAcademy(Integer academyId, List<Integer> userIds);
+
     void addStudentsToAcademy(Integer academyId, List<Integer> userIds);
 
     void saveResults(StudentsViewDto studentsViewDto);

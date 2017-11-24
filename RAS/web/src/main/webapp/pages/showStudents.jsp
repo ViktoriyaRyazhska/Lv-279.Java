@@ -34,13 +34,19 @@
             </c:if>
         </form>
     </div>
+    <c:if test="${academyId != null}">
+    <form method="post" action="/students/${academyId}" name="deleteStudents" class="form-inline">
+        <div class="page-header">
+           <button type="submit" class="btn btn-default">Reject checked</button>
+
+        </div>
 
 
     <div id="show-students-table">
-        <c:if test="${academyId != null}">
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th>Reject student</th>
                     <th>Student name</th>
                     <th>English level</th>
                     <th>Training Score</th>
@@ -64,6 +70,11 @@
                 <tbody>
                 <c:forEach items="${students}" var="student">
                     <tr id="rows">
+                        <td>
+                            <label>
+                                <input type="checkbox" name="checked${student.studentId}"/>
+                            </label>
+                        </td>
                         <td>${student.fullName} </td>
                         <td>${student.englishLevel}</td>
                         <td>${student.trainingScore}</td>
@@ -88,5 +99,6 @@
             </table>
         </c:if>
     </div>
+    </form>
 </div>
 

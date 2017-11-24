@@ -60,6 +60,15 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.updateItaStatus(STATUS_OF_STUDENT_IN_GROUP, academyId, userIds);
     }
 
+    @Override
+    @Transactional
+    public void deleteStudentsFromAcademy(Integer academyId, List<Integer> userIds) {
+        if (academyId == null) {
+            throw new IllegalArgumentException("Academy Id cannot be null!");
+        }
+        studentRepository.updateItaStatus(STATUS_OF_REJECTED_STUDENT_IN_GROUP, academyId, userIds);
+    }
+
     @Transactional
     @Override
     public void saveAllStudents(List<StudentsViewDto> studentsViewDto) {
@@ -77,8 +86,9 @@ public class StudentServiceImpl implements StudentService {
     private StudentsViewDto fromStudentToDto(Student student) {
         StudentsViewDto dto = new StudentsViewDto();
 
-        dto.setStudentId(student.getStudentId());
+
         User u = student.getItaAcademy().getUser();
+        dto.setStudentId(u.getId());
         dto.setFullName(u.getFirstName() + " " + u.getLastName());
         dto.setEnglishLevel(u.getEnglishLevel());
         dto.setTrainingScore(student.getRate());

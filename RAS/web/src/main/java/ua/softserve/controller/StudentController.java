@@ -39,15 +39,31 @@ public class StudentController {
     @PostMapping("/students/{academyId}/add")
     public String addStudents(@PathVariable("academyId") Integer academyId, @RequestBody(required = false) MultiValueMap<String, String> formData) {
         if (formData != null) {
-            List<Integer> userIds = new ArrayList<>();
-            formData.forEach((key, value) -> {
-                if (key != null && value.size() == 1 && value.contains("on")) {
-                    String[] arr = key.split("checked");
-                    userIds.add(Integer.parseInt(arr[1]));
-                }
-            });
+            List<Integer> userIds = parseData(formData);
             if (userIds.size() > 0) {
                 studentService.addStudentsToAcademy(academyId, userIds);
+            }
+        }
+        return "redirect:/students?academyId=" + academyId;
+    }
+
+    private List<Integer> parseData(MultiValueMap<String, String> formData) {
+        List<Integer> userIds = new ArrayList<>();
+        formData.forEach((key, value) -> {
+            if (key != null && value.size() == 1 && value.contains("on")) {
+                String[] arr = key.split("checked");
+                userIds.add(Integer.parseInt(arr[1]));
+            }
+        });
+        return userIds;
+    }
+
+    @PostMapping("/students/{academyId}")
+    public String deleteStudents(@PathVariable("academyId") Integer academyId, @RequestBody(required = false) MultiValueMap<String, String> formData) {
+        if (formData != null) {
+            List<Integer> userIds = parseData(formData);
+            if (userIds.size() > 0) {
+                studentService.deleteStudentsFromAcademy(academyId, userIds);
             }
         }
         return "redirect:/students?academyId=" + academyId;

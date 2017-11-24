@@ -90,7 +90,7 @@ public class ItaAcademyServiceImpl implements ItaAcademyService {
         setUserStatusInAcademy(academyId, userId, STATUS_OF_REJECTED_STUDENT_IN_GROUP);
 
         int studentCount = academyService.getById(academyId).getStudentGroupCount().getStudentsActual();
-        if(studentCount>0) {
+        if (studentCount > 0) {
             academyService.getById(academyId).getStudentGroupCount().setStudentsActual(--studentCount);
         }
     }
