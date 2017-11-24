@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" language="java" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,7 @@
 
     <div class="page-header">
         <h2>Group Information</h2>
-        <form method="get" action="/students" name="selectAcademyForm" class="form-inline">
+        <form method="get" action="${contextPath}/students" name="selectAcademyForm" class="form-inline">
             <label>
                 Please choose group.
                 <select name='academyId' class="form-control">
@@ -30,13 +31,13 @@
             </label>
             <button type="submit" class="btn btn-default">Search</button>
             <c:if test="${academyId != null}">
-                <a href="/students/${academyId}/add" class="btn btn-default">Add Student</a>
-                <a href="/group-${academyId}/pages-1-Teacher" class="btn btn-primary">Assign to group</a>
+                <a href="${contextPath}/students/${academyId}/add" class="btn btn-default">Add Student</a>
+                <a href="${contextPath}/group-${academyId}/pages-1-Teacher" class="btn btn-primary">Assign to group</a>
             </c:if>
         </form>
     </div>
     <c:if test="${academyId != null}">
-    <form method="post" action="/students/${academyId}" name="deleteStudents" class="form-inline">
+    <form method="post" action="${contextPath}/students/${academyId}" name="deleteStudents" class="form-inline">
         <div class="page-header">
            <button type="submit" class="btn btn-default">Reject checked</button>
 
