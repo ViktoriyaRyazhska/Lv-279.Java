@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Feedback</title>
-    <link rel="stylesheet" href="/bs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <caption><h1>Feedback</h1></caption>
