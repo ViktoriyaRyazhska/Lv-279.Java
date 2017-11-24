@@ -86,4 +86,18 @@ public class StudentServiceImpl implements StudentService {
         student.setExpertFeedback(studentsViewDto.getExpertFeedback());
         studentRepository.save(student);
     }
+
+    @Transactional
+    @Override
+    public Student findById(Integer studentId) {
+        return studentRepository.findOne(studentId);
+    }
+
+    @Transactional
+    @Override
+    public Student save(Student student) {
+        return studentRepository.save(student);
+    }
+
+
 }

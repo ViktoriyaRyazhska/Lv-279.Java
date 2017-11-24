@@ -14,4 +14,8 @@ public interface StudentService {
     void saveResults(StudentsViewDto studentsViewDto);
 
     void saveAllStudents(List<StudentsViewDto> studentsViewDto);
+
+    Student findById(Integer studentId);
+
+    Student save(Student student);
 }

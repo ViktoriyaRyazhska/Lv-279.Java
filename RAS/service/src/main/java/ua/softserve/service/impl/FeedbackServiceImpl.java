@@ -26,6 +26,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public void saveDTO(FeedbackDTO feedbackDTO) {
         Feedback feedback = new Feedback();
+
         feedback.setLearningAbility(feedbackDTO.getLearningAbility());
         feedback.setActiveCommunicator(feedbackDTO.getActiveCommunicator());
         feedback.setGettingThingsDone(feedbackDTO.getGettingThingsDone());
@@ -34,7 +35,11 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedback.setTeamWork(feedbackDTO.getTeamWork());
         feedback.setSummary(feedbackDTO.getSummary());
 
-
         feedbackDAO.save(feedback);
+    }
+
+    @Override
+    public Feedback findOne(int id) {
+        return feedbackDAO.findOne(id);
     }
 }

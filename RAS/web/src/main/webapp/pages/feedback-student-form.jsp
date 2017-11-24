@@ -17,7 +17,7 @@
     <div class="col-lg-12 well">
         <h4>Add Feedback</h4>
         <div class="row">
-            <form:form method="post" action="processForm" modelAttribute="feedbackDTO">
+            <form:form method="post" action="processFeedbackForm" modelAttribute="feedbackDTO">
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-2 form-group">
@@ -110,10 +110,15 @@
                     </div>
                     <input type="submit" value="Save Feedback"/>
                 </div>
+                <form:hidden path="studentId" value="${sId}"/>
+                <form:hidden path="isTeacher" value="${isT}"/>
+
             </form:form>
+
             <c:forEach items="${indexList}" var="index">
                 <input type="hidden" id="mapInput${index}" value="${mapMark[index]}"/>
             </c:forEach>
+
         </div>
 
     </div>

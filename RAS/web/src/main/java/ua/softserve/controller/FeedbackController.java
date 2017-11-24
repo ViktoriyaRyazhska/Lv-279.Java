@@ -35,6 +35,64 @@ public class FeedbackController {
     @Autowired
     private MarkEditor markEditor;
 
+    @RequestMapping("/addStudentFeedback")
+    public String addStudentFeedback(@RequestParam("studentId") Integer studentId,
+                                     @RequestParam("isTeacher") Integer isTeacher,
+                                     Model model) {
+
+        FeedbackDTO feedbackDTO = new FeedbackDTO();
+
+        System.out.println(studentId);
+        System.out.println(isTeacher);
+        model.addAttribute("feedbackDTO", feedbackDTO);
+
+        model.addAttribute("sId", studentId);
+        model.addAttribute("isT", isTeacher);
+        List<Mark> learningAbility = markService.findAllByCharacteristicId(1);
+        List<Mark> overallTechnicalCompetence = markService.findAllByCharacteristicId(2);
+        List<Mark> passionalInitiative = markService.findAllByCharacteristicId(3);
+        List<Mark> teamWork = markService.findAllByCharacteristicId(4);
+        List<Mark> gettingThingsDone = markService.findAllByCharacteristicId(5);
+        List<Mark> activeCommunicator = markService.findAllByCharacteristicId(6);
+
+        model.addAttribute("learningAbility", learningAbility);
+        model.addAttribute("overallTechnicalCompetence", overallTechnicalCompetence);
+        model.addAttribute("passionalInitiative", passionalInitiative);
+        model.addAttribute("teamWork", teamWork);
+        model.addAttribute("gettingThingsDone", gettingThingsDone);
+        model.addAttribute("activeCommunicator", activeCommunicator);
+
+        List<Mark> markList = markService.findAll();
+        Map<Integer,String> map = new HashMap<>();
+        List<Integer> index = new ArrayList<>();
+        for (int i = 1; i <= markList.size(); i++) {
+            index.add(i);
+            map.put(markList.get(i-1).getId(), markList.get(i-1).getDescription());
+        }
+        model.addAttribute("mapMark", map);
+        model.addAttribute("indexList", index);
+        return "feedback-student-form";
+    }
+
+    @RequestMapping("/processFeedbackForm")
+    public String processFeedbackForm(@ModelAttribute("feedbackDTO") FeedbackDTO feedbackDTO,
+                                      Model model) {
+        System.out.println(feedbackDTO);
+        if(feedbackDTO.getStudentId() != null) {
+            System.out.println("Im here");
+            Student student = studentService.findById(feedbackDTO.getStudentId());
+            if(feedbackDTO.getIsTeacher() == 1) {
+                student.setTeacherFeedback(convert(feedbackDTO));
+            } else {
+                student.setExpertFeedback(convert(feedbackDTO));
+            }
+            studentService.save(student);
+        }
+
+        List<StudentsViewDto> students = studentService.getAllStudentsOfAcademy(796);
+        model.addAttribute("allStudent", students);
+        return "student-of-group-feedback";
+    }
 
     @RequestMapping("/addFeedback")
     public String addFeedback(Model model) {
@@ -56,25 +114,23 @@ public class FeedbackController {
 
         List<Mark> markList = markService.findAll();
         Map<Integer,String> map = new HashMap<>();
-        List<Integer> indx = new ArrayList<>();
+        List<Integer> index = new ArrayList<>();
         for (int i = 1; i <= markList.size(); i++) {
-            indx.add(i);
+            index.add(i);
             map.put(markList.get(i-1).getId(), markList.get(i-1).getDescription());
         }
-        model.addAttribute("mapAP", map);
-        model.addAttribute("indxList", indx);
+        model.addAttribute("mapMark", map);
+        model.addAttribute("indexList", index);
         return "feedback-form";
     }
 
     @PostMapping("/processForm")
     public String processForm(@ModelAttribute("feedbackDTO") FeedbackDTO feedbackDTO) {
-        System.out.println(feedbackDTO);
         feedbackService.saveDTO(feedbackDTO);
         return "feedback-confirmation";
     }
 
-
-    @GetMapping("/showFeedbacks")
+    @RequestMapping(value = "/showFeedbacks",method = RequestMethod.GET)
     public String showFeedbacks(Model model) {
         List<Feedback> allFeedback = feedbackService.findAll();
         model.addAttribute("allFeedback", allFeedback);
@@ -96,5 +152,19 @@ public class FeedbackController {
         binder.registerCustomEditor(Mark.class,"teamWork", markEditor);
         binder.registerCustomEditor(Mark.class,"gettingThingsDone", markEditor);
         binder.registerCustomEditor(Mark.class,"activeCommunicator", markEditor);
+    }
+
+    public Feedback convert(FeedbackDTO feedbackDTO) {
+            Feedback feedback = new Feedback();
+
+            feedback.setLearningAbility(feedbackDTO.getLearningAbility());
+            feedback.setActiveCommunicator(feedbackDTO.getActiveCommunicator());
+            feedback.setGettingThingsDone(feedbackDTO.getGettingThingsDone());
+            feedback.setOverallTechnicalCompetence(feedbackDTO.getOverallTechnicalCompetence());
+            feedback.setPassionalInitiative(feedbackDTO.getPassionalInitiative());
+            feedback.setTeamWork(feedbackDTO.getTeamWork());
+            feedback.setSummary(feedbackDTO.getSummary());
+
+            return feedback;
     }
 }

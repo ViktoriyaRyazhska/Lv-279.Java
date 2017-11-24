@@ -92,11 +92,11 @@ public class Student {
     @Column(name = "interviewer_comment")
     private String interviewerComment;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "teacher_student_feedback_id")
     private Feedback teacherFeedback;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "expert_student_feedback_id")
     private Feedback expertFeedback;
 
