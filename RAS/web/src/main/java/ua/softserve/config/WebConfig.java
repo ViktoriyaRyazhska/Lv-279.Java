@@ -23,16 +23,16 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/mycss/**")
-                .addResourceLocations("static/css/");
+                .addResourceLocations("/static/css/");
         registry
                 .addResourceHandler("/bs/css/**")
-                .addResourceLocations("static/css/");
+                .addResourceLocations("/static/css/");
         registry
                 .addResourceHandler("/bs/js/**")
-                .addResourceLocations("static/js/");
+                .addResourceLocations("/static/js/");
         registry
                 .addResourceHandler("/TRIGER/**")
-                .addResourceLocations("style/");
+                .addResourceLocations("/style/");
 
 
     }
