@@ -74,7 +74,7 @@
                             </c:otherwise>
                         </c:choose>
                         <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
-                            <c:url var="pageUrl" value="/group-${groupId}/pages-${i}-${role}" />
+                            <c:url var="pageUrl" value="${contextPath}/group-${groupId}/pages-${i}-${role}" />
                             <c:choose>
                                 <c:when test="${i == currentIndex}">
                                     <li class="active"><a href="${pageUrl}"><c:out value="${i}" /></a></li>
