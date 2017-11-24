@@ -31,6 +31,7 @@
             <button type="submit" class="btn btn-default">Search</button>
             <c:if test="${academyId != null}">
                 <a href="/students/${academyId}/add" class="btn btn-default">Add Student</a>
+                <a href="/group-${academyId}/pages-1-Teacher" class="btn btn-primary">Assign to group</a>
             </c:if>
         </form>
     </div>
