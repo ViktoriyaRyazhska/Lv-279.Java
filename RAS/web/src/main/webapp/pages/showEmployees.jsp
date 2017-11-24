@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request"/>
 <html>
 <head>
     <title>Assign to Group</title>
@@ -9,10 +10,10 @@
     <%--<link rel="stylesheet" href="/bs/css/employee.css">--%>
 </head>
 <body>
-<c:url var="firstUrl" value="/group-${groupId}/pages-1-${role}" />
-<c:url var="lastUrl" value="/group-${groupId}/pages-${deploymentLog.totalPages}-${role}" />
-<c:url var="prevUrl" value="/group-${groupId}/pages-${currentIndex - 1}-${role}" />
-<c:url var="nextUrl" value="/group-${groupId}/pages-${currentIndex + 1}-${role}" />
+<c:url var="firstUrl" value="${contextPath}/group-${groupId}/pages-1-${role}" />
+<c:url var="lastUrl" value="${contextPath}/group-${groupId}/pages-${deploymentLog.totalPages}-${role}" />
+<c:url var="prevUrl" value="${contextPath}/group-${groupId}/pages-${currentIndex - 1}-${role}" />
+<c:url var="nextUrl" value="${contextPath}/group-${groupId}/pages-${currentIndex + 1}-${role}" />
 <div class="container">
     <div class="col-lg-6 well">
         <div class="customcontainer">
@@ -20,13 +21,13 @@
         <%--<a href="/group-${groupId}/pages-1-Expert">Expert</a>--%>
         <%--<a href="/group-${groupId}/pages-1-Interviewer">Interviewer</a>--%>
 
-            <a href="/group-${groupId}/pages-1-Teacher"><button class="btn btn-primary changeposition">Teachers</button></a>
-            <a href="/group-${groupId}/pages-1-Expert"><button class="btn btn-primary changeposition">Experts</button></a>
-            <a href="/group-${groupId}/pages-1-Interviewer"><button class="btn btn-primary changeposition">Interviewers</button></a>
+            <a href="${contextPath}/group-${groupId}/pages-1-Teacher"><button class="btn btn-primary changeposition">Teachers</button></a>
+            <a href="${contextPath}/group-${groupId}/pages-1-Expert"><button class="btn btn-primary changeposition">Experts</button></a>
+            <a href="${contextPath}/group-${groupId}/pages-1-Interviewer"><button class="btn btn-primary changeposition">Interviewers</button></a>
 
 
         <div class="moveinputs">
-            <form action="/group-${groupId}/pages-1-${role}-search" method="get">
+            <form action="${contextPath}/group-${groupId}/pages-1-${role}-search" method="get">
                 <div class="col-sm-5 form-group">
                     <input class="form-control" type="text" name="firstname" value="${modelfirstname}" placeholder="First Name">
                 </div>
@@ -41,11 +42,11 @@
         <c:choose>
             <c:when test="${deploymentLog.numberOfElements==0}">
                     <h3 class="alert-danger" align="center">Invalid input, try again!</h3>
-                <a href="/group-${groupId}/pages-1-${role}">Back to list</a>
+                <a href="${contextPath}/group-${groupId}/pages-1-${role}">Back to list</a>
             </c:when>
             <c:otherwise>
                 <div class="formwithinputs">
-                    <form action="/group-${groupId}/include-${role}" method="post">
+                    <form action="${contextPath}/group-${groupId}/include-${role}" method="post">
                         <c:forEach items="${allEmployees}" var="employee">
                             <ul class="marker1 list-group">
                                 <li class="list-group-item">${employee.firstname}</li>
@@ -95,7 +96,7 @@
                         </c:choose>
                     </ul>
                 </div>
-                <a href="/group-${groupId}">Back to group</a>
+                <a href="${contextPath}/group-${groupId}">Back to group</a>
             </c:otherwise>
         </c:choose>
         </div>
