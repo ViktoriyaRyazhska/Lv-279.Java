@@ -34,7 +34,6 @@ public class Academy {
     @JoinColumn(name = "technology_id")
     private Technologies technologies;
 
-
     @ManyToOne
     @JoinColumn(name = "stage_id")
     private AcademyStages academyStages;
@@ -110,7 +109,6 @@ public class Academy {
             inverseJoinColumns = {@JoinColumn(name = "employee_id")}
     )
     private List<Employee> interviewers;
-
 
     @Override
     public String toString() {

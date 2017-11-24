@@ -30,7 +30,7 @@ public class StudentsViewDto {
     private Double englishGrammar;
     private Double interviewerScore;
     private Feedback teacherFeedback = new Feedback();
-    private Feedback expertFeedback  = new Feedback();
+    private Feedback expertFeedback = new Feedback();
 }
 
 

@@ -13,7 +13,6 @@ import ua.softserve.service.StudentService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Service
 public class StudentServiceImpl implements StudentService {
 
@@ -85,8 +84,6 @@ public class StudentServiceImpl implements StudentService {
 
     private StudentsViewDto fromStudentToDto(Student student) {
         StudentsViewDto dto = new StudentsViewDto();
-
-
         User u = student.getItaAcademy().getUser();
         dto.setStudentId(u.getId());
         dto.setFullName(u.getFirstName() + " " + u.getLastName());
@@ -94,7 +91,7 @@ public class StudentServiceImpl implements StudentService {
         dto.setTrainingScore(student.getRate());
         dto.setTeacherScore(student.getTeacherScore());
         dto.setExpertScore(student.getExpertScore());
-        //studentsViewDto.setCurrent(student.get);
+        //dto.setCurrent(student.get);
         dto.setTest1(student.getTestOne());
         dto.setTest2(student.getTestTwo());
         dto.setTest3(student.getTestThree());
@@ -106,7 +103,6 @@ public class StudentServiceImpl implements StudentService {
         dto.setTest9(student.getTestNine());
         dto.setTest10(student.getTestTen());
         dto.setEnglishGrammar(student.getLanguage());
-
         dto.setTeacherFeedback(student.getTeacherFeedback());
         dto.setExpertFeedback(student.getExpertFeedback());
 

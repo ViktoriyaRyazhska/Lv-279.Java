@@ -40,10 +40,8 @@ public class ItaAcademy {
     @JoinColumn(name = "academy_id")
     private Academy academy;
 
-
     @Column(name = "it_academy_status_id")
     private Integer itaAcademyStatus;
-
 
     @Override
     public String toString() {
@@ -54,6 +52,5 @@ public class ItaAcademy {
                 ", itaAcademyStatus=" + itaAcademyStatus +
                 '}';
     }
-
 }
 

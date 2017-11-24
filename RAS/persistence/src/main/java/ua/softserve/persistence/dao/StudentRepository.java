@@ -20,15 +20,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query("select st from Student as st where st.itaAcademy.academy.academyId = :academyId and st.itaAcademy.user.id = :userId")
     Student findStudentByAcademyAndUser(@Param("academyId") Integer academyId, @Param("userId") Integer userId);
 
-
     @Modifying
     @Query(value = "update ita_academy set it_academy_status_id = :status where academy_id = :academyId and user_id in :userIds", nativeQuery = true)
     void updateItaStatus(@Param("status") Integer status, @Param("academyId") Integer academyId, @Param("userIds") List<Integer> userIds);
 
-//
-//    @Modifying(clearAutomatically = true)
-//
-//    @Query("update Student st set st.itaAcademy.itaAcademyStatus =:status where  st.itaAcademy.academy.academyId = :academyId  and st.itaAcademy.user.id in :userIds")
-//    void updateItaStatus1(@Param("status") Integer status, @Param("academyId") Integer academyId, @Param("userIds") List<Integer> userIds);
-//
 }
