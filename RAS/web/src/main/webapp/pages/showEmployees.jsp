@@ -6,7 +6,7 @@
     <title>Assign to Group</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <%--<link rel="stylesheet" href="/bs/css/bootstrap.min.css">--%>
-    <link rel="stylesheet" href="/bs/css/employee.css">
+    <%--<link rel="stylesheet" href="/bs/css/employee.css">--%>
 </head>
 <body>
 <c:url var="firstUrl" value="/group-${groupId}/pages-1-${role}" />
@@ -103,4 +103,52 @@
 </div>
 <%--<a href="/group-${groupId}/pages-1-Teacher"><button class="btn btn-primary">Assign to group</button></a>--%>
 </body>
+<style>
+    .customcontainer{
+        width: 105%;
+    }
+    .changeposition{
+        margin-right: 10%;
+        margin-bottom: 3%;
+    }
+    .container{
+        margin-top: 10px;
+        margin-left: 23%;
+    }
+    .moveinputs{
+        margin-left: -2.6%;
+    }
+    .list-group{
+        margin-top: 4%;
+        width: 30%;
+        float:left;
+    }
+    .list-group-item{
+        margin-top: -15%;
+        height: 5.5%;
+        font-size: 1.58rem;
+    }
+
+    .formwithinputs .marker1{
+        width: 37%;
+        margin-right: 6%;
+    }
+    .formwithinputs .marker2{
+        width: 37%;
+        margin-right: 3%;
+    }
+
+    .formwithinputs .marker3{
+        width: 13%;
+        margin-top: 0.3%;
+        /*margin-right: 30px;*/
+    }
+    .marker3 input{
+        margin-left: 35%;
+    }
+    .custombtn{
+        float: left;
+        width: 13.2%;
+    }
+</style>
 </html>

@@ -6,12 +6,9 @@
 
 <html lang="en">
 <head>
-    <%--<link rel="stylesheet" href="/bs/css/bootstrap.min.css">--%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<%--<link rel="stylesheet" href="/bs/css/bootstrap.min.css">--%>
     <%--<link rel="stylesheet" href="/bs/css/addGroup.css">--%>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/bs/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -138,6 +135,45 @@
     </div>
 </div>
 </body>
+<style>
+    #form-div {
+        height: 280px;
+    }
+
+    #UL_left_column {
+
+        border-right: 1px solid rgb(204, 204, 204);
+        flex-flow: column wrap;
+        font: normal normal 400 normal 16px / 16px "Roboto Condensed", "SF Compact Display", "Helvetica Neue Condensed", sans-serif;
+        list-style: none outside none;
+        margin: 0px;
+        padding: 0px 70px;
+    }
+
+    #UL_right_column {
+        font: normal normal 400 normal 16px / 16px "Roboto Condensed", "SF Compact Display", "Helvetica Neue Condensed", sans-serif;
+        list-style: none outside none;
+        margin: 0px;
+        padding: 0px 70px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+
+    #testqwe{
+        margin-top: 15px;
+    }
+
+    input[type=date]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        display: none;
+    }
+</style>
 
 </html>
 
