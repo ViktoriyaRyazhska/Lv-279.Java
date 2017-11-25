@@ -6,7 +6,7 @@ import ua.softserve.persistence.entity.Directions;
 
 import java.util.List;
 
-public interface DirectionsDAO extends JpaRepository<Directions, Integer> {
+public interface DirectionsRepository extends JpaRepository<Directions, Integer> {
     @Query("select d.name from Directions d")
     List<String> findDirectionsName();
 }

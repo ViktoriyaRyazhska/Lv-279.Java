@@ -6,7 +6,7 @@ import ua.softserve.persistence.entity.Profile;
 
 import java.util.List;
 
-public interface ProfileDAO extends JpaRepository<Profile, Integer> {
+public interface ProfileRepository extends JpaRepository<Profile, Integer> {
     @Query("select p.profileName from Profile p")
     List<String> findProfileNames();
 }
