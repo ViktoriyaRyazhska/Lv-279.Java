@@ -5,11 +5,11 @@ import ua.softserve.persistence.entity.Technologies;
 import java.util.List;
 
 public interface TechnologieService {
-    void save(Technologies user);
+    void save(Technologies technologies);
 
     Technologies findOne(int id);
 
     List<Technologies> findAll();
 
-    void remove(Technologies user);
+    void remove(Technologies technologies);
 }
