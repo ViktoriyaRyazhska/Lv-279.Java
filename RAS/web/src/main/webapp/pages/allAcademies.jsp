@@ -1,5 +1,6 @@
 <%@ page import="ua.softserve.persistence.entity.Academy" %>
 <%@ page import="java.util.List" %>
+<%@ page import="ua.softserve.persistence.dto.AcademyDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"
@@ -30,7 +31,7 @@
     </style>
 </head>
 <body>
-<table class="table table-condensed table-hover table-bordered table-responsive table-striped">
+<table id = "MyTable" class="table table-condensed table-hover table-bordered table-responsive table-striped">
     <caption><h1>Information about academies</h1></caption>
     <thead>
     <tr>
@@ -142,15 +143,15 @@
     <c:forEach items="${academies}" var="list">
     <tr id="rows">
         <td>---</td>
-        <td id="site">${list.name}</td>
-        <td>${list.technologies.name}</td>
+        <td id="site">${list.nameForSite}</td>
+        <td>${list.technologie.name}</td>
         <td>${list.profile.profileName}</td>
-        <td>${list.free == 1 ? "Free" : "Paid"}</td>
+        <td>${list.payment == 1 ? "Free" : "Paid"}</td>
         <td>${cities[list.city.cityId]}</td>
         <td>
             <%
-                List<Academy> startTime = (List<Academy>)request.getAttribute("academies");
-                String startDate = startTime.get(i).getStartDate().toString();
+                List<AcademyDTO> startTime = (List<AcademyDTO>)request.getAttribute("academies");
+                String startDate = startTime.get(i).getStartDate();
                 String[] start  = startDate.split(" ");
                 out.print(start[0]);
                 i++;
@@ -160,8 +161,8 @@
 
         <td>
             <%
-                List<Academy> endTime = (List<Academy>)request.getAttribute("academies");
-                String endDate = endTime.get(j).getEndDate().toString();
+                List<AcademyDTO> endTime = (List<AcademyDTO>)request.getAttribute("academies");
+                String endDate = endTime.get(j).getEndDate();
                 String[] end = endDate.split(" ");
                 out.print(end[0]);
                 j++;
@@ -170,15 +171,15 @@
         </td>
         <td>${list.academyStages.name}</td>
         <td>
-            <c:forEach items="${list.experts}" var="expert">
-                ${expert.firstname} ${expert.lastname}
+            <c:forEach items="${list.expert}" var="expert">
+                ${expert}
             </c:forEach>
         </td>
-        <td>${list.studentGroupCount.studentsPlannedToGraduate}</td>
-        <td>${list.studentGroupCount.studentsPlannedToEnrollment}</td>
-        <td>${list.studentGroupCount.studentsActual}</td>
+        <td>${list.studentsPlannedToGraduate}</td>
+        <td>${list.studentsPlannedToEnrollment}</td>
+        <td>${list.studentsActual}</td>
         <td>---</td>
-        <td>${list.directions.name}</td>
+        <td>${list.direction.name}</td>
         <td>---</td>
     </tr>
     </c:forEach>
@@ -201,6 +202,14 @@
     });
     function changeList(list) {
         console.log(list);
+        $("tr").remove("#rows");
+            for(i=1;i<=list.length;i++) {
+                $("#MyTable").append('<tr></tr>');
+                for(j=1;j<=16;j++) {
+                    $("#MyTable > tbody > tr:last").append('<td>'+list[i].grName +'</td>');
+                }
+        }
+
     }
 </script>
 

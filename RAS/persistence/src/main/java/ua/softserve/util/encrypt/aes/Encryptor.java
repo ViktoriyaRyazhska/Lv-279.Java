@@ -33,10 +33,10 @@ import java.util.Arrays;
  */
 public class Encryptor {
 
-    private static final int MAC_POS_IN_JSON = 11;
+    /*private static final int MAC_POS_IN_JSON = 11;
     private static final int VALUE_POS_IN_JSON = 7;
     private static final int IV_POS_IN_JSON = 3;
-    private static final int CORRECT_JSON_LENGTH = 13;
+    private static final int CORRECT_JSON_LENGTH = 13;*/
 
     /**
      * Encrypts the value using key

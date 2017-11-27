@@ -32,3 +32,4 @@ public interface AcademyDAO extends JpaRepository<Academy, Integer> {
 
 
 }
+ 

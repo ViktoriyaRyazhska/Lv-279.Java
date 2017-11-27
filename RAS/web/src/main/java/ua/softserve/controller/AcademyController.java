@@ -118,7 +118,7 @@ public class AcademyController {
 
     @RequestMapping(value = "/allGroupsInf",method = RequestMethod.GET)
     public String getAllAcademies(Model model) {
-        List<Academy> academies = academyService.findWithEmployeeExperts();
+        List<AcademyDTO> academies = academyService.findWithEmployeeExperts();
         Collections.reverse(academies);
         model.addAttribute("academies", academies.stream().limit(20).collect(Collectors.toList()));
 

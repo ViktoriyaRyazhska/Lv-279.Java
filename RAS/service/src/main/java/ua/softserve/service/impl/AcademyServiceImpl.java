@@ -7,10 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.dto.AcademyDTO;
 import ua.softserve.persistence.dao.AcademyDAO;
-import ua.softserve.persistence.entity.Academy;
-import ua.softserve.persistence.entity.City;
-import ua.softserve.persistence.entity.Employee;
-import ua.softserve.persistence.entity.StudentGroupCount;
+import ua.softserve.persistence.entity.*;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.CityService;
 import ua.softserve.service.EmployeeService;
@@ -19,7 +16,9 @@ import ua.softserve.service.StudentGroupCountService;
 import java.awt.print.Pageable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
@@ -103,9 +102,9 @@ public class AcademyServiceImpl implements AcademyService {
 
     private City getCity(String id) {
         City city = cityService.findOne(Integer.parseInt(id));
-        if (city == null) {
-            throw new NullPointerException("Can't find city with id = " + id);
-        }
+//        if (city == null) {
+//            throw new NullPointerException("Can't find city with id = " + id);
+//        }
         return city;
     }
 
@@ -169,14 +168,37 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     @Override
-    public List<Academy> findWithEmployeeExperts() {
-        List<Academy> withEmployeeExperts = academyDAO.findWithEmployeeExperts();
-        if (withEmployeeExperts == null) {
-            throw new RuntimeException("There is no data in database");
-        } else {
-            return withEmployeeExperts;
+    public List<AcademyDTO> findWithEmployeeExperts() {
+        List<Academy> academiesWithExperts = academyDAO.findWithEmployeeExperts();
+        List<AcademyDTO> academyDTOS = new ArrayList<>();
+        for(Academy academy: academiesWithExperts){
+            AcademyDTO academyDTO = new AcademyDTO();
+            academyDTO.setNameForSite(academy.getName());
+            academyDTO.setDirection(academy.getDirections());
+            academyDTO.setAcademyStages(academy.getAcademyStages());
+            academyDTO.setGrName(academy.getName());
+            academyDTO.setStartDate(academy.getStartDate().toString());
+            academyDTO.setEndDate(academy.getEndDate().toString());
+            academyDTO.setProfile(academy.getProfile());
+            academyDTO.setStudentsActual(0);
+            academyDTO.setStudentsPlannedToGraduate(0);
+            academyDTO.setStudentsPlannedToEnrollment(0);
+            /*academyDTO.setStudentsActual(academy.getStudentGroupCount().getStudentsActual());
+            academyDTO.setStudentsPlannedToGraduate(academy.getStudentGroupCount().getStudentsPlannedToGraduate());
+            academyDTO.setStudentsPlannedToEnrollment(academy.getStudentGroupCount().getStudentsPlannedToEnrollment());*/
+            academyDTO.setTechnologie(academy.getTechnologies());
+            academyDTO.setCity(academy.getCity());
+            academyDTO.setCityNames("ee");
+            TreeMap<String, String> exp = new TreeMap<>();
+            for(Employee experts : academy.getExperts()){
+                exp.put(experts.getFirstname(), experts.getLastname());
+                academyDTO.setExpert(exp);
+            }
+            academyDTOS.add(academyDTO);
+
         }
 
+        return academyDTOS;
     }
 }
 
