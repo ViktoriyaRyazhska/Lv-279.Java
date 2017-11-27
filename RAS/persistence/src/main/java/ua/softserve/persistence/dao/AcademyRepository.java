@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Repository
-public interface AcademyDAO extends JpaRepository<Academy, Integer> {
+public interface AcademyRepository extends JpaRepository<Academy, Integer> {
     @Query("from Academy t left outer join fetch t.experts where t.name=:name")
     List<Academy> findAllByName(@Param("name")String name);
 

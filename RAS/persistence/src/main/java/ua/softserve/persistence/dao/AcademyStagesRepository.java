@@ -5,6 +5,6 @@ import ua.softserve.persistence.entity.AcademyStages;
 
 import java.util.List;
 
-public interface AcademyStagesDAO extends JpaRepository<AcademyStages, Integer> {
+public interface AcademyStagesRepository extends JpaRepository<AcademyStages, Integer> {
     List<AcademyStages> findAll();
 }

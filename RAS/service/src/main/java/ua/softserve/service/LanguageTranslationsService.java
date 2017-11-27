@@ -7,9 +7,9 @@ public interface LanguageTranslationsService {
 
     List<LanguageTranslations> getAllLanguageTranslationsName();
 
-    void save(LanguageTranslations user);
+    void save(LanguageTranslations languageTranslations);
 
     LanguageTranslations findOne(int id);
 
-    void remove(LanguageTranslations user);
+    void remove(LanguageTranslations languageTranslations);
 }

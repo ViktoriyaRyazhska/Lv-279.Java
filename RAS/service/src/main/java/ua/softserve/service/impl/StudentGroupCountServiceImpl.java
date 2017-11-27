@@ -3,7 +3,7 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.dao.StudentGroupCountDAO;
+import ua.softserve.persistence.dao.StudentGroupCountRepository;
 import ua.softserve.persistence.dto.AcademyDTO;
 import ua.softserve.persistence.entity.StudentGroupCount;
 import ua.softserve.service.StudentGroupCountService;
@@ -13,12 +13,12 @@ import java.util.List;
 @Service
 public class StudentGroupCountServiceImpl implements StudentGroupCountService {
     @Autowired
-    StudentGroupCountDAO studentGroupCountDAO;
+    StudentGroupCountRepository studentGroupCountRepository;
 
     @Transactional
     @Override
     public void save(StudentGroupCount studentGroupCount) {
-        studentGroupCountDAO.save(studentGroupCount);
+        studentGroupCountRepository.save(studentGroupCount);
     }
 
     @Transactional
@@ -45,17 +45,17 @@ public class StudentGroupCountServiceImpl implements StudentGroupCountService {
 
     @Override
     public StudentGroupCount findOne(int id) {
-        return studentGroupCountDAO.findOne(id);
+        return studentGroupCountRepository.findOne(id);
     }
 
     @Override
     public List<StudentGroupCount> findAll() {
-        return studentGroupCountDAO.findAll();
+        return studentGroupCountRepository.findAll();
     }
 
     @Transactional
     @Override
     public void remove(StudentGroupCount studentGroupCount) {
-        studentGroupCountDAO.delete(studentGroupCount);
+        studentGroupCountRepository.delete(studentGroupCount);
     }
 }

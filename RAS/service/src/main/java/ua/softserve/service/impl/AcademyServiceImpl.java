@@ -1,19 +1,19 @@
 package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.softserve.persistence.dao.AcademyRepository;
 import ua.softserve.persistence.dto.AcademyDTO;
-import ua.softserve.persistence.dao.AcademyDAO;
-import ua.softserve.persistence.entity.*;
+import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.entity.City;
+import ua.softserve.persistence.entity.Employee;
+import ua.softserve.persistence.entity.EmployeeRoles;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.CityService;
 import ua.softserve.service.EmployeeService;
 import ua.softserve.service.StudentGroupCountService;
 
-import java.awt.print.Pageable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import java.util.TreeMap;
 public class AcademyServiceImpl implements AcademyService {
     private static final int MAXROW = 10;
     @Autowired
-    AcademyDAO academyDAO;
+    AcademyRepository academyRepository;
 
     @Autowired
     CityService cityService;
@@ -36,25 +36,25 @@ public class AcademyServiceImpl implements AcademyService {
     @Transactional(readOnly = true)
     @Override
     public Academy getById(Integer id) {
-        return academyDAO.findOne(id);
+        return academyRepository.findOne(id);
     }
 
     @Transactional
     @Override
     public List<Academy> getAllAcademys() {
-        return academyDAO.findAll();
+        return academyRepository.findAll();
     }
 
     @Transactional
     @Override
     public List<Academy> findAllByName(String name) {
-        return academyDAO.findAllByName(name);
+        return academyRepository.findAllByName(name);
     }
 
     @Transactional
     @Override
     public void save(Academy academy) {
-        academyDAO.save(academy);
+        academyRepository.save(academy);
     }
 
     @Transactional
@@ -71,13 +71,8 @@ public class AcademyServiceImpl implements AcademyService {
         academy.setStartDate(convertStringToTimestamp(academyDTO.getStartDate()));
         academy.setEndDate(convertStringToTimestamp(academyDTO.getEndDate()));
         academy.setFree(academyDTO.getPayment());
-        academy.setStatus(0);
-        academy.setHasTech(0);
-        academy.setHasEng(0);
-        academy.setHasFirst(0);
-        academy.setNotSynchronized(0);
 
-        academyDAO.save(academy);
+        academyRepository.save(academy);
     }
 
 
@@ -102,9 +97,9 @@ public class AcademyServiceImpl implements AcademyService {
 
     private City getCity(String id) {
         City city = cityService.findOne(Integer.parseInt(id));
-//        if (city == null) {
-//            throw new NullPointerException("Can't find city with id = " + id);
-//        }
+        if (city == null) {
+            //throw new ("Can't find city with id = " + id);
+        }
         return city;
     }
 
@@ -114,8 +109,8 @@ public class AcademyServiceImpl implements AcademyService {
     public void saveCustom(int id, String role, int[] arr, EmployeeService employeeService) {
         List<Employee> employees;
         Academy academy;
-        if (role.equals("Teacher")) {
-            academy = academyDAO.findWithEmployeeTeacher(id);
+        if (role.equals(EmployeeRoles.Teacher.toString())) {
+            academy = academyRepository.findWithEmployeeTeacher(id);
             employees = academy.getTeachers();
             for (int i : arr) {
                 if (!employees.contains(employeeService.findOne(i))) {
@@ -123,9 +118,9 @@ public class AcademyServiceImpl implements AcademyService {
                 }
             }
             academy.setTeachers(employees);
-            academyDAO.save(academy);
-        } else if (role.equals("Expert")) {
-            academy = academyDAO.findWithEmployeeExperts(id);
+            academyRepository.save(academy);
+        } else if (role.equals(EmployeeRoles.Expert.toString())) {
+            academy = academyRepository.findWithEmployeeExperts(id);
             employees = academy.getExperts();
             for (int i : arr) {
                 if (!employees.contains(employeeService.findOne(i))) {
@@ -133,9 +128,9 @@ public class AcademyServiceImpl implements AcademyService {
                 }
             }
             academy.setExperts(employees);
-            academyDAO.save(academy);
-        } else if (role.equals("Interviewer")) {
-            academy = academyDAO.findWithEmployeeInterviewers(id);
+            academyRepository.save(academy);
+        } else if (role.equals(EmployeeRoles.Interviewer.toString())) {
+            academy = academyRepository.findWithEmployeeInterviewers(id);
             employees = academy.getInterviewers();
             for (int i : arr) {
                 if (!employees.contains(employeeService.findOne(i))) {
@@ -143,35 +138,35 @@ public class AcademyServiceImpl implements AcademyService {
                 }
             }
             academy.setInterviewers(employees);
-            academyDAO.save(academy);
+            academyRepository.save(academy);
         } else throw new IllegalArgumentException();
     }
 
     @Override
     public Academy findOne(int id) {
-        return academyDAO.findOne(id);
+        return academyRepository.findOne(id);
     }
 
     @Override
     public Academy findWithEmployeeTeacher(int id) {
-        return academyDAO.findWithEmployeeTeacher(id);
+        return academyRepository.findWithEmployeeTeacher(id);
     }
 
     @Override
     public Academy findWithEmployeeExperts(int id) {
-        return academyDAO.findWithEmployeeExperts(id);
+        return academyRepository.findWithEmployeeExperts(id);
     }
 
     @Override
     public Academy findWithEmployeeInterviewers(int id) {
-        return academyDAO.findWithEmployeeInterviewers(id);
+        return academyRepository.findWithEmployeeInterviewers(id);
     }
 
     @Override
     public List<AcademyDTO> findWithEmployeeExperts() {
-        List<Academy> academiesWithExperts = academyDAO.findWithEmployeeExperts();
+        List<Academy> academiesWithExperts = academyRepository.findWithEmployeeExperts();
         List<AcademyDTO> academyDTOS = new ArrayList<>();
-        for(Academy academy: academiesWithExperts){
+        for (Academy academy : academiesWithExperts) {
             AcademyDTO academyDTO = new AcademyDTO();
             academyDTO.setNameForSite(academy.getName());
             academyDTO.setDirection(academy.getDirections());
@@ -190,14 +185,12 @@ public class AcademyServiceImpl implements AcademyService {
             academyDTO.setCity(academy.getCity());
             academyDTO.setCityNames("ee");
             TreeMap<String, String> exp = new TreeMap<>();
-            for(Employee experts : academy.getExperts()){
+            for (Employee experts : academy.getExperts()) {
                 exp.put(experts.getFirstname(), experts.getLastname());
                 academyDTO.setExpert(exp);
             }
             academyDTOS.add(academyDTO);
-
         }
-
         return academyDTOS;
     }
 }
