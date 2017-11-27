@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.dao.EmployeeDAO;
+import ua.softserve.persistence.dao.EmployeeRepository;
 import ua.softserve.persistence.entity.Employee;
 import ua.softserve.service.EmployeeService;
 
@@ -16,25 +16,25 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
     static final int MAXROW=8;
     @Autowired
-    private EmployeeDAO employeeDAO;
+    private EmployeeRepository employeeRepository;
 
     @Transactional
     @Override
     public List<Employee> findAllEmployees() {
-        return employeeDAO.findAll();
+        return employeeRepository.findAll();
     }
 
     @Transactional
     @Override
     public List<Employee> findEmployeesWithItaRoles(String role) {
-        return employeeDAO.findEmployeesWithItaRoles(role);
+        return employeeRepository.findEmployeesWithItaRoles(role);
     }
 
     @Transactional
     @Override
     public Page<Employee> getEmployeeLog(Integer pageNumber,String role) {
         PageRequest pageRequest=new PageRequest(pageNumber -1,MAXROW,Sort.Direction.ASC,"firstname","lastname");
-        return employeeDAO.findEmployeesByItaroleRole(role,pageRequest);
+        return employeeRepository.findEmployeesByItaroleRole(role,pageRequest);
     }
 
     @Transactional
@@ -42,22 +42,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Page<Employee> getEmployeeLogFromInput(Integer pageNumber, String firstname, String lastname, String role) {
         PageRequest pageRequest=new PageRequest(pageNumber -1,MAXROW,Sort.Direction.ASC,"firstname","lastname");
         if (!firstname.equals("") && !lastname.equals("")){
-            return employeeDAO.findEmployeesByItaroleRoleAndFirstnameLikeAndLastnameLike(role,firstname,lastname,pageRequest);
+            return employeeRepository.findEmployeesByItaroleRoleAndFirstnameLikeAndLastnameLike(role,firstname,lastname,pageRequest);
         }
         else if (!firstname.equals("") && lastname.equals("")){
-            return employeeDAO.findEmployeesByItaroleRoleAndFirstnameLike(role,firstname,pageRequest);
+            return employeeRepository.findEmployeesByItaroleRoleAndFirstnameLike(role,firstname,pageRequest);
         }
         else if (firstname.equals("") && !lastname.equals("")){
-            return employeeDAO.findEmployeesByItaroleRoleAndLastnameLike(role,lastname,pageRequest);
+            return employeeRepository.findEmployeesByItaroleRoleAndLastnameLike(role,lastname,pageRequest);
         }
         else {
-            return employeeDAO.findEmployeesByItaroleRole(role,pageRequest);
+            return employeeRepository.findEmployeesByItaroleRole(role,pageRequest);
         }
     }
 
     @Transactional
     @Override
     public Employee findOne(int id) {
-        return employeeDAO.findOne(id);
+        return employeeRepository.findOne(id);
     }
 }

@@ -8,6 +8,7 @@ import ua.softserve.persistence.dto.AcademyDTO;
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.City;
 import ua.softserve.persistence.entity.Employee;
+import ua.softserve.persistence.entity.EmployeeRoles;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.CityService;
 import ua.softserve.service.EmployeeService;
@@ -106,7 +107,7 @@ public class AcademyServiceImpl implements AcademyService {
     public void saveCustom(int id, String role, int[] arr, EmployeeService employeeService) {
         List<Employee> employees;
         Academy academy;
-        if (role.equals("Teacher")) {
+        if (role.equals(EmployeeRoles.Teacher.toString())) {
             academy = academyRepository.findWithEmployeeTeacher(id);
             employees = academy.getTeachers();
             for (int i : arr) {
@@ -116,7 +117,7 @@ public class AcademyServiceImpl implements AcademyService {
             }
             academy.setTeachers(employees);
             academyRepository.save(academy);
-        } else if (role.equals("Expert")) {
+        } else if (role.equals(EmployeeRoles.Expert.toString())) {
             academy = academyRepository.findWithEmployeeExperts(id);
             employees = academy.getExperts();
             for (int i : arr) {
@@ -126,7 +127,7 @@ public class AcademyServiceImpl implements AcademyService {
             }
             academy.setExperts(employees);
             academyRepository.save(academy);
-        } else if (role.equals("Interviewer")) {
+        } else if (role.equals(EmployeeRoles.Interviewer.toString())) {
             academy = academyRepository.findWithEmployeeInterviewers(id);
             employees = academy.getInterviewers();
             for (int i : arr) {
