@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+  background: white;
+  color: black;
+  border-spacing: 1px
+}
+th {
+  background: lightskyblue;
+  padding: 5px;
+
+}
+td{
+  background: ghostwhite;
+  padding: 5px;
+  text-align: center;
+
+}
+div{
+  padding-left: 2%;
+  padding-right: 2%;
+}

@@ -44,3 +44,7 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+#Angular
+node/
+node_modules/
