@@ -20,6 +20,10 @@ public class AcademyServiceImpl implements AcademyService {
     @Autowired
     AcademyConverter academyConverter;
 
+    @Autowired
+    EmployeeDirectionService employeeDirectionService;
+
+
     @Transactional(readOnly = true)
     @Override
     public Academy getById(Integer id) {
@@ -65,6 +69,9 @@ public class AcademyServiceImpl implements AcademyService {
             }
             academy.setTeachers(employees);
             academyRepository.save(academy);
+            for(Employee empl : employees) {
+                employeeDirectionService.addEmployeeToGroup(id, empl,1);
+            }
         } else if (role.equals("Expert")) {
             academy = academyRepository.findWithEmployeeExperts(id);
             employees = academy.getExperts();
@@ -75,6 +82,9 @@ public class AcademyServiceImpl implements AcademyService {
             }
             academy.setExperts(employees);
             academyRepository.save(academy);
+            for(Employee empl : employees) {
+                employeeDirectionService.addEmployeeToGroup(id, empl,2);
+            }
         } else if (role.equals("Interviewer")) {
             academy = academyRepository.findWithEmployeeInterviewers(id);
             employees = academy.getInterviewers();
@@ -85,6 +95,9 @@ public class AcademyServiceImpl implements AcademyService {
             }
             academy.setInterviewers(employees);
             academyRepository.save(academy);
+            for(Employee empl : employees) {
+                employeeDirectionService.addEmployeeToGroup(id, empl,3);
+            }
         } else throw new IllegalArgumentException();
     }
 
@@ -119,4 +132,6 @@ public class AcademyServiceImpl implements AcademyService {
 
     }
 }
+
+
 
