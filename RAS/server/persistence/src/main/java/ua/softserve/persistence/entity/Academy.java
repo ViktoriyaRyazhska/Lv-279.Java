@@ -110,27 +110,5 @@ public class Academy {
     )
     private List<Employee> interviewers;
 
-    @Override
-    public String toString() {
-        return "Academy{" +
-                "academyId=" + academyId +
-                ", city=" + city +
-                ", directions=" + directions +
-                ", technologies=" + technologies +
-                ", academyStages=" + academyStages +
-                ", profile=" + profile +
-                ", studentGroupCount=" + studentGroupCount +
-                ", crmGroup=" + crmGroup +
-                ", name='" + name + '\'' +
-                ", startDate=" + startDate.toLocalDateTime().toLocalDate() +
-                ", endDate=" + endDate.toLocalDateTime().toLocalDate() +
-                ", free=" + free +
-                ", status=" + status +
-                ", hasTech=" + hasTech +
-                ", hasEng=" + hasEng +
-                ", hasFirst=" + hasFirst +
-                ", notSynchronized=" + notSynchronized +
-                '}';
-    }
 }
 
