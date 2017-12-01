@@ -11,7 +11,7 @@
  
     <parent>
         <groupId>ua.softserve</groupId>
-        <artifactId>RAS</artifactId>
+        <artifactId>server</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
  

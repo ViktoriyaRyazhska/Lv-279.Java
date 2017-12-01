@@ -2,12 +2,21 @@ package ua.softserve.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ua.softserve.persistence.entity.Employee;
+import ua.softserve.persistence.entity.EmployeeDirection;
 import ua.softserve.service.AcademyService;
+import ua.softserve.service.EmployeeDirectionService;
 import ua.softserve.service.EmployeeService;
+
+import java.util.List;
 
 @Controller
 public class EmployeeController {
@@ -15,6 +24,8 @@ public class EmployeeController {
     EmployeeService employeeService;
     @Autowired
     AcademyService academyService;
+    @Autowired
+    EmployeeDirectionService employeeDirectionService;
 
     @GetMapping(value = "/group-{groupId}/pages-{pageNumber}-{role}")
     public String getRunbookPage(@PathVariable Integer pageNumber,
@@ -73,5 +84,17 @@ public class EmployeeController {
         }
         academyService.saveCustom(groupId,role,arr,employeeService);
         return "redirect:/group-"+groupId+"/pages-1-"+role;
+    }
+
+    @GetMapping("/showGroupStaff-{groupId}")
+    public ResponseEntity<List <EmployeeDirection>> showAllInfoEmployees (@PathVariable int groupId) {
+        return new ResponseEntity<List <EmployeeDirection>>(employeeDirectionService.findAllEmployeesDirectionsByGroupId(groupId), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/remove-group-{empl_id}")
+    public String removeGroupEmployee (@PathVariable int empl_id,Model model){
+        employeeDirectionService.removeGroupEmployee(empl_id);
+        return "index";
     }
 }

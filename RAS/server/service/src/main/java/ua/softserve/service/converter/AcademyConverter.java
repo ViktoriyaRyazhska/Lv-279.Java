@@ -33,22 +33,40 @@ public class AcademyConverter {
         AcademyDTO academyDTO = new AcademyDTO();
 //        academyDTO.setGrName();
         academyDTO.setNameForSite(academy.getName());
-        academyDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
-//        academyDTO.setStartDate();
-//        academyDTO.setEndDate();
-        academyDTO.setCityId(academy.getCity().getCityId());
-        academyDTO.setPayment(academy.getFree());
-        academyDTO.setDirectionId(academy.getDirections().getDirectionId());
-        academyDTO.setTechnologieId(academy.getTechnologies().getTechnologyId());
-        academyDTO.setProfileId(academy.getProfile().getProfileId());
-        academyDTO.setStudentPlannedToGraduate(academy.getStudentGroupCount().getStudentsPlannedToGraduate());
-        academyDTO.setStudentPlannedToEnrollment(academy.getStudentGroupCount().getStudentsPlannedToEnrollment());
-        academyDTO.setStudentActual(academy.getStudentGroupCount().getStudentsActual());
 
+        if (academy.getAcademyStages() != null) {
+            academyDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
+        }
+        if (academy.getStartDate() != null) {
+            academyDTO.setStartDate(academy.getStartDate().toString());
+        }
+        academyDTO.setEndDate(academy.getEndDate() != null ? academy.getEndDate().toString() : null);
+
+        if (academy.getCity() != null) {
+            academyDTO.setCityId(academy.getCity().getCityId());
+        }
+
+        academyDTO.setPayment(academy.getFree());
+        if (academy.getDirections() != null) {
+            academyDTO.setDirectionId(academy.getDirections().getDirectionId());
+        }
+        if (academy.getTechnologies() != null) {
+            academyDTO.setTechnologieId(academy.getTechnologies().getTechnologyId());
+        }
+        if (academy.getProfile() != null) {
+            academyDTO.setProfileId(academy.getProfile().getProfileId());
+        }
+        StudentGroupCount studentGroupCount = academy.getStudentGroupCount();
+        if (studentGroupCount != null) {
+            academyDTO.setStudentPlannedToGraduate(studentGroupCount.getStudentsPlannedToGraduate());
+            academyDTO.setStudentPlannedToEnrollment(studentGroupCount.getStudentsPlannedToEnrollment());
+            academyDTO.setStudentActual(studentGroupCount.getStudentsActual());
+
+        }
         return academyDTO;
     }
 
-    public  Academy toEntity(AcademyDTO academyDTO) {
+    public Academy toEntity(AcademyDTO academyDTO) {
         Academy academy = new Academy();
 
         academy.setName(academyDTO.getNameForSite());
@@ -92,19 +110,19 @@ public class AcademyConverter {
         return city;
     }
 
-    private AcademyStages getAcademyStages(int academyStagesId){
+    private AcademyStages getAcademyStages(int academyStagesId) {
         return academyStagesService.findOne(academyStagesId);
     }
 
-    private Directions getDirection(int direcrionId){
+    private Directions getDirection(int direcrionId) {
         return directionService.findOne(direcrionId);
     }
 
-    private Technologies getTechnologies(int technologieId){
+    private Technologies getTechnologies(int technologieId) {
         return technologieService.findOne(technologieId);
     }
 
-    private Profile getProfile(int profileId){
+    private Profile getProfile(int profileId) {
         return profileService.findOne(profileId);
     }
 }
