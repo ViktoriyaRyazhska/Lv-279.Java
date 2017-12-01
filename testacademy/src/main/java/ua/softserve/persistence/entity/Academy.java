@@ -1,14 +1,14 @@
-package com.academy.test.testacademy.entity;
+package ua.softserve.persistence.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
-
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "academy")
 public class Academy {
@@ -75,25 +75,4 @@ public class Academy {
     @Column(name = "not_synchronized")
     private int notSynchronized;
 
-
-    @Override
-    public String toString() {
-        return "Academy{" +
-                "academyId=" + academyId +
-                ", city=" + city +
-                ", directions=" + directions +
-                ", technologies=" + technologies +
-                ", academyStages=" + academyStages +
-                ", crmGroup=" + crmGroup +
-                ", name='" + name + '\'' +
-                ", startDate=" + startDate.toLocalDateTime().toLocalDate() +
-                ", endDate=" + endDate.toLocalDateTime().toLocalDate() +
-                ", free=" + free +
-                ", status=" + status +
-                ", hasTech=" + hasTech +
-                ", hasEng=" + hasEng +
-                ", hasFirst=" + hasFirst +
-                ", notSynchronized=" + notSynchronized +
-                '}';
-    }
 }

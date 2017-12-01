@@ -1,4 +1,4 @@
-package com.academy.test.testacademy;
+package ua.softserve;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

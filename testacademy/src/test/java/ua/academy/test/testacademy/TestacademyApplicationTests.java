@@ -1,4 +1,4 @@
-package com.academy.test.testacademy;
+package ua.academy.test.testacademy;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,14 +1,17 @@
-package com.academy.test.testacademy.entity;
+package ua.softserve.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@ToString
-@Getter @Setter
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "academy_stages")
 public class AcademyStages {
@@ -24,6 +27,4 @@ public class AcademyStages {
     @NotNull
     @Column(name = "sort")
     private byte sort;
-
-    public AcademyStages() {}
 }

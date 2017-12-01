@@ -1,6 +1,6 @@
-package com.academy.test.testacademy.repo;
+package ua.softserve.persistence.repo;
 
-import com.academy.test.testacademy.entity.GroupInfo;
+import ua.softserve.persistence.entity.GroupInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GroupRepo extends JpaRepository<GroupInfo, Integer> {

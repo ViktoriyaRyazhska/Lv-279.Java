@@ -1,18 +1,23 @@
-package com.academy.test.testacademy.entity;
+package ua.softserve.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter @Setter
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "group_info")
 public class GroupInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "group_info_id")
+    @Column(name = "group_info_id")
     private int groupInfoId;
 
     @OneToOne
@@ -34,5 +39,4 @@ public class GroupInfo {
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private ProfileInfo profileInfo;
-
 }

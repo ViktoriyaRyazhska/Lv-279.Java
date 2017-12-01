@@ -1,14 +1,17 @@
-package com.academy.test.testacademy.entity;
+package ua.softserve.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter @Setter
-@ToString
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "directions")
 public class Directions {
@@ -21,21 +24,9 @@ public class Directions {
     @Column(name = "name")
     private String name;
 
-    @NotNull
-    @Column(name = "item")
-    private String item;
-
-    @Column(name = "crm_id")
-    private Integer crmId;
-
     @Column(name = "ita")
     private Byte ita;
 
-    @Column(name = "vacancy")
-    private Byte vacancy;
-
     @Column(name = "status")
     private Byte status;
-
-    public Directions() {}
 }

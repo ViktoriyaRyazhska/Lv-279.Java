@@ -1,15 +1,18 @@
-package com.academy.test.testacademy.entity;
+package ua.softserve.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@ToString
-@Getter @Setter
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "city")
 public class City {
     @Id
@@ -24,18 +27,7 @@ public class City {
     @Column(name = "country_id")
     private Integer countryId;
 
-    @Column(name = "status", columnDefinition = "TINYINT(1)")
-    private Byte status;
-
     @Column(name = "ita")
     private Integer ita;
-
-    @Column(name = "vacancy")
-    private Integer vacancy;
-
-    @Column(name = "state_id", columnDefinition = "INT(11) UNSIGNED")
-    private Integer stateId;
-
-    public City() {}
 
 }
