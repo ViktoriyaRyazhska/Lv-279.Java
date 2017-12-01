@@ -6,6 +6,7 @@ import {GroupListComponent} from './group/group-list/group-list.component';
 import {GroupService} from './group/group.service';
 import {HistoryListComponent} from './history/history-list/history-list.component';
 import {HistoryService} from './history/history.service';
+import { ViewAcademiesComponent } from './view-academies/view-academies.component';
 
 
 
@@ -13,7 +14,8 @@ import {HistoryService} from './history/history.service';
   declarations: [
     AppComponent,
     GroupListComponent,
-    HistoryListComponent
+    HistoryListComponent,
+    ViewAcademiesComponent
 
   ],
   imports: [

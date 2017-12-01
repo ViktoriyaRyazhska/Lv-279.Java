@@ -9,6 +9,7 @@ import ua.softserve.service.*;
 import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.converter.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -108,15 +109,16 @@ public class AcademyServiceImpl implements AcademyService {
         return academyRepository.findWithEmployeeInterviewers(id);
     }
 
+    @Transactional
     @Override
-    public List<Academy> findWithEmployeeExperts() {
-        List<Academy> withEmployeeExperts = academyRepository.findWithEmployeeExperts();
-        if (withEmployeeExperts == null) {
-            throw new RuntimeException("There is no data in database");
-        } else {
-            return withEmployeeExperts;
+    public List<AcademyDTO> findWithEmployeeExperts() {
+        List<Academy> academies = academyRepository.findWithEmployeeExperts();
+        List<AcademyDTO> academyDTOS = new ArrayList<>();
+        for(Academy academy: academies){
+            AcademyDTO academyDTO = academyConverter.toDTO(academy);
+            academyDTOS.add(academyDTO);
         }
-
+        return academyDTOS;
     }
 }
 
