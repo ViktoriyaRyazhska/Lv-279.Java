@@ -7,8 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
+@Getter @Setter
 @ToString
 @Entity
 @Table(name = "technologies")

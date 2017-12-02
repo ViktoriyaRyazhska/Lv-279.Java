@@ -7,8 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "academy")
 public class Academy {
@@ -33,7 +32,6 @@ public class Academy {
     @ManyToOne
     @JoinColumn(name = "stage_id")
     private AcademyStages academyStages;
-
 
     @NotNull
     @Column(name = "crm_group")
@@ -75,4 +73,5 @@ public class Academy {
     @Column(name = "not_synchronized")
     private int notSynchronized;
 
+    public Academy() {}
 }

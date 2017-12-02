@@ -1,17 +1,12 @@
 package ua.softserve.persistence.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter
 @Entity
 @Table(name = "profile_info")
 public class ProfileInfo {
@@ -29,6 +24,7 @@ public class ProfileInfo {
     @JoinColumn(name = "technology_id")
     private Technologies technologies;
 
+    public ProfileInfo() {}
 }
 
 

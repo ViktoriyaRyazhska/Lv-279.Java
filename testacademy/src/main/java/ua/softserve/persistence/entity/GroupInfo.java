@@ -1,17 +1,12 @@
 package ua.softserve.persistence.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter
 @Entity
 @Table(name = "group_info")
 public class GroupInfo {
@@ -39,4 +34,6 @@ public class GroupInfo {
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private ProfileInfo profileInfo;
+
+    public GroupInfo() {}
 }
