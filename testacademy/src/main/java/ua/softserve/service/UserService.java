@@ -15,6 +15,10 @@ import ua.softserve.persistence.entity.User;
 import java.util.List;
 
 public interface UserService {
+    /**
+     * Demo method for saving n random users
+     * @param countOfUsers (n) number of users to generating and saving
+     */
     void genAndSaveUsers(int countOfUsers);
 
     List<User> findAll();

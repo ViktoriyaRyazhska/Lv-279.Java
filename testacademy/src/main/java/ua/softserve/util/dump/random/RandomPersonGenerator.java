@@ -19,7 +19,7 @@ import ua.softserve.util.dump.random.RandomPerson.Sex;
 import java.util.Random;
 
 /**
- * Util class for creating some person
+ * Util class for creating some <b>person</b>
  * with random data (sex, first name, second name, last name, email).
  */
 public class RandomPersonGenerator {

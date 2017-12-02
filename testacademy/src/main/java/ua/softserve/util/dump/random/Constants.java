@@ -10,6 +10,9 @@
 
 package ua.softserve.util.dump.random;
 
+/**
+ * Class with constants of person data (firs, second, last names, email domains, etc.)
+ */
 public class Constants {
 
     final static String[] MAN_FIRST_NAMES = {

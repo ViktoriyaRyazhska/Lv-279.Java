@@ -25,6 +25,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository uRepo;
 
+    /**
+     * Demo method for saving n random users
+     * @param countOfUsers (n) number of users to generating and saving
+     */
     @Override
     public void genAndSaveUsers(int countOfUsers) {
         for (int i = 0; i < countOfUsers; i++) {

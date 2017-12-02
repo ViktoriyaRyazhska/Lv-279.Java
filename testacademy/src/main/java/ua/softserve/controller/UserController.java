@@ -21,12 +21,22 @@ public class UserController {
     @Autowired
     private UserService uServ;
 
+    /**
+     *
+     * Demo controller for saving n random users
+     * @param count (n) number of users to generating and saving
+     * @return simple string 'Hello'
+     */
     @GetMapping(value = "/user/randomAdd{count}", produces = {"application/json"})
     public ResponseEntity<String> randomAddUsers(@PathVariable int count) {
         uServ.genAndSaveUsers(count);
         return new ResponseEntity<>("Hello", HttpStatus.OK);
     }
 
+    /**
+     * Gets from DB list of all users.
+     * @return JSON object of list of all users from DB.
+     */
     @GetMapping(value = "/user/getAllUsers", produces = {"application/json"})
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(uServ.findAll(), HttpStatus.OK);

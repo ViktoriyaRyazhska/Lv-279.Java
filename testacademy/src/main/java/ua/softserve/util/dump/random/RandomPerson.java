@@ -17,7 +17,7 @@ import lombok.Setter;
 
 /**
  * Class of Persons.
- * Consists of sex, first name, second name, last name and email.
+ * Consists of <b>sex, first name, second name, last name and email</b>.
  */
 @Getter
 @Setter
