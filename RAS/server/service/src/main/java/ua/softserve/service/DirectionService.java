@@ -12,6 +12,8 @@ public interface DirectionService {
 
     List<Directions> findAll();
 
+    List<Directions> findAllDirectionsInIta();
+
     List<String> findDirectionsName();
 
     void remove(Directions user);

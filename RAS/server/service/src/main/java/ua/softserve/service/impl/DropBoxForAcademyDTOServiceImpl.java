@@ -26,8 +26,8 @@ public class DropBoxForAcademyDTOServiceImpl implements DropBoxForAcademyDTOServ
     public DropBoxForAcademyDTO getDropBox(){
         DropBoxForAcademyDTO dropBoxForAcademyDTO = new DropBoxForAcademyDTO();
         dropBoxForAcademyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
-        dropBoxForAcademyDTO.setDirection(directionService.findAll());
-        dropBoxForAcademyDTO.setTechnologie(technologieService.findAll());
+        dropBoxForAcademyDTO.setDirection(directionService.findAllDirectionsInIta());
+        dropBoxForAcademyDTO.setTechnologie(technologieService.findAllTechonologyInIta());
         dropBoxForAcademyDTO.setProfile(profileService.findAll());
         dropBoxForAcademyDTO.setCityNames(languageTranslationsService.getAllLanguageTranslationsName());
         return dropBoxForAcademyDTO;
