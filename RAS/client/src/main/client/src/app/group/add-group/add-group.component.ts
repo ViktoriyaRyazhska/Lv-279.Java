@@ -16,7 +16,7 @@ export class AddGroupComponent implements OnInit {
   technologie: any[];
   profile: any[];
 
-  defaultStudentActual = 0;
+  defaultStudentActual: number = 0;
 
 
   // academyStages = [
