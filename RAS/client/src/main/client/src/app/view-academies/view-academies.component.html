@@ -1,6 +1,12 @@
-<div class="container">
-  <table id="MyTable" class="table table-condensed table-hover table-bordered table-responsive table-striped">
-    <caption><h1>Information about academies</h1></caption>
+<div class="container-fluid">
+  <br>
+  <input type="text" name="nameForSite" (input) = "onFilterField($event)">
+  <hr>
+  <input type="text" name="studentPlannedToGraduate" (input) = "onFilterField($event)">
+  <!--[(ngModel)]="filteredSite"-->
+  <caption><h1>Information about academies</h1></caption>
+  <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
+
     <tr>
       <th>Group name</th>
       <th>Name For Site</th>
@@ -19,16 +25,23 @@
       <th>Common Direction</th>
       <th>Interviewer Feedback</th>
     </tr>
-    <ng-container *ngFor="let academy of pagedItems">
-      <tr>
+
+      <tr *ngFor="let academy of pagedItems">
         <td>----</td>
         <td>{{academy.nameForSite}}</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>{{academy.studentPlannedToGraduate}}</td>
       </tr>
 
-    </ng-container>
-
   </table>
-  <div class="container">
     <div class="row">
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
         <li [ngClass]="{disabled:pager.currentPage === 1}">
@@ -48,5 +61,4 @@
         </li>
       </ul>
     </div>
-  </div>
 </div>

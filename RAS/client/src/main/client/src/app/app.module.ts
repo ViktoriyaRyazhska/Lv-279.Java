@@ -10,6 +10,8 @@ import {ViewAcademiesComponent} from './view-academies/view-academies.component'
 import {RouterModule, Routes} from "@angular/router";
 import {AddGroupComponent} from "./group/add-group/add-group.component";
 import {AddGroupService} from "./group/add-group/add-group.service";
+import { FilterPipe } from './view-academies/filter.pipe';
+import {FormsModule} from "@angular/forms";
 
 const appRoutes: Routes = [
   {path: 'viewAcademies', component: ViewAcademiesComponent},
@@ -22,12 +24,16 @@ const appRoutes: Routes = [
     GroupListComponent,
     HistoryListComponent,
     ViewAcademiesComponent,
-    AddGroupComponent
+    AddGroupComponent,
+    ViewAcademiesComponent,
+    FilterPipe
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule
   ],
   providers: [GroupService, HistoryService, AddGroupService],
   bootstrap: [AppComponent]
