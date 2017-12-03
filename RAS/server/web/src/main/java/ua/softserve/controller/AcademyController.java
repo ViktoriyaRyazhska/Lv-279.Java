@@ -35,6 +35,7 @@ public class AcademyController {
     }
 
     @RequestMapping(value = "/viewAcademies",method = RequestMethod.GET)
+    @CrossOrigin(origins = "http://localhost:4200")
     public @ResponseBody
     List<AcademyDTO> searchSite(HttpServletRequest request) {
         List<AcademyDTO> academyDTOS = academyService.findWithEmployeeExperts();

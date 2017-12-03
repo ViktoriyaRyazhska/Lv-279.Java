@@ -6,9 +6,12 @@ import {GroupListComponent} from './group/group-list/group-list.component';
 import {GroupService} from './group/group.service';
 import {HistoryListComponent} from './history/history-list/history-list.component';
 import {HistoryService} from './history/history.service';
-import { ViewAcademiesComponent } from './view-academies/view-academies.component';
+import {ViewAcademiesComponent} from './view-academies/view-academies.component';
+import {RouterModule, Routes} from "@angular/router";
 
-
+const appRoutes: Routes = [
+  {path: 'viewAcademies', component: ViewAcademiesComponent}
+];
 
 @NgModule({
   declarations: [
@@ -20,9 +23,11 @@ import { ViewAcademiesComponent } from './view-academies/view-academies.componen
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [GroupService, HistoryService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
