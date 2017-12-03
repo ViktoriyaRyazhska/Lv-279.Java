@@ -1,11 +1,12 @@
-<div class="container">
+<div class="container-fluid">
+  <br>
   <input type="text" name="nameForSite" (input) = "onFilterField($event)">
   <hr>
   <input type="text" name="studentPlannedToGraduate" (input) = "onFilterField($event)">
   <!--[(ngModel)]="filteredSite"-->
-
+  <caption><h1>Information about academies</h1></caption>
   <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
-    <caption><h1>Information about academies</h1></caption>
+
     <tr>
       <th>Group name</th>
       <th>Name For Site</th>
@@ -41,7 +42,6 @@
       </tr>
 
   </table>
-  <div class="container">
     <div class="row">
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
         <li [ngClass]="{disabled:pager.currentPage === 1}">
@@ -61,5 +61,4 @@
         </li>
       </ul>
     </div>
-  </div>
 </div>
