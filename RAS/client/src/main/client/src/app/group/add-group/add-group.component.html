@@ -1,0 +1,107 @@
+<div class="container well">
+  <div id="form-test">
+    <form>
+      <div>
+        <ul class="col-sm-6 form-group" id="UL_left_column">
+
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label> Group Name:</label>
+              <input type="text" class="form-control input-sm"/>
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <label> Site for Name:</label>
+              <input type="text" class="form-control input-sm"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 ">
+              <label>Status:</label>
+              <select class="form-control input-sm">
+                <option *ngFor="let academy of academyStages" >{{academy.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <label>Location:</label>
+              <select class="form-control input-sm">
+                <option *ngFor="let city of cityNames" [value]="city.cityId">{{city.trasnlation}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label>Start Date:</label>
+              <input type="date" class="form-control input-sm"/>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>End Date:</label>
+              <input type="date" class="form-control input-sm"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <label class="radio-inline">
+                <input type="radio" [value]="1" name="foundedBySS">Founded by SoftServe
+              </label>
+              <label class="radio-inline">
+                <input type="radio" [value]="2" name="openGroup">Open Group
+              </label>
+            </div>
+          </div>
+        </ul>
+
+        <ul class="col-sm-6 form-group" id="UL_right_column">
+
+          <div class="row">
+            <div class="col-sm-12 form-group">
+              <label>Common Direction:</label>
+              <select class="form-control input-sm">
+                <option *ngFor="let direct of direction" [value]="direct.directionId">{{direct.name}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label>Direction:</label>
+              <select class="form-control input-sm">
+                <option *ngFor="let tech of technologie" [value]="tech.technologyId">{{tech.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <label>Profile:</label>
+              <select class="form-control input-sm">
+                <option *ngFor="let prof of profile" [value]="prof.profileId">{{prof.profileName}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <label> Students Planned to Graduate:</label>
+              <input type="number" class="form-control input-sm"/>
+            </div>
+            <div class="col-sm-4">
+              <label> Students Planned to Enrollment:</label>
+              <input type="number" class="form-control input-sm"/>
+            </div>
+
+            <div class="col-sm-4">
+              <label>Students Actual:</label>
+              <input type="number" class="form-control input-sm" value="0"/>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<div align="buttom">
+  <button type="submit" class="btn btn-primary" (click)="saveGroup()">Save Group</button>
+</div>
