@@ -24,4 +24,10 @@ public interface UserService {
 
     void remove(User user);
 
+    /**
+     * Demo method for saving n random users
+     * @param countOfUsers (n) number of users to generating and saving
+     */
+    void genAndSaveUsers(int countOfUsers);
+
 }
