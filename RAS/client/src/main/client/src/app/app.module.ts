@@ -8,9 +8,12 @@ import {HistoryListComponent} from './history/history-list/history-list.componen
 import {HistoryService} from './history/history.service';
 import {ViewAcademiesComponent} from './view-academies/view-academies.component';
 import {RouterModule, Routes} from "@angular/router";
+import {AddGroupComponent} from "./group/add-group/add-group.component";
+import {AddGroupService} from "./group/add-group/add-group.service";
 
 const appRoutes: Routes = [
-  {path: 'viewAcademies', component: ViewAcademiesComponent}
+  {path: 'viewAcademies', component: ViewAcademiesComponent},
+  {path: 'addgroup', component: AddGroupComponent}
 ];
 
 @NgModule({
@@ -18,15 +21,15 @@ const appRoutes: Routes = [
     AppComponent,
     GroupListComponent,
     HistoryListComponent,
-    ViewAcademiesComponent
-
+    ViewAcademiesComponent,
+    AddGroupComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [GroupService, HistoryService],
+  providers: [GroupService, HistoryService, AddGroupService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
