@@ -10,10 +10,6 @@
 
 package ua.softserve.util.dump.random;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import ua.softserve.util.dump.random.RandomPerson.Sex;
 
 import java.util.Random;
