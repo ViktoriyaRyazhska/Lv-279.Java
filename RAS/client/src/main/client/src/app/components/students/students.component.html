@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Students</h2>
+  <!-- Trigger the modal with a button -->
+
+  <table>
+    <thead>
+    <tr>
+      <th scope="col">Header 1</th>
+      <th scope="col">Header 2</th>
+      <th scope="col">Header 3</th>
+      <th scope="col">Header 4</th>
+      <th scope="col">Header 4</th>
+      <th scope="col">Header 4</th>
+      <th scope="col">Header 4</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of students">
+      <td>{{student.id}}</td>
+      <td><a href="*">{{student.firstName + student.lastName}}</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
