@@ -16,7 +16,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-@Controller
+@RestController
 public class AcademyController {
     @Autowired
     AcademyService academyService;
@@ -30,6 +30,7 @@ public class AcademyController {
     }
 
     @RequestMapping(value = "/academy/addgroup",method = RequestMethod.GET, produces = {"application/json"})
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<DropBoxForAcademyDTO> getAllAcademys() {
         return new ResponseEntity<DropBoxForAcademyDTO>(dropBoxForAcademyDTOService.getDropBox(), HttpStatus.OK);
     }
