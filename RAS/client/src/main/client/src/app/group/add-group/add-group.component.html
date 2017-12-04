@@ -20,7 +20,7 @@
             <div class="col-sm-6 ">
               <label>Status:</label>
               <select class="form-control input-sm">
-                <option *ngFor="let academy of academyStages" >{{academy.name}}</option>
+                <option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>
               </select>
             </div>
 
