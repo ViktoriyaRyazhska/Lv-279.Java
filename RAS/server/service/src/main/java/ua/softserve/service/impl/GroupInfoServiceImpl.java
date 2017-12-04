@@ -41,6 +41,11 @@ public class GroupInfoServiceImpl implements GroupInfoService{
         return academyDTOList;
     }
 
+    @Override
+    public GroupInfo findOneGroupInfoByAcademyId(int academyId) {
+        return groupInfoRepository.findByAcademyAcademyId(academyId);
+    }
+
 //TODO: refactor this
 //    @Transactional
 //    @Override

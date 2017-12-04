@@ -12,5 +12,7 @@ public interface GroupInfoService {
 
     GroupInfo findOne(int id);
 
+    GroupInfo findOneGroupInfoByAcademyId(int groupInfoId);
+
     List<AcademyDTO> getAllAcademies();
 }
