@@ -1,3 +1,13 @@
+/*
+* Feedback
+*
+* Version 1.0-SNAPSHOT
+*
+* 02.12.17
+*
+* All rights reserved by DoubleO Team (Team#1)
+* */
+
 package ua.softserve.persistence.entity;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +22,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ssu_student_feedback")
+@Table(name = "feedback")
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,17 +55,4 @@ public class Feedback {
 
     @Column(name = "summary_comment")
     private String summary;
-
-    @Override
-    public String toString() {
-        return "Feedback{" +
-                "learningAbility=" + learningAbility +
-                ", overallTechnicalCompetence=" + overallTechnicalCompetence +
-                ", passionalInitiative=" + passionalInitiative +
-                ", teamWork=" + teamWork +
-                ", gettingThingsDone=" + gettingThingsDone +
-                ", activeCommunicator=" + activeCommunicator +
-                ", summary='" + summary + '\'' +
-                '}';
-    }
 }

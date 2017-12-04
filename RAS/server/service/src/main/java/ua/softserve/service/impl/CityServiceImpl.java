@@ -13,7 +13,7 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.dao.CityRepository;
+import ua.softserve.persistence.repo.CityRepository;
 import ua.softserve.persistence.entity.City;
 import ua.softserve.service.CityService;
 

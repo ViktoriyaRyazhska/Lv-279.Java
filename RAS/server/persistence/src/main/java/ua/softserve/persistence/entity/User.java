@@ -7,7 +7,6 @@
 * All rights reserved by DoubleO Team (Team#1)
 */
 
-
 package ua.softserve.persistence.entity;
 
 import lombok.AllArgsConstructor;
@@ -30,10 +29,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-
-//    @OneToOne
-//    @JoinColumn(name = "country_id")
-//    private Country country;
 
     @Column(name = "user_name", nullable = false)
     private String userName;

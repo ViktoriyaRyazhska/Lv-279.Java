@@ -13,7 +13,7 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.dao.UserDAO;
+import ua.softserve.persistence.repo.UserDAO;
 import ua.softserve.persistence.entity.User;
 import ua.softserve.service.UserService;
 import ua.softserve.util.dump.random.RandomPerson;

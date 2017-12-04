@@ -2,7 +2,7 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ua.softserve.persistence.dao.LanguageTranslationsRepository;
+import ua.softserve.persistence.repo.LanguageTranslationsRepository;
 import ua.softserve.persistence.entity.LanguageTranslations;
 import ua.softserve.service.LanguageTranslationsService;
 

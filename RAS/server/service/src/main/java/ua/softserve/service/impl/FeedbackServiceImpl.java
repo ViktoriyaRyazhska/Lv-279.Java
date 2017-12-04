@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.service.dto.FeedbackDTO;
-import ua.softserve.persistence.dao.FeedbackDAO;
+import ua.softserve.persistence.repo.FeedbackDAO;
 import ua.softserve.persistence.entity.Feedback;
 import ua.softserve.service.FeedbackService;
 

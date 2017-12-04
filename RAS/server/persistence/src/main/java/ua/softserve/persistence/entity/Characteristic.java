@@ -1,3 +1,13 @@
+/*
+* Mark
+*
+* Version 1.0-SNAPSHOT
+*
+* 02.12.17
+*
+* All rights reserved by DoubleO Team (Team#1)
+* */
+
 package ua.softserve.persistence.entity;
 
 import lombok.AllArgsConstructor;
@@ -20,13 +30,5 @@ public class Characteristic {
     @Column(name = "characteristic_id")
     private int id;
 
-    @Column(name = "name")
-    private String characteristicName;
-
-    @Override
-    public String toString() {
-        return "Characteristic{" +
-                "characteristicName='" + characteristicName + '\'' +
-                '}';
-    }
+    private String name;
 }

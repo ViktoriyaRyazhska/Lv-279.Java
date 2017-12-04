@@ -3,11 +3,10 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.dao.HistoryDAO;
+import ua.softserve.persistence.repo.HistoryDAO;
 import ua.softserve.persistence.entity.History;
 import ua.softserve.service.HistoryService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

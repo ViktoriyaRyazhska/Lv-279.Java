@@ -1,36 +1,45 @@
 package ua.softserve.persistence.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "ssu_student")
-public class Student {
+@Table(name = "students")
+public class Students {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_id")
-    private Integer studentId;
+    private Integer id;
 
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "group_direction_id")
-    private ItaAcademy itaAcademy;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(name = "language")
-    private Double language;
+    @ManyToOne
+    @JoinColumn(name = "academy_id")
+    private Academy academy;
 
-    @Column(name = "rate")
-    private Double rate;
+    @Column(name = "eng_gram")
+    private Double engGram;
 
-    @Column(name = "incoming_test")
-    private Integer incomingTest;
+    @ManyToOne
+    @JoinColumn(name = "english_level_id")
+    private EnglishLevel englishLevel;
+
+    @Column(name = "interm_test_base")
+    private Double intermBase;
+
+    @Column(name = "interm_test_lang")
+    private Double intermLang;
 
     @Column(name = "entry_score")
     private Double entryScore;
@@ -65,32 +74,27 @@ public class Student {
     @Column(name = "test_10")
     private Double testTen;
 
-    @Column(name = "base_test")
-    private Double baseTest;
+    @Column(name = "final_base")
+    private Double finalBase;
 
-    @Column(name = "direction_test")
-    private Double directionTest;
+    @Column(name = "final_lang")
+    private Double finalLang;
 
-    @Column(name = "final_test")
-    private Double finalTest;
+    @Column(name = "incoming_test")
+    private Integer incomingTest;
 
     @Column(name = "teacher_score")
     private Double teacherScore;
 
-    @Column(name = "teacher_comment")
-    private String teacherComment;
-
     @Column(name = "expert_score")
     private Double expertScore;
-
-    @Column(name = "expert_comment")
-    private String expertComment;
 
     @Column(name = "interviewer_score")
     private Double interviewerScore;
 
-    @Column(name = "interviewer_comment")
-    private String interviewerComment;
+    @ManyToOne
+    @JoinColumn(name = "student_status_id")
+    private StudentStatuses studentStatus;
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "teacher_student_feedback_id")
@@ -100,5 +104,13 @@ public class Student {
     @JoinColumn(name = "expert_student_feedback_id")
     private Feedback expertFeedback;
 
+    @Column(name = "interviewer_comment")
+    private String interviewerComment;
 
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee approvedBy;
+
+    @Column(columnDefinition = "tinyint")
+    private boolean removed;
 }

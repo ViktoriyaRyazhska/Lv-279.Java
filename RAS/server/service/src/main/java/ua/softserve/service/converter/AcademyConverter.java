@@ -1,5 +1,6 @@
 package ua.softserve.service.converter;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
@@ -26,8 +27,6 @@ public class AcademyConverter {
     @Autowired
     ProfileService profileService;
 
-    @Autowired
-    StudentGroupCountService studentGroupCountService;
 
     public AcademyDTO toDTO(Academy academy) {
         AcademyDTO academyDTO = new AcademyDTO();
@@ -53,16 +52,17 @@ public class AcademyConverter {
         if (academy.getTechnologies() != null) {
             academyDTO.setTechnologieId(academy.getTechnologies().getTechnologyId());
         }
-        if (academy.getProfile() != null) {
-            academyDTO.setProfileId(academy.getProfile().getProfileId());
-        }
-        StudentGroupCount studentGroupCount = academy.getStudentGroupCount();
-        if (studentGroupCount != null) {
-            academyDTO.setStudentPlannedToGraduate(studentGroupCount.getStudentsPlannedToGraduate());
-            academyDTO.setStudentPlannedToEnrollment(studentGroupCount.getStudentsPlannedToEnrollment());
-            academyDTO.setStudentActual(studentGroupCount.getStudentsActual());
-
-        }
+        //TODO: refactor
+//        if (academy.getProfile() != null) {
+//            academyDTO.setProfileId(academy.getProfile().getProfileId());
+//        }
+//        StudentGroupCount studentGroupCount = academy.getStudentGroupCount();
+//        if (studentGroupCount != null) {
+//            academyDTO.setStudentPlannedToGraduate(studentGroupCount.getStudentsPlannedToGraduate());
+//            academyDTO.setStudentPlannedToEnrollment(studentGroupCount.getStudentsPlannedToEnrollment());
+//            academyDTO.setStudentActual(studentGroupCount.getStudentsActual());
+//
+//        }
         return academyDTO;
     }
 
@@ -77,8 +77,10 @@ public class AcademyConverter {
         academy.setFree(academyDTO.getPayment());
         academy.setDirections(getDirection(academyDTO.getDirectionId()));
         academy.setTechnologies(getTechnologies(academyDTO.getTechnologieId()));
-        academy.setProfile(getProfile(academyDTO.getProfileId()));
-        academy.setStudentGroupCount(studentGroupCountService.saveDTO(academyDTO));
+
+        //TODO: refactor
+//        academy.setProfile(getProfile(academyDTO.getProfileId()));
+//        academy.setStudentGroupCount(studentGroupCountService.saveDTO(academyDTO));
 
         return academy;
     }
@@ -122,7 +124,8 @@ public class AcademyConverter {
         return technologyService.findOne(technologieId);
     }
 
-    private Profile getProfile(int profileId) {
-        return profileService.findOne(profileId);
-    }
+    //TODO: refactor
+//    private Profile getProfile(int profileId) {
+//        return profileService.findOne(profileId);
+//    }
 }
