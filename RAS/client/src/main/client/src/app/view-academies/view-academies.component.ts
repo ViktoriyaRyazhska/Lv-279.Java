@@ -54,10 +54,11 @@ export class ViewAcademiesComponent implements OnInit {
     if (this.filteredSite === '') {
       this.filteredAcademies = this.academies;
     } else {
-      this.filteredAcademies = this.filterService.transform(this.filteredAcademies, this.filteredSite, this.propName);
       if (this.filteredAcademies.length === 0) {
         this.filteredAcademies = this.academies;
       }
+      this.filteredAcademies = this.filterService.transform(this.filteredAcademies, this.filteredSite, this.propName);
+
     }
     this.setPage(1);
   }

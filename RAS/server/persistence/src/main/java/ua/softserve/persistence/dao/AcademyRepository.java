@@ -31,4 +31,5 @@ public interface AcademyRepository extends JpaRepository<Academy, Integer> {
     Academy findWithEmployeeInterviewers(@Param("id")int id);
 
 
+
 }

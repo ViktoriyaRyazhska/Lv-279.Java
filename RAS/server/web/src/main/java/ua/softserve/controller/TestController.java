@@ -6,9 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import ua.softserve.persistence.entity.Directions;
 import ua.softserve.persistence.entity.LanguageTranslations;
-import ua.softserve.persistence.entity.Technologies;
 import ua.softserve.service.*;
 import ua.softserve.service.dto.ItaTacticalPlanByGroupStageDto;
 
@@ -20,16 +18,13 @@ public class TestController {
     AcademyService academyService;
 
     @Autowired
-    DropBoxForAcademyDTOService dropBoxForAcademyDTOService;
-
-    @Autowired
     LanguageTranslationsService languageTranslationsService;
 
     @Autowired
     DirectionService directionService;
 
     @Autowired
-    TechnologieService technologieService;
+    TechnologyService technologyService;
 
     @Autowired
     ItaTacticalPlanByGroupStageDtoService itaTacticalPlanByGroupStageDtoService;

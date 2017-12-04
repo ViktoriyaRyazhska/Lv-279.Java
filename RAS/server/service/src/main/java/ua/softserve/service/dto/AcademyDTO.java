@@ -2,7 +2,9 @@ package ua.softserve.service.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import ua.softserve.persistence.entity.*;
 
+import java.util.List;
 import java.util.TreeMap;
 
 
@@ -23,5 +25,12 @@ public class AcademyDTO {
     private int studentPlannedToEnrollment;
     private int studentActual;
     private TreeMap<String, String> expert;
+
+    List<AcademyStages> academyStages;
+    List<LanguageTranslations> cityNames;
+    List<Directions> direction;
+    List<Technologies> technologie;
+    //TODO: rename field
+    List<Profile> profile;
 
 }
