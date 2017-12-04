@@ -3,15 +3,21 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.softserve.persistence.dao.LanguageTranslationsRepository;
+import ua.softserve.persistence.entity.City;
 import ua.softserve.persistence.entity.LanguageTranslations;
+import ua.softserve.service.CityService;
 import ua.softserve.service.LanguageTranslationsService;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class LanguageTranslationsServiceImpl implements LanguageTranslationsService {
     @Autowired
     LanguageTranslationsRepository languageTranslationsRepository;
+    @Autowired
+    private CityService cityService;
 
     @Override
     public List<LanguageTranslations> getAllLanguageTranslationsName() {
@@ -32,6 +38,5 @@ public class LanguageTranslationsServiceImpl implements LanguageTranslationsServ
     public void remove(LanguageTranslations languageTranslations) {
         languageTranslationsRepository.delete(languageTranslations);
     }
-
 
 }
