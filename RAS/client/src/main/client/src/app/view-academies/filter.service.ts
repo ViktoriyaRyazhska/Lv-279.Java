@@ -11,7 +11,7 @@ export class FilterService {
     }
     const resultArray = [];
     for (const item of value) {
-      if (('' + item[propName]).includes(filterString)) {
+      if (('' + item[propName]).includes('' + filterString)) {
         resultArray.push(item);
       }
     }

@@ -41,7 +41,7 @@
 //    @Override
 //    public List<ItaTacticalPlanByGroupStageDto> findAll() {
 //        List<ItaTacticalPlanByGroupStageDto> itaTacticalPlanByGroupStageDtos  = new ArrayList<ItaTacticalPlanByGroupStageDto>();
-//        List<Academy> academies= academyService.getAllAcademys();
+//        List<Academy> academies= academyService.getAllAcademies();
 //        for (Academy a:academies) {
 //            itaTacticalPlanByGroupStageDtos.add(this.findById(a.getAcademyId()));
 //        }

@@ -1,9 +1,4 @@
 <div class="container-fluid">
-  <br>
-
-  <hr>
-
-  <!--[(ngModel)]="filteredSite"-->
   <caption><h1>Information about academies</h1></caption>
   <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
 
@@ -26,32 +21,35 @@
       <th>Interviewer Feedback</th>
     </tr>
     <tr>
-      <td>----</td>
-      <td><input type="text" name="nameForSite" (input) = "onFilterField($event)"></td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td><input type="text" name="studentPlannedToGraduate" (input)= "onFilterField($event)"></td>
+      <td><input type="text" name="groupName" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="nameForSite" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="direction" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="profile" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="paymentStatus" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="location" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="date" name="startDate" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="date" name="endDate" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="status" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="experts" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="studentPlannedToGraduate" (input)= "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="studentPlannedForEnrolment" (input)= "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="studentsActual" (input)= "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="hiredNotGraduated" (input)= "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="commonDirections" (input)= "onFilterField($event)" class="form-control"></td>
     </tr>
-      <tr *ngFor="let academy of pagedItems">
+      <tr *ngFor="let academy of pagedItems" (click)="onClickFunc($event)">
         <td>----</td>
         <td>{{academy.nameForSite}}</td>
         <td>---</td>
         <td>---</td>
         <td>---</td>
         <td>---</td>
-        <td>---</td>
-        <td>---</td>
+        <td>{{academy.startDate | date: "dd.MM.yyyy"}}</td>
         <td>---</td>
         <td>---</td>
         <td>---</td>
         <td>{{academy.studentPlannedToGraduate}}</td>
+        <td>---</td>
       </tr>
 
   </table>

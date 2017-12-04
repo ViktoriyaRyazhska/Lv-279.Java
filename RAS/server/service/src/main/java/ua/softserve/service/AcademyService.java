@@ -15,10 +15,7 @@ public interface AcademyService {
 
     Academy findOne(int id);
 
-    List<AcademyDTO> findWithEmployeeExperts();
-
     AcademyDTO getAcademyDTO();
 
-    List<Academy> getAllAcademys();
-
+    List<Academy> getAllAcademies();
 }
