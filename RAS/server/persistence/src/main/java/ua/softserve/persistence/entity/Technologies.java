@@ -57,8 +57,5 @@ public class Technologies {
     @Column(name = "crm_id")
     private Integer crmId;
 
-    @Column(name = "activeGroups")
-    private Integer activeGroups;
-
     public Technologies() {}
 }

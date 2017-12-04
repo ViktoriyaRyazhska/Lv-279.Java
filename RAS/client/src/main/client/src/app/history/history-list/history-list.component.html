@@ -1,6 +1,7 @@
-<div>
-  <table>
-    <caption><h1>History</h1></caption>
+<div class="container">
+  <h1>History</h1>
+  <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
+
     <tr>
       <th>Group name</th>
       <th>Name for site</th>
@@ -18,11 +19,11 @@
         <td>{{history.academyName}}</td>
         <td>{{history.nameForSite}}</td>
         <td>{{history.location}}</td>
-        <td>{{history.sartDate|date}}</td>
-        <td>{{history.endDate|date}}</td>
+        <td>{{history.sartDate|date: "dd/MM/yy"}}</td>
+        <td>{{history.endDate|date: "dd/MM/yy"}}</td>
         <td>{{history.stage}}</td>
         <td>{{history.direction}}</td>
-        <td>{{history.modifyDate|date}}</td>
+        <td>{{history.modifyDate|date: "dd/MM/yy hh:mm"}}</td>
         <td>{{history.modifyBy}}</td>
       </tr>
     </ng-container>
