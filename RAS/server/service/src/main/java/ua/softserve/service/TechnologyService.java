@@ -4,7 +4,7 @@ import ua.softserve.persistence.entity.Technologies;
 
 import java.util.List;
 
-public interface TechnologieService {
+public interface TechnologyService {
     void save(Technologies technologies);
 
     Technologies findOne(int id);

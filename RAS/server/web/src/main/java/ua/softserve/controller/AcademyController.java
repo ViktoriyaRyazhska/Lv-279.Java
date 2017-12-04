@@ -3,26 +3,18 @@ package ua.softserve.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
-import ua.softserve.service.dto.DropBoxForAcademyDTO;
 
-import javax.accessibility.AccessibleValue;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 @RestController
 public class AcademyController {
     @Autowired
     AcademyService academyService;
-
-    @Autowired
-    DropBoxForAcademyDTOService dropBoxForAcademyDTOService;
 
     @RequestMapping(value = "/academy/{academyId}",method = RequestMethod.GET, produces = {"application/json"})
     public ResponseEntity<Academy> getAcademy(@PathVariable Integer academyId) {
@@ -31,14 +23,14 @@ public class AcademyController {
 
     @RequestMapping(value = "/academy/addgroup",method = RequestMethod.GET, produces = {"application/json"})
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<DropBoxForAcademyDTO> getAllAcademys() {
-        return new ResponseEntity<DropBoxForAcademyDTO>(dropBoxForAcademyDTOService.getDropBox(), HttpStatus.OK);
+    public ResponseEntity<AcademyDTO> getAllAcademys() {
+        return new ResponseEntity<AcademyDTO>(academyService.getAcademyDTO(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/viewAcademies",method = RequestMethod.GET)
     @CrossOrigin(origins = "http://localhost:4200")
     public @ResponseBody
-    List<AcademyDTO> searchSite(HttpServletRequest request) {
+    List<AcademyDTO> searchSite() {
         List<AcademyDTO> academyDTOS = academyService.findWithEmployeeExperts();
         return academyDTOS;
     }

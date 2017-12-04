@@ -21,7 +21,7 @@ public class AcademyConverter {
     DirectionService directionService;
 
     @Autowired
-    TechnologieService technologieService;
+    TechnologyService technologyService;
 
     @Autowired
     ProfileService profileService;
@@ -119,7 +119,7 @@ public class AcademyConverter {
     }
 
     private Technologies getTechnologies(int technologieId) {
-        return technologieService.findOne(technologieId);
+        return technologyService.findOne(technologieId);
     }
 
     private Profile getProfile(int profileId) {

@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.dao.TechnologiesRepository;
 import ua.softserve.persistence.entity.Technologies;
-import ua.softserve.service.TechnologieService;
+import ua.softserve.service.TechnologyService;
 
 import java.util.List;
 
 @Service
-public class TechnologieServiceImpl implements TechnologieService {
+public class TechnologyServiceImpl implements TechnologyService {
 
     @Autowired
     private TechnologiesRepository technologiesRepository;

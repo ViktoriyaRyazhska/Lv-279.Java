@@ -14,7 +14,6 @@ import java.util.List;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
-    private static final int MAXROW = 10;
     @Autowired
     AcademyRepository academyRepository;
 
@@ -23,6 +22,21 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Autowired
     EmployeeDirectionService employeeDirectionService;
+
+    @Autowired
+    AcademyStagesService academyStagesService;
+
+    @Autowired
+    DirectionService directionService;
+
+    @Autowired
+    TechnologyServiceImpl technologyServiceImpl;
+
+    @Autowired
+    ProfileService profileService;
+
+    @Autowired
+    LanguageTranslationsService languageTranslationsService;
 
 
     @Transactional(readOnly = true)
@@ -33,26 +47,8 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Transactional
     @Override
-    public List<Academy> getAllAcademys() {
-        return academyRepository.findAll();
-    }
-
-    @Transactional
-    @Override
-    public List<Academy> findAllByName(String name) {
-        return academyRepository.findAllByName(name);
-    }
-
-    @Transactional
-    @Override
     public void save(Academy academy) {
         academyRepository.save(academy);
-    }
-
-    @Transactional
-    @Override
-    public void saveDTO(AcademyDTO academyDTO) {
-        academyRepository.save(academyConverter.toEntity(academyDTO));
     }
 
     @Transactional
@@ -107,21 +103,6 @@ public class AcademyServiceImpl implements AcademyService {
         return academyRepository.findOne(id);
     }
 
-    @Override
-    public Academy findWithEmployeeTeacher(int id) {
-        return academyRepository.findWithEmployeeTeacher(id);
-    }
-
-    @Override
-    public Academy findWithEmployeeExperts(int id) {
-        return academyRepository.findWithEmployeeExperts(id);
-    }
-
-    @Override
-    public Academy findWithEmployeeInterviewers(int id) {
-        return academyRepository.findWithEmployeeInterviewers(id);
-    }
-
     @Transactional
     @Override
     public List<AcademyDTO> findWithEmployeeExperts() {
@@ -132,6 +113,17 @@ public class AcademyServiceImpl implements AcademyService {
             academyDTOS.add(academyDTO);
         }
         return academyDTOS;
+    }
+
+    @Override
+    public AcademyDTO getAcademyDTO(){
+        AcademyDTO academyDTO = new AcademyDTO();
+        academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
+        academyDTO.setDirection(directionService.findAllDirectionsInIta());
+        academyDTO.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
+        academyDTO.setProfile(profileService.findAll());
+        academyDTO.setCityNames(languageTranslationsService.getAllLanguageTranslationsName());
+        return academyDTO;
     }
 }
 
