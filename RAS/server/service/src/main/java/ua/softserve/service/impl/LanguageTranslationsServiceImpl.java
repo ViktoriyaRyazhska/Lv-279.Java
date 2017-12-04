@@ -33,4 +33,9 @@ public class LanguageTranslationsServiceImpl implements LanguageTranslationsServ
         languageTranslationsRepository.delete(languageTranslations);
     }
 
+    @Override
+    public LanguageTranslations findById(int id) {
+        return languageTranslationsRepository.findById(id);
+    }
+
 }

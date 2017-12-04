@@ -10,6 +10,7 @@ import ua.softserve.persistence.entity.Directions;
 import ua.softserve.persistence.entity.LanguageTranslations;
 import ua.softserve.persistence.entity.Technologies;
 import ua.softserve.service.*;
+import ua.softserve.service.dto.ItaTacticalPlanByGroupStageDto;
 
 import java.util.List;
 
@@ -30,8 +31,13 @@ public class TestController {
     @Autowired
     TechnologieService technologieService;
 
+    @Autowired
+    ItaTacticalPlanByGroupStageDtoService itaTacticalPlanByGroupStageDtoService;
+
     @RequestMapping(value = "/test",method = RequestMethod.GET, produces = {"application/json"})
     public ResponseEntity<List<LanguageTranslations>> getCity() {
         return new ResponseEntity<>(languageTranslationsService.getAllLanguageTranslationsName(), HttpStatus.OK);
     }
+
+
 }

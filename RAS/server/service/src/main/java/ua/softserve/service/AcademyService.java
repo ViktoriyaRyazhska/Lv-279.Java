@@ -28,4 +28,5 @@ public interface AcademyService {
     Academy findWithEmployeeInterviewers(int id);
 
     List<AcademyDTO> findWithEmployeeExperts();
+
 }
