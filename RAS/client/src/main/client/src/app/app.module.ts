@@ -15,7 +15,8 @@ import {FormsModule} from "@angular/forms";
 
 const appRoutes: Routes = [
   {path: 'viewAcademies', component: ViewAcademiesComponent},
-  {path: 'addgroup', component: AddGroupComponent}
+  {path: 'addgroup', component: AddGroupComponent},
+  {path:'history', component: HistoryListComponent}
 ];
 
 @NgModule({
