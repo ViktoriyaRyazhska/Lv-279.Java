@@ -10,7 +10,4 @@ import java.util.List;
 
 public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
     GroupInfo findByAcademyAcademyId(int academyId);
-
-    @Query("from GroupInfo t left outer join fetch t.employees where t.groupInfoId=:id")
-    GroupInfo findWithEmployeeTeacher(@Param("id")int id);
 }

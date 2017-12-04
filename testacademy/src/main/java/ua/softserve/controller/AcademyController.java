@@ -34,22 +34,22 @@ public class AcademyController {
         return new ResponseEntity<GroupInfo>(groupInfoRepository.findByAcademyAcademyId(0), HttpStatus.OK);
     }
 
-    @GetMapping("/olegtest")
-    public List<Employee> getSmth(){
-        int id=1;
-        GroupInfo groupInfo=groupInfoRepository.findWithEmployeeTeacher(id);
-        List<Employee> employees=groupInfo.getEmployees();
-        employees.add(employeeRepository.findOne(1));
-        groupInfoTeachersRepository.save(new GroupInfoTeachers(0,0,employeeRepository.findOne(1).getTeacherTypes().get(0).getName(),
-                1,groupInfo));
-        employees.add(employeeRepository.findOne(2));
-        groupInfoTeachersRepository.save(new GroupInfoTeachers(0,0,employeeRepository.findOne(2).getTeacherTypes().get(0).getName(),
-                2,groupInfo));
-        groupInfo.setEmployees(employees);
-        groupInfoRepository.save(groupInfo);
-
-        return null;
-    }
+//    @GetMapping("/olegtest")
+//    public List<Employee> getSmth(){
+//        int id=1;
+//        GroupInfo groupInfo=groupInfoRepository.findWithEmployeeTeacher(id);
+//        List<Employee> employees=groupInfo.getEmployees();
+//        employees.add(employeeRepository.findOne(1));
+//        groupInfoTeachersRepository.save(new GroupInfoTeachers(0,0,employeeRepository.findOne(1).getTeacherTypes().get(0).getName(),
+//                1,groupInfo));
+//        employees.add(employeeRepository.findOne(2));
+//        groupInfoTeachersRepository.save(new GroupInfoTeachers(0,0,employeeRepository.findOne(2).getTeacherTypes().get(0).getName(),
+//                2,groupInfo));
+//        groupInfo.setEmployees(employees);
+//        groupInfoRepository.save(groupInfo);
+//
+//        return null;
+//    }
 
 }
 

@@ -29,10 +29,11 @@ public class Students {
     private Academy academy;
 
     @Column(name = "eng_gram")
-    private Double language;
+    private Double engGram;
 
-    @Column(name = "rate")
-    private Double rate;
+    @ManyToOne
+    @JoinColumn(name = "english_level_id")
+    private EnglishLevel englishLevel;
 
     @Column(name = "interm_test_base")
     private Double intermBase;
@@ -106,6 +107,10 @@ public class Students {
     @Column(name = "interviewer_comment")
     private String interviewerComment;
 
-    @Column(name  = "approved_by")
-    private Integer approvedBy;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee approvedBy;
+
+    @Column(columnDefinition = "tinyint")
+    private boolean removed;
 }

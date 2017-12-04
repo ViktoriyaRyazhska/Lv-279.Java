@@ -33,9 +33,6 @@ public class Technologies {
     @Column(name = "image2")
     private String image2;
 
-    @Column(name = "price")
-    private Integer price;
-
     @Column(name = "ita")
     private Byte ita;
 

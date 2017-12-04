@@ -8,5 +8,5 @@ import ua.softserve.persistence.entity.GroupInfoTeachers;
 import java.util.List;
 
 public interface GroupInfoTeachersRepository extends JpaRepository<GroupInfoTeachers,Integer>{
-
+    List<GroupInfoTeachers> findAllByAcademy_AcademyId(int id);
 }

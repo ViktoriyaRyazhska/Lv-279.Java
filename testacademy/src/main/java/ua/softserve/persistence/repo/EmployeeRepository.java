@@ -10,6 +10,4 @@ import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Integer>{
 
-    @Query("from Employee t left outer join fetch t.teacherTypes where t.employee_id=:id")
-    List<Employee> findRightEmployee(@Param("id") int id);
 }

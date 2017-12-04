@@ -1,44 +1,37 @@
 package ua.softserve.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "groupinfoteachers")
+@Table(name = "group_info_teachers")
 public class GroupInfoTeachers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int groupinfoteachers_id;
+    private int id;
 
-    @Column(name = "involved")
+    @ManyToOne
+    @JoinColumn(name = "academy_id")
+    private Academy academy;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
     private int involved;
 
-    @Column(name = "contributedhours")
-    private int contributedhours;
+    @Column(name = "contributed_hours")
+    private int contributedHours;
 
-    @Column(name = "teachertype")
-    private String teachertype;
-
-    @Column(name = "employee_id")
-    private int employee_id;
-
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonIgnore
-    private GroupInfo groupInfo;
-
-    public GroupInfoTeachers(int involved, int contributedhours, String teachertype, int employee_id, GroupInfo groupInfo) {
-        this.involved = involved;
-        this.contributedhours = contributedhours;
-        this.teachertype = teachertype;
-        this.employee_id = employee_id;
-        this.groupInfo = groupInfo;
-    }
-
-    public GroupInfoTeachers() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "teacher_type_id")
+    private TeacherTypes teacherType;
 }

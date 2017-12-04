@@ -17,48 +17,23 @@ import java.util.Set;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employee_id;
+    @Column(name = "employee_id")
+    private int employeeId;
 
     @NotNull
-    @Column(name = "firstnameeng")
-    private String firstnameeng;
+    @Column(name = "first_name_eng")
+    private String firstNameEng;
 
     @NotNull
-    @Column(name = "lastnameeng")
-    private String lastnameeng;
+    @Column(name = "last_name_eng")
+    private String lastNameEng;
 
-    @NotNull
-    @Column(name = "firstnameukr")
-    private String firstnameukr;
+    @Column(name = "first_name_ukr")
+    private String firstNameUkr;
 
-    @NotNull
-    @Column(name = "lastnameukr")
-    private String lastnameukr;
+    @Column(name = "last_name_ukr")
+    private String lastNameUkr;
 
-    @NotNull
-    @Column(name = "secondnameukr")
-    private String secondnameukr;
-
-    @ManyToMany(cascade =  CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinTable(name = "employee_teachertype",
-        joinColumns = {@JoinColumn(name = "employee_id")},
-        inverseJoinColumns = {@JoinColumn(name = "teachertype_id")})
-    @JsonIgnore
-    private List<TeacherTypes> teacherTypes;
-
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "employees")
-    @JsonIgnore
-    private List<GroupInfo> groupInfosForTeachers;
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "employee_id=" + employee_id +
-                ", firstnameeng='" + firstnameeng + '\'' +
-                ", lastnameeng='" + lastnameeng + '\'' +
-                ", firstnameukr='" + firstnameukr + '\'' +
-                ", lastnameukr='" + lastnameukr + '\'' +
-                ", secondnameukr='" + secondnameukr + '\'' +
-                '}';
-    }
+    @Column(name = "second_name_ukr")
+    private String secondNameUkr;
 }

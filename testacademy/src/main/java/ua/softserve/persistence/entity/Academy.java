@@ -1,13 +1,18 @@
 package ua.softserve.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "academy")
 public class Academy {
@@ -73,5 +78,4 @@ public class Academy {
     @Column(name = "not_synchronized")
     private int notSynchronized;
 
-    public Academy() {}
 }
