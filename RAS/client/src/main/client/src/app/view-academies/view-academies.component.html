@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <br>
-  <input type="text" name="nameForSite" (input) = "onFilterField($event)">
+
   <hr>
-  <input type="text" name="studentPlannedToGraduate" (input) = "onFilterField($event)">
+
   <!--[(ngModel)]="filteredSite"-->
   <caption><h1>Information about academies</h1></caption>
   <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
@@ -25,7 +25,20 @@
       <th>Common Direction</th>
       <th>Interviewer Feedback</th>
     </tr>
-
+    <tr>
+      <td>----</td>
+      <td><input type="text" name="nameForSite" (input) = "onFilterField($event)"></td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+      <td><input type="text" name="studentPlannedToGraduate" (input)= "onFilterField($event)"></td>
+    </tr>
       <tr *ngFor="let academy of pagedItems">
         <td>----</td>
         <td>{{academy.nameForSite}}</td>
