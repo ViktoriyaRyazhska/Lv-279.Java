@@ -63,4 +63,8 @@ export class ViewAcademiesComponent implements OnInit {
     this.setPage(1);
   }
 
+  onClickFunc(event: Event) {
+    console.log(event);
+  }
+
 }
