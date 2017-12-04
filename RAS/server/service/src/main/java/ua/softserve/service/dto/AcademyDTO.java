@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 @Getter @Setter
 public class AcademyDTO {
-
+//TODO: fix grammar errors
     private String grName;
     private String nameForSite;
     private int academyStagesId;
@@ -21,6 +21,9 @@ public class AcademyDTO {
     private int directionId;
     private int technologieId;
     private int profileId;
+    private String profileName;
+    private String directionName;
+    private String technologyName;
     private int studentPlannedToGraduate;
     private int studentPlannedToEnrollment;
     private int studentActual;
