@@ -33,6 +33,11 @@ public class TechnologieServiceImpl implements TechnologieService {
         return technologiesRepository.findAll();
     }
 
+    @Override
+    public List<Technologies> findAllTechonologyInIta() {
+        return technologiesRepository.findAllTechonologyInIta();
+    }
+
     @Transactional
     @Override
     public void remove(Technologies technologies) {

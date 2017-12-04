@@ -34,6 +34,11 @@ public class DirectionServiceImpl implements DirectionService {
     }
 
     @Override
+    public List<Directions> findAllDirectionsInIta() {
+        return directionsRepository.findAllDirectionsInIta();
+    }
+
+    @Override
     public List<String> findDirectionsName() {
         return directionsRepository.findDirectionsName();
     }

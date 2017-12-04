@@ -33,5 +33,4 @@ public class LanguageTranslationsServiceImpl implements LanguageTranslationsServ
         languageTranslationsRepository.delete(languageTranslations);
     }
 
-
 }

@@ -11,5 +11,7 @@ public interface TechnologieService {
 
     List<Technologies> findAll();
 
+    List<Technologies> findAllTechonologyInIta();
+
     void remove(Technologies technologies);
 }
