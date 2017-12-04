@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {AddGroupService} from "./add-group.service";
+import {HistoryService} from "../../history/history.service";
 
 
 @Component({
   selector: 'app-add-group',
   templateUrl: './add-group.component.html',
-  styleUrls: ['./add-group.component.css']
+  styleUrls: ['./add-group.component.css'],
+  providers:[HistoryService]
 })
 export class AddGroupComponent implements OnInit {
 
@@ -17,6 +19,7 @@ export class AddGroupComponent implements OnInit {
   profile: any[];
 
   defaultStudentActual: number = 0;
+   defaultCity = this.cityNames['0'];
 
 
   // academyStages = [
@@ -43,7 +46,7 @@ export class AddGroupComponent implements OnInit {
   }
 
   saveGroup() {
-    console.log();
+    console.log(this.defaultCity);
   }
 
 

@@ -8,10 +8,11 @@
 * All rights reserved by DoubleO Team (Team#1)
 * */
 
-package ua.softserve.persistence.dao;
+package ua.softserve.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ua.softserve.persistence.entity.City;
+import ua.softserve.persistence.entity.User;
 
-public interface CityRepository extends JpaRepository<City, Integer> {
+public interface UserDAO extends JpaRepository<User, Integer>{
+
 }

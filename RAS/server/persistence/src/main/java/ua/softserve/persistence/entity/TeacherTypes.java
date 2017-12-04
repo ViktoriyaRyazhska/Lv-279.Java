@@ -1,38 +1,39 @@
 /*
-* ItaAcademyStatus
+* TeacherTypes
 *
 * Version 1.0-SNAPSHOT
 *
-* 15.11.17
+* 02.12.17
 *
 * All rights reserved by DoubleO Team (Team#1)
-*/
-
+* */
 
 package ua.softserve.persistence.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ita_academy_statuses")
-public class ItaAcademyStatus {
+@Table(name = "teacher_types")
+public class TeacherTypes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "it_academy_status_id")
-    private int id;
+    @Column(name = "teacher_type_id")
+    private int teachertype_id;
 
-    @Column(name = "crm_status", nullable = false)
+    @NotNull
+    @Column(name = "name")
     private String name;
-
 }
-

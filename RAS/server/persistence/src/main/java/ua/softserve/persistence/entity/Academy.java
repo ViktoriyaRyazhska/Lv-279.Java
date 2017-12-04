@@ -1,18 +1,18 @@
 package ua.softserve.persistence.entity;
 
-import javax.persistence.*;
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import java.sql.Timestamp;
-import java.util.List;
 
-
-@Getter
-@Setter
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "academy")
 public class Academy {
@@ -37,14 +37,6 @@ public class Academy {
     @ManyToOne
     @JoinColumn(name = "stage_id")
     private AcademyStages academyStages;
-
-    @ManyToOne
-    @JoinColumn(name = "profile_id")
-    private Profile profile;
-
-    @OneToOne
-    @JoinColumn(name = "student_group_count_id")
-    private StudentGroupCount studentGroupCount;
 
     @NotNull
     @Column(name = "crm_group")
@@ -86,29 +78,4 @@ public class Academy {
     @Column(name = "not_synchronized")
     private int notSynchronized;
 
-    @ManyToMany(cascade =  CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "teacher_academy",
-            joinColumns = {@JoinColumn(name = "academy_id")},
-            inverseJoinColumns = {@JoinColumn(name = "employee_id")}
-    )
-    private List<Employee> teachers;
-
-    @ManyToMany(cascade =  CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "expert_academy",
-            joinColumns = {@JoinColumn(name = "academy_id")},
-            inverseJoinColumns = {@JoinColumn(name = "employee_id")}
-    )
-    private List<Employee> experts;
-
-    @ManyToMany(cascade =  CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "interviewer_academy",
-            joinColumns = {@JoinColumn(name = "academy_id")},
-            inverseJoinColumns = {@JoinColumn(name = "employee_id")}
-    )
-    private List<Employee> interviewers;
-
 }
-

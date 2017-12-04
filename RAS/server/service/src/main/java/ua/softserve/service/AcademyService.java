@@ -11,11 +11,14 @@ public interface AcademyService {
 
     void save(Academy user);
 
-    void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
+//    void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
 
     Academy findOne(int id);
 
     List<AcademyDTO> findWithEmployeeExperts();
 
     AcademyDTO getAcademyDTO();
+
+    List<Academy> getAllAcademys();
+
 }

@@ -31,6 +31,6 @@ public class AcademyDTO {
     List<Directions> direction;
     List<Technologies> technologie;
     //TODO: rename field
-    List<Profile> profile;
+    List<ProfileInfo> profile;
 
 }

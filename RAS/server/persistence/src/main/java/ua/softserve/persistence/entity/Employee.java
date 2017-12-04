@@ -16,57 +16,23 @@ import java.util.Set;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employee_id;
+    @Column(name = "employee_id")
+    private int employeeId;
 
     @NotNull
-    @Column(name = "firstname")
-    private String firstname;
+    @Column(name = "first_name_eng")
+    private String firstNameEng;
 
     @NotNull
-    @Column(name = "lastname")
-    private String lastname;
+    @Column(name = "last_name_eng")
+    private String lastNameEng;
 
-    @NotNull
-    @Column(name = "ukrfullname")
-    private String ukrfullname;
+    @Column(name = "first_name_ukr")
+    private String firstNameUkr;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private ItaRole itarole;
+    @Column(name = "last_name_ukr")
+    private String lastNameUkr;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "teachers")
-    private List<Academy> testGroupList1;
-
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "experts")
-    private List<Academy> testGroupList2;
-
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "interviewers")
-    private List<Academy> testGroupList3;
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "employee_id=" + employee_id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", ukrfullname='" + ukrfullname + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Employee employee = (Employee) o;
-
-        if (employee_id != employee.employee_id) return false;
-        return firstname != null ? firstname.equals(employee.firstname) : employee.firstname == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = employee_id;
-        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
-        return result;
-    }
+    @Column(name = "second_name_ukr")
+    private String secondNameUkr;
 }

@@ -5,7 +5,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {GroupListComponent} from './group/group-list/group-list.component';
 import {GroupService} from './group/group.service';
 import {HistoryListComponent} from './history/history-list/history-list.component';
-import {HistoryService} from './history/history.service';
 import {ViewAcademiesComponent} from './view-academies/view-academies.component';
 import {RouterModule, Routes} from "@angular/router";
 import {AddGroupComponent} from "./group/add-group/add-group.component";
@@ -36,7 +35,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule
   ],
-  providers: [GroupService, HistoryService, AddGroupService],
+  providers: [GroupService, AddGroupService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

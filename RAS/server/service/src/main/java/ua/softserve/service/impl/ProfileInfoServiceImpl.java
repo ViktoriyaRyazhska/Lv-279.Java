@@ -3,39 +3,39 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.dao.ProfileRepository;
-import ua.softserve.persistence.entity.Profile;
+import ua.softserve.persistence.repo.ProfileRepository;
+import ua.softserve.persistence.entity.ProfileInfo;
 import ua.softserve.service.ProfileService;
 
 import java.util.List;
 
 @Service
-public class ProfileServiceImpl implements ProfileService {
+public class ProfileInfoServiceImpl implements ProfileService {
 
     @Autowired
     private ProfileRepository profileRepository;
 
     @Transactional
     @Override
-    public void save(Profile profile) {
+    public void save(ProfileInfo profile) {
         profileRepository.save(profile);
     }
 
     @Transactional
     @Override
-    public Profile findOne(int id) {
+    public ProfileInfo findOne(int id) {
         return profileRepository.findOne(id);
     }
 
     @Transactional
     @Override
-    public List<Profile> findAll() {
+    public List<ProfileInfo> findAll() {
         return profileRepository.findAll();
     }
 
     @Transactional
     @Override
-    public void remove(Profile profile) {
+    public void remove(ProfileInfo profile) {
         profileRepository.delete(profile);
     }
 

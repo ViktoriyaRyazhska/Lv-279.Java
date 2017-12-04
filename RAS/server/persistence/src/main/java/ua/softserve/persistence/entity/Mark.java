@@ -1,3 +1,13 @@
+/*
+* Mark
+*
+* Version 1.0-SNAPSHOT
+*
+* 02.12.17
+*
+* All rights reserved by DoubleO Team (Team#1)
+* */
+
 package ua.softserve.persistence.entity;
 
 import lombok.AllArgsConstructor;
@@ -23,18 +33,7 @@ public class Mark {
     @JoinColumn(name = "characteristic_id")
     private Characteristic characteristic;
 
-    @Column(name = "mark")
-    private String markName;
+    private String name;
 
-    @Column(name = "description")
     private String description;
-
-    @Override
-    public String toString() {
-        return "Mark{" +
-                ", characteristic=" + characteristic +
-                ", markName='" + markName + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }

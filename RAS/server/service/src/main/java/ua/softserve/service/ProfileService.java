@@ -1,17 +1,17 @@
 package ua.softserve.service;
 
-import ua.softserve.persistence.entity.Profile;
+import ua.softserve.persistence.entity.ProfileInfo;
 
 import java.util.List;
 
 public interface ProfileService {
-    void save(Profile profile);
+    void save(ProfileInfo profile);
 
-    Profile findOne(int id);
+    ProfileInfo findOne(int id);
 
-    List<Profile> findAll();
+    List<ProfileInfo> findAll();
 
-    void remove(Profile profile);
+    void remove(ProfileInfo profile);
 
     List<String> findProfileNames();
 }
