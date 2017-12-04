@@ -18,9 +18,6 @@ public class AcademyServiceImpl implements AcademyService {
     AcademyRepository academyRepository;
 
     @Autowired
-    AcademyConverter academyConverter;
-
-    @Autowired
     AcademyStagesService academyStagesService;
 
     @Autowired

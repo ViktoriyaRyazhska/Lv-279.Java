@@ -27,7 +27,7 @@ public class AcademyDTO {
     private int studentPlannedToGraduate;
     private int studentPlannedToEnrollment;
     private int studentActual;
-    private TreeMap<String, String> expert;
+    private List<String> experts;
 
     List<AcademyStages> academyStages;
     List<LanguageTranslations> cityNames;
