@@ -1,0 +1,81 @@
+table {
+  width: 100%;
+  background: white;
+  color: black;
+  border-spacing: 1px
+}
+th {
+  background: lightskyblue;
+  padding: 5px;
+  text-align: center;
+
+}
+td{
+  background: ghostwhite;
+  padding: 5px;
+  text-align: center;
+
+}
+div{
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.tab-content{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.tab-pane{
+  padding:0;
+}
+
+#students-table{
+  margin: 2em 0;
+}
+
+.btn-costil{
+  color:#337ab7;
+  border: none;
+  background: none;
+}
+
+.btn-costil:hover{
+  text-decoration: underline;
+}
+
+.details-modal-content{
+  height: 200px;
+}
+
+#table-container{
+  overflow-x: auto;
+}
+
+/*th, td {*/
+  /*padding:5px 10px;*/
+  /*border:1px solid #000;*/
+/*}*/
+/*thead {*/
+  /*background:#f9f9f9;*/
+  /*display:table;*/
+  /*width:100%;*/
+  /*width:calc(100% - 18px);*/
+/*}*/
+/*tbody {*/
+  /*height:300px;*/
+  /*overflow:auto;*/
+  /*overflow-x:hidden;*/
+  /*display:block;*/
+  /*width:100%;*/
+/*}*/
+/*tbody tr {*/
+  /*display:table;*/
+  /*width:100%;*/
+  /*table-layout:fixed;*/
+/*}*/
+/*table {*/
+  /*max-width:980px;*/
+  /*table-layout:fixed;*/
+  /*margin:auto;*/
+/*}*/

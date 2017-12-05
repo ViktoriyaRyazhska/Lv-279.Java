@@ -11,11 +11,14 @@ import {AddGroupComponent} from "./group/add-group/add-group.component";
 import {AddGroupService} from "./group/add-group/add-group.service";
 import { FilterPipe } from './view-academies/filter.pipe';
 import {FormsModule} from "@angular/forms";
+import {StudentsComponent} from "./components/students/students.component";
+import {StudentsService} from "./services/students/students.service";
 
 const appRoutes: Routes = [
   {path: 'viewAcademies', component: ViewAcademiesComponent},
   {path: 'addgroup', component: AddGroupComponent},
-  {path:'history', component: HistoryListComponent}
+  {path:'history', component: HistoryListComponent},
+  {path:'students', component: StudentsComponent}
 ];
 
 @NgModule({
@@ -26,7 +29,8 @@ const appRoutes: Routes = [
     ViewAcademiesComponent,
     AddGroupComponent,
     ViewAcademiesComponent,
-    FilterPipe
+    FilterPipe,
+    StudentsComponent
 
   ],
   imports: [
@@ -35,7 +39,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule
   ],
-  providers: [GroupService, AddGroupService],
+  providers: [GroupService, AddGroupService, StudentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

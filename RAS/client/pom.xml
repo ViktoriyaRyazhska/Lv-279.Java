@@ -13,6 +13,7 @@
         <groupId>ua.softserve</groupId>
         <artifactId>server</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../server/pom.xml</relativePath>
     </parent>
 
     <build>
@@ -25,7 +26,7 @@
                 <configuration>
                     <nodeVersion>v8.9.1</nodeVersion>
                     <npmVersion>5.5.1</npmVersion>
-                    <workingDirectory>src/main/client</workingDirectory>
+                    <workingDirectory>./</workingDirectory>
                 </configuration>
 
                 <executions>

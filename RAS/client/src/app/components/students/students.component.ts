@@ -10,7 +10,7 @@ import {Observable} from "rxjs/Observable";
 })
 export class StudentsComponent implements OnInit {
   private students:Student[];
-
+  private selectedStudent:Student;
   constructor(private studentsService: StudentsService) {
   }
 
@@ -21,6 +21,9 @@ export class StudentsComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+  onStudentClick(student:Student){
+    this.selectedStudent = student;
   }
 
 }

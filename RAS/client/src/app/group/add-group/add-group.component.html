@@ -69,15 +69,15 @@
           <div class="row">
             <div class="col-sm-6 form-group">
               <label>Direction:</label>
-              <select class="form-control input-sm">
-                <option *ngFor="let tech of technologie" [value]="tech.technologyId">{{tech.name}}</option>
+              <select class="form-control input-sm" [(ngModel)]="technologyModel" name="technologySelect">
+                <option *ngFor="let tech of technologie" [ngValue]="tech.technologyId">{{ tech.name }}</option>
               </select>
             </div>
 
             <div class="col-sm-6 form-group">
               <label>Profile:</label>
               <select class="form-control input-sm">
-                <option *ngFor="let prof of profile" [value]="prof.profileId">{{prof.profileName}}</option>
+                <option *ngFor="let prof of profile | profileFilter:technologyModel" [value]="prof.profileId">{{prof.profileName}}</option>
               </select>
             </div>
           </div>

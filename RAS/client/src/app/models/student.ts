@@ -37,6 +37,6 @@ export class Student {
   email: string;
   messenger: string;
   phone: string;
-  plaseOfOrigin: string;
+  placeOfOrigin: string;
 
 }
