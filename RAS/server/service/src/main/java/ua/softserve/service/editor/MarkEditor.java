@@ -14,8 +14,8 @@ public class MarkEditor extends PropertyEditorSupport{
 
     @Override
     public void setAsText(String markId) throws IllegalArgumentException {
-        int id = Integer.parseInt(markId);
-        Mark mark = markService.findOne(id);
-        setValue(mark);
+//        int id = Integer.parseInt(markId);
+//        Mark mark = markService.findOne(id);
+//        setValue(mark);
     }
 }

@@ -37,6 +37,5 @@ public class AcademyController {
         List<AcademyDTO> academyDTOS = groupInfoService.getAllAcademies();
         return academyDTOS;
     }
-
 }
 

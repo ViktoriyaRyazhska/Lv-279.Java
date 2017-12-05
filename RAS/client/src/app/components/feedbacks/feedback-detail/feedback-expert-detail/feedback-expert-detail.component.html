@@ -1,0 +1,109 @@
+<div class="col-lg-12 well">
+  <form>
+    <h4>Add Feedback</h4>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-2 form-group">
+            Learning ability
+          </div>
+          <div class="col-sm-3 form-group">
+            <select class="form-control input-sm">
+              <option *ngFor="let mark of marks">{{mark.mark}}</option>
+            </select>
+          </div>
+          <!--<div class="col-sm-7 form-group">-->
+          <!--{{mark.description}}-->
+          <!--</div>-->
+        </div>
+
+        <!--<div class="row">-->
+        <!--<div class="col-sm-2 form-group">-->
+        <!--<lable>Overall technical competence</lable>-->
+        <!--</div>-->
+        <!--<div class="col-sm-3 form-group">-->
+        <!--<select class="form-control input-sm">-->
+        <!--<option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--<div class="col-sm-7 form-group">-->
+        <!--<lable id="otDesc">Technically skilful, good technical background on different levels</lable>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="row">-->
+        <!--<div class="col-sm-2 form-group">-->
+        <!--<lable>Passional initiative</lable>-->
+        <!--</div>-->
+        <!--<div class="col-sm-3 form-group">-->
+        <!--<select class="form-control input-sm">-->
+        <!--<option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--<div class="col-sm-7 form-group">-->
+        <!--<lable id="piDesc">Highly motivated to grow in chosen direction, shows initiative to get all needed-->
+        <!--knowledge and information for effective growth-->
+        <!--</lable>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="row">-->
+        <!--<div class="col-sm-2 form-group">-->
+        <!--<lable>Team work</lable>-->
+        <!--</div>-->
+        <!--<div class="col-sm-3 form-group">-->
+        <!--<select class="form-control input-sm">-->
+        <!--<option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--<div class="col-sm-7 form-group">-->
+        <!--<lable id="twDesc">Work as team member, cooperates with others to achieve team goals</lable>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="row">-->
+        <!--<div class="col-sm-2 form-group">-->
+        <!--<lable>Getting things done</lable>-->
+        <!--</div>-->
+        <!--<div class="col-sm-3 form-group">-->
+        <!--<select class="form-control input-sm">-->
+        <!--<option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--<div class="col-sm-7 form-group">-->
+        <!--<lable id="gtDesc">Finish tasks in time even if this will take extra efforts</lable>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="row">-->
+        <!--<div class="col-sm-2 form-group">-->
+        <!--<lable>Active Communicator</lable>-->
+        <!--</div>-->
+        <!--<div class="col-sm-3 form-group">-->
+        <!--<select class="form-control input-sm">-->
+        <!--<option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--<div class="col-sm-7 form-group">-->
+        <!--<lable id="acDesc">Good communication skills. Doesn't be afraid to talk to other students, teachers,-->
+        <!--experts. Clearly describes his/her point of view. Listening skills are good as well.-->
+        <!--</lable>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="row">-->
+        <!--<div class="col-sm-2 form-group">-->
+        <!--<lable>Summary</lable>-->
+        <!--</div>-->
+        <!--<div class="col-sm-10 form-group">-->
+        <!--<input type="text" placeholder="Summary"-->
+        <!--class="form-control input-sm"/>-->
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </form>
+</div>
+<div align="button">
+  <button type="submit" class="btn btn-primary" (click)="onSaveFeedback()">Save Feedback</button>
+</div>
