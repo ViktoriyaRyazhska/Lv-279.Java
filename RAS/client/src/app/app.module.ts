@@ -35,7 +35,7 @@ import {AppRoutingModule} from "./app-routing.module";
     ViewAcademiesComponent,
     FilterPipe,
     StudentsComponent,
-    ProfileInfoFilterPipe
+    ProfileInfoFilterPipe,
     ProfileInfoFilterPipe,
     StudentsComponent,
     FeedbacksComponent,
