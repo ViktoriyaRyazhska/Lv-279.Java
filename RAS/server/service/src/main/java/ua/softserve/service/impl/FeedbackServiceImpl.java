@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.service.dto.FeedbackDTO;
-import ua.softserve.persistence.repo.FeedbackDAO;
+import ua.softserve.persistence.repo.FeedbackRepository;
 import ua.softserve.persistence.entity.Feedback;
 import ua.softserve.service.FeedbackService;
 
@@ -14,12 +14,12 @@ import java.util.List;
 public class FeedbackServiceImpl implements FeedbackService {
 
     @Autowired
-    private FeedbackDAO feedbackDAO;
+    private FeedbackRepository feedbackRepository;
 
     @Transactional
     @Override
     public List<Feedback> findAll() {
-        return feedbackDAO.findAll();
+        return feedbackRepository.findAll();
     }
 
     @Transactional
@@ -35,11 +35,11 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedback.setTeamWork(feedbackDTO.getTeamWork());
         feedback.setSummary(feedbackDTO.getSummary());
 
-        feedbackDAO.save(feedback);
+        feedbackRepository.save(feedback);
     }
 
     @Override
     public Feedback findOne(int id) {
-        return feedbackDAO.findOne(id);
+        return feedbackRepository.findOne(id);
     }
 }

@@ -14,7 +14,7 @@ public interface LanguageTranslationsRepository extends JpaRepository<LanguageTr
     @Query("select lt from LanguageTranslations lt where lt.tag like 'city' and lt.local like 'en' and lt.itemId = ?1")
     LanguageTranslations findById(int id);
 
-    LanguageTranslations findByItemId(int id);
+    List<LanguageTranslations> findAllByItemId(int id);
 
 
 }
