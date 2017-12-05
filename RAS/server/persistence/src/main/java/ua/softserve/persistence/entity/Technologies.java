@@ -2,13 +2,11 @@ package ua.softserve.persistence.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Getter @Setter
-@ToString
 @Entity
 @Table(name = "technologies")
 public class Technologies {
@@ -41,4 +39,6 @@ public class Technologies {
 
     @Column(name = "directiond_id", columnDefinition = "INT(11) UNSIGNED")
     private int directiondId;
+
+    public Technologies() {}
 }

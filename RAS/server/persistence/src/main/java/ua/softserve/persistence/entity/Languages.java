@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Getter @Setter
-@ToString
 @Entity
 @Table(name = "languages")
 public class Languages {
