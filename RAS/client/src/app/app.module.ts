@@ -13,7 +13,6 @@ import {AddGroupService} from "./components/group/add-group/add-group.service";
 import {FilterPipe} from './components/view-academies/filter.pipe';
 import {StudentsComponent} from "./components/students/students.component";
 import {StudentsService} from "./services/students/students.service";
-import {ProfileInfoFilterPipe} from "./group/add-group/add-group.pipe";
 import {ProfileInfoFilterPipe} from "./components/group/add-group/add-group.pipe";
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
