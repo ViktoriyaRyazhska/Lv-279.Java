@@ -19,7 +19,9 @@ export class AddGroupComponent implements OnInit {
   profile: any[];
 
   defaultStudentActual: number = 0;
-   defaultCity = this.cityNames['0'];
+   // defaultCity = this.cityNames['0'];
+
+  technologyModel: any;
 
 
   // academyStages = [
@@ -46,7 +48,7 @@ export class AddGroupComponent implements OnInit {
   }
 
   saveGroup() {
-    console.log(this.defaultCity);
+    console.log(this.technologyModel);
   }
 
 
