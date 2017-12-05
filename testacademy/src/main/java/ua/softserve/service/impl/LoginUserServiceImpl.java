@@ -34,6 +34,6 @@ public class LoginUserServiceImpl implements LoginUserService,UserDetailsService
     }
 
     public LoginUser findByUserName(String username) {
-        return loginUserRepository.findByUserName(username);
+        return loginUserRepository.findLoginUserByUsername(username);
     }
 }

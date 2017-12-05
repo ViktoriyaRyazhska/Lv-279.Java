@@ -22,7 +22,7 @@ public class LoginUser implements UserDetails {
     private String username;
     private String password;
     @Enumerated(EnumType.STRING)
-    private Authority authority = Authority.ROLE_USER;
+    private Authority authority = Authority.USER;
 
     private boolean accountNonExpired = true;
     private boolean accountNonLocked= true;
@@ -48,12 +48,12 @@ public class LoginUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return accountNonExpired;
+        return accountNonLocked;
     }
 
     @Override
