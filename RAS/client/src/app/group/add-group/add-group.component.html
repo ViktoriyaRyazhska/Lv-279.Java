@@ -61,6 +61,7 @@
             <div class="col-sm-12 form-group">
               <label>Common Direction:</label>
               <select class="form-control input-sm">
+                <option value=""></option>
                 <option *ngFor="let direct of direction" [value]="direct.directionId">{{direct.name}}</option>
               </select>
             </div>
@@ -70,6 +71,7 @@
             <div class="col-sm-6 form-group">
               <label>Direction:</label>
               <select class="form-control input-sm" [(ngModel)]="technologyModel" name="technologySelect">
+                <option value="0"></option>
                 <option *ngFor="let tech of technologie" [ngValue]="tech.technologyId">{{ tech.name }}</option>
               </select>
             </div>
@@ -85,11 +87,11 @@
           <div class="row">
             <div class="col-sm-4">
               <label> Students Planned to Graduate:</label>
-              <input type="number" class="form-control input-sm"/>
+              <input type="number" class="form-control input-sm" value={{defaultStudentsPlannedToGraduate}}/>
             </div>
             <div class="col-sm-4">
               <label> Students Planned to Enrollment:</label>
-              <input type="number" class="form-control input-sm"/>
+              <input type="number" class="form-control input-sm" value={{defaultStudentsPlannedToEnrollment}}/>
             </div>
 
             <div class="col-sm-4">
