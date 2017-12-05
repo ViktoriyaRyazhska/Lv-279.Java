@@ -27,6 +27,9 @@ public class RandomPerson {
     private String firstName;
     private String secondName;
     private String lastName;
+    private String firstNameUkr;
+    private String secondNameUkr;
+    private String lastNameUkr;
     private String email;
     private Sex sex;
 

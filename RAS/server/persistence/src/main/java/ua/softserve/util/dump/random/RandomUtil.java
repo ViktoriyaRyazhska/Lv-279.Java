@@ -56,14 +56,14 @@ public class RandomUtil {
             {"STRONG AREA", "NEEDS IMPROVEMENT", "CAN'T EVALUATE"},
             {"LISTENER AND PRESENTER", "LISTENER", "WEAK COMMUNICATION", "CAN'T EVALUATE"}
     };
-    private final static String[] MAN_FIRST_NAMES = {
+    public final static String[] MAN_FIRST_NAMES = {
             "Volodymyr", "Orest", "Ivan", "Stepan", "Roman",
             "Vasyl", "Oleh", "Ihor", "Andriy", "Nazar",
             "Rostyslav", "Ostap", "Tymofiy", "Petro",
             "Pavlo", "Bohdan", "Taras", "Markiyan",
             "Maryan", "Grygoriy", "Serhiy"
     };
-    private final static String[] WOMAN_FIRST_NAMES = {
+    public final static String[] WOMAN_FIRST_NAMES = {
             "Olga", "Olena", "Ivanka", "Sofiya",
             "Vasylyna", "Khrystyna", "Iryna", "Larysa",
             "Karina", "Romana", "Anna", "Natalya", "Anastasiya",
@@ -71,7 +71,7 @@ public class RandomUtil {
             "Paraska", "Antonina", "Darya", "Daryna",
             "Solomiya", "Tetyana"
     };
-    private final static String[] MAN_SECOND_NAMES = {
+    public final static String[] MAN_SECOND_NAMES = {
             "Volodymyrovych", "Orestovych", "Ivanovych", "Stepanovych",
             "Romanovych", "Vasylovych", "Olehovych", "Ihorovych",
             "Andriyovych", "Nazarovych", "Rostyslavovych",
@@ -80,7 +80,7 @@ public class RandomUtil {
             "Markiyanovych", "Maryanovych",
             "Grygoriyovych", "Serhiyovych"
     };
-    private final static String[] WOMAN_SECOND_NAMES = {
+    public final static String[] WOMAN_SECOND_NAMES = {
             "Volodymyrivna", "Orestivna", "Ivanivna", "Stepanivna",
             "Romanivna", "Vasylivna", "Olehivna", "Ihorivna",
             "Andriyivna", "Nazarivna", "Rostyslavivna",
@@ -89,13 +89,50 @@ public class RandomUtil {
             "Markiyanivna", "Maryanivna",
             "Grygoriyivna", "Serhiyivna"
     };
-    private final static String[] LAST_NAMES = {
+    public final static String[] LAST_NAMES = {
             "Mykytyn", "Melnyk", "Pikula", "Shymchak",
             "Moskal", "Bandera", "Poroshenko",
             "Putin", "Kuchma", "Moroz", "Kuybida",
             "Gnyp", "Barna", "Figurka", "Semygen",
             "Ivashchuk", "Shkilnyk", "Kostyuk",
             "Barylyak", "Koziy", "Zakharchuk"
+    };
+    public final static String[] MAN_FIRST_NAMES_UKR = {
+            "Володимир", "Орест", "Іван", "Степан", "Роман",
+            "Василь", "Олег", "Ігор", "Андрій", "Назар",
+            "Ростислав", "Остап", "Тимофій", "Петро",
+            "Павло", "Богдан", "Тарас", "Маркіян",
+            "Мар`ян", "Григорій", "Сергій"
+    };
+    public final static String[] WOMAN_FIRST_NAMES_UKR = {
+            "Ольга", "Олена", "Іванка", "Софія",
+            "Василина", "Христина", "Ірина", "Лариса",
+            "Каріна", "Романа", "Анна", "Наталія", "Анастасія",
+            "Поліна", "Маргарита", "Марія", "Марта",
+            "Параска", "Антоніна", "Дарья", "Дарина",
+            "Соломія", "Тетяна"
+    };
+    public final static String[] MAN_SECOND_NAMES_UKR = {
+            "Володимирович", "Орестович", "Іванович", "Степанович", "Романович",
+            "Васильович", "Олегович", "Ігорович", "Андрійович", "Назарович",
+            "Ростиславович", "Остапович", "Тимофійович", "Петрович",
+            "Павлович", "Богданович", "Тарасович", "Маркіянович",
+            "Мар`янович", "Григорійович", "Сергійович"
+    };
+    public final static String[] WOMAN_SECOND_NAMES_UKR = {
+            "Володимирівна", "Орестівна", "Іванівна", "Степанівна", "Романівна",
+            "Васильівна", "Олегівна", "Ігорівна", "Андрійівна", "Назарівна",
+            "Ростиславівна", "Остапівна", "Тимофійівна", "Петрівна",
+            "Павлівна", "Богданівна", "Тарасівна", "Маркіянівна",
+            "Мар`янівна", "Григорійівна", "Сергійівна"
+    };
+    public final static String[] LAST_NAMES_UKR = {
+            "Микитин", "Мельник", "Пікула", "Шимчак",
+            "Москаль", "Бандера", "Порошенко",
+            "Путін", "Кучма", "Мороз", "Куйбіда",
+            "Гнип", "Барна", "Фігурка", "Семиген",
+            "Івашчук", "Шкільник", "Костюк",
+            "Бариляк", "Козій", "Захарчук"
     };
     private final static String[] EMAIL_DOMAINS = {
             "@gmail.com", "@i.ua", "@yahoo.com",

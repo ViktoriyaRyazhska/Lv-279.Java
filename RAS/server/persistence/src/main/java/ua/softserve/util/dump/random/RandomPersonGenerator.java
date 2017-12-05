@@ -14,6 +14,8 @@ import ua.softserve.util.dump.random.RandomPerson.Sex;
 
 import java.util.Random;
 
+import static ua.softserve.util.dump.random.RandomUtil.*;
+
 /**
  * Util class for creating some <b>person</b>
  * with random data (sex, first name, second name, last name, email).
@@ -27,41 +29,43 @@ public class RandomPersonGenerator {
      * @return created person.
      */
     public static RandomPerson getRandomPerson() {
-        RandomPerson person = new RandomPerson(Sex.values()[random.nextInt(1)]);
-        person.setFirstName(genFirstName(person.getSex()));
-        person.setSecondName(genSecondName(person.getSex()));
-        person.setLastName(RandomUtil.getRandomLastName());
+        Sex sex = Sex.values()[random.nextInt(1)];
+        RandomPerson person = new RandomPerson(sex);
+        int r;
+
+        if (sex == Sex.MALE) {
+
+            r = random.nextInt(MAN_FIRST_NAMES.length);
+            person.setFirstName(MAN_FIRST_NAMES[r]);
+            person.setFirstNameUkr(MAN_FIRST_NAMES_UKR[r]);
+
+            r = random.nextInt(MAN_SECOND_NAMES.length);
+            person.setSecondName(MAN_SECOND_NAMES[r]);
+            person.setSecondNameUkr(MAN_SECOND_NAMES_UKR[r]);
+
+        } else {
+
+            r = random.nextInt(WOMAN_FIRST_NAMES.length);
+            person.setFirstName(WOMAN_FIRST_NAMES[r]);
+            person.setFirstNameUkr(WOMAN_FIRST_NAMES_UKR[r]);
+
+            r = random.nextInt(WOMAN_SECOND_NAMES.length);
+            person.setSecondName(WOMAN_SECOND_NAMES[r]);
+            person.setSecondNameUkr(WOMAN_SECOND_NAMES_UKR[r]);
+
+        }
+
+        r = random.nextInt(LAST_NAMES.length);
+        person.setLastName(LAST_NAMES[r]);
+        person.setLastNameUkr(LAST_NAMES_UKR[r]);
+
         person.setEmail(
                 person.getFirstName().toLowerCase() +
                         "." +
                         person.getLastName().toLowerCase() +
-                        RandomUtil.getRandomEmailDomain()
+                        getRandomEmailDomain()
         );
         return person;
-    }
-
-    /**
-     * Generate random first name.
-     * @param male first names are divided by sex,
-     *             and you can chose which type of names must be generated.
-     * @return generated first name.
-     */
-    public static String genFirstName(Sex male) {
-        return (male == Sex.MALE)
-                ? RandomUtil.getRandomManFirstName()
-                : RandomUtil.getRandomWomanFirstName();
-    }
-
-    /**
-     * Generate random second name.
-     * @param male second names are divided by sex,
-     *             and you can chose which type of names must be generated.
-     * @return generated second name.
-     */
-    public static String genSecondName(Sex male) {
-        return (male == Sex.MALE)
-                ? RandomUtil.getRandomManSecondName()
-                : RandomUtil.getRandomWomanSecondName();
     }
 
 }

@@ -9,4 +9,6 @@ import java.util.List;
 public interface ProfileRepository extends JpaRepository<ProfileInfo, Integer> {
     @Query("select p.profileName from ProfileInfo p")
     List<String> findProfileNames();
+
+    List<ProfileInfo> findAllByTechnologiesTechnologyId(int id);
 }
