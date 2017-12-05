@@ -9,7 +9,6 @@ import java.util.Random;
 public class MainPersistence {
 
     public static void main(String[] args) {
-
     }
 
 }

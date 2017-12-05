@@ -13,6 +13,7 @@ import { FilterPipe } from './view-academies/filter.pipe';
 import {FormsModule} from "@angular/forms";
 import {StudentsComponent} from "./components/students/students.component";
 import {StudentsService} from "./services/students/students.service";
+import {ProfileInfoFilterPipe} from "./group/add-group/add-group.pipe";
 
 const appRoutes: Routes = [
   {path: 'viewAcademies', component: ViewAcademiesComponent},
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     AddGroupComponent,
     ViewAcademiesComponent,
     FilterPipe,
-    StudentsComponent
+    StudentsComponent,
+    ProfileInfoFilterPipe
 
   ],
   imports: [
