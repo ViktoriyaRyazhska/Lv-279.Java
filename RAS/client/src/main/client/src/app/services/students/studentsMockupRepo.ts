@@ -30,7 +30,7 @@ export  class StudentsMockupRepo{
   interviewerScore: 4343,
   studentStatus: 1,
   personStatus: 1,
-  approvedBy: "Myloka",
+  approvedBy: "Marchuk Mykola",
 
   //additional candidate information
   age: 21,
@@ -39,7 +39,7 @@ export  class StudentsMockupRepo{
   email: "aff@add",
   messenger: "andrii_barna",
   phone: "+38036",
-  plaseOfOrigin: "Bilobozhnytsya",
+  placeOfOrigin: "Bilobozhnytsya",
     },
   ];
 
