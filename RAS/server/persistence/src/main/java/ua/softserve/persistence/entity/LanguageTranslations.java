@@ -23,7 +23,7 @@ public class LanguageTranslations {
     @JoinColumn(name = "language_id")
     private Languages language;
 
-    @Column(name = "local")
+    @Column(name = "local", columnDefinition = "char(2)")
     private Character local;
 
     @NotNull

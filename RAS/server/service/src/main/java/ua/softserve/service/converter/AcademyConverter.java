@@ -1,6 +1,5 @@
 package ua.softserve.service.converter;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
@@ -24,45 +23,24 @@ public class AcademyConverter {
     @Autowired
     TechnologyService technologyService;
 
-    @Autowired
-    ProfileService profileService;
-
-
-    public AcademyDTO toDTO(Academy academy) {
+    public AcademyDTO toDTO(GroupInfo groupInfo) {
         AcademyDTO academyDTO = new AcademyDTO();
-//        academyDTO.setGrName();
-        academyDTO.setNameForSite(academy.getName());
 
-        if (academy.getAcademyStages() != null) {
-            academyDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
+        if(groupInfo.getAcademy() != null){
+            academyDTO.setAcademyStagesId(groupInfo.getAcademy().getAcademyStages().getStageId());
+            academyDTO.setStartDate(groupInfo.getAcademy().getStartDate().toString());
+            academyDTO.setDirectionName(groupInfo.getAcademy().getDirections().getName());
+            academyDTO.setTechnologyName(groupInfo.getAcademy().getTechnologies().getName());
+            academyDTO.setPayment(groupInfo.getAcademy().getFree());
+            academyDTO.setEndDate(groupInfo.getAcademy().getEndDate().toString());
+            academyDTO.setNameForSite(groupInfo.getAcademy().getName());
         }
-        if (academy.getStartDate() != null) {
-            academyDTO.setStartDate(academy.getStartDate().toString());
+        if (groupInfo.getProfileInfo() != null) {
+            academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
         }
-        academyDTO.setEndDate(academy.getEndDate() != null ? academy.getEndDate().toString() : null);
-
-        if (academy.getCity() != null) {
-            academyDTO.setCityId(academy.getCity().getCityId());
-        }
-
-        academyDTO.setPayment(academy.getFree());
-        if (academy.getDirections() != null) {
-            academyDTO.setDirectionId(academy.getDirections().getDirectionId());
-        }
-        if (academy.getTechnologies() != null) {
-            academyDTO.setTechnologieId(academy.getTechnologies().getTechnologyId());
-        }
-        //TODO: refactor
-//        if (academy.getProfile() != null) {
-//            academyDTO.setProfileId(academy.getProfile().getProfileId());
-//        }
-//        StudentGroupCount studentGroupCount = academy.getStudentGroupCount();
-//        if (studentGroupCount != null) {
-//            academyDTO.setStudentPlannedToGraduate(studentGroupCount.getStudentsPlannedToGraduate());
-//            academyDTO.setStudentPlannedToEnrollment(studentGroupCount.getStudentsPlannedToEnrollment());
-//            academyDTO.setStudentActual(studentGroupCount.getStudentsActual());
-//
-//        }
+        academyDTO.setGrName(groupInfo.getGroupName());
+        academyDTO.setStudentPlannedToEnrollment(groupInfo.getStudentsPlannedToEnrollment());
+        academyDTO.setStudentPlannedToGraduate(groupInfo.getStudentsPlannedToGraduate());
         return academyDTO;
     }
 
