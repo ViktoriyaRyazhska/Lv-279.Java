@@ -10,6 +10,7 @@
 
 package ua.softserve.util.dump.random;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -278,7 +279,7 @@ public class RandomUtil {
      * @return random double value between min and max.
      */
     public static double getRandomDouble(double min, double max) {
-        return Math.random() * (max - min) + min;
+        return (double) (Math.round((Math.random() * (max - min) + min)*100))/100;
     }
 
     /**
