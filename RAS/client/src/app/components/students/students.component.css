@@ -46,6 +46,9 @@ div{
 
 .details-modal-content{
   height: 200px;
+  max-width: 100%;
+  width: auto !important;
+  display: inline-block;
 }
 
 #table-container{
