@@ -21,76 +21,55 @@
       <th>Interviewer Feedback</th>
     </tr>
     <tr>
-      <td><input type="text" name="groupName" (input)="onFilterField($event)" class="form-control"></td>
-      <td><input type="text" name="nameForSite" (input)="onFilterField($event)" class="form-control"></td>
-      <td><!--<input type="text" name="direction" (input)="onFilterField($event)" class="form-control">-->
-        <select name="directionName" class="form-control input-sm" (change)="onFilterField($event)">
-          <option *ngFor="let tech of technology" [value]="tech.technologyId">{{tech.name}}</option>
-        </select>
-      </td>
-      <td><!--<input type="text" name="profile" (input)="onFilterField($event)" class="form-control">-->
-        <select class="form-control input-sm" name="profile" (change)="onFilterField($event)">
-          <option *ngFor="let prof of profile" [value]="prof.profileId" >{{prof.profileName}}</option>
-        </select>
-      </td>
-      <td><input type="text" name="paymentStatus" (input)="onFilterField($event)" class="form-control"></td>
-      <td><!--<input type="text" name="location" (input)="onFilterField($event)" class="form-control">-->
-        <select name="location" class="form-control input-sm">
-          <option *ngFor="let city of cityNames" [value]="city.cityId">{{city.trasnlation}}</option>
-        </select>
-      </td>
-      <td><input type="date" name="startDate" (input)="onFilterField($event)" class="form-control"></td>
-      <td><input type="date" name="endDate" (input)="onFilterField($event)" class="form-control"></td>
-      <td><!--<input type="text" name="status" (input)="onFilterField($event)" class="form-control">-->
-        <select name="status" class="form-control input-sm">
-          <option *ngFor="let stages of academyStages" [value]="stages.stageId">{{stages.name}}</option>
-        </select>
-      </td>
-      <td><input type="text" name="experts" (input)="onFilterField($event)" class="form-control"></td>
-      <td><input type="text" name="studentPlannedToGraduate" (input)="onFilterField($event)" class="form-control"></td>
-      <td><input type="text" name="studentPlannedForEnrolment" (input)="onFilterField($event)" class="form-control">
-      </td>
-      <td><input type="text" name="studentsActual" (input)="onFilterField($event)" class="form-control"></td>
-      <td><input type="text" name="hiredNotGraduated" (input)="onFilterField($event)" class="form-control"></td>
-      <td><!--<input type="text" name="commonDirections" (input)="onFilterField($event)" class="form-control">-->
-        <select class="form-control input-sm" name="commonDirections">
-          <option *ngFor="let direct of direction" [value]="direct.directionId">{{direct.name}}</option>
-        </select>
-      </td>
+      <td><input type="text" name="groupName" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="nameForSite" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="direction" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="profile" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="paymentStatus" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="location" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="date" name="startDate" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="date" name="endDate" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="status" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="experts" (input) = "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="studentPlannedToGraduate" (input)= "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="studentPlannedForEnrolment" (input)= "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="studentsActual" (input)= "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="hiredNotGraduated" (input)= "onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="commonDirections" (input)= "onFilterField($event)" class="form-control"></td>
     </tr>
-    <tr *ngFor="let academy of pagedItems" (click)="onClickFunc($event)">
-      <td>----</td>
-      <td>{{academy.nameForSite}}</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>{{academy.startDate | date: "dd.MM.yyyy"}}</td>
-      <td>---</td>
-      <td>---</td>
-      <td>---</td>
-      <td>{{academy.studentPlannedToGraduate}}</td>
-      <td>---</td>
-    </tr>
+      <tr *ngFor="let academy of pagedItems" (click)="onClickFunc($event)">
+        <td>----</td>
+        <td>{{academy.nameForSite}}</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>{{academy.startDate | date: "dd.MM.yyyy"}}</td>
+        <td>---</td>
+        <td>---</td>
+        <td>---</td>
+        <td>{{academy.studentPlannedToGraduate}}</td>
+        <td>---</td>
+      </tr>
 
   </table>
-  <div class="row">
-    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-      <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <a (click)="setPage(1)">First</a>
-      </li>
-      <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-      </li>
-      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-        <a (click)="setPage(page)">{{page}}</a>
-      </li>
-      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(pager.currentPage + 1)">Next</a>
-      </li>
-      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(pager.totalPages)">Last</a>
-      </li>
-    </ul>
-  </div>
+    <div class="row">
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(1)">First</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+          <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.currentPage + 1)">Next</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.totalPages)">Last</a>
+        </li>
+      </ul>
+    </div>
 </div>
