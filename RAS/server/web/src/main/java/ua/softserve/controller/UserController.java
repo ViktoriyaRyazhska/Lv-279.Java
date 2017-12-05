@@ -52,7 +52,7 @@ public class UserController {
     @Autowired
     private EnglishLevelRepository elRepo;
     @Autowired
-    private MarkDAO mRepo;
+    private MarkRepository mRepo;
 
     @GetMapping(value = "/group/randomAdd", produces = {"application/json"})
     public ResponseEntity<String> randomGroups() {
