@@ -7,6 +7,10 @@ export class ProfileInfoFilterPipe implements PipeTransform {
 
   transform(profileInfoArray: any, directionId: any): any {
     const resultArray = [];
+
+    if(directionId == 0){
+      return profileInfoArray;
+    }
     for (const profileInfo of profileInfoArray) {
       if (profileInfo.technologies.technologyId == directionId) {
         console.log(profileInfo);
