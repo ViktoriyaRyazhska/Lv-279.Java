@@ -8,7 +8,8 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 
-@Getter @Setter
+@Getter
+@Setter
 @ToString
 @Entity
 @Table(name = "language_translations")
@@ -42,5 +43,6 @@ public class LanguageTranslations {
     @Column(name = "trasnlation")
     private String trasnlation;
 
-    public LanguageTranslations() {}
+    public LanguageTranslations() {
+    }
 }

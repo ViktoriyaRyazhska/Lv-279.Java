@@ -37,19 +37,13 @@ public class FakeControllerForReports {
     private CheckListByGroupsDtoService checkListByGroupsDtoService;
 
     @GetMapping(value = "/check_list_by_groups{count}", produces = "application/json")
-    public ResponseEntity< List<CheckListByGroupsDto>> getCheckListByGroupsDto(
-            @PathVariable int count
-    ) {
-        return new ResponseEntity<>(
-                checkListByGroupsDtoService.fakeGetAllCheckListByGroupsDto(count),
-                HttpStatus.OK);
+    public ResponseEntity<List<CheckListByGroupsDto>> getCheckListByGroupsDto(@PathVariable int count) {
+        return new ResponseEntity<>(checkListByGroupsDtoService.fakeGetAllCheckListByGroupsDto(count), HttpStatus.OK);
     }
 
     @GetMapping(value = "/testLang", produces = "application/json")
     public ResponseEntity<LanguageTranslations> testLang() {
-        return new ResponseEntity<>(languageTranslationsService.findOne(1),
-                HttpStatus.OK);
+        return new ResponseEntity<>(languageTranslationsService.findOne(1), HttpStatus.OK);
     }
-
 
 }

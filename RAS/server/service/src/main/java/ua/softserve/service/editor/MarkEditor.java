@@ -8,14 +8,14 @@ import ua.softserve.service.MarkService;
 import java.beans.PropertyEditorSupport;
 
 @Component
-public class MarkEditor extends PropertyEditorSupport{
+public class MarkEditor extends PropertyEditorSupport {
     @Autowired
     MarkService markService;
 
     @Override
     public void setAsText(String markId) throws IllegalArgumentException {
-//        int id = Integer.parseInt(markId);
-//        Mark mark = markService.findOne(id);
-//        setValue(mark);
+        // int id = Integer.parseInt(markId);
+        // Mark mark = markService.findOne(id);
+        // setValue(mark);
     }
 }

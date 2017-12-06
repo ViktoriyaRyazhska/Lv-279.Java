@@ -1,6 +1,5 @@
 package ua.softserve;
 
-
 import ua.softserve.util.dump.random.RandomUtil;
 
 import java.util.Date;

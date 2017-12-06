@@ -7,10 +7,10 @@ import ua.softserve.persistence.entity.*;
 import java.util.List;
 import java.util.TreeMap;
 
-
-@Getter @Setter
+@Getter
+@Setter
 public class AcademyDTO {
-//TODO: fix grammar errors
+    // TODO: fix grammar errors
     private String grName;
     private String nameForSite;
     private int academyStagesId;
@@ -35,7 +35,7 @@ public class AcademyDTO {
     List<LanguageTranslations> cityNames;
     List<Directions> direction;
     List<Technologies> technologie;
-    //TODO: rename field
+    // TODO: rename field
     List<ProfileInfo> profile;
 
 }

@@ -17,8 +17,7 @@ import java.util.Random;
 import static ua.softserve.util.dump.random.RandomUtil.*;
 
 /**
- * Util class for creating some <b>person</b>
- * with random data (sex, first name, second name, last name, email).
+ * Util class for creating some <b>person</b> with random data (sex, first name, second name, last name, email).
  */
 public class RandomPersonGenerator {
 
@@ -26,6 +25,7 @@ public class RandomPersonGenerator {
 
     /**
      * Creates the person with random data.
+     * 
      * @return created person.
      */
     public static RandomPerson getRandomPerson() {
@@ -59,12 +59,8 @@ public class RandomPersonGenerator {
         person.setLastName(LAST_NAMES[r]);
         person.setLastNameUkr(LAST_NAMES_UKR[r]);
 
-        person.setEmail(
-                person.getFirstName().toLowerCase() +
-                        "." +
-                        person.getLastName().toLowerCase() +
-                        getRandomEmailDomain()
-        );
+        person.setEmail(person.getFirstName().toLowerCase() + "." + person.getLastName().toLowerCase()
+                + getRandomEmailDomain());
         return person;
     }
 
