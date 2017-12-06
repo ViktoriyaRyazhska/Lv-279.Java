@@ -8,104 +8,94 @@
             Learning ability
           </div>
           <div class="col-sm-3 form-group">
-            <select class="form-control input-sm" [(ngModel)]="markValue" name="desc" (change)="onChoose()">
-              <!--<ng-container *ngFor="let mark of marks">-->
-                <!--<option *ngIf="mark.characteristic.id == one">{{mark.name}}</option>-->
-              <!--</ng-container>-->
-
-
-                <option *ngFor="let mark of marks | markFilter:one">{{mark.name}}</option>
+            <select class="form-control input-sm" [(ngModel)]="learnMark" name="learn" (change)="onChoose()">
+              <option *ngFor="let mark of marks | markFilter:one">{{mark.name}}</option>
             </select>
           </div>
           <div class="col-sm-7 form-group">
-            {{learningAbility}}
+            {{learnDesc}}
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" (click)="onSave()">asdf</button>
 
-        <!--<div class="row">-->
-          <!--<div class="col-sm-2 form-group">-->
-            <!--<lable>Overall technical competence</lable>-->
-          <!--</div>-->
-          <!--<div class="col-sm-3 form-group">-->
-            <!--<select class="form-control input-sm">-->
-              <!--<option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>-->
-            <!--</select>-->
-          <!--</div>-->
-          <!--<div class="col-sm-7 form-group">-->
-            <!--<lable id="otDesc">Technically skilful, good technical background on different levels</lable>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="col-sm-2 form-group">
+            Overall technical competence
+          </div>
+          <div class="col-sm-3 form-group">
+            <select class="form-control input-sm" [(ngModel)]="overallMark" name="overall" (change)="onChoose()">
+              <option *ngFor="let mark of marks | markFilter:two">{{mark.name}}</option>
+            </select>
+          </div>
+          <div class="col-sm-7 form-group">
+            {{overallDesc}}
+          </div>
+        </div>
 
-        <!--<div class="row">-->
-          <!--<div class="col-sm-2 form-group">-->
-            <!--<lable>Passional initiative</lable>-->
-          <!--</div>-->
-          <!--<div class="col-sm-3 form-group">-->
-            <!--<select class="form-control input-sm">-->
-              <!--<option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>-->
-            <!--</select>-->
-          <!--</div>-->
-          <!--<div class="col-sm-7 form-group">-->
-            <!--<lable id="piDesc">Highly motivated to grow in chosen direction, shows initiative to get all needed-->
-              <!--knowledge and information for effective growth-->
-            <!--</lable>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="col-sm-2 form-group">
+            Passional initiative
+          </div>
+          <div class="col-sm-3 form-group">
+            <select class="form-control input-sm" [(ngModel)]="passMark" name="pass" (change)="onChoose()">
+              <option *ngFor="let mark of marks | markFilter:tree">{{mark.name}}</option>
+            </select>
+          </div>
+          <div class="col-sm-7 form-group">
+            {{passDesc}}
+          </div>
+        </div>
 
-        <!--<div class="row">-->
-          <!--<div class="col-sm-2 form-group">-->
-            <!--<lable>Team work</lable>-->
-          <!--</div>-->
-          <!--<div class="col-sm-3 form-group">-->
-            <!--<select class="form-control input-sm">-->
-              <!--<option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>-->
-            <!--</select>-->
-          <!--</div>-->
-          <!--<div class="col-sm-7 form-group">-->
-            <!--<lable id="twDesc">Work as team member, cooperates with others to achieve team goals</lable>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="col-sm-2 form-group">
+            Team work
+          </div>
+          <div class="col-sm-3 form-group">
+            <select class="form-control input-sm" [(ngModel)]="teamMark" name="team" (change)="onChoose()">
+              <option *ngFor="let mark of marks | markFilter:four">{{mark.name}}</option>
+            </select>
+          </div>
+          <div class="col-sm-7 form-group">
+            {{teamDesc}}
+          </div>
+        </div>
 
-        <!--<div class="row">-->
-          <!--<div class="col-sm-2 form-group">-->
-            <!--<lable>Getting things done</lable>-->
-          <!--</div>-->
-          <!--<div class="col-sm-3 form-group">-->
-            <!--<select class="form-control input-sm">-->
-              <!--<option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>-->
-            <!--</select>-->
-          <!--</div>-->
-          <!--<div class="col-sm-7 form-group">-->
-            <!--<lable id="gtDesc">Finish tasks in time even if this will take extra efforts</lable>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="col-sm-2 form-group">
+            Getting things done
+          </div>
+          <div class="col-sm-3 form-group">
+            <select class="form-control input-sm" [(ngModel)]="getMark" name="get" (change)="onChoose()">
+              <option *ngFor="let mark of marks | markFilter:five">{{mark.name}}</option>
+            </select>
+          </div>
+          <div class="col-sm-7 form-group">
+            {{getDesc}}
+          </div>
+        </div>
 
-        <!--<div class="row">-->
-          <!--<div class="col-sm-2 form-group">-->
-            <!--<lable>Active Communicator</lable>-->
-          <!--</div>-->
-          <!--<div class="col-sm-3 form-group">-->
-            <!--<select class="form-control input-sm">-->
-              <!--<option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>-->
-            <!--</select>-->
-          <!--</div>-->
-          <!--<div class="col-sm-7 form-group">-->
-            <!--<lable id="acDesc">Good communication skills. Doesn't be afraid to talk to other students, teachers,-->
-              <!--experts. Clearly describes his/her point of view. Listening skills are good as well.-->
-            <!--</lable>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="col-sm-2 form-group">
+            Active Communicator
+          </div>
+          <div class="col-sm-3 form-group">
+            <select class="form-control input-sm" [(ngModel)]="actMark" name="act" (change)="onChoose()">
+              <option *ngFor="let mark of marks | markFilter:six">{{mark.name}}</option>
+            </select>
+          </div>
+          <div class="col-sm-7 form-group">
+            {{actDesc}}
+          </div>
+        </div>
 
-        <!--<div class="row">-->
-          <!--<div class="col-sm-2 form-group">-->
-            <!--<lable>Summary</lable>-->
-          <!--</div>-->
-          <!--<div class="col-sm-10 form-group">-->
-            <!--<input type="text" placeholder="Summary"-->
-                   <!--class="form-control input-sm"/>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="col-sm-2 form-group">
+            Summary
+          </div>
+          <div class="col-sm-10 form-group">
+            <input type="text" placeholder="Summary"
+                   class="form-control input-sm"/>
+          </div>
+        </div>
       </div>
     </div>
   </form>
