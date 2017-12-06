@@ -33,15 +33,12 @@ import java.util.Arrays;
  */
 public class Encryptor {
 
-    private static final int MAC_POS_IN_JSON = 11;
-    private static final int VALUE_POS_IN_JSON = 7;
-    private static final int IV_POS_IN_JSON = 3;
-    private static final int CORRECT_JSON_LENGTH = 13;
+    private Encryptor() {}
 
     /**
      * Encrypts the value using key
-     * @param value
-     * @param key
+     * @param value entry string
+     * @param key secret key
      * @return encrypted String
      */
     public static String encrypt(String value, String key) {
@@ -63,12 +60,12 @@ public class Encryptor {
 
     /**
      * Decrypts the value using key
-     * @param value
-     * @param key
+     * @param value entry string
+     * @param key secret key
      * @return decrypted String
      * @throws IllegalArgumentException can be "Incorrect value" or "Mac validation failed"
      */
-    public static String decrypt(String value, String key) throws IllegalArgumentException {
+    public static String decrypt(String value, String key) {
         byte[] jsonVal = Base64.decodeBase64(value);
         String iv;
         String val;

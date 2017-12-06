@@ -8,11 +8,11 @@ import {StudentsComponent} from "./components/students/students.component";
 import {FeedbackTeacherDetailComponent} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.component";
 
 const appRoutes: Routes = [
-  {path: 'viewAcademies', component: ViewAcademiesComponent},
-  {path: 'addgroup', component: AddGroupComponent},
-  {path: 'history', component: HistoryListComponent},
-  {path: 'students', component: StudentsComponent},
-  {path: 'marks', component: FeedbackTeacherDetailComponent}
+  {path: 'ang/viewAcademies', component: ViewAcademiesComponent},
+  {path: 'ang/addgroup', component: AddGroupComponent},
+  {path: 'ang/history', component: HistoryListComponent},
+  {path: 'ang/students', component: StudentsComponent},
+  {path: 'ang/marks', component: FeedbackTeacherDetailComponent}
 ];
 
 @NgModule({

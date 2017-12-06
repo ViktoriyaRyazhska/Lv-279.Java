@@ -11,18 +11,15 @@
 package ua.softserve.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
+	
+	@RequestMapping("/ang")
+	public String init(){
+		return "forward:/index.html";
+	}
 
-    @GetMapping("/main")
-    public String welcome() {
-        return "forward:/index.html";
-    }
 
-    @GetMapping("/")
-    public String init() {
-        return "redirect:/main";
-    }
 }
