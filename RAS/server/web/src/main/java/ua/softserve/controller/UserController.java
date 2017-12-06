@@ -1,6 +1,5 @@
 package ua.softserve.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +9,6 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.service.UserService;
 
 import java.util.List;
-
 
 @RestController
 public class UserController {
@@ -22,7 +20,7 @@ public class UserController {
      *
      * @return JSON object of list of all users from DB.
      */
-    @GetMapping(value = "/user/getAllUsers", produces = {"application/json"})
+    @GetMapping(value = "/user/getAllUsers", produces = { "application/json" })
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }

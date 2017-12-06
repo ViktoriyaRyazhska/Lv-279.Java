@@ -14,7 +14,6 @@ public class AcademyStagesServiceimpl implements AcademyStagesService {
     @Autowired
     private AcademyStagesRepository academyRepository;
 
-
     @Transactional(readOnly = true)
     @Override
     public List<AcademyStages> getAllAcademyStagesService() {

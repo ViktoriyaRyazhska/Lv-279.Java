@@ -10,5 +10,5 @@ import lombok.*;
 public class StudentsShortViewDto {
     private Integer id;
     private String fullName;
-//    private boolean checked = false;
+    // private boolean checked = false;
 }

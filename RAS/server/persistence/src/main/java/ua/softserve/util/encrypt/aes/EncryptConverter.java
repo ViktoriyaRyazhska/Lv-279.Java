@@ -14,15 +14,14 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 /**
- * Converter for encrypt and decrypt fields in Hibernate.
- * Implements AttributeConverter.
+ * Converter for encrypt and decrypt fields in Hibernate. Implements AttributeConverter.
  */
 @Converter
 public class EncryptConverter implements AttributeConverter<String, String> {
 
     /**
-     * The method which will be auto invoked by Hibernate to encrypt the data
-     * when they are preparing to be saved.
+     * The method which will be auto invoked by Hibernate to encrypt the data when they are preparing to be saved.
+     * 
      * @param s
      * @return
      */
@@ -32,8 +31,8 @@ public class EncryptConverter implements AttributeConverter<String, String> {
     }
 
     /**
-     * The method which will be auto invoked by Hibernate to decrypt the data
-     * when they are preparing to be read.
+     * The method which will be auto invoked by Hibernate to decrypt the data when they are preparing to be read.
+     * 
      * @param s
      * @return
      */

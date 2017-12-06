@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface FeedbackService {
     List<Feedback> findAll();
+
     void saveDTO(FeedbackDTO feedbackDTO);
+
     Feedback findOne(int id);
 }

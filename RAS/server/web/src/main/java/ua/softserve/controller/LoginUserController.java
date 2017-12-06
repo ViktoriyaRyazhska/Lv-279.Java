@@ -12,26 +12,27 @@ public class LoginUserController {
     @Autowired
     LoginUserServiceImpl userService;
 
-//    @GetMapping("/")
-//    public String init(){
-//        return "index";
-//    }
+    // @GetMapping("/")
+    // public String init(){
+    // return "index";
+    // }
 
     @GetMapping("/registr/{username}/{password}")
-    public void registration(@PathVariable String username,
-                               @PathVariable String password){
-        LoginUser user=new LoginUser();
+    public void registration(@PathVariable String username, @PathVariable String password) {
+        LoginUser user = new LoginUser();
         user.setUsername(username);
         user.setPassword(password);
         userService.save(user);
 
     }
+
     @GetMapping("/success")
-    public String success(){
+    public String success() {
         return "success";
     }
+
     @GetMapping("/fail")
-    public String fail(){
+    public String fail() {
         return "fail";
     }
 }

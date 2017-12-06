@@ -3,7 +3,6 @@ package ua.softserve.service.dto;
 import lombok.*;
 import ua.softserve.persistence.entity.Feedback;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,5 +31,3 @@ public class StudentsViewDto {
     private Feedback teacherFeedback = new Feedback();
     private Feedback expertFeedback = new Feedback();
 }
-
-
