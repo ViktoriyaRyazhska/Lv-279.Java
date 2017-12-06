@@ -23,6 +23,7 @@ import {FeedbackExpertDetailComponent} from "./components/feedbacks/feedback-det
 import {FeedbackInterviewerDetailComponent} from "./components/feedbacks/feedback-detail/feedback-interviewer-detail/feedback-interviewer-detail.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.pipe";
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -36,7 +37,6 @@ import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-detail/
     FilterPipe,
     StudentsComponent,
     ProfileInfoFilterPipe,
-    ProfileInfoFilterPipe,
     StudentsComponent,
     FeedbacksComponent,
     FeedbackListComponent,
@@ -45,7 +45,8 @@ import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-detail/
     FeedbackTeacherDetailComponent,
     FeedbackExpertDetailComponent,
     FeedbackInterviewerDetailComponent,
-    FeedbackTeacherDetailPipe
+    FeedbackTeacherDetailPipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
