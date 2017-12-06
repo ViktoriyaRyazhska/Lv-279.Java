@@ -19,6 +19,8 @@ export class AddGroupComponent implements OnInit {
   profile: any[];
 
   defaultStudentActual: number = 0;
+  defaultStudentsPlannedToGraduate: number = 0;
+  defaultStudentsPlannedToEnrollment: number = 0;
    // defaultCity = this.cityNames['0'];
 
   technologyModel: any;
