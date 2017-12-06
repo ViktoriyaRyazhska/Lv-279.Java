@@ -27,6 +27,8 @@ public class AcademyDTO {
     private int studentPlannedToGraduate;
     private int studentPlannedToEnrollment;
     private int studentActual;
+    private String cityName;
+    private String status;
     private List<String> experts;
 
     List<AcademyStages> academyStages;

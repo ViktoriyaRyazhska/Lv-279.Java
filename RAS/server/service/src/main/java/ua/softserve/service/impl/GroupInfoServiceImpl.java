@@ -2,10 +2,7 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.softserve.persistence.entity.Employee;
-import ua.softserve.persistence.entity.GroupInfo;
-import ua.softserve.persistence.entity.GroupInfoTeachers;
-import ua.softserve.persistence.entity.TeacherTypes;
+import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.persistence.repo.GroupInfoTeachersRepository;
@@ -19,6 +16,8 @@ import java.util.List;
 
 @Service
 public class GroupInfoServiceImpl implements GroupInfoService {
+    private static final int ID_OF_THE_EXPERT_VALUE = 2;
+
     @Autowired
     private GroupInfoRepository groupInfoRepository;
 
@@ -63,22 +62,44 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         List<AcademyDTO> academyDTOList = new ArrayList<AcademyDTO>();
         for (GroupInfo groupInfo : groupInfoList) {
             AcademyDTO academyDTO = academyConverter.toDTO(groupInfo);
-            academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
-            academyDTO.setDirection(directionService.findAllDirectionsInIta());
-            academyDTO.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
-            academyDTO.setProfile(profileService.findAll());
-            academyDTO.setCityNames(languageTranslationsService.getAllLanguageTranslationsName());
-            TeacherTypes teacherTypes = teacherTypeRepository.findOne(1);
-            List<GroupInfoTeachers> allByAcademyAndTeacherType =
-                    groupInfoTeachersRepository.findAllByAcademyAndTeacherType(groupInfo.getAcademy(), teacherTypes);
-            List<String> employeeList = new ArrayList<>();
-            for (GroupInfoTeachers groupInfoTeachers : allByAcademyAndTeacherType) {
-                employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " " +
-                                groupInfoTeachers.getEmployee().getLastNameEng());
+            if (groupInfo.getAcademy() != null) {
+                LanguageTranslations languageTranslations = languageTranslationsService.findById(groupInfo.getAcademy().getAcademyId());
+                if(languageTranslations != null){
+                    academyDTO.setCityName(languageTranslations.getTrasnlation());
+                }
+
+                if (groupInfo.getAcademy().getAcademyStages() != null) {
+                    academyDTO.setStatus(groupInfo.getAcademy().getAcademyStages().getName());
+                }
+
+                TeacherTypes teacherTypes = teacherTypeRepository.findOne(ID_OF_THE_EXPERT_VALUE);
+                List<GroupInfoTeachers> allByAcademyAndTeacherType =
+                        groupInfoTeachersRepository.findAllByAcademyAndTeacherType(groupInfo.getAcademy(), teacherTypes);
+                List<String> employeeList = new ArrayList<>();
+                for (GroupInfoTeachers groupInfoTeachers : allByAcademyAndTeacherType) {
+                    employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " " +
+                            groupInfoTeachers.getEmployee().getLastNameEng());
+                }
+                academyDTO.setExperts(employeeList);
             }
-            academyDTO.setExperts(employeeList);
+            if (groupInfo.getProfileInfo() != null) {
+                academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
+            }
+
+
+
+
+
             academyDTOList.add(academyDTO);
         }
+        //form list for combo-box.
+        AcademyDTO academyDTO = new AcademyDTO();
+        academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
+        academyDTO.setDirection(directionService.findAllDirectionsInIta());
+        academyDTO.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
+        academyDTO.setProfile(profileService.findAll());
+        academyDTO.setCityNames(languageTranslationsService.getAllLanguageTranslationsName());
+        academyDTOList.add(academyDTO);
         return academyDTOList;
     }
 
