@@ -9,9 +9,10 @@ import {Mark} from "../mark.model";
   providers: [FeedbackDetailService]
 })
 export class FeedbackTeacherDetailComponent implements OnInit {
+  learningAbility: string;
   one: number = 1;
   marks: Array<any>;
-  desc: any;
+  markValue: any;
 
   constructor(private feedbackDetailService: FeedbackDetailService) {
   }
@@ -25,7 +26,17 @@ export class FeedbackTeacherDetailComponent implements OnInit {
     );
   }
 
-  onSave(){
-        console.log(this.desc)
+  onChoose() {
+    console.log(this.markValue);
+    for (let mark of this.marks) {
+      console.log(mark.name == this.markValue);
+      if (mark.name == this.markValue) {
+        this.learningAbility = mark.description;
+      }
+    }
   }
+
+  // onSave(){
+  //       console.log(this.markValue)
+  // }
 }

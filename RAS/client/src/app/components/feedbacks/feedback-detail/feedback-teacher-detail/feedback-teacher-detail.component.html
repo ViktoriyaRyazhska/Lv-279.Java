@@ -8,14 +8,17 @@
             Learning ability
           </div>
           <div class="col-sm-3 form-group">
-            <select class="form-control input-sm" [(ngModel)] ="desc" name="descName">
-              <ng-container *ngFor="let mark of marks">
-                <option *ngIf="mark.characteristic.id == one">{{mark.mark}}</option>
-              </ng-container>
+            <select class="form-control input-sm" [(ngModel)]="markValue" name="desc" (change)="onChoose()">
+              <!--<ng-container *ngFor="let mark of marks">-->
+                <!--<option *ngIf="mark.characteristic.id == one">{{mark.name}}</option>-->
+              <!--</ng-container>-->
+
+
+                <option *ngFor="let mark of marks | markFilter:one">{{mark.name}}</option>
             </select>
           </div>
           <div class="col-sm-7 form-group">
-            <!--{{mark.description}}-->
+            {{learningAbility}}
           </div>
         </div>
         <button type="submit" class="btn btn-primary" (click)="onSave()">asdf</button>
