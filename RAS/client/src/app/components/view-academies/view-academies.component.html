@@ -21,7 +21,7 @@
       <th>Interviewer Feedback</th>
     </tr>
     <tr>
-      <td><input type="text" name="groupName" (input)="onFilterField($event)" class="form-control"></td>
+      <td><input type="text" name="grName" (input)="onFilterField($event)" class="form-control"></td>
       <td><input type="text" name="nameForSite" (input)="onFilterField($event)" class="form-control"></td>
       <td><!--<input type="text" name="direction" (input)="onFilterField($event)" class="form-control">-->
         <select name="technologyName" class="form-control input-sm" (change)="onFilterField($event)" ngModel>
@@ -43,13 +43,13 @@
       <td><input type="date" name="startDate" (input)="onFilterField($event)" class="form-control"></td>
       <td><input type="date" name="endDate" (input)="onFilterField($event)" class="form-control"></td>
       <td><!--<input type="text" name="status" (input)="onFilterField($event)" class="form-control">-->
-        <select name="status" class="form-control input-sm">
-          <option *ngFor="let stages of academyStages" [value]="stages.stageId">{{stages.name}}</option>
+        <select name="status" class="form-control input-sm" (input)="onFilterField($event)">
+          <option *ngFor="let stages of academyStages" [value]="stages.name">{{stages.name}}</option>
         </select>
       </td>
       <td><input type="text" name="experts" (input)="onFilterField($event)" class="form-control"></td>
       <td><input type="text" name="studentPlannedToGraduate" (input)="onFilterField($event)" class="form-control"></td>
-      <td><input type="text" name="studentPlannedForEnrolment" (input)="onFilterField($event)" class="form-control">
+      <td><input type="text" name="studentPlannedToEnrollment" (input)="onFilterField($event)" class="form-control">
       </td>
       <td><input type="text" name="studentsActual" (input)="onFilterField($event)" class="form-control"></td>
       <td><input type="text" name="hiredNotGraduated" (input)="onFilterField($event)" class="form-control"></td>
@@ -68,10 +68,10 @@
       <td>---</td>
       <td>{{academy.startDate | date: "dd.MM.yyyy"}}</td>
       <td>{{academy.endDate | date: "dd.MM.yyyy"}}</td>
-      <td>---</td>
+      <td>{{academy.status}}</td>
       <td>{{academy.experts.toString()}}</td>
       <td>{{academy.studentPlannedToGraduate}}</td>
-      <td>{{academy.studentPlannedForEnrolment}}</td>
+      <td>{{academy.studentPlannedToEnrollment}}</td>
       <td>{{academy.studentActual}}</td>
       <td>---</td>
       <td>{{academy.directionName}}</td>
