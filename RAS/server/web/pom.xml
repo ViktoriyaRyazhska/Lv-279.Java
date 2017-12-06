@@ -11,8 +11,8 @@
     </parent>
 
     <artifactId>web</artifactId>
-    <!--<version>1.0-SNAPSHOT</version>-->
-    <!--<name>RAS web</name>-->
+    <version>1.0-SNAPSHOT</version>
+    <name>RAS web</name>
     <packaging>war</packaging>
 
 

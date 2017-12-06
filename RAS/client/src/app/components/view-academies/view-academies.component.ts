@@ -12,6 +12,12 @@ import {FilterService} from "./filter.service";
 export class ViewAcademiesComponent implements OnInit {
   academies = [];
   filteredAcademies = [];
+  academyStages: any[];
+  cityNames: any[];
+  direction: any[];
+  technology: any[];
+  profile: any[];
+
   pager: any = {};
   pagedItems = [];
   propName = '';
@@ -27,7 +33,14 @@ export class ViewAcademiesComponent implements OnInit {
     this.academyService.getAll().subscribe(
       data => {
         this.academies = data;
-        this.filteredAcademies = data;
+        this.academies = this.academies.slice(0, data.length - 2);
+        this.filteredAcademies = this.academies;
+
+        this.academyStages = data[data.length - 1].academyStages;
+        this.cityNames = data[data.length - 1].cityNames;
+        this.direction = data[data.length - 1].direction;
+        this.profile = data[data.length - 1].profile;
+        this.technology = data[data.length - 1].technologie;
 
         this.setPage(1);
       },
