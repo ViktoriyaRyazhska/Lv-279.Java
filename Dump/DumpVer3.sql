@@ -3,7 +3,7 @@
 -- Host: localhost    Database: academy_test
 -- ------------------------------------------------------
 -- Server version	5.7.20-0ubuntu0.16.04.1
-
+use ss_ps_db;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -657,13 +657,16 @@ INSERT INTO `login_user` VALUES (1,'','','USER','','','$2a$10$xsC3s4zqKO8CdS
 /*!40000 ALTER TABLE `login_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+
+
 --
 -- Dumping data for table `mark`
 --
 
 LOCK TABLES `mark` WRITE;
 /*!40000 ALTER TABLE `mark` DISABLE KEYS */;
-INSERT INTO `mark` VALUES (1,'Learns very quickly, shows significant progress during education time','Quick',1),(2,'Learns most scope of program, shows expected progress ','Normal',1),(3,'Learns not much, after end of education knowledge level almost the same as it was at the beginning','Hard to learn',1),(4,NULL,'Can\'t evaluate',1),(5,'Technically skilful, good technical background on different levels','Strong',2),(6,'Technical knowledge is present, but there are gaps in base knowledge, understanding of base things','Good',2),(7,'Technical knowledge is pure, just user level of technologies, no understanding of lower technical levels, than user needs','Non-technical',2),(8,NULL,'Can\'t evaluate',2),(9,'Highly motivated to grow in chosen direction, shows initiative to get all needed knowledge and information for effective growth','Inititative',3),(10,'Usual student: works good, asks questions, interested to work with chosen direction','Equal to majority',3),(11,NULL,'Can\'t evaluate',3),(12,'Work as team member, cooperates with others to achieve team goals','Team player',4),(13,'Most of work does alone, doesn’t want to cooperate with others, achieves his/her own goals','Works alone',4),(14,'Takes initiative or can organize small groups of student to work together or proposes solutions how team can effectively achieve goals. Doesn\'t afraid to take responsibility of team results','Leader',4),(15,NULL,'Can\'t evaluate',4),(16,'Finish tasks in time even if this will take extra efforts','Strong Area',5),(17,'Finish tasks but with delay. Oriented to result, but has problem with planning.','Needs improvement',5),(18,NULL,'Can\'t evaluate',5),(19,'Good communication skills. Doesn’t be afraid to talk to other students, teachers, experts. Clearly describes his/her point of view. Listening skills are good as well.','Listener and presenter',6),(20,'Has some problems in communication','Listener ',6),(21,'Has issue with communication - can\'t communicate at all or can\'t listen to others','Weak communication',6),(22,NULL,'Can\'t evaluate',6);
+INSERT INTO `mark` VALUES (1,'Learns very quickly, shows significant progress during education time','Quick',1),(2,'Learns most scope of program, shows expected progress ','Normal',1),(3,'Learns not much, after end of education knowledge level almost the same as it was at the beginning','Hard to learn',1),(4,NULL,'Can\'t evaluate',1),(5,'Technically skilful, good technical background on different levels','Strong',2),(6,'Technical knowledge is present, but there are gaps in base knowledge, understanding of base things','Good',2),(7,'Technical knowledge is pure, just user level of technologies, no understanding of lower technical levels, than user needs','Non-technical',2),(8,NULL,'Can\'t evaluate',2),(9,'Highly motivated to grow in chosen direction, shows initiative to get all needed knowledge and information for effective growth','Inititative',3),(10,'Usual student: works good, asks questions, interested to work with chosen direction','Equal to majority',3),(11,NULL,'Can\'t evaluate',3),(12,'Work as team member, cooperates with others to achieve team goals','Team player',4),(13,'Most of work does alone, doesn’t want to cooperate with others, achieves his/her own goals','Works alone',4),(14,'Takes initiative or can organize small groups of student to work together or proposes solutions how team can effectively achieve goals. Doesn\'t afraid to take responsibility of team results','Leader',4),(15,NULL,'Can\'t evaluate',4),(16,'Finish tasks in time even if this will take extra efforts','Strong Area',5),(17,'Finish tasks but with delay. Oriented to result, but has problem with planning.','Needs improvement',5),(18,NULL,'Can\'t evaluate',5),(19,'Good communication skills. Doesn’t be afraid to talk to other students, teachers, experts. Clearly describes his/her point of view. Listening skills are good as well.','Listener and presenter',6),(20,'Has some problems in communication','Listener',6),(21,'Has issue with communication - can\'t communicate at all or can\'t listen to others','Weak communication',6),(22,NULL,'Can\'t evaluate',6);
 /*!40000 ALTER TABLE `mark` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -683,7 +686,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `profile_info` WRITE;
 /*!40000 ALTER TABLE `profile_info` DISABLE KEYS */;
-INSERT INTO `profile_info` VALUES (1,'Ruby',49),(2,'Java: Web 2.0',3),(3,'Java: Web TAE',31),(4,'.NET: Web TAE',31),(5,'.NET: Web',4),(6,'Python',50),(7,'Python: Web TAE',31),(8,'DevOps: Unix',9),(9,'Generic QCE',41),(10,'Go',54),(11,'Apple: Mobile 2.0',53),(12,'MSSQL: Development',6),(13,'Web UI\n\n',11),(14,'NodeJS',11);
+INSERT INTO `profile_info` VALUES (1,'Ruby',49),(2,'Java: Web 2.0',3),(3,'Java: Web TAE',31),(4,'.NET: Web TAE',31),(5,'.NET: Web',4),(6,'Python',50),(7,'Python: Web TAE',31),(8,'DevOps: Unix',9),(9,'Generic QCE',41),(10,'Go',54),(11,'Apple: Mobile 2.0',53),(12,'MSSQL: Development',6),(13,'Web UI',11),(14,'NodeJS',11);
 /*!40000 ALTER TABLE `profile_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
