@@ -6,7 +6,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "academy_stages")
 public class AcademyStages {
@@ -23,5 +24,6 @@ public class AcademyStages {
     @Column(name = "sort")
     private byte sort;
 
-    public AcademyStages() {}
+    public AcademyStages() {
+    }
 }

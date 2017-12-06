@@ -17,7 +17,6 @@ public class HistoryController {
     @Autowired
     private HistoryService historyService;
 
-
     @GetMapping("/showHistory")
     public String showHistory(Model model) {
         List<History> allHistory = historyService.findAll();
@@ -25,9 +24,9 @@ public class HistoryController {
         return "showHistory";
     }
 
-    @RequestMapping(value = "/history",method = RequestMethod.GET,produces = "application/json")
+    @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<List<History>> getHistory(){
-        return new ResponseEntity<List<History>>( historyService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<History>> getHistory() {
+        return new ResponseEntity<List<History>>(historyService.findAll(), HttpStatus.OK);
     }
 }

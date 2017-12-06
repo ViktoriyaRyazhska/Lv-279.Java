@@ -66,10 +66,9 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
     public void randomGroups() {
         List<Academy> academies = academyRepository.findAllByStartDateBetween(
                 new Timestamp(System.currentTimeMillis() - 12 * ONE_MONTH_IN_MILES),
-                new Timestamp(System.currentTimeMillis() + 12 * ONE_MONTH_IN_MILES)
-        );
-//        List<Academy> academies = academyRepository.findAll()
-//                .stream().filter(academy -> academy.getAcademyId()==1).collect(Collectors.toList());
+                new Timestamp(System.currentTimeMillis() + 12 * ONE_MONTH_IN_MILES));
+        // List<Academy> academies = academyRepository.findAll()
+        // .stream().filter(academy -> academy.getAcademyId()==1).collect(Collectors.toList());
         Random r = new Random();
         List<Employee> employeesAll = eRepo.findAll();
         List<User> usersAll = uServ.findAll();
@@ -84,17 +83,9 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
             Technologies tech = academy.getTechnologies();
             String techName = tech.getName();
             List<LanguageTranslations> cityLT = ltRepo.findAllByItemId(academy.getCity().getCityId());
-            String city = cityLT
-                    .stream()
-                    .filter(lt -> lt.getLocal()=='e')
-                    .collect(Collectors.toList())
-                    .get(0)
+            String city = cityLT.stream().filter(lt -> lt.getLocal() == 'e').collect(Collectors.toList()).get(0)
                     .getTrasnlation();
-            gi.setGroupName(
-                    city.substring(0, 2) + "-" +
-                            (r.nextInt(700) + 300) +
-                            "." + techName
-            );
+            gi.setGroupName(city.substring(0, 2) + "-" + (r.nextInt(700) + 300) + "." + techName);
 
             List<ProfileInfo> pis = pRepo.findAllByTechnologiesTechnologyId(tech.getTechnologyId());
             if (pis == null || pis.size() == 0) {
@@ -120,19 +111,18 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
                 if (c == tc) {
                     ttIndex++;
                 }
-                if (c == tc+ec) {
+                if (c == tc + ec) {
                     ttIndex++;
                 }
                 GroupInfoTeachers git = new GroupInfoTeachers();
                 git.setAcademy(academy);
                 git.setEmployee(employee);
-                git.setInvolved(100/tc);
-                git.setContributedHours(r.nextInt(20)+10);
+                git.setInvolved(100 / tc);
+                git.setContributedHours(r.nextInt(20) + 10);
                 git.setTeacherType(ttAll.get(ttIndex));
                 gitRepo.save(git);
                 c++;
             }
-
 
             StudentStatuses ss = ssRepo.findOne(1);
             Employee approvedBy = employeesAll.get(r.nextInt(employees.size()));
@@ -141,7 +131,7 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
                 return;
             }
             List<EnglishLevel> engLevs = elRepo.findAll();
-            for (User user: users) {
+            for (User user : users) {
 
                 Students student = new Students();
                 student.setAcademy(academy);
@@ -149,37 +139,36 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
                 student.setUser(user);
                 student.setStudentStatus(ss);
                 student.setEnglishLevel(engLevs.get(r.nextInt(engLevs.size())));
-                student.setEngGram(getRandomDouble(3,11));
-                student.setEntryScore(getRandomDouble(300,1001));
+                student.setEngGram(getRandomDouble(3, 11));
+                student.setEntryScore(getRandomDouble(300, 1001));
 
-                student.setIncomingTest(r.nextInt(7001)+300);
-                student.setIntermBase(getRandomDouble(3,11));
-                student.setIntermLang(getRandomDouble(300,1001));
-                student.setFinalBase(getRandomDouble(30,101));
-                student.setFinalLang(getRandomDouble(300,1001));
+                student.setIncomingTest(r.nextInt(7001) + 300);
+                student.setIntermBase(getRandomDouble(3, 11));
+                student.setIntermLang(getRandomDouble(300, 1001));
+                student.setFinalBase(getRandomDouble(30, 101));
+                student.setFinalLang(getRandomDouble(300, 1001));
 
-                student.setTestOne(getRandomDouble(30,101));
-                student.setTestTwo(getRandomDouble(3,11));
-                student.setTestThree(getRandomDouble(300,1001));
-                student.setTestFour(getRandomDouble(30,101));
-                student.setTestFive(getRandomDouble(300,1001));
-                student.setTestSix(getRandomDouble(300,1001));
-                student.setTestSeven(getRandomDouble(300,1001));
-                student.setTestEight(getRandomDouble(30,101));
-                student.setTestNine(getRandomDouble(300,1001));
-                student.setTestTen(getRandomDouble(3,11));
+                student.setTestOne(getRandomDouble(30, 101));
+                student.setTestTwo(getRandomDouble(3, 11));
+                student.setTestThree(getRandomDouble(300, 1001));
+                student.setTestFour(getRandomDouble(30, 101));
+                student.setTestFive(getRandomDouble(300, 1001));
+                student.setTestSix(getRandomDouble(300, 1001));
+                student.setTestSeven(getRandomDouble(300, 1001));
+                student.setTestEight(getRandomDouble(30, 101));
+                student.setTestNine(getRandomDouble(300, 1001));
+                student.setTestTen(getRandomDouble(3, 11));
 
                 student.setTeacherFeedback(getRandomFeedback());
-                student.setTeacherScore(getRandomDouble(3,6));
+                student.setTeacherScore(getRandomDouble(3, 6));
                 student.setExpertFeedback(getRandomFeedback());
-                student.setExpertScore(getRandomDouble(3,6));
-                student.setInterviewerScore(getRandomDouble(3,6));
+                student.setExpertScore(getRandomDouble(3, 6));
+                student.setInterviewerScore(getRandomDouble(3, 6));
 
                 student.setInterviewerComment("Bla bla bla");
 
                 sRepo.save(student);
             }
-
 
         }
     }
@@ -187,7 +176,8 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
     /**
      * Demo method for saving n random users
      *
-     * @param count (n) number of users to generating and saving
+     * @param count
+     *            (n) number of users to generating and saving
      * @return simple string 'Hello'
      */
     public void randomAddUsers(int count) {
@@ -196,7 +186,9 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
 
     /**
      * Demo method for saving n random users
-     * @param countOfUsers (n) number of users to generating and saving
+     * 
+     * @param countOfUsers
+     *            (n) number of users to generating and saving
      */
     public void genAndSaveUsers(int countOfUsers) {
         for (int i = 0; i < countOfUsers; i++) {
@@ -205,8 +197,7 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
             user.setFirstName(person.getFirstName());
             user.setLastName(person.getLastName());
             user.setEmail(person.getEmail());
-            user.setUserName(person.getFirstName().toLowerCase() +
-                    person.getLastName().toLowerCase());
+            user.setUserName(person.getFirstName().toLowerCase() + person.getLastName().toLowerCase());
             user.setPhone("+38(000)000-00-00");
             uServ.save(user);
         }
@@ -215,38 +206,32 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
     /**
      * Generates random employees
      *
-     * @param count of random employees
+     * @param count
+     *            of random employees
      *
      * @return script for inserting employees to database
      */
     public String randomAddEmpl(int count) {
         StringBuilder sb = new StringBuilder();
-        sb.append("INSERT INTO employee" +
-                "(employee_id, first_name_eng," +
-                "last_name_eng, first_name_ukr," +
-                "second_name_ukr, last_name_ukr)\n" +
-                " VALUES\n");
-        for (int i = 0; i < count; ) {
+        sb.append("INSERT INTO employee" + "(employee_id, first_name_eng," + "last_name_eng, first_name_ukr,"
+                + "second_name_ukr, last_name_ukr)\n" + " VALUES\n");
+        for (int i = 0; i < count;) {
             RandomPerson randomPerson = RandomPersonGenerator.getRandomPerson();
-            sb.append("(" +
-                    ++i + ", " +
-                    "'" + randomPerson.getFirstName() + "', " +
-                    "'" + randomPerson.getLastName() + "', " +
-                    "'" + randomPerson.getFirstNameUkr() + "', " +
-                    "'" + randomPerson.getSecondNameUkr() + "', " +
-                    "'" + randomPerson.getLastNameUkr() + "')");
+            sb.append("(" + ++i + ", " + "'" + randomPerson.getFirstName() + "', " + "'" + randomPerson.getLastName()
+                    + "', " + "'" + randomPerson.getFirstNameUkr() + "', " + "'" + randomPerson.getSecondNameUkr()
+                    + "', " + "'" + randomPerson.getLastNameUkr() + "')");
             if (i < count) {
                 sb.append(",\n");
             } else {
                 sb.append(";\n");
             }
-//            Employee employee = new Employee();
-//            employee.setFirstNameEng(randomPerson.getFirstName());
-//            employee.setLastNameEng(randomPerson.getLastName());
-//            employee.setFirstNameUkr(randomPerson.getFirstNameUkr());
-//            employee.setSecondNameUkr(randomPerson.getSecondNameUkr());
-//            employee.setLastNameUkr(randomPerson.getLastNameUkr());
-//            eRepo.save(employee);
+            // Employee employee = new Employee();
+            // employee.setFirstNameEng(randomPerson.getFirstName());
+            // employee.setLastNameEng(randomPerson.getLastName());
+            // employee.setFirstNameUkr(randomPerson.getFirstNameUkr());
+            // employee.setSecondNameUkr(randomPerson.getSecondNameUkr());
+            // employee.setLastNameUkr(randomPerson.getLastNameUkr());
+            // eRepo.save(employee);
         }
         return sb.toString();
     }
@@ -254,9 +239,11 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
     /**
      * Returns random set of employees from entry list
      *
-     * @param count of employees
+     * @param count
+     *            of employees
      *
-     * @param allEmpl entry list of employees
+     * @param allEmpl
+     *            entry list of employees
      *
      * @return random set of employees
      */
@@ -272,9 +259,11 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
     /**
      * Returns random set of users from entry list
      *
-     * @param count of users
+     * @param count
+     *            of users
      *
-     * @param allUsers entry list of users
+     * @param allUsers
+     *            entry list of users
      *
      * @return random set of users
      */

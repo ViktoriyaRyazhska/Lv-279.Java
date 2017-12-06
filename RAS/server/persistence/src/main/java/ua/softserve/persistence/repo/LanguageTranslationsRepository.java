@@ -17,6 +17,4 @@ public interface LanguageTranslationsRepository extends JpaRepository<LanguageTr
 
     List<LanguageTranslations> findAllByItemId(int id);
 
-
 }
-

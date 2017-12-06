@@ -6,7 +6,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "profile_info")
 public class ProfileInfo {
@@ -24,7 +25,6 @@ public class ProfileInfo {
     @JoinColumn(name = "technology_id")
     private Technologies technologies;
 
-    public ProfileInfo() {}
+    public ProfileInfo() {
+    }
 }
-
-
