@@ -5,13 +5,13 @@ import ua.softserve.persistence.entity.Profile;
 import java.util.List;
 
 public interface ProfileService {
-    void save(Profile profile);
+    void save(Profile user);
 
     Profile findOne(int id);
 
     List<Profile> findAll();
 
-    void remove(Profile profile);
+    void remove(Profile user);
 
     List<String> findProfileNames();
 }

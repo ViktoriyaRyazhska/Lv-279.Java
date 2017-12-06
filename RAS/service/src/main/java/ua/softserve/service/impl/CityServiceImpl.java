@@ -13,7 +13,7 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.dao.CityRepository;
+import ua.softserve.persistence.dao.CityDAO;
 import ua.softserve.persistence.entity.City;
 import ua.softserve.service.CityService;
 
@@ -23,31 +23,31 @@ import java.util.List;
 public class CityServiceImpl implements CityService {
 
     @Autowired
-    private CityRepository cityRepository;
+    private CityDAO cityDAO;
 
     @Override
     @Transactional
     public void save(City city) {
-        cityRepository.save(city);
+        cityDAO.save(city);
     }
 
     @Override
     @Transactional(readOnly = true)
     public City findOne(int id) {
-        return cityRepository.findOne(id);
+        return cityDAO.findOne(id);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<City> findAll() {
-        return cityRepository.findAll();
+        return cityDAO.findAll();
 
     }
 
     @Override
     @Transactional
     public void remove(City city) {
-        cityRepository.delete(city);
+        cityDAO.delete(city);
     }
 
 }

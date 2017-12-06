@@ -1,9 +1,11 @@
 package ua.softserve.service;
 
 
+import org.springframework.data.domain.Page;
 import ua.softserve.persistence.dto.AcademyDTO;
 import ua.softserve.persistence.entity.Academy;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 public interface AcademyService {
@@ -27,6 +29,5 @@ public interface AcademyService {
 
     Academy findWithEmployeeInterviewers(int id);
 
-    List<AcademyDTO> findWithEmployeeExperts();
-
+    List<Academy> findWithEmployeeExperts();
 }

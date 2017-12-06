@@ -6,7 +6,7 @@ import ua.softserve.persistence.entity.LanguageTranslations;
 
 import java.util.List;
 
-public interface LanguageTranslationsRepository extends JpaRepository<LanguageTranslations, Integer> {
+public interface LanguageTranslationsDAO extends JpaRepository<LanguageTranslations, Integer> {
 
     @Query("select lt from LanguageTranslations lt where lt.tag like 'city' and lt.local like 'en'")
     List<LanguageTranslations> getAllLanguageTranslationsName();

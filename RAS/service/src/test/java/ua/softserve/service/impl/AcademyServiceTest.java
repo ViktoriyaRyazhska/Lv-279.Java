@@ -3,8 +3,9 @@ package ua.softserve.service.impl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import ua.softserve.persistence.dao.AcademyRepository;
+import ua.softserve.persistence.dao.AcademyDAO;
 import ua.softserve.persistence.entity.Academy;
+import ua.softserve.service.AcademyService;
 
 import java.util.Arrays;
 
@@ -17,31 +18,31 @@ import static org.mockito.Mockito.verify;
 public class AcademyServiceTest {
     AcademyServiceImpl academyService;
 
-    AcademyRepository academyRepository;
+    AcademyDAO academyDAO;
 
     @Before
     public void setUp(){
         academyService = new AcademyServiceImpl();
 
-        academyRepository = mock(AcademyRepository.class);
-        academyService.academyRepository = academyRepository;
+        academyDAO = mock(AcademyDAO.class);
+        academyService.academyDAO = academyDAO;
     }
 
     @Test(expected = RuntimeException.class)
     public void findWithEmployeeExpertsTest(){
-        Mockito.when(academyRepository.findWithEmployeeExperts()).thenReturn(null);
+        Mockito.when(academyDAO.findWithEmployeeExperts()).thenReturn(null);
 
         academyService.findWithEmployeeExperts();
 
-        verify(academyRepository).findWithEmployeeExperts();
+        verify(academyDAO).findWithEmployeeExperts();
     }
 
     @Test
     public void findWithEmployeeExpertsTest1(){
-        Mockito.when(academyRepository.findWithEmployeeExperts()).thenReturn(Arrays.asList(new Academy()));
+        Mockito.when(academyDAO.findWithEmployeeExperts()).thenReturn(Arrays.asList(new Academy()));
 
         academyService.findWithEmployeeExperts();
 
-        verify(academyRepository).findWithEmployeeExperts();
+        verify(academyDAO).findWithEmployeeExperts();
     }
 }

@@ -9,7 +9,7 @@ import ua.softserve.persistence.entity.Employee;
 
 import java.util.List;
 
-public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
+public interface EmployeeDAO extends JpaRepository<Employee,Integer> {
 
     @Query("from Employee e join fetch e.itarole where e.itarole.role=:role")
     List<Employee> findEmployeesWithItaRoles(@Param("role") String role);

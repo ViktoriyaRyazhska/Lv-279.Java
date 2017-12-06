@@ -3,9 +3,6 @@ package ua.softserve.persistence.dto;
 import lombok.*;
 import ua.softserve.persistence.entity.*;
 
-import java.util.List;
-import java.util.TreeMap;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,6 +23,4 @@ public class AcademyDTO {
     private int studentsPlannedToGraduate;
     private int studentsPlannedToEnrollment;
     private int studentsActual;
-    private City city;
-    private TreeMap<String, String> expert;
 }

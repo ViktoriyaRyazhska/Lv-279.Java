@@ -3,7 +3,7 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.dao.DirectionsRepository;
+import ua.softserve.persistence.dao.DirectionsDAO;
 import ua.softserve.persistence.entity.Directions;
 import ua.softserve.service.DirectionService;
 
@@ -13,34 +13,34 @@ import java.util.List;
 public class DirectionServiceImpl implements DirectionService {
 
     @Autowired
-    private DirectionsRepository directionsRepository;
+    private DirectionsDAO directionDao;
 
     @Transactional
     @Override
     public void save(Directions direction) {
-        directionsRepository.save(direction);
+        directionDao.save(direction);
     }
 
     @Transactional
     @Override
     public Directions findOne(int id) {
-        return directionsRepository.findOne(id);
+        return directionDao.findOne(id);
     }
 
     @Transactional
     @Override
     public List<Directions> findAll() {
-        return directionsRepository.findAll();
+        return directionDao.findAll();
     }
 
     @Override
     public List<String> findDirectionsName() {
-        return directionsRepository.findDirectionsName();
+        return directionDao.findDirectionsName();
     }
 
     @Transactional
     @Override
     public void remove(Directions direction) {
-        directionsRepository.delete(direction);
+        directionDao.delete(direction);
     }
 }

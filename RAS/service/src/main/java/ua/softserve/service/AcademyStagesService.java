@@ -1,6 +1,7 @@
 package ua.softserve.service;
 
 import ua.softserve.persistence.entity.AcademyStages;
+import ua.softserve.persistence.entity.Profile;
 
 import java.util.List;
 
