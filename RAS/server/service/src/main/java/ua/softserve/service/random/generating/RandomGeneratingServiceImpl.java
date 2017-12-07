@@ -50,7 +50,7 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
     @Autowired
     private TeacherTypeRepository ttRepo;
     @Autowired
-    private StudentsRepository sRepo;
+    private StudentRepository sRepo;
     @Autowired
     private StudentsStatusesRepository ssRepo;
     @Autowired
@@ -133,39 +133,41 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
             List<EnglishLevel> engLevs = elRepo.findAll();
             for (User user : users) {
 
-                Students student = new Students();
+                Student student = new Student();
                 student.setAcademy(academy);
                 student.setApprovedBy(approvedBy);
                 student.setUser(user);
                 student.setStudentStatus(ss);
-                student.setEnglishLevel(engLevs.get(r.nextInt(engLevs.size())));
-                student.setEngGram(getRandomDouble(3, 11));
-                student.setEntryScore(getRandomDouble(300, 1001));
+                StudentTestData data = new StudentTestData();
+                data.setEnglishLevel(engLevs.get(r.nextInt(engLevs.size())));
+                data.setEngGram(getRandomDouble(3, 11));
+                data.setEntryScore(getRandomDouble(300, 1001));
 
-                student.setIncomingTest(r.nextInt(7001) + 300);
-                student.setIntermBase(getRandomDouble(3, 11));
-                student.setIntermLang(getRandomDouble(300, 1001));
-                student.setFinalBase(getRandomDouble(30, 101));
-                student.setFinalLang(getRandomDouble(300, 1001));
+                data.setIncomingTest(r.nextInt(7001) + 300);
+                data.setIntermBase(getRandomDouble(3, 11));
+                data.setIntermLang(getRandomDouble(300, 1001));
+                data.setFinalBase(getRandomDouble(30, 101));
+                data.setFinalLang(getRandomDouble(300, 1001));
 
-                student.setTestOne(getRandomDouble(30, 101));
-                student.setTestTwo(getRandomDouble(3, 11));
-                student.setTestThree(getRandomDouble(300, 1001));
-                student.setTestFour(getRandomDouble(30, 101));
-                student.setTestFive(getRandomDouble(300, 1001));
-                student.setTestSix(getRandomDouble(300, 1001));
-                student.setTestSeven(getRandomDouble(300, 1001));
-                student.setTestEight(getRandomDouble(30, 101));
-                student.setTestNine(getRandomDouble(300, 1001));
-                student.setTestTen(getRandomDouble(3, 11));
+                data.setTestOne(getRandomDouble(30, 101));
+                data.setTestTwo(getRandomDouble(3, 11));
+                data.setTestThree(getRandomDouble(300, 1001));
+                data.setTestFour(getRandomDouble(30, 101));
+                data.setTestFive(getRandomDouble(300, 1001));
+                data.setTestSix(getRandomDouble(300, 1001));
+                data.setTestSeven(getRandomDouble(300, 1001));
+                data.setTestEight(getRandomDouble(30, 101));
+                data.setTestNine(getRandomDouble(300, 1001));
+                data.setTestTen(getRandomDouble(3, 11));
 
                 student.setTeacherFeedback(getRandomFeedback());
-                student.setTeacherScore(getRandomDouble(3, 6));
+                data.setTeacherScore(getRandomDouble(3, 6));
                 student.setExpertFeedback(getRandomFeedback());
-                student.setExpertScore(getRandomDouble(3, 6));
-                student.setInterviewerScore(getRandomDouble(3, 6));
+                data.setExpertScore(getRandomDouble(3, 6));
+                data.setInterviewerScore(getRandomDouble(3, 6));
 
-                student.setInterviewerComment("Bla bla bla");
+                data.setInterviewerComment("Bla bla bla");
+                student.setData(data);
 
                 sRepo.save(student);
             }
