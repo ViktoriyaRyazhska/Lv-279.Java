@@ -1,6 +1,7 @@
 package ua.softserve.service;
 
 import ua.softserve.persistence.entity.LanguageTranslations;
+
 import java.util.List;
 
 public interface LanguageTranslationsService {
@@ -12,6 +13,7 @@ public interface LanguageTranslationsService {
     LanguageTranslations findOne(int id);
 
     void remove(LanguageTranslations languageTranslations);
-     LanguageTranslations findById(int id);
+
+    List<LanguageTranslations> findAllCities();
 
 }

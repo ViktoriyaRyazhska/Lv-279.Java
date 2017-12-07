@@ -7,7 +7,7 @@
 //import org.springframework.web.bind.annotation.*;
 //import ua.softserve.service.dto.StudentsShortViewDto;
 //import ua.softserve.service.dto.StudentsViewDto;
-//import ua.softserve.service.StudentService;
+//import ua.softserve.service.StudentsService;
 //
 //import java.util.ArrayList;
 //import java.util.List;
@@ -16,7 +16,7 @@
 //public class StudentController {
 //
 //    @Autowired
-//    StudentService studentService;
+//    StudentsService studentService;
 //
 //    @GetMapping("/students")
 //    public String showStudents(@RequestParam(value = "academyId", required = false) Integer academyId, Model model) {

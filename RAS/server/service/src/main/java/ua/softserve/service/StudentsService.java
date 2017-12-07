@@ -1,13 +1,18 @@
 package ua.softserve.service;
 
+import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.entity.StudentStatuses;
 import ua.softserve.service.dto.StudentsShortViewDto;
 import ua.softserve.service.dto.StudentsViewDto;
 import ua.softserve.persistence.entity.Students;
 
 import java.util.List;
 
-public interface StudentService {
+public interface StudentsService {
 
+    Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatus);
+
+    List<Students> findAllByStudentStatus(StudentStatuses studentStatus);
 //    /**
 //     * Returns accepted students by academy id
 //     *
