@@ -1,14 +1,19 @@
 <div class="col-lg-12 well">
-  <form>
+  <form (ngSubmit)="onSave()" #feedbackForm="ngForm">
     <h4>Add Feedback</h4>
     <div class="row">
       <div class="col-sm-12">
         <div class="row">
           <div class="col-sm-2 form-group">
-            Learning ability
+            <label for="learningAbility">Learning ability</label>
           </div>
           <div class="col-sm-3 form-group">
-            <select class="form-control input-sm" [(ngModel)]="learnMark" name="learn" (change)="onChoose()">
+            <select
+              id="learningAbility"
+              class="form-control input-sm"
+              [(ngModel)]="learnMark"
+              name="learningAbility"
+              (change)="onChoose()">
               <option *ngFor="let mark of marks | markFilter:one">{{mark.name}}</option>
             </select>
           </div>
@@ -19,10 +24,15 @@
 
         <div class="row">
           <div class="col-sm-2 form-group">
-            Overall technical competence
+            <label for="overallTechCompetence">Overall technical competence</label>
           </div>
           <div class="col-sm-3 form-group">
-            <select class="form-control input-sm" [(ngModel)]="overallMark" name="overall" (change)="onChoose()">
+            <select
+              id="overallTechCompetence"
+              class="form-control input-sm"
+              [(ngModel)]="overallMark"
+              name="overallTechCompetence"
+              (change)="onChoose()">
               <option *ngFor="let mark of marks | markFilter:two">{{mark.name}}</option>
             </select>
           </div>
@@ -33,10 +43,15 @@
 
         <div class="row">
           <div class="col-sm-2 form-group">
-            Passional initiative
+            <label for="passionalInitiative">Passional initiative</label>
           </div>
           <div class="col-sm-3 form-group">
-            <select class="form-control input-sm" [(ngModel)]="passMark" name="pass" (change)="onChoose()">
+            <select
+              id="passionalInitiative"
+              class="form-control input-sm"
+              [(ngModel)]="passMark"
+              name="passionalInitiative"
+              (change)="onChoose()">
               <option *ngFor="let mark of marks | markFilter:tree">{{mark.name}}</option>
             </select>
           </div>
@@ -47,10 +62,15 @@
 
         <div class="row">
           <div class="col-sm-2 form-group">
-            Team work
+            <label for="teamWork">Team work</label>
           </div>
           <div class="col-sm-3 form-group">
-            <select class="form-control input-sm" [(ngModel)]="teamMark" name="team" (change)="onChoose()">
+            <select
+              id="teamWork"
+              class="form-control input-sm"
+              [(ngModel)]="teamMark"
+              name="teamWork"
+              (change)="onChoose()">
               <option *ngFor="let mark of marks | markFilter:four">{{mark.name}}</option>
             </select>
           </div>
@@ -61,10 +81,15 @@
 
         <div class="row">
           <div class="col-sm-2 form-group">
-            Getting things done
+            <label for="getThingsDone">Getting things done</label>
           </div>
           <div class="col-sm-3 form-group">
-            <select class="form-control input-sm" [(ngModel)]="getMark" name="get" (change)="onChoose()">
+            <select
+              id="getThingsDone"
+              class="form-control input-sm"
+              [(ngModel)]="getMark"
+              name="getThingsDone"
+              (change)="onChoose()">
               <option *ngFor="let mark of marks | markFilter:five">{{mark.name}}</option>
             </select>
           </div>
@@ -75,10 +100,16 @@
 
         <div class="row">
           <div class="col-sm-2 form-group">
-            Active Communicator
+            <label for="activeCommunicator">Active Communicator</label>
           </div>
           <div class="col-sm-3 form-group">
-            <select class="form-control input-sm" [(ngModel)]="actMark" name="act" (change)="onChoose()">
+            <select
+              id="activeCommunicator"
+              class="form-control input-sm"
+              [(ngModel)]="actMark"
+              name="activeCommunicator"
+              (change)="onChoose()"
+              >
               <option *ngFor="let mark of marks | markFilter:six">{{mark.name}}</option>
             </select>
           </div>
@@ -89,17 +120,19 @@
 
         <div class="row">
           <div class="col-sm-2 form-group">
-            Summary
+            <label for="summary">Summary</label>
           </div>
           <div class="col-sm-10 form-group">
-            <input type="text" placeholder="Summary"
-                   class="form-control input-sm"/>
+            <input
+              type="text"
+              id="summary"
+              class="form-control input-sm"
+              ngModel
+              name="summary">
           </div>
         </div>
       </div>
     </div>
+    <button class="btn btn-primary" type="submit">Save Feedback</button>
   </form>
-</div>
-<div align="button">
-  <button type="submit" class="btn btn-primary" (click)="onSaveFeedback()">Save Feedback</button>
 </div>

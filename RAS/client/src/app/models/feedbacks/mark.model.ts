@@ -1,12 +1,12 @@
 export class Mark {
   id: number;
   characteristic: Characteristic;
-  mark: string;
+  name: string;
 
-  constructor(id: number, characteristic: Characteristic, mark: string, description: string) {
+  constructor(id: number, characteristic: Characteristic, name: string, description: string) {
     this.id = id;
     this.characteristic = characteristic;
-    this.mark = mark;
+    this.name = name;
     this.description = description;
   }
 

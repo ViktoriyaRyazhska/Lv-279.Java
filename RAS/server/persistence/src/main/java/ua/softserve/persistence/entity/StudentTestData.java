@@ -5,28 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "students")
-public class Students {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "academy_id")
-    private Academy academy;
-
+@Embeddable
+public class StudentTestData {
     @Column(name = "eng_gram")
     private Double engGram;
 
@@ -91,25 +80,6 @@ public class Students {
     @Column(name = "interviewer_score")
     private Double interviewerScore;
 
-    @ManyToOne
-    @JoinColumn(name = "student_status_id")
-    private StudentStatuses studentStatus;
-
-    @OneToOne(cascade = { CascadeType.ALL })
-    @JoinColumn(name = "teacher_student_feedback_id")
-    private Feedback teacherFeedback;
-
-    @OneToOne(cascade = { CascadeType.ALL })
-    @JoinColumn(name = "expert_student_feedback_id")
-    private Feedback expertFeedback;
-
     @Column(name = "interviewer_comment")
     private String interviewerComment;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee approvedBy;
-
-    @Column(columnDefinition = "tinyint")
-    private boolean removed;
 }

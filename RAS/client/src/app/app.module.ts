@@ -17,15 +17,16 @@ import {ProfileInfoFilterPipe} from "./components/group/add-group/add-group.pipe
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {FeedbackItemComponent} from "./components/feedbacks/feedback-list/feedback-item/feedback-item.component";
-import {FeedbackDetailComponent} from "./components/feedbacks/feedback-detail/feedback-detail.component";
-import {FeedbackTeacherDetailComponent} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.component";
-import {FeedbackExpertDetailComponent} from "./components/feedbacks/feedback-detail/feedback-expert-detail/feedback-expert-detail.component";
-import {FeedbackInterviewerDetailComponent} from "./components/feedbacks/feedback-detail/feedback-interviewer-detail/feedback-interviewer-detail.component";
+import {FeedbackEditComponent} from "./components/feedbacks/feedback-edit/feedback-edit.component";
+import {FeedbackTeacherEditComponent} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.component";
+import {FeedbackExpertEditComponent} from "./components/feedbacks/feedback-edit/feedback-expert-edit/feedback-expert-edit.component";
+import {FeedbackInterviewerEditComponent} from "./components/feedbacks/feedback-edit/feedback-interviewer-edit/feedback-interviewer-edit.component";
 import {AppRoutingModule} from "./app-routing.module";
-import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.pipe";
-import { HeaderComponent } from './components/header/header.component';
-import { NavTabsComponent } from './components/nav-tabs/nav-tabs.component';
-
+import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.pipe";
+import {HeaderComponent} from './components/header/header.component';
+import {FeedbackDetailComponent} from "./components/feedbacks/feedback-detail/feedback-detail.component";
+import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
+import {FeedbackService} from "./services/feedbacks/feedback.service";
 
 @NgModule({
   declarations: [
@@ -43,9 +44,10 @@ import { NavTabsComponent } from './components/nav-tabs/nav-tabs.component';
     FeedbackListComponent,
     FeedbackItemComponent,
     FeedbackDetailComponent,
-    FeedbackTeacherDetailComponent,
-    FeedbackExpertDetailComponent,
-    FeedbackInterviewerDetailComponent,
+    FeedbackEditComponent,
+    FeedbackTeacherEditComponent,
+    FeedbackExpertEditComponent,
+    FeedbackInterviewerEditComponent,
     FeedbackTeacherDetailPipe,
     HeaderComponent,
     NavTabsComponent
@@ -56,7 +58,7 @@ import { NavTabsComponent } from './components/nav-tabs/nav-tabs.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService],
+  providers: [GroupService, AddGroupService, StudentsService, FeedbackService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

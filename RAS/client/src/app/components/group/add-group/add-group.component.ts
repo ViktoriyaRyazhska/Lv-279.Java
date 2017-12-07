@@ -26,6 +26,9 @@ export class AddGroupComponent implements OnInit {
   defaultStudentsPlannedToEnrollment: number = 0;
 
   defaultCity: any[];
+  defaultInvalidInput: string = 'No data entered. Group will not be save';
+
+  defaultCity: any[];
 
   constructor(private addGroupService: AddGroupService) {
   }
