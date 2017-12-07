@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface StudentsRepository extends JpaRepository<Students, Integer> {
 
+    List<Students> findAllByAcademy_AcademyId(int academyId);
+
 }

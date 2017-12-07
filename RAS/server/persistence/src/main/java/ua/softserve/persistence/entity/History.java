@@ -19,7 +19,7 @@ public class History {
     private int id;
 
     @Column(name = "crm_group")
-    private int crmGroup;
+    private Integer crmGroup;
 
     @Column(name = "academy_name")
     private String academyName;

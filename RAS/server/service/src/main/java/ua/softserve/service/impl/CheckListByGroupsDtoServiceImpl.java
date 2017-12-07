@@ -10,8 +10,12 @@
 
 package ua.softserve.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.softserve.service.CheckListByGroupsDtoService;
+import ua.softserve.persistence.entity.*;
+import ua.softserve.persistence.repo.LanguageTranslationsRepository;
+import ua.softserve.persistence.repo.StudentsRepository;
+import ua.softserve.service.*;
 import ua.softserve.service.dto.CheckListByGroupsDto;
 import ua.softserve.util.dump.random.RandomPerson;
 import ua.softserve.util.dump.random.RandomPersonGenerator;
@@ -19,11 +23,24 @@ import ua.softserve.util.dump.random.RandomPersonGenerator;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ua.softserve.util.dump.random.RandomUtil.*;
 
 @Service
 public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoService {
+    @Autowired
+    private AcademyService academyService;
+    @Autowired
+    private GroupInfoService groupInfoService;
+    @Autowired
+    private LanguageTranslationsRepository languageTranslationsRepository;
+    @Autowired
+    private AcademyStagesService academyStagesService;
+    @Autowired
+    private StudentsRepository studentsRepository;
+
+
     @Override
     public List<CheckListByGroupsDto> fakeGetAllCheckListByGroupsDto(int count) {
         List<CheckListByGroupsDto> listByGroupsDtos = new ArrayList<>();
@@ -37,6 +54,65 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             listByGroupsDtos.add(checkListByGroupsDto);
         }
         return listByGroupsDtos;
+    }
+
+    @Override
+    public List<CheckListByGroupsDto> getAllCheckListByGroupsDto() {
+        List<Academy> allAcademies = academyService.getAllAcademies();
+        List<CheckListByGroupsDto> checkListByGroupsDtos = new ArrayList<>();
+        for (Academy academy : allAcademies) {
+            CheckListByGroupsDto checkListByGroupsDto = new CheckListByGroupsDto();
+            GroupInfo groupInfo =
+                    groupInfoService
+                            .findOneGroupInfoByAcademyId(academy.getAcademyId());
+            checkListByGroupsDto.setGroupName(groupInfo.getGroupName());
+
+            LanguageTranslations city = languageTranslationsRepository
+                    .findByItemIdAndLocal(academy.getCity().getCityId(), 'e');
+            checkListByGroupsDto.setCityName(city.getTrasnlation());
+
+            checkListByGroupsDto.setStartDate(academy.getStartDate());
+            checkListByGroupsDto.setEndDate(academy.getEndDate());
+
+            AcademyStages stage = academyStagesService.findOne(academy.getAcademyStages().getStageId());
+            checkListByGroupsDto.setStatus(stage.getName());
+            List<Students> students = studentsRepository.findAllByAcademy_AcademyId(academy.getAcademyId());
+            List<CheckListByGroupsDto.StudentInGroup> studentsInGroup = new ArrayList<>();
+            for (Students student : students) {
+                CheckListByGroupsDto.StudentInGroup studentInGroup = checkListByGroupsDto.new StudentInGroup();
+
+                studentInGroup.setEntryScore(student.getEntryScore());
+
+                studentInGroup.setStatus(student.getStudentStatus().getName());
+
+                studentInGroup.setApprovedBy(student.getApprovedBy().getFirstNameEng() + " " +
+                        student.getApprovedBy().getLastNameEng());
+
+                studentInGroup.setEnglishLevel(student.getEnglishLevel().getName());
+
+                List<CheckListByGroupsDto.TeacherOfStudent> teachers = new ArrayList<>();
+
+//                for ()
+//                CheckListByGroupsDto.TeacherOfStudent teacherOfStudent = checkListByGroupsDto.new TeacherOfStudent();
+//                teacherOfStudent.setEnumeratedFeedbacks();
+//                teacherOfStudent.setScore();
+//                teacherOfStudent.setSummary();
+//                teachers.add(teacherOfStudent);
+//
+//                studentInGroup.setTeachersOfStudent(teachers);
+
+//                CheckListByGroupsDto.TestsOfStudent testsOfStudent = checkListByGroupsDto.new TestsOfStudent();
+//                testsOfStudent.setFinalTestBase();
+//
+//                studentInGroup.setTestsOfStudent();
+
+                studentsInGroup.add(studentInGroup);
+            }
+            checkListByGroupsDto.setStudents(studentsInGroup);
+
+            checkListByGroupsDtos.add(checkListByGroupsDto);
+        }
+        return checkListByGroupsDtos;
     }
 
     private CheckListByGroupsDto getRandomGroup() {
