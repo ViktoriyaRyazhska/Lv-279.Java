@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.softserve.persistence.entity.LanguageTranslations;
 import ua.softserve.service.CheckListByGroupsDtoService;
-import ua.softserve.service.FeedbackService;
 import ua.softserve.service.LanguageTranslationsService;
-import ua.softserve.service.StudentService;
 import ua.softserve.service.dto.CheckListByGroupsDto;
 
 import java.util.List;
