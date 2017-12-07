@@ -28,8 +28,6 @@ export class AddGroupComponent implements OnInit {
   defaultCity: any[];
   defaultInvalidInput: string = 'No data entered. Group will not be save';
 
-  defaultCity: any[];
-
   constructor(private addGroupService: AddGroupService) {
   }
 
