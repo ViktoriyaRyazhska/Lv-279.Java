@@ -9,7 +9,7 @@ import {NgForm} from "@angular/forms";
   selector: 'app-add-group',
   templateUrl: './add-group.component.html',
   styleUrls: ['./add-group.component.css'],
-  providers:[HistoryService]
+  providers: [HistoryService]
 })
 export class AddGroupComponent implements OnInit {
 
@@ -25,7 +25,7 @@ export class AddGroupComponent implements OnInit {
   defaultStudentsPlannedToGraduate: number = 0;
   defaultStudentsPlannedToEnrollment: number = 0;
 
-   defaultCity: any[] ;
+  defaultCity: any[];
 
   constructor(private addGroupService: AddGroupService) {
   }

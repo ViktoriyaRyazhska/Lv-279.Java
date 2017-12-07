@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AcademyService} from "./academy.service";
 import {PagerService} from "./pager.service";
 import {FilterService} from "./filter.service";
+import {Form, NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-view-academies',
@@ -23,6 +24,8 @@ export class ViewAcademiesComponent implements OnInit {
   propName = '';
 
   filteredSite = '';
+
+  @ViewChild('inn') inn;
 
   constructor(private academyService: AcademyService,
               private pagerService: PagerService,
@@ -60,19 +63,37 @@ export class ViewAcademiesComponent implements OnInit {
     this.pagedItems = this.filteredAcademies.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
-  onFilterField(event: Event) {
-    console.log(event);
-    this.filteredSite = (<HTMLInputElement>event.target).value;
-    this.propName = (<HTMLInputElement>event.target).name;
-    if (this.filteredSite === '') {
-      this.filteredAcademies = this.academies;
-    } else {
-      if (this.filteredAcademies.length === 0) {
-        this.filteredAcademies = this.academies;
-      }
-      this.filteredAcademies = this.filterService.transform(this.filteredAcademies, this.filteredSite, this.propName);
+  onFilterField(event: Event, form) {
+    this.filteredAcademies = this.academies;
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.grName, 'grName');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.nameForSite, 'nameForSite');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.technologyName, 'technologyName');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.profileName, 'profileName');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.paymentStatus, 'paymentStatus');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.cityName, 'cityName');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.startDate, 'startDate');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.status, 'status');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.experts, 'experts');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.studentPlannedToGraduate,
+      'studentPlannedToGraduate');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.studentPlannedToEnrollment,
+      'studentPlannedToEnrollment');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.studentsActual, 'studentsActual');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.hiredNotGraduated, 'hiredNotGraduated');
+    this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value.directionName, 'directionName');
 
-    }
+    // console.log(i);
+    // this.filteredSite = (<HTMLInputElement>event.target).value;
+    // this.propName = (<HTMLInputElement>event.target).name;
+    // if (this.filteredSite === '') {
+    //   this.filteredAcademies = this.academies;
+    // } else {
+    //   if (this.filteredAcademies.length === 0) {
+    //     this.filteredAcademies = this.academies;
+    //   }
+    //   this.filteredAcademies = this.filterService.transform(this.filteredAcademies, this.filteredSite, this.propName);
+    //
+    // }
     this.setPage(1);
   }
 
