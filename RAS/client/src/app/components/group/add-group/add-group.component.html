@@ -1,16 +1,19 @@
 <div class="container well">
   <div class="col-sm-12" id="form-test">
-    <form>
+    <form (ngSubmit)="saveGroup(groupForm)" #groupForm="ngForm">
       <ul class="col-sm-6 form-group" id="UL_left_column">
         <div class="row">
           <div class="col-sm-6 form-group">
             <label> Group Name:</label>
-            <input type="text" class="form-control input-sm"/>
+            <input type="text" class="form-control input-sm" name="inpGroupName" ngModel required #inpGroupNameLocRef="ngModel"/>
+            <span class="help-block" *ngIf="!inpGroupNameLocRef.valid && inpGroupNameLocRef.touched">
+              No data entered. Group will not be save
+            </span>
           </div>
 
           <div class="col-sm-6 form-group">
             <label> Site for Name:</label>
-            <input type="text" class="form-control input-sm"/>
+            <input type="text" class="form-control input-sm" name="inpNameForSite" ngModel required/>
           </div>
         </div>
 
@@ -47,7 +50,7 @@
         <div class="row">
           <div class="col-sm-12">
             <label class="radio-inline">
-              <input type="radio" [value]="1" name="payment">Founded by SoftServe
+              <input type="radio" [value]="1" checked name="payment">Founded by SoftServe
             </label>
             <label class="radio-inline">
               <input type="radio" [value]="0" name="payment">Open Group
@@ -81,9 +84,7 @@
             <label>Profile:</label>
             <select class="form-control input-sm">
               <option value="0"></option>
-              <option *ngFor="let prof of profile | profileFilter:technologyModel" [value]="prof.profileId">
-                {{prof.profileName}}
-              </option>
+              <option *ngFor="let prof of profile | profileFilter:technologyModel" [value]="prof.profileId">{{prof.profileName}} </option>
             </select>
           </div>
         </div>
@@ -108,33 +109,8 @@
   </div>
   <hr>
   <div class="row" id="saveGroupBtn" align="center">
-    <button type="submit" class="btn btn-primary" (click)="saveGroup()">Save Group</button>
+    <button type="submit" class="btn btn-primary" (click)="saveGroup()" [disabled]="!groupForm.valid">Save Group</button>
   </div>
 </div>
 
-<div>
-<div>
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Students</a></li>
-    <li><a data-toggle="tab" href="#menu1">Teachers (Experts)</a></li>
-    <li><a data-toggle="tab" href="#menu2">Group history</a></li>
-    <li><a data-toggle="tab" href="#menu3">Feedbacks</a></li>
-  </ul>
-</div>
-
-  <div>
-    <div id="menu1" class="tab-pane fade">
-    </div>
-
-    <div id="menu2" class="tab-pane fade">
-      <app-history-list></app-history-list>
-    </div>
-
-    <div id="menu3" class="tab-pane fade">
-    </div>
-
-    <div id="home" class="tab-pane fade">
-      <app-students></app-students>
-    </div>
-  </div>
-</div>
+<app-nav-tabs></app-nav-tabs>
