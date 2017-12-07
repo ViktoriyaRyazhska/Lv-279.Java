@@ -13,12 +13,11 @@ import ua.softserve.service.LoginUserService;
 
 @Transactional
 @Service
-public class LoginUserServiceImpl implements LoginUserService,UserDetailsService {
+public class LoginUserServiceImpl implements LoginUserService, UserDetailsService {
     @Autowired
     LoginUserRepository loginUserRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
-
 
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return findByUserName(s);

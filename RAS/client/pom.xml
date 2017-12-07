@@ -27,6 +27,7 @@
                     <nodeVersion>v8.9.1</nodeVersion>
                     <npmVersion>5.5.1</npmVersion>
                     <workingDirectory>./</workingDirectory>
+
                 </configuration>
 
                 <executions>

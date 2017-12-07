@@ -1,6 +1,5 @@
 package ua.softserve.persistence.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -96,11 +95,11 @@ public class Students {
     @JoinColumn(name = "student_status_id")
     private StudentStatuses studentStatus;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = { CascadeType.ALL })
     @JoinColumn(name = "teacher_student_feedback_id")
     private Feedback teacherFeedback;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = { CascadeType.ALL })
     @JoinColumn(name = "expert_student_feedback_id")
     private Feedback expertFeedback;
 

@@ -25,8 +25,9 @@ import java.util.List;
 public class CheckListByGroupsDto {
 
     public enum TeacherTypes {
-            TEACHER, EXPERT, INTERVIEWER;
+        TEACHER, EXPERT, INTERVIEWER;
     };
+
     private String groupName;
     private String cityName;
     private String status;

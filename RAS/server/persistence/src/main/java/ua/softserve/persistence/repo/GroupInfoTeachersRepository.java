@@ -7,7 +7,7 @@ import ua.softserve.persistence.entity.TeacherTypes;
 
 import java.util.List;
 
-public interface GroupInfoTeachersRepository extends JpaRepository<GroupInfoTeachers, Integer>{
+public interface GroupInfoTeachersRepository extends JpaRepository<GroupInfoTeachers, Integer> {
     List<GroupInfoTeachers> findAllByAcademyAndTeacherType(Academy academy, TeacherTypes teacherType);
 
     List<GroupInfoTeachers> findAllByTeacherType(TeacherTypes teacherType);

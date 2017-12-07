@@ -7,7 +7,6 @@ import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
 import ua.softserve.service.dto.AcademyDTO;
-import ua.softserve.util.encrypt.aes.Encryptor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     private TeacherTypeService teacherTypeService;
 
     @Autowired
-    private StudentsService studentsService;
+    private StudentsServiceImpl studentsServiceImpl;
 
     @Autowired
     private StudentsStatusesService studentsStatusesService;
@@ -105,7 +104,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                         }
                     }
                 }*/
-                Integer countActualStudents = studentsService.countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
+                Integer countActualStudents = studentsServiceImpl.countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
                 academyDTO.setStudentsActual(countActualStudents);
             }
             if (groupInfo.getProfileInfo() != null) {

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface LanguageTranslationsRepository extends JpaRepository<LanguageTranslations, Integer> {
 
-    @Query(value = "select * from city join language_translations on city.city_id = language_translations.item_id where ita = 1 and tag like 'city' and local like 'en' group by trasnlation", nativeQuery = true)
+    @Query(value = "select * from city join language_translations on city.city_id = language_translations.item_id where ita = 1 and tag like 'city' and local like 'en' order by trasnlation", nativeQuery = true)
     List<LanguageTranslations> getAllLanguageTranslationsName();
 
     @Query(value = "select lt from LanguageTranslations lt where lt.tag like 'city' and lt.local like 'en'")
@@ -17,6 +17,4 @@ public interface LanguageTranslationsRepository extends JpaRepository<LanguageTr
 
     List<LanguageTranslations> findAllByItemId(int id);
 
-
 }
-

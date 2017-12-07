@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
@@ -25,7 +24,7 @@ public class AcademyController {
         return new ResponseEntity<Academy>(academyService.getById(academyId), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/academy/addgroup",method = RequestMethod.GET)
+    @RequestMapping(value = "/academy/addgroup",method = RequestMethod.GET, produces = {"application/json"})
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<AcademyDTO> getAllAcademies() {
         return new ResponseEntity<AcademyDTO>(academyService.getAcademyDTO(), HttpStatus.OK);
@@ -38,6 +37,5 @@ public class AcademyController {
         List<AcademyDTO> academyDTOS = groupInfoService.getAllAcademies();
         return academyDTOS;
     }
-
 }
 

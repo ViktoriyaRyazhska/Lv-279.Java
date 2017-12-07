@@ -11,7 +11,7 @@ import ua.softserve.service.GroupInfoTeachersService;
 import java.util.List;
 
 @Service
-public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService{
+public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
     @Autowired
     private GroupInfoTeachersRepository groupInfoTeachersRepository;
 

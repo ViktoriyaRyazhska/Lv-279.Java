@@ -1,6 +1,5 @@
 package ua.softserve.service;
 
-
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.service.dto.AcademyDTO;
 
@@ -11,7 +10,7 @@ public interface AcademyService {
 
     void save(Academy user);
 
-//    void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
+    // void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
 
     Academy findOne(int id);
 

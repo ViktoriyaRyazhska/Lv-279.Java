@@ -18,23 +18,13 @@ export class AddGroupComponent implements OnInit {
   technologie: any[];
   profile: any[];
 
+  technologyModel: any;
+
   defaultStudentActual: number = 0;
   defaultStudentsPlannedToGraduate: number = 0;
   defaultStudentsPlannedToEnrollment: number = 0;
-   // defaultCity = this.cityNames['0'];
 
-  technologyModel: any;
-
-
-  // academyStages = [
-  //   {'stageId': 1, 'name': 'Planned', 'sort': 2},
-  //   {'stageId': 2, 'name': 'Boarding', 'sort': 1},
-  //   {'stageId': 3, 'name': 'In Process', 'sort': 3},
-  //   {'stageId': 4, 'name': 'Distributed', 'sort': 4},
-  //   {'stageId': 5, 'name': 'Canceled', 'sort': 5},
-  //   {'stageId': 6, 'name': 'Graduated', 'sort': 6},
-  //   {'stageId': 7, 'name': 'Offering', 'sort': 7}
-  // ];
+   defaultCity: any[] ;
 
   constructor(private addGroupService: AddGroupService) {
   }
@@ -47,10 +37,13 @@ export class AddGroupComponent implements OnInit {
       this.profile = resp.profile;
       this.technologie = resp.technologie;
     });
+
+    // this.defaultCity = this.cityNames.filter(cityNames=> cityNames.trasnlation=='Lviv');
   }
 
   saveGroup() {
-    console.log(this.technologyModel);
+    // console.log(this.cityNames.filter(cityNames=> cityNames.trasnlation=='Lviv'));
+    console.log(this.defaultCity);
   }
 
 
