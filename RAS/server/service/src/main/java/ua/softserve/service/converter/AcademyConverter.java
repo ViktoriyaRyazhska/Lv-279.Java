@@ -32,6 +32,11 @@ public class AcademyConverter {
             academyDTO.setDirectionName(groupInfo.getAcademy().getDirections().getName());
             academyDTO.setTechnologyName(groupInfo.getAcademy().getTechnologies().getName());
             academyDTO.setPayment(groupInfo.getAcademy().getFree());
+            if(groupInfo.getAcademy().getFree() == 1){
+                academyDTO.setPaymentStatus("Founded by SoftServe academy");
+            }else{
+                academyDTO.setPaymentStatus("Paid");
+            }
             academyDTO.setEndDate(groupInfo.getAcademy().getEndDate().toString());
             academyDTO.setNameForSite(groupInfo.getAcademy().getName());
         }
