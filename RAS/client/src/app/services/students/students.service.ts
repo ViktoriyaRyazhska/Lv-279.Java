@@ -1,25 +1,14 @@
-
 import { Injectable } from '@angular/core';
-import {BaseService} from "../base.service";
 import {HttpClient} from "@angular/common/http";
-import {StudentsMockupRepo} from "./studentsMockupRepo";
-import {Student} from "../../models/student";
 import {Observable} from "rxjs/Observable";
-import {of} from "rxjs/observable/of";
-
 
 @Injectable()
-export class StudentsService extends BaseService{
+export class StudentsService{
 
-  private studentsMock: StudentsMockupRepo = new StudentsMockupRepo();
+  constructor(private http: HttpClient) { }
 
-  constructor(client: HttpClient) {
-    super(client)
-    this.parPath="students"
-  }
-
-  getAll():Observable<Student[]>{
-    return of(this.studentsMock.students);
+  getAll(): Observable<any> {
+    return this.http.get('http://localhost:8080/students/585');
   }
 
 }
