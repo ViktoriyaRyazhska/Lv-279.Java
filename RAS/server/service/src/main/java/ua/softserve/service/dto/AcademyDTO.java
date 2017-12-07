@@ -18,6 +18,7 @@ public class AcademyDTO {
     private String endDate;
     private int cityId;
     private int payment;
+    private String paymentStatus;
     private int directionId;
     private int technologieId;
     private int profileId;
