@@ -13,6 +13,6 @@ public interface LanguageTranslationsService {
 
     void remove(LanguageTranslations languageTranslations);
 
-    LanguageTranslations findById(int id);
+    List<LanguageTranslations> findAllCities();
 
 }

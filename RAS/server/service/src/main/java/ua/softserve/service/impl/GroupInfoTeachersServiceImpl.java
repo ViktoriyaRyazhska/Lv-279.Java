@@ -19,4 +19,9 @@ public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
     public List<GroupInfoTeachers> findAllByAcademyAndTeacherType(Academy academy, TeacherTypes teacherType) {
         return groupInfoTeachersRepository.findAllByAcademyAndTeacherType(academy, teacherType);
     }
+
+    @Override
+    public List<GroupInfoTeachers> findAllByTeacherType(TeacherTypes teacherType) {
+        return groupInfoTeachersRepository.findAllByTeacherType(teacherType);
+    }
 }

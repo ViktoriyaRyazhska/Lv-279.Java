@@ -34,8 +34,8 @@ public class LanguageTranslationsServiceImpl implements LanguageTranslationsServ
     }
 
     @Override
-    public LanguageTranslations findById(int id) {
-        return languageTranslationsRepository.findById(id);
+    public List<LanguageTranslations> findAllCities() {
+        return languageTranslationsRepository.findAllCities();
     }
 
 }

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <caption><h1>Information about academies</h1></caption>
+  <h1>Information about academies</h1>
   <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
 
     <tr>
@@ -25,18 +25,27 @@
       <td><input type="text" name="nameForSite" (input)="onFilterField($event)" class="form-control"></td>
       <td><!--<input type="text" name="direction" (input)="onFilterField($event)" class="form-control">-->
         <select name="technologyName" class="form-control input-sm" (change)="onFilterField($event)" ngModel>
+          <option></option>
           <option *ngFor="let tech of technology" [value]="tech.name">{{tech.name}}</option>
           <!--<option *ngFor="let tech of academies" [value]="tech.name">{{tech.nameForSite}}</option>-->
         </select>
       </td>
       <td><!--<input type="text" name="profile" (input)="onFilterField($event)" class="form-control">-->
         <select class="form-control input-sm" name="profileName" (change)="onFilterField($event)">
+          <option></option>
           <option *ngFor="let prof of profile" [value]="prof.profileName" >{{prof.profileName}}</option>
         </select>
       </td>
-      <td><input type="text" name="payment" (input)="onFilterField($event)" class="form-control"></td>
+      <td>
+        <select class="form-control input-sm" name="paymentStatus" (change)="onFilterField($event)">
+          <option></option>
+          <option>Founded by SoftServe academy</option>
+          <option>Paid</option>
+        </select>
+      </td>
       <td><!--<input type="text" name="location" (input)="onFilterField($event)" class="form-control">-->
-        <select name="location" class="form-control input-sm">
+        <select name="cityName" class="form-control input-sm" (change)="onFilterField($event)">
+          <option></option>
           <option *ngFor="let city of cityNames" [value]="city.trasnlation">{{city.trasnlation}}</option>
         </select>
       </td>
@@ -44,6 +53,7 @@
       <td><input type="date" name="endDate" (input)="onFilterField($event)" class="form-control"></td>
       <td><!--<input type="text" name="status" (input)="onFilterField($event)" class="form-control">-->
         <select name="status" class="form-control input-sm" (input)="onFilterField($event)">
+          <option></option>
           <option *ngFor="let stages of academyStages" [value]="stages.name">{{stages.name}}</option>
         </select>
       </td>
@@ -55,6 +65,7 @@
       <td><input type="text" name="hiredNotGraduated" (input)="onFilterField($event)" class="form-control"></td>
       <td><!--<input type="text" name="commonDirections" (input)="onFilterField($event)" class="form-control">-->
         <select class="form-control input-sm" name="directionName">
+          <option></option>
           <option *ngFor="let direct of direction" [value]="direct.name">{{direct.name}}</option>
         </select>
       </td>
@@ -64,36 +75,36 @@
       <td>{{academy.nameForSite}}</td>
       <td>{{academy.technologyName}}</td>
       <td>{{academy.profileName}}</td>
-      <td>{{academy.payment}}</td>
-      <td>---</td>
+      <td>{{academy.paymentStatus}}</td>
+      <td>{{academy.cityName}}</td>
       <td>{{academy.startDate | date: "dd.MM.yyyy"}}</td>
       <td>{{academy.endDate | date: "dd.MM.yyyy"}}</td>
       <td>{{academy.status}}</td>
       <td>{{academy.experts.toString()}}</td>
       <td>{{academy.studentPlannedToGraduate}}</td>
       <td>{{academy.studentPlannedToEnrollment}}</td>
-      <td>{{academy.studentActual}}</td>
+      <td>{{academy.studentsActual}}</td>
       <td>---</td>
       <td>{{academy.directionName}}</td>
     </tr>
 
   </table>
-  <div class="row">
+  <div class="row" align="center">
     <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
       <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <a (click)="setPage(1)">First</a>
+        <a (click)="setPage(1)" style="cursor:pointer">First</a>
       </li>
       <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+        <a (click)="setPage(pager.currentPage - 1)" style="cursor:pointer">Previous</a>
       </li>
       <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-        <a (click)="setPage(page)">{{page}}</a>
+        <a (click)="setPage(page)" style="cursor:pointer">{{page}}</a>
       </li>
       <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+        <a (click)="setPage(pager.currentPage + 1)" style="cursor:pointer">Next</a>
       </li>
       <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(pager.totalPages)">Last</a>
+        <a (click)="setPage(pager.totalPages)" style="cursor:pointer">Last</a>
       </li>
     </ul>
   </div>

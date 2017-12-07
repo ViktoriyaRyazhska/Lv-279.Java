@@ -25,7 +25,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.pipe";
 import { HeaderComponent } from './components/header/header.component';
 import {FeedbackDetailComponent} from "./components/feedbacks/feedback-detail/feedback-detail.component";
-
+import { NavTabsComponent } from './components/nav-tabs/nav-tabs.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,8 @@ import {FeedbackDetailComponent} from "./components/feedbacks/feedback-detail/fe
     FeedbackExpertEditComponent,
     FeedbackInterviewerEditComponent,
     FeedbackTeacherDetailPipe,
-    HeaderComponent
+    HeaderComponent,
+    NavTabsComponent
   ],
   imports: [
     BrowserModule,

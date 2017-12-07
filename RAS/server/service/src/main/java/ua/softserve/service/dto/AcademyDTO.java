@@ -18,6 +18,7 @@ public class AcademyDTO {
     private String endDate;
     private int cityId;
     private int payment;
+    private String paymentStatus;
     private int directionId;
     private int technologieId;
     private int profileId;
@@ -26,7 +27,7 @@ public class AcademyDTO {
     private String technologyName;
     private int studentPlannedToGraduate;
     private int studentPlannedToEnrollment;
-    private int studentActual;
+    private int studentsActual;
     private String cityName;
     private String status;
     private List<String> experts;

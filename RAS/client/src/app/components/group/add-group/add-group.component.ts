@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {AddGroupService} from "./add-group.service";
 import {HistoryService} from "../../history/history.service";
+import {NgForm} from "@angular/forms";
 
 
 @Component({
@@ -24,6 +25,8 @@ export class AddGroupComponent implements OnInit {
   defaultStudentsPlannedToGraduate: number = 0;
   defaultStudentsPlannedToEnrollment: number = 0;
 
+  defaultInvalidInput: string = 'No data entered. Group will not be save';
+
    defaultCity: any[] ;
 
   constructor(private addGroupService: AddGroupService) {
@@ -41,10 +44,15 @@ export class AddGroupComponent implements OnInit {
     // this.defaultCity = this.cityNames.filter(cityNames=> cityNames.trasnlation=='Lviv');
   }
 
-  saveGroup() {
+  saveGroup(form: NgForm) {
     // console.log(this.cityNames.filter(cityNames=> cityNames.trasnlation=='Lviv'));
-    console.log(this.defaultCity);
+    // console.log(this.defaultCity);
+    console.log(form);
   }
+
+  // onSubmit(form: NgForm) {
+  //   console.log(form);
+  // }
 
 
 }
