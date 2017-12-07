@@ -1,6 +1,5 @@
 package ua.softserve.service.dto;
 
-
 import lombok.*;
 import ua.softserve.persistence.entity.Mark;
 
@@ -21,6 +20,3 @@ public class FeedbackDTO {
     private Integer studentId;
     private Integer isTeacher;
 }
-
-
-

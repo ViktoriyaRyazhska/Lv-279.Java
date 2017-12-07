@@ -12,6 +12,7 @@ public interface LanguageTranslationsService {
     LanguageTranslations findOne(int id);
 
     void remove(LanguageTranslations languageTranslations);
-     LanguageTranslations findById(int id);
+
+    LanguageTranslations findById(int id);
 
 }

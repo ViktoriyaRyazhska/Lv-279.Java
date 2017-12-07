@@ -26,7 +26,7 @@ public class AcademyConverter {
     public AcademyDTO toDTO(GroupInfo groupInfo) {
         AcademyDTO academyDTO = new AcademyDTO();
 
-        if(groupInfo.getAcademy() != null){
+        if (groupInfo.getAcademy() != null) {
             academyDTO.setAcademyStagesId(groupInfo.getAcademy().getAcademyStages().getStageId());
             academyDTO.setStartDate(groupInfo.getAcademy().getStartDate().toString());
             academyDTO.setDirectionName(groupInfo.getAcademy().getDirections().getName());
@@ -56,9 +56,9 @@ public class AcademyConverter {
         academy.setDirections(getDirection(academyDTO.getDirectionId()));
         academy.setTechnologies(getTechnologies(academyDTO.getTechnologieId()));
 
-        //TODO: refactor
-//        academy.setProfile(getProfile(academyDTO.getProfileId()));
-//        academy.setStudentGroupCount(studentGroupCountService.saveDTO(academyDTO));
+        // TODO: refactor
+        // academy.setProfile(getProfile(academyDTO.getProfileId()));
+        // academy.setStudentGroupCount(studentGroupCountService.saveDTO(academyDTO));
 
         return academy;
     }
@@ -85,7 +85,7 @@ public class AcademyConverter {
     private City getCity(int id) {
         City city = cityService.findOne(id);
         if (city == null) {
-            //throw new ("Can't find city with id = " + id);
+            // throw new ("Can't find city with id = " + id);
         }
         return city;
     }
@@ -102,8 +102,8 @@ public class AcademyConverter {
         return technologyService.findOne(technologieId);
     }
 
-    //TODO: refactor
-//    private Profile getProfile(int profileId) {
-//        return profileService.findOne(profileId);
-//    }
+    // TODO: refactor
+    // private Profile getProfile(int profileId) {
+    // return profileService.findOne(profileId);
+    // }
 }

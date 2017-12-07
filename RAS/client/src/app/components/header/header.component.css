@@ -1,0 +1,18 @@
+.navbar-default {
+  background: rgba(0, 180, 213, 0.69) none repeat scroll 0% 0% / auto padding-box border-box;
+  /*transition: all 0.3s cubic-bezier(0.7, 0.01, 0.3, 1) 0s;*/
+}
+nav li a{
+  color:white;
+}
+#softServeLogo{
+  color:white;
+  font-size: 30px;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #383838;
+}
+
+
+

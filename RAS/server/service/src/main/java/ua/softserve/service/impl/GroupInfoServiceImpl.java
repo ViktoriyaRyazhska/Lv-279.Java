@@ -47,8 +47,8 @@ public class GroupInfoServiceImpl implements GroupInfoService {
 
     @Override
     public void save(GroupInfo groupInfo) {
-        //TODO: implements method
-        //NOP
+        // TODO: implements method
+        // NOP
     }
 
     @Override
@@ -63,8 +63,9 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         for (GroupInfo groupInfo : groupInfoList) {
             AcademyDTO academyDTO = academyConverter.toDTO(groupInfo);
             if (groupInfo.getAcademy() != null) {
-                LanguageTranslations languageTranslations = languageTranslationsService.findById(groupInfo.getAcademy().getAcademyId());
-                if(languageTranslations != null){
+                LanguageTranslations languageTranslations = languageTranslationsService
+                        .findById(groupInfo.getAcademy().getAcademyId());
+                if (languageTranslations != null) {
                     academyDTO.setCityName(languageTranslations.getTrasnlation());
                 }
 
@@ -73,12 +74,12 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                 }
 
                 TeacherTypes teacherTypes = teacherTypeRepository.findOne(ID_OF_THE_EXPERT_VALUE);
-                List<GroupInfoTeachers> allByAcademyAndTeacherType =
-                        groupInfoTeachersRepository.findAllByAcademyAndTeacherType(groupInfo.getAcademy(), teacherTypes);
+                List<GroupInfoTeachers> allByAcademyAndTeacherType = groupInfoTeachersRepository
+                        .findAllByAcademyAndTeacherType(groupInfo.getAcademy(), teacherTypes);
                 List<String> employeeList = new ArrayList<>();
                 for (GroupInfoTeachers groupInfoTeachers : allByAcademyAndTeacherType) {
-                    employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " " +
-                            groupInfoTeachers.getEmployee().getLastNameEng());
+                    employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " "
+                            + groupInfoTeachers.getEmployee().getLastNameEng());
                 }
                 academyDTO.setExperts(employeeList);
             }
@@ -86,13 +87,9 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                 academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
             }
 
-
-
-
-
             academyDTOList.add(academyDTO);
         }
-        //form list for combo-box.
+        // form list for combo-box.
         AcademyDTO academyDTO = new AcademyDTO();
         academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
         academyDTO.setDirection(directionService.findAllDirectionsInIta());
@@ -108,18 +105,17 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         return groupInfoRepository.findByAcademyAcademyId(academyId);
     }
 
-//TODO: refactor this
-//    @Transactional
-//    @Override
-//    public List<AcademyDTO> findWithEmployeeExperts() {
-//        List<Academy> academies = academyRepository.findWithEmployeeExperts();
-//        List<AcademyDTO> academyDTOS = new ArrayList<>();
-//        for(Academy academy: academies){
-//            AcademyDTO academyDTO = academyConverter.toDTO(academy);
-//            academyDTOS.add(academyDTO);
-//        }
-//        return academyDTOS;
-//    }
-
+    // TODO: refactor this
+    // @Transactional
+    // @Override
+    // public List<AcademyDTO> findWithEmployeeExperts() {
+    // List<Academy> academies = academyRepository.findWithEmployeeExperts();
+    // List<AcademyDTO> academyDTOS = new ArrayList<>();
+    // for(Academy academy: academies){
+    // AcademyDTO academyDTO = academyConverter.toDTO(academy);
+    // academyDTOS.add(academyDTO);
+    // }
+    // return academyDTOS;
+    // }
 
 }

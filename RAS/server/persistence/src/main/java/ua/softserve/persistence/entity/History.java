@@ -1,11 +1,9 @@
 package ua.softserve.persistence.entity;
 
-
 import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-
 
 @Getter
 @Setter
@@ -46,6 +44,5 @@ public class History {
 
     @Column(name = "modify_by")
     private String modifyBy;
-
 
 }

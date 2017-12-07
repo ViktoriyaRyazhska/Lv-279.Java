@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface MarkRepository extends JpaRepository<Mark, Integer> {
     List<Mark> findAll();
+
     List<Mark> findAllByCharacteristicId(int characteristicId);
 }

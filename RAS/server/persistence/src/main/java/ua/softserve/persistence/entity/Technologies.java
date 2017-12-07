@@ -6,7 +6,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "technologies")
 public class Technologies {
@@ -40,5 +41,6 @@ public class Technologies {
     @Column(name = "directiond_id", columnDefinition = "INT(11) UNSIGNED")
     private int directiondId;
 
-    public Technologies() {}
+    public Technologies() {
+    }
 }

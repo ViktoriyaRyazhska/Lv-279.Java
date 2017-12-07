@@ -1,109 +1,140 @@
 <div class="container well">
-  <div id="form-test">
+  <div class="col-sm-12" id="form-test">
     <form>
-      <div>
-        <ul class="col-sm-6 form-group" id="UL_left_column">
-
-          <div class="row">
-            <div class="col-sm-6 form-group">
-              <label> Group Name:</label>
-              <input type="text" class="form-control input-sm"/>
-            </div>
-
-            <div class="col-sm-6 form-group">
-              <label> Site for Name:</label>
-              <input type="text" class="form-control input-sm"/>
-            </div>
+      <ul class="col-sm-6 form-group" id="UL_left_column">
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label> Group Name:</label>
+            <input type="text" class="form-control input-sm"/>
           </div>
 
-          <div class="row">
-            <div class="col-sm-6 ">
-              <label>Status:</label>
-              <select class="form-control input-sm">
-                <option *ngFor="let academy of academyStages" [value]="academy.stageId">{{academy.name}}</option>
-              </select>
-            </div>
+          <div class="col-sm-6 form-group">
+            <label> Site for Name:</label>
+            <input type="text" class="form-control input-sm"/>
+          </div>
+        </div>
 
-            <div class="col-sm-6 form-group">
-              <label>Location:</label>
-              <select class="form-control input-sm">
-                <option *ngFor="let city of cityNames" [value]="city.cityId">{{city.trasnlation}}</option>
-              </select>
-            </div>
+        <div class="row">
+          <div class="col-sm-6 ">
+            <label>Status:</label>
+            <select class="form-control input-sm">
+              <option *ngFor="let academy of academyStages" [selected]="academy.name == 'Planned'"
+                      [value]="academy.stageId">{{academy.name}}
+            </select>
           </div>
 
-          <div class="row">
-            <div class="col-sm-6 form-group">
-              <label>Start Date:</label>
-              <input type="date" class="form-control input-sm"/>
-            </div>
-            <div class="col-sm-6 form-group">
-              <label>End Date:</label>
-              <input type="date" class="form-control input-sm"/>
-            </div>
+          <div class="col-sm-6 form-group">
+            <label>Location:</label>
+            <select class="form-control input-sm">
+              <option *ngFor="let city of cityNames" [selected]="city.trasnlation == 'Lviv'" [value]="city.cityId">
+                {{city.trasnlation}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Start Date:</label>
+            <input type="date" class="form-control input-sm"/>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label>End Date:</label>
+            <input type="date" class="form-control input-sm"/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <label class="radio-inline">
+              <input type="radio" [value]="1" name="payment">Founded by SoftServe
+            </label>
+            <label class="radio-inline">
+              <input type="radio" [value]="0" name="payment">Open Group
+            </label>
+          </div>
+        </div>
+      </ul>
+
+      <ul class="col-sm-6 form-group" id="UL_right_column">
+
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label>Common Direction:</label>
+            <select class="form-control input-sm">
+              <option value="0" [selected]="0"></option>
+              <option *ngFor="let direct of direction" [value]="direct.directionId">{{direct.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Direction:</label>
+            <select class="form-control input-sm" [(ngModel)]="technologyModel" name="technologySelect">
+              <option selected value="0"></option>
+              <option *ngFor="let tech of technologie" [ngValue]="tech.technologyId">{{ tech.name }}</option>
+            </select>
           </div>
 
-          <div class="row">
-            <div class="col-sm-12">
-              <label class="radio-inline">
-                <input type="radio" [value]="1" name="foundedBySS">Founded by SoftServe
-              </label>
-              <label class="radio-inline">
-                <input type="radio" [value]="2" name="openGroup">Open Group
-              </label>
-            </div>
+          <div class="col-sm-6 form-group">
+            <label>Profile:</label>
+            <select class="form-control input-sm">
+              <option value="0"></option>
+              <option *ngFor="let prof of profile | profileFilter:technologyModel" [value]="prof.profileId">
+                {{prof.profileName}}
+              </option>
+            </select>
           </div>
-        </ul>
+        </div>
 
-        <ul class="col-sm-6 form-group" id="UL_right_column">
-
-          <div class="row">
-            <div class="col-sm-12 form-group">
-              <label>Common Direction:</label>
-              <select class="form-control input-sm">
-                <option value=""></option>
-                <option *ngFor="let direct of direction" [value]="direct.directionId">{{direct.name}}</option>
-              </select>
-            </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <label> Students Planned to Graduate:</label>
+            <input type="number" class="form-control input-sm" value={{defaultStudentsPlannedToGraduate}}/>
+          </div>
+          <div class="col-sm-4">
+            <label> Students Planned to Enrollment:</label>
+            <input type="number" class="form-control input-sm" value={{defaultStudentsPlannedToEnrollment}}/>
           </div>
 
-          <div class="row">
-            <div class="col-sm-6 form-group">
-              <label>Direction:</label>
-              <select class="form-control input-sm" [(ngModel)]="technologyModel" name="technologySelect">
-                <option value="0"></option>
-                <option *ngFor="let tech of technologie" [ngValue]="tech.technologyId">{{ tech.name }}</option>
-              </select>
-            </div>
-
-            <div class="col-sm-6 form-group">
-              <label>Profile:</label>
-              <select class="form-control input-sm">
-                <option *ngFor="let prof of profile | profileFilter:technologyModel" [value]="prof.profileId">{{prof.profileName}}</option>
-              </select>
-            </div>
+          <div class="col-sm-4">
+            <label>Students Actual:</label>
+            <input type="number" class="form-control input-sm" disabled value={{defaultStudentActual}}/>
           </div>
-
-          <div class="row">
-            <div class="col-sm-4">
-              <label> Students Planned to Graduate:</label>
-              <input type="number" class="form-control input-sm" value={{defaultStudentsPlannedToGraduate}}/>
-            </div>
-            <div class="col-sm-4">
-              <label> Students Planned to Enrollment:</label>
-              <input type="number" class="form-control input-sm" value={{defaultStudentsPlannedToEnrollment}}/>
-            </div>
-
-            <div class="col-sm-4">
-              <label>Students Actual:</label>
-              <input type="number" class="form-control input-sm" disabled value={{defaultStudentActual}}/>
-            </div>
-          </div>
-        </ul>
-      </div>
+        </div>
+      </ul>
     </form>
   </div>
+  <hr>
+  <div class="row" id="saveGroupBtn" align="center">
+    <button type="submit" class="btn btn-primary" (click)="saveGroup()">Save Group</button>
+  </div>
 </div>
-<div align="buttom">
-  <button type="submit" class="btn btn-primary" (click)="saveGroup()">Save Group</button>
+
+<div>
+<div>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Students</a></li>
+    <li><a data-toggle="tab" href="#menu1">Teachers (Experts)</a></li>
+    <li><a data-toggle="tab" href="#menu2">Group history</a></li>
+    <li><a data-toggle="tab" href="#menu3">Feedbacks</a></li>
+  </ul>
+</div>
+
+  <div>
+    <div id="menu1" class="tab-pane fade">
+    </div>
+
+    <div id="menu2" class="tab-pane fade">
+      <app-history-list></app-history-list>
+    </div>
+
+    <div id="menu3" class="tab-pane fade">
+    </div>
+
+    <div id="home" class="tab-pane fade">
+      <app-students></app-students>
+    </div>
+  </div>
 </div>

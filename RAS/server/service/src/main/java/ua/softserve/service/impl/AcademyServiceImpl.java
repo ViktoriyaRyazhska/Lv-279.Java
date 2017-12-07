@@ -32,7 +32,6 @@ public class AcademyServiceImpl implements AcademyService {
     @Autowired
     LanguageTranslationsService languageTranslationsService;
 
-
     @Transactional(readOnly = true)
     @Override
     public Academy getById(Integer id) {
@@ -53,7 +52,7 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Transactional
     @Override
-    public AcademyDTO getAcademyDTO(){
+    public AcademyDTO getAcademyDTO() {
         AcademyDTO academyDTO = new AcademyDTO();
         academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
         academyDTO.setDirection(directionService.findAllDirectionsInIta());
@@ -69,53 +68,50 @@ public class AcademyServiceImpl implements AcademyService {
         return academyRepository.findAll();
     }
 
-//    @Transactional
-//    @Override
-//    public void saveCustom(int id, String role, int[] arr, EmployeeService employeeService) {
-//        List<Employee> employees;
-//        Academy academy;
-//        if (role.equals("Teacher")) {
-//            academy = academyRepository.findWithEmployeeTeacher(id);
-//            employees = academy.getTeachers();
-//            for (int i : arr) {
-//                if (!employees.contains(employeeService.findOne(i))) {
-//                    employees.add(employeeService.findOne(i));
-//                }
-//            }
-//            academy.setTeachers(employees);
-//            academyRepository.save(academy);
-//            for(Employee empl : employees) {
-//                employeeDirectionService.addEmployeeToGroup(id, empl,1);
-//            }
-//        } else if (role.equals("Expert")) {
-//            academy = academyRepository.findWithEmployeeExperts(id);
-//            employees = academy.getExperts();
-//            for (int i : arr) {
-//                if (!employees.contains(employeeService.findOne(i))) {
-//                    employees.add(employeeService.findOne(i));
-//                }
-//            }
-//            academy.setExperts(employees);
-//            academyRepository.save(academy);
-//            for(Employee empl : employees) {
-//                employeeDirectionService.addEmployeeToGroup(id, empl,2);
-//            }
-//        } else if (role.equals("Interviewer")) {
-//            academy = academyRepository.findWithEmployeeInterviewers(id);
-//            employees = academy.getInterviewers();
-//            for (int i : arr) {
-//                if (!employees.contains(employeeService.findOne(i))) {
-//                    employees.add(employeeService.findOne(i));
-//                }
-//            }
-//            academy.setInterviewers(employees);
-//            academyRepository.save(academy);
-//            for(Employee empl : employees) {
-//                employeeDirectionService.addEmployeeToGroup(id, empl,3);
-//            }
-//        } else throw new IllegalArgumentException();
-//    }
+    // @Transactional
+    // @Override
+    // public void saveCustom(int id, String role, int[] arr, EmployeeService employeeService) {
+    // List<Employee> employees;
+    // Academy academy;
+    // if (role.equals("Teacher")) {
+    // academy = academyRepository.findWithEmployeeTeacher(id);
+    // employees = academy.getTeachers();
+    // for (int i : arr) {
+    // if (!employees.contains(employeeService.findOne(i))) {
+    // employees.add(employeeService.findOne(i));
+    // }
+    // }
+    // academy.setTeachers(employees);
+    // academyRepository.save(academy);
+    // for(Employee empl : employees) {
+    // employeeDirectionService.addEmployeeToGroup(id, empl,1);
+    // }
+    // } else if (role.equals("Expert")) {
+    // academy = academyRepository.findWithEmployeeExperts(id);
+    // employees = academy.getExperts();
+    // for (int i : arr) {
+    // if (!employees.contains(employeeService.findOne(i))) {
+    // employees.add(employeeService.findOne(i));
+    // }
+    // }
+    // academy.setExperts(employees);
+    // academyRepository.save(academy);
+    // for(Employee empl : employees) {
+    // employeeDirectionService.addEmployeeToGroup(id, empl,2);
+    // }
+    // } else if (role.equals("Interviewer")) {
+    // academy = academyRepository.findWithEmployeeInterviewers(id);
+    // employees = academy.getInterviewers();
+    // for (int i : arr) {
+    // if (!employees.contains(employeeService.findOne(i))) {
+    // employees.add(employeeService.findOne(i));
+    // }
+    // }
+    // academy.setInterviewers(employees);
+    // academyRepository.save(academy);
+    // for(Employee empl : employees) {
+    // employeeDirectionService.addEmployeeToGroup(id, empl,3);
+    // }
+    // } else throw new IllegalArgumentException();
+    // }
 }
-
-
-

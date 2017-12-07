@@ -32,5 +32,4 @@ public class EnglishLevel {
 
     private String name;
 
-
 }

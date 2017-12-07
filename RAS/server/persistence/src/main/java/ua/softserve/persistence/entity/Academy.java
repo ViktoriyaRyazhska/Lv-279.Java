@@ -7,14 +7,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "academy")
 public class Academy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "academy_id")
+    @Column(name = "academy_id")
     private Integer academyId;
 
     @ManyToOne
@@ -73,5 +74,6 @@ public class Academy {
     @Column(name = "not_synchronized")
     private int notSynchronized;
 
-    public Academy() {}
+    public Academy() {
+    }
 }

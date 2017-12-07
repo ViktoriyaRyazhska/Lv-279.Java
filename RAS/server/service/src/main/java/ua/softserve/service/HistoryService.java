@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface HistoryService {
     List<History> findByAcademyName(String name);
+
     List<History> findAll();
 
 }
