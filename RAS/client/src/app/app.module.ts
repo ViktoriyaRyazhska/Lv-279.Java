@@ -23,9 +23,10 @@ import {FeedbackExpertEditComponent} from "./components/feedbacks/feedback-edit/
 import {FeedbackInterviewerEditComponent} from "./components/feedbacks/feedback-edit/feedback-interviewer-edit/feedback-interviewer-edit.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.pipe";
-import { HeaderComponent } from './components/header/header.component';
+import {HeaderComponent} from './components/header/header.component';
 import {FeedbackDetailComponent} from "./components/feedbacks/feedback-detail/feedback-detail.component";
-import { NavTabsComponent } from './components/nav-tabs/nav-tabs.component';
+import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
+import {FeedbackService} from "./services/feedbacks/feedback.service";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { NavTabsComponent } from './components/nav-tabs/nav-tabs.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService],
+  providers: [GroupService, AddGroupService, StudentsService, FeedbackService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

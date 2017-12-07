@@ -1,10 +1,10 @@
-import {EventEmitter} from "@angular/core";
+import {EventEmitter, Injectable} from "@angular/core";
 import {Student} from "../../models/student";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {StudentsMockupRepo} from "../students/studentsMockupRepo";
 import {of} from "rxjs/observable/of";
-
+@Injectable()
 export class FeedbackService {
   private student: Student[];
   // private studentsMock: StudentsMockupRepo = new StudentsMockupRepo();

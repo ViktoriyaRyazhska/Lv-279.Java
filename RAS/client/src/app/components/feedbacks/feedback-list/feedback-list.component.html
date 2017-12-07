@@ -5,8 +5,10 @@
       <th rowspan="3">Name</th>
       <th rowspan="3"></th>
       <th rowspan="3"></th>
+
       <th colspan="7">Teacher Mark</th>
       <th colspan="7">Expert Mark</th>
+
       <th rowspan="3">HR Comment</th>
       <th rowspan="3">Interviewer Comment</th>
       <th rowspan="3">Intern. Test, Base</th>
@@ -41,17 +43,53 @@
       <th>Team work</th>
       <th>Getting things done</th>
       <th>Active Communicator</th>
-
-    <!--</tr>-->
-      <!--<app-feedback-item-->
-      <!--*ngFor="let student of students; let i = index"-->
-      <!--[student]="student"-->
-      <!--[index]="i"></app-feedback-item>-->
-    <!--<tr>-->
     </tr>
+
+    <ng-container *ngFor="let student of students">
+      <tr>
+        <td>{{student.user.firstName}} {{student.user.lastName}}</td>
+        <td>Overall feedback</td>
+        <td>Provide feedback</td>
+        <td>{{student.teacherFeedback.learningAbility.name}}</td>
+        <td>{{student.teacherFeedback.overallTechnicalCompetence.name}}</td>
+        <td>{{student.teacherFeedback.passionalInitiative.name}}</td>
+        <td>{{student.teacherFeedback.teamWork.name}}</td>
+        <td>{{student.teacherFeedback.gettingThingsDone.name}}</td>
+        <td>{{student.teacherFeedback.activeCommunicator.name}}</td>
+        <td>{{student.teacherFeedback.summary}}</td>
+
+        <td>{{student.expertFeedback.learningAbility.name}}</td>
+        <td>{{student.expertFeedback.overallTechnicalCompetence.name}}</td>
+        <td>{{student.expertFeedback.passionalInitiative.name}}</td>
+        <td>{{student.expertFeedback.teamWork.name}}</td>
+        <td>{{student.expertFeedback.gettingThingsDone.name}}</td>
+        <td>{{student.expertFeedback.activeCommunicator.name}}</td>
+        <td>{{student.expertFeedback.summary}}</td>
+
+        <td></td>
+
+        <td>{{student.data.interviewerComment}}</td>
+        <td>{{student.data.intermBase}}</td>
+        <td>{{student.data.intermLang}}</td>
+        <td>{{student.data.finalBase}}</td>
+        <td>{{student.data.finalLang}}</td>
+        <td>{{student.data.teacherScore}}</td>
+
+        <td></td>
+        <td></td>
+      </tr>
+    </ng-container>
   </table>
 
-  <hr>
+
+  <!--</tr>-->
+  <!--<app-feedback-item-->
+  <!--*ngFor="let student of students; let i = index"-->
+  <!--[student]="student"-->
+  <!--[index]="i"></app-feedback-item>-->
+  <!--<tr>-->
+
+
   <!--<div class="row">-->
     <!--<div class="col-xs-12">-->
       <!--<app-feedback-item-->

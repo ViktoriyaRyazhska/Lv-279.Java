@@ -16,11 +16,11 @@ const appRoutes: Routes = [
   {path: 'ang/addgroup', component: AddGroupComponent, children: [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
     {path: 'students', component: StudentsComponent},
+    {path: 'feedbacks', component: FeedbackListComponent},
     {path: 'history', component: HistoryListComponent}]},
   {path: 'ang/viewAcademies', component: ViewAcademiesComponent},
   {path: 'ang/students', component: StudentsComponent},
   {path: 'ang/marks', component: FeedbackTeacherEditComponent},
-  {path: 'ang/feedbacks', component: FeedbackListComponent},
   {path: 'ang/feed', component: FeedbacksComponent, children: [
     // think about this {path: '', component: FeedbackStartComponent},
     {path: ':id', component: FeedbackDetailComponent},

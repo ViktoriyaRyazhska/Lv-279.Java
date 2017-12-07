@@ -16,11 +16,13 @@ public class StudentController {
     StudentService studentService;
 
     @GetMapping("{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<StudentViewDto> getStudentsByAcademy(@PathVariable("id") Integer academyId) {
         return studentService.getStudentsByAcademy(academyId);
     }
 
     @PostMapping("academy/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void addStudents(@PathVariable("id") Integer academyId, @RequestBody Integer students) {
 
         System.out.println("Worked");

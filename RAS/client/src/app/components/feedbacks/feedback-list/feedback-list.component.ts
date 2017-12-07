@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Student} from "../../../models/student";
 import {FeedbackService} from "../../../services/feedbacks/feedback.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -9,21 +9,20 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./feedback-list.component.css']
 })
 export class FeedbackListComponent implements OnInit {
-  students: Student[];
+  students: any[];
 
-  constructor(
-    // private feedbackService: FeedbackService,
-    //           private router: Router,
-    //           private route: ActivatedRoute
-  ) { }
+  constructor(private feedbackService: FeedbackService,
+              private router: Router,
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    // this.feedbackService.getAllStudent().subscribe(
-    //   data => {
-    //     this.students = data;
-    //   },
-    //   error => console.log(error)
-    // );
+    this.feedbackService.getAllStudent().subscribe(
+      data => {
+        this.students = data;
+      },
+      error => console.log(error)
+    );
   }
 
 }
