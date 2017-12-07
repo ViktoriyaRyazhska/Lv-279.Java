@@ -9,13 +9,17 @@
               <input type="text" class="form-control input-sm" name="inpGroupName" ngModel required
                      #inpGroupNameLocRef="ngModel"/>
               <span class="help-block" *ngIf="!inpGroupNameLocRef.valid && inpGroupNameLocRef.touched">
-              No data entered. Group will not be save
+              {{defaultInvalidInput}}
             </span>
             </div>
 
             <div class="col-sm-6 form-group">
               <label> Site for Name:</label>
-              <input type="text" class="form-control input-sm" name="inpNameForSite" ngModel required/>
+              <input type="text" class="form-control input-sm" name="inpNameForSite" ngModel required
+                     #inpNameForSiteLocRef="ngModel"/>
+              <span class="help-block" *ngIf="!inpNameForSiteLocRef.valid && inpNameForSiteLocRef.touched">
+              {{defaultInvalidInput}}
+            </span>
             </div>
           </div>
 
