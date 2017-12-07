@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
 
 @Component({
   selector: 'app-feedback-interviewer-detail',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedbackInterviewerDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+
   }
 
 }

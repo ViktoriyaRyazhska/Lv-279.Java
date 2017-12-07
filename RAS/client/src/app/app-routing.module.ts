@@ -6,6 +6,7 @@ import {AddGroupComponent} from "./components/group/add-group/add-group.componen
 import {HistoryListComponent} from "./components/history/history-list/history-list.component";
 import {StudentsComponent} from "./components/students/students.component";
 import {FeedbackTeacherDetailComponent} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.component";
+import {FeedbackInterviewerDetailComponent} from "./components/feedbacks/feedback-detail/feedback-interviewer-detail/feedback-interviewer-detail.component";
 
 const appRoutes: Routes = [
   {path: 'ang/viewAcademies', component: ViewAcademiesComponent},

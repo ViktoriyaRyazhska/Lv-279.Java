@@ -40,7 +40,7 @@ export class FeedbackTeacherDetailComponent implements OnInit {
   getMark: string;
   actMark: string;
 
-  marks: Array<any>;
+  marks: Mark[];
 
   constructor(private feedbackDetailService: FeedbackDetailService) {
   }
