@@ -22,8 +22,16 @@ public class StudentViewDto {
     private boolean removed;
 
     public static StudentViewDto of(Student student) {
-        return new StudentViewDto(student.getId(), student.getUser(), student.getAcademy().getAcademyId(),
-                student.getData(), EmployeeEngShortDto.of(student.getApprovedBy()), student.getTeacherFeedback(),
-                student.getExpertFeedback(), student.isRemoved());
+        return new StudentViewDto(
+                student.getId(),
+                student.getUser(),
+                student.getAcademy().getAcademyId(),
+                student.getData(),
+                student.getApprovedBy() == null ?
+                        null :
+                        EmployeeEngShortDto.of(student.getApprovedBy()),
+                student.getTeacherFeedback(),
+                student.getExpertFeedback(),
+                student.isRemoved());
     }
 }

@@ -30,7 +30,6 @@ public class ControllerForReports {
     private CheckListByGroupsDtoService checkListByGroupsDtoService;
 
     @GetMapping(value = "/check_list_by_groups", produces = "application/json")
-    @CrossOrigin(origins = "${client_cross_origin}")
     public ResponseEntity<List<CheckListByGroupsDto>> getCheckListByGroupsDto() {
         return new ResponseEntity<>(checkListByGroupsDtoService.getAllCheckListByGroupsDto(), HttpStatus.OK);
     }
