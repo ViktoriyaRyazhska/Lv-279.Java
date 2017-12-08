@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {AddGroupService} from "./add-group.service";
 import {HistoryService} from "../../history/history.service";
-import {NgForm} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+
 
 
 @Component({
@@ -12,6 +13,7 @@ import {NgForm} from "@angular/forms";
   providers: [HistoryService]
 })
 export class AddGroupComponent implements OnInit {
+  signupForm: FormGroup;
 
   academyStages: any[];
   cityNames: any[];
@@ -40,18 +42,24 @@ export class AddGroupComponent implements OnInit {
       this.technologie = resp.technologie;
     });
 
-    // this.defaultCity = this.cityNames.filter(cityNames=> cityNames.trasnlation=='Lviv');
+    this.signupForm = new FormGroup({
+      'groupInfo': new FormControl(null, Validators.required),
+      'nameForSite': new FormControl(null, [Validators.required]),
+      'academyStageId': new FormControl('1'),
+      'cityId': new FormControl('1'),
+      'startDateFormControl': new FormControl(),
+      'endDateFormControl': new FormControl(),
+      'commonDirection': new FormControl(),
+      'technolgyId': new FormControl(),
+      'profileInfoFormControl': new FormControl(),
+      'SCTGraduate': new FormControl(),
+      'SCTEnrollment': new FormControl()
+    });
   }
 
-  saveGroup(form: NgForm) {
-    // console.log(this.cityNames.filter(cityNames=> cityNames.trasnlation=='Lviv'));
-    // console.log(this.defaultCity);
-    console.log(form);
+  saveGroup() {
+    console.log(this.signupForm);
   }
-
-  // onSubmit(form: NgForm) {
-  //   console.log(form);
-  // }
 
 
 }
