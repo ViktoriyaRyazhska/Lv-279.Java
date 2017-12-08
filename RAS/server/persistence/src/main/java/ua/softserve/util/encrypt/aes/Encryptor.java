@@ -28,17 +28,20 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 
 /**
- * Java encryptor equivalent to encryptor from PHP framework 'Laravel'
- * Based on AES/CBC/256
+ * Java encryptor equivalent to encryptor from PHP framework 'Laravel' Based on AES/CBC/256
  */
 public class Encryptor {
 
-    private Encryptor() {}
+    private Encryptor() {
+    }
 
     /**
      * Encrypts the value using key
-     * @param value entry string
-     * @param key secret key
+     * 
+     * @param value
+     *            entry string
+     * @param key
+     *            secret key
      * @return encrypted String
      */
     public static String encrypt(String value, String key) {
@@ -49,21 +52,21 @@ public class Encryptor {
         byte[] val = Base64.encodeBase64(encrypted);
         String ivStr = new String(ivB);
         String valStr = new String(val);
-        String mac = hashHmac(
-                (ivStr + valStr).replace("\\", "").getBytes(),
-                key.getBytes());
-        String json = "{\"iv\":\"" + ivStr +
-                "\",\"value\":\"" + valStr +
-                "\",\"mac\":\"" + mac + "\"}";
+        String mac = hashHmac((ivStr + valStr).replace("\\", "").getBytes(), key.getBytes());
+        String json = "{\"iv\":\"" + ivStr + "\",\"value\":\"" + valStr + "\",\"mac\":\"" + mac + "\"}";
         return new String(Base64.encodeBase64(json.getBytes()));
     }
 
     /**
      * Decrypts the value using key
-     * @param value entry string
-     * @param key secret key
+     * 
+     * @param value
+     *            entry string
+     * @param key
+     *            secret key
      * @return decrypted String
-     * @throws IllegalArgumentException can be "Incorrect value" or "Mac validation failed"
+     * @throws IllegalArgumentException
+     *             can be "Incorrect value" or "Mac validation failed"
      */
     public static String decrypt(String value, String key) {
         byte[] jsonVal = Base64.decodeBase64(value);
@@ -89,6 +92,7 @@ public class Encryptor {
 
     /**
      * Calculates mac(hash) by value and key
+     * 
      * @param value
      * @param key
      * @return hash_hmac
@@ -108,6 +112,7 @@ public class Encryptor {
 
     /**
      * Validates the Mac
+     * 
      * @param mac
      * @param iv
      * @param val
@@ -115,12 +120,12 @@ public class Encryptor {
      * @return
      */
     private static boolean validMac(String mac, String iv, String val, String key) {
-        return mac.equalsIgnoreCase(hashHmac((iv + val).getBytes(),key.getBytes()));
+        return mac.equalsIgnoreCase(hashHmac((iv + val).getBytes(), key.getBytes()));
     }
 
     /**
-     * Serializes the value,
-     * and add to serialized value missing bytes to length multiple 16
+     * Serializes the value, and add to serialized value missing bytes to length multiple 16
+     * 
      * @param value
      * @return
      */
@@ -145,6 +150,7 @@ public class Encryptor {
 
     /**
      * Unserializes the value, and cuts off extra bytes
+     * 
      * @param serializedValue
      * @return
      */
@@ -168,6 +174,7 @@ public class Encryptor {
 
     /**
      * Encrypt method based on Cipher AES/CBC/256
+     * 
      * @param value
      * @param key
      * @param iv
@@ -180,7 +187,8 @@ public class Encryptor {
             IvParameterSpec ivPS = new IvParameterSpec(iv);
             cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key.getBytes(), "AES"), ivPS);
             res = cipher.doFinal(value);
-        } catch (NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException | NoSuchPaddingException | InvalidAlgorithmParameterException | InvalidKeyException e) {
+        } catch (NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException | NoSuchPaddingException
+                | InvalidAlgorithmParameterException | InvalidKeyException e) {
             e.printStackTrace();
         }
         return res;
@@ -188,6 +196,7 @@ public class Encryptor {
 
     /**
      * Decrypt method based on Cipher AES/CBC/256
+     * 
      * @param value
      * @param key
      * @param iv
@@ -201,7 +210,8 @@ public class Encryptor {
             IvParameterSpec ivPS = new IvParameterSpec(iv);
             cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(key.getBytes(), "AES"), ivPS);
             res = cipher.doFinal(val);
-        } catch (NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException | NoSuchPaddingException | InvalidAlgorithmParameterException | InvalidKeyException e) {
+        } catch (NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException | NoSuchPaddingException
+                | InvalidAlgorithmParameterException | InvalidKeyException e) {
             e.printStackTrace();
         }
         return res;

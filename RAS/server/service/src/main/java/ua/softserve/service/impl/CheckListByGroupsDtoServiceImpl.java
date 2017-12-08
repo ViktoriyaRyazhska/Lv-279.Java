@@ -34,7 +34,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     @Autowired
     private AcademyStagesService academyStagesService;
     @Autowired
-    private StudentsRepository studentsRepository;
+    private StudentRepository studentRepository;
     @Autowired
     private GroupInfoTeachersRepository groupInfoTeachersRepository;
 
@@ -64,19 +64,19 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
             AcademyStages stage = academyStagesService.findOne(academy.getAcademyStages().getStageId());
             checkListByGroupsDto.setStatus(stage.getName());
-            List<Students> students = studentsRepository.findAllByAcademy_AcademyId(academy.getAcademyId());
+            List<Student> students = studentRepository.findAllByAcademy_AcademyId(academy.getAcademyId());
             List<CheckListByGroupsDto.StudentInGroup> studentsInGroup = new ArrayList<>();
-            for (Students student : students) {
+            for (Student student : students) {
                 CheckListByGroupsDto.StudentInGroup studentInGroup = checkListByGroupsDto.new StudentInGroup();
 
-                studentInGroup.setEntryScore(student.getEntryScore());
+                studentInGroup.setEntryScore(student.getData().getEntryScore());
 
                 studentInGroup.setStatus(student.getStudentStatus().getName());
 
                 studentInGroup.setApprovedBy(student.getApprovedBy().getFirstNameEng() + " " +
                         student.getApprovedBy().getLastNameEng());
 
-                studentInGroup.setEnglishLevel(student.getEnglishLevel().getName());
+                studentInGroup.setEnglishLevel(student.getData().getEnglishLevel().getName());
 
                 List<GroupInfoTeachers> groupInfoTeachers =
                         groupInfoTeachersRepository.findAllByAcademy_AcademyId(academy.getAcademyId());
@@ -124,22 +124,22 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
                 checkListByGroupsDto.setTeachers(teachersInGroup);
 
                 CheckListByGroupsDto.TestsOfStudent testsOfStudent = checkListByGroupsDto.new TestsOfStudent();
-                testsOfStudent.setFinalTestBase(student.getFinalBase());
-                testsOfStudent.setFinalTestLang(student.getFinalLang());
-                testsOfStudent.setIncomingTest(student.getIncomingTest());
-                testsOfStudent.setIntermediateTestBase(student.getIntermBase());
-                testsOfStudent.setIntermediateTestLang(student.getIntermLang());
+                testsOfStudent.setFinalTestBase(student.getData().getFinalBase());
+                testsOfStudent.setFinalTestLang(student.getData().getFinalLang());
+                testsOfStudent.setIncomingTest(student.getData().getIncomingTest());
+                testsOfStudent.setIntermediateTestBase(student.getData().getIntermBase());
+                testsOfStudent.setIntermediateTestLang(student.getData().getIntermLang());
                 double testsN[] = new double[10];
-                testsN[0] = student.getTestOne();
-                testsN[1] = student.getTestTwo();
-                testsN[2] = student.getTestThree();
-                testsN[3] = student.getTestFour();
-                testsN[4] = student.getTestFive();
-                testsN[5] = student.getTestSix();
-                testsN[6] = student.getTestSeven();
-                testsN[7] = student.getTestEight();
-                testsN[8] = student.getTestNine();
-                testsN[9] = student.getTestTen();
+                testsN[0] = student.getData().getTestOne();
+                testsN[1] = student.getData().getTestTwo();
+                testsN[2] = student.getData().getTestThree();
+                testsN[3] = student.getData().getTestFour();
+                testsN[4] = student.getData().getTestFive();
+                testsN[5] = student.getData().getTestSix();
+                testsN[6] = student.getData().getTestSeven();
+                testsN[7] = student.getData().getTestEight();
+                testsN[8] = student.getData().getTestNine();
+                testsN[9] = student.getData().getTestTen();
                 testsOfStudent.setTestN(testsN);
                 studentInGroup.setTestsOfStudent(testsOfStudent);
 
