@@ -24,7 +24,7 @@
           <div class="row">
             <div class="col-sm-6 ">
               <label>Status:</label>
-              <select class="form-control input-sm" formControlName="academyStageId">
+              <select class="form-control input-sm" formControlName="academyStatusId">
                 <option *ngFor="let stages of academyStatus" [value]="stages.stageId">{{ stages.name }}</option>
               </select>
             </div>
@@ -75,7 +75,7 @@
           <div class="row">
             <div class="col-sm-6 form-group">
               <label>Direction:</label>
-              <select class="form-control input-sm" formControlName="technolgyId">
+              <select class="form-control input-sm" formControlName="directionFormControl">
                 <option selected value="0"></option>
                 <option *ngFor="let tech of direction" [value]="tech.technologyId">{{ tech.name }}</option>
               </select>
@@ -85,7 +85,7 @@
               <label>Profile:</label>
               <select class="form-control input-sm" formControlName="profileInfoFormControl">
                 <option value="0"></option>
-                <option *ngFor="let prof of profile | profileFilter:signupForm.get('technolgyId').value"
+                <option *ngFor="let prof of profile | profileFilter:signupForm.get('directionFormControl').value"
                         [value]="prof.profileId">{{ prof.profileName }}
                 </option>
               </select>
@@ -95,12 +95,12 @@
           <div class="row">
             <div class="col-sm-4">
               <label> Students Planned to Graduate:</label>
-              <input type="number" class="form-control input-sm" formControlName="SCTGraduate"
+              <input type="number" class="form-control input-sm" formControlName="sctGraduate"
                      value={{defaultStudentsPlannedToGraduate}}/>
             </div>
             <div class="col-sm-4">
               <label> Students Planned to Enrollment:</label>
-              <input type="number" class="form-control input-sm" formControlName="SCTEnrollment"
+              <input type="number" class="form-control input-sm" formControlName="sctEnrollment"
                      value={{defaultStudentsPlannedToEnrollment}}/>
             </div>
 

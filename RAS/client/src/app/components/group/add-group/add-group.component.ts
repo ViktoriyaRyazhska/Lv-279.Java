@@ -40,21 +40,37 @@ export class AddGroupComponent implements OnInit {
     this.signupForm = new FormGroup({
       'groupInfoFormControl': new FormControl(null, Validators.required),
       'nameForSiteFormControl': new FormControl(null, [Validators.required]),
-      'academyStageId': new FormControl('1'),
+      "academyStatusId": new FormControl('1'),
       'cityId': new FormControl('1'),
       'startDateFormControl': new FormControl(),
       'endDateFormControl': new FormControl(),
       'commonDirectionFormControl': new FormControl(),
-      'technolgyId': new FormControl(),
+      "directionFormControl": new FormControl(),
       'profileInfoFormControl': new FormControl(),
-      'SCTGraduate': new FormControl(),
-      'SCTEnrollment': new FormControl()
+      "sctGraduate": new FormControl(),
+      "sctEnrollment": new FormControl()
     });
   }
 
   saveGroup() {
     console.log(this.signupForm);
   }
+
+  // setDataToForm(){
+  //   this.signupForm.setValue({
+  //     'groupInfoFormControl': ,
+  //     'nameForSiteFormControl': ,
+  //     'academyStatusId': ,
+  //     'cityId': ,
+  //     'startDateFormControl': ,
+  //     'endDateFormControl': ,
+  //     'commonDirectionFormControl': ,
+  //     'directionFormControl': ,
+  //     'profileInfoFormControl': ,
+  //     'sctGraduate': ,
+  //     'sctEnrollment':
+  //   });
+  // }
 
 
 }
