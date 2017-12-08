@@ -1,6 +1,4 @@
-<button type="submit" class="btn btn-primary " (click)="showReport()">Show report</button>
 
-<div *ngIf="isShow">
   <h1>ITA Tactical Plan by Group Stage</h1>
   <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
 
@@ -24,7 +22,7 @@
       <th>Payment status</th>
     </tr>
 
-    <ng-container *ngFor="let report of tacticalRepors|tacticalReport:criteria">
+    <ng-container *ngFor="let report of itaTacticalPlanByGroupStage">
       <tr>
         <td>{{report.startDate|date: "yyyy"}}</td>
         <td>{{report.startDate|date: "M"}}</td>
@@ -48,4 +46,4 @@
     </ng-container>
 
   </table>
-</div>
+

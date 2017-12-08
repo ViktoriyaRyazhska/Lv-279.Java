@@ -10,6 +10,7 @@ import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FeedbackDetailComponent} from "./components/feedbacks/feedback-detail/feedback-detail.component";
 import {FeedbackEditComponent} from "./components/feedbacks/feedback-edit/feedback-edit.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
+import {ItaTacticalPlanByGroupStageComponent} from "./components/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 
 
 const appRoutes: Routes = [
@@ -26,7 +27,7 @@ const appRoutes: Routes = [
     // think about this {path: '', component: FeedbackStartComponent},
     {path: ':id', component: FeedbackDetailComponent},
     {path: ':id/edit', component: FeedbackEditComponent},]},
-  // {path: 'ang/report', component:TacticalReportComponent}
+  {path: 'ang/ita-tactical-plan-by-group-stage', component:ItaTacticalPlanByGroupStageComponent}
 ];
 
 @NgModule({

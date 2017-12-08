@@ -19,7 +19,7 @@ public class ItaTacticalPlanByGroupStageController {
     @Autowired
     ItaTacticalPlanByGroupStageDtoService itaTacticalPlanByGroupStageDtoService;
 
-    @RequestMapping(value = "/itaTacticalPlanByGroupStageService",method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/itaTacticalPlanByGroupStage",method = RequestMethod.GET, produces = {"application/json"})
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<ItaTacticalPlanByGroupStageDto>> getCity() {
         return new ResponseEntity<>(itaTacticalPlanByGroupStageDtoService.findAll(), HttpStatus.OK);
