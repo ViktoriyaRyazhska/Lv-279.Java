@@ -6,12 +6,18 @@
           <div class="row">
             <div class="col-sm-6 form-group">
               <label> Group Name:</label>
-              <input type="text" class="form-control input-sm" formControlName="groupInfo"/>
+              <input type="text" class="form-control input-sm" formControlName="groupInfoFormControl"/>
+              <span *ngIf="!signupForm.get('groupInfoFormControl').valid
+              && signupForm.get('groupInfoFormControl').touched"
+              class="help-block">{{defaultInvalidInput}}</span>
             </div>
 
             <div class="col-sm-6 form-group">
               <label> Site for Name:</label>
-              <input type="text" class="form-control input-sm" formControlName="nameForSite"/>
+              <input type="text" class="form-control input-sm" formControlName="nameForSiteFormControl"/>
+              <span *ngIf="!signupForm.get('nameForSiteFormControl').valid
+              && signupForm.get('nameForSiteFormControl').touched"
+                    class="help-block">{{defaultInvalidInput}}</span>
             </div>
           </div>
 
