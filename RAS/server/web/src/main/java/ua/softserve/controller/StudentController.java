@@ -16,22 +16,14 @@ public class StudentController {
     StudentService studentService;
 
     @GetMapping("{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
     public List<StudentViewDto> getStudentsByAcademy(@PathVariable("id") Integer academyId) {
         return studentService.getStudentsByAcademy(academyId);
     }
 
-    @PostMapping("academy/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public void addStudents(@PathVariable("id") Integer academyId, @RequestBody Integer students) {
-
-        System.out.println("Worked");
-//        try {
-//            System.out.println("WHAAAAT 1");
-//            studentService.addStudentsToAcademy(1, Arrays.asList(students));
-//            System.out.println("WHAAAAT 2");
-//        } catch (Throwable e) {
-//            e.printStackTrace();
-//        }
+    @PostMapping("{id}")
+    public void addStudents(@PathVariable("id") Integer academyId,
+                            @RequestBody List<Integer> students) {
+        studentService.addStudentsToAcademy(academyId, students);
     }
+
 }
