@@ -11,6 +11,7 @@ import {FeedbackEditComponent} from "./components/feedbacks/feedback-edit/feedba
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {ItaTacticalPlanByGroupStageComponent} from "./components/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
+import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 
 
 const appRoutes: Routes = [
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     // think about this {path: '', component: FeedbackStartComponent},
     {path: ':id', component: FeedbackDetailComponent},
     {path: ':id/edit', component: FeedbackEditComponent},]},
-  {path: 'ang/ita-tactical-plan-by-group-stage', component:ItaTacticalPlanByGroupStageComponent}
+  {path: 'ang/ita-tactical-plan-by-group-stage', component:ItaTacticalPlanByGroupStageComponent},
+  {path: 'ang/tests', component:TestsNamesComponent}
 ];
 
 @NgModule({

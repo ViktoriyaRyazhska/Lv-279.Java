@@ -29,6 +29,8 @@ import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
 import {FeedbackService} from "./services/feedbacks/feedback.service";
 import { ItaTacticalPlanByGroupStageComponent } from './components/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component';
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
+import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
+import {TestsService} from "./services/tests-names/tests.service";
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import {CheckListByGroupsComponent} from "./components/reports/check-list-by-gro
     HeaderComponent,
     NavTabsComponent,
     ItaTacticalPlanByGroupStageComponent,
-    CheckListByGroupsComponent
+    CheckListByGroupsComponent,
+    TestsNamesComponent
 
   ],
   imports: [
@@ -64,7 +67,7 @@ import {CheckListByGroupsComponent} from "./components/reports/check-list-by-gro
     AppRoutingModule,
     FormsModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, FeedbackService],
+  providers: [GroupService, AddGroupService, StudentsService, FeedbackService, TestsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
