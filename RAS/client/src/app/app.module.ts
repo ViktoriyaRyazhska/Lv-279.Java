@@ -27,6 +27,8 @@ import {HeaderComponent} from './components/header/header.component';
 import {FeedbackDetailComponent} from "./components/feedbacks/feedback-detail/feedback-detail.component";
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
 import {FeedbackService} from "./services/feedbacks/feedback.service";
+import { ItaTacticalPlanByGroupStageComponent } from './components/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import {FeedbackService} from "./services/feedbacks/feedback.service";
     FeedbackInterviewerEditComponent,
     FeedbackTeacherDetailPipe,
     HeaderComponent,
-    NavTabsComponent
+    NavTabsComponent,
+    ItaTacticalPlanByGroupStageComponent,
+
   ],
   imports: [
     BrowserModule,

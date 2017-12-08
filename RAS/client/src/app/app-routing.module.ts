@@ -11,6 +11,7 @@ import {FeedbackDetailComponent} from "./components/feedbacks/feedback-detail/fe
 import {FeedbackEditComponent} from "./components/feedbacks/feedback-edit/feedback-edit.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 
+
 const appRoutes: Routes = [
   // {path: '', component: ViewAcademiesComponent},
   {path: 'ang/addgroup', component: AddGroupComponent, children: [
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
   {path: 'ang/feed', component: FeedbacksComponent, children: [
     // think about this {path: '', component: FeedbackStartComponent},
     {path: ':id', component: FeedbackDetailComponent},
-    {path: ':id/edit', component: FeedbackEditComponent}]}
+    {path: ':id/edit', component: FeedbackEditComponent},]},
+  // {path: 'ang/report', component:TacticalReportComponent}
 ];
 
 @NgModule({

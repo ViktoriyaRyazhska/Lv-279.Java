@@ -15,4 +15,5 @@ public interface LanguageTranslationsService {
 
     List<LanguageTranslations> findAllCities();
 
+
 }
