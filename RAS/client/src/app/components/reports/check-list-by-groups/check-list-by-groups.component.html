@@ -1,0 +1,95 @@
+<!--<button (click)="tstBtnClick()">{{tstCapt}}</button>-->
+<!--<span *ngIf="tstVisible">This is SPARTA!!!</span>-->
+
+<div *ngIf="allData">
+
+  <table>
+
+    <caption><h1>Check list by groups (REPORT)</h1></caption>
+
+    <tr>
+      <th>Group name</th>
+      <th>Dev center</th>
+      <th>Status</th>
+      <th>Teachers</th>
+      <th>Experts</th>
+
+      <th><span>English level defined for group</span></th>
+      <th><span>English Level is correct</span></th>
+      <th><span>Entry score is defined</span></th>
+      <th><span>Incoming test is defined</span></th>
+      <th><span>Approved by is defined</span></th>
+      <th><span>Expert  defined</span></th>
+      <th><span>Teacher(s) defined</span></th>
+      <th><span>Group started successfully</span></th>
+
+      <th><span>English level defined for group</span></th>
+      <th><span>English Level is correct</span></th>
+      <th><span>Entry score is defined</span></th>
+      <th><span>Incoming test is defined</span></th>
+      <th><span>Approved by is defined</span></th>
+      <th><span>Expert  defined</span></th>
+      <th><span>Teacher(s) defined</span></th>
+      <th><span>Group started successfully</span></th>
+
+      <th><span>English level defined for group</span></th>
+      <th><span>English Level is correct</span></th>
+      <th><span>Entry score is defined</span></th>
+      <th><span>Incoming test is defined</span></th>
+      <th><span>Approved by is defined</span></th>
+      <th><span>Expert  defined</span></th>
+      <th><span>Teacher(s) defined</span></th>
+      <th><span>Group started successfully</span></th>
+    </tr>
+
+    <ng-container *ngFor="let oneData of allData">
+      <tr>
+        <td>{{oneData.groupName}}</td>
+        <td>{{oneData.cityName}}</td>
+        <td>{{oneData.status}}</td>
+        <td>
+          <div *ngFor="let teacher of oneData.teachers">
+            <div *ngIf="(teacher.type == 'TEACHER')">
+              {{teacher.fullName}}
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngFor="let teacher of oneData.teachers">
+            <div *ngIf="(teacher.type == 'EXPERT')">
+              {{teacher.fullName}}
+            </div>
+          </div>
+        </td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+    </ng-container>
+
+  </table>
+
+</div>

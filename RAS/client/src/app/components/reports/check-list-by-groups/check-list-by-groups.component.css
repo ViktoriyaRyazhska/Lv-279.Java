@@ -1,0 +1,32 @@
+table {
+  width: 100%;
+  background: grey;
+  color: black;
+  border-spacing: 2px
+}
+th {
+  background: lightskyblue;
+  height: 230px;
+  padding: 5px
+}
+th span {
+  writing-mode: tb-rl
+}
+
+td {
+  background: ghostwhite;
+  padding: 5px;
+  text-align: center;
+
+}
+
+div {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+button {
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}

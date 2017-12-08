@@ -13,6 +13,10 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
+    List<Student> findAllByAcademy_AcademyId(int academyId);
+
+    List<Student> findAllByStudentStatus(StudentStatuses studentStatus);
+
     @Query("from Student s where s.academy.academyId = :academyId")
     List<Student> findAllByAcademyId(@Param("academyId") Integer academyId);
 

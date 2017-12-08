@@ -11,4 +11,7 @@ public interface GroupInfoTeachersRepository extends JpaRepository<GroupInfoTeac
     List<GroupInfoTeachers> findAllByAcademyAndTeacherType(Academy academy, TeacherTypes teacherType);
 
     List<GroupInfoTeachers> findAllByTeacherType(TeacherTypes teacherType);
+
+    List<GroupInfoTeachers> findAllByAcademy_AcademyId(int id);
+
 }
