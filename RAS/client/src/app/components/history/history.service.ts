@@ -8,6 +8,7 @@ export class HistoryService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get('http://localhost:8080/history');
+    return this.http.get('http://localhost:8080/history/585');
   }
 }
+

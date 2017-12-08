@@ -24,9 +24,9 @@ public class HistoryController {
         return "showHistory";
     }
 
-    @RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/history/{id}", method = RequestMethod.GET, produces = "application/json")
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<List<History>> getHistory() {
-        return new ResponseEntity<List<History>>(historyService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<History>> getHistory(@PathVariable int id) {
+        return new ResponseEntity<List<History>>(historyService.findByAcademyId(id), HttpStatus.OK);
     }
 }
