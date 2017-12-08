@@ -19,7 +19,7 @@
             <div class="col-sm-6 ">
               <label>Status:</label>
               <select class="form-control input-sm" formControlName="academyStageId">
-                <option *ngFor="let stages of academyStages" [value]="stages.stageId" >{{ stages.name }}</option>
+                <option *ngFor="let stages of academyStages" [value]="stages.stageId">{{ stages.name }}</option>
               </select>
             </div>
 
@@ -79,7 +79,9 @@
               <label>Profile:</label>
               <select class="form-control input-sm" formControlName="profileInfoFormControl">
                 <option value="0"></option>
-                <option *ngFor="let prof of profile | profileFilter:signupForm.get('technolgyId').value" [value]="prof.profileId">{{ prof.profileName }}</option>
+                <option *ngFor="let prof of profile | profileFilter:signupForm.get('technolgyId').value"
+                        [value]="prof.profileId">{{ prof.profileName }}
+                </option>
               </select>
             </div>
           </div>
@@ -87,11 +89,13 @@
           <div class="row">
             <div class="col-sm-4">
               <label> Students Planned to Graduate:</label>
-              <input type="number" class="form-control input-sm" formControlName="SCTGraduate" value={{defaultStudentsPlannedToGraduate}}/>
+              <input type="number" class="form-control input-sm" formControlName="SCTGraduate"
+                     value={{defaultStudentsPlannedToGraduate}}/>
             </div>
             <div class="col-sm-4">
               <label> Students Planned to Enrollment:</label>
-              <input type="number" class="form-control input-sm" formControlName="SCTEnrollment" value={{defaultStudentsPlannedToEnrollment}}/>
+              <input type="number" class="form-control input-sm" formControlName="SCTEnrollment"
+                     value={{defaultStudentsPlannedToEnrollment}}/>
             </div>
 
             <div class="col-sm-4">
@@ -104,11 +108,12 @@
     </div>
     <hr>
     <div class="row" id="saveGroupBtn" align="center">
-      <button type="submit" class="btn btn-primary" (click)="saveGroup()" >Save Group
+      <button type="submit" class="btn btn-primary" (click)="saveGroup()">Save Group
       </button>
     </div>
   </div>
 
   <div>
+    <app-nav-tabs></app-nav-tabs>
   </div>
 </div>
