@@ -1,6 +1,7 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
-import {FeedbackDetailService} from "../feedback-detail.service";
-import {Mark} from "../mark.model";
+import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {FeedbackDetailService} from "../../../../services/feedbacks/marks.service";
+import {Mark} from "../../../../models/feedbacks/mark.model";
+import {NgForm} from "@angular/forms";
 
 export enum CharacteristicId {
   ONE = 1,
@@ -13,11 +14,11 @@ export enum CharacteristicId {
 
 @Component({
   selector: 'app-feedback-teacher-detail',
-  templateUrl: './feedback-teacher-detail.component.html',
-  styleUrls: ['./feedback-teacher-detail.component.css'],
+  templateUrl: './feedback-teacher-edit.component.html',
+  styleUrls: ['./feedback-teacher-edit.component.css'],
   providers: [FeedbackDetailService]
 })
-export class FeedbackTeacherDetailComponent implements OnInit {
+export class FeedbackTeacherEditComponent implements OnInit {
   // @Input() CharacteristicId;
   one:number = CharacteristicId.ONE;
   two:number = CharacteristicId.TWO;
@@ -33,14 +34,15 @@ export class FeedbackTeacherDetailComponent implements OnInit {
   getDesc: string;
   actDesc: string;
 
-  learnMark: any;
+  learnMark: string;
   overallMark: string;
   passMark: string;
   teamMark: string;
   getMark: string;
   actMark: string;
 
-  marks: Array<any>;
+  marks: Mark[];
+  @ViewChild('feedbackForm') saveForm: NgForm;
 
   constructor(private feedbackDetailService: FeedbackDetailService) {
   }
@@ -53,6 +55,11 @@ export class FeedbackTeacherDetailComponent implements OnInit {
       error => console.log(error)
     );
   }
+
+  onSave() {
+    console.log(this.saveForm);
+  }
+
 
   onChoose() {
     for (let mark of this.marks) {
@@ -76,4 +83,5 @@ export class FeedbackTeacherDetailComponent implements OnInit {
       }
     }
   }
+
 }

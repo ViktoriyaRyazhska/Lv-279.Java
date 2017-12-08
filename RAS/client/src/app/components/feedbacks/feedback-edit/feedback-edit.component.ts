@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Student} from "../../../models/student";
 import {FeedbackService} from "../../../services/feedbacks/feedback.service";
 import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-feedback-detail',
-  templateUrl: './feedback-detail.component.html',
-  styleUrls: ['./feedback-detail.component.css']
+  templateUrl: './feedback-edit.component.html',
+  styleUrls: ['./feedback-edit.component.css']
 })
-export class FeedbackDetailComponent implements OnInit {
+export class FeedbackEditComponent implements OnInit {
   student: Student;
   id: number;
 

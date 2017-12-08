@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Student} from "../../../models/student";
+import {FeedbackService} from "../../../services/feedbacks/feedback.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-feedback-list',
@@ -6,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feedback-list.component.css']
 })
 export class FeedbackListComponent implements OnInit {
+  students: any[];
 
-  constructor() { }
+  constructor(private feedbackService: FeedbackService,
+              private router: Router,
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
+    this.feedbackService.getAllStudent().subscribe(
+      data => {
+        this.students = data;
+      },
+      error => console.log(error)
+    );
   }
 
 }

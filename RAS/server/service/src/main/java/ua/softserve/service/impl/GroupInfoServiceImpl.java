@@ -44,7 +44,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     private TeacherTypeService teacherTypeService;
 
     @Autowired
-    private StudentsServiceImpl studentsServiceImpl;
+    private StudentServiceImpl studentsServiceImpl;
 
     @Autowired
     private StudentsStatusesService studentsStatusesService;
