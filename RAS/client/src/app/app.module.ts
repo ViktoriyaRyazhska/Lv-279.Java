@@ -24,6 +24,7 @@ import {FeedbackInterviewerDetailComponent} from "./components/feedbacks/feedbac
 import {AppRoutingModule} from "./app-routing.module";
 import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.pipe";
 import { HeaderComponent } from './components/header/header.component';
+import { NavTabsComponent } from './components/nav-tabs/nav-tabs.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { HeaderComponent } from './components/header/header.component';
     FeedbackExpertDetailComponent,
     FeedbackInterviewerDetailComponent,
     FeedbackTeacherDetailPipe,
-    HeaderComponent
+    HeaderComponent,
+    NavTabsComponent
   ],
   imports: [
     BrowserModule,

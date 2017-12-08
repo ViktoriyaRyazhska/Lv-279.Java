@@ -45,7 +45,9 @@ public class CheckListByGroupsDto {
         private String englishLevel;
         private Double entryScore;
         private TestsOfStudent testsOfStudent;
-        private List<TeacherOfStudent> teachersOfStudent;
+        private Feedback teacherFeedback;
+        private Feedback expertFeedback;
+        private String interviewerComment;
         private String approvedBy;
     }
 
@@ -63,9 +65,13 @@ public class CheckListByGroupsDto {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public class TeacherOfStudent {
-        private List<String> enumeratedFeedbacks;
-        private double score;
+    public class Feedback {
+        private String learningAbility;
+        private String overallTechnicalCompetence;
+        private String passionalInitiative;
+        private String teamWork;
+        private String gettingThingsDone;
+        private String activeCommunicator;
         private String summary;
     }
 

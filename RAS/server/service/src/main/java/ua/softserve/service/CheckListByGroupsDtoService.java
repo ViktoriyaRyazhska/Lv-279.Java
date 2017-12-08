@@ -16,7 +16,7 @@ import java.util.List;
 
 public interface CheckListByGroupsDtoService {
 
-    List<CheckListByGroupsDto> fakeGetAllCheckListByGroupsDto(int count);
+//    List<CheckListByGroupsDto> fakeGetAllCheckListByGroupsDto(int count);
 
     List<CheckListByGroupsDto> getAllCheckListByGroupsDto();
 

@@ -2,18 +2,20 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.service.dto.StudentsShortViewDto;
-import ua.softserve.service.dto.StudentsViewDto;
-import ua.softserve.persistence.entity.Students;
-import ua.softserve.persistence.entity.User;
-import ua.softserve.service.StudentService;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.entity.StudentStatuses;
+import ua.softserve.persistence.repo.StudentsRepository;
+import ua.softserve.service.StudentsService;
 
 @Service
-public class StudentServiceImpl implements StudentService {
+public class StudentsServiceImpl implements StudentsService {
+    @Autowired
+    private StudentsRepository studentsRepository;
+
+    @Override
+    public Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatuses) {
+        return studentsRepository.countAllByAcademyAndStudentStatus(academy, studentStatuses);
+    }
 
     // TODO: refactor
 

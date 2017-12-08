@@ -13,7 +13,6 @@ export class ProfileInfoFilterPipe implements PipeTransform {
     }
     for (const profileInfo of profileInfoArray) {
       if (profileInfo.technologies.technologyId == directionId) {
-        console.log(profileInfo);
         resultArray.push(profileInfo);
       }
     }

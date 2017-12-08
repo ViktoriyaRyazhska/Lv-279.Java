@@ -36,7 +36,7 @@
       </td>
       <td><input type="text" name="payment" (input)="onFilterField($event)" class="form-control"></td>
       <td><!--<input type="text" name="location" (input)="onFilterField($event)" class="form-control">-->
-        <select name="location" class="form-control input-sm">
+        <select name="cityName" class="form-control input-sm" (change)="onFilterField($event)">
           <option *ngFor="let city of cityNames" [value]="city.trasnlation">{{city.trasnlation}}</option>
         </select>
       </td>
@@ -65,14 +65,14 @@
       <td>{{academy.technologyName}}</td>
       <td>{{academy.profileName}}</td>
       <td>{{academy.payment}}</td>
-      <td>---</td>
+      <td>{{academy.cityName}}</td>
       <td>{{academy.startDate | date: "dd.MM.yyyy"}}</td>
       <td>{{academy.endDate | date: "dd.MM.yyyy"}}</td>
       <td>{{academy.status}}</td>
       <td>{{academy.experts.toString()}}</td>
       <td>{{academy.studentPlannedToGraduate}}</td>
       <td>{{academy.studentPlannedToEnrollment}}</td>
-      <td>{{academy.studentActual}}</td>
+      <td>{{academy.studentsActual}}</td>
       <td>---</td>
       <td>{{academy.directionName}}</td>
     </tr>

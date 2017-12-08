@@ -15,4 +15,6 @@ public interface GroupInfoService {
     GroupInfo findOneGroupInfoByAcademyId(int groupInfoId);
 
     List<AcademyDTO> getAllAcademies();
+
+    List<GroupInfo> findAll();
 }
