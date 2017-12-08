@@ -19,14 +19,14 @@
             <div class="col-sm-6 ">
               <label>Status:</label>
               <select class="form-control input-sm" formControlName="academyStageId">
-                <option *ngFor="let stages of academyStages" [value]="stages.stageId">{{ stages.name }}</option>
+                <option *ngFor="let stages of academyStatus" [value]="stages.stageId">{{ stages.name }}</option>
               </select>
             </div>
 
             <div class="col-sm-6 form-group">
               <label>Location:</label>
               <select class="form-control input-sm" formControlName="cityId">
-                <option *ngFor="let city of cityNames" [value]="city.itemId">{{city.trasnlation}}</option>
+                <option *ngFor="let city of city" [value]="city.itemId">{{city.trasnlation}}</option>
               </select>
             </div>
           </div>
@@ -59,9 +59,9 @@
           <div class="row">
             <div class="col-sm-12 form-group">
               <label>Common Direction:</label>
-              <select class="form-control input-sm">
+              <select class="form-control input-sm" formControlName="commonDirectionFormControl">
                 <option value="0" [selected]="0"></option>
-                <!--<option *ngFor="let direct of direction" [value]="direct.directionId">{{direct.name}}</option>-->
+                <option *ngFor="let direct of commonDirection" [value]="direct.directionId">{{direct.name}}</option>
               </select>
             </div>
           </div>
@@ -71,7 +71,7 @@
               <label>Direction:</label>
               <select class="form-control input-sm" formControlName="technolgyId">
                 <option selected value="0"></option>
-                <option *ngFor="let tech of technologie" [value]="tech.technologyId">{{ tech.name }}</option>
+                <option *ngFor="let tech of direction" [value]="tech.technologyId">{{ tech.name }}</option>
               </select>
             </div>
 
