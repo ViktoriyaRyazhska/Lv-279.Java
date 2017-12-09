@@ -36,7 +36,7 @@ import {CheckListByGroupsComponent} from "./components/reports/check-list-by-gro
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {DataTableModule, DropdownModule} from "primeng/primeng";
+import {PrimeNgModules} from "./prime-ng.modules";
 
 
 @NgModule({
@@ -77,11 +77,10 @@ import {DataTableModule, DropdownModule} from "primeng/primeng";
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    PrimeNgModules,
     BrowserModule,
-    BrowserAnimationsModule,
-    DataTableModule,
-    DropdownModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService],
   bootstrap: [AppComponent]
