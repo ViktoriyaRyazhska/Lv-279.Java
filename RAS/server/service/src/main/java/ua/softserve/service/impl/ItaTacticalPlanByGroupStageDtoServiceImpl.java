@@ -6,17 +6,14 @@ import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.persistence.repo.LanguageTranslationsRepository;
 import ua.softserve.service.AcademyService;
-import ua.softserve.service.AcademyStagesService;
 import ua.softserve.service.ItaTacticalPlanByGroupStageDtoService;
-import ua.softserve.service.LanguageTranslationsService;
-import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.ItaTacticalPlanByGroupStageDto;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
-public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPlanByGroupStageDtoService{
+public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPlanByGroupStageDtoService {
 
     @Autowired
     AcademyService academyService;
@@ -28,7 +25,7 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
 
     @Override
     public ItaTacticalPlanByGroupStageDto findById(int id) {
-       ItaTacticalPlanByGroupStageDto dto = new ItaTacticalPlanByGroupStageDto();
+        ItaTacticalPlanByGroupStageDto dto = new ItaTacticalPlanByGroupStageDto();
         Academy academy = academyService.findOne(id);
         dto.setGroupId(id);
         dto.setCG(academy.getTechnologies().getName());
@@ -36,7 +33,7 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         dto.setStartDate(academy.getStartDate());
         dto.setEndDate(academy.getEndDate());
         dto.setGroupStatus(academy.getAcademyStages().getName());
-        dto.setPaymentSatus(academy.getFree()==1?"Founded by Softserve":"Open group");
+        dto.setPaymentSatus(academy.getFree() == 1 ? "Founded by Softserve" : "Open group");
 //        dto.setGroupName(groupInfoRepository.findByAcademyAcademyId(academy.getAcademyId()).getGroupName());
 //        dto.setProfile(groupInfoRepository.findByAcademyAcademyId(academy.getAcademyId()).getProfileInfo().getProfileName());
 
@@ -45,9 +42,9 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
 
     @Override
     public List<ItaTacticalPlanByGroupStageDto> findAll() {
-        List<ItaTacticalPlanByGroupStageDto> itaTacticalPlanByGroupStageDtos  = new ArrayList<ItaTacticalPlanByGroupStageDto>();
-        List<Academy> academies= academyService.getAllAcademies();
-        for (Academy a:academies) {
+        List<ItaTacticalPlanByGroupStageDto> itaTacticalPlanByGroupStageDtos = new ArrayList<ItaTacticalPlanByGroupStageDto>();
+        List<Academy> academies = academyService.getAllAcademies();
+        for (Academy a : academies) {
             itaTacticalPlanByGroupStageDtos.add(this.findById(a.getAcademyId()));
         }
         return itaTacticalPlanByGroupStageDtos;

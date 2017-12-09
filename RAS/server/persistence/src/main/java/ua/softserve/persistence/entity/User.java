@@ -10,8 +10,8 @@
 package ua.softserve.persistence.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ua.softserve.util.encrypt.aes.EncryptConverter;
 

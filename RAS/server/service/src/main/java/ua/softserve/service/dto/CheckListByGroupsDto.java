@@ -24,17 +24,19 @@ import java.util.List;
 @AllArgsConstructor
 public class CheckListByGroupsDto {
 
-    public enum TeacherTypes {
-        TEACHER, EXPERT, INTERVIEWER;
-    };
-
     private String groupName;
+
+    ;
     private String cityName;
     private String status;
     private List<TeacherInGroup> teachers;
     private List<StudentInGroup> students;
     private Date startDate;
     private Date endDate;
+
+    public enum TeacherTypes {
+        TEACHER, EXPERT, INTERVIEWER;
+    }
 
     @Getter
     @Setter

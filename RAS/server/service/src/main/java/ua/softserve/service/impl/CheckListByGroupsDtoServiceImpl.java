@@ -13,7 +13,10 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
-import ua.softserve.persistence.repo.*;
+import ua.softserve.persistence.repo.AcademyRepository;
+import ua.softserve.persistence.repo.GroupInfoTeachersRepository;
+import ua.softserve.persistence.repo.LanguageTranslationsRepository;
+import ua.softserve.persistence.repo.StudentRepository;
 import ua.softserve.service.AcademyStagesService;
 import ua.softserve.service.CheckListByGroupsDtoService;
 import ua.softserve.service.GroupInfoService;
@@ -51,7 +54,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             GroupInfo groupInfo =
                     groupInfoService
                             .findOneGroupInfoByAcademyId(academy.getAcademyId());
-            checkListByGroupsDto.setGroupName((groupInfo==null)?null:groupInfo.getGroupName());
+            checkListByGroupsDto.setGroupName((groupInfo == null) ? null : groupInfo.getGroupName());
 
 //            LanguageTranslations city = languageTranslationsRepository
 //                    .findByItemIdAndLanguageLanguageIdAndTag(academy.getCity().getCityId(), 2, "city");

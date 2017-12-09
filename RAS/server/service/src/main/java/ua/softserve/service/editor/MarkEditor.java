@@ -2,7 +2,6 @@ package ua.softserve.service.editor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ua.softserve.persistence.entity.Mark;
 import ua.softserve.service.MarkService;
 
 import java.beans.PropertyEditorSupport;

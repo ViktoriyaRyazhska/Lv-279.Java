@@ -1,6 +1,6 @@
 package ua.softserve.config;
 
-public enum  AccountStatus {
+public enum AccountStatus {
     ACTIVE, BLOCKED, DELETED;
 
     public boolean isNotActive() {
