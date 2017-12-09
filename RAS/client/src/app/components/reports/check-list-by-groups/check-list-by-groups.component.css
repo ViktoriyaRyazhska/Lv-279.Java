@@ -25,3 +25,13 @@ button {
   width: 20px;
   height: 20px;
 }
+
+.cell1{
+  width: 20px;
+  height: 20px;
+  background: lawngreen;
+}
+
+.cell0{
+  background: deeppink;
+}
