@@ -67,10 +67,6 @@ public class AcademyConverter {
         academy.setDirections(getDirection(academyDTO.getDirectionId()));
         academy.setTechnologies(getTechnologies(academyDTO.getTechnologieId()));
 
-        // TODO: refactor
-        // academy.setProfile(getProfile(academyDTO.getProfileId()));
-        // academy.setStudentGroupCount(studentGroupCountService.saveDTO(academyDTO));
-
         return academy;
     }
 
@@ -128,8 +124,4 @@ public class AcademyConverter {
         return academyService.findOne(academyId);
     }
 
-    // TODO: refactor
-    // private Profile getProfile(int profileId) {
-    // return profileService.findOne(profileId);
-    // }
 }
