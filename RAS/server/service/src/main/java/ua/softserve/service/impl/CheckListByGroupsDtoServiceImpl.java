@@ -1,41 +1,40 @@
 /*
-* CheckListByGroupsDtoServiceImpl
-*
-* Version 1.0-SNAPSHOT
-*
-* 03.12.17
-*
-* All rights reserved by DoubleO Team (Team#1)
-* */
+ * CheckListByGroupsDto2ServiceImpl
+ *
+ * Version 1.0-SNAPSHOT
+ *
+ * 03.12.17
+ *
+ * All rights reserved by DoubleO Team (Team#1)
+ * */
 
 package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
-import ua.softserve.persistence.repo.AcademyRepository;
-import ua.softserve.persistence.repo.GroupInfoTeachersRepository;
-import ua.softserve.persistence.repo.LanguageTranslationsRepository;
-import ua.softserve.persistence.repo.StudentRepository;
-import ua.softserve.service.AcademyStagesService;
+import ua.softserve.persistence.repo.*;
 import ua.softserve.service.CheckListByGroupsDtoService;
-import ua.softserve.service.GroupInfoService;
 import ua.softserve.service.dto.CheckListByGroupsDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static ua.softserve.persistence.constants.ConstantsFromDb.*;
 
 @Service
 public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoService {
     @Autowired
-    private AcademyRepository academyacademyRepository;
+    private AcademyRepository academyRepository;
     @Autowired
-    private GroupInfoService groupInfoService;
+    private GroupInfoRepository groupInfoRepository;
     @Autowired
     private LanguageTranslationsRepository languageTranslationsRepository;
     @Autowired
-    private AcademyStagesService academyStagesService;
+    private AcademyStagesRepository academyStagesRepository;
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
@@ -44,229 +43,242 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
     @Override
     public List<CheckListByGroupsDto> getAllCheckListByGroupsDto() {
-        List<Academy> allAcademies = academyacademyRepository.findAll()
+
+        List<Academy> allAcademies = academyRepository.findAll()
                 .stream()
-                .filter(academy -> academy.getAcademyId() >= 624 && academy.getAcademyId() <= 650)
+                .filter(academy -> academy.getAcademyId() >= 625 && academy.getAcademyId() <= 645)
                 .collect(Collectors.toList());
-        List<CheckListByGroupsDto> checkListByGroupsDtos = new ArrayList<>();
+
+        List<CheckListByGroupsDto> CheckListByGroupsDtos = new ArrayList<>();
+
         for (Academy academy : allAcademies) {
-            CheckListByGroupsDto checkListByGroupsDto = new CheckListByGroupsDto();
-            GroupInfo groupInfo =
-                    groupInfoService
-                            .findOneGroupInfoByAcademyId(academy.getAcademyId());
-            checkListByGroupsDto.setGroupName((groupInfo == null) ? null : groupInfo.getGroupName());
 
-//            LanguageTranslations city = languageTranslationsRepository
-//                    .findByItemIdAndLanguageLanguageIdAndTag(academy.getCity().getCityId(), 2, "city");
-//            checkListByGroupsDto.setCityName((city == null)?null:city.getTrasnlation());
-            String city = languageTranslationsRepository.getOneCityNameTranslationByItemId(academy.getCity().getCityId());
+            Integer academyId = academy.getAcademyId();
+            CheckListByGroupsDto checkListByGroupsDto;
+            GroupInfo groupInfo;
+            String city;
+            AcademyStages stage;
+            List<Student> students;
+            List<GroupInfoTeachers> teachers;
+            List<GroupInfoTeachers> experts;
+            List<GroupInfoTeachers> interviewers;
+            List<CheckListByGroupsDto.TeacherInGroup> teachersInGroup;
+            CheckListByGroupsDto.TeacherInGroup teacherInGroup;
+
+            groupInfo = groupInfoRepository
+                    .findByAcademyAcademyId(academyId);
+
+            city = languageTranslationsRepository
+                    .getOneCityNameTranslationByItemId(academy.getCity().getCityId());
+
+            stage = academyStagesRepository
+                    .findOne(academy.getAcademyStages().getStageId());
+
+            students = studentRepository
+                    .findAllByAcademy_AcademyId(academyId);
+
+            teachers = groupInfoTeachersRepository
+                    .findAllByAcademyIdAndTeacherTypeId(academyId, TT_TEACHER_ID);
+
+            experts = groupInfoTeachersRepository
+                    .findAllByAcademyIdAndTeacherTypeId(academyId, TT_EXPERT_ID);
+
+            interviewers = groupInfoTeachersRepository
+                    .findAllByAcademyIdAndTeacherTypeId(academyId, TT_INTERVIEWER_ID);
+
+            teachersInGroup = new ArrayList<>();
+
+            checkListByGroupsDto = new CheckListByGroupsDto();
             checkListByGroupsDto.setCityName(city);
-
-            checkListByGroupsDto.setStartDate(academy.getStartDate());
-            checkListByGroupsDto.setEndDate(academy.getEndDate());
-
-            AcademyStages stage = academyStagesService.findOne(academy.getAcademyStages().getStageId());
+            checkListByGroupsDto.setGroupName(
+                    (groupInfo == null) ? null : groupInfo.getGroupName()
+            );
             checkListByGroupsDto.setStatus(stage.getName());
-            List<Student> students = studentRepository.findAllByAcademy_AcademyId(academy.getAcademyId());
-            List<CheckListByGroupsDto.StudentInGroup> studentsInGroup = new ArrayList<>();
-            for (Student student : students) {
-                CheckListByGroupsDto.StudentInGroup studentInGroup = checkListByGroupsDto.new StudentInGroup();
-
-                studentInGroup.setEntryScore(student.getData().getEntryScore());
-
-                studentInGroup.setStatus(student.getStudentStatus().getName());
-
-                studentInGroup.setApprovedBy(student.getApprovedBy().getFirstNameEng() + " " +
-                        student.getApprovedBy().getLastNameEng());
-
-                studentInGroup.setEnglishLevel(student.getData().getEnglishLevel().getName());
-
-                List<GroupInfoTeachers> groupInfoTeachers =
-                        groupInfoTeachersRepository.findAllByAcademy_AcademyId(academy.getAcademyId());
-                List<CheckListByGroupsDto.TeacherInGroup> teachersInGroup = new ArrayList<>();
-
-                for (GroupInfoTeachers git : groupInfoTeachers) {
-                    CheckListByGroupsDto.TeacherInGroup teacherInGroup = checkListByGroupsDto.new TeacherInGroup();
-                    Employee teacher = git.getEmployee();
-
-                    teacherInGroup.setFullName(teacher.getFirstNameEng() + " " + teacher.getLastNameEng());
-                    teacherInGroup.setLoad(git.getInvolved());
-                    String ttName = git.getTeacherType().getName();
-                    CheckListByGroupsDto.TeacherTypes teacherTypes
-                            = CheckListByGroupsDto.TeacherTypes.valueOf(ttName.toUpperCase());
-                    teacherInGroup.setType(teacherTypes);
-
-                    CheckListByGroupsDto.Feedback feedback = checkListByGroupsDto.new Feedback();
-
-                    Feedback teacherFeedback = student.getTeacherFeedback();
-                    feedback.setActiveCommunicator(teacherFeedback.getActiveCommunicator().getName());
-                    feedback.setGettingThingsDone(teacherFeedback.getGettingThingsDone().getName());
-                    feedback.setLearningAbility(teacherFeedback.getLearningAbility().getName());
-                    feedback.setOverallTechnicalCompetence(teacherFeedback.getOverallTechnicalCompetence().getName());
-                    feedback.setPassionalInitiative(teacherFeedback.getPassionalInitiative().getName());
-                    feedback.setTeamWork(teacherFeedback.getTeamWork().getName());
-                    feedback.setSummary(teacherFeedback.getSummary());
-
-                    studentInGroup.setTeacherFeedback(feedback);
-                    feedback = checkListByGroupsDto.new Feedback();
-
-                    Feedback expertFeedback = student.getExpertFeedback();
-                    feedback.setActiveCommunicator(expertFeedback.getActiveCommunicator().getName());
-                    feedback.setGettingThingsDone(expertFeedback.getGettingThingsDone().getName());
-                    feedback.setLearningAbility(expertFeedback.getLearningAbility().getName());
-                    feedback.setOverallTechnicalCompetence(expertFeedback.getOverallTechnicalCompetence().getName());
-                    feedback.setPassionalInitiative(expertFeedback.getPassionalInitiative().getName());
-                    feedback.setTeamWork(expertFeedback.getTeamWork().getName());
-                    feedback.setSummary(expertFeedback.getSummary());
-
-                    studentInGroup.setExpertFeedback(feedback);
+            if (teachers != null) {
+                for (GroupInfoTeachers git : teachers) {
+                    teacherInGroup = checkListByGroupsDto.new TeacherInGroup();
+                    teacherInGroup.setFullName(
+                            git.getEmployee().getFirstNameEng() + " " +
+                                    git.getEmployee().getLastNameEng()
+                    );
+                    teacherInGroup.setTeacherType("Teacher");
                     teachersInGroup.add(teacherInGroup);
-
                 }
-
-                checkListByGroupsDto.setTeachers(teachersInGroup);
-
-                CheckListByGroupsDto.TestsOfStudent testsOfStudent = checkListByGroupsDto.new TestsOfStudent();
-                testsOfStudent.setFinalTestBase(student.getData().getFinalBase());
-                testsOfStudent.setFinalTestLang(student.getData().getFinalLang());
-                testsOfStudent.setIncomingTest(student.getData().getIncomingTest());
-                testsOfStudent.setIntermediateTestBase(student.getData().getIntermBase());
-                testsOfStudent.setIntermediateTestLang(student.getData().getIntermLang());
-                double testsN[] = new double[10];
-                testsN[0] = student.getData().getTestOne();
-                testsN[1] = student.getData().getTestTwo();
-                testsN[2] = student.getData().getTestThree();
-                testsN[3] = student.getData().getTestFour();
-                testsN[4] = student.getData().getTestFive();
-                testsN[5] = student.getData().getTestSix();
-                testsN[6] = student.getData().getTestSeven();
-                testsN[7] = student.getData().getTestEight();
-                testsN[8] = student.getData().getTestNine();
-                testsN[9] = student.getData().getTestTen();
-                testsOfStudent.setTestN(testsN);
-                studentInGroup.setTestsOfStudent(testsOfStudent);
-
-                studentsInGroup.add(studentInGroup);
             }
-            checkListByGroupsDto.setStudents(studentsInGroup);
-
-            checkListByGroupsDtos.add(checkListByGroupsDto);
+            if (experts != null) {
+                for (GroupInfoTeachers git : experts) {
+                    teacherInGroup = checkListByGroupsDto.new TeacherInGroup();
+                    teacherInGroup.setFullName(
+                            git.getEmployee().getFirstNameEng() + " " +
+                                    git.getEmployee().getLastNameEng()
+                    );
+                    teacherInGroup.setTeacherType("Expert");
+                    teachersInGroup.add(teacherInGroup);
+                }
+            }
+            checkListByGroupsDto.setTeachers(teachersInGroup);
+            Map<String, Integer> r = checkListByGroupsDto.getR();
+            if (checkStudents(
+                    student -> student.getData().getEnglishLevel() != null,
+                    students ) == 1) {
+                r.put("englishLevelDefined",1);
+                r.put("englishLevelCorrect", checkStudents(
+                        student -> student.getData()
+                                .getEnglishLevel()
+                                .getEnglishLevelId() >= EL_PRE_INTERMEDIATE_ID,
+                        students
+                ));
+            } else {
+                r.put("englishLevelDefined",0);
+                r.put("englishLevelCorrect",0);
+            }
+            r.put("entryScoreDefined", checkStudents(
+                            student -> student
+                                    .getData()
+                                    .getEntryScore() != null,
+                            students
+            ));
+            r.put("incomingTestDefined", checkStudents(
+                            student -> student
+                                    .getData()
+                                    .getIncomingTest() != null,
+                            students
+            ));
+            r.put("approvedByDefined", checkStudents(
+                            student -> student
+                                    .getApprovedBy() != null,
+                            students
+            ));
+            r.put("teacherDefined", (teachers != null)?1:0);
+            r.put("expertDefined", (experts != null)?1:0);
+            checkStudentsTestsNPass(students, r);
+            r.put("intermediateTestBasePass", checkStudents(
+                            student -> student.getData().getIntermBase() != null,
+                            students
+            ));
+            r.put("intermediateTestLangPass", checkStudents(
+                            student -> student.getData().getIntermLang() != null,
+                            students
+            ));
+            r.put("teacherFeedbacksFilledIn",
+                    checkStudents(
+                            student -> student.getTeacherFeedback() != null,
+                            students
+                    ) * checkStudents(
+                            student -> student.getData().getTeacherScore() != null,
+                            students
+                    )
+            );
+            r.put("expertFeedbacksFilledIn",
+                    checkStudents(
+                            student -> student.getExpertFeedback() != null,
+                            students
+                    ) * checkStudents(
+                            student -> student.getData().getExpertScore() != null,
+                            students
+                    )
+            );
+            r.put("finalTestBasePass", checkStudents(
+                            student -> student.getData().getFinalBase() != null,
+                            students
+            ));
+            r.put("finalTestLangPass", checkStudents(
+                            student -> student.getData().getFinalLang() != null,
+                            students
+            ));
+            r.put("interviewerDefined", (interviewers != null)?1:0);
+            r.put("interviewerSummaryDefined", checkStudents(
+                            student -> student.getData().getInterviewerComment() != null,
+                            students
+            ));
+            r.put("expertsLoadFilledIn", checkTeachers(
+                            git -> git.getContributedHours() != null,
+                            experts
+            ));
+            r.put("interviewersLoadFilledIn", checkTeachers(
+                            git -> git.getContributedHours() != null,
+                            interviewers
+            ));
+            checkListByGroupsDto.setTotal();
+            CheckListByGroupsDtos.add(checkListByGroupsDto);
         }
-        return checkListByGroupsDtos;
+        return CheckListByGroupsDtos;
     }
 
-//    @Override
-//    public List<CheckListByGroupsDto> fakeGetAllCheckListByGroupsDto(int count) {
-//        List<CheckListByGroupsDto> listByGroupsDtos = new ArrayList<>();
-//        for (int i = 0; i < count; i++) {
-//            CheckListByGroupsDto checkListByGroupsDto = getRandomGroup();
-//            int teachersCount = (Math.random() < 0.85) ? 1 : 2;
-//            int expertsCount = (Math.random() < 0.85) ? 1 : 2;
-//            int interviewersCount = (Math.random() < 0.85) ? 1 : 2;
-//            checkListByGroupsDto.setTeachers(getRandomTeachersInGroup(teachersCount, expertsCount, interviewersCount));
-//            checkListByGroupsDto.setStudents(getRandomStudentsInGroup(teachersCount, expertsCount, interviewersCount));
-//            listByGroupsDtos.add(checkListByGroupsDto);
-//        }
-//        return listByGroupsDtos;
-//    }
+    private Integer checkTeachers(Predicate<GroupInfoTeachers> predicate, List<GroupInfoTeachers> groupInfoTeachers) {
+        if (groupInfoTeachers == null) {
+            return 0;
+        }
+        for (GroupInfoTeachers git : groupInfoTeachers) {
+            if (!predicate.test(git)) {
+                return 0;
+            }
+        }
+        return 1;
+    }
 
-//    private CheckListByGroupsDto getRandomGroup() {
-//        CheckListByGroupsDto checkListByGroupsDto = new CheckListByGroupsDto();
-//
-//        checkListByGroupsDto.setCityName(getRandomCity());
-//        Date startDate = getRandomDateBetween(new Date(System.currentTimeMillis() - ONE_MONTH_IN_MILES * 6),
-//                new Date(System.currentTimeMillis() + ONE_MONTH_IN_MILES * 6));
-//        checkListByGroupsDto.setStartDate(startDate);
-//        checkListByGroupsDto.setEndDate(new Date(startDate.getTime() + ONE_MONTH_IN_MILES * 3));
-//        checkListByGroupsDto.setGroupName(getRandomGroupNameByCity(checkListByGroupsDto.getCityName()));
-//        checkListByGroupsDto.setStatus(getRandomGroupStatus());
-//        return checkListByGroupsDto;
-//    }
-//
-//    private CheckListByGroupsDto.TeacherInGroup getRandomTeacherInGroup(CheckListByGroupsDto.TeacherTypes type,
-//            int teachersCount) {
-//        CheckListByGroupsDto.TeacherInGroup teacherInGroup = new CheckListByGroupsDto().new TeacherInGroup();
-//        RandomPerson randomPerson = RandomPersonGenerator.getRandomPerson();
-//        teacherInGroup.setFullName(randomPerson.getFirstName() + " " + randomPerson.getLastName());
-//        teacherInGroup.setLoad(100 / teachersCount);
-//        teacherInGroup.setType(type);
-//        return teacherInGroup;
-//    }
-//
-//    private List<CheckListByGroupsDto.TeacherInGroup> getRandomTeachersInGroup(int teachersCount, int expertsCount,
-//            int interviewersCount) {
-//        List<CheckListByGroupsDto.TeacherInGroup> teachers = new ArrayList<>();
-//        for (int c = 0; c < teachersCount; c++) {
-//            teachers.add(getRandomTeacherInGroup(CheckListByGroupsDto.TeacherTypes.TEACHER, teachersCount));
-//        }
-//        for (int c = 0; c < expertsCount; c++) {
-//            teachers.add(getRandomTeacherInGroup(CheckListByGroupsDto.TeacherTypes.EXPERT, expertsCount));
-//        }
-//        for (int c = 0; c < interviewersCount; c++) {
-//            teachers.add(getRandomTeacherInGroup(CheckListByGroupsDto.TeacherTypes.INTERVIEWER, interviewersCount));
-//        }
-//        return teachers;
-//    }
+    private Integer checkStudents(Predicate<Student> predicate, List<Student> students) {
+        if (students == null) {
+            return 0;
+        }
+        for (Student student : students) {
+            if (!checkStudentStatus(student)) {
+                continue;
+            }
+            if (!predicate.test(student)) {
+                return 0;
+            }
+        }
+        return 1;
+    }
 
-//    private List<CheckListByGroupsDto.StudentInGroup> getRandomStudentsInGroup(int teachersCount, int expertsCount,
-//            int interviewersCount) {
-//        List<CheckListByGroupsDto.StudentInGroup> students = new ArrayList<>();
-//        int studentsCount = getRandomStudentsCount();
-//        RandomPerson randomPerson = RandomPersonGenerator.getRandomPerson();
-//        String approvedBy = randomPerson.getFirstName() + " " + randomPerson.getLastName();
-//        for (int j = 0; j < studentsCount; j++) {
-//
-//            CheckListByGroupsDto.StudentInGroup studentInGroup = new CheckListByGroupsDto().new StudentInGroup();
-//            studentInGroup.setApprovedBy(approvedBy);
-//            studentInGroup.setEnglishLevel(getRandomCorrectEnglishLevel());
-//            studentInGroup.setEntryScore(getRandomDouble(300, 1000));
-//            studentInGroup.setStatus(getRandomStudentStatus());
-//
-//            List<CheckListByGroupsDto.TeacherOfStudent> teachersOfStudent = new ArrayList<>();
-//            for (int c = 0; c < teachersCount + expertsCount; c++) {
-//                CheckListByGroupsDto.TeacherOfStudent teacherOfStudent = new CheckListByGroupsDto().new TeacherOfStudent();
-//                teacherOfStudent.setScore(getRandomDouble(3, 5));
-//                List<String> randomFeedbacks = getRandomFeedbacks();
-//                teacherOfStudent.setEnumeratedFeedbacks(randomFeedbacks);
-//                StringBuilder summary = new StringBuilder();
-//                for (String s : randomFeedbacks) {
-//                    if (s.length() > 1) {
-//                        summary.append(s.toUpperCase().charAt(0)).append(s.toLowerCase().substring(1)).append(" ");
-//                    } else {
-//                        summary.append(s).append(" ");
-//                    }
-//
-//                }
-//                teacherOfStudent.setSummary(summary.toString().trim());
-//                teachersOfStudent.add(teacherOfStudent);
-//            }
-//
-//            for (int c = 0; c < interviewersCount; c++) {
-//                CheckListByGroupsDto.TeacherOfStudent teacherOfStudent = new CheckListByGroupsDto().new TeacherOfStudent();
-//                teacherOfStudent.setScore(getRandomDouble(3, 5));
-//                teacherOfStudent.setSummary("Bla bla bla");
-//                teachersOfStudent.add(teacherOfStudent);
-//            }
-//
-//            studentInGroup.setTeachersOfStudent(teachersOfStudent);
-//
-//            CheckListByGroupsDto.TestsOfStudent testsOfStudent = new CheckListByGroupsDto().new TestsOfStudent();
-//            double[] testsN = new double[10];
-//            for (int c = 0; c < 10; c++) {
-//                double min = (Math.random() < 0.5) ? 3 : 300;
-//                double max = (min == 3) ? 10 : 1000;
-//                testsN[c] = getRandomDouble(min, max);
-//            }
-//            testsOfStudent.setTestN(testsN);
-//            testsOfStudent.setIncomingTest(getRandomDouble(300, 1000));
-//            testsOfStudent.setIntermediateTestBase(getRandomDouble(300, 1000));
-//            testsOfStudent.setIntermediateTestLang(getRandomDouble(300, 1000));
-//            testsOfStudent.setFinalTestBase(getRandomDouble(300, 1000));
-//            testsOfStudent.setFinalTestLang(getRandomDouble(300, 1000));
-//            studentInGroup.setTestsOfStudent(testsOfStudent);
-//
-//            students.add(studentInGroup);
-//        }
-//        return students;
-//    }
+    private boolean checkStudentStatus(Student student) {
+        int id = student.getStudentStatus().getId();
+        return id == SS_TRAINEE_ID ||
+                id == SS_ACCEPTED_PRE_OFFER_ID ||
+                id == SS_GRADUATED_ID;
+    }
+
+    private void checkStudentsTestsNPass(List<Student> students, Map<String, Integer> r) {
+        r.put("tests1", checkStudents(
+                student -> student.getData().getTestOne() != null,
+                students
+        ));
+        r.put("tests2", checkStudents(
+                student -> student.getData().getTestTwo() != null,
+                students
+        ));
+        r.put("tests3", checkStudents(
+                student -> student.getData().getTestThree() != null,
+                students
+        ));
+        r.put("tests4", checkStudents(
+                student -> student.getData().getTestFour() != null,
+                students
+        ));
+        r.put("tests5", checkStudents(
+                student -> student.getData().getTestFive() != null,
+                students
+        ));
+        r.put("tests6", checkStudents(
+                student -> student.getData().getTestSix() != null,
+                students
+        ));
+        r.put("tests7", checkStudents(
+                student -> student.getData().getTestSeven() != null,
+                students
+        ));
+        r.put("tests8", checkStudents(
+                student -> student.getData().getTestEight() != null,
+                students
+        ));
+        r.put("tests9", checkStudents(
+                student -> student.getData().getTestNine() != null,
+                students
+        ));
+        r.put("tests10", checkStudents(
+                student -> student.getData().getTestTen() != null,
+                students
+        ));
+    }
 }

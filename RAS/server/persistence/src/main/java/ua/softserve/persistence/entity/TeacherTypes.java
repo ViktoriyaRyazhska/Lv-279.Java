@@ -29,7 +29,7 @@ public class TeacherTypes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "teacher_type_id")
-    private int teachertype_id;
+    private int teachertypeId;
 
     @NotNull
     @Column(name = "name")

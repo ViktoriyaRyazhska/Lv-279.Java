@@ -35,6 +35,8 @@ import { ItaTacticalPlanByGroupStageComponent } from './components/ita-tactical-
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 import {TestsService} from "./services/tests-names/tests.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {DataTableModule, DropdownModule} from "primeng/primeng";
 
 
 @NgModule({
@@ -69,14 +71,17 @@ import {TestsService} from "./services/tests-names/tests.service";
     ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
     TestsNamesComponent
-
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    DataTableModule,
+    DropdownModule
   ],
   providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService],
   bootstrap: [AppComponent]
