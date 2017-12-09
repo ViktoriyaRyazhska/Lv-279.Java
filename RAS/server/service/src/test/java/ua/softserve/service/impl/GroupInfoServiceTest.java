@@ -1,6 +1,5 @@
 package ua.softserve.service.impl;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -11,7 +10,6 @@ import ua.softserve.persistence.entity.LanguageTranslations;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,7 +39,7 @@ public class GroupInfoServiceTest {
     GroupInfoServiceImpl groupInfoService = new GroupInfoServiceImpl();
 
     @Test
-    public void test1(){
+    public void test1() {
         Mockito.when(languageTranslationsService.getAllLanguageTranslationsName()).thenReturn(Arrays.asList(new LanguageTranslations(), new LanguageTranslations()));
 
         groupInfoService.getAllAcademies();

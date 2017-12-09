@@ -6,12 +6,17 @@ import lombok.ToString;
 import ua.softserve.persistence.entity.*;
 
 import java.util.List;
-import java.util.TreeMap;
 
 @Getter
 @Setter
 @ToString
 public class AcademyDTO {
+    List<AcademyStages> academyStages;
+    List<LanguageTranslations> cityNames;
+    List<Directions> direction;
+    List<Technologies> technologie;
+    // TODO: rename field
+    List<ProfileInfo> profile;
     // TODO: fix grammar errors
     private String grName;
     private String nameForSite;
@@ -34,12 +39,5 @@ public class AcademyDTO {
     private String cityName;
     private String status;
     private List<String> experts;
-
-    List<AcademyStages> academyStages;
-    List<LanguageTranslations> cityNames;
-    List<Directions> direction;
-    List<Technologies> technologie;
-    // TODO: rename field
-    List<ProfileInfo> profile;
 
 }

@@ -25,7 +25,7 @@ public class RandomPersonGenerator {
 
     /**
      * Creates the person with random data.
-     * 
+     *
      * @return created person.
      */
     public static RandomPerson getRandomPerson() {
