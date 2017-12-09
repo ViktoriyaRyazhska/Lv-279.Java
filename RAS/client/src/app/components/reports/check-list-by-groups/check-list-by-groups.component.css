@@ -1,12 +1,9 @@
-table {
-  width: 100%;
-  background: grey;
-  color: black;
-  border-spacing: 2px
+table{
+  font-size: 0.75em;
 }
+
 th {
-  background: lightskyblue;
-  height: 230px;
+  height: 175px;
   padding: 5px
 }
 th span {
@@ -14,10 +11,8 @@ th span {
 }
 
 td {
-  background: ghostwhite;
   padding: 5px;
   text-align: center;
-
 }
 
 div {

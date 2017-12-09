@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ua.softserve.persistence.entity.*;
+import ua.softserve.persistence.entity.User;
+import ua.softserve.persistence.repo.LanguageTranslationsRepository;
 import ua.softserve.service.UserService;
 
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private LanguageTranslationsRepository languageTranslationsRepository;
 
     /**
      * Gets from DB list of all users.

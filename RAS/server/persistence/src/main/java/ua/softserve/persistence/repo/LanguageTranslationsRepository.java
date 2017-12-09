@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import ua.softserve.persistence.entity.LanguageTranslations;
 
 import java.util.List;
+import java.util.Map;
 
 public interface LanguageTranslationsRepository extends JpaRepository<LanguageTranslations, Integer> {
 
@@ -21,5 +22,4 @@ public interface LanguageTranslationsRepository extends JpaRepository<LanguageTr
 
     @Query(value = "select trasnlation from language_translations lt where tag like 'city' and local like 'en' AND item_id = :itemId", nativeQuery = true)
     String getOneCityNameTranslationByItemId(@Param(value = "itemId") int itemId);
-
 }

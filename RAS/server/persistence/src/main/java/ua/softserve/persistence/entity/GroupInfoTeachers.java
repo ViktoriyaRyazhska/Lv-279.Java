@@ -26,10 +26,10 @@ public class GroupInfoTeachers {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    private int involved;
+    private Integer involved;
 
     @Column(name = "contributed_hours")
-    private int contributedHours;
+    private Integer contributedHours;
 
     @ManyToOne
     @JoinColumn(name = "teacher_type_id")
