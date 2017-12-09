@@ -24,7 +24,7 @@
           <div class="row">
             <div class="col-sm-6 ">
               <label>Status:</label>
-              <select class="form-control input-sm" formControlName="academyStatusId">
+              <select class="form-control input-sm" formControlName="academyStagesId">
                 <option *ngFor="let stages of academyStatus" [value]="stages.stageId">{{ stages.name }}</option>
               </select>
             </div>
@@ -95,18 +95,16 @@
           <div class="row">
             <div class="col-sm-4">
               <label> Students Planned to Graduate:</label>
-              <input type="number" class="form-control input-sm" formControlName="sctGraduate"
-                     value={{defaultStudentsPlannedToGraduate}}/>
+              <input type="number" class="form-control input-sm" formControlName="studentPlannedToGraduate"/>
             </div>
             <div class="col-sm-4">
               <label> Students Planned to Enrollment:</label>
-              <input type="number" class="form-control input-sm" formControlName="sctEnrollment"
-                     value={{defaultStudentsPlannedToEnrollment}}/>
+              <input type="number" class="form-control input-sm" formControlName="studentPlannedToEnrollment"/>
             </div>
 
             <div class="col-sm-4">
               <label>Students Actual:</label>
-              <input type="number" class="form-control input-sm" disabled value={{defaultStudentActual}}/>
+              <input type="number" class="form-control input-sm" disabled/>
             </div>
           </div>
         </ul>
