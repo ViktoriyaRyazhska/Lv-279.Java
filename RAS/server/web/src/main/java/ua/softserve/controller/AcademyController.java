@@ -25,9 +25,13 @@ public class AcademyController {
     }
 
     @RequestMapping(value = "/academy/addgroup", method = RequestMethod.GET, produces = {"application/json"})
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<AcademyDTO> getAllAcademies() {
         return new ResponseEntity<AcademyDTO>(academyService.getAcademyDTO(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/academy/addgroup", method = RequestMethod.POST, produces = { "application/json" })
+    public void saveGroup(@RequestBody AcademyDTO academyDTO) {
+        academyService.saveAcademyFromAcademyDTO(academyDTO);
     }
 
     @RequestMapping(value = "/viewAcademies", method = RequestMethod.GET)

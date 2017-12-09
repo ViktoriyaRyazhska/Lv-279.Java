@@ -10,7 +10,5 @@ public interface ItaTacticalPlanByGroupStageDtoService {
 
     List<ItaTacticalPlanByGroupStageDto> findAll();
 
-    List<ItaTacticalPlanByGroupStageDto> findPlanedGroupForTwoMoth();
-
-    List<ItaTacticalPlanByGroupStageDto> findGroupInProces();
+    public List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStageReport();
 }

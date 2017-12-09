@@ -11,12 +11,7 @@ import java.util.List;
 @Setter
 @ToString
 public class AcademyDTO {
-    List<AcademyStages> academyStages;
-    List<LanguageTranslations> cityNames;
-    List<Directions> direction;
-    List<Technologies> technologie;
-    // TODO: rename field
-    List<ProfileInfo> profile;
+
     // TODO: fix grammar errors
     private String grName;
     private String nameForSite;
@@ -32,6 +27,12 @@ public class AcademyDTO {
     private int studentPlannedToEnrollment;
     private int studentsActual;
 
+    List<AcademyStages> academyStages;
+    List<LanguageTranslations> cityNames;
+    List<Directions> direction;
+    List<Technologies> technologie;
+    List<ProfileInfo> profile; // TODO: rename field
+
     private String paymentStatus;
     private String profileName;
     private String directionName;
@@ -39,5 +40,4 @@ public class AcademyDTO {
     private String cityName;
     private String status;
     private List<String> experts;
-
 }
