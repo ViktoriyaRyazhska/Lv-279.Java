@@ -51,8 +51,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
 
     @Override
     public void save(GroupInfo groupInfo) {
-        // TODO: implements method
-        // NOP
+        groupInfoRepository.save(groupInfo);
     }
 
     @Override
