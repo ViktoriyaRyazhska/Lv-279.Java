@@ -34,4 +34,11 @@ public class StudentViewDto {
                 student.getExpertFeedback(),
                 student.isRemoved());
     }
+
+    public Student update(Student student){
+        student.setData(data);
+        student.setTeacherFeedback(teacherFeedback);
+        student.setExpertFeedback(expertFeedback);
+        return student;
+    }
 }
