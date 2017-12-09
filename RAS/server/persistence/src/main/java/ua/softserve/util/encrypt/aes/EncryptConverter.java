@@ -21,7 +21,7 @@ public class EncryptConverter implements AttributeConverter<String, String> {
 
     /**
      * The method which will be auto invoked by Hibernate to encrypt the data when they are preparing to be saved.
-     * 
+     *
      * @param s
      * @return
      */
@@ -32,7 +32,7 @@ public class EncryptConverter implements AttributeConverter<String, String> {
 
     /**
      * The method which will be auto invoked by Hibernate to decrypt the data when they are preparing to be read.
-     * 
+     *
      * @param s
      * @return
      */

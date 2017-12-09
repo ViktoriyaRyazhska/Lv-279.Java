@@ -4,12 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.*;
-import ua.softserve.service.*;
 import ua.softserve.service.dto.ItaTacticalPlanByGroupStageDto;
-
 import java.util.*;
-
 import static ua.softserve.persistence.constants.ConstantsFromDb.*;
+import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.repo.GroupInfoRepository;
+import ua.softserve.persistence.repo.LanguageTranslationsRepository;
+import ua.softserve.service.AcademyService;
+import ua.softserve.service.ItaTacticalPlanByGroupStageDtoService;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
 public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPlanByGroupStageDtoService {
@@ -55,7 +62,6 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         }
         this.calculationStudentsStatuses(dto);
         this.setTrainer(dto);
-
         return dto;
     }
 

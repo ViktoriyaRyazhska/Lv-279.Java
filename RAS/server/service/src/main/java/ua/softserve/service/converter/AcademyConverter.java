@@ -3,7 +3,10 @@ package ua.softserve.service.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
-import ua.softserve.service.*;
+import ua.softserve.service.AcademyStagesService;
+import ua.softserve.service.CityService;
+import ua.softserve.service.DirectionService;
+import ua.softserve.service.TechnologyService;
 import ua.softserve.service.dto.AcademyDTO;
 
 import java.sql.Timestamp;
@@ -33,7 +36,7 @@ public class AcademyConverter {
             academyDTO.setTechnologyName(groupInfo.getAcademy().getTechnologies().getName());
             academyDTO.setPayment(groupInfo.getAcademy().getFree());
             if (groupInfo.getAcademy().getFree() == 1) {
-                academyDTO.setPaymentStatus("Founded by SoftServe academy");
+                academyDTO.setPaymentStatus("Founded by SoftServe");
             } else {
                 academyDTO.setPaymentStatus("Paid");
             }

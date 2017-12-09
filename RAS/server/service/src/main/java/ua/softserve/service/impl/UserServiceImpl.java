@@ -13,11 +13,9 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.repo.UserRepository;
 import ua.softserve.persistence.entity.User;
+import ua.softserve.persistence.repo.UserRepository;
 import ua.softserve.service.UserService;
-import ua.softserve.util.dump.random.RandomPerson;
-import ua.softserve.util.dump.random.RandomPersonGenerator;
 
 import java.util.List;
 

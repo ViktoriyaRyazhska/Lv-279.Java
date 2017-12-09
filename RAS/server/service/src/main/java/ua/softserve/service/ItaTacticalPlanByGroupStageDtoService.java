@@ -5,8 +5,12 @@ import ua.softserve.service.dto.ItaTacticalPlanByGroupStageDto;
 import java.util.List;
 
 public interface ItaTacticalPlanByGroupStageDtoService {
-     ItaTacticalPlanByGroupStageDto findById( int id);
+
+    ItaTacticalPlanByGroupStageDto findById(int id);
+
     List<ItaTacticalPlanByGroupStageDto> findAll();
+
     List<ItaTacticalPlanByGroupStageDto> findPlanedGroupForTwoMoth();
+
     List<ItaTacticalPlanByGroupStageDto> findGroupInProces();
 }

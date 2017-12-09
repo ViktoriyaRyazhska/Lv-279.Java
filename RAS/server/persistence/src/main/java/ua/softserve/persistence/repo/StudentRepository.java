@@ -17,7 +17,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     List<Student> findAllByStudentStatus(StudentStatuses studentStatus);
 
-    @Query("from Student s where s.academy.academyId = :academyId")
+    @Query("from Student s where s.academy.academyId = :academyId and s.removed = false")
     List<Student> findAllByAcademyId(@Param("academyId") Integer academyId);
 
     Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatus);

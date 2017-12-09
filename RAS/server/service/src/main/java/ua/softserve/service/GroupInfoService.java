@@ -16,5 +16,5 @@ public interface GroupInfoService {
 
     List<AcademyDTO> getAllAcademies();
 
-    List<GroupInfo> findAll();
+    List<GroupInfo> findAllWithOrder();
 }
