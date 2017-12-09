@@ -76,25 +76,39 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     }
 
     @Override
-    public List<ItaTacticalPlanByGroupStageDto> findPlanedGroupForTwoMoth() {
-        List<ItaTacticalPlanByGroupStageDto> itaTacticalPlanByGroupStageDtos = new ArrayList<ItaTacticalPlanByGroupStageDto>();
+    public List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStageReport() {
+        List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStage = new ArrayList<List<ItaTacticalPlanByGroupStageDto>>();
+        List<ItaTacticalPlanByGroupStageDto> planedGroupForTwoMoth = new ArrayList<>();
+        List<ItaTacticalPlanByGroupStageDto> groupsInProces= new ArrayList<>();
+        List<ItaTacticalPlanByGroupStageDto> groupsOffering= new ArrayList<>();
+        List<ItaTacticalPlanByGroupStageDto> groupsGraduated= new ArrayList<>();
         List<Academy> academies = academyService.getAllAcademies();
         Calendar dateForComparison = new GregorianCalendar();
         dateForComparison.add(Calendar.MONTH, 2);
         for (Academy a : academies) {
             Calendar academyStartDate = new GregorianCalendar();
             academyStartDate.setTimeInMillis(a.getStartDate().getTime());
-            if ((a.getAcademyStages().getStageId() == 1) && academyStartDate.before(dateForComparison)) {
-                itaTacticalPlanByGroupStageDtos.add(this.findById(a.getAcademyId()));
+            if ((a.getAcademyStages().getStageId() == AS_PLANNED_ID) && academyStartDate.before(dateForComparison)) {
+                planedGroupForTwoMoth.add(this.findById(a.getAcademyId()));
             }
+            if(a.getAcademyStages().getStageId() == AS_IN_PROCESS_ID){
+                groupsInProces.add(this.findById(a.getAcademyId()));
+            }
+            if(a.getAcademyStages().getStageId() == AS_OFFERING_ID){
+                groupsOffering.add(this.findById(a.getAcademyId()));
+            }
+            if(a.getAcademyStages().getStageId() == AS_GRADUATED_ID){
+                groupsGraduated.add(this.findById(a.getAcademyId()));
+            }
+
         }
-        return itaTacticalPlanByGroupStageDtos;
+        itaTacticalPlanByGroupStage.add(planedGroupForTwoMoth);
+        itaTacticalPlanByGroupStage.add(groupsInProces);
+        itaTacticalPlanByGroupStage.add(groupsOffering);
+        itaTacticalPlanByGroupStage.add(groupsGraduated);
+        return itaTacticalPlanByGroupStage;
     }
 
-    @Override
-    public List<ItaTacticalPlanByGroupStageDto> findGroupInProces() {
-        return null;
-    }
 
     private void calculationStudentsStatuses(ItaTacticalPlanByGroupStageDto dto) {
         List<Student> allStudentsOfGroup = studentRepository.findAllByAcademy_AcademyId(dto.getGroupId());
