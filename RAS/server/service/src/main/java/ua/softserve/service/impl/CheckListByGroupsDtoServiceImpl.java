@@ -46,7 +46,8 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
         List<Academy> allAcademies = academyRepository.findAll()
                 .stream()
-                .filter(academy -> academy.getAcademyId() >= 625 && academy.getAcademyId() <= 645)
+                .filter(academy -> academy.getAcademyId() >= 586 && academy.getAcademyId() <= 932)
+                .limit(20)
                 .collect(Collectors.toList());
 
         List<CheckListByGroupsDto> CheckListByGroupsDtos = new ArrayList<>();
@@ -240,43 +241,43 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     }
 
     private void checkStudentsTestsNPass(List<Student> students, Map<String, Integer> r) {
-        r.put("tests1", checkStudents(
+        r.put("test1", checkStudents(
                 student -> student.getData().getTestOne() != null,
                 students
         ));
-        r.put("tests2", checkStudents(
+        r.put("test2", checkStudents(
                 student -> student.getData().getTestTwo() != null,
                 students
         ));
-        r.put("tests3", checkStudents(
+        r.put("test3", checkStudents(
                 student -> student.getData().getTestThree() != null,
                 students
         ));
-        r.put("tests4", checkStudents(
+        r.put("test4", checkStudents(
                 student -> student.getData().getTestFour() != null,
                 students
         ));
-        r.put("tests5", checkStudents(
+        r.put("test5", checkStudents(
                 student -> student.getData().getTestFive() != null,
                 students
         ));
-        r.put("tests6", checkStudents(
+        r.put("test6", checkStudents(
                 student -> student.getData().getTestSix() != null,
                 students
         ));
-        r.put("tests7", checkStudents(
+        r.put("test7", checkStudents(
                 student -> student.getData().getTestSeven() != null,
                 students
         ));
-        r.put("tests8", checkStudents(
+        r.put("test8", checkStudents(
                 student -> student.getData().getTestEight() != null,
                 students
         ));
-        r.put("tests9", checkStudents(
+        r.put("test9", checkStudents(
                 student -> student.getData().getTestNine() != null,
                 students
         ));
-        r.put("tests10", checkStudents(
+        r.put("test10", checkStudents(
                 student -> student.getData().getTestTen() != null,
                 students
         ));
