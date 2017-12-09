@@ -8,8 +8,8 @@ export class ItaTacticalPlanByGroupStageService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    console.log(this.http.get('http://localhost:8080/itaTacticalPlanByGroupStage'));
-    return this.http.get('http://localhost:8080/itaTacticalPlanByGroupStage');
+    return this.http.get('http://localhost:8080/reports/itaTacticalPlanByGroupStage');
   }
 
 }
+
