@@ -19,7 +19,7 @@ public class StudentController {
         return studentService.getStudentsByAcademy(academyId);
     }
 
-    @PostMapping("add/{id}")
+    @PostMapping("{id}/add")
     public void addStudents(@PathVariable("id") Integer academyId,
                             @RequestBody List<Integer> students) {
         studentService.addStudentsToAcademy(academyId, students);
