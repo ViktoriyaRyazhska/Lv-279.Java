@@ -39,7 +39,7 @@ public class AcademyConverter {
             academyDTO.setTechnologyName(groupInfo.getAcademy().getTechnologies().getName());
             academyDTO.setPayment(groupInfo.getAcademy().getFree());
             if (groupInfo.getAcademy().getFree() == 1) {
-                academyDTO.setPaymentStatus("Founded by SoftServe academy");
+                academyDTO.setPaymentStatus("Founded by SoftServe");
             } else {
                 academyDTO.setPaymentStatus("Paid");
             }

@@ -1,3 +1,4 @@
+<!--
 <div class="container-fluid">
   <h1>Information about academies</h1>
   <form #groupForm="ngForm">
@@ -23,14 +24,14 @@
       <tr>
         <td><input type="text" name="grName"  (input)="onFilterField($event, groupForm)" class="form-control" ngModel></td>
         <td><input type="text" name="nameForSite" (input)="onFilterField($event, groupForm)" class="form-control" ngModel></td>
-        <td><!--<input type="text" name="direction" (input)="onFilterField($event)" class="form-control">-->
+        <td>&lt;!&ndash;<input type="text" name="direction" (input)="onFilterField($event)" class="form-control">&ndash;&gt;
           <select name="technologyName" class="form-control input-sm" (change)="onFilterField($event, groupForm)" ngModel>
             <option></option>
             <option *ngFor="let tech of technology" [value]="tech.name">{{tech.name}}</option>
-            <!--<option *ngFor="let tech of academies" [value]="tech.name">{{tech.nameForSite}}</option>-->
+            &lt;!&ndash;<option *ngFor="let tech of academies" [value]="tech.name">{{tech.nameForSite}}</option>&ndash;&gt;
           </select>
         </td>
-        <td><!--<input type="text" name="profile" (input)="onFilterField($event)" class="form-control">-->
+        <td>&lt;!&ndash;<input type="text" name="profile" (input)="onFilterField($event)" class="form-control">&ndash;&gt;
           <select class="form-control input-sm" name="profileName" (change)="onFilterField($event, groupForm)" ngModel>
             <option></option>
             <option *ngFor="let prof of profile" [value]="prof.profileName">{{prof.profileName}}</option>
@@ -43,7 +44,7 @@
             <option>Paid</option>
           </select>
         </td>
-        <td><!--<input type="text" name="location" (input)="onFilterField($event)" class="form-control">-->
+        <td>&lt;!&ndash;<input type="text" name="location" (input)="onFilterField($event)" class="form-control">&ndash;&gt;
           <select name="cityName" class="form-control input-sm" (change)="onFilterField($event, groupForm)" ngModel>
             <option></option>
             <option *ngFor="let city of cityNames" [value]="city.trasnlation">{{city.trasnlation}}</option>
@@ -51,7 +52,7 @@
         </td>
         <td><input type="date" name="startDate" (input)="onFilterField($event, groupForm)" class="form-control" ngModel></td>
         <td><input type="date" name="endDate" (input)="onFilterField($event, groupForm)" class="form-control"></td>
-        <td><!--<input type="text" name="status" (input)="onFilterField($event)" class="form-control">-->
+        <td>&lt;!&ndash;<input type="text" name="status" (input)="onFilterField($event)" class="form-control">&ndash;&gt;
           <select name="status" class="form-control input-sm" (change)="onFilterField($event, groupForm)" ngModel>
             <option></option>
             <option *ngFor="let stages of academyStages" [value]="stages.name">{{stages.name}}</option>
@@ -64,7 +65,7 @@
         </td>
         <td><input type="text" name="studentsActual" (input)="onFilterField($event, groupForm)" class="form-control" ngModel></td>
         <td><input type="text" name="hiredNotGraduated" (input)="onFilterField($event, groupForm)" class="form-control" ngModel></td>
-        <td><!--<input type="text" name="commonDirections" (input)="onFilterField($event)" class="form-control">-->
+        <td>&lt;!&ndash;<input type="text" name="commonDirections" (input)="onFilterField($event)" class="form-control">&ndash;&gt;
           <select class="form-control input-sm" name="directionName" (change)="onFilterField($event, groupForm)" ngModel>
             <option></option>
             <option *ngFor="let direct of direction" [value]="direct.name">{{direct.name}}</option>
@@ -86,7 +87,7 @@
         <td>{{academy.studentPlannedToGraduate}}</td>
         <td>{{academy.studentPlannedToEnrollment}}</td>
         <td>{{academy.studentsActual}}</td>
-        <td>---</td>
+        <td>-&#45;&#45;</td>
         <td>{{academy.directionName}}</td>
       </tr>
 
@@ -114,3 +115,74 @@
   </div>
 
 </div>
+-->
+
+<!--NEW UI-->
+
+<p-dataTable [value]="academies" [paginator]="true" [rows]="10" [pageLinks]="10" [rowsPerPageOptions]="[5,10,20]"  #dt>
+  <p-column field="grName" header="Group name" [filter]="true" filterPlaceholder="Search" [style]="{'overflow':'invisible'}"></p-column>
+  <p-column field="nameForSite" header="Name For Site" [filter]="true" filterPlaceholder="Search" [style]="{'overflow':'invisible'}"></p-column>
+  <p-column field="technologyName" header="Direction" [filter]="true" [sortable]="true" filterMatchMode="equals">
+    <ng-template pTemplate="filter" let-col>
+      <p-dropdown [options]="technologyItems" [style]="{'width':'100%'}"
+                  (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                  styleClass="ui-column-filter"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="profileName" header="Profile" [filter]="true" [sortable]="true" filterMatchMode="equals">
+    <ng-template pTemplate="filter" let-col>
+      <p-dropdown [options]="profileItems" [style]="{'width':'100%'}"
+                  (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                  styleClass="ui-column-filter"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="paymentStatus" header="Payment Status" [filter]="true" [sortable]="true" filterMatchMode="equals">
+    <ng-template pTemplate="filter" let-col>
+      <p-dropdown [options]="paymentStatusItems" [style]="{'width':'100%'}"
+                  (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                  styleClass="ui-column-filter"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="cityName" header="Location" [filter]="true" [sortable]="true" filterMatchMode="equals">
+    <ng-template pTemplate="filter" let-col>
+      <p-dropdown [options]="cityItems" [style]="{'width':'100%'}"
+                  (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                  styleClass="ui-column-filter"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="startDate" header="Start Date">
+    <ng-template let-col let-transaction="rowData" pTemplate="body">
+      {{transaction[col.field] | date: "dd.MM.yyyy"}}
+    </ng-template>
+  </p-column>
+  <p-column field="endDate" header="End Date">
+    <ng-template let-col let-transaction="rowData" pTemplate="body">
+      {{transaction[col.field] | date: "dd.MM.yyyy"}}
+    </ng-template>
+  </p-column>
+  <p-column field="status" header="Status" [filter]="true" [sortable]="true" filterMatchMode="equals">
+    <ng-template pTemplate="filter" let-col>
+      <p-dropdown [options]="academyStagesItems" [style]="{'width':'100%'}"
+                  (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                  styleClass="ui-column-filter">
+      </p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="experts" header="Experts" [filter]="true" filterPlaceholder="Search"></p-column>
+  <p-column field="studentPlannedToGraduate" header="Students Planned To Graduate" [filter]="true" filterPlaceholder="Search"></p-column>
+  <p-column field="studentPlannedToEnrollment" header="Students Planned for Enrolment" [filter]="true" filterPlaceholder="Search"></p-column>
+  <p-column field="studentsActual" header="Students Actual" [filter]="true" filterPlaceholder="Search"></p-column>
+  <p-column field="---" header="Hired - Not Graduate" [filter]="true" filterPlaceholder="Search"></p-column>
+  <p-column field="directionName" header="Common Direction" [filter]="true" [sortable]="true" filterMatchMode="equals">
+    <ng-template pTemplate="filter" let-col>
+      <p-dropdown [options]="directionItems" [style]="{'width':'100%'}"
+                  (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                  styleClass="ui-column-filter">
+      </p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="---" header="Interviewer Feedback"></p-column>
+  <ng-template pTemplate="emptymessage">
+    Data is loading...
+  </ng-template>
+</p-dataTable>

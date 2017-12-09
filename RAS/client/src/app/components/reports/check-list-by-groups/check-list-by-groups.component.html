@@ -1,9 +1,9 @@
 <!--<button (click)="tstBtnClick()">{{tstCapt}}</button>-->
 <!--<span *ngIf="tstVisible">This is SPARTA!!!</span>-->
 
-<div *ngIf="allData">
+<div *ngIf="allData" class="container">
 
-  <table>
+  <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
 
     <caption><h1>Check list by groups (REPORT)</h1></caption>
 
@@ -23,23 +23,32 @@
       <th><span>Teacher(s) defined</span></th>
       <th><span>Group started successfully</span></th>
 
-      <th><span>English level defined for group</span></th>
-      <th><span>English Level is correct</span></th>
-      <th><span>Entry score is defined</span></th>
-      <th><span>Incoming test is defined</span></th>
-      <th><span>Approved by is defined</span></th>
-      <th><span>Expert  defined</span></th>
-      <th><span>Teacher(s) defined</span></th>
-      <th><span>Group started successfully</span></th>
+      <th><span>Test 1 is pass</span></th>
+      <th><span>Test 2 is pass</span></th>
+      <th><span>Test 3 is pass</span></th>
+      <th><span>Test 4 is pass</span></th>
+      <th><span>Test 5 is pass</span></th>
+      <th><span>Test 6 is pass</span></th>
+      <th><span>Test 7 is pass</span></th>
+      <th><span>Test 8 is pass</span></th>
+      <th><span>Test 9 is pass</span></th>
+      <th><span>Test 10 is pass</span></th>
+      <th><span>Intermediate Test Base is pass</span></th>
+      <th><span>Intermediate Test Lang is pass</span></th>
+      <th><span>Teacher’s feedbacks filled in</span></th>
+      <th><span>Expert’s feedbacks filled in</span></th>
+      <th><span>Group ready to offering</span></th>
 
-      <th><span>English level defined for group</span></th>
-      <th><span>English Level is correct</span></th>
-      <th><span>Entry score is defined</span></th>
-      <th><span>Incoming test is defined</span></th>
-      <th><span>Approved by is defined</span></th>
-      <th><span>Expert  defined</span></th>
-      <th><span>Teacher(s) defined</span></th>
-      <th><span>Group started successfully</span></th>
+      <th><span>Final Test Base is pass</span></th>
+      <th><span>Final Test Lang is pass</span></th>
+      <th><span>Interviewer defined</span></th>
+      <th><span>Interviewers feedback – summary defined</span></th>
+      <th><span>Experts load filled in</span></th>
+      <th><span>Interviewers load filled in</span></th>
+      <th><span>Group ready for close</span></th>
+
+      <th><span>Total, %</span></th>
+
     </tr>
 
     <ng-container *ngFor="let oneData of allData">
@@ -49,44 +58,56 @@
         <td>{{oneData.status}}</td>
         <td>
           <div *ngFor="let teacher of oneData.teachers">
-            <div *ngIf="(teacher.type == 'TEACHER')">
+            <div *ngIf="(teacher.teacherType == 'Teacher')">
               {{teacher.fullName}}
             </div>
           </div>
         </td>
         <td>
           <div *ngFor="let teacher of oneData.teachers">
-            <div *ngIf="(teacher.type == 'EXPERT')">
+            <div *ngIf="(teacher.teacherType == 'Expert')">
               {{teacher.fullName}}
             </div>
           </div>
         </td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
+        <td>{{oneData.r.englishLevelDefined}}</td>
+        <td>{{oneData.r.englishLevelCorrect}}</td>
+        <td>{{oneData.r.entryScoreDefined}}</td>
+        <td>{{oneData.r.incomingTestDefined}}</td>
+        <td>{{oneData.r.approvedByDefined}}</td>
+        <td>{{oneData.r.teacherDefined}}</td>
+        <td>{{oneData.r.expertDefined}}</td>
 
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
+        <td>{{oneData.r.groupStartedSuccessfully}}</td>
 
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
+        <td>{{oneData.r.tests1}}</td>
+        <td>{{oneData.r.tests2}}</td>
+        <td>{{oneData.r.tests3}}</td>
+        <td>{{oneData.r.tests4}}</td>
+        <td>{{oneData.r.tests5}}</td>
+        <td>{{oneData.r.tests6}}</td>
+        <td>{{oneData.r.tests7}}</td>
+        <td>{{oneData.r.tests8}}</td>
+        <td>{{oneData.r.tests9}}</td>
+        <td>{{oneData.r.tests10}}</td>
+        <td>{{oneData.r.intermediateTestBasePass}}</td>
+        <td>{{oneData.r.intermediateTestLangPass}}</td>
+        <td>{{oneData.r.teacherFeedbacksFilledIn}}</td>
+        <td>{{oneData.r.expertFeedbacksFilledIn}}</td>
+
+        <td>{{oneData.r.groupReadyToOffering}}</td>
+
+        <td>{{oneData.r.finalTestBasePass}}</td>
+        <td>{{oneData.r.finalTestLangPass}}</td>
+        <td>{{oneData.r.interviewerDefined}}</td>
+        <td>{{oneData.r.interviewerSummaryDefined}}</td>
+        <td>{{oneData.r.expertsLoadFilledIn}}</td>
+        <td>{{oneData.r.interviewersLoadFilledIn}}</td>
+
+        <td>{{oneData.r.groupReadyForClose}}</td>
+
+        <td>{{oneData.total}}</td>
+
       </tr>
     </ng-container>
 

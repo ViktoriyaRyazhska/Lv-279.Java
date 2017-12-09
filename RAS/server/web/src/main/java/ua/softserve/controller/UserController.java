@@ -20,7 +20,7 @@ public class UserController {
      *
      * @return JSON object of list of all users from DB.
      */
-    @GetMapping(value = "/user/getAllUsers", produces = {"application/json"})
+    @GetMapping(value = "/user/getAllUsers", produces = { "application/json" })
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
