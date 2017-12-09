@@ -55,4 +55,9 @@ public class Student {
         this.academy = new Academy();
         this.academy.setAcademyId(academyId);
     }
+
+    public Student setApprovedBy(Employee employee) {
+        approvedBy = employee;
+        return this;
+    }
 }

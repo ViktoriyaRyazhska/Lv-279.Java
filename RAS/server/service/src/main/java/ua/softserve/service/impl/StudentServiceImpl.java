@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.Student;
 import ua.softserve.persistence.entity.StudentStatuses;
+import ua.softserve.persistence.repo.EmployeeRepository;
 import ua.softserve.persistence.repo.StudentRepository;
 import ua.softserve.persistence.repo.StudentsStatusesRepository;
 import ua.softserve.service.StudentService;
@@ -24,6 +25,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentsStatusesRepository studentsStatusesRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -62,7 +66,11 @@ public class StudentServiceImpl implements StudentService {
     public void updateStudentOfAcademy(Integer academyId, List<StudentViewDto> students) {
         students.forEach(st -> studentRepository
                 .save(st.update(studentRepository
-                        .findOne(st.getId()))));
+                        .findOne(st.getId())
+                        .setApprovedBy(employeeRepository
+                                .findOne(st
+                                        .getApprovedBy()
+                                        .getEmployeeId())))));
     }
 
     @Override

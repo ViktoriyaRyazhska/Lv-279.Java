@@ -70,7 +70,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         List<LanguageTranslations> languageTranslations = languageTranslationsService.getAllLanguageTranslationsName();
         TeacherTypes teacherTypes = teacherTypeService.findOne(EXPERT_STATUS_ID);
         StudentStatuses studentStatuses = studentsStatusesService.findOne(TRAINEE_STATUS_ID);
-        if(teacherTypes != null){
+        if (teacherTypes != null) {
             getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
         }
 
@@ -102,11 +102,11 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                  * (students.getAcademy().getAcademyId() == groupInfo.getAcademy().getAcademyId()) {
                  * countStudentsInTheGroup++; } } }
                  */
-                if(studentStatuses != null){
+                if (studentStatuses != null) {
                     countActualStudents = studentsServiceImpl
                             .countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
                 }
-                if(countActualStudents != null){
+                if (countActualStudents != null) {
                     academyDTO.setStudentsActual(countActualStudents);
                 }
             }

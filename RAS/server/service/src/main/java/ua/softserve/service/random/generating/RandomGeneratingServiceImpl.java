@@ -60,7 +60,7 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
 
     /**
      * Generates random groups with all information
-     *
+     * <p>
      * and saves them in the database
      */
     public void randomGroups() {
@@ -178,8 +178,7 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
     /**
      * Demo method for saving n random users
      *
-     * @param count
-     *            (n) number of users to generating and saving
+     * @param count (n) number of users to generating and saving
      * @return simple string 'Hello'
      */
     public void randomAddUsers(int count) {
@@ -188,9 +187,8 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
 
     /**
      * Demo method for saving n random users
-     * 
-     * @param countOfUsers
-     *            (n) number of users to generating and saving
+     *
+     * @param countOfUsers (n) number of users to generating and saving
      */
     public void genAndSaveUsers(int countOfUsers) {
         for (int i = 0; i < countOfUsers; i++) {
@@ -208,16 +206,14 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
     /**
      * Generates random employees
      *
-     * @param count
-     *            of random employees
-     *
+     * @param count of random employees
      * @return script for inserting employees to database
      */
     public String randomAddEmpl(int count) {
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO employee" + "(employee_id, first_name_eng," + "last_name_eng, first_name_ukr,"
                 + "second_name_ukr, last_name_ukr)\n" + " VALUES\n");
-        for (int i = 0; i < count;) {
+        for (int i = 0; i < count; ) {
             RandomPerson randomPerson = RandomPersonGenerator.getRandomPerson();
             sb.append("(" + ++i + ", " + "'" + randomPerson.getFirstName() + "', " + "'" + randomPerson.getLastName()
                     + "', " + "'" + randomPerson.getFirstNameUkr() + "', " + "'" + randomPerson.getSecondNameUkr()
@@ -241,12 +237,8 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
     /**
      * Returns random set of employees from entry list
      *
-     * @param count
-     *            of employees
-     *
-     * @param allEmpl
-     *            entry list of employees
-     *
+     * @param count   of employees
+     * @param allEmpl entry list of employees
      * @return random set of employees
      */
     private Set<Employee> getRandomEmployees(int count, List<Employee> allEmpl) {
@@ -261,12 +253,8 @@ public class RandomGeneratingServiceImpl implements RandomGenerating {
     /**
      * Returns random set of users from entry list
      *
-     * @param count
-     *            of users
-     *
-     * @param allUsers
-     *            entry list of users
-     *
+     * @param count    of users
+     * @param allUsers entry list of users
      * @return random set of users
      */
     private Set<User> getRandomUsers(int count, List<User> allUsers) {

@@ -2,7 +2,6 @@ package ua.softserve.service.dto;
 
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package ua.softserve.config.DTO;
 
-public class JwtAuthenticationRequest{
+public class JwtAuthenticationRequest {
 
     private String username;
     private String password;

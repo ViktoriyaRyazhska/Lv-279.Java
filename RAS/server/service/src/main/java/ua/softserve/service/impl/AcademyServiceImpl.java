@@ -3,13 +3,11 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.repo.AcademyRepository;
-import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 import ua.softserve.service.dto.AcademyDTO;
-import ua.softserve.service.converter.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
