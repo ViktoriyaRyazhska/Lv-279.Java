@@ -2,7 +2,6 @@ package ua.softserve.persistence.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

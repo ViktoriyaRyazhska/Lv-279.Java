@@ -1,7 +1,6 @@
 package ua.softserve.service;
 
 
-
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.StudentStatuses;
 import ua.softserve.service.dto.StudentViewDto;
@@ -20,7 +19,9 @@ public interface StudentService {
 
     void addStudentsToAcademy(Integer academyId, List<Integer> students);
 
-    void deleteStudentFromAcademy(Integer studentId);
+    void removeStudentFromAcademy(Integer academyId, Integer studentId);
+
+    void updateStudentOfAcademy(Integer academyId, List<StudentViewDto> students);
 
     Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatuses);
 

@@ -1,4 +1,4 @@
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
@@ -22,12 +22,22 @@ import {FeedbackTeacherEditComponent} from "./components/feedbacks/feedback-edit
 import {FeedbackExpertEditComponent} from "./components/feedbacks/feedback-edit/feedback-expert-edit/feedback-expert-edit.component";
 import {FeedbackInterviewerEditComponent} from "./components/feedbacks/feedback-edit/feedback-interviewer-edit/feedback-interviewer-edit.component";
 import {AppRoutingModule} from "./app-routing.module";
+// import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.pipe";
+import { LoginComponent } from './components/auth/login/login.component';
+import {LoginService} from "./components/auth/login/login.service";
+import {MyauthService} from "./components/auth/myauth.service";
 import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.pipe";
 import {HeaderComponent} from './components/header/header.component';
 import {FeedbackDetailComponent} from "./components/feedbacks/feedback-detail/feedback-detail.component";
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
 import {FeedbackService} from "./services/feedbacks/feedback.service";
+import { ItaTacticalPlanByGroupStageComponent } from './components/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component';
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
+import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
+import {TestsService} from "./services/tests-names/tests.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {DataTableModule, DropdownModule} from "primeng/primeng";
+
 
 @NgModule({
   declarations: [
@@ -40,11 +50,17 @@ import {CheckListByGroupsComponent} from "./components/reports/check-list-by-gro
     FilterPipe,
     StudentsComponent,
     ProfileInfoFilterPipe,
+    ProfileInfoFilterPipe,
     StudentsComponent,
     FeedbacksComponent,
     FeedbackListComponent,
     FeedbackItemComponent,
     FeedbackDetailComponent,
+    // FeedbackTeacherDetailComponent,
+    // FeedbackExpertDetailComponent,
+    // FeedbackInterviewerDetailComponent,
+    FeedbackTeacherDetailPipe,
+    LoginComponent,
     FeedbackEditComponent,
     FeedbackTeacherEditComponent,
     FeedbackExpertEditComponent,
@@ -52,15 +68,22 @@ import {CheckListByGroupsComponent} from "./components/reports/check-list-by-gro
     FeedbackTeacherDetailPipe,
     HeaderComponent,
     NavTabsComponent,
-    CheckListByGroupsComponent
+    ItaTacticalPlanByGroupStageComponent,
+    CheckListByGroupsComponent,
+    TestsNamesComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    DataTableModule,
+    DropdownModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, FeedbackService],
+  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

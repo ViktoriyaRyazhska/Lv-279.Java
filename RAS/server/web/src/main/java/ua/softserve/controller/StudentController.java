@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import ua.softserve.service.StudentService;
 import ua.softserve.service.dto.StudentViewDto;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -16,22 +15,25 @@ public class StudentController {
     StudentService studentService;
 
     @GetMapping("{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
     public List<StudentViewDto> getStudentsByAcademy(@PathVariable("id") Integer academyId) {
         return studentService.getStudentsByAcademy(academyId);
     }
 
-    @PostMapping("academy/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public void addStudents(@PathVariable("id") Integer academyId, @RequestBody Integer students) {
+    @PostMapping("{id}/add")
+    public void addStudents(@PathVariable("id") Integer academyId,
+                            @RequestBody List<Integer> students) {
+        studentService.addStudentsToAcademy(academyId, students);
+    }
 
-        System.out.println("Worked");
-//        try {
-//            System.out.println("WHAAAAT 1");
-//            studentService.addStudentsToAcademy(1, Arrays.asList(students));
-//            System.out.println("WHAAAAT 2");
-//        } catch (Throwable e) {
-//            e.printStackTrace();
-//        }
+    @DeleteMapping("{academyId}/{id}")
+    public void removeStudentFromAcademy(@PathVariable("academyId") Integer academyId,
+                                         @PathVariable("id") Integer studentId) {
+        studentService.removeStudentFromAcademy(academyId, studentId);
+    }
+
+    @PutMapping("{id}")
+    public void updateStudentsOfAcademy(@PathVariable("id") Integer academyId,
+                                        @RequestBody List<StudentViewDto> studentViewDtos) {
+        studentService.updateStudentOfAcademy(academyId, studentViewDtos);
     }
 }

@@ -1,11 +1,7 @@
 package ua.softserve.service.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,13 +9,14 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class ItaTacticalPlanByGroupStageDto {
 
     int groupId;
     private String groupName;
     private String CG;
-    private String Profile;
-    private String Location;
+    private String profile;
+    private String location;
     private Date startDate;
     private Date endDate;
     private String groupStatus;
@@ -30,5 +27,6 @@ public class ItaTacticalPlanByGroupStageDto {
     private int studyInProgress;
     private int graduated;
     private int hired;
+
 
 }

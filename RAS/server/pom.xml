@@ -4,12 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!--<parent>
-        <groupId>ua.softserve</groupId>
-        <artifactId>RAS</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>-->
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -81,25 +75,25 @@
             </plugin>
 
             <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
-                <!--<version>2.17</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>validate</id>-->
-                        <!--<phase>validate</phase>-->
-                        <!--<configuration>-->
-                            <!--<configLocation>sun-checkstyle.xml</configLocation>-->
-                            <!--<encoding>UTF-8</encoding>-->
-                            <!--<consoleOutput>true</consoleOutput>-->
-                            <!--<failsOnError>true</failsOnError>-->
-                            <!--<includeTestSourceDirectory>true</includeTestSourceDirectory>-->
-                        <!--</configuration>-->
-                        <!--<goals>-->
-                            <!--<goal>check</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
+            <!--<version>2.17</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>validate</id>-->
+            <!--<phase>validate</phase>-->
+            <!--<configuration>-->
+            <!--<configLocation>sun-checkstyle.xml</configLocation>-->
+            <!--<encoding>UTF-8</encoding>-->
+            <!--<consoleOutput>true</consoleOutput>-->
+            <!--<failsOnError>true</failsOnError>-->
+            <!--<includeTestSourceDirectory>true</includeTestSourceDirectory>-->
+            <!--</configuration>-->
+            <!--<goals>-->
+            <!--<goal>check</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
             <!--</plugin>-->
         </plugins>
     </build>

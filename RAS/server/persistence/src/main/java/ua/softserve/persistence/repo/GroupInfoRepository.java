@@ -6,8 +6,9 @@ import ua.softserve.persistence.entity.GroupInfo;
 
 import java.util.List;
 
-public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer>{
-    List<GroupInfo> findAll();
+public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
+    @Query("select gi from GroupInfo gi order by gi.groupInfoId desc")
+    List<GroupInfo> findAllWithOrder();
 
     GroupInfo findByAcademyAcademyId(int academyId);
 }

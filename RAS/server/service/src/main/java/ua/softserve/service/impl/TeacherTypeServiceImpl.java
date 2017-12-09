@@ -7,7 +7,7 @@ import ua.softserve.persistence.repo.TeacherTypeRepository;
 import ua.softserve.service.TeacherTypeService;
 
 @Service
-public class TeacherTypeServiceImpl implements TeacherTypeService{
+public class TeacherTypeServiceImpl implements TeacherTypeService {
     @Autowired
     private TeacherTypeRepository teacherTypeRepository;
 

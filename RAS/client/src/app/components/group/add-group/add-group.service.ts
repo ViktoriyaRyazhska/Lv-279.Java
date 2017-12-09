@@ -12,4 +12,14 @@ export class AddGroupService {
     return this.http.get('http://localhost:8080/academy/addgroup');
   }
 
+  post(object: any){
+    this.http.post('http://localhost:8080/academy/addgroup', object)
+      .subscribe(res => {
+        console.log(res);
+      }, err => {
+        console.log('Error occured');
+      }
+    );
+  }
+
 }

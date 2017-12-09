@@ -5,9 +5,9 @@ import ua.softserve.persistence.entity.History;
 
 import java.util.List;
 
-public interface HistoryDAO extends JpaRepository<History, Integer> {
+public interface HistoryRepository extends JpaRepository<History, Integer> {
 
-    List<History> findByAcademyName(String name);
+    List<History> findByAcademyId(int academyId);
 
     List<History> findAll();
 
