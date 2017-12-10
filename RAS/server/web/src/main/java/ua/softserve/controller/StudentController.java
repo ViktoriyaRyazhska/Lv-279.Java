@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import ua.softserve.service.StudentService;
 import ua.softserve.service.dto.StudentViewDto;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController

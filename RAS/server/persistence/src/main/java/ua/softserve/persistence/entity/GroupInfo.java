@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,6 +36,12 @@ public class GroupInfo {
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private ProfileInfo profileInfo;
+
+    @ManyToMany
+    @JoinTable(name = "group_tests",
+            joinColumns = @JoinColumn(name = "academy_id", referencedColumnName = "academy_id"),
+            inverseJoinColumns = @JoinColumn(name = "test_id",referencedColumnName = "id"))
+    private List<TestName> testNames;
 
     public GroupInfo() {
     }

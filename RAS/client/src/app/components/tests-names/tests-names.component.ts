@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Tests} from "../../models/tests";
 import {TestsService} from "../../services/tests-names/tests.service";
+import {Http, Response} from '@angular/http';
 
 @Component({
   selector: 'app-tests-names',
@@ -12,25 +13,30 @@ export class TestsNamesComponent implements OnInit {
   static counter : number = 1;
   name: string;
   mp: number;
-  tests : Tests;
-  testNames : string[];
-  max_points : number[];
+  tests : Tests[];
+  testNames : any[];
+  max_points : any[];
   //noinspection TypeScriptUnresolvedFunction
   testIndex = Array(TestsNamesComponent.counter).fill(1).map((x,i)=>i);
 
   constructor(
-    private groupTestsService : TestsService,
+    private testNamesService  : TestsService
   )
   { }
 
 
   ngOnInit() {
-    this.groupTestsService.getAll().subscribe(
-      data => {
-        this.tests = data;
-      },
-      error => console.log(error)
-    );
+    this.testNamesService.getAll().subscribe(resp => {
+      this.name = resp.testName;
+    });
+
+
+    // this.testNamesService.getAll().subscribe(
+    //   data => {
+    //     this.tests = data;
+    //   },
+    //   error => console.log(error)
+    // );
   }
 
 
@@ -56,20 +62,21 @@ export class TestsNamesComponent implements OnInit {
   }
 
 
-  removeTest(name : string, mp : number) {
-    TestsNamesComponent.counter--;
-    //noinspection TypeScriptUnresolvedFunction
-    this.testIndex = Array(TestsNamesComponent.counter).fill(1).map((x,i)=>i);
 
-    const indexName = this.tests.testName.indexOf(name);
-    const indexMP = this.tests.max_point.indexOf(mp);
-
-
-    if(indexMP!=-1) {
-      this.tests.max_point.splice(indexMP,1);
-    }
-    if(indexName!=-1) {
-      this.tests.testName.splice(indexName,1);
-    }
-  }
+  // removeTest(name : string, mp : number) {
+  //   TestsNamesComponent.counter--;
+  //   //noinspection TypeScriptUnresolvedFunction
+  //   this.testIndex = Array(TestsNamesComponent.counter).fill(1).map((x,i)=>i);
+  //
+  //   const indexName = this.tests.testName.indexOf(name);
+  //   const indexMP = this.tests.max_point.indexOf(mp);
+  //
+  //
+  //   if(indexMP!=-1) {
+  //     this.tests.max_point.splice(indexMP,1);
+  //   }
+  //   if(indexName!=-1) {
+  //     this.tests.testName.splice(indexName,1);
+  //   }
+  // }
 }

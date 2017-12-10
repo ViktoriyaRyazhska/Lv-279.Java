@@ -1,6 +1,7 @@
 package ua.softserve.service;
 
 import ua.softserve.persistence.entity.GroupInfo;
+import ua.softserve.persistence.entity.TestName;
 import ua.softserve.service.dto.AcademyDTO;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface GroupInfoService {
     List<AcademyDTO> getAllAcademies();
 
     List<GroupInfo> findAll();
+
+    List<TestName> findAllTestNamesByAcademyId (int groupId);
 }
