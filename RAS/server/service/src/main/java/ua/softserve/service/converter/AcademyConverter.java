@@ -9,6 +9,10 @@ import ua.softserve.service.dto.AcademyDTO;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
+/**
+ * Service transforms GroupInfo Entity to DTO object and DTO object to GroupInfo Entity.
+ * Also it transforms AcademyDTO object to Academy Entity.
+ */
 @Service
 public class AcademyConverter {
     @Autowired
@@ -29,6 +33,11 @@ public class AcademyConverter {
     @Autowired
     AcademyService academyService;
 
+    /**
+     * Method transforms GroupInfo Entity to AcademyDTO object.
+     * @param groupInfo is a object that will be transformed.
+     * @return AcademyDTO object.
+     */
     public AcademyDTO toDTO(GroupInfo groupInfo) {
         AcademyDTO academyDTO = new AcademyDTO();
         Academy academy = groupInfo.getAcademy();
