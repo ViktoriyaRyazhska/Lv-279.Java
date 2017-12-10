@@ -1,10 +1,7 @@
 table{
 font-size: 0.75em;
 }
-label{
-  position:absolute;
-  bottom: 0;
-}
+
 input[type=date]::-webkit-inner-spin-button {
 -webkit-appearance: none;
 display: none;
