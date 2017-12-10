@@ -1,1 +1,92 @@
+<p-dataTable [value]="students" [editable]="true" resizableColumns="true" reorderableColumns="true" scrollable="true">
+  <!--<p-column field="vin" header="Id" [editable]="true" [style]="{'width':'10em'}"></p-column>-->
+  <p-column field="user.firstName" header="Name" [editable]="false"  [filter]="true" [sortable]="true"[style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="body">
+       <span>
+         <!--<button type="text" (click)="onStudentClick(student)"  pButton  label="Show"> {{student.user.firstName +" "+ student.user.lastName}}</button>-->
+<a (click)="onStudentClick(student)"> {{student.user.firstName +" "+ student.user.lastName}}</a>
+       </span>
+    </ng-template>
+  </p-column>
+  <p-column field="data.englishLevel.name" header="English Level" [editable]="false" [filter]="true" [sortable]="true" [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.entryScore" header="Entry Score" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.intermBase" header="Interm. Test. Base" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.intermLang" header="Interm. Test. Lang" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.engGram" header="English Grammar Score" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.incomingTest" header="Incoming Test" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testOne" header="Test1" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testTwo" header="Test3" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testThree" header="Test2" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testFour" header="Test4" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testFive" header="Test5" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testSix" header="Test6" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testSeven" header="Test7" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testEight" header="Test8" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testNine" header="Test9" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testTen" header="Test10" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="finalBase" header="Final, Base" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="finalLang" header="Final, Lang" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="" header="Current Score" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="" header="Training Score" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.teacherScore" header="Teacher Score" [filter]="true" [editable]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.expertScore" header="Expert Score" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.interviewerScore" header="Interviewer Score"  [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="studentStatus.name" header="Student status" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="personStatus" header="Personal status" [editable]="false" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="approvedBy.firstNameEng" header="Approved By" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="body">
+       <span *ngIf="student.approvedBy">
+              {{student.approvedBy.firstNameEng +" "+ student.approvedBy.lastNameEng}}
+       </span>
+    </ng-template>
+  </p-column>
+</p-dataTable>
 
+<p-dialog header="User info" [(visible)]="displayStudentDetails"  width="auto">
+  <div class="ui-g">
+    <div class="ui-g-6">
+      <h4>Personal Information:</h4>
+      <div class="ui-g-6">
+        <div class="column">
+          <div>Id:</div>
+          <div>Name:</div>
+          <div>Age:</div>
+          <div>Education:</div>
+          <div>Strong Skills:</div>
+        </div>
+      </div>
+      <div class="ui-g-6">
+        <div class="column" *ngIf="selectedStudent && selectedStudent.user">
+          <div>{{selectedStudent.user.id}}</div>
+          <div>{{selectedStudent.user.firstName +" "+ selectedStudent.user.lastName}}</div>
+          <div>{{selectedStudent.age}}-</div>
+          <div>{{selectedStudent.education}}-</div>
+          <div>{{selectedStudent.strongSkills}}-</div>
+        </div>
+      </div>
+    </div>
+      <div class="ui-g-6">
+        <h4>Contact Information:</h4>
+        <div class="ui-g-6">
+          <div class="column">
+            <div>Email:</div>
+            <div>Messenger:</div>
+            <div>Phone:</div>
+            <div>Place Of Origin:</div>
+          </div>
+        </div>
+          <div class="ui-g-6">
+            <div class="column" *ngIf="selectedStudent && selectedStudent.user">
+              <div>{{selectedStudent.user.email}}</div>
+              <div>{{selectedStudent.messenger}}-</div>
+              <div>{{selectedStudent.user.phone}}</div>
+              <div>{{selectedStudent.placeOfOrigin}}-</div>
+            </div>
+          </div>
+
+      </div>
+  </div>
+</p-dialog>
+
+
+<button pButton type="button" (click)="count()" label="Add students"></button>

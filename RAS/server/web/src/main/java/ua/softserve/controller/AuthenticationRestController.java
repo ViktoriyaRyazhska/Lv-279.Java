@@ -1,29 +1,94 @@
 package ua.softserve.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.config.DTO.JwtAuthenticationRequest;
-import ua.softserve.config.DTO.JwtAuthenticationResponse;
-import ua.softserve.config.JwtUser;
+import ua.softserve.config.auth.TokenHandler;
 import ua.softserve.persistence.entity.LoginUser;
+import ua.softserve.service.SecurityContextService;
 
 @RestController
 public class AuthenticationRestController {
 
-    @RequestMapping(value = "api/auth", method = RequestMethod.POST)
-    public ResponseEntity<JwtAuthenticationResponse> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest){
-//        HttpHeaders headers=
-        System.out.println(authenticationRequest.getUsername()+" "+authenticationRequest.getPassword());
-        return new ResponseEntity<JwtAuthenticationResponse>(new JwtAuthenticationResponse("OK") , HttpStatus.OK);
+    private final AuthenticationManager authenticationManager;
+    private final TokenHandler tokenHandler;
+    private final SecurityContextService securityContextService;
+
+    @Autowired
+    public AuthenticationRestController(AuthenticationManager authenticationManager, TokenHandler tokenHandler, SecurityContextService securityContextService) {
+        this.authenticationManager = authenticationManager;
+        this.tokenHandler = tokenHandler;
+        this.securityContextService = securityContextService;
     }
 
-    @RequestMapping(value = "api/status", method = RequestMethod.GET)
-    public ResponseEntity getUserStatus(){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(principal.toString());
-        return new ResponseEntity(HttpStatus.OK);
+    @RequestMapping(value = "api/auth", method = RequestMethod.POST)
+    public AuthResponse createAuthenticationToken(@RequestBody AuthParams authenticationRequest) {
+
+        final UsernamePasswordAuthenticationToken loginToken = authenticationRequest.toAuthenticationToken();
+        final Authentication authentication = authenticationManager.authenticate(loginToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return securityContextService.currentUser().map(u -> {
+            final String token = tokenHandler.createTokenForUser(u);
+            return new AuthenticationRestController.AuthResponse(token);
+        }).orElseThrow(RuntimeException::new);
+    }
+
+
+    private static final class AuthParams {
+        private String username;
+        private String password;
+
+        public AuthParams() {
+        }
+
+        public AuthParams(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        UsernamePasswordAuthenticationToken toAuthenticationToken() {
+            return new UsernamePasswordAuthenticationToken(username, password);
+        }
+    }
+
+    private static final class AuthResponse {
+        private String token;
+
+        public AuthResponse() {
+        }
+
+        public AuthResponse(String token) {
+            this.token = token;
+        }
+
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
     }
 }

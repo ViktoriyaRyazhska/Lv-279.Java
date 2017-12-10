@@ -9,6 +9,10 @@ import ua.softserve.service.dto.AcademyDTO;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
+/**
+ * Service transforms GroupInfo Entity to DTO object and DTO object to GroupInfo Entity.
+ * Also it transforms AcademyDTO object to Academy Entity.
+ */
 @Service
 public class AcademyConverter {
     @Autowired
@@ -23,22 +27,43 @@ public class AcademyConverter {
     @Autowired
     TechnologyService technologyService;
 
+    @Autowired
+    ProfileService profileService;
+
+    @Autowired
+    AcademyService academyService;
+
+    /**
+     * Method transforms GroupInfo Entity to AcademyDTO object.
+     * @param groupInfo is a object that will be transformed.
+     * @return AcademyDTO object.
+     */
     public AcademyDTO toDTO(GroupInfo groupInfo) {
         AcademyDTO academyDTO = new AcademyDTO();
-
-        if (groupInfo.getAcademy() != null) {
-            academyDTO.setAcademyStagesId(groupInfo.getAcademy().getAcademyStages().getStageId());
-            academyDTO.setStartDate(groupInfo.getAcademy().getStartDate().toString());
-            academyDTO.setDirectionName(groupInfo.getAcademy().getDirections().getName());
-            academyDTO.setTechnologyName(groupInfo.getAcademy().getTechnologies().getName());
-            academyDTO.setPayment(groupInfo.getAcademy().getFree());
-            if (groupInfo.getAcademy().getFree() == 1) {
-                academyDTO.setPaymentStatus("Founded by SoftServe academy");
+        Academy academy = groupInfo.getAcademy();
+        if (academy != null) {
+            if(academy.getAcademyStages() != null){
+                academyDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
+            }
+            if(academy.getStartDate() != null){
+                academyDTO.setStartDate(academy.getStartDate().toString());
+            }
+            if(academy.getDirections() != null){
+                academyDTO.setDirectionName(academy.getDirections().getName());
+            }
+            if(academy.getTechnologies() != null){
+                academyDTO.setTechnologyName(academy.getTechnologies().getName());
+            }
+            academyDTO.setPayment(academy.getFree());
+            if (academy.getFree() == 1) {
+                academyDTO.setPaymentStatus("Founded by SoftServe");
             } else {
                 academyDTO.setPaymentStatus("Paid");
             }
-            academyDTO.setEndDate(groupInfo.getAcademy().getEndDate().toString());
-            academyDTO.setNameForSite(groupInfo.getAcademy().getName());
+            if(academy.getEndDate() != null){
+                academyDTO.setEndDate(academy.getEndDate().toString());
+            }
+            academyDTO.setNameForSite(academy.getName());
         }
         if (groupInfo.getProfileInfo() != null) {
             academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
@@ -61,14 +86,21 @@ public class AcademyConverter {
         academy.setDirections(getDirection(academyDTO.getDirectionId()));
         academy.setTechnologies(getTechnologies(academyDTO.getTechnologieId()));
 
-        // TODO: refactor
-        // academy.setProfile(getProfile(academyDTO.getProfileId()));
-        // academy.setStudentGroupCount(studentGroupCountService.saveDTO(academyDTO));
-
         return academy;
     }
 
-    private Timestamp convertStringToTimestamp(String date) {
+    public GroupInfo groupInfoToEntity(int academyId, AcademyDTO academyDTO) {
+        GroupInfo groupInfo = new GroupInfo();
+        groupInfo.setAcademy(getAcademyById(academyId));
+        groupInfo.setGroupName(academyDTO.getGrName());
+        groupInfo.setProfileInfo(getProfileInfo(academyDTO.getProfileId()));
+        groupInfo.setStudentsPlannedToEnrollment(academyDTO.getStudentPlannedToEnrollment());
+        groupInfo.setStudentsPlannedToGraduate(academyDTO.getStudentPlannedToGraduate());
+
+        return groupInfo;
+    }
+
+        private Timestamp convertStringToTimestamp(String date) {
         if (date == null) {
             throw new IllegalArgumentException("Date can't be null");
         } else if (date.isEmpty()) {
@@ -88,11 +120,7 @@ public class AcademyConverter {
     }
 
     private City getCity(int id) {
-        City city = cityService.findOne(id);
-        if (city == null) {
-            // throw new ("Can't find city with id = " + id);
-        }
-        return city;
+        return cityService.findOne(id);
     }
 
     private AcademyStages getAcademyStages(int academyStagesId) {
@@ -107,8 +135,12 @@ public class AcademyConverter {
         return technologyService.findOne(technologieId);
     }
 
-    // TODO: refactor
-    // private Profile getProfile(int profileId) {
-    // return profileService.findOne(profileId);
-    // }
+    private ProfileInfo getProfileInfo(int profileInfoId){
+        return profileService.findOne(profileInfoId);
+    }
+
+    private Academy getAcademyById(int academyId){
+        return academyService.findOne(academyId);
+    }
+
 }

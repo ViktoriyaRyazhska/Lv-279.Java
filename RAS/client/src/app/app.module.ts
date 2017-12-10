@@ -13,7 +13,7 @@ import {AddGroupService} from "./components/group/add-group/add-group.service";
 import {FilterPipe} from './components/view-academies/filter.pipe';
 import {StudentsComponent} from "./components/students/students.component";
 import {StudentsService} from "./services/students/students.service";
-import {ProfileInfoFilterPipe} from "./components/group/add-group/add-group.pipe";
+import {ProfileInfoFilterPipe} from './components/group/add-group/add-group.pipe';
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {FeedbackItemComponent} from "./components/feedbacks/feedback-list/feedback-item/feedback-item.component";
@@ -35,6 +35,8 @@ import { ItaTacticalPlanByGroupStageComponent } from './components/ita-tactical-
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 import {TestsService} from "./services/tests-names/tests.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {PrimeNgModules} from "./prime-ng.modules";
 
 
 @NgModule({
@@ -47,7 +49,6 @@ import {TestsService} from "./services/tests-names/tests.service";
     ViewAcademiesComponent,
     FilterPipe,
     StudentsComponent,
-    ProfileInfoFilterPipe,
     ProfileInfoFilterPipe,
     StudentsComponent,
     FeedbacksComponent,
@@ -76,7 +77,10 @@ import {TestsService} from "./services/tests-names/tests.service";
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    PrimeNgModules,
+    BrowserModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService],
   bootstrap: [AppComponent]

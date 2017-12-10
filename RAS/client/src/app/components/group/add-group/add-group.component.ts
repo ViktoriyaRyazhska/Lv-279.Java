@@ -3,6 +3,7 @@ import 'rxjs/add/operator/map';
 import {AddGroupService} from "./add-group.service";
 import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Group} from "./group.model";
 
 @Component({
   selector: 'app-add-group',
@@ -11,7 +12,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   providers: [HistoryService]
 })
 export class AddGroupComponent implements OnInit {
-  signupForm: FormGroup;
+  private signupForm: FormGroup;
+
+  private group: Group;
 
   academyStatus: any[];
   city: any[];
@@ -19,16 +22,14 @@ export class AddGroupComponent implements OnInit {
   direction: any[];
   profile: any[];
 
-  defaultStudentActual: number = 0;
-  defaultStudentsPlannedToGraduate: number = 0;
-  defaultStudentsPlannedToEnrollment: number = 0;
+  private defaultInvalidInput: string = 'No data entered. Group will not be save';
 
-  defaultInvalidInput: string = 'No data entered. Group will not be save';
+  constructor(private addGroupService: AddGroupService) {}
 
-  constructor(private addGroupService: AddGroupService) {
-  }
 
   ngOnInit() {
+    this.group = new Group();
+
     this.addGroupService.getAll().subscribe(resp => {
       this.academyStatus = resp.academyStages;
       this.city = resp.cityNames;
@@ -38,37 +39,40 @@ export class AddGroupComponent implements OnInit {
     });
 
     this.signupForm = new FormGroup({
-      'groupInfoFormControl': new FormControl(null, Validators.required),
-      'nameForSiteFormControl': new FormControl(null, [Validators.required]),
-      "academyStatusId": new FormControl('1'),
-      'cityId': new FormControl('1'),
-      'startDateFormControl': new FormControl(),
-      'endDateFormControl': new FormControl(),
-      'commonDirectionFormControl': new FormControl(),
-      "directionFormControl": new FormControl(),
-      'profileInfoFormControl': new FormControl(),
-      "sctGraduate": new FormControl(),
-      "sctEnrollment": new FormControl()
+      'groupInfoFormControl': new FormControl(this.group.grName, Validators.required),
+      'nameForSiteFormControl': new FormControl(this.group.nameForSite, [Validators.required]),
+      'academyStagesId': new FormControl(this.group.academyStagesId),
+      'cityId': new FormControl(this.group.cityId),
+      'startDateFormControl': new FormControl(this.group.startDate),
+      'endDateFormControl': new FormControl(this.group.endDate),
+      'commonDirectionFormControl': new FormControl(this.group.directionId),
+      'directionFormControl': new FormControl(this.group.technologieId),
+      'profileInfoFormControl': new FormControl(this.group.profileId),
+      'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate),
+      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment)
     });
   }
 
   saveGroup() {
-    console.log(this.signupForm);
+    // console.log(this.signupForm);
+    this.group.setDataFromFormControl(this.signupForm);
+    this.addGroupService.post(this.group);
+    console.log(this.group);
   }
 
   // setDataToForm(){
   //   this.signupForm.setValue({
   //     'groupInfoFormControl': ,
   //     'nameForSiteFormControl': ,
-  //     'academyStatusId': ,
+  //     'academyStagesId': ,
   //     'cityId': ,
   //     'startDateFormControl': ,
   //     'endDateFormControl': ,
   //     'commonDirectionFormControl': ,
   //     'directionFormControl': ,
   //     'profileInfoFormControl': ,
-  //     'sctGraduate': ,
-  //     'sctEnrollment':
+  //     'studentPlannedToGraduate': ,
+  //     'studentPlannedToEnrollment':
   //   });
   // }
 

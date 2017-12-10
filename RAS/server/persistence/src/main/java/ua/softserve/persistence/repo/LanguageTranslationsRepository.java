@@ -23,4 +23,3 @@ public interface LanguageTranslationsRepository extends JpaRepository<LanguageTr
     String getOneCityNameTranslationByItemId(@Param(value = "itemId") int itemId);
 
 }
-

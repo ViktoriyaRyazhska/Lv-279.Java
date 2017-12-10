@@ -1,91 +1,119 @@
 /*
-* CheckListByGroupsDto
-*
-* Version 1.0-SNAPSHOT
-*
-* 30.11.17
-*
-* All rights reserved by DoubleO Team (Team#1)
-* */
+ * CheckListByGroupsDto
+ *
+ * Version 1.0-SNAPSHOT
+ *
+ * 30.11.17
+ *
+ * All rights reserved by DoubleO Team (Team#1)
+ * */
 
 package ua.softserve.service.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ua.softserve.persistence.entity.EnglishLevel;
+import ua.softserve.persistence.entity.Student;
 
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+import static ua.softserve.persistence.constants.ConstantsFromDb.EL_PRE_INTERMEDIATE_ID;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class CheckListByGroupsDto {
-
-    public enum TeacherTypes {
-        TEACHER, EXPERT, INTERVIEWER;
-    };
 
     private String groupName;
     private String cityName;
     private String status;
     private List<TeacherInGroup> teachers;
-    private List<StudentInGroup> students;
-    private Date startDate;
-    private Date endDate;
+    private Map<String, Integer> r = new HashMap<>();
+    private double total;
+
+    private static String[][] KEYS = {
+            {
+                    "englishLevelDefined",
+                    "englishLevelCorrect",
+                    "entryScoreDefined",
+                    "incomingTestDefined",
+                    "approvedByDefined",
+                    "teacherDefined",
+                    "expertDefined"
+            },
+            {
+                    "test1",
+                    "test2",
+                    "test3",
+                    "test4",
+                    "test5",
+                    "intermediateTestBasePass",
+                    "intermediateTestLangPass",
+                    "teacherFeedbacksFilledIn",
+                    "expertFeedbacksFilledIn"
+            },
+            {
+                    "finalTestBasePass",
+                    "finalTestLangPass",
+                    "interviewerDefined",
+                    "interviewerSummaryDefined",
+                    "expertsLoadFilledIn",
+                    "interviewersLoadFilledIn"
+            },
+            {
+                    "test6",
+                    "test7",
+                    "test8",
+                    "test9",
+                    "test10",
+            }
+    };
 
     @Getter
     @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public class StudentInGroup {
-        private String status;
-        private String englishLevel;
-        private Double entryScore;
-        private TestsOfStudent testsOfStudent;
-        private Feedback teacherFeedback;
-        private Feedback expertFeedback;
-        private String interviewerComment;
-        private String approvedBy;
-    }
-
-    @Getter
-    @Setter
-    @AllArgsConstructor
     @NoArgsConstructor
     public class TeacherInGroup {
         private String fullName;
-        private double load;
-        private TeacherTypes type;
+        private String teacherType;
     }
 
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public class Feedback {
-        private String learningAbility;
-        private String overallTechnicalCompetence;
-        private String passionalInitiative;
-        private String teamWork;
-        private String gettingThingsDone;
-        private String activeCommunicator;
-        private String summary;
-    }
+    public void setTotal() {
+        double sum = 0;
+        for (Map.Entry s : r.entrySet()) {
+            sum += (Integer) s.getValue();
+        }
+        System.out.println(r.size());
+        total = (double) Math.round((sum / r.size()) * 100 * 100) / 100;
 
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public class TestsOfStudent {
-        private double[] testN = new double[10];
-        private double incomingTest;
-        private double intermediateTestBase;
-        private double intermediateTestLang;
-        private double finalTestBase;
-        private double finalTestLang;
+        int flag = 1;
+        for (String s : KEYS[0]) {
+            flag *= r.get(s);
+        }
+        r.put("groupStartedSuccessfully", flag);
+        if (flag == 0) {
+            r.put("groupReadyToOffering", 0);
+            r.put("groupReadyForClose", 0);
+        } else {
+            flag = 1;
+            for (String s : KEYS[1]) {
+                flag *= r.get(s);
+            }
+            r.put("groupReadyToOffering", flag);
+            if (flag == 0) {
+                r.put("groupReadyToOffering", 0);
+            } else {
+                flag = 1;
+                for (String s : KEYS[2]) {
+                    flag *= r.get(s);
+                }
+                r.put("groupReadyForClose", flag);
+            }
+        }
+
     }
 
 }
