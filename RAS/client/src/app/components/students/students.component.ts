@@ -12,6 +12,7 @@ import {Student} from "../../models/student";
 export class StudentsComponent implements OnInit {
   private students:Student[];
   private selectedStudent:Student;
+  private displayStudentDetails:boolean;
   constructor(private studentsService: StudentsService) {
     this.selectedStudent = new Student();
   }
@@ -26,6 +27,7 @@ export class StudentsComponent implements OnInit {
   }
   onStudentClick(student:Student){
     this.selectedStudent = student;
+    this.displayStudentDetails = true;
   }
 
 }
