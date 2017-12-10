@@ -1,7 +1,4 @@
-<!--<button (click)="tstBtnClick()">{{tstCapt}}</button>-->
-<!--<span *ngIf="tstVisible">This is SPARTA!!!</span>-->
-
-<div *ngIf="allData" class="container">
+<div *ngIf="groups" class="container">
 
   <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
 
@@ -51,62 +48,62 @@
 
     </tr>
 
-    <ng-container *ngFor="let oneData of allData">
+    <ng-container *ngFor="let group of groups">
       <tr>
-        <td>{{oneData.groupName}}</td>
-        <td>{{oneData.cityName}}</td>
-        <td>{{oneData.status}}</td>
+        <td>{{group.groupName}}</td>
+        <td>{{group.cityName}}</td>
+        <td>{{group.status}}</td>
         <td>
-          <div *ngFor="let teacher of oneData.teachers">
+          <div *ngFor="let teacher of group.teachers">
             <div *ngIf="(teacher.teacherType == 'Teacher')">
               {{teacher.fullName}}
             </div>
           </div>
         </td>
         <td>
-          <div *ngFor="let teacher of oneData.teachers">
+          <div *ngFor="let teacher of group.teachers">
             <div *ngIf="(teacher.teacherType == 'Expert')">
               {{teacher.fullName}}
             </div>
           </div>
         </td>
-        <td>{{oneData.r.englishLevelDefined}}</td>
-        <td>{{oneData.r.englishLevelCorrect}}</td>
-        <td>{{oneData.r.entryScoreDefined}}</td>
-        <td>{{oneData.r.incomingTestDefined}}</td>
-        <td>{{oneData.r.approvedByDefined}}</td>
-        <td>{{oneData.r.teacherDefined}}</td>
-        <td>{{oneData.r.expertDefined}}</td>
+        <td><div class="cell{{group.r.englishLevelDefined}}"></div></td>
+        <td class="cell{{group.r.englishLevelCorrect}}"></td>
+        <td class="cell{{group.r.entryScoreDefined}}"></td>
+        <td class="cell{{group.r.incomingTestDefined}}"></td>
+        <td class="cell{{group.r.approvedByDefined}}"></td>
+        <td class="cell{{group.r.teacherDefined}}"></td>
+        <td class="cell{{group.r.expertDefined}}"></td>
 
-        <td>{{oneData.r.groupStartedSuccessfully}}</td>
+        <td class="cell{{group.r.groupStartedSuccessfully}}"></td>
 
-        <td>{{oneData.r.tests1}}</td>
-        <td>{{oneData.r.tests2}}</td>
-        <td>{{oneData.r.tests3}}</td>
-        <td>{{oneData.r.tests4}}</td>
-        <td>{{oneData.r.tests5}}</td>
-        <td>{{oneData.r.tests6}}</td>
-        <td>{{oneData.r.tests7}}</td>
-        <td>{{oneData.r.tests8}}</td>
-        <td>{{oneData.r.tests9}}</td>
-        <td>{{oneData.r.tests10}}</td>
-        <td>{{oneData.r.intermediateTestBasePass}}</td>
-        <td>{{oneData.r.intermediateTestLangPass}}</td>
-        <td>{{oneData.r.teacherFeedbacksFilledIn}}</td>
-        <td>{{oneData.r.expertFeedbacksFilledIn}}</td>
+        <td class="cell{{group.r.test1}}"></td>
+        <td class="cell{{group.r.test2}}"></td>
+        <td class="cell{{group.r.test3}}"></td>
+        <td class="cell{{group.r.test4}}"></td>
+        <td class="cell{{group.r.test5}}"></td>
+        <td class="cell{{group.r.test6}}"></td>
+        <td class="cell{{group.r.test7}}"></td>
+        <td class="cell{{group.r.test8}}"></td>
+        <td class="cell{{group.r.test9}}"></td>
+        <td class="cell{{group.r.test10}}"></td>
+        <td class="cell{{group.r.intermediateTestBasePass}}"></td>
+        <td class="cell{{group.r.intermediateTestLangPass}}"></td>
+        <td class="cell{{group.r.teacherFeedbacksFilledIn}}"></td>
+        <td class="cell{{group.r.expertFeedbacksFilledIn}}"></td>
 
-        <td>{{oneData.r.groupReadyToOffering}}</td>
+        <td class="cell{{group.r.groupReadyToOffering}}"></td>
 
-        <td>{{oneData.r.finalTestBasePass}}</td>
-        <td>{{oneData.r.finalTestLangPass}}</td>
-        <td>{{oneData.r.interviewerDefined}}</td>
-        <td>{{oneData.r.interviewerSummaryDefined}}</td>
-        <td>{{oneData.r.expertsLoadFilledIn}}</td>
-        <td>{{oneData.r.interviewersLoadFilledIn}}</td>
+        <td class="cell{{group.r.finalTestBasePass}}"></td>
+        <td class="cell{{group.r.finalTestLangPass}}"></td>
+        <td class="cell{{group.r.interviewerDefined}}"></td>
+        <td class="cell{{group.r.interviewerSummaryDefined}}"></td>
+        <td class="cell{{group.r.expertsLoadFilledIn}}"></td>
+        <td class="cell{{group.r.interviewersLoadFilledIn}}"></td>
 
-        <td>{{oneData.r.groupReadyForClose}}</td>
+        <td class="cell{{group.r.groupReadyForClose}}"></td>
 
-        <td>{{oneData.total}}</td>
+        <td>{{group.total}}</td>
 
       </tr>
     </ng-container>
