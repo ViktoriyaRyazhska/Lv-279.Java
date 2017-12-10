@@ -84,22 +84,23 @@ public class GroupInfoServiceImpl implements GroupInfoService {
 
             for (GroupInfo groupInfo : groupInfoList) {
                 AcademyDTO academyDTO = academyConverter.toDTO(groupInfo);
-                if (groupInfo.getAcademy() != null) {
-                    if (groupInfo.getAcademy().getCity() != null) {
+                Academy academy = groupInfo.getAcademy();
+                if (academy != null) {
+                    if (academy.getCity() != null) {
                         for (LanguageTranslations languageTranslation : languageTranslations) {
-                            if (languageTranslation.getItemId() == groupInfo.getAcademy().getCity().getCityId()) {
+                            if (languageTranslation.getItemId() == academy.getCity().getCityId()) {
                                 academyDTO.setCityName(languageTranslation.getTrasnlation());
                                 break;
                             }
                         }
                     }
-                    if (groupInfo.getAcademy().getAcademyStages() != null) {
-                        academyDTO.setStatus(groupInfo.getAcademy().getAcademyStages().getName());
+                    if (academy.getAcademyStages() != null) {
+                        academyDTO.setStatus(academy.getAcademyStages().getName());
                     }
                     List<String> employeeList = new ArrayList<>();
                     if (getExpertsOfTheGroup != null) {
                         for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
-                            if (groupInfoTeachers.getAcademy().getAcademyId() == groupInfo.getAcademy().getAcademyId()) {
+                            if (groupInfoTeachers.getAcademy().getAcademyId() == academy.getAcademyId()) {
                                 employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " "
                                         + groupInfoTeachers.getEmployee().getLastNameEng());
                             }
@@ -110,7 +111,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                     }
                     if (studentStatuses != null) {
                         countActualStudents = studentsService
-                                .countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
+                                .countAllByAcademyAndStudentStatus(academy, studentStatuses);
                     }
                     if (countActualStudents != null) {
                         academyDTO.setStudentsActual(countActualStudents);

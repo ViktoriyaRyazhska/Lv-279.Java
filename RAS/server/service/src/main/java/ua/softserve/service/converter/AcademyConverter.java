@@ -31,20 +31,30 @@ public class AcademyConverter {
 
     public AcademyDTO toDTO(GroupInfo groupInfo) {
         AcademyDTO academyDTO = new AcademyDTO();
-
-        if (groupInfo.getAcademy() != null) {
-            academyDTO.setAcademyStagesId(groupInfo.getAcademy().getAcademyStages().getStageId());
-            academyDTO.setStartDate(groupInfo.getAcademy().getStartDate().toString());
-            academyDTO.setDirectionName(groupInfo.getAcademy().getDirections().getName());
-            academyDTO.setTechnologyName(groupInfo.getAcademy().getTechnologies().getName());
-            academyDTO.setPayment(groupInfo.getAcademy().getFree());
-            if (groupInfo.getAcademy().getFree() == 1) {
+        Academy academy = groupInfo.getAcademy();
+        if (academy != null) {
+            if(academy.getAcademyStages() != null){
+                academyDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
+            }
+            if(academy.getStartDate() != null){
+                academyDTO.setStartDate(academy.getStartDate().toString());
+            }
+            if(academy.getDirections() != null){
+                academyDTO.setDirectionName(academy.getDirections().getName());
+            }
+            if(academy.getTechnologies() != null){
+                academyDTO.setTechnologyName(academy.getTechnologies().getName());
+            }
+            academyDTO.setPayment(academy.getFree());
+            if (academy.getFree() == 1) {
                 academyDTO.setPaymentStatus("Founded by SoftServe");
             } else {
                 academyDTO.setPaymentStatus("Paid");
             }
-            academyDTO.setEndDate(groupInfo.getAcademy().getEndDate().toString());
-            academyDTO.setNameForSite(groupInfo.getAcademy().getName());
+            if(academy.getEndDate() != null){
+                academyDTO.setEndDate(academy.getEndDate().toString());
+            }
+            academyDTO.setNameForSite(academy.getName());
         }
         if (groupInfo.getProfileInfo() != null) {
             academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
