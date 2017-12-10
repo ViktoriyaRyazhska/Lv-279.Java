@@ -3,6 +3,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginAccount} from "./LoginAccount";
 import {LoginService} from "./login.service";
 import {MyauthService} from "../myauth.service";
+import {getResponseURL} from "@angular/http/src/http_utils";
+import {ResponseToken} from "./ResponseToken";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -30,16 +33,10 @@ export class LoginComponent implements OnInit {
   login = () => {
     this.account = this.loginForm.value;
     this.loginService.signIn(this.account)
-      .subscribe((response)=>{
-      this.getStatus();
+      .subscribe((response:ResponseToken)=>{
+        localStorage.setItem('jwt',response.token)
       })
-  }
+  };
 
-  private getStatus() {
-    this.loginService.getStatus()
-      .subscribe((response) => {
-        sessionStorage.setItem('status', 'ACTIVE');
-        this.success = true;
-      });
-  }
+
 }
