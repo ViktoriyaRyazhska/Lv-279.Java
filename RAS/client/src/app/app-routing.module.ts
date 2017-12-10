@@ -36,12 +36,6 @@ const appRoutes: Routes = [
   {path: 'ang/students', component: StudentsComponent},
   {path: 'ang/marks', component: FeedbackTeacherEditComponent},
   {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},
-  {
-    path: 'ang/feed', component: FeedbacksComponent, children: [
-    // think about this {path: '', component: FeedbackStartComponent},
-    {path: ':id', component: FeedbackDetailComponent},
-    {path: ':id/edit', component: FeedbackEditComponent},]
-  },
   {path: 'ang/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
   {path: 'ang/tests', component: TestsNamesComponent},
 ];

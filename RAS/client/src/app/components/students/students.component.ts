@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StudentsService} from "../../services/students/students.service";
 import {Student} from "../../models/student";
-import {Observable} from "rxjs/Observable";
+
+
 
 @Component({
   selector: 'app-students',
@@ -11,6 +12,7 @@ import {Observable} from "rxjs/Observable";
 export class StudentsComponent implements OnInit {
   private students:Student[];
   private selectedStudent:Student;
+  private displayStudentDetails:boolean;
   constructor(private studentsService: StudentsService) {
     this.selectedStudent = new Student();
   }
@@ -25,6 +27,7 @@ export class StudentsComponent implements OnInit {
   }
   onStudentClick(student:Student){
     this.selectedStudent = student;
+    this.displayStudentDetails = true;
   }
 
 }

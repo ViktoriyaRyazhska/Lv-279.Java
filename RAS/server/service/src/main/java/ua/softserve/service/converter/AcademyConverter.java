@@ -3,10 +3,7 @@ package ua.softserve.service.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
-import ua.softserve.service.AcademyStagesService;
-import ua.softserve.service.CityService;
-import ua.softserve.service.DirectionService;
-import ua.softserve.service.TechnologyService;
+import ua.softserve.service.*;
 import ua.softserve.service.dto.AcademyDTO;
 
 import java.sql.Timestamp;
@@ -25,6 +22,12 @@ public class AcademyConverter {
 
     @Autowired
     TechnologyService technologyService;
+
+    @Autowired
+    ProfileService profileService;
+
+    @Autowired
+    AcademyService academyService;
 
     public AcademyDTO toDTO(GroupInfo groupInfo) {
         AcademyDTO academyDTO = new AcademyDTO();
@@ -64,14 +67,21 @@ public class AcademyConverter {
         academy.setDirections(getDirection(academyDTO.getDirectionId()));
         academy.setTechnologies(getTechnologies(academyDTO.getTechnologieId()));
 
-        // TODO: refactor
-        // academy.setProfile(getProfile(academyDTO.getProfileId()));
-        // academy.setStudentGroupCount(studentGroupCountService.saveDTO(academyDTO));
-
         return academy;
     }
 
-    private Timestamp convertStringToTimestamp(String date) {
+    public GroupInfo groupInfoToEntity(int academyId, AcademyDTO academyDTO) {
+        GroupInfo groupInfo = new GroupInfo();
+        groupInfo.setAcademy(getAcademyById(academyId));
+        groupInfo.setGroupName(academyDTO.getGrName());
+        groupInfo.setProfileInfo(getProfileInfo(academyDTO.getProfileId()));
+        groupInfo.setStudentsPlannedToEnrollment(academyDTO.getStudentPlannedToEnrollment());
+        groupInfo.setStudentsPlannedToGraduate(academyDTO.getStudentPlannedToGraduate());
+
+        return groupInfo;
+    }
+
+        private Timestamp convertStringToTimestamp(String date) {
         if (date == null) {
             throw new IllegalArgumentException("Date can't be null");
         } else if (date.isEmpty()) {
@@ -91,11 +101,7 @@ public class AcademyConverter {
     }
 
     private City getCity(int id) {
-        City city = cityService.findOne(id);
-        if (city == null) {
-            // throw new ("Can't find city with id = " + id);
-        }
-        return city;
+        return cityService.findOne(id);
     }
 
     private AcademyStages getAcademyStages(int academyStagesId) {
@@ -110,8 +116,12 @@ public class AcademyConverter {
         return technologyService.findOne(technologieId);
     }
 
-    // TODO: refactor
-    // private Profile getProfile(int profileId) {
-    // return profileService.findOne(profileId);
-    // }
+    private ProfileInfo getProfileInfo(int profileInfoId){
+        return profileService.findOne(profileInfoId);
+    }
+
+    private Academy getAcademyById(int academyId){
+        return academyService.findOne(academyId);
+    }
+
 }

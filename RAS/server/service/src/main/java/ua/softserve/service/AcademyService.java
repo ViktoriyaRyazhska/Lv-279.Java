@@ -8,7 +8,9 @@ import java.util.List;
 public interface AcademyService {
     Academy getById(Integer id);
 
-    void save(Academy user);
+    Integer save(Academy academy);
+
+    void saveAcademyFromAcademyDTO(AcademyDTO academyDTO);
 
     // void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
 

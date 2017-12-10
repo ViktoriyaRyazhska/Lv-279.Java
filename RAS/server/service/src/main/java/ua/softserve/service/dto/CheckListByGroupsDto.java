@@ -13,11 +13,15 @@ package ua.softserve.service.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ua.softserve.persistence.entity.EnglishLevel;
+import ua.softserve.persistence.entity.Student;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.function.Predicate;
+
+import static ua.softserve.persistence.constants.ConstantsFromDb.EL_PRE_INTERMEDIATE_ID;
 
 @Getter
 @Setter
@@ -31,40 +35,42 @@ public class CheckListByGroupsDto {
     private Map<String, Integer> r = new HashMap<>();
     private double total;
 
-    private static String[] GROUP_STARTED_SUCCESS_FULLY_KEYS = {
-            "englishLevelDefined",
-            "englishLevelCorrect",
-            "entryScoreDefined",
-            "incomingTestDefined",
-            "approvedByDefined",
-            "teacherDefined",
-            "expertDefined"
-    };
-
-    private static String[] GROUP_READY_TO_OFFERING_KEYS = {
-            "tests1",
-            "tests2",
-            "tests3",
-            "tests4",
-            "tests5",
-            "tests6",
-            "tests7",
-            "tests8",
-            "tests9",
-            "tests10",
-            "intermediateTestBasePass",
-            "intermediateTestLangPass",
-            "teacherFeedbacksFilledIn",
-            "expertFeedbacksFilledIn"
-    };
-
-    private static String[] GROUP_READY_FOR_CLOSE_KEYS = {
-            "finalTestBasePass",
-            "finalTestLangPass",
-            "interviewerDefined",
-            "interviewerSummaryDefined",
-            "expertsLoadFilledIn",
-            "interviewersLoadFilledIn"
+    private static String[][] KEYS = {
+            {
+                    "englishLevelDefined",
+                    "englishLevelCorrect",
+                    "entryScoreDefined",
+                    "incomingTestDefined",
+                    "approvedByDefined",
+                    "teacherDefined",
+                    "expertDefined"
+            },
+            {
+                    "test1",
+                    "test2",
+                    "test3",
+                    "test4",
+                    "test5",
+                    "intermediateTestBasePass",
+                    "intermediateTestLangPass",
+                    "teacherFeedbacksFilledIn",
+                    "expertFeedbacksFilledIn"
+            },
+            {
+                    "finalTestBasePass",
+                    "finalTestLangPass",
+                    "interviewerDefined",
+                    "interviewerSummaryDefined",
+                    "expertsLoadFilledIn",
+                    "interviewersLoadFilledIn"
+            },
+            {
+                    "test6",
+                    "test7",
+                    "test8",
+                    "test9",
+                    "test10",
+            }
     };
 
     @Getter
@@ -84,7 +90,7 @@ public class CheckListByGroupsDto {
         total = (double) Math.round((sum / r.size()) * 100 * 100) / 100;
 
         int flag = 1;
-        for (String s : GROUP_STARTED_SUCCESS_FULLY_KEYS) {
+        for (String s : KEYS[0]) {
             flag *= r.get(s);
         }
         r.put("groupStartedSuccessfully", flag);
@@ -93,7 +99,7 @@ public class CheckListByGroupsDto {
             r.put("groupReadyForClose", 0);
         } else {
             flag = 1;
-            for (String s : GROUP_READY_TO_OFFERING_KEYS) {
+            for (String s : KEYS[1]) {
                 flag *= r.get(s);
             }
             r.put("groupReadyToOffering", flag);
@@ -101,7 +107,7 @@ public class CheckListByGroupsDto {
                 r.put("groupReadyToOffering", 0);
             } else {
                 flag = 1;
-                for (String s : GROUP_READY_FOR_CLOSE_KEYS) {
+                for (String s : KEYS[2]) {
                     flag *= r.get(s);
                 }
                 r.put("groupReadyForClose", flag);
@@ -109,4 +115,5 @@ public class CheckListByGroupsDto {
         }
 
     }
+
 }

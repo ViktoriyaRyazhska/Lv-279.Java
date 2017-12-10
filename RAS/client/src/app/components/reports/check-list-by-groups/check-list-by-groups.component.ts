@@ -9,29 +9,17 @@ import {ChListGr} from "./ChListGr";
   providers: [ReportsService]
 })
 export class CheckListByGroupsComponent implements OnInit {
-  allData: ChListGr;
-  tstVisible: any;
-  some: any;
-  tstCapt = '+';
+  groups: ChListGr;
 
   constructor(private reportsService: ReportsService) { }
 
   ngOnInit() {
     this.reportsService.getAllForCheckListReport().subscribe(
       data => {
-        this.allData = data;
+        this.groups = data;
       },
       error => console.log(error)
     );
-  }
-
-  tstBtnClick(index: number): void {
-    this.tstVisible = !this.tstVisible;
-    if (this.tstVisible) {
-      this.tstCapt = '-';
-    } else {
-      this.tstCapt = '+';
-    }
   }
 
 }
