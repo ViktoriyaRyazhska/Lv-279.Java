@@ -85,8 +85,8 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         List<Academy> academies = academyService.getAllAcademies();
         Calendar dateForComparison = new GregorianCalendar();
         dateForComparison.add(Calendar.MONTH, 2);
+        Calendar academyStartDate = new GregorianCalendar();
         for (Academy a : academies) {
-            Calendar academyStartDate = new GregorianCalendar();
             academyStartDate.setTimeInMillis(a.getStartDate().getTime());
             if ((a.getAcademyStages().getStageId() == AS_PLANNED_ID) && academyStartDate.before(dateForComparison)) {
                 planedGroupForTwoMoth.add(this.findById(a.getAcademyId()));
@@ -100,7 +100,6 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
             if(a.getAcademyStages().getStageId() == AS_GRADUATED_ID){
                 groupsGraduated.add(this.findById(a.getAcademyId()));
             }
-
         }
         itaTacticalPlanByGroupStage.add(planedGroupForTwoMoth);
         itaTacticalPlanByGroupStage.add(groupsInProces);

@@ -43,7 +43,7 @@ public class ControllerForReports {
     @RequestMapping(value = "/itaTacticalPlanByGroupStage",method = RequestMethod.GET, produces = {"application/json"})
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<List<ItaTacticalPlanByGroupStageDto>>> itaTacticalPlanByGroupStage() {
-        return new ResponseEntity<List<List<ItaTacticalPlanByGroupStageDto>>>(itaTacticalPlanByGroupStageDtoService.itaTacticalPlanByGroupStageReport(), HttpStatus.OK);
+        return new ResponseEntity<>(itaTacticalPlanByGroupStageDtoService.itaTacticalPlanByGroupStageReport(), HttpStatus.OK);
     }
 
 }

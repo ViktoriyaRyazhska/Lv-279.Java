@@ -26,9 +26,14 @@ export class ItaTacticalPlanByGroupStageComponent implements OnInit {
     this.itaTacticalPlanByGroupStageService.getAll().subscribe(
       data => {
         for (var i = 0; i < data.length; i++) {
-          this.itaTacticalPlanByGroupStageReports[i].report = data[i];
+          this.itaTacticalPlanByGroupStageReports[i].report = data[i].sort((item1, item2) => {
+            if (item1.startDate > item2.startDate) {
+              return 1;
+            } else {
+              return -1;
+            }
+          });
         }
-       // console.log(this.itaTacticalPlanByGroupStageReports);
       },
       error => {
         console.log(error)
@@ -36,21 +41,5 @@ export class ItaTacticalPlanByGroupStageComponent implements OnInit {
     );
   }
 
-  //
-  //
-  // ngOnInit() {
-  //   this.itaTacticalPlanByGroupStageService.getAll().subscribe(
-  //     data => {
-  //       this.itaTacticalPlanByGroupStage = data;
-  //       this.groupsGraduated = this.itaTacticalPlanByGroupStage.pop();
-  //       this.groupsOffering = this.itaTacticalPlanByGroupStage.pop();
-  //       this.groupsInProces = this.itaTacticalPlanByGroupStage.pop();
-  //       this.planedGroupForTwoMoth = this.itaTacticalPlanByGroupStage.pop()
-  //     },
-  //     error => {
-  //       console.log(error)
-  //     }
-  //   );
-  // }
 
 }
