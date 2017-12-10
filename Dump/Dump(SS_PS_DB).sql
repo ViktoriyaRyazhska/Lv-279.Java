@@ -731,7 +731,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `student_statuses` WRITE;
 /*!40000 ALTER TABLE `student_statuses` DISABLE KEYS */;
-INSERT INTO `student_statuses` VALUES (1,'Trainee'),(2,'Suspended'),(3,'Accepted pre-offer'),(4,'Rejected: non-classified'),(5,'Rejected: pre-offer'),(6,'Rejected: by poor progress'),(7,'Rejected: hunted by rivals'),(8,'Graduated'),(8,'Hired');
+INSERT INTO `student_statuses` VALUES (1,'Trainee'),(2,'Suspended'),(3,'Accepted pre-offer'),(4,'Rejected: non-classified'),(5,'Rejected: pre-offer'),(6,'Rejected: by poor progress'),(7,'Rejected: hunted by rivals'),(8,'Graduated'),(9,'Hired');
 /*!40000 ALTER TABLE `student_statuses` ENABLE KEYS */;
 UNLOCK TABLES;
 
