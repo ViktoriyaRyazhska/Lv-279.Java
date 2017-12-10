@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
+import ua.softserve.service.converter.AcademyConverter;
 import ua.softserve.service.dto.AcademyDTO;
 
 import java.util.List;
@@ -30,6 +32,12 @@ public class AcademyServiceImpl implements AcademyService {
     @Autowired
     LanguageTranslationsService languageTranslationsService;
 
+    @Autowired
+    GroupInfoService groupInfoService;
+
+    @Autowired
+    private AcademyConverter academyConverter;
+
     @Transactional(readOnly = true)
     @Override
     public Academy getById(Integer id) {
@@ -38,9 +46,25 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Transactional
     @Override
-    public void save(Academy academy) {
-        academyRepository.save(academy);
+    public Integer save(Academy academy) {
+        return academyRepository.save(academy).getAcademyId();
     }
+
+    @Transactional
+    @Override
+    public void saveAcademyFromAcademyDTO(AcademyDTO academyDTO) {
+        Academy academy = academyConverter.toEntity(academyDTO);
+
+        int academyId = save(academy);
+
+        saveGroupInfo(academyId, academyDTO);
+    }
+
+    private void saveGroupInfo(int academyId, AcademyDTO academyDTO){
+        GroupInfo  groupInfo = academyConverter.groupInfoToEntity(academyId, academyDTO);
+        groupInfoService.save(groupInfo);
+    }
+
 
     @Transactional
     @Override
