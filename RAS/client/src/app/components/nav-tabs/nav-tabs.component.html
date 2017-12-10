@@ -1,8 +1,19 @@
-<ul class="nav nav-tabs">
-  <li data-toggle="tab" role="presentation" class="active"><a routerLink="students">Students</a></li>
-  <li data-toggle="tab" role="presentation" ><a>Teachers(Experts)</a></li>
-  <li data-toggle="tab" role="presentation"><a routerLink="history">Group History</a></li>
-  <li data-toggle="tab" role="presentation"><a routerLink="feedbacks">Feedback</a></li>
-</ul>
+<p-tabView>
+  <p-tabPanel header="Students" [selected]="true">
+    <app-students></app-students>
+  </p-tabPanel>
 
-<router-outlet></router-outlet>
+  <p-tabPanel header="Teachers(Experts)">
+    Тут пів киці, там пів киці, киця йде по залізниці.
+  </p-tabPanel>
+
+  <p-tabPanel header="Group History">
+    <app-history-list></app-history-list>
+  </p-tabPanel>
+
+  <p-tabPanel header="Feedback">
+    <app-feedbacks></app-feedbacks>
+  </p-tabPanel>
+
+</p-tabView>
+
