@@ -1,5 +1,5 @@
-
-  <h1 align="center">List of planned launches of group (next 2 monthes)</h1>
+<div *ngFor="let report of itaTacticalPlanByGroupStageReports">
+  <h1 align="center">{{report.name}}</h1>
   <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
 
     <tr>
@@ -22,169 +22,28 @@
       <th>Payment status</th>
     </tr>
 
-    <ng-container *ngFor="let report of planedGroupForTwoMoth">
+    <ng-container *ngFor="let item of report.report">
       <tr>
-        <td>{{report.startDate|date: "yyyy"}}</td>
-        <td>{{report.startDate|date: "M"}}</td>
-        <td>{{report.groupId}}</td>
-        <td>{{report.groupName}}</td>
-        <td>{{report.cg}}</td>
-        <td>{{report.profile}}</td>
-        <td>{{report.location}}</td>
-        <td>{{report.requested}}</td>
-        <td>{{report.studyInProgress}}</td>
-        <td>{{report.graduated}}</td>
-        <td>{{report.hired}}</td>
-        <td>{{report.startDate|date: "dd/MM/yyyy"}}</td>
-        <td>{{report.endDate|date: "dd/MM/yyyy"}}</td>
-        <td>{{report.groupStatus}}</td>
-        <td>{{report.trainer}}</td>
-        <td>{{report.comment}}</td>
-        <td>{{report.paymentSatus}}</td>
+        <td>{{item.startDate|date: "yyyy"}}</td>
+        <td>{{item.startDate|date: "M"}}</td>
+        <td>{{item.groupId}}</td>
+        <td>{{item.groupName}}</td>
+        <td>{{item.cg}}</td>
+        <td>{{item.profile}}</td>
+        <td>{{item.location}}</td>
+        <td>{{item.requested}}</td>
+        <td>{{item.studyInProgress}}</td>
+        <td>{{item.graduated}}</td>
+        <td>{{item.hired}}</td>
+        <td>{{item.startDate|date: "dd/MM/yyyy"}}</td>
+        <td>{{item.endDate|date: "dd/MM/yyyy"}}</td>
+        <td>{{item.groupStatus}}</td>
+        <td>{{item.trainer}}</td>
+        <td>{{item.comment}}</td>
+        <td>{{item.paymentSatus}}</td>
 
       </tr>
     </ng-container>
 
   </table>
-
-  <h1 align="center">In Process</h1>
-  <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
-
-    <tr>
-      <th>Year</th>
-      <th>Month</th>
-      <th>Group ID</th>
-      <th>Group/Group feedbacks</th>
-      <th>CG</th>
-      <th>Profile</th>
-      <th>Location</th>
-      <th>#,requested</th>
-      <th>#,study in progress</th>
-      <th>#,graduated</th>
-      <th>#,hired</th>
-      <th>Group start Date</th>
-      <th>Group finish Date</th>
-      <th>Group status</th>
-      <th>Trainer</th>
-      <th>Comment</th>
-      <th>Payment status</th>
-    </tr>
-
-    <ng-container *ngFor="let report of groupsInProces">
-      <tr>
-        <td>{{report.startDate|date: "yyyy"}}</td>
-        <td>{{report.startDate|date: "M"}}</td>
-        <td>{{report.groupId}}</td>
-        <td>{{report.groupName}}</td>
-        <td>{{report.cg}}</td>
-        <td>{{report.profile}}</td>
-        <td>{{report.location}}</td>
-        <td>{{report.requested}}</td>
-        <td>{{report.studyInProgress}}</td>
-        <td>{{report.graduated}}</td>
-        <td>{{report.hired}}</td>
-        <td>{{report.startDate|date: "dd/MM/yyyy"}}</td>
-        <td>{{report.endDate|date: "dd/MM/yyyy"}}</td>
-        <td>{{report.groupStatus}}</td>
-        <td>{{report.trainer}}</td>
-        <td>{{report.comment}}</td>
-        <td>{{report.paymentSatus}}</td>
-
-      </tr>
-    </ng-container>
-
-  </table>
-  <h1 align="center">Offering</h1>
-  <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
-
-    <tr>
-      <th>Year</th>
-      <th>Month</th>
-      <th>Group ID</th>
-      <th>Group/Group feedbacks</th>
-      <th>CG</th>
-      <th>Profile</th>
-      <th>Location</th>
-      <th>#,requested</th>
-      <th>#,study in progress</th>
-      <th>#,graduated</th>
-      <th>#,hired</th>
-      <th>Group start Date</th>
-      <th>Group finish Date</th>
-      <th>Group status</th>
-      <th>Trainer</th>
-      <th>Comment</th>
-      <th>Payment status</th>
-    </tr>
-
-    <ng-container *ngFor="let report of groupsOffering">
-      <tr>
-        <td>{{report.startDate|date: "yyyy"}}</td>
-        <td>{{report.startDate|date: "M"}}</td>
-        <td>{{report.groupId}}</td>
-        <td>{{report.groupName}}</td>
-        <td>{{report.cg}}</td>
-        <td>{{report.profile}}</td>
-        <td>{{report.location}}</td>
-        <td>{{report.requested}}</td>
-        <td>{{report.studyInProgress}}</td>
-        <td>{{report.graduated}}</td>
-        <td>{{report.hired}}</td>
-        <td>{{report.startDate|date: "dd/MM/yyyy"}}</td>
-        <td>{{report.endDate|date: "dd/MM/yyyy"}}</td>
-        <td>{{report.groupStatus}}</td>
-        <td>{{report.trainer}}</td>
-        <td>{{report.comment}}</td>
-        <td>{{report.paymentSatus}}</td>
-
-      </tr>
-    </ng-container>
-
-  </table>
-  <h1 align="center">Graduated</h1>
-  <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
-
-    <tr>
-      <th>Year</th>
-      <th>Month</th>
-      <th>Group ID</th>
-      <th>Group/Group feedbacks</th>
-      <th>CG</th>
-      <th>Profile</th>
-      <th>Location</th>
-      <th>#,requested</th>
-      <th>#,study in progress</th>
-      <th>#,graduated</th>
-      <th>#,hired</th>
-      <th>Group start Date</th>
-      <th>Group finish Date</th>
-      <th>Group status</th>
-      <th>Trainer</th>
-      <th>Comment</th>
-      <th>Payment status</th>
-    </tr>
-
-    <ng-container *ngFor="let report of groupsGraduated">
-      <tr>
-        <td>{{report.startDate|date: "yyyy"}}</td>
-        <td>{{report.startDate|date: "M"}}</td>
-        <td>{{report.groupId}}</td>
-        <td>{{report.groupName}}</td>
-        <td>{{report.cg}}</td>
-        <td>{{report.profile}}</td>
-        <td>{{report.location}}</td>
-        <td>{{report.requested}}</td>
-        <td>{{report.studyInProgress}}</td>
-        <td>{{report.graduated}}</td>
-        <td>{{report.hired}}</td>
-        <td>{{report.startDate|date: "dd/MM/yyyy"}}</td>
-        <td>{{report.endDate|date: "dd/MM/yyyy"}}</td>
-        <td>{{report.groupStatus}}</td>
-        <td>{{report.trainer}}</td>
-        <td>{{report.comment}}</td>
-        <td>{{report.paymentSatus}}</td>
-
-      </tr>
-    </ng-container>
-
-  </table>
+</div>
