@@ -12,6 +12,7 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
+import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.CheckListByGroupsDto;
 
 import java.util.Arrays;
@@ -69,6 +70,7 @@ public class GroupInfoServiceTest {
         Mockito.when(teacherTypeService.findOne(EXPERT_STATUS_ID)).thenReturn(teacherTypes);
         Mockito.when(groupInfoService.findAllWithOrder()).thenReturn(Arrays.asList(groupInfo));
         Mockito.when(studentsStatusesService.findOne(TRAINEE_STATUS_ID)).thenReturn(studentStatuses);
+        Mockito.when(academyConverter.toDTO(groupInfo)).thenReturn(new AcademyDTO());
 
         groupInfoService.getAllAcademies();
 

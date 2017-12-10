@@ -11,6 +11,9 @@ import ua.softserve.service.dto.AcademyDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service processes information that returns Repositories.
+ */
 @Service
 public class GroupInfoServiceImpl implements GroupInfoService {
     private static final int EXPERT_STATUS_ID = 2;
@@ -59,9 +62,13 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         return groupInfoRepository.findOne(id);
     }
 
+    /**
+     * Method transforms information about academies from all tables into one DTO object.
+     *
+     * @return information about academies from all tables into one DTO object.
+     */
     @Override
     public List<AcademyDTO> getAllAcademies() {
-        // int countStudentsInTheGroup = 0;
         List<GroupInfo> groupInfoList = findAllWithOrder();
         List<AcademyDTO> academyDTOList = new ArrayList<>();
         Integer countActualStudents = null;
@@ -115,7 +122,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                 academyDTOList.add(academyDTO);
             }
         }
-        // form list for combo-box.
+
         AcademyDTO academyDTO = new AcademyDTO();
         academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
         academyDTO.setDirection(directionService.findAllDirectionsInIta());
@@ -126,6 +133,11 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         return academyDTOList;
     }
 
+    /**
+     * Method returns data from GroupInfo table in order of adding records.
+     *
+     * @return data from GroupInfo table in order of adding records.
+     */
     @Override
     public List<GroupInfo> findAllWithOrder() {
         return groupInfoRepository.findAllWithOrder();
