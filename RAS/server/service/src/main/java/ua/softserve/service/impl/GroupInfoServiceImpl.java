@@ -44,7 +44,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     private TeacherTypeService teacherTypeService;
 
     @Autowired
-    private StudentServiceImpl studentsServiceImpl;
+    private StudentService studentsService;
 
     @Autowired
     private StudentsStatusesService studentsStatusesService;
@@ -72,47 +72,48 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         if (teacherTypes != null) {
             getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
         }
+        if (groupInfoList != null) {
 
-        for (GroupInfo groupInfo : groupInfoList) {
-            AcademyDTO academyDTO = academyConverter.toDTO(groupInfo);
-            if (groupInfo.getAcademy() != null) {
-                if (groupInfo.getAcademy().getCity() != null) {
-                    for (LanguageTranslations languageTranslation : languageTranslations) {
-                        if (languageTranslation.getItemId() == groupInfo.getAcademy().getCity().getCityId()) {
-                            academyDTO.setCityName(languageTranslation.getTrasnlation());
-                            break;
+
+            for (GroupInfo groupInfo : groupInfoList) {
+                AcademyDTO academyDTO = academyConverter.toDTO(groupInfo);
+                if (groupInfo.getAcademy() != null) {
+                    if (groupInfo.getAcademy().getCity() != null) {
+                        for (LanguageTranslations languageTranslation : languageTranslations) {
+                            if (languageTranslation.getItemId() == groupInfo.getAcademy().getCity().getCityId()) {
+                                academyDTO.setCityName(languageTranslation.getTrasnlation());
+                                break;
+                            }
                         }
                     }
-                }
-                if (groupInfo.getAcademy().getAcademyStages() != null) {
-                    academyDTO.setStatus(groupInfo.getAcademy().getAcademyStages().getName());
-                }
-                List<String> employeeList = new ArrayList<>();
-                for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
-                    if (groupInfoTeachers.getAcademy().getAcademyId() == groupInfo.getAcademy().getAcademyId()) {
-                        employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " "
-                                + groupInfoTeachers.getEmployee().getLastNameEng());
-                        break;
+                    if (groupInfo.getAcademy().getAcademyStages() != null) {
+                        academyDTO.setStatus(groupInfo.getAcademy().getAcademyStages().getName());
+                    }
+                    List<String> employeeList = new ArrayList<>();
+                    if (getExpertsOfTheGroup != null) {
+                        for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
+                            if (groupInfoTeachers.getAcademy().getAcademyId() == groupInfo.getAcademy().getAcademyId()) {
+                                employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " "
+                                        + groupInfoTeachers.getEmployee().getLastNameEng());
+                            }
+                        }
+                    }
+                    if(employeeList.size() != 0){
+                        academyDTO.setExperts(employeeList);
+                    }
+                    if (studentStatuses != null) {
+                        countActualStudents = studentsService
+                                .countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
+                    }
+                    if (countActualStudents != null) {
+                        academyDTO.setStudentsActual(countActualStudents);
                     }
                 }
-                academyDTO.setExperts(employeeList);
-                /*
-                 * for (Students students : studentsList) { if (students.getAcademy() != null) { if
-                 * (students.getAcademy().getAcademyId() == groupInfo.getAcademy().getAcademyId()) {
-                 * countStudentsInTheGroup++; } } }
-                 */
-                if (studentStatuses != null) {
-                    countActualStudents = studentsServiceImpl
-                            .countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
+                if (groupInfo.getProfileInfo() != null) {
+                    academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
                 }
-                if (countActualStudents != null) {
-                    academyDTO.setStudentsActual(countActualStudents);
-                }
+                academyDTOList.add(academyDTO);
             }
-            if (groupInfo.getProfileInfo() != null) {
-                academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
-            }
-            academyDTOList.add(academyDTO);
         }
         // form list for combo-box.
         AcademyDTO academyDTO = new AcademyDTO();

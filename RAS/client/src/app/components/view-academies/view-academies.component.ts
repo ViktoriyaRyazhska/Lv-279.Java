@@ -14,6 +14,7 @@ import * as moment from 'moment';
 export class ViewAcademiesComponent implements OnInit {
   academies = [];
   filteredAcademies = [];
+  fff = [];
   academyStages: any[];
   cityNames: any[];
   direction: any[];
@@ -29,6 +30,9 @@ export class ViewAcademiesComponent implements OnInit {
       {label: 'Founded by SoftServe', value: 'Founded by SoftServe'},
       {label: 'Paid', value: 'Paid'}
     ];
+
+  yearFilter: number;
+  date1: Date;
 
   pager: any = {};
   pagedItems = [];
@@ -98,12 +102,24 @@ export class ViewAcademiesComponent implements OnInit {
     this.setPage(1);
   }
 
-  onClickFunc(event: Event) {
-    console.log(event);
-  }
+  onYearChange(event, dt, col) {
+    // console.log(dt);
+    // this.fff = dt.value;
+    // Object.keys(dt.filters).forEach(key => {
+    //   // console.log(dt.filters[key]);
+    //   if(key === 'startDate')
+    //     for(const data of this.fff){
+    //       console.log(data);
+    //       if(data[key].incldt.filters[key]){
+    //
+    //       }
+    //   }
+    // });
 
-  format(date) {
-    return moment(date).format('lll');
+    // for (const data of dt.filters) {
+    //   console.log(data);
+    // }
+    // dt.filter(event.value, col.field, col.filterMatchMode);
   }
 
 }
