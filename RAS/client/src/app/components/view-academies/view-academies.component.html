@@ -119,7 +119,8 @@
 
 <!--NEW UI-->
 
-<p-dataTable [value]="academies" [paginator]="true" [rows]="10" [pageLinks]="10" [rowsPerPageOptions]="[5,10,20]"  #dt>
+<p-dataTable [value]="academies" [paginator]="true" [rows]="10" [lazy]="true" (onLazyLoad)="loadData($event)" [pageLinks]="10"
+             [totalRecords]="totalRecords" [rowsPerPageOptions]="[5,10,20]"  #dt>
   <p-column field="grName" header="Group name" [filter]="true" filterPlaceholder="Search" [sortable]="true" [style]="{'overflow':'invisible'}"></p-column>
   <p-column field="nameForSite" header="Name For Site" [filter]="true" filterPlaceholder="Search" [sortable]="true" [style]="{'overflow':'invisible'}"></p-column>
   <p-column field="technologyName" header="Direction" [filter]="true" [sortable]="true" filterMatchMode="equals">
@@ -155,14 +156,17 @@
     <ng-template let-col let-transaction="rowData" pTemplate="body">
       {{transaction[col.field] | date}}
     </ng-template>
-    <ng-template  let-col pTemplate="filter" >
+    <ng-template  let-col pTemplate="filter">
+    <p-calendar [(ngModel)]="date1" [inputStyle]="{'width':'60%'}"
+                 showButtonBar="true" (onBlur)="ccc()">
+    </p-calendar>
+    </ng-template>
+
+    <!--(onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"></p-calendar> {{date1|date}}-->
+    <!--(onBlur)="onYearChange($event, dt, col)"-->
     <!--<i class="fa fa-close" (click)="yearFilter=null;dt.filter(null,col.field,col.filterMatchMode)"></i>-->
     <!--<p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="yearFilter"-->
     <!--[min]="1970" [max]="2010" (onChange)="onYearChange($event, dt, col)"></p-slider>-->
-    <p-calendar [(ngModel)]="date1" [inputStyle]="{'width':'60%'}" (onSelect)="dt.filter($event.value,col.field,col.filterMatchMode)"
-                ></p-calendar> {{date1|date}}
-
-    </ng-template>
   </p-column>
 
   <p-column field="endDate" header="End Date">
@@ -196,3 +200,5 @@
     Data is loading...
   </ng-template>
 </p-dataTable>
+
+

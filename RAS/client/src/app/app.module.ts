@@ -70,6 +70,7 @@ import {PrimeNgModules} from "./prime-ng.modules";
     ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
     TestsNamesComponent
+
   ],
   imports: [
     BrowserModule,
