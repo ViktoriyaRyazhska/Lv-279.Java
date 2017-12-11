@@ -23,6 +23,6 @@ export class TestsService {
   // }
 
   getAll(): Observable<any> {
-    return this.http.get('http://localhost:8080/tests/712');
+    return this.http.get('http://localhost:8080/tests/585');
   }
 }

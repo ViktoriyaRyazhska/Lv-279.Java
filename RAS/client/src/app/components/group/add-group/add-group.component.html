@@ -1,65 +1,60 @@
 <div>
   <div class="container well">
     <div class="col-sm-12" id="form-test">
-      <form (ngSubmit)="saveGroup(groupForm)" #groupForm="ngForm">
+      <form [formGroup]="signupForm" (ngSubmit)="saveGroup()">
         <ul class="col-sm-6 form-group" id="UL_left_column">
           <div class="row">
             <div class="col-sm-6 form-group">
               <label> Group Name:</label>
-              <input type="text" class="form-control input-sm" name="inpGroupName" ngModel required
-                     #inpGroupNameLocRef="ngModel"/>
-              <span class="help-block" *ngIf="!inpGroupNameLocRef.valid && inpGroupNameLocRef.touched">
-              {{defaultInvalidInput}}
-            </span>
+              <!--<input type="text" class="form-control input-sm" formControlName="groupInfoFormControl"/>-->
+              <span *ngIf="!signupForm.get('groupInfoFormControl').valid
+              && signupForm.get('groupInfoFormControl').touched"
+              class="help-block">{{defaultInvalidInput}}</span>
             </div>
 
             <div class="col-sm-6 form-group">
               <label> Site for Name:</label>
-              <input type="text" class="form-control input-sm" name="inpNameForSite" ngModel required
-                     #inpNameForSiteLocRef="ngModel"/>
-              <span class="help-block" *ngIf="!inpNameForSiteLocRef.valid && inpNameForSiteLocRef.touched">
-              {{defaultInvalidInput}}
-            </span>
+              <!--<input type="text" class="form-control input-sm" formControlName="nameForSiteFormControl"/>-->
+              <span *ngIf="!signupForm.get('nameForSiteFormControl').valid
+              && signupForm.get('nameForSiteFormControl').touched"
+                    class="help-block">{{defaultInvalidInput}}</span>
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-6 ">
               <label>Status:</label>
-              <select class="form-control input-sm">
-                <option *ngFor="let academy of academyStages" [selected]="academy.name == 'Planned'"
-                        [value]="academy.stageId">{{academy.name}}
-              </select>
+              <!--<select class="form-control input-sm" formControlName="academyStagesId">-->
+                <!--<option *ngFor="let stages of academyStatus" [value]="stages.stageId">{{ stages.name }}</option>-->
+              <!--</select>-->
             </div>
 
             <div class="col-sm-6 form-group">
               <label>Location:</label>
-              <select class="form-control input-sm">
-                <option *ngFor="let city of cityNames" [selected]="city.trasnlation == 'Lviv'" [value]="city.cityId">
-                  {{city.trasnlation}}
-                </option>
-              </select>
+              <!--<select class="form-control input-sm" formControlName="cityId">-->
+                <!--<option *ngFor="let city of city" [value]="city.itemId">{{city.trasnlation}}</option>-->
+              <!--</select>-->
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-6 form-group">
               <label>Start Date:</label>
-              <input type="date" class="form-control input-sm"/>
+              <!--<input type="date" class="form-control input-sm" formControlName="startDateFormControl"/>-->
             </div>
             <div class="col-sm-6 form-group">
               <label>End Date:</label>
-              <input type="date" class="form-control input-sm"/>
+              <!--<input type="date" class="form-control input-sm" formControlName="endDateFormControl"/>-->
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-12">
               <label class="radio-inline">
-                <input type="radio" [value]="1" checked name="payment">Founded by SoftServe
+                <!--<input type="radio" [value]="1" checked name="payment">Founded by SoftServe-->
               </label>
               <label class="radio-inline">
-                <input type="radio" [value]="0" name="payment">Open Group
+                <!--<input type="radio" [value]="0" name="payment">Open Group-->
               </label>
             </div>
           </div>
@@ -70,46 +65,46 @@
           <div class="row">
             <div class="col-sm-12 form-group">
               <label>Common Direction:</label>
-              <select class="form-control input-sm">
+              <!--<select class="form-control input-sm" formControlName="commonDirectionFormControl">
                 <option value="0" [selected]="0"></option>
-                <option *ngFor="let direct of direction" [value]="direct.directionId">{{direct.name}}</option>
-              </select>
+                <option *ngFor="let direct of commonDirection" [value]="direct.directionId">{{direct.name}}</option>
+              </select>-->
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-6 form-group">
               <label>Direction:</label>
-              <select class="form-control input-sm" [(ngModel)]="technologyModel" name="technologySelect">
+              <!--<select class="form-control input-sm" formControlName="directionFormControl">
                 <option selected value="0"></option>
-                <option *ngFor="let tech of technologie" [ngValue]="tech.technologyId">{{ tech.name }}</option>
-              </select>
+                <option *ngFor="let tech of direction" [value]="tech.technologyId">{{ tech.name }}</option>
+              </select>-->
             </div>
 
             <div class="col-sm-6 form-group">
               <label>Profile:</label>
-              <select class="form-control input-sm">
+              <!--<select class="form-control input-sm" formControlName="profileInfoFormControl">
                 <option value="0"></option>
-                <option *ngFor="let prof of profile | profileFilter:technologyModel" [value]="prof.profileId">
-                  {{prof.profileName}}
+                <option *ngFor="let prof of profile | profileFilter:signupForm.get('directionFormControl').value"
+                        [value]="prof.profileId">{{ prof.profileName }}
                 </option>
-              </select>
+              </select>-->
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-4">
               <label> Students Planned to Graduate:</label>
-              <input type="number" class="form-control input-sm" value={{defaultStudentsPlannedToGraduate}}/>
+              <!--<input type="number" class="form-control input-sm" formControlName="studentPlannedToGraduate"/>-->
             </div>
             <div class="col-sm-4">
               <label> Students Planned to Enrollment:</label>
-              <input type="number" class="form-control input-sm" value={{defaultStudentsPlannedToEnrollment}}/>
+              <!--<input type="number" class="form-control input-sm" formControlName="studentPlannedToEnrollment"/>-->
             </div>
 
             <div class="col-sm-4">
               <label>Students Actual:</label>
-              <input type="number" class="form-control input-sm" disabled value={{defaultStudentActual}}/>
+              <!--<input type="number" class="form-control input-sm" disabled/>-->
             </div>
           </div>
         </ul>
@@ -117,7 +112,7 @@
     </div>
     <hr>
     <div class="row" id="saveGroupBtn" align="center">
-      <button type="submit" class="btn btn-primary" (click)="saveGroup()" [disabled]="!groupForm.valid">Save Group
+      <button type="submit" class="btn btn-primary" (click)="saveGroup()">Save Group
       </button>
     </div>
   </div>

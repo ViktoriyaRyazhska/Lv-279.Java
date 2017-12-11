@@ -37,11 +37,9 @@ public class Encryptor {
 
     /**
      * Encrypts the value using key
-     * 
-     * @param value
-     *            entry string
-     * @param key
-     *            secret key
+     *
+     * @param value entry string
+     * @param key   secret key
      * @return encrypted String
      */
     public static String encrypt(String value, String key) {
@@ -59,14 +57,11 @@ public class Encryptor {
 
     /**
      * Decrypts the value using key
-     * 
-     * @param value
-     *            entry string
-     * @param key
-     *            secret key
+     *
+     * @param value entry string
+     * @param key   secret key
      * @return decrypted String
-     * @throws IllegalArgumentException
-     *             can be "Incorrect value" or "Mac validation failed"
+     * @throws IllegalArgumentException can be "Incorrect value" or "Mac validation failed"
      */
     public static String decrypt(String value, String key) {
         byte[] jsonVal = Base64.decodeBase64(value);
@@ -92,7 +87,7 @@ public class Encryptor {
 
     /**
      * Calculates mac(hash) by value and key
-     * 
+     *
      * @param value
      * @param key
      * @return hash_hmac
@@ -112,7 +107,7 @@ public class Encryptor {
 
     /**
      * Validates the Mac
-     * 
+     *
      * @param mac
      * @param iv
      * @param val
@@ -125,7 +120,7 @@ public class Encryptor {
 
     /**
      * Serializes the value, and add to serialized value missing bytes to length multiple 16
-     * 
+     *
      * @param value
      * @return
      */
@@ -150,7 +145,7 @@ public class Encryptor {
 
     /**
      * Unserializes the value, and cuts off extra bytes
-     * 
+     *
      * @param serializedValue
      * @return
      */
@@ -174,7 +169,7 @@ public class Encryptor {
 
     /**
      * Encrypt method based on Cipher AES/CBC/256
-     * 
+     *
      * @param value
      * @param key
      * @param iv
@@ -196,7 +191,7 @@ public class Encryptor {
 
     /**
      * Decrypt method based on Cipher AES/CBC/256
-     * 
+     *
      * @param value
      * @param key
      * @param iv

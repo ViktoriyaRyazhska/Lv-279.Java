@@ -7,7 +7,7 @@ import ua.softserve.service.dto.AcademyDTO;
 import java.util.List;
 
 public interface GroupInfoService {
-    void save(GroupInfo user);
+    void save(GroupInfo groupInfo);
 
     // void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
 
@@ -17,7 +17,9 @@ public interface GroupInfoService {
 
     List<AcademyDTO> getAllAcademies();
 
-    List<GroupInfo> findAll();
+    List<GroupInfo> findAllWithOrder();
 
     List<TestName> findAllTestNamesByAcademyId (int groupId);
+
+    void saveTestNames(List<TestName> testNames,Integer academy_id);
 }

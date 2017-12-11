@@ -2,7 +2,6 @@ package ua.softserve.service.dto;
 
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class ItaTacticalPlanByGroupStageDto {
     private String groupStatus;
     private String paymentSatus;
     private String comment;
-    private List trainer;
+    private String trainer;
     private int requested;
     private int studyInProgress;
     private int graduated;

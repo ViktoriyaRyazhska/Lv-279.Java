@@ -3,8 +3,8 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.repo.DirectionsRepository;
 import ua.softserve.persistence.entity.Directions;
+import ua.softserve.persistence.repo.DirectionsRepository;
 import ua.softserve.service.DirectionService;
 
 import java.util.List;

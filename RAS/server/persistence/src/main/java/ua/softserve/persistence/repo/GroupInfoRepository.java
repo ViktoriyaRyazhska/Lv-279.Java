@@ -9,9 +9,10 @@ import ua.softserve.persistence.entity.TestName;
 import java.util.List;
 
 public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
-    List<GroupInfo> findAll();
+    @Query("select gi from GroupInfo gi order by gi.groupInfoId desc")
+    List<GroupInfo> findAllWithOrder();
 
-    GroupInfo findByAcademyAcademyId(int academyId);
+    GroupInfo findByAcademyAcademyId(Integer academyId);
 
     @Query("select testNames from GroupInfo gi where gi.academy.academyId = :academyId")
     List<TestName> findTestNamesByAcademyId (@Param("academyId") Integer academyId);

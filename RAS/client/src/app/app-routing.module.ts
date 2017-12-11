@@ -1,5 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
+
 import {ViewAcademiesComponent} from "./components/view-academies/view-academies.component";
 import {AddGroupComponent} from "./components/group/add-group/add-group.component";
 import {HistoryListComponent} from "./components/history/history-list/history-list.component";
@@ -13,24 +14,30 @@ import {ItaTacticalPlanByGroupStageComponent} from "./components/ita-tactical-pl
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 
+// import {FeedbackTeacherDetailComponent} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.component";
+import {LoginComponent} from "./components/auth/login/login.component";
 
 const appRoutes: Routes = [
+  {path: 'viewAcademies', component: ViewAcademiesComponent},
+  {path: 'addgroup', component: AddGroupComponent},
+  {path: 'history', component: HistoryListComponent},
+  {path: 'students', component: StudentsComponent},
+  // {path: 'marks', component: FeedbackTeacherDetailComponent},
+  {path: 'myLogin', component: LoginComponent},
   // {path: '', component: ViewAcademiesComponent},
-  {path: 'ang/addgroup', component: AddGroupComponent, children: [
+  {
+    path: 'ang/addgroup', component: AddGroupComponent, children: [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
     {path: 'students', component: StudentsComponent},
     {path: 'feedbacks', component: FeedbackListComponent},
-    {path: 'history', component: HistoryListComponent}]},
+    {path: 'history', component: HistoryListComponent}]
+  },
   {path: 'ang/viewAcademies', component: ViewAcademiesComponent},
   {path: 'ang/students', component: StudentsComponent},
   {path: 'ang/marks', component: FeedbackTeacherEditComponent},
   {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},
-  {path: 'ang/feed', component: FeedbacksComponent, children: [
-    // think about this {path: '', component: FeedbackStartComponent},
-    {path: ':id', component: FeedbackDetailComponent},
-    {path: ':id/edit', component: FeedbackEditComponent},]},
-  {path: 'ang/ita-tactical-plan-by-group-stage', component:ItaTacticalPlanByGroupStageComponent},
-  {path: 'ang/tests', component:TestsNamesComponent}
+  {path: 'ang/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
+  {path: 'ang/tests', component: TestsNamesComponent},
 ];
 
 @NgModule({

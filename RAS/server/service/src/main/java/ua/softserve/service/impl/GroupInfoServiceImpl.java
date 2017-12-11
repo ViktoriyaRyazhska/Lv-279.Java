@@ -51,8 +51,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
 
     @Override
     public void save(GroupInfo groupInfo) {
-        // TODO: implements method
-        // NOP
+        groupInfoRepository.save(groupInfo);
     }
 
     @Override
@@ -63,16 +62,17 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Override
     public List<AcademyDTO> getAllAcademies() {
         // int countStudentsInTheGroup = 0;
-        List<GroupInfo> groupInfoList = findAll();
+        List<GroupInfo> groupInfoList = findAllWithOrder();
         List<AcademyDTO> academyDTOList = new ArrayList<>();
+        Integer countActualStudents = null;
+        List<GroupInfoTeachers> getExpertsOfTheGroup = null;
         List<LanguageTranslations> languageTranslations = languageTranslationsService.getAllLanguageTranslationsName();
         TeacherTypes teacherTypes = teacherTypeService.findOne(EXPERT_STATUS_ID);
         StudentStatuses studentStatuses = studentsStatusesService.findOne(TRAINEE_STATUS_ID);
-        List<GroupInfoTeachers> getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
+        if (teacherTypes != null) {
+            getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
+        }
 
-        // List<Students> studentsList = studentsService.findAllByStudentStatus(studentStatuses);
-
-        // long l = System.currentTimeMillis();
         for (GroupInfo groupInfo : groupInfoList) {
             AcademyDTO academyDTO = academyConverter.toDTO(groupInfo);
             if (groupInfo.getAcademy() != null) {
@@ -101,9 +101,13 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                  * (students.getAcademy().getAcademyId() == groupInfo.getAcademy().getAcademyId()) {
                  * countStudentsInTheGroup++; } } }
                  */
-                Integer countActualStudents = studentsServiceImpl
-                        .countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
-                academyDTO.setStudentsActual(countActualStudents);
+                if (studentStatuses != null) {
+                    countActualStudents = studentsServiceImpl
+                            .countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
+                }
+                if (countActualStudents != null) {
+                    academyDTO.setStudentsActual(countActualStudents);
+                }
             }
             if (groupInfo.getProfileInfo() != null) {
                 academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
@@ -122,8 +126,8 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     }
 
     @Override
-    public List<GroupInfo> findAll() {
-        return groupInfoRepository.findAll();
+    public List<GroupInfo> findAllWithOrder() {
+        return groupInfoRepository.findAllWithOrder();
     }
 
     @Override
@@ -131,6 +135,16 @@ public class GroupInfoServiceImpl implements GroupInfoService {
 //        GroupInfo groupInfo = groupInfoRepository.findByAcademyAcademyId(groupId);
 //        return groupInfo.getTestNames();
         return groupInfoRepository.findTestNamesByAcademyId(groupId);
+    }
+
+    @Override
+    public void saveTestNames(List<TestName> testNames,Integer academy_id) {
+        System.out.println(groupInfoRepository.findByAcademyAcademyId(academy_id));
+        for (TestName testName : testNames) {
+//            GroupInfo groupInfo = groupInfoRepository.findByAcademyAcademyId(academy_id);
+//            groupInfo.setTestNames(testNames);
+//            groupInfoRepository.save(groupInfo);
+        }
     }
 
     @Override

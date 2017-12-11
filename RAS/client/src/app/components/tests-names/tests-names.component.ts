@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Tests} from "../../models/tests";
 import {TestsService} from "../../services/tests-names/tests.service";
 import {Http, Response} from '@angular/http';
+import {map} from "rxjs/operator/map";
 
 @Component({
   selector: 'app-tests-names',
@@ -14,31 +15,16 @@ export class TestsNamesComponent implements OnInit {
   name: string;
   mp: number;
   tests : Tests[];
-  testNames : any[];
-  max_points : any[];
-  //noinspection TypeScriptUnresolvedFunction
-  testIndex = Array(TestsNamesComponent.counter).fill(1).map((x,i)=>i);
+  defaultTestName : string;
 
-  constructor(
-    private testNamesService  : TestsService
-  )
-  { }
-
+  constructor(private testNamesService  : TestsService) {}
 
   ngOnInit() {
-    this.testNamesService.getAll().subscribe(resp => {
-      this.name = resp.testName;
+    this.testNamesService.getAll().subscribe(data => {
+      console.log(data)
+      this.tests = data
     });
-
-
-    // this.testNamesService.getAll().subscribe(
-    //   data => {
-    //     this.tests = data;
-    //   },
-    //   error => console.log(error)
-    // );
   }
-
 
   save(name : string, mp : number) {
     if(name==null || name==undefined || name.trim()=="")
@@ -56,8 +42,9 @@ export class TestsNamesComponent implements OnInit {
     else
     {
       TestsNamesComponent.counter++;
-      //noinspection TypeScriptUnresolvedFunction
-      this.testIndex = Array(TestsNamesComponent.counter).fill(1).map((x,i)=>i);
+      this.defaultTestName = 'test' + (this.tests.length+1);
+      this.tests.push(new Tests(this.defaultTestName,10));
+
     }
   }
 

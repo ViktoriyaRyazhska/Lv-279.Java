@@ -16,6 +16,9 @@ public class TestName {
     @Column(name = "id")
     private Long testId;
 
+    @Column(name = "academy_id")
+    private Integer groupId;
+
     @NotNull
     @Column(name = "test_name")
     private String testName;
@@ -24,12 +27,10 @@ public class TestName {
     @Column(name = "test_max_score")
     private Double testMaxScore;
 
-//    @ManyToMany(mappedBy = "testNames", cascade = CascadeType.PERSIST)
-//    private List<Student> students;
-
     public TestName(){}
 
-    public TestName(String testName,double testMaxScore) {
+    public TestName(Integer group_id, String testName,double testMaxScore) {
+        this.groupId = group_id;
         this.testName = testName;
         this.testMaxScore = testMaxScore;
     }

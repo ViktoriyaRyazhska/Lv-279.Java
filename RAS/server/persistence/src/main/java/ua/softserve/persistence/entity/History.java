@@ -45,7 +45,7 @@ public class History {
     @Column(name = "modify_by")
     private String modifyBy;
 
-    @Column(name="academy_id")
+    @Column(name = "academy_id")
     private int academyId;
 
 }
