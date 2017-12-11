@@ -22,7 +22,7 @@ public class ItaTacticalPlanByGroupStageDto {
     private String groupStatus;
     private String paymentSatus;
     private String comment;
-    private String trainer;
+    private StringBuilder trainer;
     private int requested;
     private int studyInProgress;
     private int graduated;

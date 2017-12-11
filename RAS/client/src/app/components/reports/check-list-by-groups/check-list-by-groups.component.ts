@@ -1,18 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import {ReportsService} from '../reports.service';
-import {ChListGr} from "./ChListGr";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource, MatSort} from '@angular/material';
+import {ReportsService} from "../reports.service";
 
+/**
+ * @title Table with sorting
+ */
 @Component({
   selector: 'app-check-list-by-groups',
-  templateUrl: './check-list-by-groups.component.html',
+  templateUrl: './check-list-by-groups.component2.html',
   styleUrls: ['./check-list-by-groups.component.css'],
   providers: [ReportsService]
 })
-export class CheckListByGroupsComponent implements OnInit {
-  groups: ChListGr;
+export class CheckListByGroupsComponent {
+  displayedColumns = ['groupName', 'cityName', 'status', 'teachers'];
+  groups: any;
+  dataSource =  new MatTableDataSource(this.groups);
 
-  loading: boolean;
+  @ViewChild(MatSort) sort: MatSort;
 
+  /**
+   * Set the sort after the view init since this component will
+   * be able to query its view for the initialized sort.
+   */
   constructor(private reportsService: ReportsService) { }
 
   ngOnInit() {
@@ -20,26 +29,29 @@ export class CheckListByGroupsComponent implements OnInit {
     this.reportsService.getAllForCheckListReport().subscribe(
       data => {
         this.groups = data;
+        this.dataSource = new MatTableDataSource(this.groups);
+        this.dataSource.sort = this.sort;
       },
       error => console.log(error)
     );
+
   }
 
-  myMouseEnter(s: string){
+  /*onMouseEnter(s: string){
     let elementsByClassName = document.getElementsByClassName(s);
     for (let i = 0; i < elementsByClassName.length; i++) {
       elementsByClassName[i].setAttribute('style', 'background: oldlace; cursor: pointer;');
     }
   }
 
-  myMouseLeave(s: string){
+  onMouseLeave(s: string){
     let elementsByClassName = document.getElementsByClassName(s);
     for (let i = 0; i < elementsByClassName.length; i++) {
       elementsByClassName[i].setAttribute('style', 'background: initial');
     }
   }
 
-  myMouseClick(s: string){
+  onMouseClick(s: string){
     let elementsByClassName = document.getElementsByClassName(s);
     for (let i = 0; i < elementsByClassName.length; i++) {
       if (!elementsByClassName[i].className.endsWith('master')) {
@@ -51,7 +63,7 @@ export class CheckListByGroupsComponent implements OnInit {
         }
       }
     }
-  }
+  }*/
 
 
 }

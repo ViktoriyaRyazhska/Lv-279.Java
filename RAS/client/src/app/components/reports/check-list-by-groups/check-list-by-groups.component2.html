@@ -1,44 +1,115 @@
-<div *ngIf="groups" class="container" style="margin: 0; padding: 0">
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
 
-  <p-dataTable [value]="groups" scrollable="true" scrollHeight="400px" scrollWidth="1600px"
-               resizableColumns="true" columnResizeMode="expand" [loading]="loading">
-    <p-header>Vertical</p-header>
-    <p-column field="groupName" header="Group"></p-column>
-    <p-column field="cityName" header="Group"></p-column>
-    <p-column field="status" header="Group"></p-column>
-    <p-column field="teachers" header="Group"></p-column>
-    <p-column field="experts" header="Group"></p-column>
-    <p-column field="r.englishLevelDefined" header="Group"></p-column>
-    <p-column field="r.englishLevelCorrect" header="Group"></p-column>
-    <p-column field="r.entryScoreDefined" header="Group"></p-column>
-    <p-column field="r.incomingTestDefined" header="Group"></p-column>
-    <p-column field="r.approvedByDefined" header="Group"></p-column>
-    <p-column field="r.teacherDefined" header="Group"></p-column>
-    <p-column field="r.expertDefined" header="Group"></p-column>
-    <p-column field="r.groupStartedSuccessfully" header="Group"></p-column>
-    <p-column field="r.test1" header="Group"></p-column>
-    <p-column field="r.test2" header="Group"></p-column>
-    <p-column field="r.test3" header="Group"></p-column>
-    <p-column field="r.test4" header="Group"></p-column>
-    <p-column field="r.test5" header="Group"></p-column>
-    <p-column field="r.test6" header="Group"></p-column>
-    <p-column field="r.test7" header="Group"></p-column>
-    <p-column field="r.test8" header="Group"></p-column>
-    <p-column field="r.test9" header="Group"></p-column>
-    <p-column field="r.test10" header="Group"></p-column>
-    <p-column field="r.intermediateTestBasePass" header="Group"></p-column>
-    <p-column field="r.intermediateTestLangPass" header="Group"></p-column>
-    <p-column field="r.teacherFeedbacksFilledIn" header="Group"></p-column>
-    <p-column field="r.expertFeedbacksFilledIn" header="Group"></p-column>
-    <p-column field="r.groupReadyToOffering" header="Group"></p-column>
-    <p-column field="r.finalTestBasePass" header="Group"></p-column>
-    <p-column field="r.finalTestLangPass" header="Group"></p-column>
-    <p-column field="r.interviewerDefined" header="Group"></p-column>
-    <p-column field="r.interviewerSummaryDefined" header="Group"></p-column>
-    <p-column field="r.expertsLoadFilledIn" header="Group"></p-column>
-    <p-column field="r.interviewersLoadFilledIn" header="Group"></p-column>
-    <p-column field="r.groupReadyForClose" header="Group"></p-column>
-    <p-column field="total" header="Group"></p-column>
-  </p-dataTable>
+    <ng-container matColumnDef="groupName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Group name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.groupName}} </mat-cell>
+    </ng-container>
 
+    <ng-container matColumnDef="cityName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Dev center</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cityName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="teachers">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Teachers</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.teachers}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
 </div>
+
+<!--<div *ngIf="groups" class="container" style="margin: 0; padding: 0">-->
+
+  <!--<p-dataTable [value]="groups" [scrollable]="true" scrollHeight="400px" scrollWidth="800px"-->
+               <!--resizableColumns="true" columnResizeMode="expand" [loading]="loading">-->
+    <!--<p-header>Check List By Group</p-header>-->
+
+    <!--<p-headerColumnGroup>-->
+
+      <!--<p-row>-->
+        <!--<p-column header="Group name" [rowspan]="2"></p-column>-->
+        <!--<p-column header="Dev center" [rowspan]="2"></p-column>-->
+        <!--<p-column header="Status" [rowspan]="2"></p-column>-->
+        <!--<p-column header="Teachers" [rowspan]="2"></p-column>-->
+        <!--<p-column header="Experts" [rowspan]="2"></p-column>-->
+        <!--<p-column header="Group started successfully" [colspan]="7"></p-column>-->
+        <!--<p-column header="Group ready to offering" [colspan]="14"></p-column>-->
+        <!--<p-column header="Group ready for close" [colspan]="6"></p-column>-->
+        <!--<p-column header="Total, %" [rowspan]="2"></p-column>-->
+      <!--</p-row>-->
+      <!--<p-row>-->
+        <!--<p-column header="English level defined for group"></p-column>-->
+        <!--<p-column header="English Level is correct"></p-column>-->
+        <!--<p-column header="Entry score is defined"></p-column>-->
+        <!--<p-column header="Incoming test is defined"></p-column>-->
+        <!--<p-column header="Approved by is defined"></p-column>-->
+        <!--<p-column header="Teacher(s) defined"></p-column>-->
+        <!--<p-column header="Expert  defined"></p-column>-->
+        <!--<p-column header="Test 1 is pass"></p-column>-->
+        <!--<p-column header="Test 2 is pass"></p-column>-->
+        <!--<p-column header="Test 3 is pass"></p-column>-->
+        <!--<p-column header="Test 4 is pass"></p-column>-->
+        <!--<p-column header="Test 5 is pass"></p-column>-->
+        <!--<p-column header="Test 6 is pass"></p-column>-->
+        <!--<p-column header="Test 7 is pass"></p-column>-->
+        <!--<p-column header="Test 8 is pass"></p-column>-->
+        <!--<p-column header="Test 9 is pass"></p-column>-->
+        <!--<p-column header="Test 10 is pass"></p-column>-->
+        <!--<p-column header="Intermediate Test Base is pass"></p-column>-->
+        <!--<p-column header="Intermediate Test Lang is pass"></p-column>-->
+        <!--<p-column header="Teacher’s feedbacks filled in"></p-column>-->
+        <!--<p-column header="Expert’s feedbacks filled in"></p-column>-->
+        <!--<p-column header="Final Test Base is pass"></p-column>-->
+        <!--<p-column header="Final Test Lang is pass"></p-column>-->
+        <!--<p-column header="Interviewer defined"></p-column>-->
+        <!--<p-column header="Interviewers feedback – summary defined"></p-column>-->
+        <!--<p-column header="Experts load filled in"></p-column>-->
+        <!--<p-column header="Interviewers load filled in"></p-column>-->
+      <!--</p-row>-->
+    <!--</p-headerColumnGroup>-->
+
+    <!--<p-column field="groupName"></p-column>-->
+    <!--<p-column field="cityName"></p-column>-->
+    <!--<p-column field="status"></p-column>-->
+    <!--<p-column field="teachers"></p-column>-->
+    <!--<p-column field="experts"></p-column>-->
+    <!--<p-column field="r.englishLevelDefined"></p-column>-->
+    <!--<p-column field="r.englishLevelCorrect"></p-column>-->
+    <!--<p-column field="r.entryScoreDefined"></p-column>-->
+    <!--<p-column field="r.incomingTestDefined"></p-column>-->
+    <!--<p-column field="r.approvedByDefined"></p-column>-->
+    <!--<p-column field="r.teacherDefined"></p-column>-->
+    <!--<p-column field="r.expertDefined"></p-column>-->
+    <!--<p-column field="r.test1"></p-column>-->
+    <!--<p-column field="r.test2"></p-column>-->
+    <!--<p-column field="r.test3"></p-column>-->
+    <!--<p-column field="r.test4"></p-column>-->
+    <!--<p-column field="r.test5"></p-column>-->
+    <!--<p-column field="r.test6"></p-column>-->
+    <!--<p-column field="r.test7"></p-column>-->
+    <!--<p-column field="r.test8"></p-column>-->
+    <!--<p-column field="r.test9"></p-column>-->
+    <!--<p-column field="r.test10"></p-column>-->
+    <!--<p-column field="r.intermediateTestBasePass"></p-column>-->
+    <!--<p-column field="r.intermediateTestLangPass"></p-column>-->
+    <!--<p-column field="r.teacherFeedbacksFilledIn"></p-column>-->
+    <!--<p-column field="r.expertFeedbacksFilledIn"></p-column>-->
+    <!--<p-column field="r.finalTestBasePass"></p-column>-->
+    <!--<p-column field="r.finalTestLangPass"></p-column>-->
+    <!--<p-column field="r.interviewerDefined"></p-column>-->
+    <!--<p-column field="r.interviewerSummaryDefined"></p-column>-->
+    <!--<p-column field="r.expertsLoadFilledIn"></p-column>-->
+    <!--<p-column field="r.interviewersLoadFilledIn"></p-column>-->
+    <!--<p-column field="total"></p-column>-->
+  <!--</p-dataTable>-->
+
+<!--</div>-->

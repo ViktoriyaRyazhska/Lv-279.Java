@@ -53,3 +53,13 @@ button {
   cursor: pointer;
   display: none;
 }
+
+.general-column {
+  color: red;
+  /*width: 100%;*/
+  /*height: 100px;*/
+}
+
+.container {
+  font-size: medium;
+}

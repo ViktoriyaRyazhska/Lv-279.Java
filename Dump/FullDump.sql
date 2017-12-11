@@ -109,7 +109,7 @@ CREATE TABLE `characteristic` (
 
 LOCK TABLES `characteristic` WRITE;
 /*!40000 ALTER TABLE `characteristic` DISABLE KEYS */;
-INSERT INTO `characteristic` VALUES (1,'Learning ability\n'),(2,'Overall technical competence'),(3,'Passional initiative'),(4,'Team work\n'),(5,'Getting things done\n'),(6,'Active Communicator\n');
+INSERT INTO `characteristic` VALUES (1,'Learning ability'),(2,'Overall technical competence'),(3,'Passional initiative'),(4,'Team work'),(5,'Getting things done'),(6,'Active Communicator');
 /*!40000 ALTER TABLE `characteristic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +211,7 @@ CREATE TABLE `english_level` (
 
 LOCK TABLES `english_level` WRITE;
 /*!40000 ALTER TABLE `english_level` DISABLE KEYS */;
-INSERT INTO `english_level` VALUES (1,'Beginner low'),(2,'Beginner'),(3,'Beginner high'),(4,'Elementary low'),(5,'Elementary'),(6,'Elementary high'),(7,'Pre-Intermediate low'),(8,'Pre-Intermediate'),(9,'Pre-Intermediate high\n'),(10,'Intermediate low'),(11,'Intermediate'),(12,'Intermediate high'),(13,'Upper intermediate low'),(14,'Upper intermediate'),(15,'Upper intermediate high'),(16,'Advanced low'),(17,'Advanced'),(18,'Advanced high'),(19,'Proficient low'),(20,'Proficient'),(21,'Proficient high');
+INSERT INTO `english_level` VALUES (1,'Beginner low'),(2,'Beginner'),(3,'Beginner high'),(4,'Elementary low'),(5,'Elementary'),(6,'Elementary high'),(7,'Pre-Intermediate low'),(8,'Pre-Intermediate'),(9,'Pre-Intermediate high'),(10,'Intermediate low'),(11,'Intermediate'),(12,'Intermediate high'),(13,'Upper intermediate low'),(14,'Upper intermediate'),(15,'Upper intermediate high'),(16,'Advanced low'),(17,'Advanced'),(18,'Advanced high'),(19,'Proficient low'),(20,'Proficient'),(21,'Proficient high');
 /*!40000 ALTER TABLE `english_level` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,6 +369,30 @@ LOCK TABLES `group_info_tests` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `group_payment_status`
+--
+
+DROP TABLE IF EXISTS `group_payment_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `group_payment_status` (
+  `group_payment_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_payment_status` int(11) NOT NULL,
+  `group_payment_status_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`group_payment_status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `group_payment_status`
+--
+
+LOCK TABLES `group_payment_status` WRITE;
+/*!40000 ALTER TABLE `group_payment_status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `group_payment_status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `history`
 --
 
@@ -474,8 +498,11 @@ CREATE TABLE `login_user` (
   `enabled` bit(1) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `employee_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKctad27fryj7tnantkhbqggr1v` (`employee_id`),
+  CONSTRAINT `FKctad27fryj7tnantkhbqggr1v` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -484,7 +511,7 @@ CREATE TABLE `login_user` (
 
 LOCK TABLES `login_user` WRITE;
 /*!40000 ALTER TABLE `login_user` DISABLE KEYS */;
-INSERT INTO `login_user` VALUES (1,'','','USER','','','$2a$10$xsC3s4zqKO8CdStghFgqa.2/hw0ADFoNWPpjgiO2AOl3YhUUTnaUu','1');
+INSERT INTO `login_user` VALUES (1,'','','USER','','','$2a$10$xsC3s4zqKO8CdStghFgqa.2/hw0ADFoNWPpjgiO2AOl3YhUUTnaUu','1',1),(2,'','','ADMIN','','','$2a$10$CQ.60ak/MVz4US0yLKU.NOYP2tQaNCVgnQbjm0AeR9yk63Ac/HhO2','admin',2);
 /*!40000 ALTER TABLE `login_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -512,7 +539,7 @@ CREATE TABLE `mark` (
 
 LOCK TABLES `mark` WRITE;
 /*!40000 ALTER TABLE `mark` DISABLE KEYS */;
-INSERT INTO `mark` VALUES (1,'Learns very quickly, shows significant progress during education time\n','Quick\n',1),(2,'Learns most scope of program, shows expected progress \n','Normal\n',1),(3,'Learns not much, after end of education knowledge level almost the same as it was at the beginning\n','Hard to learn',1),(4,NULL,'Can\'t evaluate\n',1),(5,'Technically skilful, good technical background on different levels\n','Strong\n',2),(6,'Technical knowledge is present, but there are gaps in base knowledge, understanding of base things\n','Good\n',2),(7,'Technical knowledge is pure, just user level of technologies, no understanding of lower technical levels, than user needs\n','Non-technical\n',2),(8,NULL,'Can\'t evaluate\n',2),(9,'Highly motivated to grow in chosen direction, shows initiative to get all needed knowledge and information for effective growth\n','Inititative\n',3),(10,'Usual student: works good, asks questions, interested to work with chosen direction\n','Equal to majority\n',3),(11,NULL,'Can\'t evaluate\n',3),(12,'Work as team member, cooperates with others to achieve team goals\n','Team player\n',4),(13,'Most of work does alone, doesn’t want to cooperate with others, achieves his/her own goals\n','Works alone\n',4),(14,'Takes initiative or can organize small groups of student to work together or proposes solutions how team can effectively achieve goals. Doesn\'t afraid to take responsibility of team results\n','Leader\n',4),(15,NULL,'Can\'t evaluate\n',4),(16,'Finish tasks in time even if this will take extra efforts\n','Strong Area\n',5),(17,'Finish tasks but with delay. Oriented to result, but has problem with planning.\n','Needs improvement\n',5),(18,NULL,'Can\'t evaluate\n',5),(19,'Good communication skills. Doesn’t be afraid to talk to other students, teachers, experts. Clearly describes his/her point of view. Listening skills are good as well.\n','Listener and presenter\n',6),(20,'Has some problems in communication\n','Listener \n',6),(21,'Has issue with communication - can\'t communicate at all or can\'t listen to others\n','Weak communication\n',6),(22,NULL,'Can\'t evaluate\n',6);
+INSERT INTO `mark` VALUES (1,'Learns very quickly, shows significant progress during education time','Quick',1),(2,'Learns most scope of program, shows expected progress ','Normal',1),(3,'Learns not much, after end of education knowledge level almost the same as it was at the beginning','Hard to learn',1),(4,'','Can\'t evaluate',1),(5,'Technically skilful, good technical background on different levels','Strong',2),(6,'Technical knowledge is present, but there are gaps in base knowledge, understanding of base things','Good',2),(7,'Technical knowledge is pure, just user level of technologies, no understanding of lower technical levels, than user needs','Non-technical',2),(8,'','Can\'t evaluate',2),(9,'Highly motivated to grow in chosen direction, shows initiative to get all needed knowledge and information for effective growth','Inititative',3),(10,'Usual student: works good, asks questions, interested to work with chosen direction','Equal to majority',3),(11,NULL,'Can\'t evaluate',3),(12,'Work as team member, cooperates with others to achieve team goals','Team player',4),(13,'Most of work does alone, doesn’t want to cooperate with others, achieves his/her own goals','Works alone',4),(14,'Takes initiative or can organize small groups of student to work together or proposes solutions how team can effectively achieve goals. Doesn\'t afraid to take responsibility of team results','Leader',4),(15,NULL,'Can\'t evaluate',4),(16,'Finish tasks in time even if this will take extra efforts','Strong Area',5),(17,'Finish tasks but with delay. Oriented to result, but has problem with planning.','Needs improvement',5),(18,NULL,'Can\'t evaluate',5),(19,'Good communication skills. Doesn’t be afraid to talk to other students, teachers, experts. Clearly describes his/her point of view. Listening skills are good as well.','Listener and presenter',6),(20,'Has some problems in communication','Listener',6),(21,'Has issue with communication - can\'t communicate at all or can\'t listen to others','Weak communication',6),(22,NULL,'Can\'t evaluate',6);
 /*!40000 ALTER TABLE `mark` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -563,7 +590,7 @@ CREATE TABLE `profile_info` (
 
 LOCK TABLES `profile_info` WRITE;
 /*!40000 ALTER TABLE `profile_info` DISABLE KEYS */;
-INSERT INTO `profile_info` VALUES (1,'Ruby',49),(2,'Java: Web 2.0',3),(3,'Java: Web TAE',31),(4,'.NET: Web TAE',31),(5,'.NET: Web',4),(6,'Python',50),(7,'Python: Web TAE',31),(8,'DevOps: Unix',9),(9,'Generic QCE',41),(10,'Go',54),(11,'Apple: Mobile 2.0',53),(12,'MSSQL: Development',6),(13,'Web UI\n\n',11),(14,'NodeJS',11);
+INSERT INTO `profile_info` VALUES (1,'Ruby',49),(2,'Java: Web 2.0',3),(3,'Java: Web TAE',31),(4,'.NET: Web TAE',31),(5,'.NET: Web',4),(6,'Python',50),(7,'Python: Web TAE',31),(8,'DevOps: Unix',9),(9,'Generic QCE',41),(10,'Go',54),(11,'Apple: Mobile 2.0',53),(12,'MSSQL: Development',6),(13,'Web UI',11),(14,'NodeJS',11);
 /*!40000 ALTER TABLE `profile_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -751,4 +778,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-11 14:25:47
+-- Dump completed on 2017-12-11 18:53:48

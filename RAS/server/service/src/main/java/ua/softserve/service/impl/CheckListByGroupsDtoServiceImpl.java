@@ -49,7 +49,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         List<Academy> allAcademies = academyRepository.findAll()
                 .stream()
                 .filter(academy -> academy.getAcademyId() >= 586 && academy.getAcademyId() <= 932)
-                .limit(50)
+                .limit(30)
                 .collect(Collectors.toList());
 
         List<CheckListByGroupsDto> CheckListByGroupsDtos = new ArrayList<>();
