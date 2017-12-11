@@ -4,8 +4,8 @@
 -- ------------------------------------------------------
 -- Server version	5.7.20-0ubuntu0.16.04.1
 
-create database if not exists academy_test;
-use academy_test;
+create database if not exists ss_ps_db;
+use ss_ps_db;
 SET SQL_SAFE_UPDATES = 0;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -24,7 +24,7 @@ SET SQL_SAFE_UPDATES = 0;
 --
 
 DROP TABLE IF EXISTS `academy`;
-/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `academy` (
   `academy_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -369,6 +369,30 @@ LOCK TABLES `group_info_tests` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `group_payment_status`
+--
+
+DROP TABLE IF EXISTS `group_payment_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `group_payment_status` (
+  `group_payment_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_payment_status` int(11) NOT NULL,
+  `group_payment_status_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`group_payment_status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `group_payment_status`
+--
+
+LOCK TABLES `group_payment_status` WRITE;
+/*!40000 ALTER TABLE `group_payment_status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `group_payment_status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `history`
 --
 
@@ -474,8 +498,11 @@ CREATE TABLE `login_user` (
   `enabled` bit(1) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `employee_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKctad27fryj7tnantkhbqggr1v` (`employee_id`),
+  CONSTRAINT `FKctad27fryj7tnantkhbqggr1v` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -484,7 +511,7 @@ CREATE TABLE `login_user` (
 
 LOCK TABLES `login_user` WRITE;
 /*!40000 ALTER TABLE `login_user` DISABLE KEYS */;
-INSERT INTO `login_user` VALUES (1,'','','USER','','','$2a$10$xsC3s4zqKO8CdStghFgqa.2/hw0ADFoNWPpjgiO2AOl3YhUUTnaUu','1');
+INSERT INTO `login_user` VALUES (1,'','','USER','','','$2a$10$xsC3s4zqKO8CdStghFgqa.2/hw0ADFoNWPpjgiO2AOl3YhUUTnaUu','1',1),(2,'','','ADMIN','','','$2a$10$CQ.60ak/MVz4US0yLKU.NOYP2tQaNCVgnQbjm0AeR9yk63Ac/HhO2','admin',2);
 /*!40000 ALTER TABLE `login_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -751,4 +778,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-11 18:25:07
+-- Dump completed on 2017-12-11 18:53:48
