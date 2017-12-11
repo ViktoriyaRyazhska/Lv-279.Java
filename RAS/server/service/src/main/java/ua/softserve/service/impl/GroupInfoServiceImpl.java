@@ -11,6 +11,9 @@ import ua.softserve.service.dto.AcademyDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service processes information that returns Repositories.
+ */
 @Service
 public class GroupInfoServiceImpl implements GroupInfoService {
     private static final int EXPERT_STATUS_ID = 2;
@@ -59,9 +62,13 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         return groupInfoRepository.findOne(id);
     }
 
+    /**
+     * Method transforms information about academies from all tables into one DTO object.
+     *
+     * @return information about academies from all tables into one DTO object.
+     */
     @Override
     public List<AcademyDTO> getAllAcademies() {
-        // int countStudentsInTheGroup = 0;
         List<GroupInfo> groupInfoList = findAllWithOrder();
         List<AcademyDTO> academyDTOList = new ArrayList<>();
         Integer countActualStudents = null;
@@ -77,22 +84,23 @@ public class GroupInfoServiceImpl implements GroupInfoService {
 
             for (GroupInfo groupInfo : groupInfoList) {
                 AcademyDTO academyDTO = academyConverter.toDTO(groupInfo);
-                if (groupInfo.getAcademy() != null) {
-                    if (groupInfo.getAcademy().getCity() != null) {
+                Academy academy = groupInfo.getAcademy();
+                if (academy != null) {
+                    if (academy.getCity() != null) {
                         for (LanguageTranslations languageTranslation : languageTranslations) {
-                            if (languageTranslation.getItemId() == groupInfo.getAcademy().getCity().getCityId()) {
+                            if (languageTranslation.getItemId() == academy.getCity().getCityId()) {
                                 academyDTO.setCityName(languageTranslation.getTrasnlation());
                                 break;
                             }
                         }
                     }
-                    if (groupInfo.getAcademy().getAcademyStages() != null) {
-                        academyDTO.setStatus(groupInfo.getAcademy().getAcademyStages().getName());
+                    if (academy.getAcademyStages() != null) {
+                        academyDTO.setStatus(academy.getAcademyStages().getName());
                     }
                     List<String> employeeList = new ArrayList<>();
                     if (getExpertsOfTheGroup != null) {
                         for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
-                            if (groupInfoTeachers.getAcademy().getAcademyId() == groupInfo.getAcademy().getAcademyId()) {
+                            if (groupInfoTeachers.getAcademy().getAcademyId() == academy.getAcademyId()) {
                                 employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " "
                                         + groupInfoTeachers.getEmployee().getLastNameEng());
                             }
@@ -103,7 +111,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                     }
                     if (studentStatuses != null) {
                         countActualStudents = studentsService
-                                .countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
+                                .countAllByAcademyAndStudentStatus(academy, studentStatuses);
                     }
                     if (countActualStudents != null) {
                         academyDTO.setStudentsActual(countActualStudents);
@@ -115,7 +123,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                 academyDTOList.add(academyDTO);
             }
         }
-        // form list for combo-box.
+
         AcademyDTO academyDTO = new AcademyDTO();
         academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
         academyDTO.setDirection(directionService.findAllDirectionsInIta());
@@ -126,6 +134,11 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         return academyDTOList;
     }
 
+    /**
+     * Method returns data from GroupInfo table in order of adding records.
+     *
+     * @return data from GroupInfo table in order of adding records.
+     */
     @Override
     public List<GroupInfo> findAllWithOrder() {
         return groupInfoRepository.findAllWithOrder();

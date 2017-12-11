@@ -11,8 +11,11 @@ export class LoginService {
   signIn(account: LoginAccount): Observable<any> {
     return this.auth.post('http://localhost:8080/api/auth', account);
   }
-  getStatus(): Observable<Response> {
-    return this.auth.get('http://localhost:8080/api/status');
-  }
+  // getStatus(): Observable<Response> {
+  //   return this.auth.get('http://localhost:8080/api/status');
+  // }
 
+  isSignedIn(): boolean {
+    return localStorage.getItem('jwt') !== null;
+  }
 }

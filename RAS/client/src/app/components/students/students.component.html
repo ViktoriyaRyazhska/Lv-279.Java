@@ -1,6 +1,6 @@
 <p-dataTable [value]="students" [editable]="true" resizableColumns="true" reorderableColumns="true" scrollable="true">
   <!--<p-column field="vin" header="Id" [editable]="true" [style]="{'width':'10em'}"></p-column>-->
-  <p-column field="user.firstName" header="Name" [editable]="false" [style]="{'width':'10em'}">
+  <p-column field="user.firstName" header="Name" [editable]="false"  [filter]="true" [sortable]="true"[style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span>
          <!--<button type="text" (click)="onStudentClick(student)"  pButton  label="Show"> {{student.user.firstName +" "+ student.user.lastName}}</button>-->
@@ -8,34 +8,32 @@
        </span>
     </ng-template>
   </p-column>
-  <p-column field="data.englishLevel.name" header="English Level" [editable]="false"
-            [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.entryScore" header="Entry Score" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.intermBase" header="Interm. Test. Base" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.intermLang" header="Interm. Test. Lang" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.engGram" header="English Grammar Score" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.incomingTest" header="Incoming Test" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.testOne" header="Test1" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.testTwo" header="Test3" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.testThree" header="Test2" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.testFour" header="Test4" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.testFive" header="Test5" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.testSix" header="Test6" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.testSeven" header="Test7" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.testEight" header="Test8" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.testNine" header="Test9" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.testTen" header="Test10" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="finalBase" header="Final, Base" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="finalLang" header="Final, Lang" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="" header="Current Score" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="" header="Training Score" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.teacherScore" header="Teacher Score" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.expertScore" header="Expert Score" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.interviewerScore" header="Interviewer Score" [editable]="true"
-            [style]="{'width':'10em'}"></p-column>
-  <p-column field="studentStatus.name" header="Student status" [editable]="true" [style]="{'width':'10em'}"></p-column>
-  <p-column field="personStatus" header="Personal status" [editable]="false" [style]="{'width':'10em'}"></p-column>
-  <p-column field="approvedBy.firstNameEng" header="Approved By" [editable]="true" [style]="{'width':'10em'}">
+  <p-column field="data.englishLevel.name" header="English Level" [editable]="false" [filter]="true" [sortable]="true" [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.entryScore" header="Entry Score" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.intermBase" header="Interm. Test. Base" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.intermLang" header="Interm. Test. Lang" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.engGram" header="English Grammar Score" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.incomingTest" header="Incoming Test" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testOne" header="Test1" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testTwo" header="Test3" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testThree" header="Test2" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testFour" header="Test4" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testFive" header="Test5" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testSix" header="Test6" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testSeven" header="Test7" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testEight" header="Test8" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testNine" header="Test9" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.testTen" header="Test10" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="finalBase" header="Final, Base" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="finalLang" header="Final, Lang" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="" header="Current Score" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="" header="Training Score" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.teacherScore" header="Teacher Score" [filter]="true" [editable]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.expertScore" header="Expert Score" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.interviewerScore" header="Interviewer Score"  [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="studentStatus.name" header="Student status" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="personStatus" header="Personal status" [editable]="false" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column field="approvedBy.firstNameEng" header="Approved By" [editable]="true" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span *ngIf="student.approvedBy">
               {{student.approvedBy.firstNameEng +" "+ student.approvedBy.lastNameEng}}

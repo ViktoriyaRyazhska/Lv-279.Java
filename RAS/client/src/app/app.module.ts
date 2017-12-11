@@ -13,7 +13,7 @@ import {AddGroupService} from "./components/group/add-group/add-group.service";
 import {FilterPipe} from './components/view-academies/filter.pipe';
 import {StudentsComponent} from "./components/students/students.component";
 import {StudentsService} from "./services/students/students.service";
-import {ProfileInfoFilterPipe} from "./components/group/add-group/add-group.pipe";
+import {ProfileInfoFilterPipe} from './components/group/add-group/add-group.pipe';
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {FeedbackItemComponent} from "./components/feedbacks/feedback-list/feedback-item/feedback-item.component";
@@ -50,7 +50,6 @@ import {PrimeNgModules} from "./prime-ng.modules";
     FilterPipe,
     StudentsComponent,
     ProfileInfoFilterPipe,
-    ProfileInfoFilterPipe,
     StudentsComponent,
     FeedbacksComponent,
     FeedbackListComponent,
@@ -71,6 +70,7 @@ import {PrimeNgModules} from "./prime-ng.modules";
     ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
     TestsNamesComponent
+
   ],
   imports: [
     BrowserModule,
