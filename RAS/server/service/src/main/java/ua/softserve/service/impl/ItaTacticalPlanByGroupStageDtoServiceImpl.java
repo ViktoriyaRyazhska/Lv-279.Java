@@ -138,7 +138,7 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         List<GroupInfoTeachers> allExpertsOfGroup = groupInfoTeachersRepository.findAllByAcademyAndTeacherType(academyService.getById(dto.getGroupId()), typeExpert);
         for (GroupInfoTeachers teacherInfo : allTeachersOfGroup) {
             trainers += teacherInfo.getEmployee().getFirstNameEng() + " " + teacherInfo.getEmployee().getLastNameEng() + " ";
-        }
+    }
 
         for (GroupInfoTeachers infoTeachers : allExpertsOfGroup) {
             trainers += infoTeachers.getEmployee().getFirstNameEng() + " " + infoTeachers.getEmployee().getLastNameEng() + " ";
