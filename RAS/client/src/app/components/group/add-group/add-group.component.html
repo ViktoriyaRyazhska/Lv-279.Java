@@ -1,39 +1,43 @@
 <div>
   <div class="container well">
-    <div class="col-sm-12" id="form-test">
+    <div id="form-test">
       <form [formGroup]="signupForm" (ngSubmit)="saveGroup()">
         <ul class="col-sm-6 form-group" id="UL_left_column">
           <div class="row">
-            <div class="col-sm-6 form-group">
+            <div class="ui-g-4">
               <label> Group Name:</label>
-              <input type="text" class="form-control input-sm" formControlName="groupInfoFormControl"/>
-              <span *ngIf="!signupForm.get('groupInfoFormControl').valid
-              && signupForm.get('groupInfoFormControl').touched"
-              class="help-block">{{defaultInvalidInput}}</span>
+              <!--<input type="text" class="form-control input-sm" formControlName="groupInfoFormControl"/>-->
+              <input type="text" pInputText formControlName="groupInfoFormControl"/>
+              <!--<span *ngIf="!signupForm.get('groupInfoFormControl').valid-->
+              <!--&& signupForm.get('groupInfoFormControl').touched"-->
+              <!--class="help-block">{{defaultInvalidInput}}</span>-->
             </div>
 
             <div class="col-sm-6 form-group">
               <label> Site for Name:</label>
-              <input type="text" class="form-control input-sm" formControlName="nameForSiteFormControl"/>
-              <span *ngIf="!signupForm.get('nameForSiteFormControl').valid
-              && signupForm.get('nameForSiteFormControl').touched"
-                    class="help-block">{{defaultInvalidInput}}</span>
+              <!--<input type="text" class="form-control input-sm" formControlName="nameForSiteFormControl"/>-->
+              <input type="text" pInputText formControlName="nameForSiteFormControl" [style]="{'width':'50%'}"/>
+              <!--<span *ngIf="!signupForm.get('nameForSiteFormControl').valid-->
+              <!--&& signupForm.get('nameForSiteFormControl').touched"-->
+                    <!--class="help-block">{{defaultInvalidInput}}</span>-->
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-6 ">
               <label>Status:</label>
-              <select class="form-control input-sm" formControlName="academyStagesId">
-                <option *ngFor="let stages of academyStatus" [value]="stages.stageId">{{ stages.name }}</option>
-              </select>
+              <!--<select class="form-control input-sm" formControlName="academyStagesId">-->
+                <!--<option *ngFor="let stages of academyStatus" [value]="stages.stageId">{{ stages.name }}</option>-->
+              <!--</select>-->
+              <p-dropdown [options]="academyStatus" optionLabel="name" formControlName="academyStagesId" [style]="{'width':'100%'}"></p-dropdown>
             </div>
 
             <div class="col-sm-6 form-group">
               <label>Location:</label>
-              <select class="form-control input-sm" formControlName="cityId">
-                <option *ngFor="let city of city" [value]="city.itemId">{{city.trasnlation}}</option>
-              </select>
+              <!--<select class="form-control input-sm" formControlName="cityId">-->
+                <!--<option *ngFor="let city of city" [value]="city.itemId">{{city.trasnlation}}</option>-->
+              <!--</select>-->
+              <p-dropdown [options]="city" optionLabel="trasnlation" formControlName="cityId" [style]="{'width':'100%'}"></p-dropdown>
             </div>
           </div>
 
@@ -65,48 +69,68 @@
           <div class="row">
             <div class="col-sm-12 form-group">
               <label>Common Direction:</label>
-              <select class="form-control input-sm" formControlName="commonDirectionFormControl">
-                <option value="0" [selected]="0"></option>
-                <option *ngFor="let direct of commonDirection" [value]="direct.directionId">{{direct.name}}</option>
-              </select>
+              <!--<select class="form-control input-sm" formControlName="commonDirectionFormControl">-->
+                <!--<option value="0" [selected]="0"></option>-->
+                <!--<option *ngFor="let direct of commonDirection" [value]="direct.directionId">{{direct.name}}</option>-->
+              <!--</select>-->
+              <p-dropdown [options]="commonDirection" optionLabel="name" formControlName="commonDirectionFormControl" [style]="{'width':'100%'}"></p-dropdown>
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-6 form-group">
               <label>Direction:</label>
-              <select class="form-control input-sm" formControlName="directionFormControl">
-                <option selected value="0"></option>
-                <option *ngFor="let tech of direction" [value]="tech.technologyId">{{ tech.name }}</option>
-              </select>
+              <p-dropdown [options]="direction" optionLabel="name" formControlName="directionFormControl" [style]="{'width':'100%'}"></p-dropdown>
+              <!--<select class="form-control input-sm" formControlName="directionFormControl">-->
+                <!--<option selected value="0"></option>-->
+                <!--<option *ngFor="let tech of direction" [value]="tech.technologyId">{{ tech.name }}</option>-->
+              <!--</select>-->
             </div>
 
             <div class="col-sm-6 form-group">
               <label>Profile:</label>
-              <select class="form-control input-sm" formControlName="profileInfoFormControl">
-                <option value="0"></option>
-                <option *ngFor="let prof of profile | profileFilter:signupForm.get('directionFormControl').value"
-                        [value]="prof.profileId">{{ prof.profileName }}
-                </option>
-              </select>
+              <!--<select class="form-control input-sm" formControlName="profileInfoFormControl">-->
+                <!--<option value="0"></option>-->
+                <!--<option *ngFor="let prof of profile | profileFilter:signupForm.get('directionFormControl').value"-->
+                        <!--[value]="prof.profileId">{{ prof.profileName }}-->
+                <!--</option>-->
+              <!--</select>-->
+              <p-dropdown [options]="profile"
+                          optionLabel="profileName"
+                          formControlName="profileInfoFormControl"
+                          [filter]="true" filterBy="directionFormControl  "
+                          [style]="{'width':'100%'}"></p-dropdown>
             </div>
           </div>
 
+          <!--<p-spinner id="graduateId" formControlName="studentPlannedToGraduate" [min]="0" [max]="99" ></p-spinner>-->
+
+          <ng-template let-col let-student="rowData" pTemplate="body">
+       <span *ngIf="student.approvedBy">
+              {{student.approvedBy.firstNameEng +" "+ student.approvedBy.lastNameEng}}
+       </span>
+          </ng-template>
+
+
           <div class="row">
-            <div class="col-sm-4">
-              <label> Students Planned to Graduate:</label>
-              <input type="number" class="form-control input-sm" formControlName="studentPlannedToGraduate"/>
-            </div>
-            <div class="col-sm-4">
-              <label> Students Planned to Enrollment:</label>
-              <input type="number" class="form-control input-sm" formControlName="studentPlannedToEnrollment"/>
-            </div>
+            <!--<div class="col-sm-4">-->
+              <!--<label> Students Planned to Graduate:</label>-->
+              <!--<p-spinner size=1em id="graduateId" formControlName="studentPlannedToGraduate" [min]="0" [max]="99" ></p-spinner>-->
+              <!--&lt;!&ndash;<input type="number" class="form-control input-sm" formControlName="studentPlannedToGraduate"/>&ndash;&gt;-->
+            <!--</div>-->
+            <!--<div class="col-sm-6">-->
+              <!--<label> Students Planned to Enrollment:</label>-->
+              <!--<p-spinner size=10% formControlName="studentPlannedToEnrollment" [min]="0" [max]="99"></p-spinner>-->
+              <!--&lt;!&ndash;<input type="number" class="form-control input-sm" formControlName="studentPlannedToEnrollment"/>&ndash;&gt;-->
+            <!--</div>-->
 
             <div class="col-sm-4">
               <label>Students Actual:</label>
               <input type="number" class="form-control input-sm" disabled/>
+              <p-spinner style="{'width':'100%'}" formControlName="studentActualFromControl" [min]="0" [max]="99" [disabled]="true"></p-spinner>
             </div>
           </div>
+
         </ul>
       </form>
     </div>

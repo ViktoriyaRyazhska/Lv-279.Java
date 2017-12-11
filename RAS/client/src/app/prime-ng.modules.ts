@@ -5,6 +5,7 @@ import {NgModule} from "@angular/core";
 import {SharedModule} from "primeng/components/common/shared";
 import {CalendarModule} from "primeng/components/calendar/calendar";
 import {TabViewModule} from 'primeng/primeng';
+import {SpinnerModule} from 'primeng/primeng';
 
 @NgModule({
   exports: [
@@ -16,7 +17,8 @@ import {TabViewModule} from 'primeng/primeng';
     SharedModule,
     CalendarModule,
     DialogModule,
-    TabViewModule
+    TabViewModule,
+    SpinnerModule
   ]
 })
 export class PrimeNgModules {}
