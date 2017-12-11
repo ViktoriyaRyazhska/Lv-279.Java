@@ -1,3 +1,13 @@
+.container{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.capture-fixed{
+  position: fixed;
+}
+
 table{
   font-size: 0.75em;
 }
@@ -29,9 +39,17 @@ button {
 .cell1{
   width: 20px;
   height: 20px;
-  background: lawngreen;
+  background: green;
 }
 
 .cell0{
-  background: deeppink;
+  width: 20px;
+  height: 20px;
+  background: red;
+}
+
+.gss-on {
+  background: oldlace;
+  cursor: pointer;
+  display: none;
 }

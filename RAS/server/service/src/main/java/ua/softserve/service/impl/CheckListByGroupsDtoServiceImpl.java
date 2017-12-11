@@ -206,18 +206,6 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         return CheckListByGroupsDtos;
     }
 
-    private Integer checkTeachers(Predicate<GroupInfoTeachers> predicate, List<GroupInfoTeachers> groupInfoTeachers) {
-        if (groupInfoTeachers == null) {
-            return 0;
-        }
-        for (GroupInfoTeachers git : groupInfoTeachers) {
-            if (!predicate.test(git)) {
-                return 0;
-            }
-        }
-        return 1;
-    }
-
     private Integer checkStudents(Predicate<Student> predicate, List<Student> students) {
         if (students == null) {
             return 0;
@@ -233,7 +221,22 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         return 1;
     }
 
+    private Integer checkTeachers(Predicate<GroupInfoTeachers> predicate, List<GroupInfoTeachers> groupInfoTeachers) {
+        if (groupInfoTeachers == null) {
+            return 0;
+        }
+        for (GroupInfoTeachers git : groupInfoTeachers) {
+            if (!predicate.test(git)) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+
     private boolean checkStudentStatus(Student student) {
+        if (student == null || student.getStudentStatus() == null) {
+            return false;
+        }
         int id = student.getStudentStatus().getId();
         return id == SS_TRAINEE_ID ||
                 id == SS_ACCEPTED_PRE_OFFER_ID ||

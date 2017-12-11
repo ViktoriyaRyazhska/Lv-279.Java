@@ -22,4 +22,33 @@ export class CheckListByGroupsComponent implements OnInit {
     );
   }
 
+  myMouseEnter(s: string){
+    let elementsByClassName = document.getElementsByClassName(s);
+    for (let i = 0; i < elementsByClassName.length; i++) {
+      elementsByClassName[i].setAttribute('style', 'background: oldlace; cursor: pointer;');
+    }
+  }
+
+  myMouseLeave(s: string){
+    let elementsByClassName = document.getElementsByClassName(s);
+    for (let i = 0; i < elementsByClassName.length; i++) {
+      elementsByClassName[i].setAttribute('style', 'background: initial');
+    }
+  }
+
+  myMouseClick(s: string){
+    let elementsByClassName = document.getElementsByClassName(s);
+    for (let i = 0; i < elementsByClassName.length; i++) {
+      if (!elementsByClassName[i].className.endsWith('master')) {
+        let attribute = elementsByClassName[i].getAttribute('hidden');
+        if (attribute) {
+          elementsByClassName[i].removeAttribute('hidden');
+        } else {
+          elementsByClassName[i].setAttribute('hidden', '' + !attribute);
+        }
+      }
+    }
+  }
+
+
 }
