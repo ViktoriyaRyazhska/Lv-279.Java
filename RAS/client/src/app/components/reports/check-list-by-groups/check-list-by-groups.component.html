@@ -1,8 +1,6 @@
-<div *ngIf="groups" class="container">
+<div *ngIf="groups" class="container" style="margin: 0; padding: 0">
 
   <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
-
-    <caption><h1>Check list by groups (REPORT)</h1></caption>
 
     <tr>
       <th>Group name</th>
@@ -11,38 +9,158 @@
       <th>Teachers</th>
       <th>Experts</th>
 
-      <th><span>English level defined for group</span></th>
-      <th><span>English Level is correct</span></th>
-      <th><span>Entry score is defined</span></th>
-      <th><span>Incoming test is defined</span></th>
-      <th><span>Approved by is defined</span></th>
-      <th><span>Expert  defined</span></th>
-      <th><span>Teacher(s) defined</span></th>
-      <th><span>Group started successfully</span></th>
+      <th class="gss"
+          (mouseenter)="myMouseEnter('gss');"
+          (mouseleave)="myMouseLeave('gss');"
+          (click)="myMouseClick('gss');"
+      ><span>English level defined for group</span></th>
+      <th class="gss"
+          (mouseenter)="myMouseEnter('gss');"
+          (mouseleave)="myMouseLeave('gss');"
+          (click)="myMouseClick('gss');"
+      ><span>English Level is correct</span></th>
+      <th class="gss"
+          (mouseenter)="myMouseEnter('gss');"
+          (mouseleave)="myMouseLeave('gss');"
+          (click)="myMouseClick('gss');"
+      ><span>Entry score is defined</span></th>
+      <th class="gss"
+          (mouseenter)="myMouseEnter('gss');"
+          (mouseleave)="myMouseLeave('gss');"
+          (click)="myMouseClick('gss');"
+      ><span>Incoming test is defined</span></th>
+      <th class="gss"
+          (mouseenter)="myMouseEnter('gss');"
+          (mouseleave)="myMouseLeave('gss');"
+          (click)="myMouseClick('gss');"
+      ><span>Approved by is defined</span></th>
+      <th class="gss"
+          (mouseenter)="myMouseEnter('gss');"
+          (mouseleave)="myMouseLeave('gss');"
+          (click)="myMouseClick('gss');"
+      ><span>Expert  defined</span></th>
+      <th class="gss"
+          (mouseenter)="myMouseEnter('gss');"
+          (mouseleave)="myMouseLeave('gss');"
+          (click)="myMouseClick('gss');"
+      ><span>Teacher(s) defined</span></th>
+      <th class="gss master"
+        (mouseenter)="myMouseEnter('gss');"
+          (mouseleave)="myMouseLeave('gss');"
+          (click)="myMouseClick('gss');"
+      ><span>Group started successfully</span></th>
 
-      <th><span>Test 1 is pass</span></th>
-      <th><span>Test 2 is pass</span></th>
-      <th><span>Test 3 is pass</span></th>
-      <th><span>Test 4 is pass</span></th>
-      <th><span>Test 5 is pass</span></th>
-      <th><span>Test 6 is pass</span></th>
-      <th><span>Test 7 is pass</span></th>
-      <th><span>Test 8 is pass</span></th>
-      <th><span>Test 9 is pass</span></th>
-      <th><span>Test 10 is pass</span></th>
-      <th><span>Intermediate Test Base is pass</span></th>
-      <th><span>Intermediate Test Lang is pass</span></th>
-      <th><span>Teacher’s feedbacks filled in</span></th>
-      <th><span>Expert’s feedbacks filled in</span></th>
-      <th><span>Group ready to offering</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Test 1 is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Test 2 is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Test 3 is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Test 4 is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Test 5 is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Test 6 is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Test 7 is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Test 8 is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Test 9 is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Test 10 is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Intermediate Test Base is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Intermediate Test Lang is pass</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Teacher’s feedbacks filled in</span></th>
+      <th class="gro"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Expert’s feedbacks filled in</span></th>
+      <th class="gro master"
+          (mouseenter)="myMouseEnter('gro');"
+          (mouseleave)="myMouseLeave('gro');"
+          (click)="myMouseClick('gro');"
+      ><span>Group ready to offering</span></th>
 
-      <th><span>Final Test Base is pass</span></th>
-      <th><span>Final Test Lang is pass</span></th>
-      <th><span>Interviewer defined</span></th>
-      <th><span>Interviewers feedback – summary defined</span></th>
-      <th><span>Experts load filled in</span></th>
-      <th><span>Interviewers load filled in</span></th>
-      <th><span>Group ready for close</span></th>
+      <th class="grc"
+          (mouseenter)="myMouseEnter('grc');"
+          (mouseleave)="myMouseLeave('grc');"
+          (click)="myMouseClick('grc');"
+      ><span>Final Test Base is pass</span></th>
+      <th class="grc"
+          (mouseenter)="myMouseEnter('grc');"
+          (mouseleave)="myMouseLeave('grc');"
+          (click)="myMouseClick('grc');"
+      ><span>Final Test Lang is pass</span></th>
+      <th class="grc"
+          (mouseenter)="myMouseEnter('grc');"
+          (mouseleave)="myMouseLeave('grc');"
+          (click)="myMouseClick('grc');"
+      ><span>Interviewer defined</span></th>
+      <th class="grc"
+          (mouseenter)="myMouseEnter('grc');"
+          (mouseleave)="myMouseLeave('grc');"
+          (click)="myMouseClick('grc');"
+      ><span>Interviewers feedback – summary defined</span></th>
+      <th class="grc"
+          (mouseenter)="myMouseEnter('grc');"
+          (mouseleave)="myMouseLeave('grc');"
+          (click)="myMouseClick('grc');"
+      ><span>Experts load filled in</span></th>
+      <th class="grc"
+          (mouseenter)="myMouseEnter('grc');"
+          (mouseleave)="myMouseLeave('grc');"
+          (click)="myMouseClick('grc');"
+      ><span>Interviewers load filled in</span></th>
+      <th class="grc master"
+          (mouseenter)="myMouseEnter('grc');"
+          (mouseleave)="myMouseLeave('grc');"
+          (click)="myMouseClick('grc');"
+      ><span>Group ready for close</span></th>
 
       <th><span>Total, %</span></th>
 
@@ -53,55 +171,141 @@
         <td>{{group.groupName}}</td>
         <td>{{group.cityName}}</td>
         <td>{{group.status}}</td>
-        <td>
-          <div *ngFor="let teacher of group.teachers">
-            <div *ngIf="(teacher.teacherType == 'Teacher')">
-              {{teacher.fullName}}
-            </div>
-          </div>
-        </td>
-        <td>
-          <div *ngFor="let teacher of group.teachers">
-            <div *ngIf="(teacher.teacherType == 'Expert')">
-              {{teacher.fullName}}
-            </div>
-          </div>
-        </td>
-        <td><div class="cell{{group.r.englishLevelDefined}}"></div></td>
-        <td class="cell{{group.r.englishLevelCorrect}}"></td>
-        <td class="cell{{group.r.entryScoreDefined}}"></td>
-        <td class="cell{{group.r.incomingTestDefined}}"></td>
-        <td class="cell{{group.r.approvedByDefined}}"></td>
-        <td class="cell{{group.r.teacherDefined}}"></td>
-        <td class="cell{{group.r.expertDefined}}"></td>
+        <td>{{group.teachers}}</td>
+        <td>{{group.experts}}</td>
+        <td class = "gss"
+            (mouseenter)="myMouseEnter('gss');"
+            (mouseleave)="myMouseLeave('gss');"
+        >
+          <div class="cell{{group.r.englishLevelDefined}}"></div></td>
+        <td class = "gss"
+            (mouseenter)="myMouseEnter('gss');"
+            (mouseleave)="myMouseLeave('gss');"
+        >
+          <div class="cell{{group.r.englishLevelCorrect}}"></div></td>
+        <td class = "gss"
+            (mouseenter)="myMouseEnter('gss');"
+            (mouseleave)="myMouseLeave('gss');"
+        >
+          <div class="cell{{group.r.entryScoreDefined}}"></div></td>
+        <td class = "gss"
+            (mouseenter)="myMouseEnter('gss');"
+            (mouseleave)="myMouseLeave('gss');"
+        >
+          <div class="cell{{group.r.incomingTestDefined}}"></div></td>
+        <td class = "gss"
+            (mouseenter)="myMouseEnter('gss');"
+            (mouseleave)="myMouseLeave('gss');"
+        >
+          <div class="cell{{group.r.approvedByDefined}}"></div></td>
+        <td class = "gss"
+            (mouseenter)="myMouseEnter('gss');"
+            (mouseleave)="myMouseLeave('gss');"
+        >
+          <div class="cell{{group.r.teacherDefined}}"></div></td>
+        <td class = "gss"
+            (mouseenter)="myMouseEnter('gss');"
+            (mouseleave)="myMouseLeave('gss');"
+        >
+          <div class="cell{{group.r.expertDefined}}"></div></td>
 
-        <td class="cell{{group.r.groupStartedSuccessfully}}"></td>
+        <td class = "gss master"
+            (mouseenter)="myMouseEnter('gss');"
+            (mouseleave)="myMouseLeave('gss');"
+        >
+          <div class="cell{{group.r.groupStartedSuccessfully}}"></div></td>
 
-        <td class="cell{{group.r.test1}}"></td>
-        <td class="cell{{group.r.test2}}"></td>
-        <td class="cell{{group.r.test3}}"></td>
-        <td class="cell{{group.r.test4}}"></td>
-        <td class="cell{{group.r.test5}}"></td>
-        <td class="cell{{group.r.test6}}"></td>
-        <td class="cell{{group.r.test7}}"></td>
-        <td class="cell{{group.r.test8}}"></td>
-        <td class="cell{{group.r.test9}}"></td>
-        <td class="cell{{group.r.test10}}"></td>
-        <td class="cell{{group.r.intermediateTestBasePass}}"></td>
-        <td class="cell{{group.r.intermediateTestLangPass}}"></td>
-        <td class="cell{{group.r.teacherFeedbacksFilledIn}}"></td>
-        <td class="cell{{group.r.expertFeedbacksFilledIn}}"></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.test1}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.test2}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.test3}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.test4}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.test5}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.test6}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.test7}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.test8}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.test9}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.test10}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.intermediateTestBasePass}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.intermediateTestLangPass}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.teacherFeedbacksFilledIn}}"></div></td>
+        <td class="gro"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.expertFeedbacksFilledIn}}"></div></td>
 
-        <td class="cell{{group.r.groupReadyToOffering}}"></td>
+        <td class="gro master"
+            (mouseenter)="myMouseEnter('gro');"
+            (mouseleave)="myMouseLeave('gro');"
+        ><div class="cell{{group.r.groupReadyToOffering}}"></div></td>
 
-        <td class="cell{{group.r.finalTestBasePass}}"></td>
-        <td class="cell{{group.r.finalTestLangPass}}"></td>
-        <td class="cell{{group.r.interviewerDefined}}"></td>
-        <td class="cell{{group.r.interviewerSummaryDefined}}"></td>
-        <td class="cell{{group.r.expertsLoadFilledIn}}"></td>
-        <td class="cell{{group.r.interviewersLoadFilledIn}}"></td>
+        <td class="grc"
+            (mouseenter)="myMouseEnter('grc');"
+            (mouseleave)="myMouseLeave('grc');"
+        ><div class="cell{{group.r.finalTestBasePass}}"></div></td>
+        <td class="grc"
+            (mouseenter)="myMouseEnter('grc');"
+            (mouseleave)="myMouseLeave('grc');"
+        ><div class="cell{{group.r.finalTestLangPass}}"></div></td>
+        <td class="grc"
+            (mouseenter)="myMouseEnter('grc');"
+            (mouseleave)="myMouseLeave('grc');"
+        ><div class="cell{{group.r.interviewerDefined}}"></div></td>
+        <td class="grc"
+            (mouseenter)="myMouseEnter('grc');"
+            (mouseleave)="myMouseLeave('grc');"
+        ><div class="cell{{group.r.interviewerSummaryDefined}}"></div></td>
+        <td class="grc"
+            (mouseenter)="myMouseEnter('grc');"
+            (mouseleave)="myMouseLeave('grc');"
+        ><div class="cell{{group.r.expertsLoadFilledIn}}"></div></td>
+        <td class="grc"
+            (mouseenter)="myMouseEnter('grc');"
+            (mouseleave)="myMouseLeave('grc');"
+        ><div class="cell{{group.r.interviewersLoadFilledIn}}"></div></td>
 
-        <td class="cell{{group.r.groupReadyForClose}}"></td>
+        <td class="grc master"
+            (mouseenter)="myMouseEnter('grc');"
+            (mouseleave)="myMouseLeave('grc');"
+        ><div class="cell{{group.r.groupReadyForClose}}"></div></td>
 
         <td>{{group.total}}</td>
 
