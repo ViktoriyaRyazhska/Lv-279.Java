@@ -37,6 +37,7 @@ import {TestsNamesComponent} from "./components/tests-names/tests-names.componen
 import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
+import {UsersService} from "./services/users/users.service";
 
 
 @NgModule({
@@ -82,7 +83,7 @@ import {PrimeNgModules} from "./prime-ng.modules";
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService],
+  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService, UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
