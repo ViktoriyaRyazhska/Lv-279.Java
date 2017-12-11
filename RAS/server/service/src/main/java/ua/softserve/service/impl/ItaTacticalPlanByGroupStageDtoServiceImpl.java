@@ -133,15 +133,15 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     private void setTrainer(ItaTacticalPlanByGroupStageDto dto) {
         TeacherTypes typeTeacher = teacherTypeRepository.findOne(TT_TEACHER_ID);
         TeacherTypes typeExpert = teacherTypeRepository.findOne(TT_EXPERT_ID);
-        String trainers = "";
+        StringBuilder trainers = new StringBuilder();
         List<GroupInfoTeachers> allTeachersOfGroup = groupInfoTeachersRepository.findAllByAcademyAndTeacherType(academyService.getById(dto.getGroupId()), typeTeacher);
         List<GroupInfoTeachers> allExpertsOfGroup = groupInfoTeachersRepository.findAllByAcademyAndTeacherType(academyService.getById(dto.getGroupId()), typeExpert);
         for (GroupInfoTeachers teacherInfo : allTeachersOfGroup) {
-            trainers += teacherInfo.getEmployee().getFirstNameEng() + " " + teacherInfo.getEmployee().getLastNameEng() + " ";
+            trainers.append(teacherInfo.getEmployee().getFirstNameEng() + " " + teacherInfo.getEmployee().getLastNameEng() + " ");
     }
 
         for (GroupInfoTeachers infoTeachers : allExpertsOfGroup) {
-            trainers += infoTeachers.getEmployee().getFirstNameEng() + " " + infoTeachers.getEmployee().getLastNameEng() + " ";
+            trainers.append(infoTeachers.getEmployee().getFirstNameEng() + " " + infoTeachers.getEmployee().getLastNameEng() + " ");
         }
 
         dto.setTrainer(trainers);
