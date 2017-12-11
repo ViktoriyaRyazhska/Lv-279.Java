@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ReportsService} from '../reports.service';
-import {ChListGr} from "./ChListGr";
 
 @Component({
   selector: 'app-check-list-by-groups',
@@ -9,7 +8,7 @@ import {ChListGr} from "./ChListGr";
   providers: [ReportsService]
 })
 export class CheckListByGroupsComponent implements OnInit {
-  groups: ChListGr;
+  groups: any;
 
   loading: boolean;
 
