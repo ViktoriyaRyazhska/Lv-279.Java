@@ -11,7 +11,7 @@
 }
 
 #saveGroupBtn{
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
 #UL_left_column {
@@ -30,10 +30,10 @@
 }
 /*input[type=number]::-webkit-inner-spin-button,*/
 /*input[type=number]::-webkit-outer-spin-button {*/
-  /*-webkit-appearance: none;*/
-  /*-moz-appearance: none;*/
-  /*appearance: none;*/
-  /*margin: 0;*/
+/*-webkit-appearance: none;*/
+/*-moz-appearance: none;*/
+/*appearance: none;*/
+/*margin: 0;*/
 /*}*/
 
 input[type=date]::-webkit-inner-spin-button {
@@ -59,8 +59,8 @@ input.ng-invalid.ng-touched {
 
 .help-block {
   display: block;
-   margin-top: 0px;
-   margin-bottom: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   color: black;
 }
 

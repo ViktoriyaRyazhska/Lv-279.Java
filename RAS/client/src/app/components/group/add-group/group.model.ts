@@ -9,9 +9,9 @@ export class Group {
   startDate: string = null;
   endDate: string = null;
   cityId: number = 1;
-  directionId: number;
+  directionId: number = 0;
   technologieId: number;
-  profileId: number;
+  profileId: number = 0;
   studentPlannedToGraduate: number = 0;
   studentPlannedToEnrollment: number = 0;
   studentActual: number = 0;
@@ -24,7 +24,7 @@ export class Group {
     this.startDate = form.get('startDateFormControl').value;
     this.endDate = form.get('endDateFormControl').value;
     this.directionId = form.get('commonDirectionFormControl').value;
-    this.technologieId = form.get('directionFormControl').value.technologyId;
+    this.technologieId = form.get('directionFormControl').value;
     this.profileId = form.get('profileInfoFormControl').value;
     this.studentPlannedToGraduate = form.get('studentPlannedToGraduate').value;
     this.studentPlannedToEnrollment = form.get('studentPlannedToEnrollment').value;
