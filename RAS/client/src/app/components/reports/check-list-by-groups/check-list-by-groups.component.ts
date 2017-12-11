@@ -11,9 +11,12 @@ import {ChListGr} from "./ChListGr";
 export class CheckListByGroupsComponent implements OnInit {
   groups: ChListGr;
 
+  loading: boolean;
+
   constructor(private reportsService: ReportsService) { }
 
   ngOnInit() {
+    // this.loading = true;
     this.reportsService.getAllForCheckListReport().subscribe(
       data => {
         this.groups = data;
