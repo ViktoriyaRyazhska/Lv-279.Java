@@ -34,13 +34,4 @@ public class TestName {
         this.testName = testName;
         this.testMaxScore = testMaxScore;
     }
-
-    @Override
-    public String toString() {
-        return "TestName{" +
-                "testId=" + testId +
-                ", testName='" + testName + '\'' +
-                ", testMaxScore=" + testMaxScore +
-                '}';
-    }
 }

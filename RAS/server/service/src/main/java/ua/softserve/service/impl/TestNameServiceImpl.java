@@ -2,6 +2,7 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.entity.TestName;
 import ua.softserve.persistence.repo.TestNameRepository;
 import ua.softserve.service.TestNameService;
@@ -13,7 +14,9 @@ public class TestNameServiceImpl implements TestNameService {
     @Autowired
     private TestNameRepository testNameRepository;
 
-    public void saveAl(TestName testName){
+    @Transactional
+    public void saveTestNames(List<TestName> testNames){
+        for(TestName testName : testNames)
         testNameRepository.save(testName);
     }
 
@@ -21,4 +24,8 @@ public class TestNameServiceImpl implements TestNameService {
         return testNameRepository.findAll();
     }
 
+    @Override
+    public List<TestName> findAllTestNamesByAcademyId(Integer groupId) {
+        return  testNameRepository.findAllTestNamesBygroupId(groupId);
+    }
 }

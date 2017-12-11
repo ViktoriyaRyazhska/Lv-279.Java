@@ -3,6 +3,7 @@ import {Tests} from "../../models/tests";
 import {TestsService} from "../../services/tests-names/tests.service";
 import {Http, Response} from '@angular/http';
 import {map} from "rxjs/operator/map";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-tests-names',
@@ -11,32 +12,34 @@ import {map} from "rxjs/operator/map";
 })
 export class TestsNamesComponent implements OnInit {
 
+  groupId : number;
   static counter : number = 1;
   name: string;
   mp: number;
   tests : Tests[];
   defaultTestName : string;
 
-  constructor(private testNamesService  : TestsService) {}
+  constructor(
+    private testNamesService  : TestsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.testNamesService.getAll().subscribe(data => {
+    this.groupId = +this.route.snapshot.paramMap.get('id');
+    this.testNamesService.getAll(this.groupId).subscribe(data => {
       console.log(data)
       this.tests = data
     });
   }
 
-  save(name : string, mp : number) {
-    if(name==null || name==undefined || name.trim()=="")
-      return;
-    if(mp==null || mp==undefined)
-      return;
-    // this.tests.push(new Tests(name, mp));
+  save() {
+    this.testNamesService.addTests(this.tests,this.groupId);
+    console.log(this.tests);
   }
 
 
   addTest() {
-    if(TestsNamesComponent.counter>=12) {
+    if(TestsNamesComponent.counter>=11) {
       return;
     }
     else
@@ -44,7 +47,6 @@ export class TestsNamesComponent implements OnInit {
       TestsNamesComponent.counter++;
       this.defaultTestName = 'test' + (this.tests.length+1);
       this.tests.push(new Tests(this.defaultTestName,10));
-
     }
   }
 

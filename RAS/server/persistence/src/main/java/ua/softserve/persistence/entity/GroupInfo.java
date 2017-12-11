@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Getter
 @Setter
@@ -42,9 +41,9 @@ public class GroupInfo {
 //            joinColumns = @JoinColumn(name = "academy_id", referencedColumnName = "academy_id"),
 //            inverseJoinColumns = @JoinColumn(name = "test_id",referencedColumnName = "id"))
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "academy_id", referencedColumnName = "academy_id")
-    private List<TestName> testNames;
+//    @OneToMany
+//    @JoinColumn(name = "academy_id", referencedColumnName = "academy_id")
+//    private List<TestName> testNames;
 
     public GroupInfo() {
     }

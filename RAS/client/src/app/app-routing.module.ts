@@ -31,7 +31,7 @@ const appRoutes: Routes = [
   {path: 'ang/marks', component: FeedbackTeacherEditComponent},
   {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},
   {path: 'ang/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
-  {path: 'ang/tests', component: TestsNamesComponent},
+  {path: 'ang/tests/:id', component: TestsNamesComponent},
 ];
 
 @NgModule({

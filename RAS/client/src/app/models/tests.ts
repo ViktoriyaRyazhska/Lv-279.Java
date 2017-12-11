@@ -1,4 +1,5 @@
 export class Tests {
+  groupId : number;
   testMaxScore: number;
   testName: string;
 
