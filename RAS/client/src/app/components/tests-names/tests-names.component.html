@@ -22,5 +22,41 @@
     </button>
     <button type="submit" class="btn btn-primary" (click)="save">Cancel
     </button>
+
+    <br>
+    <div class="example-container mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="testName">
+          <mat-header-cell *matHeaderCellDef> Test Name </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.testName}}
+            <!--<mat-form-field floatPlaceholder="{{ row.editing ? 'string' : 'never'}}">-->
+              <!--<input matInput [formControl]="row.validator.controls['testName']" [readonly]="!row.editing" placeholder="Test Name" [(ngModel)]="row.currentData.testName">-->
+            <!--</mat-form-field>-->
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="testMaxScore">
+          <mat-header-cell *matHeaderCellDef> Max Point </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.testMaxScore}}
+            <mat-form-field >
+            <input matInput type="number" placeholder="Max Point" [(ngModel)]="row.currentData.testMaxScore">
+          </mat-form-field>
+            <!--<mat-form-field>-->
+              <!--<input matInput placeholder="Test Name">-->
+            <!--</mat-form-field>-->
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="testId">
+          <mat-header-cell *matHeaderCellDef> Remove Test </mat-header-cell>
+          <mat-cell *matCellDef="let row"><button mat-button (click)="removeTest(row)">remove</button></mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="removeTest(row)"></mat-row>
+      </mat-table>
+
+    </div>
   </div>
 </div>

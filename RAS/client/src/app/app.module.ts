@@ -38,6 +38,9 @@ import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
 import {MatSortModule, MatTableModule} from "@angular/material";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material';
+
 
 
 @NgModule({
@@ -83,7 +86,8 @@ import {MatSortModule, MatTableModule} from "@angular/material";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule
   ],
   providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService],
   bootstrap: [AppComponent]
