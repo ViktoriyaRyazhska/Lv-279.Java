@@ -134,7 +134,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
                         .append(git.getEmployee().getFirstNameEng())
                         .append(" ")
                         .append(git.getEmployee().getLastNameEng())
-                        .append(", ");
+                        .append("; ");
             }
         }
         return teachersSb.toString();

@@ -1,9 +1,9 @@
 <div *ngIf="groups" class="container" style="margin: 0; padding: 0">
 
-  <table class="table table-condensed table-hover table-bordered table-responsive table-striped">
-
-    <tr>
-      <th>Group name</th>
+  <table class="table table-condensed table-hover table-bordered table-responsive table-striped fixed_headers">
+    <thead>
+    <tr class="header">
+      <th width="100">Group name</th>
       <th>Dev center</th>
       <th>Status</th>
       <th>Teachers</th>
@@ -45,7 +45,7 @@
           (click)="onMouseClick('gss');"
       ><span>Teacher(s) defined</span></th>
       <th class="gss master"
-        (mouseenter)="onMouseEnter('gss');"
+          (mouseenter)="onMouseEnter('gss');"
           (mouseleave)="onMouseLeave('gss');"
           (click)="onMouseClick('gss');"
       ><span>Group started successfully</span></th>
@@ -145,7 +145,7 @@
           (mouseenter)="onMouseEnter('grc');"
           (mouseleave)="onMouseLeave('grc');"
           (click)="onMouseClick('grc');"
-      ><span>Interviewers feedback – summary defined</span></th>
+      ><span>Interviewers summary defined</span></th>
       <th class="grc"
           (mouseenter)="onMouseEnter('grc');"
           (mouseleave)="onMouseLeave('grc');"
@@ -165,7 +165,8 @@
       <th><span>Total, %</span></th>
 
     </tr>
-
+    </thead>
+    <tbody>
     <ng-container *ngFor="let group of groups">
       <tr>
         <td>{{group.groupName}}</td>
@@ -173,145 +174,197 @@
         <td>{{group.status}}</td>
         <td>{{group.teachers}}</td>
         <td>{{group.experts}}</td>
-        <td class = "gss"
+        <td class="gss"
             (mouseenter)="onMouseEnter('gss');"
             (mouseleave)="onMouseLeave('gss');"
         >
-          <div class="cell{{group.r.englishLevelDefined}}"></div></td>
-        <td class = "gss"
+          <mat-icon svgIcon="icon{{group.r.englishLevelDefined}}"></mat-icon>
+        </td>
+        <td class="gss"
             (mouseenter)="onMouseEnter('gss');"
             (mouseleave)="onMouseLeave('gss');"
         >
-          <div class="cell{{group.r.englishLevelCorrect}}"></div></td>
-        <td class = "gss"
+          <mat-icon svgIcon="icon{{group.r.englishLevelCorrect}}"></mat-icon>
+        </td>
+        <td class="gss"
             (mouseenter)="onMouseEnter('gss');"
             (mouseleave)="onMouseLeave('gss');"
         >
-          <div class="cell{{group.r.entryScoreDefined}}"></div></td>
-        <td class = "gss"
+          <mat-icon svgIcon="icon{{group.r.entryScoreDefined}}"></mat-icon>
+        </td>
+        <td class="gss"
             (mouseenter)="onMouseEnter('gss');"
             (mouseleave)="onMouseLeave('gss');"
         >
-          <div class="cell{{group.r.incomingTestDefined}}"></div></td>
-        <td class = "gss"
+          <mat-icon svgIcon="icon{{group.r.incomingTestDefined}}"></mat-icon>
+        </td>
+        <td class="gss"
             (mouseenter)="onMouseEnter('gss');"
             (mouseleave)="onMouseLeave('gss');"
         >
-          <div class="cell{{group.r.approvedByDefined}}"></div></td>
-        <td class = "gss"
+          <mat-icon svgIcon="icon{{group.r.approvedByDefined}}"></mat-icon>
+        </td>
+        <td class="gss"
             (mouseenter)="onMouseEnter('gss');"
             (mouseleave)="onMouseLeave('gss');"
         >
-          <div class="cell{{group.r.teacherDefined}}"></div></td>
-        <td class = "gss"
+          <mat-icon svgIcon="icon{{group.r.teacherDefined}}"></mat-icon>
+        </td>
+        <td class="gss"
             (mouseenter)="onMouseEnter('gss');"
             (mouseleave)="onMouseLeave('gss');"
         >
-          <div class="cell{{group.r.expertDefined}}"></div></td>
+          <mat-icon svgIcon="icon{{group.r.expertDefined}}"></mat-icon>
+        </td>
 
-        <td class = "gss master"
+        <td class="gss master"
             (mouseenter)="onMouseEnter('gss');"
             (mouseleave)="onMouseLeave('gss');"
         >
-          <div class="cell{{group.r.groupStartedSuccessfully}}"></div></td>
+          <mat-icon svgIcon="icon{{group.r.groupStartedSuccessfully}}"></mat-icon>
+        </td>
 
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.test1}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.test1}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.test2}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.test2}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.test3}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.test3}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.test4}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.test4}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.test5}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.test5}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.test6}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.test6}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.test7}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.test7}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.test8}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.test8}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.test9}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.test9}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.test10}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.test10}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.intermediateTestBasePass}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.intermediateTestBasePass}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.intermediateTestLangPass}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.intermediateTestLangPass}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.teacherFeedbacksFilledIn}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.teacherFeedbacksFilledIn}}"></mat-icon>
+        </td>
         <td class="gro"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.expertFeedbacksFilledIn}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.expertFeedbacksFilledIn}}"></mat-icon>
+        </td>
 
         <td class="gro master"
             (mouseenter)="onMouseEnter('gro');"
             (mouseleave)="onMouseLeave('gro');"
-        ><div class="cell{{group.r.groupReadyToOffering}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.groupReadyToOffering}}"></mat-icon>
+        </td>
 
         <td class="grc"
             (mouseenter)="onMouseEnter('grc');"
             (mouseleave)="onMouseLeave('grc');"
-        ><div class="cell{{group.r.finalTestBasePass}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.finalTestBasePass}}"></mat-icon>
+        </td>
         <td class="grc"
             (mouseenter)="onMouseEnter('grc');"
             (mouseleave)="onMouseLeave('grc');"
-        ><div class="cell{{group.r.finalTestLangPass}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.finalTestLangPass}}"></mat-icon>
+        </td>
         <td class="grc"
             (mouseenter)="onMouseEnter('grc');"
             (mouseleave)="onMouseLeave('grc');"
-        ><div class="cell{{group.r.interviewerDefined}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.interviewerDefined}}"></mat-icon>
+        </td>
         <td class="grc"
             (mouseenter)="onMouseEnter('grc');"
             (mouseleave)="onMouseLeave('grc');"
-        ><div class="cell{{group.r.interviewerSummaryDefined}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.interviewerSummaryDefined}}"></mat-icon>
+        </td>
         <td class="grc"
             (mouseenter)="onMouseEnter('grc');"
             (mouseleave)="onMouseLeave('grc');"
-        ><div class="cell{{group.r.expertsLoadFilledIn}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.expertsLoadFilledIn}}"></mat-icon>
+        </td>
         <td class="grc"
             (mouseenter)="onMouseEnter('grc');"
             (mouseleave)="onMouseLeave('grc');"
-        ><div class="cell{{group.r.interviewersLoadFilledIn}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.interviewersLoadFilledIn}}"></mat-icon>
+        </td>
 
         <td class="grc master"
             (mouseenter)="onMouseEnter('grc');"
             (mouseleave)="onMouseLeave('grc');"
-        ><div class="cell{{group.r.groupReadyForClose}}"></div></td>
+        >
+          <mat-icon svgIcon="icon{{group.r.groupReadyForClose}}"></mat-icon>
+        </td>
 
         <td>{{group.total}}</td>
 
       </tr>
     </ng-container>
-
+    </tbody>
   </table>
 
 </div>
