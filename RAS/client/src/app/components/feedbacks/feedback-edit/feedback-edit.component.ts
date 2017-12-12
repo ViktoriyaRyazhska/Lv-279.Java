@@ -17,12 +17,6 @@ export class FeedbackEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.id = +params['id'];
-          this.student = this.feedbackService.getStudent(this.id);
-        }
-      )
+
   }
 }
