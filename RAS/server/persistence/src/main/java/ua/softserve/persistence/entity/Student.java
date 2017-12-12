@@ -60,4 +60,9 @@ public class Student {
         approvedBy = employee;
         return this;
     }
+
+    public Student unRemove() {
+        removed = false;
+        return this;
+    }
 }
