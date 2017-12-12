@@ -99,3 +99,4 @@ export class ViewAcademiesComponent implements OnInit {
 //   }
 //
 // }
+}

@@ -40,7 +40,7 @@ import {PrimeNgModules} from "./prime-ng.modules";
 import {UsersService} from "./services/users/users.service";
 import {MatSortModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDatepickerModule, MatNativeDateModule, MatTabsModule} from '@angular/material';
+import {MatDatepickerModule, MatNativeDateModule, MatTabsModule} from '@angular/material'
 
 
 @NgModule({
