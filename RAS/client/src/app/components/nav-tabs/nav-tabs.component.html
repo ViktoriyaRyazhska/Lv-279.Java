@@ -1,8 +1,14 @@
-<div style="padding: 5px;">
-<mat-tab-group>
-    <mat-tab label="students"><app-students></app-students></mat-tab>
-    <mat-tab label="teachers(experts)">Тут пів киці, там пів киці, киця йшла по залізниці</mat-tab>
-    <mat-tab label="history"><app-history-list></app-history-list></mat-tab>
-    <mat-tab label="tests"><app-tests-names></app-tests-names></mat-tab>
-  </mat-tab-group>
-</div>
+<!--<div style="padding: 5px;">-->
+<!--<mat-tab-group>-->
+    <!--<mat-tab label="students"><app-students></app-students></mat-tab>-->
+    <!--<mat-tab label="teachers(experts)">Тут пів киці, там пів киці, киця йшла по залізниці</mat-tab>-->
+    <!--<mat-tab label="history"><app-history-list></app-history-list></mat-tab>-->
+    <!--<mat-tab label="tests"><app-tests-names></app-tests-names></mat-tab>-->
+  <!--</mat-tab-group>-->
+<!--</div>-->
+
+<nav mat-tab-nav-bar>
+<a mat-tab-link routerLink="students">Students</a>
+<a mat-tab-link routerLink="history">History</a>
+</nav>
+<router-outlet></router-outlet>
