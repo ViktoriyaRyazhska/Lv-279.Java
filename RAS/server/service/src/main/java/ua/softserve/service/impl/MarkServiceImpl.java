@@ -19,10 +19,4 @@ public class MarkServiceImpl implements MarkService {
     public List<Mark> findAll() {
         return markRepository.findAll();
     }
-
-    @Transactional
-    @Override
-    public List<Mark> findAllByCharacteristicId(int characteristicId) {
-        return markRepository.findAllByCharacteristicId(characteristicId);
-    }
 }

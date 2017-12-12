@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Student} from "../../../../models/student";
-import {FeedbackService} from "../../../../services/feedbacks/feedback.service";
-import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
   selector: 'app-feedback-expert-detail',

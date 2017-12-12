@@ -1,11 +1,4 @@
 <nav class="navbar navbar-default">
-  <!--<div id="DIV_2">-->
-    <!--<a href="https://softserveinc.com/en-us/" title="Return to the homepage" id="A_3"><img src="https://career.softserveinc.com/2017/images/root/logo-root.svg" alt="SoftServe logo" id="IMG_4" /></a> <a href="https://softserveinc.com/en-us/careers/" id="A_5">Join professionals</a> <a href="https://softserveinc.com/en-us/search/" title="Search" id="A_6"><img src="https://cdnssinc.softserveinc.com/IncImg/root/Lince-22px-cr.svg" alt="Search icon" id="IMG_7" /></a><a href="#" id="A_8"></a>-->
-    <!--<div id="DIV_9">-->
-    <!--</div><a href="#" id="A_10"></a>-->
-    <!--<div id="DIV_11">-->
-    <!--</div>-->
-  <!--</div>-->
   <div class="container-fluid">
     <div class="navbar-header">
       <a href="" class="navbar-brand" id="softServeLogo">soft<b>serve</b></a>
@@ -18,23 +11,15 @@
         <li class="nav-item"><a routerLink = "ang/addgroup">add group</a><br>
         <li class="nav-item"><a routerLink = "ang/viewAcademies">view academies</a><br>
         <li class="nav-item"><a routerLink = "ang/students">students</a><br>
-        <li class="nav-item"><a routerLink = "ang/marks">marks</a><br>
+        <li class="nav-item"><a routerLink = "ang/feedback">feedbacks</a><br>
         <li class="nav-item"><a routerLink = "ang/tests">tests</a><br>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item" *ngIf="!isSignedIn"><a routerLink = "myLogin">log in</a></li>
-        <li class="nav-item" *ngIf="isSignedIn" (click)="logout()"><a>log out</a></li>
+        <li class="nav-item" *ngIf="isSignedIn" (click)="logout()" id="logout"><a>log out</a></li>
       </ul>
     </div>
   </div>
 </nav>
-
-<!--<h1>Hello</h1>-->
-<!--<a routerLink = "ang/addgroup">Add group</a><br>-->
-<!--<a routerLink = "ang/viewAcademies">viewAcademies</a><br>-->
-<!--<a routerLink = "ang/history">history</a><br>-->
-<!--<a routerLink = "ang/students">students</a><br>-->
-<!--<a routerLink = "ang/marks">marks</a><br>-->
-
 <router-outlet></router-outlet>

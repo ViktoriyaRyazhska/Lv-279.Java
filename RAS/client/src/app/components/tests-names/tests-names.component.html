@@ -1,6 +1,7 @@
 <button class="btn btn-primary" (click)="addTest();">Add test</button><br><br>
 
 <div *ngIf="tests">
+<p>{{name}}</p>
   <table class="table table-striped table-hover table-bordered">
     <thead class="thead-dark">
     <tr>
@@ -9,15 +10,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let k of testIndex;let i = index">
-      <td><input type="text" class="form-control input-sm" (ngModel)="name" name="test{{i+1}}" value="{{tests.testName[i]}}"></td>
-      <td><input type="text" class="form-control input-sm" (ngModel)="mp" value="{{tests.max_point[i]}}"></td>
-      <td><button class="btn btn-primary" (click)="removeTest(name,mp);">remove</button></td>
+    <tr *ngFor="let test of tests">
+      <td><input type="text" class="form-control input-sm" [(ngModel)]="test.testName" name="test{{i+1}}" value="{{test.testName}}"></td>
+      <td><input type="text" class="form-control input-sm" [(ngModel)]="test.testMaxScore" value="{{test.testMaxScore}}"></td>
+      <td><button class="btn btn-primary" (click)="removeTest(test);">remove</button></td>
     </tr>
     </tbody>
   </table>
   <div class="row" id="saveTestsNames" align="center">
-    <button type="submit" class="btn btn-primary" (click)="save">Save
+    <button type="submit" class="btn btn-primary" (click)="save(tests)">Save
     </button>
     <button type="submit" class="btn btn-primary" (click)="save">Cancel
     </button>

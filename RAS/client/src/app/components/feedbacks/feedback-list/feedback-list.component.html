@@ -1,101 +1,567 @@
-<div class="container-fluid">
-  <table
-    class="table table-condensed table-hover table-bordered table-responsive table-striped">
-    <tr>
-      <th rowspan="3">Name</th>
-      <th rowspan="3"></th>
-      <th rowspan="3"></th>
+<p-dataTable [value]="students" [editable]="true" resizableColumns="true" reorderableColumns="true"
+             scrollable="true">
+  <p-column header="Name" [editable]="false"  [filter]="true" [sortable]="true" [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="body">
+       <span>
+          <a (click)="onStudentClick(student)"> {{student.user.firstName +" "+ student.user.lastName}}</a>
+       </span>
+    </ng-template>
+  </p-column>
+  <p-column  [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="body">
+       <span>
+          <a (click)="onOverallClick(student)">Overall feedback</a>
+       </span>
+    </ng-template>
+  </p-column>
+  <p-column   [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="body">
+      <span>
+          <a (click)="onProvideClick(student)">Provide feedback</a>
+      </span>
+    </ng-template>
+  </p-column>
 
-      <th colspan="7">Teacher Mark</th>
-      <th colspan="7">Expert Mark</th>
+  <p-column header="Learning ability" field="teacherFeedback.learningAbility.name"  [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Overall technical competence" field="teacherFeedback.overallTechnicalCompetence.name" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Passional initiative" field="teacherFeedback.passionalInitiative.name"  [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Team work" field="teacherFeedback.teamWork.name"  [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Getting things done" field="teacherFeedback.gettingThingsDone.name"  [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Active Communicator" field="teacherFeedback.activeCommunicator.name"  [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Summary" field="teacherFeedback.summary"  [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
 
-      <th rowspan="3">HR Comment</th>
-      <th rowspan="3">Interviewer Comment</th>
-      <th rowspan="3">Intern. Test, Base</th>
-      <th rowspan="3">Intern. Test, Lang</th>
-      <th rowspan="3">Final, Lang</th>
-      <th rowspan="3">Final, Base</th>
-      <th rowspan="3">Teacher Scope</th>
-      <th rowspan="3">Contact Date</th>
-      <th rowspan="3">Contact Comment</th>
-    </tr>
+  <p-column header="Learning ability" field="expertFeedback.learningAbility.name" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Overall technical competence" field="expertFeedback.overallTechnicalCompetence.name" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Passional initiative" field="expertFeedback.passionalInitiative.name" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Team work" field="expertFeedback.teamWork.name" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Getting things done" field="expertFeedback.gettingThingsDone.name" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Active Communicator" field="expertFeedback.activeCommunicator.name" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Summary" field="expertFeedback.summary" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
 
-    <tr>
-      <th colspan="2">Technical Result</th>
-      <th colspan="4">Soft Skills</th>
-      <th rowspan="2">Summary Comments</th>
-      <th colspan="2">Technical Result</th>
-      <th colspan="4">Soft Skills</th>
-      <th rowspan="2">Summary Comments</th>
-    </tr>
+  <p-column header="HR Comment" field="data.interviewerComment" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
 
-    <tr>
-      <th>Learning ability</th>
-      <th>Overall technical competence</th>
-      <th>Passional initiative</th>
-      <th>Team work</th>
-      <th>Getting things done</th>
-      <th>Active Communicator</th>
+  <p-column header="Interviewer Comment" field="data.interviewerComment" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Intern. Test, Base" field="data.intermBase" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Intern. Test, Lang" field="data.intermLang" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Final, Lang" field="data.finalBase" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Final, Base" field="data.finalLang" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Teacher Scope" field="data.teacherScore" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
 
-      <th>Learning ability</th>
-      <th>Overall technical competence</th>
-      <th>Passional initiative</th>
-      <th>Team work</th>
-      <th>Getting things done</th>
-      <th>Active Communicator</th>
-    </tr>
+  <p-column header="Contact Date" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="Contact Comment" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+</p-dataTable>
 
-    <ng-container *ngFor="let student of students">
-      <tr>
-        <td>{{student.user.firstName}} {{student.user.lastName}}</td>
-        <td>Overall feedback</td>
-        <td>Provide feedback</td>
-        <td>{{student.teacherFeedback.learningAbility.name}}</td>
-        <td>{{student.teacherFeedback.overallTechnicalCompetence.name}}</td>
-        <td>{{student.teacherFeedback.passionalInitiative.name}}</td>
-        <td>{{student.teacherFeedback.teamWork.name}}</td>
-        <td>{{student.teacherFeedback.gettingThingsDone.name}}</td>
-        <td>{{student.teacherFeedback.activeCommunicator.name}}</td>
-        <td>{{student.teacherFeedback.summary}}</td>
+<p-dialog header="User info" [(visible)]="displayStudentDetails" modal="modal" width="450">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h4>Personal Information:</h4>
+      <div class="ui-g-4">
+        <div>Id:</div>
+        <div>Name:</div>
+        <div>Age:</div>
+        <div>Education:</div>
+        <div>Strong Skills:</div>
+      </div>
+      <div class="ui-g-8" *ngIf="selectedStudent && selectedStudent.user">
+        <div>{{selectedStudent.user.id}}</div>
+        <div>{{selectedStudent.user.firstName +" "+ selectedStudent.user.lastName}}</div>
+        <div>{{selectedStudent.age}}-</div>
+        <div>{{selectedStudent.education}}-</div>
+        <div>{{selectedStudent.strongSkills}}-</div>
+      </div>
+    </div>
 
-        <td>{{student.expertFeedback.learningAbility.name}}</td>
-        <td>{{student.expertFeedback.overallTechnicalCompetence.name}}</td>
-        <td>{{student.expertFeedback.passionalInitiative.name}}</td>
-        <td>{{student.expertFeedback.teamWork.name}}</td>
-        <td>{{student.expertFeedback.gettingThingsDone.name}}</td>
-        <td>{{student.expertFeedback.activeCommunicator.name}}</td>
-        <td>{{student.expertFeedback.summary}}</td>
+    <div class="ui-g-12">
+      <h4>Contact Information:</h4>
+      <div class="ui-g-4">
+        <div>Email:</div>
+        <div>Messenger:</div>
+        <div>Phone:</div>
+        <div>Place Of Origin:</div>
+      </div>
+      <div class="ui-g-8" *ngIf="selectedStudent && selectedStudent.user">
+        <div>{{selectedStudent.user.email}}</div>
+        <div>{{selectedStudent.messenger}}-</div>
+        <div>{{selectedStudent.user.phone}}</div>
+        <div>{{selectedStudent.placeOfOrigin}}-</div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
 
-        <td></td>
+<p-dialog header="Student Overall Feedback" [(visible)]="displayOverallFeedback" modal="modal" width="800">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div *ngIf="selectedStudent && selectedStudent.user"><h4>{{selectedStudent.user.firstName +" "+
+        selectedStudent.user.lastName}}</h4></div>
+      <div class="ui-g-4">
+        <div class="column">
+          <div>English level by SSU:</div>
+          <div>Intern. Test, Base:</div>
+          <div>Intern. Test, Lang:</div>
+          <div>Final, Lang:</div>
+          <div>Final, Base:</div>
+          <div>Teacher Scope:</div>
+          <div>Teacher(s):</div>
+          <div>Expert(s):</div>
+        </div>
+      </div>
+      <div class="ui-g-8">
+        <div class="column" *ngIf="selectedStudent && selectedStudent.user">
+          <div>{{selectedStudent.data.englishLevel.name}}</div>
+          <div>{{selectedStudent.data.intermBase}}</div>
+          <div>{{selectedStudent.data.intermLang}}</div>
+          <div>{{selectedStudent.data.finalBase}}</div>
+          <div>{{selectedStudent.data.finalLang}}</div>
+          <div>{{selectedStudent.data.teacherScore}}</div>
+          <div>-</div>
+          <div>-</div>
+        </div>
+      </div>
+    </div>
 
-        <td>{{student.data.interviewerComment}}</td>
-        <td>{{student.data.intermBase}}</td>
-        <td>{{student.data.intermLang}}</td>
-        <td>{{student.data.finalBase}}</td>
-        <td>{{student.data.finalLang}}</td>
-        <td>{{student.data.teacherScore}}</td>
+    <div class="ui-g-12" *ngIf="selectedStudent && selectedStudent.user">
+      <div class="ui-g-12">
+        <div class="ui-g-4">Characteristic</div>
+        <div class="ui-g-4">Teacher</div>
+        <div class="ui-g-4">Expert</div>
+      </div>
 
-        <td></td>
-        <td></td>
-      </tr>
-    </ng-container>
-  </table>
+      <div>Technical Result</div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <div>Learning ability:</div>
+          <div>Overall technical competence:</div>
+        </div>
+        <div class="ui-g-4">
+          <div>{{selectedStudent.teacherFeedback.learningAbility.name}}</div>
+          <div>{{selectedStudent.teacherFeedback.overallTechnicalCompetence.name}}</div>
+        </div>
+        <div class="ui-g-4">
+          <div>{{selectedStudent.expertFeedback.learningAbility.name}}</div>
+          <div>{{selectedStudent.expertFeedback.overallTechnicalCompetence.name}}</div>
+        </div>
+      </div>
+
+      <div>Soft Skills</div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <div>Passional initiative:</div>
+          <div>Team work:</div>
+          <div>Getting things done:</div>
+          <div>Active Communicator:</div>
+        </div>
+        <div class="ui-g-4">
+          <div>{{selectedStudent.teacherFeedback.passionalInitiative.name}}</div>
+          <div>{{selectedStudent.teacherFeedback.teamWork.name}}</div>
+          <div>{{selectedStudent.teacherFeedback.gettingThingsDone.name}}</div>
+          <div>{{selectedStudent.teacherFeedback.activeCommunicator.name}}</div>
+        </div>
+        <div class="ui-g-4">
+          <div>{{selectedStudent.expertFeedback.passionalInitiative.name}}</div>
+          <div>{{selectedStudent.expertFeedback.teamWork.name}}</div>
+          <div>{{selectedStudent.expertFeedback.gettingThingsDone.name}}</div>
+          <div>{{selectedStudent.expertFeedback.activeCommunicator.name}}</div>
+        </div>
+      </div>
+
+      <div>Summary</div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <div>Summary comments (risks/strangths, recommendation):</div>
+        </div>
+        <div class="ui-g-4">
+          <div>{{selectedStudent.teacherFeedback.summary}}</div>
+        </div>
+        <div class="ui-g-4">
+          <div>{{selectedStudent.expertFeedback.summary}}</div>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <div>HR Comment:</div>
+        </div>
+        <div class="ui-g-8">
+          <div></div>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <div>Interviewer Comment:</div>
+        </div>
+        <div class="ui-g-8">
+          <div>{{selectedStudent.data.interviewerComment}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+<p-dialog header="Student Provide Feedback" [(visible)]="displayProvideFeedback" modal="modal" width="1200">
+  <!--<app-feedback-teacher-edit></app-feedback-teacher-edit>-->
+  <div class="container well" *ngIf="selectedStudent && selectedStudent.user">
+    <form [formGroup]="signupForm" (ngSubmit)="onSave()">
+      <h4>Add Feedback</h4>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Learning ability</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="learningAbility"
+                (change)="onChoose()">
+                <option *ngFor="let mark of marks | markFilter:CharId.ONE" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{learnDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Overall technical competence</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="overallTechCompetence"
+                (change)="onChoose()">
+                <option *ngFor="let mark of marks | markFilter:CharId.TWO" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{overallDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Passional initiative</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="passionalInitiative"
+                (change)="onChoose()">
+                <option *ngFor="let mark of marks | markFilter:CharId.THREE" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{passDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Team work</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="teamWork"
+                (change)="onChoose()">
+                <option *ngFor="let mark of marks | markFilter:CharId.FOUR" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{teamDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Getting things done</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="getThingsDone"
+                (change)="onChoose()">
+                <option *ngFor="let mark of marks | markFilter:CharId.FIVE" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{getDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Active Communicator</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="activeCommunicator"
+                (change)="onChoose()"
+              >
+                <option *ngFor="let mark of marks | markFilter:CharId.SIX" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{actDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Summary</label>
+            </div>
+            <div class="col-sm-10 form-group">
+              <input
+                type="text"
+                class="form-control input-sm"
+                formControlName="summary">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Save Feedback</button>
+    </form>
+  </div>
+
+</p-dialog>
 
 
-  <!--</tr>-->
-  <!--<app-feedback-item-->
-  <!--*ngFor="let student of students; let i = index"-->
-  <!--[student]="student"-->
-  <!--[index]="i"></app-feedback-item>-->
-  <!--<tr>-->
 
 
-  <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-      <!--<app-feedback-item-->
-        <!--*ngFor="let student of students; let i = index"-->
-        <!--[student]="student"-->
-        <!--[index]="i"></app-feedback-item>-->
-    <!--</div>-->
-  <!--</div>-->
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<p-dataTable [value]="students" [editable]="true" [editable]="true" resizableColumns="true" reorderableColumns="true" scrollable="true">-->
+<!--<p-headerColumnGroup>-->
+<!--<p-row>-->
+<!--<p-column header="Name" rowspan="3" [style]="{'width':'550px'}"></p-column>-->
+<!--<p-column rowspan="3"></p-column>-->
+<!--<p-column rowspan="3"></p-column>-->
+<!--<p-column header="Teacher Mark" colspan="7"></p-column>-->
+<!--<p-column header="Expert Mark" colspan="7"></p-column>-->
+<!--<p-column header="HR Comment" rowspan="3"></p-column>-->
+<!--<p-column header="Interviewer Comment" rowspan="3"></p-column>-->
+<!--<p-column header="Intern. Test, Base" rowspan="3"></p-column>-->
+<!--<p-column header="Intern. Test, Lang" rowspan="3"></p-column>-->
+<!--<p-column header="Final, Lang" rowspan="3"></p-column>-->
+<!--<p-column header="Final, Base" rowspan="3"></p-column>-->
+<!--<p-column header="Teacher Scope" rowspan="3"></p-column>-->
+<!--<p-column header="Contact Date" rowspan="3"></p-column>-->
+<!--<p-column header="Contact Comment" rowspan="3"></p-column>-->
+<!--</p-row>-->
+<!--<p-row>-->
+<!--<p-column header="Tchnical Result" colspan="2"></p-column>-->
+<!--<p-column header="Soft Skills" colspan="4"></p-column>-->
+<!--<p-column header="Summary Comments" rowspan="2"></p-column>-->
+<!--<p-column header="Technical Result" colspan="2"></p-column>-->
+<!--<p-column header="Soft Skills" colspan="4"></p-column>-->
+<!--<p-column header="Summary Comments" rowspan="2"></p-column>-->
+<!--</p-row>-->
+<!--<p-row>-->
+<!--<p-column header="Learning ability"></p-column>-->
+<!--<p-column header="Overall technical competence"></p-column>-->
+<!--<p-column header="Passional initiative"></p-column>-->
+<!--<p-column header="Team work"></p-column>-->
+<!--<p-column header="Getting things done"></p-column>-->
+<!--<p-column header="Active Communicator"></p-column>-->
+
+<!--<p-column header="Learning ability"></p-column>-->
+<!--<p-column header="Overall technical competence"></p-column>-->
+<!--<p-column header="Passional initiative"></p-column>-->
+<!--<p-column header="Team work"></p-column>-->
+<!--<p-column header="Getting things done"></p-column>-->
+<!--<p-column header="Active Communicator"></p-column>-->
+<!--</p-row>-->
+<!--</p-headerColumnGroup>-->
+
+<!--<p-column>-->
+<!--<ng-template let-col let-student="rowData" pTemplate="body">-->
+<!--<span>-->
+<!--<a (click)="onStudentClick(student)"> {{student.user.firstName +" "+ student.user.lastName}}</a>-->
+<!--</span>-->
+<!--</ng-template>-->
+<!--</p-column>-->
+<!--<p-column>-->
+<!--<ng-template let-col let-student="rowData" pTemplate="body">-->
+<!--<span>-->
+<!--<a (click)="onOverallClick(student)">Overall feedback</a>-->
+<!--</span>-->
+<!--</ng-template>-->
+<!--</p-column>-->
+<!--<p-column>-->
+<!--<ng-template let-col let-student="rowData" pTemplate="body">-->
+<!--<span>-->
+<!--<a (click)="onOverallClick(student)">Provide feedback</a>-->
+<!--</span>-->
+<!--</ng-template>-->
+<!--</p-column>-->
+
+<!--<p-column field="teacherFeedback.learningAbility.name"></p-column>-->
+<!--<p-column field="teacherFeedback.overallTechnicalCompetence.name"></p-column>-->
+<!--<p-column field="teacherFeedback.passionalInitiative.name"></p-column>-->
+<!--<p-column field="teacherFeedback.teamWork.name"></p-column>-->
+<!--<p-column field="teacherFeedback.gettingThingsDone.name"></p-column>-->
+<!--<p-column field="teacherFeedback.activeCommunicator.name"></p-column>-->
+<!--<p-column field="teacherFeedback.summary"></p-column>-->
+
+<!--<p-column field="expertFeedback.learningAbility.name"></p-column>-->
+<!--<p-column field="expertFeedback.overallTechnicalCompetence.name"></p-column>-->
+<!--<p-column field="expertFeedback.passionalInitiative.name"></p-column>-->
+<!--<p-column field="expertFeedback.teamWork.name"></p-column>-->
+<!--<p-column field="expertFeedback.gettingThingsDone.name"></p-column>-->
+<!--<p-column field="expertFeedback.activeCommunicator.name"></p-column>-->
+<!--<p-column field="teacherFeedback.summary"></p-column>-->
+
+<!--<p-column></p-column>-->
+
+<!--<p-column field="data.interviewerComment"></p-column>-->
+<!--<p-column field="data.intermBase"></p-column>-->
+<!--<p-column field="data.intermLang"></p-column>-->
+<!--<p-column field="data.finalBase"></p-column>-->
+<!--<p-column field="data.finalLang"></p-column>-->
+<!--<p-column field="data.teacherScore"></p-column>-->
+
+<!--<p-column></p-column>-->
+<!--<p-column></p-column>-->
+<!--</p-dataTable>-->
+
+
+<!--<div class="container-fluid">-->
+<!--<table-->
+<!--class="table table-condensed table-hover table-bordered table-responsive table-striped">-->
+<!--<tr>-->
+<!--<th rowspan="3">Name</th>-->
+<!--<th rowspan="3"></th>-->
+<!--<th rowspan="3"></th>-->
+
+<!--<th colspan="7">Teacher Mark</th>-->
+<!--<th colspan="7">Expert Mark</th>-->
+
+<!--<th rowspan="3">HR Comment</th>-->
+<!--<th rowspan="3">Interviewer Comment</th>-->
+<!--<th rowspan="3">Intern. Test, Base</th>-->
+<!--<th rowspan="3">Intern. Test, Lang</th>-->
+<!--<th rowspan="3">Final, Lang</th>-->
+<!--<th rowspan="3">Final, Base</th>-->
+<!--<th rowspan="3">Teacher Scope</th>-->
+<!--<th rowspan="3">Contact Date</th>-->
+<!--<th rowspan="3">Contact Comment</th>-->
+<!--</tr>-->
+
+<!--<tr>-->
+<!--<th colspan="2">Technical Result</th>-->
+<!--<th colspan="4">Soft Skills</th>-->
+<!--<th rowspan="2">Summary Comments</th>-->
+<!--<th colspan="2">Technical Result</th>-->
+<!--<th colspan="4">Soft Skills</th>-->
+<!--<th rowspan="2">Summary Comments</th>-->
+<!--</tr>-->
+
+<!--<tr>-->
+<!--<th>Learning ability</th>-->
+<!--<th>Overall technical competence</th>-->
+<!--<th>Passional initiative</th>-->
+<!--<th>Team work</th>-->
+<!--<th>Getting things done</th>-->
+<!--<th>Active Communicator</th>-->
+
+<!--<th>Learning ability</th>-->
+<!--<th>Overall technical competence</th>-->
+<!--<th>Passional initiative</th>-->
+<!--<th>Team work</th>-->
+<!--<th>Getting things done</th>-->
+<!--<th>Active Communicator</th>-->
+<!--</tr>-->
+
+<!--<ng-container *ngFor="let student of students">-->
+<!--<tr>-->
+<!--<td>{{student.user.firstName}} {{student.user.lastName}}</td>-->
+<!--<td>Overall feedback</td>-->
+<!--<td>Provide feedback</td>-->
+<!--<td>{{student.teacherFeedback.learningAbility.name}}</td>-->
+<!--<td>{{student.teacherFeedback.overallTechnicalCompetence.name}}</td>-->
+<!--<td>{{student.teacherFeedback.passionalInitiative.name}}</td>-->
+<!--<td>{{student.teacherFeedback.teamWork.name}}</td>-->
+<!--<td>{{student.teacherFeedback.gettingThingsDone.name}}</td>-->
+<!--<td>{{student.teacherFeedback.activeCommunicator.name}}</td>-->
+<!--<td>{{student.teacherFeedback.summary}}</td>-->
+
+<!--<td>{{student.expertFeedback.learningAbility.name}}</td>-->
+<!--<td>{{student.expertFeedback.overallTechnicalCompetence.name}}</td>-->
+<!--<td>{{student.expertFeedback.passionalInitiative.name}}</td>-->
+<!--<td>{{student.expertFeedback.teamWork.name}}</td>-->
+<!--<td>{{student.expertFeedback.gettingThingsDone.name}}</td>-->
+<!--<td>{{student.expertFeedback.activeCommunicator.name}}</td>-->
+<!--<td>{{student.expertFeedback.summary}}</td>-->
+
+<!--<td></td>-->
+
+<!--<td>{{student.data.interviewerComment}}</td>-->
+<!--<td>{{student.data.intermBase}}</td>-->
+<!--<td>{{student.data.intermLang}}</td>-->
+<!--<td>{{student.data.finalBase}}</td>-->
+<!--<td>{{student.data.finalLang}}</td>-->
+<!--<td>{{student.data.teacherScore}}</td>-->
+
+<!--<td></td>-->
+<!--<td></td>-->
+<!--</tr>-->
+<!--</ng-container>-->
+<!--</table>-->
+
+
+<!--</tr>-->
+<!--<app-feedback-item-->
+<!--*ngFor="let student of students; let i = index"-->
+<!--[student]="student"-->
+<!--[index]="i"></app-feedback-item>-->
+<!--<tr>-->
+
+
+<!--<div class="row">-->
+<!--<div class="col-xs-12">-->
+<!--<app-feedback-item-->
+<!--*ngFor="let student of students; let i = index"-->
+<!--[student]="student"-->
+<!--[index]="i"></app-feedback-item>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+

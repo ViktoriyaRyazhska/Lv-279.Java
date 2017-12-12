@@ -1,19 +1,7 @@
-<p-tabView>
-  <p-tabPanel header="Students" [selected]="true">
-    <app-students></app-students>
-  </p-tabPanel>
-
-  <p-tabPanel header="Teachers(Experts)">
-    Тут пів киці, там пів киці, киця йде по залізниці.
-  </p-tabPanel>
-
-  <p-tabPanel header="Group History">
-    <app-history-list></app-history-list>
-  </p-tabPanel>
-
-  <p-tabPanel header="Feedback">
-    <app-feedbacks></app-feedbacks>
-  </p-tabPanel>
-
-</p-tabView>
+<nav mat-tab-nav-bar>
+<a mat-tab-link routerLink="students">Students</a>
+<a mat-tab-link routerLink="history">History</a>
+<a mat-tab-link routerLink="feedback">Feedbacks</a>
+</nav>
+<router-outlet></router-outlet>
 
