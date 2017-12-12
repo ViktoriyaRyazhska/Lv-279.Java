@@ -14,17 +14,20 @@ public class TestNameServiceImpl implements TestNameService {
     @Autowired
     private TestNameRepository testNameRepository;
 
+    @Override
     @Transactional
-    public void saveTestNames(List<TestName> testNames){
+    public void saveTestNames(List<TestName> testNames) {
         for(TestName testName : testNames)
-        testNameRepository.save(testName);
+            testNameRepository.save(testName);
     }
 
-    public List<TestName> findAllTestNames (){
+    @Override
+    public List<TestName> findAllTestNames() {
         return testNameRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<TestName> findAllTestNamesByAcademyId(Integer groupId) {
         return  testNameRepository.findAllTestNamesBygroupId(groupId);
     }

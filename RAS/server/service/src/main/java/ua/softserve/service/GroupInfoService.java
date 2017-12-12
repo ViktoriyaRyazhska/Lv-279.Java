@@ -1,7 +1,6 @@
 package ua.softserve.service;
 
 import ua.softserve.persistence.entity.GroupInfo;
-import ua.softserve.persistence.entity.TestName;
 import ua.softserve.service.dto.AcademyDTO;
 
 import java.util.List;
@@ -18,8 +17,4 @@ public interface GroupInfoService {
     List<AcademyDTO> getAllAcademies();
 
     List<GroupInfo> findAllWithOrder();
-
-    List<TestName> findAllTestNamesByAcademyId (int groupId);
-
-    void saveTestNames(List<TestName> testNames,Integer academy_id);
 }

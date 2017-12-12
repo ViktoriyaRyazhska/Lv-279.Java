@@ -145,21 +145,6 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     }
 
     @Override
-    public List<TestName> findAllTestNamesByAcademyId(int groupId) {
-//        GroupInfo groupInfo = groupInfoRepository.findByAcademyAcademyId(groupId);
-//        return groupInfo.getTestNames();
-//        return groupInfoRepository.findTestNamesByAcademyId(groupId);
-        return  new ArrayList<TestName>();
-    }
-
-    @Override
-    public void saveTestNames(List<TestName> testNames,Integer academy_id) {
-        groupInfoRepository.findByAcademyAcademyId(academy_id);
-//            groupInfo.setTestNames(testNames);
-//            groupInfoRepository.save(groupInfo);
-    }
-
-    @Override
     public GroupInfo findOneGroupInfoByAcademyId(int academyId) {
         return groupInfoRepository.findByAcademyAcademyId(academyId);
     }

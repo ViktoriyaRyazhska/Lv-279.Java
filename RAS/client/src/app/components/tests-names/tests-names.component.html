@@ -9,10 +9,11 @@
       <th>Max point</th>
     </tr>
     </thead>
-    <tbody><tr *ngFor="let test of tests">
-      <td><input type="text" class="form-control input-sm" (ngModel)="name" name="test{{i+1}}" value="{{test.testName}}"></td>
-      <td><input type="text" class="form-control input-sm" (ngModel)="mp" value="{{test.testMaxScore}}"></td>
-      <td><button class="btn btn-primary" (click)="removeTest(name,mp);">remove</button></td>
+    <tbody>
+    <tr *ngFor="let test of tests">
+      <td><input type="text" class="form-control input-sm" [(ngModel)]="test.testName" name="test{{i+1}}" value="{{test.testName}}"></td>
+      <td><input type="text" class="form-control input-sm" [(ngModel)]="test.testMaxScore" value="{{test.testMaxScore}}"></td>
+      <td><button class="btn btn-primary" (click)="removeTest(test);">remove</button></td>
     </tr>
     </tbody>
   </table>

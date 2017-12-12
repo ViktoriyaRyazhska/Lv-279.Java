@@ -36,15 +36,6 @@ public class GroupInfo {
     @JoinColumn(name = "profile_id")
     private ProfileInfo profileInfo;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "group_tests",
-//            joinColumns = @JoinColumn(name = "academy_id", referencedColumnName = "academy_id"),
-//            inverseJoinColumns = @JoinColumn(name = "test_id",referencedColumnName = "id"))
-
-//    @OneToMany
-//    @JoinColumn(name = "academy_id", referencedColumnName = "academy_id")
-//    private List<TestName> testNames;
-
     public GroupInfo() {
     }
 }

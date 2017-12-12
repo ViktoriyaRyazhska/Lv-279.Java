@@ -13,7 +13,4 @@ public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
     List<GroupInfo> findAllWithOrder();
 
     GroupInfo findByAcademyAcademyId(Integer academyId);
-
-//    @Query("select testNames from GroupInfo gi where gi.academy.academyId = :academyId")
-//    List<TestName> findTestNamesByAcademyId (@Param("academyId") Integer academyId);
 }
