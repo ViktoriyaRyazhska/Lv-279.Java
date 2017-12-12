@@ -13,11 +13,7 @@ package ua.softserve.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import ua.softserve.service.CheckListByGroupsDtoService;
 import ua.softserve.service.ItaTacticalPlanByGroupStageDtoService;
 import ua.softserve.service.dto.CheckListByGroupsDto;
@@ -43,7 +39,7 @@ public class ControllerForReports {
     @RequestMapping(value = "/itaTacticalPlanByGroupStage",method = RequestMethod.GET, produces = {"application/json"})
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<List<ItaTacticalPlanByGroupStageDto>>> itaTacticalPlanByGroupStage() {
-        return new ResponseEntity<List<List<ItaTacticalPlanByGroupStageDto>>>(itaTacticalPlanByGroupStageDtoService.itaTacticalPlanByGroupStageReport(), HttpStatus.OK);
+        return new ResponseEntity<>(itaTacticalPlanByGroupStageDtoService.itaTacticalPlanByGroupStageReport(), HttpStatus.OK);
     }
 
 }

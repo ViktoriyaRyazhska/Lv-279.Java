@@ -9,26 +9,26 @@ export class Group {
   startDate: string = null;
   endDate: string = null;
   cityId: number = 1;
-  directionId: number;
+  directionId: number = 0;
   technologieId: number;
-  profileId: number;
+  profileId: number = 0;
   studentPlannedToGraduate: number = 0;
   studentPlannedToEnrollment: number = 0;
   studentActual: number = 0;
 
   setDataFromFormControl(form: FormGroup){
     this.grName = form.get('groupInfoFormControl').value;
-    this.nameForSite = form.get('nameForSiteFormControl').value;;
-    this.academyStagesId = form.get('academyStagesId').value;;
-    this.cityId = form.get('cityId').value;;
-    this.startDate = form.get('startDateFormControl').value;;
-    this.endDate = form.get('endDateFormControl').value;;
-    this.directionId = form.get('commonDirectionFormControl').value;;
-    this.technologieId = form.get('directionFormControl').value;;
-    this.profileId = form.get('profileInfoFormControl').value;;
+    this.nameForSite = form.get('nameForSiteFormControl').value;
+    this.academyStagesId = form.get('academyStagesId').value;
+    this.cityId = form.get('cityId').value;
+    this.startDate = form.get('startDateFormControl').value;
+    this.endDate = form.get('endDateFormControl').value;
+    this.directionId = form.get('commonDirectionFormControl').value;
+    this.technologieId = form.get('directionFormControl').value;
+    this.profileId = form.get('profileInfoFormControl').value;
     this.studentPlannedToGraduate = form.get('studentPlannedToGraduate').value;
-    this.studentPlannedToEnrollment = form.get('studentPlannedToEnrollment').value;;
-    // this.studentActual = form.get('').value;;
+    this.studentPlannedToEnrollment = form.get('studentPlannedToEnrollment').value;
+    this.studentActual = form.get('studentActualFromControl').value;
   }
 
 }

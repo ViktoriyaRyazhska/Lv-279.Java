@@ -5,6 +5,7 @@ import {NgModule} from "@angular/core";
 import {SharedModule} from "primeng/components/common/shared";
 import {CalendarModule} from "primeng/components/calendar/calendar";
 import {TabViewModule} from 'primeng/primeng';
+import {SpinnerModule} from 'primeng/primeng';
 import {CheckboxModule} from "primeng/components/checkbox/checkbox";
 
 @NgModule({
@@ -18,8 +19,9 @@ import {CheckboxModule} from "primeng/components/checkbox/checkbox";
     CalendarModule,
     DialogModule,
     TabViewModule,
-    CheckboxModule
-
+    CheckboxModule,
+    TabViewModule,
+    SpinnerModule
   ]
 })
 export class PrimeNgModules {}

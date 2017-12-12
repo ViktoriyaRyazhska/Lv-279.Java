@@ -38,6 +38,9 @@ import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
 import {UsersService} from "./services/users/users.service";
+import {MatSortModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule, MatNativeDateModule, MatTabsModule} from '@angular/material';
 
 
 @NgModule({
@@ -81,7 +84,19 @@ import {UsersService} from "./services/users/users.service";
     PrimeNgModules,
     BrowserModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService, UsersService],
   bootstrap: [AppComponent]
