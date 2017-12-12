@@ -12,16 +12,24 @@ import {ReportsService} from "../reports.service";
   providers: [ReportsService]
 })
 export class CheckListByGroupsComponent {
-  displayedColumns = ['groupName', 'cityName', 'status', 'teachers'];
+  displayedColumns = ['groupName',
+    'cityName',
+    'status',
+    'teachers',
+    'experts',
+    'r.englishLevelDefined',
+    'r.englishLevelCorrect',
+    'r.entryScoreDefined',
+    'r.incomingTestDefined',
+    'r.approvedByDefined',
+    'r.teacherDefined',
+    'r.expertDefined',
+    'r.groupStartedSuccessfully'];
   groups: any;
-  dataSource =  new MatTableDataSource(this.groups);
+  dataSource = new MatTableDataSource(this.groups);
 
   @ViewChild(MatSort) sort: MatSort;
 
-  /**
-   * Set the sort after the view init since this component will
-   * be able to query its view for the initialized sort.
-   */
   constructor(private reportsService: ReportsService) { }
 
   ngOnInit() {
@@ -36,34 +44,6 @@ export class CheckListByGroupsComponent {
     );
 
   }
-
-  /*onMouseEnter(s: string){
-    let elementsByClassName = document.getElementsByClassName(s);
-    for (let i = 0; i < elementsByClassName.length; i++) {
-      elementsByClassName[i].setAttribute('style', 'background: oldlace; cursor: pointer;');
-    }
-  }
-
-  onMouseLeave(s: string){
-    let elementsByClassName = document.getElementsByClassName(s);
-    for (let i = 0; i < elementsByClassName.length; i++) {
-      elementsByClassName[i].setAttribute('style', 'background: initial');
-    }
-  }
-
-  onMouseClick(s: string){
-    let elementsByClassName = document.getElementsByClassName(s);
-    for (let i = 0; i < elementsByClassName.length; i++) {
-      if (!elementsByClassName[i].className.endsWith('master')) {
-        let attribute = elementsByClassName[i].getAttribute('hidden');
-        if (attribute) {
-          elementsByClassName[i].removeAttribute('hidden');
-        } else {
-          elementsByClassName[i].setAttribute('hidden', '' + !attribute);
-        }
-      }
-    }
-  }*/
 
 
 }
