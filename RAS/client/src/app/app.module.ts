@@ -35,7 +35,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
 import {MarkService} from "./services/feedbacks/marks.service";
 import {UsersService} from "./services/users/users.service";
-import {MatSortModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
+import {MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
@@ -90,6 +90,7 @@ import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tac
     MatSortModule,
     MatPaginatorModule,
     MatSelectModule,
+    MatIconModule,
     MatInputModule,
     MatButtonModule
   ],

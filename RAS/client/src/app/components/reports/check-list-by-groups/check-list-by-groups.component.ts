@@ -1,6 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource, MatSort} from '@angular/material';
+// import {ViewChild} from '@angular/core';
+// import {MatTableDataSource, MatSort,} from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {MatIconRegistry} from '@angular/material';
 import {ReportsService} from "../reports.service";
+import {DomSanitizer} from "@angular/platform-browser";
 
 /**
  * @title Table with sorting
@@ -11,8 +14,8 @@ import {ReportsService} from "../reports.service";
   styleUrls: ['./check-list-by-groups.component.css'],
   providers: [ReportsService]
 })
-export class CheckListByGroupsComponent {
-  displayedColumns = ['groupName',
+export class CheckListByGroupsComponent implements OnInit{
+  /*displayedColumns = ['groupName',
     'cityName',
     'status',
     'teachers',
@@ -24,42 +27,49 @@ export class CheckListByGroupsComponent {
     'r.approvedByDefined',
     'r.teacherDefined',
     'r.expertDefined',
-    'r.groupStartedSuccessfully'];
+    'r.groupStartedSuccessfully'];*/
   groups: any;
-  dataSource = new MatTableDataSource(this.groups);
+  // dataSource = new MatTableDataSource(this.groups);
 
-  @ViewChild(MatSort) sort: MatSort;
+  // @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private reportsService: ReportsService) { }
+  constructor(private reportsService: ReportsService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon(
+      'icon1',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/img/examples/ic_check_black_24px.svg'));
+    iconRegistry.addSvgIcon(
+      'icon0',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/img/examples/ic_close_black_24px.svg'));
+  }
 
   ngOnInit() {
     // this.loading = true;
     this.reportsService.getAllForCheckListReport().subscribe(
       data => {
         this.groups = data;
-        this.dataSource = new MatTableDataSource(this.groups);
-        this.dataSource.sort = this.sort;
+        // this.dataSource = new MatTableDataSource(this.groups);
+        // this.dataSource.sort = this.sort;
       },
       error => console.log(error)
     );
 
   }
 
-  myMouseEnter(s: string){
+  onMouseEnter(s: string){
     let elementsByClassName = document.getElementsByClassName(s);
     for (let i = 0; i < elementsByClassName.length; i++) {
       elementsByClassName[i].setAttribute('style', 'background: oldlace; cursor: pointer;');
     }
   }
 
-  myMouseLeave(s: string){
+  onMouseLeave(s: string){
     let elementsByClassName = document.getElementsByClassName(s);
     for (let i = 0; i < elementsByClassName.length; i++) {
       elementsByClassName[i].setAttribute('style', 'background: initial');
     }
   }
 
-  myMouseClick(s: string){
+  onMouseClick(s: string){
     let elementsByClassName = document.getElementsByClassName(s);
     for (let i = 0; i < elementsByClassName.length; i++) {
       if (!elementsByClassName[i].className.endsWith('master')) {
