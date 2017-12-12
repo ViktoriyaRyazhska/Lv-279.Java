@@ -17,10 +17,11 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   account: LoginAccount;
-  success = false;
+  error: boolean;
 
   constructor(private fb: FormBuilder,
               private loginService: LoginService,
+              private router:Router
               ) { }
 
   ngOnInit() {
@@ -34,9 +35,12 @@ export class LoginComponent implements OnInit {
     this.account = this.loginForm.value;
     this.loginService.signIn(this.account)
       .subscribe((response:ResponseToken)=>{
-        localStorage.setItem('jwt',response.token)
-      })
+        localStorage.setItem('jwt',response.token);
+        // this.router.navigate(['/ang/'],);
+        this.error=false;
+      }, error2 => {
+          this.error = true;
+        }
+      );
   };
-
-
 }

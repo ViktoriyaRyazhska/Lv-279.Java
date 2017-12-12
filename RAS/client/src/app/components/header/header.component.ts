@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
     this.isSignedIn = this.loginService.isSignedIn();
   }
   logout = () => {
+      this.isSignedIn=false;
       localStorage.removeItem('jwt');
   };
 

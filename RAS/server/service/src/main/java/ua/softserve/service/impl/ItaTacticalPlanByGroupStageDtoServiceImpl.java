@@ -85,8 +85,8 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         List<Academy> academies = academyService.getAllAcademies();
         Calendar dateForComparison = new GregorianCalendar();
         dateForComparison.add(Calendar.MONTH, 2);
+        Calendar academyStartDate = new GregorianCalendar();
         for (Academy a : academies) {
-            Calendar academyStartDate = new GregorianCalendar();
             academyStartDate.setTimeInMillis(a.getStartDate().getTime());
             if ((a.getAcademyStages().getStageId() == AS_PLANNED_ID) && academyStartDate.before(dateForComparison)) {
                 planedGroupForTwoMoth.add(this.findById(a.getAcademyId()));
@@ -100,7 +100,6 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
             if(a.getAcademyStages().getStageId() == AS_GRADUATED_ID){
                 groupsGraduated.add(this.findById(a.getAcademyId()));
             }
-
         }
         itaTacticalPlanByGroupStage.add(planedGroupForTwoMoth);
         itaTacticalPlanByGroupStage.add(groupsInProces);
@@ -134,15 +133,15 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     private void setTrainer(ItaTacticalPlanByGroupStageDto dto) {
         TeacherTypes typeTeacher = teacherTypeRepository.findOne(TT_TEACHER_ID);
         TeacherTypes typeExpert = teacherTypeRepository.findOne(TT_EXPERT_ID);
-        String trainers = "";
+        StringBuilder trainers = new StringBuilder();
         List<GroupInfoTeachers> allTeachersOfGroup = groupInfoTeachersRepository.findAllByAcademyAndTeacherType(academyService.getById(dto.getGroupId()), typeTeacher);
         List<GroupInfoTeachers> allExpertsOfGroup = groupInfoTeachersRepository.findAllByAcademyAndTeacherType(academyService.getById(dto.getGroupId()), typeExpert);
         for (GroupInfoTeachers teacherInfo : allTeachersOfGroup) {
-            trainers += teacherInfo.getEmployee().getFirstNameEng() + " " + teacherInfo.getEmployee().getLastNameEng() + " ";
-        }
+            trainers.append(teacherInfo.getEmployee().getFirstNameEng() + " " + teacherInfo.getEmployee().getLastNameEng() + ", ");
+    }
 
         for (GroupInfoTeachers infoTeachers : allExpertsOfGroup) {
-            trainers += infoTeachers.getEmployee().getFirstNameEng() + " " + infoTeachers.getEmployee().getLastNameEng() + " ";
+            trainers.append(infoTeachers.getEmployee().getFirstNameEng() + " " + infoTeachers.getEmployee().getLastNameEng() + ", ");
         }
 
         dto.setTrainer(trainers);

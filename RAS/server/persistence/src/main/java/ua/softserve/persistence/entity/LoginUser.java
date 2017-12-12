@@ -24,6 +24,9 @@ public class LoginUser implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Authority authority = Authority.USER;
+    @OneToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
@@ -89,5 +92,13 @@ public class LoginUser implements UserDetails {
 
     public void setAuthority(Authority authority) {
         this.authority = authority;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

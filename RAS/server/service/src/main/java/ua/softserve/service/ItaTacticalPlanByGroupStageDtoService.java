@@ -10,5 +10,5 @@ public interface ItaTacticalPlanByGroupStageDtoService {
 
     List<ItaTacticalPlanByGroupStageDto> findAll();
 
-    public List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStageReport();
+    List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStageReport();
 }

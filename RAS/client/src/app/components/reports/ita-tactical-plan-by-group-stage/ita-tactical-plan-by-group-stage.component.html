@@ -1,0 +1,188 @@
+<!--<div *ngFor="let report of itaTacticalPlanByGroupStageReports">-->
+<!--<h1 align="center">{{report.name}}</h1>-->
+<!--<table class="table table-condensed table-hover table-bordered table-responsive table-striped">-->
+
+<!--<tr>-->
+<!--<th>Year</th>-->
+<!--<th>Month</th>-->
+<!--<th>Group ID</th>-->
+<!--<th>Group/Group feedbacks</th>-->
+<!--<th>CG</th>-->
+<!--<th>Profile</th>-->
+<!--<th>Location</th>-->
+<!--<th>#,requested</th>-->
+<!--<th>#,study in progress</th>-->
+<!--<th>#,graduated</th>-->
+<!--<th>#,hired</th>-->
+<!--<th>Group start Date</th>-->
+<!--<th>Group finish Date</th>-->
+<!--<th>Group status</th>-->
+<!--<th>Trainer</th>-->
+<!--<th>Comment</th>-->
+<!--<th>Payment status</th>-->
+<!--</tr>-->
+
+<!--<ng-container *ngFor="let item of report.report">-->
+<!--<tr>-->
+<!--<td>{{item.startDate|date: "yyyy"}}</td>-->
+<!--<td>{{item.startDate|date: "M"}}</td>-->
+<!--<td>{{item.groupId}}</td>-->
+<!--<td>{{item.groupName}}</td>-->
+<!--<td>{{item.cg}}</td>-->
+<!--<td>{{item.profile}}</td>-->
+<!--<td>{{item.location}}</td>-->
+<!--<td>{{item.requested}}</td>-->
+<!--<td>{{item.studyInProgress}}</td>-->
+<!--<td>{{item.graduated}}</td>-->
+<!--<td>{{item.hired}}</td>-->
+<!--<td>{{item.startDate|date: "dd/MM/yyyy"}}</td>-->
+<!--<td>{{item.endDate|date: "dd/MM/yyyy"}}</td>-->
+<!--<td>{{item.groupStatus}}</td>-->
+<!--<td>{{item.trainer}}</td>-->
+<!--<td>{{item.comment}}</td>-->
+<!--<td>{{item.paymentSatus}}</td>-->
+
+<!--</tr>-->
+<!--</ng-container>-->
+
+<!--</table>-->
+<!--</div>-->
+
+<!--<div *ngFor="let report of itaTacticalPlanByGroupStageReports">-->
+<!--<h1 align="center">{{report.name}}</h1>-->
+<!--<p-dataTable [value]="report.report" resizableColumns="true" reorderableColumns="true" scrollable="true">-->
+
+<!--<p-column field="startDate" header="Year" [style]="{'width':'4em'}">-->
+<!--<ng-template let-col let-item="rowData" pTemplate="body">-->
+<!--{{item[col.field]|date: "yyyy"}}-->
+<!--</ng-template>-->
+<!--</p-column>-->
+<!--<p-column field="startDate" header="Month" [style]="{'width':'4em'}">-->
+<!--<ng-template let-col let-item="rowData" pTemplate="body">-->
+<!--{{item[col.field]|date: "M"}}-->
+<!--</ng-template>-->
+<!--</p-column>-->
+<!--<p-column field="groupId" header="Group ID" [style]="{'width':'4em'}"></p-column>-->
+<!--<p-column field="groupName" header="Group/Group feedbacks" [style]="{'width':'10em'}"></p-column>-->
+<!--<p-column field="cg" header="CG" [style]="{'width':'6em'}"></p-column>-->
+<!--<p-column field="profile" header="Profile" [style]="{'width':'8em'}"></p-column>-->
+<!--<p-column field="location" header="Location" [style]="{'width':'6em'}"></p-column>-->
+<!--<p-column field="requested" header="#,requested" [style]="{'width':'4em'}"></p-column>-->
+<!--<p-column field="graduated" header="#,study in progress" [style]="{'width':'4em'}"></p-column>-->
+<!--<p-column field="hired" header="#,graduated" [style]="{'width':'4em'}"></p-column>-->
+<!--<p-column field="startDate" header="Group start Date" [style]="{'width':'8em'}">-->
+<!--<ng-template let-col let-item="rowData" pTemplate="body">-->
+<!--{{item[col.field]|date: "dd/MM/yyyy"}}-->
+<!--</ng-template>-->
+<!--</p-column>-->
+<!--<p-column field="endDate" header="Group finish Date" [style]="{'width':'8em'}">-->
+<!--<ng-template let-col let-item="rowData" pTemplate="body">-->
+<!--{{item[col.field]|date: "dd/MM/yyyy"}}-->
+<!--</ng-template>-->
+<!--</p-column>-->
+<!--<p-column field="groupStatus" header="Group status" [style]="{'width':'6em'}"></p-column>-->
+<!--<p-column field="trainer" header="Trainer" [style]="{'width':'10em'}"></p-column>-->
+<!--<p-column field="comment" header="Comment" [style]="{'width':'10em'}"></p-column>-->
+<!--<p-column field="paymentSatus" header="Payment status" [style]="{'width':'10em'}"></p-column>-->
+<!--</p-dataTable>-->
+<!--</div>-->
+
+
+<!--<td>{{item.groupName}}</td>-->
+
+<div *ngFor="let report of itaTacticalPlanByGroupStageReports">
+  <h1 align="center">{{report.name}}</h1>
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="report.dataSource" matSort>
+
+      <ng-container matColumnDef="Year">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Year</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.startDate| date:"yyyy"}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Month">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Month</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.startDate| date:"M"}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Group ID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Group ID</mat-header-cell>
+        <mat-cell *matCellDef="let element"> <a routerLink ="">{{element.groupId}}</a></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Group/Group feedbacks">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Group/Group feedbacks</mat-header-cell>
+        <mat-cell *matCellDef="let element"> <a routerLink ="">{{element.groupName}}</a></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CG">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>CG</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cg}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Profile">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Profile</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.profile}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Location">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Location</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.location}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="#,requested">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#,requested</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.requested}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="#,study in progress">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#,study in progress</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.studyInProgress}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="#,graduated">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#,graduated</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.graduated}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="#,hired">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#,hired</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hired}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Group start Date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Group start Date</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.startDate|date: "dd/MM/yyyy"}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Group finish Date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Group finish Date</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.endDate|date: "dd/MM/yyyy"}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Group status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Group status</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.groupStatus}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Trainer">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Trainer</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.trainer}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Comment">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Comment</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.comment}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Payment status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Payment status</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.paymentSatus}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+  </div>
+</div>

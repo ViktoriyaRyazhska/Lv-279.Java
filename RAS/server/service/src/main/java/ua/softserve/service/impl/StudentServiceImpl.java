@@ -45,7 +45,12 @@ public class StudentServiceImpl implements StudentService {
         studentRepository
                 .save(students
                         .stream()
-                        .map(id -> new Student(id, academyId))
+                        .map(id -> {
+                            Student existStudent = studentRepository
+                                    .ifStudentExist(academyId, id);
+                            return existStudent == null ?
+                                    new Student(id, academyId) : existStudent.unRemove();
+                        })
                         .peek(student -> student
                                 .setStudentStatus(studentsStatusesRepository
                                         .findOne(STATUS_OF_TRAINEE)))

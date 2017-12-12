@@ -1,9 +1,13 @@
-table{
-font-size: 0.75em;
-}
+/*table {*/
+  /*font-size: 0.75em;*/
+/*}*/
+
 
 input[type=date]::-webkit-inner-spin-button {
--webkit-appearance: none;
-display: none;
+  -webkit-appearance: none;
+  display: none;
 }
 
+input, td, th {
+  width: 100px;
+}

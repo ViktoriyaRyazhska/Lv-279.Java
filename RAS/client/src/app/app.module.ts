@@ -28,13 +28,18 @@ import {FeedbackTeacherEditPipe} from "./components/feedbacks/feedback-edit/feed
 import {HeaderComponent} from './components/header/header.component';
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
 import {FeedbackService} from "./services/feedbacks/feedback.service";
-import {ItaTacticalPlanByGroupStageComponent } from './components/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component';
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
 import {MarkService} from "./services/feedbacks/marks.service";
+import {UsersService} from "./services/users/users.service";
+import {MatSortModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule, MatNativeDateModule, MatTabsModule} from '@angular/material'
+import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
+
 
 
 @NgModule({
@@ -73,9 +78,22 @@ import {MarkService} from "./services/feedbacks/marks.service";
     PrimeNgModules,
     BrowserModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatInputModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService, MarkService],
+  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService, UsersService, MarkService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {
