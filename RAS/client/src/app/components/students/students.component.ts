@@ -42,6 +42,16 @@ export class StudentsComponent implements OnInit {
     this.displayStudentDetails = true;
   }
 
+  removeStudent(student: Student) {
+    this.selectedStudent = student;
+    this.studentsService
+      .remove(585, this.selectedStudent.id)
+      .subscribe(() => {
+        this.students = null;
+        this.ngOnInit();
+      });
+  }
+
   addUserClick() {
     this.loadUsers({first: 0, rows: 15});
     this.displayUsersList = true;

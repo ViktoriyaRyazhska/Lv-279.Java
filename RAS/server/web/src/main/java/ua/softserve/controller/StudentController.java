@@ -25,15 +25,13 @@ public class StudentController {
         studentService.addStudentsToAcademy(academyId, students);
     }
 
-    @DeleteMapping("{academyId}/{id}")
-    public void removeStudentFromAcademy(@PathVariable("academyId") Integer academyId,
-                                         @PathVariable("id") Integer studentId) {
-        studentService.removeStudentFromAcademy(academyId, studentId);
+    @DeleteMapping("{studentId}")
+    public void removeStudentFromAcademy(@PathVariable("studentId") Integer studentId) {
+        studentService.removeStudentFromAcademy(studentId);
     }
 
-    @PutMapping("{id}")
-    public void updateStudentsOfAcademy(@PathVariable("id") Integer academyId,
-                                        @RequestBody List<StudentViewDto> studentViewDtos) {
-        studentService.updateStudentOfAcademy(academyId, studentViewDtos);
+    @PutMapping
+    public void updateStudentsOfAcademy(@RequestBody List<StudentViewDto> studentViewDtos) {
+        studentService.updateStudentOfAcademy(studentViewDtos);
     }
 }

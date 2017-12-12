@@ -10,6 +10,7 @@ import ua.softserve.persistence.repo.EmployeeRepository;
 import ua.softserve.persistence.repo.StudentRepository;
 import ua.softserve.persistence.repo.StudentsStatusesRepository;
 import ua.softserve.service.StudentService;
+import ua.softserve.service.dto.EmployeeEngShortDto;
 import ua.softserve.service.dto.StudentViewDto;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class StudentServiceImpl implements StudentService {
 
     public static final Integer STATUS_OF_TRAINEE = 1;
+    public static final Integer ZERO_EMPLOYEE = 0;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -60,7 +62,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public void removeStudentFromAcademy(Integer academyId, Integer studentId) {
+    public void removeStudentFromAcademy(Integer studentId) {
         Student student = studentRepository.getOne(studentId);
         student.setRemoved(true);
         studentRepository.save(student);
@@ -68,19 +70,21 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public void updateStudentOfAcademy(Integer academyId, List<StudentViewDto> students) {
-        students.forEach(st -> studentRepository
-                .save(st.update(studentRepository
-                        .findOne(st.getId())
-                        .setApprovedBy(employeeRepository
-                                .findOne(st
-                                        .getApprovedBy()
-                                        .getEmployeeId())))));
+    public void updateStudentOfAcademy(List<StudentViewDto> students) {
+        students.forEach(st -> {
+            EmployeeEngShortDto approvedBy = st.getApprovedBy();
+            studentRepository
+                    .save(st.update(studentRepository
+                            .findOne(st.getId())
+                            .setApprovedBy(employeeRepository
+                                    .findOne(approvedBy == null ? ZERO_EMPLOYEE : approvedBy.getEmployeeId()))));
+        });
     }
 
     @Override
     @Transactional
     public Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatuses) {
-        return studentRepository.countAllByAcademyAndStudentStatus(academy, studentStatuses);
+        return studentRepository
+                .countAllByAcademyAndStudentStatus(academy, studentStatuses);
     }
 }
