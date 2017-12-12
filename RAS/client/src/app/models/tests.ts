@@ -1,11 +1,12 @@
 export class Tests {
-  counter : number;
-  max_point: number[];
-  testName: string[];
+  testId : number;
+  groupId : number;
+  testMaxScore: number;
+  testName: string;
 
-  constructor(mp:number,tstName:string){
-    this.max_point.push(mp);
-    this.testName.push(tstName);
+  constructor(tstName:string,mp:number){
+    this.testMaxScore = mp;
+    this.testName = tstName;
   }
 
 }

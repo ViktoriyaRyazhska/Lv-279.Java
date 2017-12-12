@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Tests} from "../../models/tests";
 import {TestsService} from "../../services/tests-names/tests.service";
+import {ActivatedRoute} from "@angular/router";
+import {Constants} from "./Constants";
 
 @Component({
   selector: 'app-tests-names',
@@ -9,67 +11,40 @@ import {TestsService} from "../../services/tests-names/tests.service";
 })
 export class TestsNamesComponent implements OnInit {
 
-  static counter : number = 1;
-  name: string;
-  mp: number;
-  tests : Tests;
-  testNames : string[];
-  max_points : number[];
-  //noinspection TypeScriptUnresolvedFunction
-  testIndex = Array(TestsNamesComponent.counter).fill(1).map((x,i)=>i);
+  groupId : number;
+  tests : Tests[];
 
   constructor(
-    private groupTestsService : TestsService,
-  )
-  { }
-
+    private testNamesService : TestsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.groupTestsService.getAll().subscribe(
-      data => {
-        this.tests = data;
-      },
-      error => console.log(error)
-    );
+    this.groupId = +this.route.snapshot.paramMap.get('id');
+    this.testNamesService.getAll(this.groupId).subscribe(data => {
+      console.log(data)
+      this.tests = data
+    });
   }
 
-
-  save(name : string, mp : number) {
-    if(name==null || name==undefined || name.trim()=="")
-      return;
-    if(mp==null || mp==undefined)
-      return;
-    // this.tests.push(new Tests(name, mp));
+  save() {
+    this.testNamesService.addTests(this.tests,this.groupId);
+    console.log(this.tests);
   }
-
 
   addTest() {
-    if(TestsNamesComponent.counter>=12) {
+    if(this.tests.length>=Constants.MaxValueOfTests) {
       return;
     }
-    else
-    {
-      TestsNamesComponent.counter++;
-      //noinspection TypeScriptUnresolvedFunction
-      this.testIndex = Array(TestsNamesComponent.counter).fill(1).map((x,i)=>i);
+    else {
+      this.tests.push(new Tests((Constants.DefaultTestName+(this.tests.length)),Constants.DefaultMaxScore));
     }
   }
 
-
-  removeTest(name : string, mp : number) {
-    TestsNamesComponent.counter--;
-    //noinspection TypeScriptUnresolvedFunction
-    this.testIndex = Array(TestsNamesComponent.counter).fill(1).map((x,i)=>i);
-
-    const indexName = this.tests.testName.indexOf(name);
-    const indexMP = this.tests.max_point.indexOf(mp);
-
-
-    if(indexMP!=-1) {
-      this.tests.max_point.splice(indexMP,1);
-    }
-    if(indexName!=-1) {
-      this.tests.testName.splice(indexName,1);
+  removeTest(test : Tests) {
+    const indexOfTestToRemove = this.tests.indexOf(test);
+    if(indexOfTestToRemove!=-1) {
+      this.tests.splice(indexOfTestToRemove,1);
     }
   }
 }
