@@ -42,6 +42,7 @@ public class AcademyConverter {
         AcademyDTO academyDTO = new AcademyDTO();
         Academy academy = groupInfo.getAcademy();
         if (academy != null) {
+            academyDTO.setId(groupInfo.getGroupInfoId());
             if(academy.getAcademyStages() != null){
                 academyDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
             }
