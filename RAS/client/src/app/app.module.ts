@@ -37,9 +37,9 @@ import {TestsNamesComponent} from "./components/tests-names/tests-names.componen
 import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
-import {MatSortModule, MatTableModule} from "@angular/material";
+import {MatSortModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule} from '@angular/material';
+import {MatDatepickerModule, MatNativeDateModule, MatTabsModule} from '@angular/material';
 
 
 @NgModule({
@@ -73,6 +73,7 @@ import {MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModul
     ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
     TestsNamesComponent
+
   ],
   imports: [
     BrowserModule,
@@ -90,7 +91,11 @@ import {MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModul
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService],
   bootstrap: [AppComponent]

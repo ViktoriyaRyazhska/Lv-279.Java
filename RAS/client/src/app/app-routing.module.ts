@@ -12,6 +12,7 @@ import {CheckListByGroupsComponent} from "./components/reports/check-list-by-gro
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 // import {FeedbackTeacherDetailComponent} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.component";
 import {LoginComponent} from "./components/auth/login/login.component";
+import {HeaderComponent} from "./components/header/header.component";
 
 const appRoutes: Routes = [
   // {path: 'marks', component: FeedbackTeacherDetailComponent},
@@ -31,6 +32,8 @@ const appRoutes: Routes = [
   {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},
   {path: 'ang/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
   {path: 'ang/tests/:id', component: TestsNamesComponent},
+  {path: 'ang/tests', component: TestsNamesComponent},
+  {path: 'ang', component: HeaderComponent}
 ];
 
 @NgModule({
