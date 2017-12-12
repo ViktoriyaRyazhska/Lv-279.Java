@@ -28,7 +28,7 @@ public class Student {
     private Academy academy;
 
     @Embedded
-    private StudentTestData data;
+    private StudentTestData data = new StudentTestData();
 
     @ManyToOne
     @JoinColumn(name = "student_status_id")

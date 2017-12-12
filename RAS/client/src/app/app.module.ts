@@ -40,7 +40,7 @@ import {PrimeNgModules} from "./prime-ng.modules";
 import {UsersService} from "./services/users/users.service";
 import {MatSortModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDatepickerModule, MatNativeDateModule, MatTabsModule} from '@angular/material'
+import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 
 
@@ -97,7 +97,8 @@ import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tac
     MatSortModule,
     MatPaginatorModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService, UsersService],
   bootstrap: [AppComponent]
