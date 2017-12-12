@@ -40,7 +40,6 @@ import {PrimeNgModules} from "./prime-ng.modules";
 import {MatSortModule, MatTableModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule} from '@angular/material';
-import {Product3Component} from "./components/product-3/product-3.component";
 
 
 @NgModule({
@@ -73,9 +72,7 @@ import {Product3Component} from "./components/product-3/product-3.component";
     NavTabsComponent,
     ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
-    TestsNamesComponent,
-    Product3Component
-
+    TestsNamesComponent
   ],
   imports: [
     BrowserModule,
