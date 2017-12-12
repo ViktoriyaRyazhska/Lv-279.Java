@@ -11,7 +11,7 @@
         <mat-cell *matHeaderCellDef></mat-cell>
         <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element.id}}"> {{element.grName}} </a></mat-cell>
       </ng-container>
-      
+
       <ng-container matColumnDef='nameForSite'>
         <mat-header-cell *matHeaderCellDef>
           <mat-form-field class="example-full-width">
@@ -155,7 +155,7 @@
       <ng-container matColumnDef="interviewerFeedback">
         <mat-header-cell *matHeaderCellDef>Interviewer Feedback
         </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.directionName}}</mat-cell>
+        <mat-cell *matCellDef="let element"> <a routerLink="/ang/feedback/{{element.id}}">Provide</a></mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
