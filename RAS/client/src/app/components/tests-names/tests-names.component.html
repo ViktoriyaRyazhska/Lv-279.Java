@@ -77,7 +77,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let test of tests;let i = index">
-      <td *ngIf="test.testName!=0">
+      <td *ngIf="test.testMaxScore!=0">
         <mat-form-field >
           <input matInput type="text" placeholder="Test name" data-value="{{test.testName}}" [(ngModel)]="test.testName" name = "test + {{i}}">
         </mat-form-field>
@@ -95,3 +95,5 @@
     </form>
 </div>
 </div>
+
+

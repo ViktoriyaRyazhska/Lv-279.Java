@@ -4,6 +4,7 @@ import {Tests} from "../../models/tests";
 import {TestsMock} from "./TestsMock";
 import {of} from "rxjs/observable/of";
 import {HttpClient} from '@angular/common/http';
+import {environment} from "../../../environments/environment";
 
 
 @Injectable()
@@ -13,11 +14,11 @@ export class TestsService {
   constructor(private http: HttpClient) {}
 
   getAll(groupId:number): Observable<any> {
-    return this.http.get('http://localhost:8080/tests/'+groupId);
+    return this.http.get(environment.serverUrl + 'tests/' + groupId);
   }
 
   addTests(tests: Tests[],groupId:number){
-    this.http.post<Tests[]>('http://localhost:8080/tests/add/'+groupId, tests)
+    this.http.post<Tests[]>(environment.serverUrl + '/tests/add/' + groupId, tests)
       .subscribe(resp => {
           console.log(resp);
         }, err => {

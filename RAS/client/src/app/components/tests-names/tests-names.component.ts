@@ -13,6 +13,8 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 export class TestsNamesComponent implements OnInit {
   groupId : number;
   tests : Tests[];
+  static counter : number = 1;
+  testsToDelete : Tests[] = [];
 
   constructor(
     private testNamesService : TestsService,
@@ -24,30 +26,42 @@ export class TestsNamesComponent implements OnInit {
     this.testNamesService.getAll(this.groupId).subscribe(data => {
       console.log(data)
       this.tests = data
+      TestsNamesComponent.counter = this.tests.length;
     });
   }
+
 
   save() {
     this.testNamesService.addTests(this.tests, this.groupId);
     console.log(this.tests);
+    this.ngOnInit();
   }
 
+
   addTest() {
-    if(this.tests.length>=Constants.MaxValueOfTests) {
+    if(TestsNamesComponent.counter>=Constants.MaxValueOfTests) {
       return;
     }
     else {
-      var testNum = this.tests.length + 1;
+      TestsNamesComponent.counter++;
+      var testNum = TestsNamesComponent.counter;
       this.tests.push(new Tests((Constants.DefaultTestName+(testNum)),Constants.DefaultMaxScore));
     }
   }
 
   removeTest(test : Tests) {
+    TestsNamesComponent.counter--;
     const indexOfTestToRemove = this.tests.indexOf(test);
-    test.testName = <string>0;
-    test.testMaxScore = 0;
     if(indexOfTestToRemove!=-1) {
-      this.tests.splice(indexOfTestToRemove,1,test);
+      if(test.testId==null){
+        this.tests.splice(indexOfTestToRemove,1);
+      }
+      else {
+        test.testMaxScore = Constants.REMOVE;
+        test.testName = "remove";
+        this.testsToDelete.push(test);
+        this.tests.splice(indexOfTestToRemove, 1, test);
+      }
     }
   }
 }
