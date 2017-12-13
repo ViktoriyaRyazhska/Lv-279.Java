@@ -24,7 +24,7 @@ export class A{
 export class StudentsComponent implements OnInit {
   private students: StudentFeedback[];
   private selectedStudent: StudentFeedback;
-  private testArrs:Test[];
+
   private displayStudentDetails: boolean;
   private studentStatuses: StudentStatus[];
 
@@ -58,12 +58,7 @@ export class StudentsComponent implements OnInit {
     );
     this.loadUsers({first: 0, rows: 15});
 
-
-
   }
-
-
-
 
 
   onStudentClick(student: StudentFeedback) {
@@ -138,5 +133,14 @@ export class StudentsComponent implements OnInit {
 
     }
   }
+
+  updateStudentsClick(){
+    this.studentsService.update(this.students).subscribe(()=>{
+      this.students = null;
+      this.ngOnInit();
+      }
+    );
+  }
+
 
 }

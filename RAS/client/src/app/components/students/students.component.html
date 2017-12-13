@@ -252,6 +252,8 @@
 
 <button mat-raised-button color="primary" (click)="addUserClick()">Add students</button>
 
+<button mat-raised-button color="primary" (click)="updateStudentsClick()">Save</button>
+
 <p-dialog header="Add users" modal="false" [(visible)]="displayUsersList" [responsive]="true" width="450">
   <div *ngIf="users">
     <p-dataTable [value]="users.content" [lazy]="true" [(selection)]="selectedUsers" dataKey="id"

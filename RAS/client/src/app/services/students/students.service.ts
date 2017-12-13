@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/of';
-import {StudentStatus} from "../../models/feedbacks/student.model";
+import {StudentFeedback, StudentStatus} from "../../models/feedbacks/student.model";
+import {Student} from "../../models/student";
 
 @Injectable()
 export class StudentsService{
@@ -25,4 +26,10 @@ export class StudentsService{
     let q = "http://localhost:8080/students/"+studentId;
     return this.http.delete(q);
   }
+
+  update(students: StudentFeedback[]): Observable<any> {
+    let q = "http://localhost:8080/students/update";
+    return this.http.put(q,students);
+  }
+
 }
