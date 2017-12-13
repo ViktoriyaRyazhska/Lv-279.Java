@@ -58,12 +58,13 @@ export class FeedbackListComponent implements OnInit {
 
   constructor(private markService: MarkService,
               private studentsService: StudentsService,
-              private router: Router,
               private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
+    this.academyId = this.route.snapshot.params['id'];
+
     this.markService.getAllMarks().subscribe(
       data => {
         this.marks = data;

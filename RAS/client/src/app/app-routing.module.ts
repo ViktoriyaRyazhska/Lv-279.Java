@@ -16,15 +16,12 @@ import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component";
 
 const appRoutes: Routes = [
-  // {path: 'marks', component: FeedbackTeacherDetailComponent},
   {path: 'ang/login', component: LoginComponent},
-  {path: '', component: ViewAcademiesComponent},
-  // {path: 'ang/addgroup', component: AddGroupComponent},
-  {
-    path: 'ang/addgroup/:id', component: AddGroupComponent, children: [
+  {path: 'ang/viewAcademies', component: ViewAcademiesComponent},
+  {path: 'ang/addgroup/:id', component: AddGroupComponent, children: [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
-    {path: 'students', component: StudentsComponent},
-    {path: 'feedback', component: FeedbacksComponent},
+    {path: 'students/:id', component: StudentsComponent},
+    {path: 'feedback/:id', component: FeedbacksComponent},
     {path: 'history/:id', component: HistoryListComponent}]
   },
   {path: 'ang/viewAcademies', component: ViewAcademiesComponent, children: [
