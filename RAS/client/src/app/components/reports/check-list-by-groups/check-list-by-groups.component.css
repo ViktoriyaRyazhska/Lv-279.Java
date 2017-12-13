@@ -22,7 +22,7 @@ div {
   padding-right: 2%;
 }
 
-@media (max-width: 1399px) {
+@media (max-width: 1815px) {
   table{
     font-size: 0.8em;
   }
@@ -33,7 +33,7 @@ div {
   }
 
   .fixed_headers {
-    width: 100%;
+    width: auto;
     table-layout: fixed;
     border-collapse: collapse;
   }
@@ -57,7 +57,7 @@ div {
 
   tbody {
     display: block;
-    overflow: auto;
+    overflow-y: auto;
     width: 100%;
     height: 350px;
   }
@@ -67,7 +67,7 @@ div {
   }
 }
 
-@media (max-width: 2000px) and (min-width: 1400px) {
+@media (max-width: 2000px) and (min-width: 1821px) {
   table{
     font-size: 1em;
   }
@@ -78,7 +78,7 @@ div {
   }
 
   .fixed_headers {
-    width: 100%;
+    width: auto;
     table-layout: fixed;
     border-collapse: collapse;
   }
@@ -102,7 +102,7 @@ div {
 
   tbody {
     display: block;
-    overflow: auto;
+    overflow-y: auto;
     width: 100%;
     height: 550px;
   }

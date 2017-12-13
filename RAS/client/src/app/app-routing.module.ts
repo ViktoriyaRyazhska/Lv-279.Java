@@ -29,7 +29,7 @@ const appRoutes: Routes = [
   {path: 'ang/feedback', component: FeedbacksComponent},
   {path: 'ang/reports/filterCheckListByGroups/checkListByGroups', component: CheckListByGroupsComponent},
   {path: 'ang/reports/filterCheckListByGroups', component: FilterCheckListByGroupsComponent},
-  {path: 'ang/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
+  {path: 'ang/reports/filterCheckListByGroups/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
   {path: 'ang/tests/:id', component: TestsNamesComponent},
   {path: 'ang', component: HeaderComponent}
 
