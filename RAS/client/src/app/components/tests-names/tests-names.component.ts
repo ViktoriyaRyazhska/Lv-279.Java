@@ -45,7 +45,6 @@ export class TestsNamesComponent implements OnInit {
       this.tests.push(new Tests((Constants.DefaultTestName+(testNum)),Constants.DefaultMaxScore));
     }
   }
-
   removeTest(test : Tests) {
     TestsNamesComponent.counter--;
     const indexOfTestToRemove = this.tests.indexOf(test);
