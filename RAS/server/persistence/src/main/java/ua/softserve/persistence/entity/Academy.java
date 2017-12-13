@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -44,11 +45,11 @@ public class Academy {
 
     @NotNull
     @Column(name = "start_date")
-    private Timestamp startDate;
+    private Date startDate;
 
     @NotNull
     @Column(name = "end_date")
-    private Timestamp endDate;
+    private Date endDate;
 
     @NotNull
     @Column(name = "free")

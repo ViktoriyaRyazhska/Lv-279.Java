@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.config.auth.TokenHandler;
@@ -29,7 +30,7 @@ public class AuthenticationRestController {
     }
 
     @RequestMapping(value = "api/auth", method = RequestMethod.POST)
-    public AuthResponse createAuthenticationToken(@RequestBody AuthParams authenticationRequest) {
+    public AuthResponse createAuthenticationToken(@RequestBody AuthParams authenticationRequest) throws AuthenticationException {
 
         final UsernamePasswordAuthenticationToken loginToken = authenticationRequest.toAuthenticationToken();
         final Authentication authentication = authenticationManager.authenticate(loginToken);
