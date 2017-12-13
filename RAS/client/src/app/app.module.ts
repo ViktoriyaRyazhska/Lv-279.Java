@@ -37,7 +37,7 @@ import {MarkService} from "./services/feedbacks/marks.service";
 import {UsersService} from "./services/users/users.service";
 import {MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule, MatDialog} from '@angular/material'
+import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 import { ExporttoexcelComponent } from './components/exporttoexcel/exporttoexcel.component';
 
@@ -94,8 +94,7 @@ import { ExporttoexcelComponent } from './components/exporttoexcel/exporttoexcel
     MatSelectModule,
     MatIconModule,
     MatInputModule,
-    MatButtonModule,
-    MatDialog
+    MatButtonModule
   ],
   providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService, UsersService, MarkService],
 
