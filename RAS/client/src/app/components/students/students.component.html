@@ -176,15 +176,6 @@
   </p-column>
 </p-dataTable>
 
-<!--<p-dataTable [value]="students" [editable]="true">-->
-  <!--<p-column field="a.val" header="val" [editable]="true">-->
-    <!--<ng-template let-col let-student="rowData" pTemplate="editor">-->
-      <!--<input type="number" pInputText [(ngModel)]="student." [class]="'form-control'" required="true" placeholder="">-->
-    <!--</ng-template>-->
-  <!--</p-column>-->
-<!--</p-dataTable>-->
-
-
 <div style="align-items: center">
   <p-dialog header="User info" modal="false" dismissableMask="false" [(visible)]="displayStudentDetails" width="750">
     <div class="ui-g">
@@ -248,11 +239,10 @@
   </p-dialog>
 
 
-<!--<button pButton type="button" (click)="addUserClick()" label="Add students" style="margin-top: 1em;"></button>-->
 
 <button mat-raised-button color="primary" (click)="addUserClick()">Add students</button>
 
-<button mat-raised-button color="primary" (click)="updateStudentsClick()">Save</button>
+<button mat-raised-button color="primary" class="saveColor" (click)="updateStudentsClick()">Save</button>
 
 <p-dialog header="Add users" modal="false" [(visible)]="displayUsersList" [responsive]="true" width="450">
   <div *ngIf="users">

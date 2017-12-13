@@ -5,24 +5,16 @@ import {UserPage, UserShort} from "../../models/userShort";
 import {Data, StudentFeedback, StudentStatus} from "../../models/feedbacks/student.model";
 import {SelectItem} from "primeng/primeng";
 
-
-export class Test{
-  a:A;
-}
-export class A{
-  val:number;
-  constructor(v:number){
-    this.val = v;
-  }
-}
-
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  private academyId: number = 585;
+
   private students: StudentFeedback[];
+
   private selectedStudent: StudentFeedback;
 
   private displayStudentDetails: boolean;
@@ -34,14 +26,14 @@ export class StudentsComponent implements OnInit {
 
   private displayRemovingDialog: boolean;
 
-  statuses: SelectItem[] = [];
+  private statuses: SelectItem[] = [];
 
   constructor(private studentsService: StudentsService, private userService: UsersService) {
     this.selectedStudent = new StudentFeedback();
   }
 
   ngOnInit() {
-    this.studentsService.getAll().subscribe(
+    this.studentsService.getAll(this.academyId).subscribe(
       data => {
         this.students = data;
         this.students.forEach(st => st.data = st.data == null ? new Data() : st.data);
@@ -80,6 +72,12 @@ export class StudentsComponent implements OnInit {
     this.studentsService
       .remove(this.selectedStudent.id)
       .subscribe(() => {
+        // var index = this.students.indexOf(this.selectedStudent, 0);
+        // if (index > -1) {
+        //   this.students.splice(index, 1);
+        // }
+
+
         this.students = null;
         this.ngOnInit();
       });
@@ -100,7 +98,7 @@ export class StudentsComponent implements OnInit {
 
   acceptUsersClick() {
     this.studentsService
-      .addUsers(this.selectedUsers.map(user => user.id))
+      .addUsers(this.selectedUsers.map(user => user.id),this.academyId)
       .subscribe(() => {
         this.students = null;
         this.selectedUsers = [];
@@ -123,7 +121,7 @@ export class StudentsComponent implements OnInit {
         idFilter = event.filters.id.value;
       }
 
-      this.userService.page(pageNum, event.rows, dir, 585, idFilter).subscribe(
+      this.userService.page(pageNum, event.rows, dir, this.academyId, idFilter).subscribe(
         data => {
           this.users = data;
 
