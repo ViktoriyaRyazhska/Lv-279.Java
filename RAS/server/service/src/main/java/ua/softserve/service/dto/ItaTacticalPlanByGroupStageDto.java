@@ -20,12 +20,11 @@ public class ItaTacticalPlanByGroupStageDto {
     private Date startDate;
     private Date endDate;
     private String groupStatus;
-    private String paymentSatus;
-    private String comment;
     private StringBuilder trainer;
     private int requested;
     private int studyInProgress;
     private int graduated;
     private int hired;
-
+    private String comment;
+    private String paymentSatus;
 }

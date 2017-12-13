@@ -54,7 +54,7 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public void saveAcademyFromAcademyDTO(AcademyDTO academyDTO) {
         Academy academy = academyConverter.toEntity(academyDTO);
-
+        System.out.println(academy.getStartDate());
         int academyId = save(academy);
 
         saveGroupInfo(academyId, academyDTO);

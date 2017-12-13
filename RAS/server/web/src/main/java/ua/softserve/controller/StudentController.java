@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.entity.StudentStatuses;
 import ua.softserve.service.StudentService;
 import ua.softserve.service.StudentsStatusesService;
+import ua.softserve.service.dto.EmployeeEngShortDto;
 import ua.softserve.service.dto.StudentViewDto;
 
 import java.util.List;
@@ -27,6 +28,11 @@ public class StudentController {
     @GetMapping("statuses")
     public List<StudentStatuses> getAllStatuses() {
         return statusesService.findAll();
+    }
+
+    @GetMapping("employee")
+    public List<EmployeeEngShortDto> getAllEmployees() {
+        return studentService.getAllEmployees();
     }
 
     @PostMapping("{id}/add")

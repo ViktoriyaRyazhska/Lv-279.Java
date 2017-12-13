@@ -137,9 +137,21 @@
     </ng-template>
   </p-column>
   <p-column field="" header="Current Score" [editable]="false" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="body">
+       <span>
+             {{this.getCurrentControl(student)}}
+       </span>
+    </ng-template>
+
+  </p-column>
   <p-column field="" header="Training Score" [editable]="false" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="body">
+       <span>
+             {{this.getTrainingScore(student)}}
+       </span>
+    </ng-template></p-column>
   <p-column field="data.teacherScore" header="Teacher Score" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
@@ -161,25 +173,26 @@
   <p-column field="studentStatus.name" header="Student status" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <p-dropdown appendTo="body" [(ngModel)]="student.studentStatus" [options]="statuses" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  ></p-dropdown>
+      <p-dropdown appendTo="body"  filter="true" [(ngModel)]="student.studentStatus" [options]="statusesDropdown" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  ></p-dropdown>
     </ng-template>
   </p-column>
-  <p-column field="personStatus" header="Personal status" [editable]="false" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
-  <p-column field="approvedBy.firstNameEng" header="Approved By" [editable]="false" [filter]="true" [sortable]="true"
+  <!--<p-column field="personStatus" header="Personal status" [editable]="false" [filter]="true" [sortable]="true"-->
+            <!--[style]="{'width':'10em'}"></p-column>-->
+  <p-column field="approvedBy.fullName" header="Approved By" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
-    <ng-template let-col let-student="rowData" pTemplate="body">
-       <span *ngIf="student.approvedBy">
-              {{student.approvedBy.firstNameEng +" "+ student.approvedBy.lastNameEng}}
-       </span>
-    </ng-template>
-  </p-column>
+      <ng-template let-col let-student="rowData" pTemplate="editor">
+        <p-dropdown appendTo="body"  filter="true" [(ngModel)]="student.approvedBy" [options]="employeesDropdown" [autoWidth]="true" [style]="{'width':'100%'}" required="true"  >
+
+
+        </p-dropdown>
+      </ng-template>
+     </p-column>
 </p-dataTable>
 
 <div style="align-items: center">
   <p-dialog header="User info" modal="false" dismissableMask="false" [(visible)]="displayStudentDetails" width="750">
     <div class="ui-g">
-      <div class="ui-g-6">
+      <div class="ui-g-5">
         <h4>Personal Information:</h4>
         <div class="ui-g-6">
           <div class="column">
@@ -200,7 +213,7 @@
           </div>
         </div>
       </div>
-      <div class="ui-g-6">
+      <div class="ui-g-5">
         <h4>Contact Information:</h4>
         <div class="ui-g-6">
           <div class="column">
@@ -244,7 +257,7 @@
 
 <button mat-raised-button color="primary" class="saveColor" (click)="updateStudentsClick()">Save</button>
 
-<p-dialog header="Add users" modal="false" [(visible)]="displayUsersList" [responsive]="true" width="450">
+<p-dialog header="Add students" modal="false" [(visible)]="displayUsersList" [responsive]="true" width="450">
   <div *ngIf="users">
     <p-dataTable [value]="users.content" [lazy]="true" [(selection)]="selectedUsers" dataKey="id"
                  [headerCheckboxToggleAllPages]="true"
@@ -252,7 +265,7 @@
                  [totalRecords]="users.totalElements" (onLazyLoad)="loadUsers($event)">
       <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
       <p-column field="id" header="Id" [filter]="true" [sortable]="true"></p-column>
-      <p-column field="fullName" header="Name" [filter]="true" [sortable]="true"></p-column>
+      <p-column field="fullName" header="Name" [filter]="false" [sortable]="true"></p-column>
     </p-dataTable>
 
     <button pButton type="button" (click)="cancelAddingClick()" label="Cancel" class="ui-button-secondary"

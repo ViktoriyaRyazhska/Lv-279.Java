@@ -6,8 +6,7 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 import ua.softserve.service.dto.AcademyDTO;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  * Service transforms GroupInfo Entity to DTO object and DTO object to GroupInfo Entity. Also it transforms AcademyDTO
@@ -49,7 +48,7 @@ public class AcademyConverter {
                 academyDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
             }
             if (academy.getStartDate() != null) {
-                academyDTO.setStartDate(academy.getStartDate().toString());
+                //academyDTO.setStartDate(academy.getStartDate().toString());
             }
             if (academy.getDirections() != null) {
                 academyDTO.setDirectionName(academy.getDirections().getName());
@@ -64,7 +63,7 @@ public class AcademyConverter {
                 academyDTO.setPaymentStatus("Paid");
             }
             if (academy.getEndDate() != null) {
-                academyDTO.setEndDate(academy.getEndDate().toString());
+                //academyDTO.setEndDate(academy.getEndDate().toString());
             }
             academyDTO.setNameForSite(academy.getName());
         }
@@ -82,12 +81,15 @@ public class AcademyConverter {
 
         academy.setName(academyDTO.getNameForSite());
         academy.setAcademyStages(getAcademyStages(academyDTO.getAcademyStagesId()));
-        academy.setStartDate(convertStringToTimestamp(academyDTO.getStartDate()));
-        academy.setEndDate(convertStringToTimestamp(academyDTO.getEndDate()));
+        Date startDate = convertLongToDate(academyDTO.getStartDate());
+        academy.setStartDate(startDate);
+        academy.setEndDate(convertLongToDate(academyDTO.getEndDate()));
         academy.setCity(getCity(academyDTO.getCityId()));
         academy.setFree(academyDTO.getPayment());
         academy.setDirections(getDirection(academyDTO.getDirectionId()));
         academy.setTechnologies(getTechnologies(academyDTO.getTechnologieId()));
+
+        System.out.println(startDate);
 
         return academy;
     }
@@ -103,23 +105,8 @@ public class AcademyConverter {
         return groupInfo;
     }
 
-    private Timestamp convertStringToTimestamp(String date) {
-        if (date == null) {
-            throw new IllegalArgumentException("Date can't be null");
-        } else if (date.isEmpty()) {
-            throw new IllegalArgumentException("Date can't be empty");
-        }
-
-        LocalDate localDate = null;
-        Timestamp timestamp = null;
-
-        try {
-            localDate = LocalDate.parse(date);
-            timestamp = Timestamp.valueOf(localDate.atStartOfDay());
-        } catch (ClassCastException e) {
-            System.err.println(e);
-        }
-        return timestamp;
+    private Date convertLongToDate(Long dateMilliseconds) {
+        return new Date(dateMilliseconds);
     }
 
     private City getCity(int id) {

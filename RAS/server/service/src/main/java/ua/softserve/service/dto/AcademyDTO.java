@@ -17,8 +17,8 @@ public class AcademyDTO {
     private String grName;
     private String nameForSite;
     private int academyStagesId;
-    private String startDate;
-    private String endDate;
+    private Long startDate;
+    private Long endDate;
     private int cityId;
     private int payment;
     private int directionId;
