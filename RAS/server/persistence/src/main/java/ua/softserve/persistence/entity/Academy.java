@@ -5,11 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
 import java.sql.Date;
 
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "academy")
 public class Academy {
@@ -53,28 +51,27 @@ public class Academy {
 
     @NotNull
     @Column(name = "free")
-    private int free;
+    private Integer free;
 
     @NotNull
     @Column(name = "status")
-    private int status;
+    private Integer status;
 
     @NotNull
     @Column(name = "has_tech")
-    private int hasTech;
+    private Integer hasTech;
 
     @NotNull
     @Column(name = "has_eng")
-    private int hasEng;
+    private Integer hasEng;
 
     @NotNull
     @Column(name = "has_first")
-    private int hasFirst;
+    private Integer hasFirst;
 
     @NotNull
     @Column(name = "not_synchronized")
-    private int notSynchronized;
+    private Integer notSynchronized;
 
-    public Academy() {
-    }
+    public Academy() {}
 }
