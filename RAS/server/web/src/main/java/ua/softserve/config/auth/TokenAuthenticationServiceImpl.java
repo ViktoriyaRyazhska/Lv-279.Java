@@ -18,16 +18,15 @@ class TokenAuthenticationServiceImpl implements TokenAuthenticationService {
 
     public Authentication getAuthentication(HttpServletRequest request) {
         final String authHeader = request.getHeader("authorization");
-        if (authHeader == null) return null;
-        if (!authHeader.startsWith("Lv-279")) return null;
+        if (authHeader == null)
+            return null;
+        if (!authHeader.startsWith("Lv-279"))
+            return null;
 
         final String jwt = authHeader.substring(7);
-        if (jwt.isEmpty()) return null;
+        if (jwt.isEmpty())
+            return null;
 
-        return tokenHandler
-                .parseUserFromToken(jwt)
-                .map(LoginUserAuthentication::new)
-                .orElse(null);
+        return tokenHandler.parseUserFromToken(jwt).map(LoginUserAuthentication::new).orElse(null);
     }
 }
-

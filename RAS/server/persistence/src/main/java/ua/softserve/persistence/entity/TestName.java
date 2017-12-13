@@ -27,9 +27,10 @@ public class TestName {
     @Column(name = "test_max_score")
     private Double testMaxScore;
 
-    public TestName(){}
+    public TestName() {
+    }
 
-    public TestName(Integer group_id, String testName,double testMaxScore) {
+    public TestName(Integer group_id, String testName, double testMaxScore) {
         this.groupId = group_id;
         this.testName = testName;
         this.testMaxScore = testMaxScore;

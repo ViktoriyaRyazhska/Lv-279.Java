@@ -17,7 +17,7 @@ public class TestNameServiceImpl implements TestNameService {
     @Override
     @Transactional
     public void saveTestNames(List<TestName> testNames) {
-        for(TestName testName : testNames)
+        for (TestName testName : testNames)
             testNameRepository.save(testName);
     }
 
@@ -29,6 +29,6 @@ public class TestNameServiceImpl implements TestNameService {
     @Override
     @Transactional(readOnly = true)
     public List<TestName> findAllTestNamesByAcademyId(Integer groupId) {
-        return  testNameRepository.findAllTestNamesBygroupId(groupId);
+        return testNameRepository.findAllTestNamesBygroupId(groupId);
     }
 }

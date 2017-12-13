@@ -24,10 +24,9 @@ import {AppRoutingModule} from "./app-routing.module";
 import { LoginComponent } from './components/auth/login/login.component';
 import {LoginService} from "./components/auth/login/login.service";
 import {MyauthService} from "./components/auth/myauth.service";
-import {FeedbackTeacherEditPipe} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.pipe";
+import {FeedbackEditPipe} from "./components/feedbacks/feedback-edit/feedback-edit.pipe";
 import {HeaderComponent} from './components/header/header.component';
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
-import {FeedbackService} from "./services/feedbacks/feedback.service";
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 import {TestsService} from "./services/tests-names/tests.service";
@@ -35,10 +34,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
 import {MarkService} from "./services/feedbacks/marks.service";
 import {UsersService} from "./services/users/users.service";
-import {MatSortModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
+import {MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
+import { ExporttoexcelComponent } from './exporttoexcel/exporttoexcel.component';
 
 
 
@@ -56,18 +56,19 @@ import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tac
     StudentsComponent,
     FeedbacksComponent,
     FeedbackListComponent,
-    FeedbackTeacherEditPipe,
+    FeedbackEditPipe,
     LoginComponent,
     FeedbackEditComponent,
     FeedbackTeacherEditComponent,
     FeedbackExpertEditComponent,
     FeedbackInterviewerEditComponent,
-    FeedbackTeacherEditPipe,
+    FeedbackEditPipe,
     HeaderComponent,
     NavTabsComponent,
     ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
-    TestsNamesComponent
+    TestsNamesComponent,
+    ExporttoexcelComponent
 
   ],
   imports: [
@@ -90,10 +91,11 @@ import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tac
     MatSortModule,
     MatPaginatorModule,
     MatSelectModule,
+    MatIconModule,
     MatInputModule,
     MatButtonModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService, UsersService, MarkService],
+  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService],
 
   bootstrap: [AppComponent]
 })

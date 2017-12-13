@@ -1,23 +1,41 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/of';
+import {StudentFeedback} from "../../models/feedbacks/student.model";
+import {environment} from "../../../environments/environment";
+
 
 @Injectable()
-export class StudentsService{
+export class StudentsService {
 
-  constructor(private http: HttpClient) { }
-
-  getAll(): Observable<any> {
-    return this.http.get('http://localhost:8080/students/586');
+  constructor(private http: HttpClient) {
   }
 
-  addUsers(object: number[]):Observable<Object>{
-    return this.http.post('http://localhost:8080/students/586/add', object);
+  getAll(academyId: number): Observable<any> {
+    let url = environment.serverUrl + 'students/' + academyId;
+    return this.http.get(url);
   }
 
-  remove(academyId: number, studentId: number): Observable<any> {
-    let q = 'http://localhost:8080/students/{'+academyId+'}/{'+studentId+'}';
-    return this.http.delete(q);
+  getStatuses(): Observable<any> {
+    let url = environment.serverUrl + 'students/statuses';
+    return this.http.get(url);
   }
+
+  addUsers(object: number[], academyId: number): Observable<any> {
+    let url = environment.serverUrl + 'students/' + academyId + '/add';
+    return this.http.post(url, object);
+  }
+
+  remove(studentId: number): Observable<any> {
+    let url = environment.serverUrl + 'students/' + studentId;
+    return this.http.delete(url);
+  }
+
+  update(students: StudentFeedback[]): Observable<any> {
+    let url = environment.serverUrl + 'students/update';
+    console.log(students);
+    return this.http.put(url, students);
+  }
+
 }

@@ -28,5 +28,4 @@ public class ItaTacticalPlanByGroupStageDto {
     private int graduated;
     private int hired;
 
-
 }

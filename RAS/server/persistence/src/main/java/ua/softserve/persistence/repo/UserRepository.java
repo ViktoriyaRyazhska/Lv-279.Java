@@ -11,12 +11,11 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query("select u from User u where FUNCTION('CONVERT', u.id, CHAR(10)) like :id " +
-            "and u.id not in (select s.user.id from Student s where s.academy.id = :academyId and s.removed = false)")
+    @Query("select u from User u where FUNCTION('CONVERT', u.id, CHAR(10)) like :id "
+            + "and u.id not in (select s.user.id from Student s where s.academy.id = :academyId and s.removed = false)")
     Page<User> findByIdAndName(@Param("id") String id, @Param("academyId") Integer notInAcademy, Pageable pageable);
 
-    @Query(value = "select * from users as u where u.id not in (" +
-            "select s.user_id from students as s " +
-            "where s.academy_id =:academyId );", nativeQuery = true)
+    @Query(value = "select * from users as u where u.id not in (" + "select s.user_id from students as s "
+            + "where s.academy_id =:academyId );", nativeQuery = true)
     List<User> findAllByAcademy(@Param("academyId") Integer academyId);
 }

@@ -21,7 +21,8 @@ public class AuthenticationRestController {
     private final SecurityContextService securityContextService;
 
     @Autowired
-    public AuthenticationRestController(AuthenticationManager authenticationManager, TokenHandler tokenHandler, SecurityContextService securityContextService) {
+    public AuthenticationRestController(AuthenticationManager authenticationManager, TokenHandler tokenHandler,
+            SecurityContextService securityContextService) {
         this.authenticationManager = authenticationManager;
         this.tokenHandler = tokenHandler;
         this.securityContextService = securityContextService;
@@ -38,7 +39,6 @@ public class AuthenticationRestController {
             return new AuthenticationRestController.AuthResponse(token);
         }).orElseThrow(RuntimeException::new);
     }
-
 
     private static final class AuthParams {
         private String username;

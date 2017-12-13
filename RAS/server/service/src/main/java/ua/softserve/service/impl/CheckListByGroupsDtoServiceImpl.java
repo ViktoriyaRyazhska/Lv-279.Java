@@ -42,22 +42,17 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     @Autowired
     private GroupInfoTeachersRepository groupInfoTeachersRepository;
 
-
     @Override
     public List<CheckListByGroupsDto> getAllCheckListByGroupsDto() {
 
-        List<Academy> allAcademies = academyRepository.findAll()
-                .stream()
-                .filter(academy -> academy.getAcademyId() >= 586 && academy.getAcademyId() <= 932)
-                .limit(30)
+        List<Academy> allAcademies = academyRepository.findAll().stream()
+                .filter(academy -> academy.getAcademyId() >= 586 && academy.getAcademyId() <= 932).limit(30)
                 .collect(Collectors.toList());
 
         List<CheckListByGroupsDto> CheckListByGroupsDtos = new ArrayList<>();
 
         for (Academy academy : allAcademies) {
-            CheckListByGroupsDtos.add(
-                    getCheckListByGroupDtoByAcademy(academy)
-            );
+            CheckListByGroupsDtos.add(getCheckListByGroupDtoByAcademy(academy));
         }
         return CheckListByGroupsDtos;
     }
@@ -70,33 +65,22 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         AcademyStages stage;
         List<Student> students;
 
-        groupInfo = groupInfoRepository
-                .findByAcademyAcademyId(academyId);
+        groupInfo = groupInfoRepository.findByAcademyAcademyId(academyId);
 
-        city = languageTranslationsRepository
-                .getOneCityNameTranslationByItemId(academy.getCity().getCityId());
+        city = languageTranslationsRepository.getOneCityNameTranslationByItemId(academy.getCity().getCityId());
 
-        stage = academyStagesRepository
-                .findOne(academy.getAcademyStages().getStageId());
+        stage = academyStagesRepository.findOne(academy.getAcademyStages().getStageId());
 
-        students = studentRepository
-                .findAllByAcademy_AcademyId(academyId);
+        students = studentRepository.findAllByAcademy_AcademyId(academyId);
 
         checkListByGroupsDto = new CheckListByGroupsDto();
         checkListByGroupsDto.setCityName(city);
-        checkListByGroupsDto.setGroupName(
-                (groupInfo == null) ? null : groupInfo.getGroupName()
-        );
+        checkListByGroupsDto.setGroupName((groupInfo == null) ? null : groupInfo.getGroupName());
         checkListByGroupsDto.setStatus(stage.getName());
         setTeachers(academyId, checkListByGroupsDto);
         Map<String, Integer> r = checkListByGroupsDto.getR();
         for (Map.Entry predicate : predicates.entrySet()) {
-            r.put((String) predicate.getKey(),
-                    checkStudents(
-                            (Predicate<Student>) predicate.getValue(),
-                            students
-                    )
-            );
+            r.put((String) predicate.getKey(), checkStudents((Predicate<Student>) predicate.getValue(), students));
         }
 
         checkListByGroupsDto.setTotal();
@@ -104,37 +88,30 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     }
 
     private void setTeachers(Integer academyId, CheckListByGroupsDto checkListByGroupsDto) {
-        List<GroupInfoTeachers> teachers = groupInfoTeachersRepository
-                .findAllByAcademyIdAndTeacherTypeId(academyId, TT_TEACHER_ID);;
-        List<GroupInfoTeachers> experts = groupInfoTeachersRepository
-                .findAllByAcademyIdAndTeacherTypeId(academyId, TT_EXPERT_ID);;
-        List<GroupInfoTeachers> interviewers = groupInfoTeachersRepository
-                .findAllByAcademyIdAndTeacherTypeId(academyId, TT_INTERVIEWER_ID);
+        List<GroupInfoTeachers> teachers = groupInfoTeachersRepository.findAllByAcademyIdAndTeacherTypeId(academyId,
+                TT_TEACHER_ID);
+        ;
+        List<GroupInfoTeachers> experts = groupInfoTeachersRepository.findAllByAcademyIdAndTeacherTypeId(academyId,
+                TT_EXPERT_ID);
+        ;
+        List<GroupInfoTeachers> interviewers = groupInfoTeachersRepository.findAllByAcademyIdAndTeacherTypeId(academyId,
+                TT_INTERVIEWER_ID);
         Map<String, Integer> r = checkListByGroupsDto.getR();
         checkListByGroupsDto.setTeachers(getTeachers(teachers));
         checkListByGroupsDto.setExperts(getTeachers(experts));
         r.put("teacherDefined", (teachers != null) ? 1 : 0);
         r.put("expertDefined", (experts != null) ? 1 : 0);
         r.put("interviewerDefined", (interviewers != null) ? 1 : 0);
-        r.put("expertsLoadFilledIn", checkTeachers(
-                git -> git.getContributedHours() != null,
-                experts
-        ));
-        r.put("interviewersLoadFilledIn", checkTeachers(
-                git -> git.getContributedHours() != null,
-                interviewers
-        ));
+        r.put("expertsLoadFilledIn", checkTeachers(git -> git.getContributedHours() != null, experts));
+        r.put("interviewersLoadFilledIn", checkTeachers(git -> git.getContributedHours() != null, interviewers));
     }
 
     private String getTeachers(List<GroupInfoTeachers> teachers) {
         StringBuilder teachersSb = new StringBuilder();
         if (teachers != null) {
             for (GroupInfoTeachers git : teachers) {
-                teachersSb
-                        .append(git.getEmployee().getFirstNameEng())
-                        .append(" ")
-                        .append(git.getEmployee().getLastNameEng())
-                        .append(", ");
+                teachersSb.append(git.getEmployee().getFirstNameEng()).append(" ")
+                        .append(git.getEmployee().getLastNameEng()).append("; ");
             }
         }
         return teachersSb.toString();
@@ -172,8 +149,6 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             return false;
         }
         int id = student.getStudentStatus().getId();
-        return id == SS_TRAINEE_ID ||
-                id == SS_ACCEPTED_PRE_OFFER_ID ||
-                id == SS_GRADUATED_ID;
+        return id == SS_TRAINEE_ID || id == SS_ACCEPTED_PRE_OFFER_ID || id == SS_GRADUATED_ID;
     }
 }

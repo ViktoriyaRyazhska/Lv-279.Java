@@ -107,13 +107,13 @@
         </div>
       </div>
       <div class="ui-g-8">
-        <div class="column" *ngIf="selectedStudent && selectedStudent.user && selectedStudent.data != null">
-          <div>{{selectedStudent.data.englishLevel.name}}</div>
-          <div>{{selectedStudent.data.intermBase}}</div>
-          <div>{{selectedStudent.data.intermLang}}</div>
-          <div>{{selectedStudent.data.finalBase}}</div>
-          <div>{{selectedStudent.data.finalLang}}</div>
-          <div>{{selectedStudent.data.teacherScore}}</div>
+        <div class="column" *ngIf="selectedStudent && selectedStudent.user">
+          <div *ngIf="selectedStudent.data.englishLevel">{{selectedStudent.data.englishLevel.name}}</div>
+          <div *ngIf="selectedStudent.data.intermBase">{{selectedStudent.data.intermBase}}</div>
+          <div *ngIf="selectedStudent.data.intermLang">{{selectedStudent.data.intermLang}}</div>
+          <div *ngIf="selectedStudent.data.finalBase">{{selectedStudent.data.finalBase}}</div>
+          <div *ngIf="selectedStudent.data.finalLang">{{selectedStudent.data.finalLang}}</div>
+          <div *ngIf="selectedStudent.data.teacherScore">{{selectedStudent.data.teacherScore}}</div>
           <div>-</div>
           <div>-</div>
         </div>
@@ -216,13 +216,13 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="learningAbility"
+                formControlName="learningAbilityTeacher"
                 (change)="onChoose()">
                 <option *ngFor="let mark of marks | markFilter:CharId.ONE" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{learnDesc}}
+              {{learnDescTeacher}}
             </div>
           </div>
 
@@ -233,13 +233,13 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="overallTechCompetence"
+                formControlName="overallTechCompetenceTeacher"
                 (change)="onChoose()">
                 <option *ngFor="let mark of marks | markFilter:CharId.TWO" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{overallDesc}}
+              {{overallDescTeacher}}
             </div>
           </div>
 
@@ -250,13 +250,13 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="passionalInitiative"
+                formControlName="passionalInitiativeTeacher"
                 (change)="onChoose()">
                 <option *ngFor="let mark of marks | markFilter:CharId.THREE" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{passDesc}}
+              {{passDescTeacher}}
             </div>
           </div>
 
@@ -267,13 +267,13 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="teamWork"
+                formControlName="teamWorkTeacher"
                 (change)="onChoose()">
                 <option *ngFor="let mark of marks | markFilter:CharId.FOUR" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{teamDesc}}
+              {{teamDescTeacher}}
             </div>
           </div>
 
@@ -284,13 +284,13 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="getThingsDone"
+                formControlName="getThingsDoneTeacher"
                 (change)="onChoose()">
                 <option *ngFor="let mark of marks | markFilter:CharId.FIVE" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{getDesc}}
+              {{getDescTeacher}}
             </div>
           </div>
 
@@ -301,14 +301,14 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="activeCommunicator"
+                formControlName="activeCommunicatorTeacher"
                 (change)="onChoose()"
               >
                 <option *ngFor="let mark of marks | markFilter:CharId.SIX" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{actDesc}}
+              {{actDescTeacher}}
             </div>
           </div>
 
@@ -320,7 +320,7 @@
               <input
                 type="text"
                 class="form-control input-sm"
-                formControlName="summary">
+                formControlName="summaryTeacher">
             </div>
           </div>
         </div>
@@ -339,13 +339,13 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="learningAbility"
+                formControlName="learningAbilityExpert"
                 (change)="onChoose()">
                 <option *ngFor="let mark of marks | markFilter:CharId.ONE" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{learnDesc}}
+              {{learnDescExpert}}
             </div>
           </div>
 
@@ -356,13 +356,13 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="overallTechCompetence"
+                formControlName="overallTechCompetenceExpert"
                 (change)="onChoose()">
                 <option *ngFor="let mark of marks | markFilter:CharId.TWO" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{overallDesc}}
+              {{overallDescExpert}}
             </div>
           </div>
 
@@ -373,13 +373,13 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="passionalInitiative"
+                formControlName="passionalInitiativeExpert"
                 (change)="onChoose()">
                 <option *ngFor="let mark of marks | markFilter:CharId.THREE" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{passDesc}}
+              {{passDescExpert}}
             </div>
           </div>
 
@@ -390,13 +390,13 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="teamWork"
+                formControlName="teamWorkExpert"
                 (change)="onChoose()">
                 <option *ngFor="let mark of marks | markFilter:CharId.FOUR" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{teamDesc}}
+              {{teamDescExpert}}
             </div>
           </div>
 
@@ -407,13 +407,13 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="getThingsDone"
+                formControlName="getThingsDoneExpert"
                 (change)="onChoose()">
                 <option *ngFor="let mark of marks | markFilter:CharId.FIVE" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{getDesc}}
+              {{getDescExpert}}
             </div>
           </div>
 
@@ -424,14 +424,14 @@
             <div class="col-sm-3 form-group">
               <select
                 class="form-control input-sm"
-                formControlName="activeCommunicator"
+                formControlName="activeCommunicatorExpert"
                 (change)="onChoose()"
               >
                 <option *ngFor="let mark of marks | markFilter:CharId.SIX" [value]="mark.id">{{mark.name}}</option>
               </select>
             </div>
             <div class="col-sm-7 form-group">
-              {{actDesc}}
+              {{actDescExpert}}
             </div>
           </div>
 
@@ -443,7 +443,7 @@
               <input
                 type="text"
                 class="form-control input-sm"
-                formControlName="summary">
+                formControlName="summaryExpert">
             </div>
           </div>
         </div>

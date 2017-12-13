@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FeedbackService} from "../../../services/feedbacks/feedback.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {StudentFeedback} from "../../../models/feedbacks/student.model";
+import {StudentFeedback, Data} from "../../../models/feedbacks/student.model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Mark} from "../../../models/feedbacks/mark.model";
 import {MarkService} from "../../../services/feedbacks/marks.service";
+import {StudentsService} from "../../../services/students/students.service";
 
 export enum CharacteristicId {
   ONE = 1,
@@ -23,6 +23,8 @@ export enum CharacteristicId {
 export class FeedbackListComponent implements OnInit {
   private CharId: any = Object.assign({}, CharacteristicId);
 
+  private academyId: number = 586;
+
   private signupTeacherForm: FormGroup;
   private signupExpertForm: FormGroup;
   private signupInterForm: FormGroup;
@@ -35,21 +37,27 @@ export class FeedbackListComponent implements OnInit {
   private displayStudentDetails: boolean;
   private displayOverallFeedback: boolean;
   private displayProvideFeedback: boolean;
+
   private displayTeacherFeedback: boolean;
   private displayExpertFeedback: boolean;
   private displayInterFeedback: boolean;
 
-  private learnDesc: string;
-  private overallDesc: string;
-  private passDesc: string;
-  private teamDesc: string;
-  private getDesc: string;
-  private actDesc: string;
-  //TODO
+  private learnDescTeacher: string;
+  private overallDescTeacher: string;
+  private passDescTeacher: string;
+  private teamDescTeacher: string;
+  private getDescTeacher: string;
+  private actDescTeacher: string;
 
+  private learnDescExpert: string;
+  private overallDescExpert: string;
+  private passDescExpert: string;
+  private teamDescExpert: string;
+  private getDescExpert: string;
+  private actDescExpert: string;
 
   constructor(private markService: MarkService,
-              private feedbackService: FeedbackService,
+              private studentsService: StudentsService,
               private router: Router,
               private route: ActivatedRoute) {
 
@@ -64,43 +72,28 @@ export class FeedbackListComponent implements OnInit {
       error => console.log(error)
     );
 
-    this.feedbackService.getAllStudent().subscribe(
+    this.studentsService.getAll(this.academyId).subscribe(
       data => {
         this.students = data;
+        this.students.forEach(st => st.data = st.data == null ? new Data() : st.data);
+        console.log("loaded " + data.length);
       },
       error => console.log(error)
     );
 
-    this.signupTeacherForm = new FormGroup({
-      'learningAbility': new FormControl(),
-      'overallTechCompetence': new FormControl(),
-      'passionalInitiative': new FormControl(),
-      'teamWork': new FormControl(),
-      'getThingsDone': new FormControl(),
-      'activeCommunicator': new FormControl(),
-      'summary': new FormControl()
-    });
-    this.signupExpertForm = new FormGroup({
-      'learningAbility': new FormControl(),
-      'overallTechCompetence': new FormControl(),
-      'passionalInitiative': new FormControl(),
-      'teamWork': new FormControl(),
-      'getThingsDone': new FormControl(),
-      'activeCommunicator': new FormControl(),
-      'summary': new FormControl()
-    });
-    this.signupInterForm = new FormGroup({
-      'summary': new FormControl()
-    });
-
-    console.log(this.students)
+    this.setBaseForms();
   }
 
   onSave() {
     this.setDataToStudent(this.signupTeacherForm, this.signupExpertForm, this.signupInterForm);
     this.updateStudents.push(this.selectedStudent);
-    this.feedbackService.updateStudents(this.updateStudents);
-
+    console.log(this.selectedStudent);
+    this.studentsService.update(this.updateStudents)
+      .subscribe(() => {
+        this.updateStudents = [];
+        this.ngOnInit()
+      });
+    console.log(this.selectedStudent);
     this.updateStudents = [];
     this.displayProvideFeedback = false;
   }
@@ -133,9 +126,6 @@ export class FeedbackListComponent implements OnInit {
 
   onChangeTab() {
     this.setDataToStudent(this.signupTeacherForm, this.signupExpertForm, this.signupInterForm);
-    this.updateStudents.push(this.selectedStudent);
-    this.feedbackService.updateStudents(this.updateStudents);
-    this.updateStudents = [];
   }
 
   onOverallClick(student: StudentFeedback) {
@@ -144,93 +134,200 @@ export class FeedbackListComponent implements OnInit {
   }
 
   onProvideClick(student: StudentFeedback) {
-    this.selectedStudent = null;
     this.selectedStudent = student;
     this.displayProvideFeedback = true;
     this.displayTeacherFeedback = true;
+    this.displayExpertFeedback = false;
+    this.displayInterFeedback = false;
 
-    if (this.selectedStudent.teacherFeedback.learningAbility != null) {
-      this.signupTeacherForm.setValue({
-        'learningAbility': this.selectedStudent.teacherFeedback.learningAbility.id,
-        'overallTechCompetence': this.selectedStudent.teacherFeedback.overallTechnicalCompetence.id,
-        'passionalInitiative': this.selectedStudent.teacherFeedback.passionalInitiative.id,
-        'teamWork': this.selectedStudent.teacherFeedback.teamWork.id,
-        'getThingsDone': this.selectedStudent.teacherFeedback.gettingThingsDone.id,
-        'activeCommunicator': this.selectedStudent.teacherFeedback.activeCommunicator.id,
-        'summary': this.selectedStudent.teacherFeedback.summary
-      });
-
-      this.onChoose();
-    }
-    if (this.selectedStudent.expertFeedback.learningAbility != null) {
-      this.signupExpertForm.setValue({
-        'learningAbility': this.selectedStudent.expertFeedback.learningAbility.id,
-        'overallTechCompetence': this.selectedStudent.expertFeedback.overallTechnicalCompetence.id,
-        'passionalInitiative': this.selectedStudent.expertFeedback.passionalInitiative.id,
-        'teamWork': this.selectedStudent.expertFeedback.teamWork.id,
-        'getThingsDone': this.selectedStudent.expertFeedback.gettingThingsDone.id,
-        'activeCommunicator': this.selectedStudent.expertFeedback.activeCommunicator.id,
-        'summary': this.selectedStudent.expertFeedback.summary
-      });
-
-      this.onChoose();
-    }
-    if (this.selectedStudent.data != null) {
-      this.signupInterForm.setValue({
-        'summary': this.selectedStudent.data.interviewerComment
-      });
-    }
-
-    console.log(this.signupTeacherForm);
-    console.log(this.signupExpertForm);
-    console.log(this.signupInterForm);
+    this.setDescValue();
+    this.initForms();
   }
 
   setDataToStudent(teacherForm: FormGroup, expertForm: FormGroup, interForm: FormGroup) {
     if (this.selectedStudent.teacherFeedback != null) {
-      this.selectedStudent.teacherFeedback.learningAbility = this.getMark(+teacherForm.get('learningAbility').value);
-      this.selectedStudent.teacherFeedback.overallTechnicalCompetence = this.getMark(+teacherForm.get('overallTechCompetence').value);
-      this.selectedStudent.teacherFeedback.passionalInitiative = this.getMark(+teacherForm.get('passionalInitiative').value);
-      this.selectedStudent.teacherFeedback.teamWork = this.getMark(+teacherForm.get('teamWork').value);
-      this.selectedStudent.teacherFeedback.gettingThingsDone = this.getMark(+teacherForm.get('getThingsDone').value);
-      this.selectedStudent.teacherFeedback.activeCommunicator = this.getMark(+teacherForm.get('activeCommunicator').value);
-      this.selectedStudent.teacherFeedback.summary = teacherForm.get('summary').value;
+      this.selectedStudent.teacherFeedback.learningAbility = this.getMark(+teacherForm.get('learningAbilityTeacher').value);
+      this.selectedStudent.teacherFeedback.overallTechnicalCompetence = this.getMark(+teacherForm.get('overallTechCompetenceTeacher').value);
+      this.selectedStudent.teacherFeedback.passionalInitiative = this.getMark(+teacherForm.get('passionalInitiativeTeacher').value);
+      this.selectedStudent.teacherFeedback.teamWork = this.getMark(+teacherForm.get('teamWorkTeacher').value);
+      this.selectedStudent.teacherFeedback.gettingThingsDone = this.getMark(+teacherForm.get('getThingsDoneTeacher').value);
+      this.selectedStudent.teacherFeedback.activeCommunicator = this.getMark(+teacherForm.get('activeCommunicatorTeacher').value);
+      this.selectedStudent.teacherFeedback.summary = teacherForm.get('summaryTeacher').value;
     }
     if (this.selectedStudent.expertFeedback != null) {
-      this.selectedStudent.expertFeedback.learningAbility = this.getMark(+expertForm.get('learningAbility').value);
-      this.selectedStudent.expertFeedback.overallTechnicalCompetence = this.getMark(+expertForm.get('overallTechCompetence').value);
-      this.selectedStudent.expertFeedback.passionalInitiative = this.getMark(+expertForm.get('passionalInitiative').value);
-      this.selectedStudent.expertFeedback.teamWork = this.getMark(+expertForm.get('teamWork').value);
-      this.selectedStudent.expertFeedback.gettingThingsDone = this.getMark(+expertForm.get('getThingsDone').value);
-      this.selectedStudent.expertFeedback.activeCommunicator = this.getMark(+expertForm.get('activeCommunicator').value);
-      this.selectedStudent.expertFeedback.summary = expertForm.get('summary').value;
+      this.selectedStudent.expertFeedback.learningAbility = this.getMark(+expertForm.get('learningAbilityExpert').value);
+      this.selectedStudent.expertFeedback.overallTechnicalCompetence = this.getMark(+expertForm.get('overallTechCompetenceExpert').value);
+      this.selectedStudent.expertFeedback.passionalInitiative = this.getMark(+expertForm.get('passionalInitiativeExpert').value);
+      this.selectedStudent.expertFeedback.teamWork = this.getMark(+expertForm.get('teamWorkExpert').value);
+      this.selectedStudent.expertFeedback.gettingThingsDone = this.getMark(+expertForm.get('getThingsDoneExpert').value);
+      this.selectedStudent.expertFeedback.activeCommunicator = this.getMark(+expertForm.get('activeCommunicatorExpert').value);
+      this.selectedStudent.expertFeedback.summary = expertForm.get('summaryExpert').value;
     }
     if (this.selectedStudent.data != null) {
       this.selectedStudent.data.interviewerComment = interForm.get('summary').value;
     }
   }
 
+
+
+  initForms() {
+    this.setBaseForms();
+
+    this.initTeacherForm();
+
+    this.initExpertForm();
+
+    this.initInterForm();
+
+    this.descriptionSelector();
+
+    console.log(this.signupTeacherForm);
+    console.log(this.signupExpertForm);
+    console.log(this.signupInterForm);
+  }
+
+  setBaseForms() {
+    this.signupTeacherForm = new FormGroup({
+      'learningAbilityTeacher': new FormControl(),
+      'overallTechCompetenceTeacher': new FormControl(),
+      'passionalInitiativeTeacher': new FormControl(),
+      'teamWorkTeacher': new FormControl(),
+      'getThingsDoneTeacher': new FormControl(),
+      'activeCommunicatorTeacher': new FormControl(),
+      'summaryTeacher': new FormControl()
+    });
+    this.signupExpertForm = new FormGroup({
+      'learningAbilityExpert': new FormControl(),
+      'overallTechCompetenceExpert': new FormControl(),
+      'passionalInitiativeExpert': new FormControl(),
+      'teamWorkExpert': new FormControl(),
+      'getThingsDoneExpert': new FormControl(),
+      'activeCommunicatorExpert': new FormControl(),
+      'summaryExpert': new FormControl()
+    });
+    this.signupInterForm = new FormGroup({
+      'summary': new FormControl()
+    });
+  }
+  initTeacherForm() {
+    if (this.selectedStudent.teacherFeedback.learningAbility != null) {
+      this.signupTeacherForm.patchValue({'learningAbilityTeacher': this.selectedStudent.teacherFeedback.learningAbility.id});
+    }
+    if (this.selectedStudent.teacherFeedback.overallTechnicalCompetence != null) {
+      this.signupTeacherForm.patchValue({'overallTechCompetenceTeacher': this.selectedStudent.teacherFeedback.overallTechnicalCompetence.id});
+    }
+    if (this.selectedStudent.teacherFeedback.passionalInitiative != null) {
+      this.signupTeacherForm.patchValue({'passionalInitiativeTeacher': this.selectedStudent.teacherFeedback.passionalInitiative.id});
+    }
+    if (this.selectedStudent.teacherFeedback.teamWork != null) {
+      this.signupTeacherForm.patchValue({'teamWorkTeacher': this.selectedStudent.teacherFeedback.teamWork.id});
+    }
+    if (this.selectedStudent.teacherFeedback.gettingThingsDone != null) {
+      this.signupTeacherForm.patchValue({'getThingsDoneTeacher': this.selectedStudent.teacherFeedback.gettingThingsDone.id});
+    }
+    if (this.selectedStudent.teacherFeedback.activeCommunicator != null) {
+      this.signupTeacherForm.patchValue({'activeCommunicatorTeacher': this.selectedStudent.teacherFeedback.activeCommunicator.id});
+    }
+    if (this.selectedStudent.teacherFeedback.summary != null) {
+      this.signupTeacherForm.patchValue({'activeCommunicatorTeacher': this.selectedStudent.teacherFeedback.summary});
+    }
+  }
+
+  initExpertForm() {
+    console.log(this.signupTeacherForm)
+    if (this.selectedStudent.expertFeedback.learningAbility != null) {
+      this.signupTeacherForm.patchValue({'learningAbilityExpert': this.selectedStudent.expertFeedback.learningAbility.id});
+    }
+    if (this.selectedStudent.expertFeedback.overallTechnicalCompetence != null) {
+      this.signupTeacherForm.patchValue({'overallTechCompetenceExpert': this.selectedStudent.expertFeedback.overallTechnicalCompetence.id});
+    }
+    if (this.selectedStudent.expertFeedback.passionalInitiative != null) {
+      this.signupTeacherForm.patchValue({'passionalInitiativeExpert': this.selectedStudent.expertFeedback.passionalInitiative.id});
+    }
+    if (this.selectedStudent.expertFeedback.teamWork != null) {
+      this.signupTeacherForm.patchValue({'teamWorkExpert': this.selectedStudent.expertFeedback.teamWork.id});
+    }
+    if (this.selectedStudent.expertFeedback.gettingThingsDone != null) {
+      this.signupTeacherForm.patchValue({'getThingsDoneExpert': this.selectedStudent.expertFeedback.gettingThingsDone.id});
+    }
+    if (this.selectedStudent.expertFeedback.activeCommunicator != null) {
+      this.signupTeacherForm.patchValue({'activeCommunicatorExpert': this.selectedStudent.expertFeedback.activeCommunicator.id});
+    }
+    if (this.selectedStudent.expertFeedback.summary != null) {
+      this.signupTeacherForm.patchValue({'activeCommunicatorExpert': this.selectedStudent.expertFeedback.summary});
+    }
+  }
+
+  initInterForm() {
+    if (this.selectedStudent.data.interviewerComment != null) {
+      this.signupInterForm.patchValue({
+        'summary': this.selectedStudent.data.interviewerComment
+      });
+    }
+  }
+
+  setDescValue() {
+    this.learnDescTeacher = null;
+    this.overallDescTeacher = null;
+    this.passDescTeacher = null;
+    this.teamDescTeacher = null;
+    this.getDescTeacher = null;
+    this.actDescTeacher = null;
+
+    this.learnDescExpert = null;
+    this.overallDescExpert = null;
+    this.passDescExpert = null;
+    this.teamDescExpert = null;
+    this.getDescExpert = null;
+    this.actDescExpert = null;
+  }
+
   onChoose() {
-    //TODO
+    this.descriptionSelector();
+  }
+
+  descriptionSelector() {
     if (this.marks != null) {
       for (let mark of this.marks) {
-        if (mark.id == this.signupTeacherForm.get('learningAbility').value && mark.characteristic.id == this.CharId.ONE) {
-          this.learnDesc = mark.description;
+        if (this.signupTeacherForm.get('learningAbilityTeacher').value != null && mark.id == this.signupTeacherForm.get('learningAbilityTeacher').value && mark.characteristic.id == this.CharId.ONE) {
+          this.learnDescTeacher = mark.description;
         }
-        if (mark.id == this.signupTeacherForm.get('overallTechCompetence').value && mark.characteristic.id == this.CharId.TWO) {
-          this.overallDesc = mark.description;
+        if (this.signupTeacherForm.get('overallTechCompetenceTeacher').value != null && mark.id == this.signupTeacherForm.get('overallTechCompetenceTeacher').value && mark.characteristic.id == this.CharId.TWO) {
+          this.overallDescTeacher = mark.description;
         }
-        if (mark.id == this.signupTeacherForm.get('passionalInitiative').value && mark.characteristic.id == this.CharId.THREE) {
-          this.passDesc = mark.description;
+        if (this.signupTeacherForm.get('passionalInitiativeTeacher').value != null && mark.id == this.signupTeacherForm.get('passionalInitiativeTeacher').value && mark.characteristic.id == this.CharId.THREE) {
+          this.passDescTeacher = mark.description;
         }
-        if (mark.id == this.signupTeacherForm.get('teamWork').value && mark.characteristic.id == this.CharId.FOUR) {
-          this.teamDesc = mark.description;
+        if (this.signupTeacherForm.get('teamWorkTeacher').value != null && mark.id == this.signupTeacherForm.get('teamWorkTeacher').value && mark.characteristic.id == this.CharId.FOUR) {
+          this.teamDescTeacher = mark.description;
         }
-        if (mark.id == this.signupTeacherForm.get('getThingsDone').value && mark.characteristic.id == this.CharId.FIVE) {
-          this.getDesc = mark.description;
+        if (this.signupTeacherForm.get('getThingsDoneTeacher').value != null && mark.id == this.signupTeacherForm.get('getThingsDoneTeacher').value && mark.characteristic.id == this.CharId.FIVE) {
+          this.getDescTeacher = mark.description;
         }
-        if (mark.id == this.signupTeacherForm.get('activeCommunicator').value && mark.characteristic.id == this.CharId.SIX) {
-          this.actDesc = mark.description;
+        if (this.signupTeacherForm.get('activeCommunicatorTeacher').value != null && mark.id == this.signupTeacherForm.get('activeCommunicatorTeacher').value && mark.characteristic.id == this.CharId.SIX) {
+          this.actDescTeacher = mark.description;
+        }
+      }
+    }
+    if (this.marks != null) {
+      for (let mark of this.marks) {
+        if (this.signupExpertForm.get('learningAbilityExpert').value != null && mark.id == this.signupExpertForm.get('learningAbilityExpert').value && mark.characteristic.id == this.CharId.ONE) {
+          this.learnDescExpert = mark.description;
+        }
+        if (this.signupExpertForm.get('overallTechCompetenceExpert').value != null && mark.id == this.signupExpertForm.get('overallTechCompetenceExpert').value && mark.characteristic.id == this.CharId.TWO) {
+          this.overallDescExpert = mark.description;
+        }
+        if (this.signupExpertForm.get('passionalInitiativeExpert').value != null && mark.id == this.signupExpertForm.get('passionalInitiativeExpert').value && mark.characteristic.id == this.CharId.THREE) {
+          this.passDescExpert = mark.description;
+        }
+        if (this.signupExpertForm.get('teamWorkExpert').value != null && mark.id == this.signupExpertForm.get('teamWorkExpert').value && mark.characteristic.id == this.CharId.FOUR) {
+          this.teamDescExpert = mark.description;
+        }
+        if (this.signupExpertForm.get('getThingsDoneExpert').value != null && mark.id == this.signupExpertForm.get('getThingsDoneExpert').value && mark.characteristic.id == this.CharId.FIVE) {
+          this.getDescExpert = mark.description;
+        }
+        if (this.signupExpertForm.get('activeCommunicatorExpert').value != null && mark.id == this.signupExpertForm.get('activeCommunicatorExpert').value && mark.characteristic.id == this.CharId.SIX) {
+          this.actDescExpert = mark.description;
         }
       }
     }
