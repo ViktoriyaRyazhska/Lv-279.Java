@@ -203,15 +203,14 @@ export class StudentsComponent implements OnInit {
   }
 
   getTrainingScore(student:StudentFeedback):number{
-    var sum: number;
+    var sum: number = 0;
     var avg :number =  this.calculate(student);
-
-    sum+=avg;
 
     var count :number = 0;
 
     if (avg != null){
       count++;
+      sum+=avg;
     }
 
     if (student.data.finalBase!=null){
@@ -224,10 +223,11 @@ export class StudentsComponent implements OnInit {
     }
 
     if(count!=0) {
-      return Math.round((sum/count) * 1000) / 1000;
+      return Math.round((sum/count) * 1000 )/ 1000;
     }
-    else return avg;
+    else return null;
   }
+
    getCurrentControl(student:StudentFeedback) :number{
 
       var avg:number = this.calculate(student);
@@ -236,7 +236,6 @@ export class StudentsComponent implements OnInit {
         return Math.round(avg * 1000) / 1000;
       }
       else return avg;
-
   }
 
   updateStudentsClick(){
