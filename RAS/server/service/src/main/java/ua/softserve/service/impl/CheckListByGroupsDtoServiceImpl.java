@@ -41,11 +41,14 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     @Autowired
     private GroupInfoTeachersRepository groupInfoTeachersRepository;
 
+    private static int TRUE = 1;
+    private static int FALSE = 0;
+
     @Override
     public List<CheckListByGroupsDto> getAllCheckListByGroupsDto() {
 
         List<Academy> allAcademies = academyRepository.findAll().stream()
-                .filter(academy -> academy.getAcademyId() >= 586 && academy.getAcademyId() <= 932).limit(30)
+                .limit(30)
                 .collect(Collectors.toList());
 
         List<CheckListByGroupsDto> CheckListByGroupsDtos = new ArrayList<>();
@@ -118,29 +121,29 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
     private Integer checkStudents(Predicate<Student> predicate, List<Student> students) {
         if (students == null) {
-            return 0;
+            return FALSE;
         }
         for (Student student : students) {
             if (!checkStudentStatus(student)) {
                 continue;
             }
             if (!predicate.test(student)) {
-                return 0;
+                return FALSE;
             }
         }
-        return 1;
+        return TRUE;
     }
 
     private Integer checkTeachers(Predicate<GroupInfoTeachers> predicate, List<GroupInfoTeachers> groupInfoTeachers) {
         if (groupInfoTeachers == null) {
-            return 0;
+            return FALSE;
         }
         for (GroupInfoTeachers git : groupInfoTeachers) {
             if (!predicate.test(git)) {
-                return 0;
+                return FALSE;
             }
         }
-        return 1;
+        return TRUE;
     }
 
     private boolean checkStudentStatus(Student student) {
