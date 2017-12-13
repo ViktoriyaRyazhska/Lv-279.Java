@@ -8,14 +8,6 @@
   position: fixed;
 }
 
-table{
-  font-size: 0.8em;
-}
-
-th {
-  height: 190px;
-  padding: 5px
-}
 th span {
   writing-mode: tb-rl
 }
@@ -30,66 +22,92 @@ div {
   padding-right: 2%;
 }
 
-button {
-  padding: 0;
-  width: 20px;
-  height: 20px;
+@media (max-width: 1399px) {
+  table{
+    font-size: 0.8em;
+  }
+
+  th {
+    height: 190px;
+    padding: 5px
+  }
+
+  .fixed_headers {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+  td:nth-child(1), th:nth-child(1) { min-width: 90px; max-width: 90px}
+  td:nth-child(2), th:nth-child(2) { min-width: 90px; max-width: 90px}
+  td:nth-child(3), th:nth-child(3) { min-width: 90px; max-width: 90px}
+  td:nth-child(4), th:nth-child(4) { min-width: 100px; max-width: 100px}
+  td:nth-child(5), th:nth-child(5) { min-width: 100px; max-width: 100px}
+  td:nth-child(n+6), th:nth-child(n+6) { min-width: 25px; max-width: 25px}
+  td:nth-child(36), th:nth-child(36) { min-width: 45px; max-width: 45px}
+
+  thead tr {
+    display: block;
+    position: relative;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  tbody {
+    display: block;
+    overflow: auto;
+    width: 100%;
+    height: 350px;
+  }
+
+  .mat-icon {
+    width: 15px;
+  }
 }
 
-.cell1{
-  width: 20px;
-  height: 20px;
-  background: green;
-}
+@media (max-width: 2000px) and (min-width: 1400px) {
+  table{
+    font-size: 1em;
+  }
 
-.cell0{
-  width: 20px;
-  height: 20px;
-  background: red;
-}
+  th {
+    height: 240px;
+    padding: 5px
+  }
 
-.gss-on {
-  background: oldlace;
-  cursor: pointer;
-  display: none;
-}
+  .fixed_headers {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
 
-.general-column {
-  color: red;
-  /*width: 100%;*/
-  /*height: 100px;*/
-}
+  td:nth-child(1), th:nth-child(1) { min-width: 120px; max-width: 120px}
+  td:nth-child(2), th:nth-child(2) { min-width: 100px; max-width: 100px}
+  td:nth-child(3), th:nth-child(3) { min-width: 100px; max-width: 100px}
+  td:nth-child(4), th:nth-child(4) { min-width: 200px; max-width: 200px}
+  td:nth-child(5), th:nth-child(5) { min-width: 200px; max-width: 200px}
+  td:nth-child(n+6), th:nth-child(n+6) { min-width: 35px; max-width: 35px}
+  td:nth-child(36), th:nth-child(36) { min-width: 45px; max-width: 45px}
 
-.fixed_headers {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: collapse;
-}
+  thead tr {
+    display: block;
+    position: relative;
+  }
 
-td:nth-child(1), th:nth-child(1) { min-width: 90px; max-width: 90px}
-td:nth-child(2), th:nth-child(2) { min-width: 90px; max-width: 90px}
-td:nth-child(3), th:nth-child(3) { min-width: 90px; max-width: 90px}
-td:nth-child(4), th:nth-child(4) { min-width: 100px; max-width: 100px}
-td:nth-child(5), th:nth-child(5) { min-width: 100px; max-width: 100px}
-td:nth-child(n+6), th:nth-child(n+6) { min-width: 25px; max-width: 25px}
-td:nth-child(36), th:nth-child(36) { min-width: 45px; max-width: 45px}
+  th {
+    text-align: center;
+  }
 
-thead tr {
-  display: block;
-  position: relative;
-}
+  tbody {
+    display: block;
+    overflow: auto;
+    width: 100%;
+    height: 550px;
+  }
 
-th {
-  text-align: center;
-}
-
-tbody {
-  display: block;
-  overflow: auto;
-  width: 100%;
-  height: 350px;
-}
-
-.mat-icon {
-  width: 15px;
+  .mat-icon {
+    width: 24px;
+  }
 }
