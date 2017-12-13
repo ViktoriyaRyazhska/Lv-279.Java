@@ -8,7 +8,5 @@ public interface ItaTacticalPlanByGroupStageDtoService {
 
     ItaTacticalPlanByGroupStageDto findById(int id);
 
-    List<ItaTacticalPlanByGroupStageDto> findAll();
-
     List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStageReport();
 }

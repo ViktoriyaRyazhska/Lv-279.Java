@@ -739,6 +739,31 @@ INSERT INTO `technologies` VALUES (1,'istqb_practical_testing',2,0,'2017/images/
 UNLOCK TABLES;
 
 --
+-- Table structure for table `testes_names`
+--
+
+DROP TABLE IF EXISTS `testes_names`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `testes_names` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `academy_id` int(11) DEFAULT NULL,
+  `test_max_score` double NOT NULL,
+  `test_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `testes_names`
+--
+
+LOCK TABLES `testes_names` WRITE;
+/*!40000 ALTER TABLE `testes_names` DISABLE KEYS */;
+/*!40000 ALTER TABLE `testes_names` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -778,4 +803,60 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-11 18:53:48
+-- Dump completed on 2017-12-13 19:39:21
+                       
+DROP TRIGGER IF EXISTS trigger_academy_add;
+
+DELIMITER $$
+CREATE TRIGGER trigger_academy_add AFTER INSERT ON academy
+FOR EACH ROW
+BEGIN
+INSERT INTO history
+(academy_id,name_for_site,location,start_date,end_date,stage,direction, modify_date, new.crm_group)
+VALUES (new.academy_id, new.name,
+(select trasnlation from language_translations where new.city_id=item_id and language_translations.tag like 'city' and language_translations.local like 'en'),
+new.start_date, new.end_date, 
+(select name from academy_stages where new.stage_id= academy_stages.stage_id), 
+(select name from directions where new.direction_id= directions.direction_id), 
+now(), new.crm_group);
+END$$
+DELIMITER ;
+
+
+DROP TRIGGER IF EXISTS trigger_academy_update;
+DELIMITER $$
+CREATE TRIGGER trigger_academy_update AFTER update ON academy
+FOR EACH ROW
+BEGIN
+INSERT INTO history
+(academy_id,name_for_site,location,start_date,end_date,stage,direction, modify_date, new.crm_group)
+VALUES (new.academy_id, new.name,
+(select trasnlation from language_translations where new.city_id=item_id and language_translations.tag like 'city' and language_translations.local like 'en'),
+new.start_date, new.end_date, 
+(select name from academy_stages where new.stage_id= academy_stages.stage_id), 
+(select name from directions where new.direction_id= directions.direction_id), 
+now(), new.crm_group);
+END$$
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS trigger_group_info_add;
+
+DELIMITER $$
+CREATE TRIGGER trigger_group_info_add AFTER INSERT ON group_info
+FOR EACH ROW
+BEGIN
+update history set history.academy_name=new.group_name
+where history.academy_id=new.academy_id;
+END$$
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS trigger_group_info_update;
+
+DELIMITER $$
+CREATE TRIGGER trigger_group_info_update AFTER UPDATE ON group_info
+FOR EACH ROW
+BEGIN
+update history set history.academy_name=new.group_name
+where history.academy_id=new.academy_id;
+END$$
+DELIMITER ;

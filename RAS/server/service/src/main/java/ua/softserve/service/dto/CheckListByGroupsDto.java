@@ -17,11 +17,10 @@ import ua.softserve.persistence.entity.EnglishLevel;
 import ua.softserve.persistence.entity.Student;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static ua.softserve.persistence.constants.ConstantsFromDb.EL_PRE_INTERMEDIATE_ID;
+import static ua.softserve.persistence.constants.ConstantsFromDb.ENGLISH_LEVEL_PRE_INTERMEDIATE_ID;
 
 @Getter
 @Setter
@@ -85,7 +84,7 @@ public class CheckListByGroupsDto {
         predicates.put("englishLevelDefined", student -> student.getData().getEnglishLevel() != null);
         predicates.put("englishLevelCorrect", student -> {
             EnglishLevel englishLevel = student.getData().getEnglishLevel();
-            return englishLevel != null && englishLevel.getEnglishLevelId() >= EL_PRE_INTERMEDIATE_ID;
+            return englishLevel != null && englishLevel.getEnglishLevelId() >= ENGLISH_LEVEL_PRE_INTERMEDIATE_ID;
         });
         predicates.put("entryScoreDefined", student -> student.getData().getEntryScore() != null);
         predicates.put("incomingTestDefined", student -> student.getData().getIncomingTest() != null);

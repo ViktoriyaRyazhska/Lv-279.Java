@@ -48,9 +48,9 @@ public class User {
     @Convert(converter = EncryptConverter.class)
     private String phone;
 
-    private String salt = "_";
+    private String salt = "EMPTY";
 
-    private String password = "_";
+    private String password = "EMPTY";
 
     @Column(name = "eng_level")
     private Integer englishLevel;

@@ -6,15 +6,14 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "academy_stages")
 public class AcademyStages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "stage_id")
-    private int stageId;
+    private Integer stageId;
 
     @NotNull
     @Column(name = "name")
@@ -22,8 +21,7 @@ public class AcademyStages {
 
     @NotNull
     @Column(name = "sort")
-    private byte sort;
+    private Byte sort;
 
-    public AcademyStages() {
-    }
+    public AcademyStages() {}
 }

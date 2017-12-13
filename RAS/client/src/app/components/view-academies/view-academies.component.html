@@ -11,7 +11,7 @@
           </mat-form-field>
         </mat-header-cell>
         <mat-cell *matHeaderCellDef></mat-cell>
-        <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element.id}}"> {{element.grName}} </a>
+        <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element.academyId}}"> {{element.grName}} </a>
         </mat-cell>
       </ng-container>
 
@@ -89,16 +89,16 @@
 
       <ng-container matColumnDef="startDate">
         <mat-header-cell *matHeaderCellDef>
-            <input matInput [matDatepicker]="picker"  name="startDate" placeholder="Choose a date" ngModel>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker (selectedChanged)="onFilterField($event, groupForm)" ></mat-datepicker>
+          <input type="date" name="startDate" (input)="onFilterField($event, groupForm)" class="form-control" ngModel>
         </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.startDate | date: "M/d/yyyy"}}</mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.startDate | date: "dd.MM.yyyy"}}</mat-cell>
       </ng-container>
 
 
       <ng-container matColumnDef="endDate">
-        <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>
+          <input type="date" name="endDate" (input)="onFilterField($event, groupForm)" class="form-control" ngModel>
+        </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.endDate | date: "dd.MM.yyyy"}}</mat-cell>
       </ng-container>
 
@@ -108,7 +108,7 @@
             <input matInput placeholder="Experts" name="experts" (input)="onFilterField($event, groupForm)" ngModel>
           </mat-form-field>
         </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.experts.toString()}}</mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.experts}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="studentPlannedToGraduate">
@@ -169,7 +169,7 @@
       <ng-container matColumnDef="interviewerFeedback">
         <mat-header-cell *matHeaderCellDef>Interviewer Feedback
         </mat-header-cell>
-        <mat-cell *matCellDef="let element"><a routerLink="/ang/feedback/{{element.id}}">Provide</a></mat-cell>
+        <mat-cell *matCellDef="let element"><a routerLink="/ang/feedback/{{element.academyId}}">Provide</a></mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

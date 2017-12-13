@@ -47,12 +47,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public List<User> findAll() {
-        List<User> all = userRepository.findAll();
-        // for (User user:all) {
-        // System.out.println(user.getFirstName());
-        // }
-        return all;
-
+        return userRepository.findAll();
     }
 
     @Override

@@ -5,11 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
 import java.sql.Date;
 
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "academy")
 public class Academy {
@@ -75,6 +73,5 @@ public class Academy {
     @Column(name = "not_synchronized")
     private int notSynchronized;
 
-    public Academy() {
-    }
+    public Academy() {}
 }

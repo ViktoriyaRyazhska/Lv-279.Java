@@ -7,8 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
+@Getter @Setter
 @ToString
 @Entity
 @Table(name = "language_translations")
@@ -17,7 +16,7 @@ public class LanguageTranslations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "translation_id")
-    private int translationId;
+    private Integer translationId;
 
     @ManyToOne
     @JoinColumn(name = "language_id")
@@ -28,7 +27,7 @@ public class LanguageTranslations {
 
     @NotNull
     @Column(name = "item_id")
-    private int itemId;
+    private Integer itemId;
 
     @NotNull
     @Column(name = "tag")
@@ -42,6 +41,5 @@ public class LanguageTranslations {
     @Column(name = "trasnlation")
     private String trasnlation;
 
-    public LanguageTranslations() {
-    }
+    public LanguageTranslations() {}
 }
