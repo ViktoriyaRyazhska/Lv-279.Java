@@ -35,9 +35,7 @@ public class AcademyController {
     }
 
     @RequestMapping(value = "/viewAcademies", method = RequestMethod.GET)
-    @CrossOrigin(origins = "http://localhost:4200")
-    public @ResponseBody List<AcademyDTO> searchSite() {
-        List<AcademyDTO> academyDTOS = groupInfoService.getAllAcademies();
-        return academyDTOS;
+    public ResponseEntity<List<AcademyDTO>> searchSite() {
+        return new ResponseEntity<>(groupInfoService.getAllAcademies(), HttpStatus.OK);
     }
 }
