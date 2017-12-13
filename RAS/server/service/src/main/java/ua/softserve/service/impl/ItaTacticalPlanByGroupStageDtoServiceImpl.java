@@ -112,6 +112,12 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         List<Student> allStudentsOfGroup = studentRepository.findAllByAcademy_AcademyId(dto.getGroupId());
         int studentRequested = 0;
         for (Student student : allStudentsOfGroup) {
+            if (student == null) {
+                continue;
+            }
+            if (student.getStudentStatus() == null) {
+                continue;
+            }
             if (student.getStudentStatus().getId() == SS_TRAINEE_ID
                     || student.getStudentStatus().getId() == SS_TRAINEE_ID) {
                 int currentValueStudentInProgress = dto.getStudyInProgress();

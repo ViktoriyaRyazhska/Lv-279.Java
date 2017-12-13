@@ -68,4 +68,6 @@ public class ConstantsFromDb {
     public static int TT_EXPERT_ID = 2;
     public static int TT_INTERVIEWER_ID = 3;
 
+    //E - Employee
+    public static final Integer EE_ZERO_EMPLOYEE = 0;
 }

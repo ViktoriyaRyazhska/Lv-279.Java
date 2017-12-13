@@ -12,10 +12,9 @@ import ua.softserve.persistence.entity.Employee;
 @AllArgsConstructor
 public class EmployeeEngShortDto {
     private int employeeId;
-    private String firstNameEng;
-    private String lastNameEng;
+    private String fullName;
 
     public static EmployeeEngShortDto of(Employee employee) {
-        return new EmployeeEngShortDto(employee.getEmployeeId(), employee.getFirstNameEng(), employee.getLastNameEng());
+        return new EmployeeEngShortDto(employee.getEmployeeId(), employee.getLastNameEng() + " "+ employee.getFirstNameEng());
     }
 }
