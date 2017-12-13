@@ -90,10 +90,10 @@
 
 <!--<td>{{item.groupName}}</td>-->
 
-<div *ngFor="let report of itaTacticalPlanByGroupStageReports">
+<div *ngFor="let report of itaTacticalPlanByGroupStageReports; let i = index">
   <h1 align="center">{{report.name}}</h1>
   <div class="example-container mat-elevation-z8">
-    <app-exporttoexcel [data]="dataToSave[0]"></app-exporttoexcel>
+    <app-exporttoexcel [data]="dataToSave[i]"></app-exporttoexcel>
     <mat-table #table [dataSource]="report.dataSource" matSort>
 
       <ng-container matColumnDef="Year">
