@@ -53,7 +53,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<UserShortViewDto> getAllUsersByAcademy(Integer academyId) {
-        return userRepository.findAllByAcademy(academyId).stream().map(UserShortViewDto::of)
+        return userRepository.findAllByAcademy(academyId)
+                .stream()
+                .map(UserShortViewDto::of)
                 .collect(Collectors.toList());
     }
 
@@ -66,10 +68,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Page<UserShortViewDto> findPageById(Integer notInAcademy, String id, Integer page, Integer size,
-            String direction) {
+                                               String direction) {
         Pageable pageable = new PageRequest(page, size, dirOf(direction), "id");
 
-        return userRepository.findByIdAndName(wrapForLike(id), notInAcademy, pageable).map(UserShortViewDto::of);
+        return userRepository.findByIdAndName(wrapForLike(id), notInAcademy, pageable)
+                .map(UserShortViewDto::of);
     }
 
     private Sort.Direction dirOf(String dir) {

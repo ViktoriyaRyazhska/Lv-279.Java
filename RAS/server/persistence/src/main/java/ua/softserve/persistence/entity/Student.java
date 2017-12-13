@@ -63,7 +63,7 @@ public class Student {
         return this;
     }
 
-    public Student unRemove() {
+    public Student unremove() {
         removed = false;
         return this;
     }
