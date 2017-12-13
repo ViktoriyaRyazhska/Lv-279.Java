@@ -8,5 +8,4 @@ export class Tests {
     this.testMaxScore = mp;
     this.testName = tstName;
   }
-
 }
