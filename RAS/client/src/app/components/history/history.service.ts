@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {ActivatedRoute} from "@angular/router";
 
 @Injectable()
-export class HistoryService {
+export class HistoryService{
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getAll(): Observable<any> {
-    return this.http.get('http://localhost:8080/history/585');
+  getAll(id: number): Observable<any> {
+    return this.http.get('http://localhost:8080/history/' + id);
   }
 }
 
