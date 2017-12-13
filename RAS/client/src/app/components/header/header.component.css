@@ -5,6 +5,9 @@
 nav li a{
   color:white;
 }
+#logout{
+  cursor: pointer;
+}
 #softServeLogo{
   color:white;
   font-size: 30px;

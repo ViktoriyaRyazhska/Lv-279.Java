@@ -17,16 +17,18 @@ public class TestNameServiceImpl implements TestNameService {
     @Override
     @Transactional
     public void saveTestNames(List<TestName> testNames, Integer academyId) {
-        List <TestName> realTestNames = testNameRepository.findAllTestNamesBygroupId(academyId);
+//        List <TestName> realTestNames = testNameRepository.findAllTestNamesBygroupId(academyId);
 
-        for(TestName realTestName : realTestNames) {
-            if (!testNames.contains(realTestName)){
-                this.deleteTestName(realTestName);
-            }
-        }
+//        for(TestName realTestName : realTestNames) {
+//            if (!testNames.contains(realTestName)){
+//                this.deleteTestName(realTestName);
+//            }
+//        }
 
         for (TestName testName : testNames) {
-            if(realTestNames.contains(testName))
+            if (testName.getTestMaxScore()==0 || testName.getTestName()=="0"){
+                this.deleteTestName(testName);
+            }
             testName.setGroupId(academyId);
             testNameRepository.save(testName);
         }

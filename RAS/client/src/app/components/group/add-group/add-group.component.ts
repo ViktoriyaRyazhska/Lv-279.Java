@@ -49,7 +49,8 @@ export class AddGroupComponent implements OnInit {
       'directionFormControl': new FormControl(this.group.technologieId),
       'profileInfoFormControl': new FormControl(this.group.profileId),
       'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate),
-      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment)
+      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment),
+      'studentActualFromControl': new FormControl(this.group.studentActual)
     });
   }
 

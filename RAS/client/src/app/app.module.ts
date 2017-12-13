@@ -16,30 +16,30 @@ import {StudentsService} from "./services/students/students.service";
 import {ProfileInfoFilterPipe} from './components/group/add-group/add-group.pipe';
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
-import {FeedbackItemComponent} from "./components/feedbacks/feedback-list/feedback-item/feedback-item.component";
 import {FeedbackEditComponent} from "./components/feedbacks/feedback-edit/feedback-edit.component";
 import {FeedbackTeacherEditComponent} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.component";
 import {FeedbackExpertEditComponent} from "./components/feedbacks/feedback-edit/feedback-expert-edit/feedback-expert-edit.component";
 import {FeedbackInterviewerEditComponent} from "./components/feedbacks/feedback-edit/feedback-interviewer-edit/feedback-interviewer-edit.component";
 import {AppRoutingModule} from "./app-routing.module";
-// import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.pipe";
-import {LoginComponent} from './components/auth/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import {LoginService} from "./components/auth/login/login.service";
 import {MyauthService} from "./components/auth/myauth.service";
-import {FeedbackTeacherDetailPipe} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.pipe";
+import {FeedbackTeacherEditPipe} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.pipe";
 import {HeaderComponent} from './components/header/header.component';
-import {FeedbackDetailComponent} from "./components/feedbacks/feedback-detail/feedback-detail.component";
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
 import {FeedbackService} from "./services/feedbacks/feedback.service";
-import {ItaTacticalPlanByGroupStageComponent} from './components/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component';
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
-import {MatSortModule, MatTableModule} from "@angular/material";
+
+import {MarkService} from "./services/feedbacks/marks.service";
+import {UsersService} from "./services/users/users.service";
+import {MatSortModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material';
+import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
+import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 
 
 
@@ -57,18 +57,13 @@ import { MatInputModule } from '@angular/material';
     StudentsComponent,
     FeedbacksComponent,
     FeedbackListComponent,
-    FeedbackItemComponent,
-    FeedbackDetailComponent,
-    // FeedbackTeacherDetailComponent,
-    // FeedbackExpertDetailComponent,
-    // FeedbackInterviewerDetailComponent,
-    FeedbackTeacherDetailPipe,
+    FeedbackTeacherEditPipe,
     LoginComponent,
     FeedbackEditComponent,
     FeedbackTeacherEditComponent,
     FeedbackExpertEditComponent,
     FeedbackInterviewerEditComponent,
-    FeedbackTeacherDetailPipe,
+    FeedbackTeacherEditPipe,
     HeaderComponent,
     NavTabsComponent,
     ItaTacticalPlanByGroupStageComponent,
@@ -87,9 +82,18 @@ import { MatInputModule } from '@angular/material';
     BrowserAnimationsModule,
     MatTableModule,
     MatSortModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService],
+  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService, UsersService, MarkService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

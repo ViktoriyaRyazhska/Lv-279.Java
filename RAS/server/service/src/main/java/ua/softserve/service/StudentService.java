@@ -19,9 +19,9 @@ public interface StudentService {
 
     void addStudentsToAcademy(Integer academyId, List<Integer> students);
 
-    void removeStudentFromAcademy(Integer academyId, Integer studentId);
+    void removeStudentFromAcademy(Integer studentId);
 
-    void updateStudentOfAcademy(Integer academyId, List<StudentViewDto> students);
+    void updateStudentOfAcademy(List<StudentViewDto> students);
 
     Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatuses);
 

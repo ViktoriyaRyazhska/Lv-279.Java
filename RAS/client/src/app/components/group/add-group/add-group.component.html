@@ -4,117 +4,167 @@
       <form [formGroup]="signupForm" (ngSubmit)="saveGroup()">
         <ul class="col-sm-6 form-group" id="UL_left_column">
           <div class="row">
-            <div class="col-sm-6 form-group">
-              <label> Group Name:</label>
-              <input type="text" class="form-control input-sm" formControlName="groupInfoFormControl"/>
-              <span *ngIf="!signupForm.get('groupInfoFormControl').valid
-              && signupForm.get('groupInfoFormControl').touched"
-              class="help-block">{{defaultInvalidInput}}</span>
-            </div>
+            <mat-form-field class="col-sm-6">
+              <input matInput placeholder="Group Name:" formControlName="groupInfoFormControl">
+            </mat-form-field>
 
-            <div class="col-sm-6 form-group">
-              <label> Site for Name:</label>
-              <input type="text" class="form-control input-sm" formControlName="nameForSiteFormControl"/>
-              <span *ngIf="!signupForm.get('nameForSiteFormControl').valid
-              && signupForm.get('nameForSiteFormControl').touched"
-                    class="help-block">{{defaultInvalidInput}}</span>
-            </div>
+            <mat-form-field class="col-sm-6">
+              <input matInput placeholder="Site for Name:" formControlName="nameForSiteFormControl">
+            </mat-form-field>
           </div>
 
           <div class="row">
-            <div class="col-sm-6 ">
-              <label>Status:</label>
-              <select class="form-control input-sm" formControlName="academyStagesId">
-                <option *ngFor="let stages of academyStatus" [value]="stages.stageId">{{ stages.name }}</option>
-              </select>
-            </div>
+            <!--<div class="col-sm-6">-->
+            <!--<label>Status:</label>-->
+            <!--<select class="form-control input-sm" formControlName="academyStagesId">-->
+            <!--<option *ngFor="let stages of academyStatus" [value]="stages.stageId">{{ stages.name }}</option>-->
+            <!--</select>-->
+            <!--</div>-->
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="Status:" formControlName="academyStagesId">
+                <mat-option *ngFor="let stages of academyStatus" [value]="stages.stageId">{{ stages.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-            <div class="col-sm-6 form-group">
-              <label>Location:</label>
-              <select class="form-control input-sm" formControlName="cityId">
-                <option *ngFor="let city of city" [value]="city.itemId">{{city.trasnlation}}</option>
-              </select>
-            </div>
+            <!--<div class="col-sm-6 form-group">-->
+            <!--<label>Location:</label>-->
+            <!--<select class="form-control input-sm" formControlName="cityId">-->
+            <!--<option *ngFor="let city of city" [value]="city.itemId">{{city.trasnlation}}</option>-->
+            <!--</select>-->
+            <!--</div>-->
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="Location:" formControlName="cityId">
+                <mat-option *ngFor="let city of city" [value]="city.itemId">{{city.trasnlation}}</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
 
           <div class="row">
-            <div class="col-sm-6 form-group">
-              <label>Start Date:</label>
-              <input type="date" class="form-control input-sm" formControlName="startDateFormControl"/>
-            </div>
-            <div class="col-sm-6 form-group">
-              <label>End Date:</label>
-              <input type="date" class="form-control input-sm" formControlName="endDateFormControl"/>
-            </div>
+            <!--<div class="col-sm-6 form-group">-->
+            <!--<label>Start Date:</label>-->
+            <!--<input type="date" class="form-control input-sm" formControlName="startDateFormControl"/>-->
+            <!--</div>-->
+            <!--<div class="col-sm-6 form-group">-->
+            <!--<label>End Date:</label>-->
+            <!--<input type="date" class="form-control input-sm" formControlName="endDateFormControl"/>-->
+            <!--</div>-->
+
+            <!--<mat-form-field class="col-sm-6">-->
+            <!--<input matInput [matDatepicker]="picker1" placeholder="Start Date:" [formControl]="startDateFormControl">-->
+            <!--<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>-->
+            <!--<mat-datepicker #picker1></mat-datepicker>-->
+            <!--</mat-form-field>-->
+
+            <!--<mat-form-field class="col-sm-6">-->
+            <!--<input matInput [matDatepicker]="picker2" placeholder="End Date:"-->
+            <!--[formControl]="endDateFormControl">-->
+            <!--<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>-->
+            <!--<mat-datepicker #picker2></mat-datepicker>-->
+            <!--</mat-form-field>-->
           </div>
 
           <div class="row">
-            <div class="col-sm-12">
-              <label class="radio-inline">
-                <input type="radio" [value]="1" checked name="payment">Founded by SoftServe
-              </label>
-              <label class="radio-inline">
-                <input type="radio" [value]="0" name="payment">Open Group
-              </label>
-            </div>
+            <!--<label class="radio-inline">-->
+            <!--<input type="radio" [value]="1" checked name="payment">Founded by SoftServe-->
+            <!--</label>-->
+            <!--<label class="radio-inline">-->
+            <!--<input type="radio" [value]="0" name="payment">Open Group-->
+            <!--</label>-->
+
+            <!--<label>Payment Status</label>-->
+            <!--<select class="form-control input-sm">-->
+            <!--&lt;!&ndash;<option *ngFor="let city of city" [value]="city.itemId">{{city.trasnlation}}</option>&ndash;&gt;-->
+            <!--<option [value]="1" selected>Founded By SoftServe</option>-->
+            <!--<option [value]="0">Open Group</option>-->
+            <!--</select>-->
+
+            <mat-form-field class="col-sm-12">
+              <mat-select placeholder="Payment Status:" formControlName="cityId">
+                <mat-option [value]="1" selected>Founded By SoftServe</mat-option>
+                <mat-option [value]="0">Open Group</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </ul>
 
         <ul class="col-sm-6 form-group" id="UL_right_column">
 
           <div class="row">
-            <div class="col-sm-12 form-group">
-              <label>Common Direction:</label>
-              <select class="form-control input-sm" formControlName="commonDirectionFormControl">
-                <option value="0" [selected]="0"></option>
-                <option *ngFor="let direct of commonDirection" [value]="direct.directionId">{{direct.name}}</option>
-              </select>
-            </div>
+            <!--<div class="col-sm-12 form-group">-->
+            <!--<label>Common Direction:</label>-->
+            <!--<select class="form-control input-sm" formControlName="commonDirectionFormControl">-->
+            <!--<option value="0" [selected]="0"></option>-->
+            <!--<option *ngFor="let direct of commonDirection" [value]="direct.directionId">{{direct.name}}</option>-->
+            <!--</select>-->
+            <!--</div>-->
+            <mat-form-field class="col-sm-12">
+              <mat-select placeholder="Common Direction:" formControlName="commonDirectionFormControl">
+                <mat-option *ngFor="let direct of commonDirection" [value]="direct.directionId">{{direct.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
 
           <div class="row">
-            <div class="col-sm-6 form-group">
-              <label>Direction:</label>
-              <select class="form-control input-sm" formControlName="directionFormControl">
-                <option selected value="0"></option>
-                <option *ngFor="let tech of direction" [value]="tech.technologyId">{{ tech.name }}</option>
-              </select>
-            </div>
+            <!--<div class="col-sm-6 form-group">-->
+            <!--<label>Direction:</label>-->
+            <!--<select class="form-control input-sm" formControlName="directionFormControl">-->
+            <!--<option value="0"></option>-->
+            <!--<option *ngFor="let tech of direction" [value]="tech.technologyId">{{ tech.name }}</option>-->
+            <!--</select>-->
+            <!--</div>-->
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="Direction:" formControlName="directionFormControl">
+                <mat-option *ngFor="let tech of direction" [value]="tech.technologyId">{{ tech.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-            <div class="col-sm-6 form-group">
-              <label>Profile:</label>
-              <select class="form-control input-sm" formControlName="profileInfoFormControl">
-                <option value="0"></option>
-                <option *ngFor="let prof of profile | profileFilter:signupForm.get('directionFormControl').value"
-                        [value]="prof.profileId">{{ prof.profileName }}
-                </option>
-              </select>
-            </div>
+            <!--<div class="col-sm-6 form-group">-->
+            <!--<label>Profile:</label>-->
+            <!--<select class="form-control input-sm" formControlName="profileInfoFormControl">-->
+            <!--<option value="0"></option>-->
+            <!--<option *ngFor="let prof of profile | profileFilter:signupForm.get('directionFormControl').value"-->
+            <!--[value]="prof.profileId">{{ prof.profileName }}-->
+            <!--</option>-->
+            <!--</select>-->
+            <!--</div>-->
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="Profile:" formControlName="directionFormControl">
+                <mat-option *ngFor="let prof of profile | profileFilter:signupForm.get('directionFormControl').value"
+                            [value]="prof.profileId">{{ prof.profileName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
 
           <div class="row">
-            <div class="col-sm-4">
-              <label> Students Planned to Graduate:</label>
-              <input type="number" class="form-control input-sm" formControlName="studentPlannedToGraduate"/>
-            </div>
-            <div class="col-sm-4">
-              <label> Students Planned to Enrollment:</label>
-              <input type="number" class="form-control input-sm" formControlName="studentPlannedToEnrollment"/>
-            </div>
+            <mat-form-field class="col-sm-4">
+            <input matInput type="number" placeholder="Students Planned to Graduate:" formControlName="studentPlannedToGraduate" min="0" max="99">
+            <!--<mat-error *ngIf="options.get('fontSize')?.invalid">Min size: 10px</mat-error>-->
+            </mat-form-field>
 
-            <div class="col-sm-4">
-              <label>Students Actual:</label>
-              <input type="number" class="form-control input-sm" disabled/>
-            </div>
+            <mat-form-field class="col-sm-4">
+              <input matInput type="number" placeholder="Students Planned to Enrollment:" formControlName="studentPlannedToEnrollment" min="0" max="99">
+              <!--<mat-error *ngIf="options.get('fontSize')?.invalid">Min size: 10px</mat-error>-->
+            </mat-form-field>
+
+            <mat-form-field hideRequiredMarker class="col-sm-4">
+              <input matInput type="number" disabled placeholder="Students Actual:" formControlName="studentActualFromControl" min="0" max="99">
+              <!--<mat-error *ngIf="options.get('fontSize')?.invalid">Min size: 10px</mat-error>-->
+            </mat-form-field>
+          </div>
+
+          <div class="row" id="saveGroupBtn" align="center">
+            <button type="submit" class="btn btn-primary" (click)="saveGroup()">Save Group</button>
           </div>
         </ul>
       </form>
     </div>
     <hr>
-    <div class="row" id="saveGroupBtn" align="center">
-      <button type="submit" class="btn btn-primary" (click)="saveGroup()">Save Group
-      </button>
-    </div>
+    <!--<div class="row" id="saveGroupBtn" align="center">-->
+    <!--<button type="submit" class="btn btn-primary" (click)="saveGroup()">Save Group-->
+    <!--</button>-->
+    <!--</div>-->
   </div>
 
   <div>

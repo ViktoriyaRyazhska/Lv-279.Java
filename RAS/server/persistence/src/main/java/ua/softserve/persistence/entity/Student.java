@@ -28,7 +28,7 @@ public class Student {
     private Academy academy;
 
     @Embedded
-    private StudentTestData data;
+    private StudentTestData data = new StudentTestData();
 
     @ManyToOne
     @JoinColumn(name = "student_status_id")
@@ -58,6 +58,11 @@ public class Student {
 
     public Student setApprovedBy(Employee employee) {
         approvedBy = employee;
+        return this;
+    }
+
+    public Student unRemove() {
+        removed = false;
         return this;
     }
 }

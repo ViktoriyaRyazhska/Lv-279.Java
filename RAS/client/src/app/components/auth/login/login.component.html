@@ -1,4 +1,3 @@
-  login works!
   <form [formGroup]="loginForm" (ngSubmit)="login()">
       <input type="text" id="username"
              placeholder="Email" formControlName="username"
@@ -10,3 +9,10 @@
                   &&loginForm.get('password').errors}" required>
   <button type="submit">TRY</button>
   </form>
+<!--//TODO зроти и філду для перевірки чи error, якщо так - залишити на сторінці логування, в противному випадку - перевести на '/'.-->
+
+
+        <div *ngIf="error">
+          invalid input!
+        </div>
+
