@@ -2,8 +2,8 @@ package ua.softserve.service.dto;
 
 import lombok.*;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
+
 
 @Getter
 @Setter
