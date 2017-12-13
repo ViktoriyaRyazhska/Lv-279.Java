@@ -28,9 +28,10 @@ public class AcademyConverterTest {
     Academy academy;
 
     @Before
-    public void setUp(){
+    public void setUp() {
 
     }
+
     @Test
     public void Group_Info_Returns_Null() {
         Mockito.when(groupInfo.getAcademy()).thenReturn(null);

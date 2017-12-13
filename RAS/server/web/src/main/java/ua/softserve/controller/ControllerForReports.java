@@ -35,11 +35,12 @@ public class ControllerForReports {
         return new ResponseEntity<>(checkListByGroupsDtoService.getAllCheckListByGroupsDto(), HttpStatus.OK);
     }
 
-
-    @RequestMapping(value = "/itaTacticalPlanByGroupStage",method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/itaTacticalPlanByGroupStage", method = RequestMethod.GET, produces = {
+            "application/json" })
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<List<ItaTacticalPlanByGroupStageDto>>> itaTacticalPlanByGroupStage() {
-        return new ResponseEntity<>(itaTacticalPlanByGroupStageDtoService.itaTacticalPlanByGroupStageReport(), HttpStatus.OK);
+        return new ResponseEntity<>(itaTacticalPlanByGroupStageDtoService.itaTacticalPlanByGroupStageReport(),
+                HttpStatus.OK);
     }
 
 }

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/of';
+import {StudentFeedback, StudentStatus} from "../../models/feedbacks/student.model";
+import {Student} from "../../models/student";
 
 @Injectable()
 export class StudentsService{
@@ -12,12 +14,22 @@ export class StudentsService{
     return this.http.get('http://localhost:8080/students/585');
   }
 
-  addUsers(object: number[]):Observable<Object>{
+  getStatuses():Observable<any>{
+    return this.http.get('http://localhost:8080/students/statuses');
+  }
+
+  addUsers(object: number[]):Observable<any>{
     return this.http.post('http://localhost:8080/students/585/add', object);
   }
 
-  remove(academyId: number, studentId: number): Observable<any> {
-    let q = 'http://localhost:8080/students/{'+academyId+'}/{'+studentId+'}';
+  remove(studentId: number): Observable<any> {
+    let q = "http://localhost:8080/students/"+studentId;
     return this.http.delete(q);
   }
+
+  update(students: StudentFeedback[]): Observable<any> {
+    let q = "http://localhost:8080/students/update";
+    return this.http.put(q,students);
+  }
+
 }

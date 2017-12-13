@@ -1,9 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {StudentsService} from "../../services/students/students.service";
-import {Student} from "../../models/student";
 import {UsersService} from "../../services/users/users.service";
 import {UserPage, UserShort} from "../../models/userShort";
+import {Data, StudentFeedback, StudentStatus} from "../../models/feedbacks/student.model";
+import {SelectItem} from "primeng/primeng";
 
+
+export class Test{
+  a:A;
+}
+export class A{
+  val:number;
+  constructor(v:number){
+    this.val = v;
+  }
+}
 
 @Component({
   selector: 'app-students',
@@ -11,45 +22,68 @@ import {UserPage, UserShort} from "../../models/userShort";
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
-  private students: Student[];
-  private selectedStudent: Student;
+  private students: StudentFeedback[];
+  private selectedStudent: StudentFeedback;
 
   private displayStudentDetails: boolean;
-
+  private studentStatuses: StudentStatus[];
 
   private users: UserPage = new UserPage();
   private selectedUsers: UserShort[];
   private displayUsersList: boolean;
 
+  private displayRemovingDialog: boolean;
+
+  statuses: SelectItem[] = [];
+
   constructor(private studentsService: StudentsService, private userService: UsersService) {
-    this.selectedStudent = new Student();
+    this.selectedStudent = new StudentFeedback();
   }
 
   ngOnInit() {
     this.studentsService.getAll().subscribe(
       data => {
         this.students = data;
+        this.students.forEach(st => st.data = st.data == null ? new Data() : st.data);
         console.log("loaded " + data.length);
+        this.studentsService.getStatuses().subscribe(data => {
+            this.studentStatuses = data;
+            this.studentStatuses.forEach(st => this.statuses.push({label: st.name, value: st}))
+            console.log(this.statuses);
+          },
+          error => console.log(error)
+        );
       },
       error => console.log(error)
     );
+    this.loadUsers({first: 0, rows: 15});
+
   }
 
 
-
-  onStudentClick(student: Student) {
+  onStudentClick(student: StudentFeedback) {
     this.selectedStudent = student;
     this.displayStudentDetails = true;
   }
 
-  removeStudent(student: Student) {
+  removeDialogStudent(student: StudentFeedback){
     this.selectedStudent = student;
+    this.displayRemovingDialog = true;
+
+  }
+
+  cancelRemovingClick() {
+    this.displayRemovingDialog =  false;
+  }
+
+  removeSelectedStudent() {
     this.studentsService
-      .remove(585, this.selectedStudent.id)
+      .remove(this.selectedStudent.id)
       .subscribe(() => {
         this.students = null;
         this.ngOnInit();
       });
+    this.displayRemovingDialog =  false;
   }
 
   addUserClick() {
@@ -62,6 +96,7 @@ export class StudentsComponent implements OnInit {
     this.selectedUsers = [];
     this.displayUsersList = false;
   }
+
 
   acceptUsersClick() {
     this.studentsService
@@ -98,5 +133,14 @@ export class StudentsComponent implements OnInit {
 
     }
   }
+
+  updateStudentsClick(){
+    this.studentsService.update(this.students).subscribe(()=>{
+      this.students = null;
+      this.ngOnInit();
+      }
+    );
+  }
+
 
 }

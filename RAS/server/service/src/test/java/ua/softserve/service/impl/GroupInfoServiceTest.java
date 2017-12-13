@@ -44,8 +44,8 @@ public class GroupInfoServiceTest {
     StudentService studentsService;
     @Mock
     ProfileService profileService;
-//    @Mock
-//    GroupInfoServiceImpl groupInfoService1;
+    // @Mock
+    // GroupInfoServiceImpl groupInfoService1;
     StudentStatuses studentStatuses;
 
     @Spy
@@ -57,15 +57,17 @@ public class GroupInfoServiceTest {
     GroupInfoServiceImpl groupInfoService = new GroupInfoServiceImpl();
 
     @Before
-    public void setUp(){
-//        teacherTypes = new TeacherTypes();
+    public void setUp() {
+        // teacherTypes = new TeacherTypes();
         groupInfo = new GroupInfo();
         groupInfo.setAcademy(new Academy());
         studentStatuses = new StudentStatuses();
     }
+
     @Test
     public void All_Services_Returns_Not_NULL() {
-        Mockito.when(languageTranslationsService.getAllLanguageTranslationsName()).thenReturn(Arrays.asList(new LanguageTranslations(), new LanguageTranslations()));
+        Mockito.when(languageTranslationsService.getAllLanguageTranslationsName())
+                .thenReturn(Arrays.asList(new LanguageTranslations(), new LanguageTranslations()));
         Mockito.when(teacherTypeService.findOne(EXPERT_STATUS_ID)).thenReturn(teacherTypes);
         Mockito.when(groupInfoService.findAllWithOrder()).thenReturn(Arrays.asList(groupInfo));
         Mockito.when(studentsStatusesService.findOne(TRAINEE_STATUS_ID)).thenReturn(studentStatuses);
@@ -80,11 +82,12 @@ public class GroupInfoServiceTest {
         Mockito.verify(academyConverter).toDTO(groupInfo);
         Mockito.verify(studentsService).countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
 
-        Mockito.verifyNoMoreInteractions(languageTranslationsService, teacherTypeService, studentsStatusesService, groupInfoTeachersService, academyConverter, studentsService);
+        Mockito.verifyNoMoreInteractions(languageTranslationsService, teacherTypeService, studentsStatusesService,
+                groupInfoTeachersService, academyConverter, studentsService);
     }
 
     @Test
-    public void Group_Info_List_Return_NULL(){
+    public void Group_Info_List_Return_NULL() {
         Mockito.when(groupInfoService.findAllWithOrder()).thenReturn(null);
         Mockito.when(teacherTypeService.findOne(EXPERT_STATUS_ID)).thenReturn(teacherTypes);
 
@@ -95,10 +98,12 @@ public class GroupInfoServiceTest {
         Mockito.verify(studentsStatusesService).findOne(TRAINEE_STATUS_ID);
         Mockito.verify(groupInfoTeachersService).findAllByTeacherType(teacherTypes);
 
-        Mockito.verifyNoMoreInteractions(languageTranslationsService, teacherTypeService, studentsStatusesService, groupInfoTeachersService, academyConverter, studentsService);
+        Mockito.verifyNoMoreInteractions(languageTranslationsService, teacherTypeService, studentsStatusesService,
+                groupInfoTeachersService, academyConverter, studentsService);
     }
+
     @Test
-    public void Group_Info_Teacher_Service_Return_NULL(){
+    public void Group_Info_Teacher_Service_Return_NULL() {
         Mockito.when(groupInfoService.findAllWithOrder()).thenReturn(Arrays.asList(groupInfo));
         Mockito.when(teacherTypeService.findOne(EXPERT_STATUS_ID)).thenReturn(teacherTypes);
         Mockito.when(groupInfoTeachersService.findAllByTeacherType(teacherTypes)).thenReturn(null);
@@ -111,6 +116,7 @@ public class GroupInfoServiceTest {
         Mockito.verify(studentsStatusesService).findOne(TRAINEE_STATUS_ID);
         Mockito.verify(groupInfoTeachersService).findAllByTeacherType(teacherTypes);
 
-        Mockito.verifyNoMoreInteractions(languageTranslationsService, teacherTypeService, studentsStatusesService, groupInfoTeachersService, academyConverter, studentsService);
+        Mockito.verifyNoMoreInteractions(languageTranslationsService, teacherTypeService, studentsStatusesService,
+                groupInfoTeachersService, academyConverter, studentsService);
     }
 }
