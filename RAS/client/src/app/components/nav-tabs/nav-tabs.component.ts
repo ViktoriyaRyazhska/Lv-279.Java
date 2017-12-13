@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router, Routes} from "@angular/router";
 
 
@@ -10,6 +10,7 @@ import {Router, Routes} from "@angular/router";
 export class NavTabsComponent implements OnInit {
   routeLinks: any[];
   activeLinkIndex = -1;
+  @Input() academyId: number;
 
   constructor(private router: Router) {
     this.routeLinks = [
@@ -41,5 +42,6 @@ export class NavTabsComponent implements OnInit {
     this.router.events.subscribe((res) => {
       this.activeLinkIndex = this.routeLinks.indexOf(this.routeLinks.find(tab => tab.link === '.' + this.router.url));
     });
+    console.log(this.academyId);
   }
 }
