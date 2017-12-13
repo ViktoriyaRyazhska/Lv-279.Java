@@ -18,23 +18,23 @@ import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-
 const appRoutes: Routes = [
   // {path: 'marks', component: FeedbackTeacherDetailComponent},
   {path: 'ang/login', component: LoginComponent},
-  // {path: '', component: ViewAcademiesComponent},
-  // {path: 'ang/addgroup', component: AddGroupComponent},
+  {path: '', component: ViewAcademiesComponent},
+  {path: 'ang/addgroup', component: AddGroupComponent},
   {
-    path: 'ang/addgroup', component: AddGroupComponent, children: [
+    path: 'ang/addgroup/:id', component: AddGroupComponent, children: [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
     {path: 'students', component: StudentsComponent},
     {path: 'feedback', component: FeedbacksComponent},
-    {path: 'history/:id', component: HistoryListComponent},
-    {path: 'history', component: HistoryListComponent},
-    {path: 'tests', component: TestsNamesComponent}]
+    {path: 'history/:id', component: HistoryListComponent}]
   },
-  {path: 'ang/viewAcademies', component: ViewAcademiesComponent},
+  {path: 'ang/viewAcademies', component: ViewAcademiesComponent, children: [
+    {path: 'ggg', component: AddGroupComponent}
+  ]},
   {path: 'ang/students', component: StudentsComponent},
   {path: 'ang/feedback', component: FeedbacksComponent},
-  {path: 'ang/reports/filterCheckListByGroups/checkListByGroups', component: CheckListByGroupsComponent},
+  {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},
   {path: 'ang/reports/filterCheckListByGroups', component: FilterCheckListByGroupsComponent},
-  {path: 'ang/reports/filterCheckListByGroups/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
+  {path: 'ang/reports/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
   {path: 'ang/tests/:id', component: TestsNamesComponent},
   {path: 'ang/tests', component: TestsNamesComponent},
   {path: 'ang', component: AppComponent}

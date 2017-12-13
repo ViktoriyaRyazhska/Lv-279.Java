@@ -11,7 +11,7 @@
           </mat-form-field>
         </mat-header-cell>
         <mat-cell *matHeaderCellDef></mat-cell>
-        <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element.id}}"> {{element.grName}} </a>
+        <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element.academyId}}"> {{element.grName}} </a>
         </mat-cell>
       </ng-container>
 
@@ -108,7 +108,7 @@
             <input matInput placeholder="Experts" name="experts" (input)="onFilterField($event, groupForm)" ngModel>
           </mat-form-field>
         </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.experts.toString()}}</mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.experts}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="studentPlannedToGraduate">

@@ -41,11 +41,14 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     @Autowired
     private GroupInfoTeachersRepository groupInfoTeachersRepository;
 
+    private static int TRUE = 1;
+    private static int FALSE = 0;
+
     @Override
     public List<CheckListByGroupsDto> getAllCheckListByGroupsDto() {
 
         List<Academy> allAcademies = academyRepository.findAll().stream()
-                .filter(academy -> academy.getAcademyId() >= 586 && academy.getAcademyId() <= 932).limit(30)
+                .limit(30)
                 .collect(Collectors.toList());
 
         List<CheckListByGroupsDto> CheckListByGroupsDtos = new ArrayList<>();
@@ -88,13 +91,13 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
     private void setTeachers(Integer academyId, CheckListByGroupsDto checkListByGroupsDto) {
         List<GroupInfoTeachers> teachers = groupInfoTeachersRepository.findAllByAcademyIdAndTeacherTypeId(academyId,
-                TT_TEACHER_ID);
+                TEACHER_TYPE_TEACHER_ID);
         ;
         List<GroupInfoTeachers> experts = groupInfoTeachersRepository.findAllByAcademyIdAndTeacherTypeId(academyId,
-                TT_EXPERT_ID);
+                TEACHER_TYPE_EXPERT_ID);
         ;
         List<GroupInfoTeachers> interviewers = groupInfoTeachersRepository.findAllByAcademyIdAndTeacherTypeId(academyId,
-                TT_INTERVIEWER_ID);
+                TEACHER_TYPE_INTERVIEWER_ID);
         Map<String, Integer> r = checkListByGroupsDto.getR();
         checkListByGroupsDto.setTeachers(getTeachers(teachers));
         checkListByGroupsDto.setExperts(getTeachers(experts));
@@ -118,29 +121,29 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
     private Integer checkStudents(Predicate<Student> predicate, List<Student> students) {
         if (students == null) {
-            return 0;
+            return FALSE;
         }
         for (Student student : students) {
             if (!checkStudentStatus(student)) {
                 continue;
             }
             if (!predicate.test(student)) {
-                return 0;
+                return FALSE;
             }
         }
-        return 1;
+        return TRUE;
     }
 
     private Integer checkTeachers(Predicate<GroupInfoTeachers> predicate, List<GroupInfoTeachers> groupInfoTeachers) {
         if (groupInfoTeachers == null) {
-            return 0;
+            return FALSE;
         }
         for (GroupInfoTeachers git : groupInfoTeachers) {
             if (!predicate.test(git)) {
-                return 0;
+                return FALSE;
             }
         }
-        return 1;
+        return TRUE;
     }
 
     private boolean checkStudentStatus(Student student) {
@@ -148,6 +151,6 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             return false;
         }
         int id = student.getStudentStatus().getId();
-        return id == SS_TRAINEE_ID || id == SS_ACCEPTED_PRE_OFFER_ID || id == SS_GRADUATED_ID;
+        return id == STUDENT_STATUS_TRAINEE_ID || id == STUDENT_STATUS_ACCEPTED_PRE_OFFER_ID || id == STUDENT_STATUS_GRADUATED_ID;
     }
 }

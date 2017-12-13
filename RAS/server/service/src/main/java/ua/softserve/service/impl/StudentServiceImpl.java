@@ -3,7 +3,6 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.constants.ConstantsFromDb;
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.Student;
 import ua.softserve.persistence.entity.StudentStatuses;
@@ -46,7 +45,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public void addStudentsToAcademy(Integer academyId, List<Integer> students) {
-        StudentStatuses s = studentsStatusesRepository.findOne(SS_TRAINEE_ID);
+        StudentStatuses s = studentsStatusesRepository.findOne(STUDENT_STATUS_TRAINEE_ID);
         studentRepository.save(students.stream().map(id -> {
             Student existStudent = studentRepository.ifStudentExist(academyId, id);
             return existStudent == null ? new Student(id, academyId) : existStudent.unRemove();
@@ -68,7 +67,7 @@ public class StudentServiceImpl implements StudentService {
         students.forEach(st -> {
             EmployeeEngShortDto approvedBy = st.getApprovedBy();
             studentRepository.save(st.update(studentRepository.findOne(st.getId()).setApprovedBy(
-                    employeeRepository.findOne(approvedBy == null ? EE_ZERO_EMPLOYEE : approvedBy.getEmployeeId()))));
+                    employeeRepository.findOne(approvedBy == null ? ZERO_EMPLOYEE : approvedBy.getEmployeeId()))));
         });
     }
 

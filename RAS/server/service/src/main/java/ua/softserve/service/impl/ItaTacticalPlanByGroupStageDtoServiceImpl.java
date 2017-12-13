@@ -114,19 +114,19 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         Calendar academyStartDate = new GregorianCalendar();
         for (Academy a : academies) {
             academyStartDate.setTimeInMillis(a.getStartDate().getTime());
-            if ((a.getAcademyStages().getStageId() == AS_PLANNED_ID) && academyStartDate.before(dateForComparison)) {
+            if ((a.getAcademyStages().getStageId() == ACADEMY_STAGE_PLANNED_ID) && academyStartDate.before(dateForComparison)) {
                 planedGroupForTwoMoth.add(this.findById(a.getAcademyId()));
             }
-            if (a.getAcademyStages().getStageId() == AS_IN_PROCESS_ID) {
+            if (a.getAcademyStages().getStageId() == ACADEMY_STAGE_IN_PROCESS_ID) {
                 groupsInProces.add(this.findById(a.getAcademyId()));
             }
-            if (a.getAcademyStages().getStageId() == AS_OFFERING_ID) {
+            if (a.getAcademyStages().getStageId() == ACADEMY_STAGE_OFFERING_ID) {
                 groupsOffering.add(this.findById(a.getAcademyId()));
             }
-            if (a.getAcademyStages().getStageId() == AS_GRADUATED_ID) {
+            if (a.getAcademyStages().getStageId() == ACADEMY_STAGE_GRADUATED_ID) {
                 groupsGraduated.add(this.findById(a.getAcademyId()));
             }
-            if (a.getAcademyStages().getStageId() == AS_BOARDING_ID) {
+            if (a.getAcademyStages().getStageId() == ACADEMY_STAGE_BOARDING_ID) {
                 listOfPlannedReleases.add(this.findById(a.getAcademyId()));
             }
         }
@@ -153,12 +153,12 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
             if (student.getStudentStatus() == null) {
                 continue;
             }
-            if (student.getStudentStatus().getId() == SS_TRAINEE_ID
-                    || student.getStudentStatus().getId() == SS_TRAINEE_ID) {
+            if (student.getStudentStatus().getId() == STUDENT_STATUS_TRAINEE_ID
+                    || student.getStudentStatus().getId() == STUDENT_STATUS_TRAINEE_ID) {
                 int currentValueStudentInProgress = dto.getStudyInProgress();
                 dto.setStudyInProgress(++currentValueStudentInProgress);
             }
-            if (student.getStudentStatus().getId() == SS_HIRED_ID) {
+            if (student.getStudentStatus().getId() == STUDENT_STATUS_HIRED_ID) {
                 int currentValueStudentHired = dto.getHired();
                 dto.setStudyInProgress(++currentValueStudentHired);
             }
@@ -174,8 +174,8 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
      */
 
     private void setTrainer(ItaTacticalPlanByGroupStageDto dto) {
-        TeacherTypes typeTeacher = teacherTypeRepository.findOne(TT_TEACHER_ID);
-        TeacherTypes typeExpert = teacherTypeRepository.findOne(TT_EXPERT_ID);
+        TeacherTypes typeTeacher = teacherTypeRepository.findOne(TEACHER_TYPE_TEACHER_ID);
+        TeacherTypes typeExpert = teacherTypeRepository.findOne(TEACHER_TYPE_EXPERT_ID);
         StringBuilder trainers = new StringBuilder();
         List<GroupInfoTeachers> allTeachersOfGroup = groupInfoTeachersRepository
                 .findAllByAcademyAndTeacherType(academyService.getById(dto.getGroupId()), typeTeacher);

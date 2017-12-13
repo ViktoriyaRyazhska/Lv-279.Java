@@ -72,8 +72,8 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         Integer countActualStudents = null;
         List<GroupInfoTeachers> getExpertsOfTheGroup = null;
         List<LanguageTranslations> languageTranslations = languageTranslationsService.getAllLanguageTranslationsName();
-        TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TT_EXPERT_ID);
-        StudentStatuses studentStatuses = studentsStatusesService.findOne(ConstantsFromDb.SS_TRAINEE_ID);
+        TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
+        StudentStatuses studentStatuses = studentsStatusesService.findOne(ConstantsFromDb.STUDENT_STATUS_TRAINEE_ID);
         if (teacherTypes != null) {
             getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
         }

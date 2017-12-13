@@ -853,7 +853,7 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS trigger_group_info_update;
 
 DELIMITER $$
-CREATE TRIGGER trigger_group_info_update AFTER INSERT ON group_info
+CREATE TRIGGER trigger_group_info_update AFTER UPDATE ON group_info
 FOR EACH ROW
 BEGIN
 update history set history.academy_name=new.group_name
