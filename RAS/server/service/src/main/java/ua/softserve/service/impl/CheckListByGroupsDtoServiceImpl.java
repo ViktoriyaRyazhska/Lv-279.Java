@@ -10,7 +10,6 @@
 
 package ua.softserve.service.impl;
 
-import org.jetbrains.annotations.Contract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
@@ -21,12 +20,11 @@ import ua.softserve.service.dto.CheckListByGroupsDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static ua.softserve.persistence.constants.ConstantsFromDb.*;
-import static ua.softserve.service.dto.CheckListByGroupsDto.*;
+import static ua.softserve.service.dto.CheckListByGroupsDto.predicates;
 
 @Service
 public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoService {
