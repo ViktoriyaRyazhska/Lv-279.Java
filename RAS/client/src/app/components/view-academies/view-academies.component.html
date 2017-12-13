@@ -1,3 +1,5 @@
+
+<router-outlet></router-outlet>
 <div class="example-container mat-elevation-z8">
   <form #groupForm="ngForm">
     <mat-table #table [dataSource]="dataSource" matSort>
@@ -9,13 +11,15 @@
           </mat-form-field>
         </mat-header-cell>
         <mat-cell *matHeaderCellDef></mat-cell>
-        <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element.id}}"> {{element.grName}} </a></mat-cell>
+        <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element.id}}"> {{element.grName}} </a>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef='nameForSite'>
         <mat-header-cell *matHeaderCellDef>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Name For Site" name="nameForSite" (input)="onFilterField($event, groupForm)" ngModel>
+            <input matInput placeholder="Name For Site" name="nameForSite" (input)="onFilterField($event, groupForm)"
+                   ngModel>
           </mat-form-field>
         </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.nameForSite}}</mat-cell>
@@ -27,6 +31,9 @@
                       ngModel>
             <mat-option *ngFor="let tech of technology" [value]="tech.name">
               {{tech.name}}
+            </mat-option>
+            <mat-option value="">
+              All Technologies
             </mat-option>
           </mat-select>
         </mat-header-cell>
@@ -81,14 +88,17 @@
       </ng-container>
 
       <ng-container matColumnDef="startDate">
-        <mat-header-cell *matHeaderCellDef> Symbol
-
+        <mat-header-cell *matHeaderCellDef>
+          <input type="date" name="startDate" (input)="onFilterField($event, groupForm)" class="form-control" ngModel>
         </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.startDate | date: "dd.MM.yyyy"}}</mat-cell>
       </ng-container>
 
+
       <ng-container matColumnDef="endDate">
-        <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>
+          <input type="date" name="endDate" (input)="onFilterField($event, groupForm)" class="form-control" ngModel>
+        </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.endDate | date: "dd.MM.yyyy"}}</mat-cell>
       </ng-container>
 
@@ -104,7 +114,8 @@
       <ng-container matColumnDef="studentPlannedToGraduate">
         <mat-header-cell *matHeaderCellDef>
           <mat-form-field>
-            <input matInput placeholder="Students Planned To Graduate" name="studentPlannedToGraduate" (input)="onFilterField($event, groupForm)" ngModel>
+            <input matInput placeholder="Students Planned To Graduate" name="studentPlannedToGraduate"
+                   (input)="onFilterField($event, groupForm)" ngModel>
           </mat-form-field>
         </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.studentPlannedToGraduate}}</mat-cell>
@@ -113,7 +124,8 @@
       <ng-container matColumnDef="studentPlannedToEnrollment">
         <mat-header-cell *matHeaderCellDef>
           <mat-form-field>
-            <input matInput placeholder="Students Planned To Enrollment" name="studentPlannedToEnrollment" (input)="onFilterField($event, groupForm)" ngModel>
+            <input matInput placeholder="Students Planned To Enrollment" name="studentPlannedToEnrollment"
+                   (input)="onFilterField($event, groupForm)" ngModel rows="3">
           </mat-form-field>
         </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.studentPlannedToEnrollment}}</mat-cell>
@@ -122,7 +134,8 @@
       <ng-container matColumnDef="studentsActual">
         <mat-header-cell *matHeaderCellDef>
           <mat-form-field>
-            <input matInput placeholder="Students Actual" name="studentsActual" (input)="onFilterField($event, groupForm)" ngModel>
+            <input matInput placeholder="Students Actual" name="studentsActual"
+                   (input)="onFilterField($event, groupForm)" ngModel>
           </mat-form-field>
         </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.studentsActual}}</mat-cell>
@@ -131,7 +144,8 @@
       <ng-container matColumnDef="hiredNotGraduated">
         <mat-header-cell *matHeaderCellDef>
           <mat-form-field>
-            <input matInput placeholder="Hired Not Graduated" name="hiredNotGraduated" (input)="onFilterField($event, groupForm)" ngModel>
+            <input matInput placeholder="Hired Not Graduated" name="hiredNotGraduated"
+                   (input)="onFilterField($event, groupForm)" ngModel>
           </mat-form-field>
         </mat-header-cell>
         <mat-cell *matCellDef="let element"> ---</mat-cell>
@@ -155,7 +169,7 @@
       <ng-container matColumnDef="interviewerFeedback">
         <mat-header-cell *matHeaderCellDef>Interviewer Feedback
         </mat-header-cell>
-        <mat-cell *matCellDef="let element"> <a routerLink="/ang/feedback/{{element.id}}">Provide</a></mat-cell>
+        <mat-cell *matCellDef="let element"><a routerLink="/ang/feedback/{{element.academyId}}">Provide</a></mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -167,4 +181,9 @@
                  [pageSize]="10"
                  [pageSizeOptions]="[5, 10, 20]">
   </mat-paginator>
+
+  <button mat-button routerLink="ggg">Add Group</button>
 </div>
+
+
+

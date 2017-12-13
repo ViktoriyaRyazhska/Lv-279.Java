@@ -4,6 +4,7 @@ import {AddGroupService} from "./add-group.service";
 import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Group} from "./group.model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-add-group',
@@ -21,15 +22,17 @@ export class AddGroupComponent implements OnInit {
   commonDirection: any[];
   direction: any[];
   profile: any[];
+  groupId: number;
 
   private defaultInvalidInput: string = 'No data entered. Group will not be save';
 
-  constructor(private addGroupService: AddGroupService) {}
+  constructor(private addGroupService: AddGroupService,
+              private route: ActivatedRoute) {}
 
 
   ngOnInit() {
     this.group = new Group();
-
+    this.groupId = this.route.snapshot.params['id'];
     this.addGroupService.getAll().subscribe(resp => {
       this.academyStatus = resp.academyStages;
       this.city = resp.cityNames;
@@ -48,20 +51,22 @@ export class AddGroupComponent implements OnInit {
       'commonDirectionFormControl': new FormControl(this.group.directionId, Validators.required),
       'directionFormControl': new FormControl(this.group.technologieId, Validators.required),
       'profileInfoFormControl': new FormControl(this.group.profileId),
+      'paymentStatusFormControl': new FormControl({value: this.group.paymentStatus, selected: true}),
       'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate),
       'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment),
-      'studentActualFromControl': new FormControl(this.group.studentActual)
+      'studentActualFromControl': new FormControl({value: this.group.studentActual, disabled: true})
     });
   }
 
   isFormValid(): boolean{
-    return this.signupForm.get('nameForSiteFormControl').valid;
+    return this.signupForm.valid;
   }
 
   saveGroup() {
+    console.log(this.isFormValid());
     if(this.isFormValid()){
       this.group.setDataFromFormControl(this.signupForm);
-      this.isFormValid();
+      console.log(this.group);
       this.addGroupService.post(this.group);
     }else{
 

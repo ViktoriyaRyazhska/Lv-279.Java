@@ -22,7 +22,7 @@ export class TestsNamesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.groupId = +this.route.snapshot.paramMap.get('id');
+    this.groupId = +this.route.snapshot.params['id'];
     this.testNamesService.getAll(this.groupId).subscribe(data => {
       console.log(data)
       this.tests = data
@@ -30,13 +30,11 @@ export class TestsNamesComponent implements OnInit {
     });
   }
 
-
   save() {
     this.testNamesService.addTests(this.tests, this.groupId);
     console.log(this.tests);
     this.ngOnInit();
   }
-
 
   addTest() {
     if(TestsNamesComponent.counter>=Constants.MaxValueOfTests) {

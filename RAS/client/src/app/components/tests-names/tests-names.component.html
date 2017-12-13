@@ -66,7 +66,6 @@
 
  <div *ngIf="tests">
 <div style=" text-align: -webkit-center;">
-  <button class="btn btn-primary" (click)="addTest();">Add test</button><br><br>
     <form #myForm="ngForm">
     <table>
     <thead>
@@ -92,6 +91,7 @@
         </tbody>
         </table>
           <button type="submit" class="btn btn-primary" (click)="save(tests)">Save</button>
+          <button class="btn btn-primary" (click)="addTest();">Add test</button><br><br>
     </form>
 </div>
 </div>

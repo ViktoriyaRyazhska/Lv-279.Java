@@ -40,6 +40,10 @@ import {MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSel
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
+import { FilterCheckListByGroupsComponent } from './components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -66,7 +70,8 @@ import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tac
     NavTabsComponent,
     ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
-    TestsNamesComponent
+    TestsNamesComponent,
+    FilterCheckListByGroupsComponent
 
   ],
   imports: [

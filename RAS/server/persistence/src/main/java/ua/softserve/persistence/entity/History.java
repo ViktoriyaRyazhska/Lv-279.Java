@@ -3,7 +3,7 @@ package ua.softserve.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -30,17 +30,17 @@ public class History {
     private String location;
 
     @Column(name = "start_date")
-    private Timestamp sartDate;
+    private Date sartDate;
 
     @Column(name = "end_date")
-    private Timestamp endDate;
+    private Date endDate;
 
     private String stage;
 
     private String direction;
 
     @Column(name = "modify_date")
-    private Timestamp modifyDate;
+    private Date modifyDate;
 
     @Column(name = "modify_by")
     private String modifyBy;

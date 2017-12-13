@@ -5,10 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
+import java.sql.Date;
 
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "academy")
 public class Academy {
@@ -44,11 +43,11 @@ public class Academy {
 
     @NotNull
     @Column(name = "start_date")
-    private Timestamp startDate;
+    private Date startDate;
 
     @NotNull
     @Column(name = "end_date")
-    private Timestamp endDate;
+    private Date endDate;
 
     @NotNull
     @Column(name = "free")
@@ -74,6 +73,5 @@ public class Academy {
     @Column(name = "not_synchronized")
     private int notSynchronized;
 
-    public Academy() {
-    }
+    public Academy() {}
 }

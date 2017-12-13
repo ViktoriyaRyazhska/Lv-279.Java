@@ -2,6 +2,7 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.softserve.persistence.constants.ConstantsFromDb;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.*;
@@ -16,9 +17,6 @@ import java.util.List;
  */
 @Service
 public class GroupInfoServiceImpl implements GroupInfoService {
-    private static final int EXPERT_STATUS_ID = 2;
-    private static final int TRAINEE_STATUS_ID = 1;
-
     @Autowired
     private GroupInfoRepository groupInfoRepository;
 
@@ -74,13 +72,12 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         Integer countActualStudents = null;
         List<GroupInfoTeachers> getExpertsOfTheGroup = null;
         List<LanguageTranslations> languageTranslations = languageTranslationsService.getAllLanguageTranslationsName();
-        TeacherTypes teacherTypes = teacherTypeService.findOne(EXPERT_STATUS_ID);
-        StudentStatuses studentStatuses = studentsStatusesService.findOne(TRAINEE_STATUS_ID);
+        TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
+        StudentStatuses studentStatuses = studentsStatusesService.findOne(ConstantsFromDb.STUDENT_STATUS_TRAINEE_ID);
         if (teacherTypes != null) {
             getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
         }
         if (groupInfoList != null) {
-
             for (GroupInfo groupInfo : groupInfoList) {
                 AcademyDTO academyDTO = academyConverter.toDTO(groupInfo);
                 Academy academy = groupInfo.getAcademy();
@@ -99,18 +96,19 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                     List<String> employeeList = new ArrayList<>();
                     if (getExpertsOfTheGroup != null) {
                         for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
-                            if (groupInfoTeachers.getAcademy().getAcademyId() == academy.getAcademyId()) {
+                            if ((groupInfoTeachers.getAcademy().getAcademyId() == academy.getAcademyId()) &&
+                                    groupInfoTeachers != null) {
                                 employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " "
                                         + groupInfoTeachers.getEmployee().getLastNameEng());
                             }
                         }
                     }
-                    if (employeeList.size() != 0) {
+                    if(employeeList.size() != 0){
                         academyDTO.setExperts(employeeList);
                     }
                     if (studentStatuses != null) {
-                        countActualStudents = studentsService.countAllByAcademyAndStudentStatus(academy,
-                                studentStatuses);
+                        countActualStudents = studentsService
+                                .countAllByAcademyAndStudentStatus(academy, studentStatuses);
                     }
                     if (countActualStudents != null) {
                         academyDTO.setStudentsActual(countActualStudents);
