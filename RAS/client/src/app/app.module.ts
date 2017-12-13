@@ -39,6 +39,7 @@ import {MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSel
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
+import { ExporttoexcelComponent } from './exporttoexcel/exporttoexcel.component';
 
 
 
@@ -67,7 +68,8 @@ import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tac
     NavTabsComponent,
     ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
-    TestsNamesComponent
+    TestsNamesComponent,
+    ExporttoexcelComponent
 
   ],
   imports: [

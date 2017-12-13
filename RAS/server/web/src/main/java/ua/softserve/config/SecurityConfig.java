@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private StatelessAuthenticationFilter statelessAuthenticationFilter;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -44,20 +44,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().disable();
 
-        http
-                .exceptionHandling().and()
-                .anonymous().and()
-                .servletApi().and()
-                .headers().cacheControl();
+        http.exceptionHandling().and().anonymous().and().servletApi().and().headers().cacheControl();
 
-//        http
-//
-//                .authorizeRequests().antMatchers("/success").hasAuthority(AUTHORIZED_ROLE)
-//                .and()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new Http401AuthenticationEntryPoint(" "));
+        // http
+        //
+        // .authorizeRequests().antMatchers("/success").hasAuthority(AUTHORIZED_ROLE)
+        // .and()
+        // .exceptionHandling()
+        // .authenticationEntryPoint(new Http401AuthenticationEntryPoint(" "));
 
-//        http.addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        // http.addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
@@ -88,16 +84,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200/")
-                        .allowCredentials(true)
-                        .allowedHeaders("Access-Control-Allow-Credentials", "Content-Type", "Access-Control-Allow-Headers", "X-Requested-With", "Origin", "Accept")
-                        .allowedMethods("PUT", "DELETE", "GET", "POST")
-                        .maxAge(3600);
+                registry.addMapping("/**").allowedOrigins("http://localhost:4200/").allowCredentials(true)
+                        .allowedHeaders("Access-Control-Allow-Credentials", "Content-Type",
+                                "Access-Control-Allow-Headers", "X-Requested-With", "Origin", "Accept")
+                        .allowedMethods("PUT", "DELETE", "GET", "POST").maxAge(3600);
             }
         };
     }
-
 
     @Bean
     public CorsFilter corsFilter() {

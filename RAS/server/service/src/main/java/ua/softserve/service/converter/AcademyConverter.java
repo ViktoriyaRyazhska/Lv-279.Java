@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 
 /**
- * Service transforms GroupInfo Entity to DTO object and DTO object to GroupInfo Entity.
- * Also it transforms AcademyDTO object to Academy Entity.
+ * Service transforms GroupInfo Entity to DTO object and DTO object to GroupInfo Entity. Also it transforms AcademyDTO
+ * object to Academy Entity.
  */
 @Service
 public class AcademyConverter {
@@ -35,7 +35,9 @@ public class AcademyConverter {
 
     /**
      * Method transforms GroupInfo Entity to AcademyDTO object.
-     * @param groupInfo is a object that will be transformed.
+     * 
+     * @param groupInfo
+     *            is a object that will be transformed.
      * @return AcademyDTO object.
      */
     public AcademyDTO toDTO(GroupInfo groupInfo) {
@@ -43,16 +45,16 @@ public class AcademyConverter {
         Academy academy = groupInfo.getAcademy();
         if (academy != null) {
             academyDTO.setId(groupInfo.getGroupInfoId());
-            if(academy.getAcademyStages() != null){
+            if (academy.getAcademyStages() != null) {
                 academyDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
             }
-            if(academy.getStartDate() != null){
+            if (academy.getStartDate() != null) {
                 academyDTO.setStartDate(academy.getStartDate().toString());
             }
-            if(academy.getDirections() != null){
+            if (academy.getDirections() != null) {
                 academyDTO.setDirectionName(academy.getDirections().getName());
             }
-            if(academy.getTechnologies() != null){
+            if (academy.getTechnologies() != null) {
                 academyDTO.setTechnologyName(academy.getTechnologies().getName());
             }
             academyDTO.setPayment(academy.getFree());
@@ -61,7 +63,7 @@ public class AcademyConverter {
             } else {
                 academyDTO.setPaymentStatus("Paid");
             }
-            if(academy.getEndDate() != null){
+            if (academy.getEndDate() != null) {
                 academyDTO.setEndDate(academy.getEndDate().toString());
             }
             academyDTO.setNameForSite(academy.getName());
@@ -101,7 +103,7 @@ public class AcademyConverter {
         return groupInfo;
     }
 
-        private Timestamp convertStringToTimestamp(String date) {
+    private Timestamp convertStringToTimestamp(String date) {
         if (date == null) {
             throw new IllegalArgumentException("Date can't be null");
         } else if (date.isEmpty()) {
@@ -136,11 +138,11 @@ public class AcademyConverter {
         return technologyService.findOne(technologieId);
     }
 
-    private ProfileInfo getProfileInfo(int profileInfoId){
+    private ProfileInfo getProfileInfo(int profileInfoId) {
         return profileService.findOne(profileInfoId);
     }
 
-    private Academy getAcademyById(int academyId){
+    private Academy getAcademyById(int academyId) {
         return academyService.findOne(academyId);
     }
 

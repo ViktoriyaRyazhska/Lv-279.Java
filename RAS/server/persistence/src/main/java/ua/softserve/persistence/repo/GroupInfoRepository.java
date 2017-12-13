@@ -12,6 +12,7 @@ import java.util.List;
 public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
     /**
      * Method returns data from GroupInfo table in descending order.
+     * 
      * @return data from GroupInfo table in descending order.
      */
     @Query("select gi from GroupInfo gi order by gi.groupInfoId desc")
@@ -19,7 +20,9 @@ public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
 
     /**
      * Method returns data from GroupInfo table by id of the academy.
-     * @param academyId id of the academy.
+     * 
+     * @param academyId
+     *            id of the academy.
      * @return returns data from GroupInfo table.
      */
     GroupInfo findByAcademyAcademyId(int academyId);

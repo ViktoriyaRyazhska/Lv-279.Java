@@ -18,10 +18,10 @@ public class SecurityContextServiceImpl implements SecurityContextService {
     @Autowired
     private LoginUserRepository loginUserRepository;
 
-//    @Autowired
-//    public SecurityContextServiceImpl(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
+    // @Autowired
+    // public SecurityContextServiceImpl(UserRepository userRepository) {
+    // this.userRepository = userRepository;
+    // }
 
     @Override
     public Optional<LoginUser> currentUser() {

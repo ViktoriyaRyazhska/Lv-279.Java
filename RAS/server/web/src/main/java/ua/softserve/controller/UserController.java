@@ -32,16 +32,13 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}/users", produces = { "application/json" })
-   public List<UserShortViewDto> getStudentsByAcademy(@PathVariable("id") Integer academyId) {
+    public List<UserShortViewDto> getStudentsByAcademy(@PathVariable("id") Integer academyId) {
         return userService.getAllUsersByAcademy(academyId);
     }
 
-
     @GetMapping("user")
-    public Page<UserShortViewDto> findByIdAndName(
-            @RequestParam(value = "id", required = false) String id,
-            @RequestParam("page") Integer pageNum,
-            @RequestParam("size") Integer size,
+    public Page<UserShortViewDto> findByIdAndName(@RequestParam(value = "id", required = false) String id,
+            @RequestParam("page") Integer pageNum, @RequestParam("size") Integer size,
             @RequestParam("notInAcademy") Integer notInAcademy,
             @RequestParam(value = "dir", required = false) String dir) {
 

@@ -34,11 +34,11 @@ public class Student {
     @JoinColumn(name = "student_status_id")
     private StudentStatuses studentStatus;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = { CascadeType.ALL })
     @JoinColumn(name = "teacher_student_feedback_id")
     private Feedback teacherFeedback = new Feedback();
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = { CascadeType.ALL })
     @JoinColumn(name = "expert_student_feedback_id")
     private Feedback expertFeedback = new Feedback();
 

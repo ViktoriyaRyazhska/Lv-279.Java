@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TestNameService {
     void saveTestNames(List<TestName> testNames);
-    List<TestName> findAllTestNames ();
+
+    List<TestName> findAllTestNames();
+
     List<TestName> findAllTestNamesByAcademyId(Integer groupId);
 }

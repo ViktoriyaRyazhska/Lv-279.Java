@@ -60,11 +60,10 @@ public class AcademyServiceImpl implements AcademyService {
         saveGroupInfo(academyId, academyDTO);
     }
 
-    private void saveGroupInfo(int academyId, AcademyDTO academyDTO){
-        GroupInfo  groupInfo = academyConverter.groupInfoToEntity(academyId, academyDTO);
+    private void saveGroupInfo(int academyId, AcademyDTO academyDTO) {
+        GroupInfo groupInfo = academyConverter.groupInfoToEntity(academyId, academyDTO);
         groupInfoService.save(groupInfo);
     }
-
 
     @Transactional
     @Override

@@ -93,6 +93,7 @@
 <div *ngFor="let report of itaTacticalPlanByGroupStageReports">
   <h1 align="center">{{report.name}}</h1>
   <div class="example-container mat-elevation-z8">
+    <app-exporttoexcel [data]="dataToSave[0]"></app-exporttoexcel>
     <mat-table #table [dataSource]="report.dataSource" matSort>
 
       <ng-container matColumnDef="Year">
