@@ -81,15 +81,12 @@ public class AcademyConverter {
 
         academy.setName(academyDTO.getNameForSite());
         academy.setAcademyStages(getAcademyStages(academyDTO.getAcademyStagesId()));
-        Date startDate = convertLongToDate(academyDTO.getStartDate());
-        academy.setStartDate(startDate);
+        academy.setStartDate(convertLongToDate(academyDTO.getStartDate()));
         academy.setEndDate(convertLongToDate(academyDTO.getEndDate()));
         academy.setCity(getCity(academyDTO.getCityId()));
         academy.setFree(academyDTO.getPayment());
         academy.setDirections(getDirection(academyDTO.getDirectionId()));
         academy.setTechnologies(getTechnologies(academyDTO.getTechnologieId()));
-
-        System.out.println(startDate);
 
         return academy;
     }
