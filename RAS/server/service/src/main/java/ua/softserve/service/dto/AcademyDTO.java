@@ -13,6 +13,7 @@ import java.util.List;
 public class AcademyDTO {
     // TODO: fix grammar errors
     private Integer id;
+    private Integer academyId;
     private String grName;
     private String nameForSite;
     private int academyStagesId;

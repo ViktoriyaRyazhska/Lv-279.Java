@@ -44,11 +44,12 @@ public class AcademyConverter {
         Academy academy = groupInfo.getAcademy();
         if (academy != null) {
             academyDTO.setId(groupInfo.getGroupInfoId());
+            academyDTO.setAcademyId(groupInfo.getAcademy().getAcademyId());
             if (academy.getAcademyStages() != null) {
                 academyDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
             }
             if (academy.getStartDate() != null) {
-                //academyDTO.setStartDate(academy.getStartDate().toString());
+                academyDTO.setStartDate(academy.getStartDate().getTime());
             }
             if (academy.getDirections() != null) {
                 academyDTO.setDirectionName(academy.getDirections().getName());
@@ -63,7 +64,7 @@ public class AcademyConverter {
                 academyDTO.setPaymentStatus("Paid");
             }
             if (academy.getEndDate() != null) {
-                //academyDTO.setEndDate(academy.getEndDate().toString());
+                academyDTO.setEndDate(academy.getEndDate().getTime());
             }
             academyDTO.setNameForSite(academy.getName());
         }
