@@ -2,7 +2,9 @@ package ua.softserve.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ua.softserve.persistence.entity.StudentStatuses;
 import ua.softserve.service.StudentService;
+import ua.softserve.service.StudentsStatusesService;
 import ua.softserve.service.dto.StudentViewDto;
 
 import java.util.List;
@@ -14,9 +16,17 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    StudentsStatusesService statusesService;
+
     @GetMapping("{id}")
     public List<StudentViewDto> getStudentsByAcademy(@PathVariable("id") Integer academyId) {
         return studentService.getStudentsByAcademy(academyId);
+    }
+
+    @GetMapping("statuses")
+    public List<StudentStatuses> getAllStatuses() {
+        return statusesService.findAll();
     }
 
     @PostMapping("{id}/add")
@@ -29,7 +39,7 @@ public class StudentController {
         studentService.removeStudentFromAcademy(studentId);
     }
 
-    @PutMapping
+    @PutMapping("update")
     public void updateStudentsOfAcademy(@RequestBody List<StudentViewDto> studentViewDtos) {
         studentService.updateStudentOfAcademy(studentViewDtos);
     }

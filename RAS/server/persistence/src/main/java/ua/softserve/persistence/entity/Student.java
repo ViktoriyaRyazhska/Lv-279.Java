@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -28,7 +30,7 @@ public class Student {
     private Academy academy;
 
     @Embedded
-    private StudentTestData data = new StudentTestData();
+    private StudentTestData data;
 
     @ManyToOne
     @JoinColumn(name = "student_status_id")

@@ -11,66 +11,162 @@
        </span>
     </ng-template>
   </p-column>
-  <p-column field="user.id" header="#" [editable]="false" [filter]="true" [sortable]="true"
+  <p-column field="user.id" header="#" [editable]="false"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span>
-        <a (click)="removeStudent(student)">Remove</a>
+        <a (click)="removeDialogStudent(student)">Remove</a>
        </span>
     </ng-template>
   </p-column>
   <p-column field="data.englishLevel.name" header="English Level" [editable]="false" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'11em'}"></p-column>
   <p-column field="data.entryScore" header="Entry Score" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+
+      <input type="number" pInputText="" [(ngModel)]="student.data.entryScore" [class]="'form-control'" required="true" >
+
+    </ng-template>
   </p-column>
   <p-column field="data.intermBase" header="Interm. Test. Base" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+      <ng-template let-col let-student="rowData" pTemplate="editor">
+
+        <input type="number" pInputText="" [(ngModel)]="student.data.intermBase" [class]="'form-control'" required="true" >
+
+      </ng-template>
+  </p-column>
   <p-column field="data.intermLang" header="Interm. Test. Lang" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+
+      <input type="number" pInputText="" [(ngModel)]="student.data.intermLang" [class]="'form-control'" required="true" >
+
+    </ng-template>
+  </p-column>
   <p-column field="data.engGram" header="English Grammar Score" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+
+      <input type="number" pInputText="" [(ngModel)]="student.data.engGram" [class]="'form-control'" required="true" >
+
+    </ng-template>
+  </p-column>
   <p-column field="data.incomingTest" header="Incoming Test" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+
+
+      <input type="number" pInputText="" [(ngModel)]="student.data.incomingTest" [class]="'form-control'" required="true" >
+
+    </ng-template>
+  </p-column>
   <p-column field="data.testOne" header="Test1" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+
+      <input type="number" pInputText="" [(ngModel)]="student.data.testOne" [class]="'form-control'" required="true" >
+
+    </ng-template>
+  </p-column>
   <p-column field="data.testTwo" header="Test3" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData"  pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testTwo" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.testThree" header="Test2" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testThree" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.testFour" header="Test4" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testFour" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.testFive" header="Test5" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testFive" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.testSix" header="Test6" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testSix" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.testSeven" header="Test7" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testSeven" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.testEight" header="Test8" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testEight" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.testNine" header="Test9" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testNine" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.testTen" header="Test10" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testTen" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.finalBase" header="Final, Base" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.finalBase" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.finalLang" header="Final, Lang" [editable]="true" [filter]="true" [sortable]="true"
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.finalLang" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
+  <p-column field="" header="Current Score" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}"></p-column>
-  <p-column field="" header="Current Score" [editable]="true" [filter]="true" [sortable]="true"
+  <p-column field="" header="Training Score" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}"></p-column>
-  <p-column field="" header="Training Score" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
-  <p-column field="data.teacherScore" header="Teacher Score" [filter]="true" [editable]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+  <p-column field="data.teacherScore" header="Teacher Score" [editable]="true" [filter]="true" [sortable]="true"
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.teacherScore" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.expertScore" header="Expert Score" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.expertScore" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="data.interviewerScore" header="Interviewer Score" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.interviewerScore" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
   <p-column field="studentStatus.name" header="Student status" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}"></p-column>
+            [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <p-dropdown appendTo="body" [(ngModel)]="student.studentStatus" [options]="statuses" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  ></p-dropdown>
+    </ng-template>
+  </p-column>
   <p-column field="personStatus" header="Personal status" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}"></p-column>
-  <p-column field="approvedBy.firstNameEng" header="Approved By" [editable]="true" [filter]="true" [sortable]="true"
+  <p-column field="approvedBy.firstNameEng" header="Approved By" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span *ngIf="student.approvedBy">
@@ -79,6 +175,15 @@
     </ng-template>
   </p-column>
 </p-dataTable>
+
+<!--<p-dataTable [value]="students" [editable]="true">-->
+  <!--<p-column field="a.val" header="val" [editable]="true">-->
+    <!--<ng-template let-col let-student="rowData" pTemplate="editor">-->
+      <!--<input type="number" pInputText [(ngModel)]="student." [class]="'form-control'" required="true" placeholder="">-->
+    <!--</ng-template>-->
+  <!--</p-column>-->
+<!--</p-dataTable>-->
+
 
 <div style="align-items: center">
   <p-dialog header="User info" modal="false" dismissableMask="false" [(visible)]="displayStudentDetails" width="750">
@@ -128,9 +233,26 @@
   </p-dialog>
 </div>
 
+
+  <p-dialog header="Removing user" modal="false" dismissableMask="false" [(visible)]="displayRemovingDialog" width="750">
+    <div>
+      <div *ngIf="selectedStudent && selectedStudent.user">
+       <h3>Are you really want to remove {{selectedStudent.user.firstName +" "+ selectedStudent.user.lastName}} from the group list?</h3>
+      </div>
+    </div>
+    <button pButton type="button" (click)="cancelRemovingClick()" label="Cancel" class="ui-button-secondary"
+            style="margin-top: 1em; float: right"></button>
+
+    <button pButton type="button" (click)="removeSelectedStudent()" label="Remove" class="ui-button-danger"
+            style="margin-top: 1em; float: right"></button>
+  </p-dialog>
+
+
 <!--<button pButton type="button" (click)="addUserClick()" label="Add students" style="margin-top: 1em;"></button>-->
 
 <button mat-raised-button color="primary" (click)="addUserClick()">Add students</button>
+
+<button mat-raised-button color="primary" (click)="updateStudentsClick()">Save</button>
 
 <p-dialog header="Add users" modal="false" [(visible)]="displayUsersList" [responsive]="true" width="450">
   <div *ngIf="users">
