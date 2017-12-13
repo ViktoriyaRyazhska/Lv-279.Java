@@ -1,126 +1,126 @@
-<div class="container well">
-  <form [formGroup]="signupForm" (ngSubmit)="onSave()">
-    <h4>Add Feedback</h4>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="row">
-          <div class="col-sm-2 form-group">
-            <label>Learning ability</label>
-          </div>
-          <div class="col-sm-3 form-group">
-            <select
-              class="form-control input-sm"
-              formControlName="learningAbility"
-              (change)="onChoose()">
-              <option *ngFor="let mark of marks | markFilter:CharId.ONE" [value]="mark.id">{{mark.name}}</option>
-            </select>
-          </div>
-          <div class="col-sm-7 form-group">
-            {{learnDesc}}
-          </div>
-        </div>
+<!--<div class="container well">-->
+  <!--<form [formGroup]="signupForm" (ngSubmit)="onSave()">-->
+    <!--<h4>Add Feedback</h4>-->
+    <!--<div class="row">-->
+      <!--<div class="col-sm-12">-->
+        <!--<div class="row">-->
+          <!--<div class="col-sm-2 form-group">-->
+            <!--<label>Learning ability</label>-->
+          <!--</div>-->
+          <!--<div class="col-sm-3 form-group">-->
+            <!--<select-->
+              <!--class="form-control input-sm"-->
+              <!--formControlName="learningAbility"-->
+              <!--(change)="onChoose()">-->
+              <!--<option *ngFor="let mark of marks | markFilter:CharId.ONE" [value]="mark.id">{{mark.name}}</option>-->
+            <!--</select>-->
+          <!--</div>-->
+          <!--<div class="col-sm-7 form-group">-->
+            <!--{{learnDesc}}-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="row">
-          <div class="col-sm-2 form-group">
-            <label>Overall technical competence</label>
-          </div>
-          <div class="col-sm-3 form-group">
-            <select
-              class="form-control input-sm"
-              formControlName="overallTechCompetence"
-              (change)="onChoose()">
-              <option *ngFor="let mark of marks | markFilter:CharId.TWO" [value]="mark.id">{{mark.name}}</option>
-            </select>
-          </div>
-          <div class="col-sm-7 form-group">
-            {{overallDesc}}
-          </div>
-        </div>
+        <!--<div class="row">-->
+          <!--<div class="col-sm-2 form-group">-->
+            <!--<label>Overall technical competence</label>-->
+          <!--</div>-->
+          <!--<div class="col-sm-3 form-group">-->
+            <!--<select-->
+              <!--class="form-control input-sm"-->
+              <!--formControlName="overallTechCompetence"-->
+              <!--(change)="onChoose()">-->
+              <!--<option *ngFor="let mark of marks | markFilter:CharId.TWO" [value]="mark.id">{{mark.name}}</option>-->
+            <!--</select>-->
+          <!--</div>-->
+          <!--<div class="col-sm-7 form-group">-->
+            <!--{{overallDesc}}-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="row">
-          <div class="col-sm-2 form-group">
-            <label>Passional initiative</label>
-          </div>
-          <div class="col-sm-3 form-group">
-            <select
-              class="form-control input-sm"
-              formControlName="passionalInitiative"
-              (change)="onChoose()">
-              <option *ngFor="let mark of marks | markFilter:CharId.THREE" [value]="mark.id">{{mark.name}}</option>
-            </select>
-          </div>
-          <div class="col-sm-7 form-group">
-            {{passDesc}}
-          </div>
-        </div>
+        <!--<div class="row">-->
+          <!--<div class="col-sm-2 form-group">-->
+            <!--<label>Passional initiative</label>-->
+          <!--</div>-->
+          <!--<div class="col-sm-3 form-group">-->
+            <!--<select-->
+              <!--class="form-control input-sm"-->
+              <!--formControlName="passionalInitiative"-->
+              <!--(change)="onChoose()">-->
+              <!--<option *ngFor="let mark of marks | markFilter:CharId.THREE" [value]="mark.id">{{mark.name}}</option>-->
+            <!--</select>-->
+          <!--</div>-->
+          <!--<div class="col-sm-7 form-group">-->
+            <!--{{passDesc}}-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="row">
-          <div class="col-sm-2 form-group">
-            <label>Team work</label>
-          </div>
-          <div class="col-sm-3 form-group">
-            <select
-              class="form-control input-sm"
-              formControlName="teamWork"
-              (change)="onChoose()">
-              <option *ngFor="let mark of marks | markFilter:CharId.FOUR" [value]="mark.id">{{mark.name}}</option>
-            </select>
-          </div>
-          <div class="col-sm-7 form-group">
-            {{teamDesc}}
-          </div>
-        </div>
+        <!--<div class="row">-->
+          <!--<div class="col-sm-2 form-group">-->
+            <!--<label>Team work</label>-->
+          <!--</div>-->
+          <!--<div class="col-sm-3 form-group">-->
+            <!--<select-->
+              <!--class="form-control input-sm"-->
+              <!--formControlName="teamWork"-->
+              <!--(change)="onChoose()">-->
+              <!--<option *ngFor="let mark of marks | markFilter:CharId.FOUR" [value]="mark.id">{{mark.name}}</option>-->
+            <!--</select>-->
+          <!--</div>-->
+          <!--<div class="col-sm-7 form-group">-->
+            <!--{{teamDesc}}-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="row">
-          <div class="col-sm-2 form-group">
-            <label>Getting things done</label>
-          </div>
-          <div class="col-sm-3 form-group">
-            <select
-              class="form-control input-sm"
-              formControlName="getThingsDone"
-              (change)="onChoose()">
-              <option *ngFor="let mark of marks | markFilter:CharId.FIVE" [value]="mark.id">{{mark.name}}</option>
-            </select>
-          </div>
-          <div class="col-sm-7 form-group">
-            {{getDesc}}
-          </div>
-        </div>
+        <!--<div class="row">-->
+          <!--<div class="col-sm-2 form-group">-->
+            <!--<label>Getting things done</label>-->
+          <!--</div>-->
+          <!--<div class="col-sm-3 form-group">-->
+            <!--<select-->
+              <!--class="form-control input-sm"-->
+              <!--formControlName="getThingsDone"-->
+              <!--(change)="onChoose()">-->
+              <!--<option *ngFor="let mark of marks | markFilter:CharId.FIVE" [value]="mark.id">{{mark.name}}</option>-->
+            <!--</select>-->
+          <!--</div>-->
+          <!--<div class="col-sm-7 form-group">-->
+            <!--{{getDesc}}-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="row">
-          <div class="col-sm-2 form-group">
-            <label>Active Communicator</label>
-          </div>
-          <div class="col-sm-3 form-group">
-            <select
-              class="form-control input-sm"
-              formControlName="activeCommunicator"
-              (change)="onChoose()"
-            >
-              <option *ngFor="let mark of marks | markFilter:CharId.SIX" [value]="mark.id">{{mark.name}}</option>
-            </select>
-          </div>
-          <div class="col-sm-7 form-group">
-            {{actDesc}}
-          </div>
-        </div>
+        <!--<div class="row">-->
+          <!--<div class="col-sm-2 form-group">-->
+            <!--<label>Active Communicator</label>-->
+          <!--</div>-->
+          <!--<div class="col-sm-3 form-group">-->
+            <!--<select-->
+              <!--class="form-control input-sm"-->
+              <!--formControlName="activeCommunicator"-->
+              <!--(change)="onChoose()"-->
+            <!--&gt;-->
+              <!--<option *ngFor="let mark of marks | markFilter:CharId.SIX" [value]="mark.id">{{mark.name}}</option>-->
+            <!--</select>-->
+          <!--</div>-->
+          <!--<div class="col-sm-7 form-group">-->
+            <!--{{actDesc}}-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="row">
-          <div class="col-sm-2 form-group">
-            <label>Summary</label>
-          </div>
-          <div class="col-sm-10 form-group">
-            <input
-              type="text"
-              class="form-control input-sm"
-              formControlName="summary">
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="btn btn-primary" type="submit">Save Feedback</button>
-  </form>
-</div>
+        <!--<div class="row">-->
+          <!--<div class="col-sm-2 form-group">-->
+            <!--<label>Summary</label>-->
+          <!--</div>-->
+          <!--<div class="col-sm-10 form-group">-->
+            <!--<input-->
+              <!--type="text"-->
+              <!--class="form-control input-sm"-->
+              <!--formControlName="summary">-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<button class="btn btn-primary" type="submit">Save Feedback</button>-->
+  <!--</form>-->
+<!--</div>-->
 
 

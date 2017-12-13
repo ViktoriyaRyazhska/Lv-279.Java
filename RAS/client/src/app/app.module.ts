@@ -24,10 +24,9 @@ import {AppRoutingModule} from "./app-routing.module";
 import { LoginComponent } from './components/auth/login/login.component';
 import {LoginService} from "./components/auth/login/login.service";
 import {MyauthService} from "./components/auth/myauth.service";
-import {FeedbackTeacherEditPipe} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.pipe";
+import {FeedbackEditPipe} from "./components/feedbacks/feedback-edit/feedback-edit.pipe";
 import {HeaderComponent} from './components/header/header.component';
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
-import {FeedbackService} from "./services/feedbacks/feedback.service";
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 import {TestsService} from "./services/tests-names/tests.service";
@@ -56,13 +55,13 @@ import { FilterCheckListByGroupsComponent } from './components/reports/check-lis
     StudentsComponent,
     FeedbacksComponent,
     FeedbackListComponent,
-    FeedbackTeacherEditPipe,
+    FeedbackEditPipe,
     LoginComponent,
     FeedbackEditComponent,
     FeedbackTeacherEditComponent,
     FeedbackExpertEditComponent,
     FeedbackInterviewerEditComponent,
-    FeedbackTeacherEditPipe,
+    FeedbackEditPipe,
     HeaderComponent,
     NavTabsComponent,
     ItaTacticalPlanByGroupStageComponent,
@@ -93,7 +92,7 @@ import { FilterCheckListByGroupsComponent } from './components/reports/check-lis
     MatInputModule,
     MatButtonModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, FeedbackService, TestsService, UsersService, MarkService],
+  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService],
 
   bootstrap: [AppComponent]
 })
