@@ -30,7 +30,7 @@ public class StudentController {
         studentService.removeStudentFromAcademy(studentId);
     }
 
-    @PutMapping
+    @PutMapping("update")
     public void updateStudentsOfAcademy(@RequestBody List<StudentViewDto> studentViewDtos) {
         studentService.updateStudentOfAcademy(studentViewDtos);
     }

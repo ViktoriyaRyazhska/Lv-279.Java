@@ -38,7 +38,7 @@
   <p-column header="Active Communicator" field="expertFeedback.activeCommunicator.name" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
   <p-column header="Summary" field="expertFeedback.summary" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
 
-  <p-column header="HR Comment" field="data.interviewerComment" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
+  <p-column header="HR Comment" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
 
   <p-column header="Interviewer Comment" field="data.interviewerComment" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
   <p-column header="Intern. Test, Base" field="data.intermBase" [filter]="true" [sortable]="true"  [style]="{'width':'10em'}"></p-column>
@@ -107,7 +107,7 @@
         </div>
       </div>
       <div class="ui-g-8">
-        <div class="column" *ngIf="selectedStudent && selectedStudent.user">
+        <div class="column" *ngIf="selectedStudent && selectedStudent.user && selectedStudent.data != null">
           <div>{{selectedStudent.data.englishLevel.name}}</div>
           <div>{{selectedStudent.data.intermBase}}</div>
           <div>{{selectedStudent.data.intermLang}}</div>
@@ -134,12 +134,12 @@
           <div>Overall technical competence:</div>
         </div>
         <div class="ui-g-4">
-          <div>{{selectedStudent.teacherFeedback.learningAbility.name}}</div>
-          <div>{{selectedStudent.teacherFeedback.overallTechnicalCompetence.name}}</div>
+          <div *ngIf="selectedStudent.teacherFeedback.learningAbility != null">{{selectedStudent.teacherFeedback.learningAbility.name}}</div>
+          <div *ngIf="selectedStudent.teacherFeedback.overallTechnicalCompetence != null">{{selectedStudent.teacherFeedback.overallTechnicalCompetence.name}}</div>
         </div>
         <div class="ui-g-4">
-          <div>{{selectedStudent.expertFeedback.learningAbility.name}}</div>
-          <div>{{selectedStudent.expertFeedback.overallTechnicalCompetence.name}}</div>
+          <div *ngIf="selectedStudent.expertFeedback.learningAbility != null">{{selectedStudent.expertFeedback.learningAbility.name}}</div>
+          <div *ngIf="selectedStudent.expertFeedback.overallTechnicalCompetence != null">{{selectedStudent.expertFeedback.overallTechnicalCompetence.name}}</div>
         </div>
       </div>
 
@@ -152,16 +152,16 @@
           <div>Active Communicator:</div>
         </div>
         <div class="ui-g-4">
-          <div>{{selectedStudent.teacherFeedback.passionalInitiative.name}}</div>
-          <div>{{selectedStudent.teacherFeedback.teamWork.name}}</div>
-          <div>{{selectedStudent.teacherFeedback.gettingThingsDone.name}}</div>
-          <div>{{selectedStudent.teacherFeedback.activeCommunicator.name}}</div>
+          <div *ngIf="selectedStudent.teacherFeedback.passionalInitiative != null">{{selectedStudent.teacherFeedback.passionalInitiative.name}}</div>
+          <div *ngIf="selectedStudent.teacherFeedback.teamWork != null">{{selectedStudent.teacherFeedback.teamWork.name}}</div>
+          <div *ngIf="selectedStudent.teacherFeedback.gettingThingsDone != null">{{selectedStudent.teacherFeedback.gettingThingsDone.name}}</div>
+          <div *ngIf="selectedStudent.teacherFeedback.activeCommunicator != null">{{selectedStudent.teacherFeedback.activeCommunicator.name}}</div>
         </div>
         <div class="ui-g-4">
-          <div>{{selectedStudent.expertFeedback.passionalInitiative.name}}</div>
-          <div>{{selectedStudent.expertFeedback.teamWork.name}}</div>
-          <div>{{selectedStudent.expertFeedback.gettingThingsDone.name}}</div>
-          <div>{{selectedStudent.expertFeedback.activeCommunicator.name}}</div>
+          <div *ngIf="selectedStudent.expertFeedback.passionalInitiative != null">{{selectedStudent.expertFeedback.passionalInitiative.name}}</div>
+          <div *ngIf="selectedStudent.expertFeedback.teamWork != null">{{selectedStudent.expertFeedback.teamWork.name}}</div>
+          <div *ngIf="selectedStudent.expertFeedback.gettingThingsDone != null">{{selectedStudent.expertFeedback.gettingThingsDone.name}}</div>
+          <div *ngIf="selectedStudent.expertFeedback.activeCommunicator != null">{{selectedStudent.expertFeedback.activeCommunicator.name}}</div>
         </div>
       </div>
 
@@ -171,10 +171,10 @@
           <div>Summary comments (risks/strangths, recommendation):</div>
         </div>
         <div class="ui-g-4">
-          <div>{{selectedStudent.teacherFeedback.summary}}</div>
+          <div *ngIf="selectedStudent.teacherFeedback.summary != null">{{selectedStudent.teacherFeedback.summary}}</div>
         </div>
         <div class="ui-g-4">
-          <div>{{selectedStudent.expertFeedback.summary}}</div>
+          <div *ngIf="selectedStudent.teacherFeedback.summary != null">{{selectedStudent.expertFeedback.summary}}</div>
         </div>
       </div>
 
@@ -191,7 +191,7 @@
         <div class="ui-g-4">
           <div>Interviewer Comment:</div>
         </div>
-        <div class="ui-g-8">
+        <div class="ui-g-8" *ngIf="selectedStudent.data != null">
           <div>{{selectedStudent.data.interviewerComment}}</div>
         </div>
       </div>
@@ -200,10 +200,13 @@
 </p-dialog>
 
 <p-dialog header="Student Provide Feedback" [(visible)]="displayProvideFeedback" modal="modal" width="1200">
-  <!--<app-feedback-teacher-edit></app-feedback-teacher-edit>-->
-  <div class="container well" *ngIf="selectedStudent && selectedStudent.user">
-    <form [formGroup]="signupForm" (ngSubmit)="onSave()">
-      <h4>Add Feedback</h4>
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link (click)="onClickTeacher()">Teacher</a>
+    <a mat-tab-link (click)="onClickExpert()">Expert</a>
+    <a mat-tab-link (click)="onClickInterviewer()">Interviewer</a>
+  </nav>
+  <div class="container well" *ngIf="selectedStudent && selectedStudent.user && displayTeacherFeedback">
+    <form [formGroup]="signupTeacherForm" (ngSubmit)="onSave()">
       <div class="row">
         <div class="col-sm-12">
           <div class="row">
@@ -309,6 +312,149 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Summary</label>
+            </div>
+            <div class="col-sm-10 form-group">
+              <input
+                type="text"
+                class="form-control input-sm"
+                formControlName="summary">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Save Feedback</button>
+    </form>
+  </div>
+  <div class="container well" *ngIf="selectedStudent && selectedStudent.user && displayExpertFeedback">
+    <form [formGroup]="signupExpertForm" (ngSubmit)="onSave()">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Learning ability</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="learningAbility"
+                (change)="onChoose()">
+                <option *ngFor="let mark of marks | markFilter:CharId.ONE" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{learnDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Overall technical competence</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="overallTechCompetence"
+                (change)="onChoose()">
+                <option *ngFor="let mark of marks | markFilter:CharId.TWO" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{overallDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Passional initiative</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="passionalInitiative"
+                (change)="onChoose()">
+                <option *ngFor="let mark of marks | markFilter:CharId.THREE" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{passDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Team work</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="teamWork"
+                (change)="onChoose()">
+                <option *ngFor="let mark of marks | markFilter:CharId.FOUR" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{teamDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Getting things done</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="getThingsDone"
+                (change)="onChoose()">
+                <option *ngFor="let mark of marks | markFilter:CharId.FIVE" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{getDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Active Communicator</label>
+            </div>
+            <div class="col-sm-3 form-group">
+              <select
+                class="form-control input-sm"
+                formControlName="activeCommunicator"
+                (change)="onChoose()"
+              >
+                <option *ngFor="let mark of marks | markFilter:CharId.SIX" [value]="mark.id">{{mark.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-7 form-group">
+              {{actDesc}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label>Summary</label>
+            </div>
+            <div class="col-sm-10 form-group">
+              <input
+                type="text"
+                class="form-control input-sm"
+                formControlName="summary">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Save Feedback</button>
+    </form>
+  </div>
+  <div class="container well" *ngIf="selectedStudent && selectedStudent.user && displayInterFeedback">
+    <form [formGroup]="signupInterForm" (ngSubmit)="onSave()">
+      <div class="row">
+        <div class="col-sm-12">
           <div class="row">
             <div class="col-sm-2 form-group">
               <label>Summary</label>

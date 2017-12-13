@@ -1,6 +1,4 @@
 import {Mark} from "./mark.model";
-import {FormGroup} from '@angular/forms';
-import {FeedbackService} from "../../services/feedbacks/feedback.service";
 
 export class StudentFeedback {
   id: number;
@@ -13,7 +11,6 @@ export class StudentFeedback {
   expertFeedback: Feedback;
   removed: boolean;
 }
-
 
 export class User {
   id: number;
