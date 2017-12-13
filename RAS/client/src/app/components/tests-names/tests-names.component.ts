@@ -33,7 +33,6 @@ export class TestsNamesComponent implements OnInit {
   save() {
     this.testNamesService.addTests(this.tests, this.groupId);
     console.log(this.tests);
-    this.ngOnInit();
   }
 
   addTest() {

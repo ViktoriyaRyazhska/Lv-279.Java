@@ -16,15 +16,7 @@ public class HistoryController {
     @Autowired
     private HistoryService historyService;
 
-    @GetMapping("/showHistory")
-    public String showHistory(Model model) {
-        List<History> allHistory = historyService.findAll();
-        model.addAttribute("allHistory", allHistory);
-        return "showHistory";
-    }
-
     @RequestMapping(value = "/history/{id}", method = RequestMethod.GET, produces = "application/json")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<History>> getHistory(@PathVariable int id) {
         return new ResponseEntity<>(historyService.findByAcademyId(id), HttpStatus.OK);
     }
