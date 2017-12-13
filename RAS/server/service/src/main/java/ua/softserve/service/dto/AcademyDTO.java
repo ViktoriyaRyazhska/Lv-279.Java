@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 @ToString
 public class AcademyDTO {
-
     // TODO: fix grammar errors
     private Integer id;
     private String grName;

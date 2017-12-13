@@ -14,7 +14,7 @@ public class GroupInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_info_id")
-    private int groupInfoId;
+    private Integer groupInfoId;
 
     @OneToOne
     @JoinColumn(name = "academy_id")

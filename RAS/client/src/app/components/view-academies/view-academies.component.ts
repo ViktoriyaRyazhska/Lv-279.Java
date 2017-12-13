@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AcademyService} from "./academy.service";
 import {PagerService} from "./pager.service";
 import {FilterService} from "./filter.service";
-import {Form, NgForm} from "@angular/forms";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
@@ -21,10 +20,6 @@ export class ViewAcademiesComponent implements OnInit {
   direction: any[];
   technology: any[];
   profile: any[];
-
-  pager: any = {};
-  pagedItems = [];
-
   paymentStatus = [];
 
   displayedColumns =
@@ -62,27 +57,11 @@ export class ViewAcademiesComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
 
         this.paymentStatus = ['Founded by SoftServe', 'Paid'];
-        // this.setPage(1);
       },
       error => console.log(error)
     );
   }
-
-//
-//   setPage(page: number) {
-//     if (page < 1 || page > this.pager.totalPages) {
-//       return;
-//     }
-//
-//     // get pager object from service
-//     this.pager = this.pagerService.getPager(this.filteredAcademies.length, page);
-//
-//     // get current page of items
-//     this.pagedItems = this.filteredAcademies.slice(this.pager.startIndex, this.pager.endIndex + 1);
-//   }
-//
   onFilterField(event: Event, form) {
-    // console.log(form.value);
     this.filteredAcademies = this.academies;
     Object.keys(form.value).forEach(key => {
       this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.value[key], key);
@@ -90,15 +69,4 @@ export class ViewAcademiesComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
   }
-
-//
-//   onClickFunc(event: Event) {
-//     console.log(event);
-//   }
-//
-//   typeOfFiltering(event){
-//     console.log(event);
-//   }
-//
-// }
 }
