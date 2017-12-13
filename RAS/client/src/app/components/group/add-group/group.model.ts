@@ -1,17 +1,16 @@
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-
+import {FormGroup} from '@angular/forms';
 
 export class Group {
 
   grName: string = null;
   nameForSite: string = null;
   academyStagesId: number = 1;
-  startDate: string = null;
-  endDate: string = null;
+  startDate: number = null;
+  endDate: number = null;
   cityId: number = 1;
-  directionId: number = 0;
-  technologieId: number;
-  profileId: number = 0;
+  directionId: number = null;
+  technologieId: number = null;
+  profileId: number = null;
   studentPlannedToGraduate: number = 0;
   studentPlannedToEnrollment: number = 0;
   studentActual: number = 0;
@@ -21,8 +20,8 @@ export class Group {
     this.nameForSite = form.get('nameForSiteFormControl').value;
     this.academyStagesId = form.get('academyStagesId').value;
     this.cityId = form.get('cityId').value;
-    this.startDate = form.get('startDateFormControl').value;
-    this.endDate = form.get('endDateFormControl').value;
+    this.startDate = new Date(form.get('startDateFormControl').value).getTime();
+    this.endDate = new Date(form.get('endDateFormControl').value).getTime();
     this.directionId = form.get('commonDirectionFormControl').value;
     this.technologieId = form.get('directionFormControl').value;
     this.profileId = form.get('profileInfoFormControl').value;

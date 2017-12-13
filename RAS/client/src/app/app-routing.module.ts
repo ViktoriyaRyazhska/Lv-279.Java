@@ -8,13 +8,16 @@ import {StudentsComponent} from "./components/students/students.component";
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
+// import {FeedbackTeacherDetailComponent} from "./components/feedbacks/feedback-detail/feedback-teacher-detail/feedback-teacher-detail.component";
 import {LoginComponent} from "./components/auth/login/login.component";
 import {HeaderComponent} from "./components/header/header.component";
+import {AppComponent} from "./app.component";
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component";
 
 const appRoutes: Routes = [
-  {path: 'myLogin', component: LoginComponent},
+  // {path: 'marks', component: FeedbackTeacherDetailComponent},
+  {path: 'ang/login', component: LoginComponent},
   // {path: '', component: ViewAcademiesComponent},
   // {path: 'ang/addgroup', component: AddGroupComponent},
   {
@@ -31,8 +34,8 @@ const appRoutes: Routes = [
   {path: 'ang/reports/filterCheckListByGroups', component: FilterCheckListByGroupsComponent},
   {path: 'ang/reports/filterCheckListByGroups/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
   {path: 'ang/tests/:id', component: TestsNamesComponent},
-  {path: 'ang', component: HeaderComponent}
-
+  {path: 'ang/tests', component: TestsNamesComponent},
+  {path: 'ang', component: AppComponent}
 ];
 
 @NgModule({

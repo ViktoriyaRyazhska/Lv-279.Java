@@ -9,16 +9,12 @@ import {Router} from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
 
-  isSignedIn: boolean;
-
   constructor(private loginService: LoginService,
               private router:Router) { }
 
   ngOnInit() {
-    this.isSignedIn = this.loginService.isSignedIn();
   }
   logout = () => {
-      this.isSignedIn=false;
       localStorage.removeItem('jwt');
   };
 

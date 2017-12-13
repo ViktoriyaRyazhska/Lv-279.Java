@@ -1,18 +1,39 @@
-  <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <input type="text" id="username"
-             placeholder="Email" formControlName="username"
-             [ngClass]="{'is-invalid': (loginForm.get('username').touched||loginForm.get('username').dirty)
-                  &&loginForm.get('username').errors}" required>
-      <input type="password" id="password"
-             placeholder="Password" formControlName="password"
-             [ngClass]="{'is-invalid':(loginForm.get('password').touched|| loginForm.get('password').dirty)
-                  &&loginForm.get('password').errors}" required>
-  <button type="submit">TRY</button>
-  </form>
-<!--//TODO зроти и філду для перевірки чи error, якщо так - залишити на сторінці логування, в противному випадку - перевести на '/'.-->
+<!--<form [formGroup]="loginForm" (ngSubmit)="login()">-->
+      <!--<input type="text" id="username"-->
+             <!--placeholder="Email" formControlName="username"-->
+             <!--[ngClass]="{'is-invalid': (loginForm.get('username').touched||loginForm.get('username').dirty)-->
+                  <!--&&loginForm.get('username').errors}" required>-->
+      <!--<input type="password" id="password"-->
+             <!--placeholder="Password" formControlName="password"-->
+             <!--[ngClass]="{'is-invalid':(loginForm.get('password').touched|| loginForm.get('password').dirty)-->
+                  <!--&&loginForm.get('password').errors}" required>-->
+  <!--<button type="submit" class="btn btn-primary">TRY</button>-->
+  <!--</form>-->
 
+<div class="container well contwidth">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="row">
+          <mat-form-field class="col-sm-12">
+            <input matInput placeholder="Username" formControlName="username">
+            <mat-error>Username is required</mat-error>
+          </mat-form-field>
+      </div>
+      <div class="row">
+          <mat-form-field class="col-sm-12">
+            <input matInput type="password" placeholder="Password" formControlName="password">
+            <mat-error>Password is required</mat-error>
+          </mat-form-field>
+      </div>
+      <div class="row center-block mybtn">
+          <!--<button type="submit" class="btn btn-primary col-sm-12">Log in</button>-->
+          <button mat-raised-button color="primary" (click)="addUserClick()" class="mymatbtm">Log in</button>
+      </div>
+    </form>
+  <div *ngIf="error" class="myerror">
+      <mat-error>
+          Invalid input!
+      </mat-error>
+  </div>
+</div>
 
-        <div *ngIf="error">
-          invalid input!
-        </div>
 
