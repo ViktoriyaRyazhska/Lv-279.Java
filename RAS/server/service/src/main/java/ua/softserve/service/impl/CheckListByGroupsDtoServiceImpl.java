@@ -10,6 +10,7 @@
 
 package ua.softserve.service.impl;
 
+import org.jetbrains.annotations.Contract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
