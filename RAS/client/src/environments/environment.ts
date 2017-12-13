@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  serverUrl: "http://localhost:8080/Lv279Java/"
+  serverUrl: "http://java.training.local:8080/Lv279Java/"
 };
