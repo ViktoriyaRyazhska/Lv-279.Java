@@ -2,3 +2,4 @@
 <!--<app-nav-tabs></app-nav-tabs>-->
 <app-header *ngIf="isSignedInForApp()"></app-header>
 <app-login *ngIf="!isSignedInForApp()"></app-login>
+<router-outlet></router-outlet>

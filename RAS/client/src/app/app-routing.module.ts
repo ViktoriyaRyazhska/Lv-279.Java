@@ -34,9 +34,9 @@ const appRoutes: Routes = [
   ]},
   {path: 'ang/students', component: StudentsComponent},
   {path: 'ang/feedback', component: FeedbacksComponent},
-  {path: 'ang/reports/filterCheckListByGroups/checkListByGroups', component: CheckListByGroupsComponent},
+  {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},
   {path: 'ang/reports/filterCheckListByGroups', component: FilterCheckListByGroupsComponent},
-  {path: 'ang/reports/filterCheckListByGroups/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
+  {path: 'ang/reports/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
   {path: 'ang/tests/:id', component: TestsNamesComponent},
   {path: 'ang', component: AppComponent}
 ];
