@@ -48,20 +48,22 @@ export class AddGroupComponent implements OnInit {
       'commonDirectionFormControl': new FormControl(this.group.directionId, Validators.required),
       'directionFormControl': new FormControl(this.group.technologieId, Validators.required),
       'profileInfoFormControl': new FormControl(this.group.profileId),
+      'paymentStatusFormControl': new FormControl({value: this.group.paymentStatus, selected: true}),
       'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate),
       'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment),
-      'studentActualFromControl': new FormControl(this.group.studentActual)
+      'studentActualFromControl': new FormControl({value: this.group.studentActual, disabled: true})
     });
   }
 
   isFormValid(): boolean{
-    return this.signupForm.get('nameForSiteFormControl').valid;
+    return this.signupForm.valid;
   }
 
   saveGroup() {
+    console.log(this.isFormValid());
     if(this.isFormValid()){
       this.group.setDataFromFormControl(this.signupForm);
-      this.isFormValid();
+      console.log(this.group);
       this.addGroupService.post(this.group);
     }else{
 
