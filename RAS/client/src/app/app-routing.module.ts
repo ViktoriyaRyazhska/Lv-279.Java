@@ -25,7 +25,9 @@ const appRoutes: Routes = [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
     {path: 'students', component: StudentsComponent},
     {path: 'feedback', component: FeedbacksComponent},
-    {path: 'history/:id', component: HistoryListComponent}]
+    {path: 'history/:id', component: HistoryListComponent},
+    {path: 'history', component: HistoryListComponent},
+    {path: 'tests/:id', component: TestsNamesComponent}]
   },
   {path: 'ang/viewAcademies', component: ViewAcademiesComponent, children: [
     {path: 'ggg', component: AddGroupComponent}
@@ -36,7 +38,6 @@ const appRoutes: Routes = [
   {path: 'ang/reports/filterCheckListByGroups', component: FilterCheckListByGroupsComponent},
   {path: 'ang/reports/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
   {path: 'ang/tests/:id', component: TestsNamesComponent},
-  {path: 'ang/tests', component: TestsNamesComponent},
   {path: 'ang', component: AppComponent}
 ];
 

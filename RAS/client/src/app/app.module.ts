@@ -33,6 +33,7 @@ import {TestsNamesComponent} from "./components/tests-names/tests-names.componen
 import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
+
 import {MarkService} from "./services/feedbacks/marks.service";
 import {UsersService} from "./services/users/users.service";
 import {MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
@@ -82,12 +83,10 @@ import { FilterCheckListByGroupsComponent } from './components/reports/check-lis
     MatTableModule,
     MatSortModule,
     MatFormFieldModule,
-    MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
-    MatSortModule,
     MatPaginatorModule,
     MatSelectModule,
     MatIconModule,
