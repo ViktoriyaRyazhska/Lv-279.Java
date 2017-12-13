@@ -6,8 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "profile_info")
 public class ProfileInfo {
@@ -15,7 +14,7 @@ public class ProfileInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "profile_id")
-    private int profileId;
+    private Integer profileId;
 
     @NotNull
     @Column(name = "profile_name")
@@ -25,6 +24,5 @@ public class ProfileInfo {
     @JoinColumn(name = "technology_id")
     private Technologies technologies;
 
-    public ProfileInfo() {
-    }
+    public ProfileInfo() {}
 }
