@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.*;
 import ua.softserve.service.dto.ItaTacticalPlanByGroupStageDto;
+
 import java.util.*;
+
 import static ua.softserve.persistence.constants.ConstantsFromDb.*;
+
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.persistence.repo.LanguageTranslationsRepository;
@@ -34,47 +37,69 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     @Autowired
     EmployeeRepository employeeRepository;
 
+    /**
+     * Method transforms information about one academy from all tables into one DTO object designed for ITA Tactical Plan by Group Stage.
+     *
+     * @param id (int) indicates which group to form DTO object designed for ITA Tactical Plan by Group Stage.
+     * @return information about one academy from all tables into one DTO object designed for ITA Tactical Plan by Group Stage.
+     */
     @Override
     public ItaTacticalPlanByGroupStageDto findById(int id) {
         ItaTacticalPlanByGroupStageDto dto = new ItaTacticalPlanByGroupStageDto();
         Academy academy = academyService.findOne(id);
-        dto.setGroupId(id);
-        dto.setCG(academy.getTechnologies().getName());
-        dto.setLocation(
-                languageTranslationsRepository.getOneCityNameTranslationByItemId(academy.getCity().getCityId()));
-        dto.setStartDate(academy.getStartDate());
-        dto.setEndDate(academy.getEndDate());
-        dto.setGroupStatus(academy.getAcademyStages().getName());
-        dto.setPaymentSatus(academy.getFree() == 1 ? "Founded by Softserve" : "Open group");
-        dto.setRequested(groupInfoRepository.findByAcademyAcademyId(academy.getAcademyId()).getStudentsPlannedToGraduate());
-        GroupInfo academyInfo = groupInfoRepository.findByAcademyAcademyId(academy.getAcademyId());
-        if (academyInfo != null) {
-            dto.setGroupName(academyInfo.getGroupName());
-            ProfileInfo profileInfo = groupInfoRepository.findByAcademyAcademyId(academy.getAcademyId())
-                    .getProfileInfo();
-            if (profileInfo != null) {
-                dto.setProfile(profileInfo.getProfileName());
+        if (academy != null) {
+            dto.setGroupId(id);
+            dto.setStartDate(academy.getStartDate());
+            dto.setEndDate(academy.getEndDate());
+            dto.setPaymentSatus(academy.getFree() == 1 ? "Founded by Softserve" : "Open group");
+
+            if (academy.getTechnologies() != null) {
+                dto.setCG(academy.getTechnologies().getName());
             } else {
-                dto.setProfile(null);
+                dto.setCG(null);
             }
+            if (academy.getCity() != null) {
+                dto.setLocation(
+                        languageTranslationsRepository.getOneCityNameTranslationByItemId(academy.getCity().getCityId()));
+            } else {
+                dto.setLocation(null);
+            }
+
+            if (academy.getAcademyStages() != null) {
+                dto.setGroupStatus(academy.getAcademyStages().getName());
+            } else {
+                dto.setGroupStatus(null);
+            }
+            GroupInfo academyInfo = groupInfoRepository.findByAcademyAcademyId(academy.getAcademyId());
+            if (academyInfo != null) {
+                dto.setGroupName(academyInfo.getGroupName());
+                dto.setRequested(academyInfo.getStudentsPlannedToGraduate());
+                ProfileInfo profileInfo = groupInfoRepository.findByAcademyAcademyId(academy.getAcademyId())
+                        .getProfileInfo();
+                if (profileInfo != null) {
+                    dto.setProfile(profileInfo.getProfileName());
+                } else {
+                    dto.setProfile(null);
+                }
+            } else {
+                dto.setGroupName(null);
+                dto.setProfile(null);
+                dto.setRequested(0);
+            }
+            this.calculationStudentsStatuses(dto);
+            this.setTrainer(dto);
         } else {
-            dto.setProfile(null);
+            dto = null;
         }
-        this.calculationStudentsStatuses(dto);
-        this.setTrainer(dto);
         return dto;
     }
 
-    @Override
-    public List<ItaTacticalPlanByGroupStageDto> findAll() {
-        List<ItaTacticalPlanByGroupStageDto> itaTacticalPlanByGroupStageDtos = new ArrayList<ItaTacticalPlanByGroupStageDto>();
-        List<Academy> academies = academyService.getAllAcademies();
-        for (Academy a : academies) {
-            itaTacticalPlanByGroupStageDtos.add(this.findById(a.getAcademyId()));
-        }
-        return itaTacticalPlanByGroupStageDtos;
-    }
 
+    /**
+     * Method Generate data for weekly status meeting with GTA/HR/ITA partisipants. Contain list og available groups by stages.
+     *
+     * @return List<List                               <                               ItaTacticalPlanByGroupStageDto>> with information from ITA Tactical Plan by Group Stage report.
+     */
     @Override
     public List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStageReport() {
         List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStage = new ArrayList<List<ItaTacticalPlanByGroupStageDto>>();
@@ -82,6 +107,7 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         List<ItaTacticalPlanByGroupStageDto> groupsInProces = new ArrayList<>();
         List<ItaTacticalPlanByGroupStageDto> groupsOffering = new ArrayList<>();
         List<ItaTacticalPlanByGroupStageDto> groupsGraduated = new ArrayList<>();
+        List<ItaTacticalPlanByGroupStageDto> listOfPlannedReleases= new ArrayList<>();
         List<Academy> academies = academyService.getAllAcademies();
         Calendar dateForComparison = new GregorianCalendar();
         dateForComparison.add(Calendar.MONTH, 2);
@@ -100,14 +126,23 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
             if (a.getAcademyStages().getStageId() == AS_GRADUATED_ID) {
                 groupsGraduated.add(this.findById(a.getAcademyId()));
             }
+            if (a.getAcademyStages().getStageId() == AS_BOARDING_ID) {
+                listOfPlannedReleases.add(this.findById(a.getAcademyId()));
+            }
         }
         itaTacticalPlanByGroupStage.add(planedGroupForTwoMoth);
         itaTacticalPlanByGroupStage.add(groupsInProces);
         itaTacticalPlanByGroupStage.add(groupsOffering);
         itaTacticalPlanByGroupStage.add(groupsGraduated);
+        itaTacticalPlanByGroupStage.add(listOfPlannedReleases);
         return itaTacticalPlanByGroupStage;
     }
 
+    /**
+     * Method calculation information about student status in the group
+     *
+     * @param dto (ItaTacticalPlanByGroupStageDto) specifies which group to calculate the number of students with different statuses
+     */
     private void calculationStudentsStatuses(ItaTacticalPlanByGroupStageDto dto) {
         List<Student> allStudentsOfGroup = studentRepository.findAllByAcademy_AcademyId(dto.getGroupId());
         int studentRequested = 0;
@@ -125,6 +160,12 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         }
         dto.setRequested(studentRequested);
     }
+
+    /**
+     * Method search and transforms information about all teachers and experts of group into one  StringBuilder object and set into dto.
+     *
+     * @param dto indicates for which dto search, transforms  and set information about trainers
+     */
 
     private void setTrainer(ItaTacticalPlanByGroupStageDto dto) {
         TeacherTypes typeTeacher = teacherTypeRepository.findOne(TT_TEACHER_ID);
