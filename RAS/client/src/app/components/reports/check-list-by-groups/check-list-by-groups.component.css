@@ -1,5 +1,5 @@
 .container{
-  margin: 0;
+  margin-top: -10px;
   padding: 0;
   width: 100%;
 }
@@ -9,11 +9,11 @@
 }
 
 table{
-  font-size: 0.75em;
+  font-size: 0.8em;
 }
 
 th {
-  height: 175px;
+  height: 190px;
   padding: 5px
 }
 th span {
@@ -60,6 +60,36 @@ button {
   /*height: 100px;*/
 }
 
-.container {
-  font-size: medium;
+.fixed_headers {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+td:nth-child(1), th:nth-child(1) { min-width: 90px; max-width: 90px}
+td:nth-child(2), th:nth-child(2) { min-width: 90px; max-width: 90px}
+td:nth-child(3), th:nth-child(3) { min-width: 90px; max-width: 90px}
+td:nth-child(4), th:nth-child(4) { min-width: 100px; max-width: 100px}
+td:nth-child(5), th:nth-child(5) { min-width: 100px; max-width: 100px}
+td:nth-child(n+6), th:nth-child(n+6) { min-width: 25px; max-width: 25px}
+td:nth-child(36), th:nth-child(36) { min-width: 45px; max-width: 45px}
+
+thead tr {
+  display: block;
+  position: relative;
+}
+
+th {
+  text-align: center;
+}
+
+tbody {
+  display: block;
+  overflow: auto;
+  width: 100%;
+  height: 350px;
+}
+
+.mat-icon {
+  width: 15px;
 }

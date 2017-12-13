@@ -17,6 +17,7 @@ export class ItaTacticalPlanByGroupStageComponent implements OnInit {
     {dataSource: new MatTableDataSource(), name: "Offering"},
     {dataSource: new MatTableDataSource(), name: "Graduated"}
   ]
+  dataToSave : any  = [];
   displayedColumns = ['Year', 'Month', 'Group ID', 'Group/Group feedbacks', 'CG', 'Profile', 'Location', '#,requested'
     , '#,study in progress', '#,graduated', '#,hired', 'Group start Date', 'Group finish Date', 'Group status'
     , 'Trainer', 'Comment', 'Payment status'];
@@ -30,13 +31,14 @@ export class ItaTacticalPlanByGroupStageComponent implements OnInit {
     this.itaTacticalPlanByGroupStageService.getAll().subscribe(
       data => {
         for (var i = 0; i < data.length; i++) {
-          this.itaTacticalPlanByGroupStageReports[i].dataSource = new MatTableDataSource(data[i].sort((item1, item2) => {
+          this.dataToSave[i]=data[i].sort((item1, item2) => {
             if (item1.startDate > item2.startDate) {
               return 1;
             } else {
               return -1;
             }
-          }));
+          });
+          this.itaTacticalPlanByGroupStageReports[i].dataSource = new MatTableDataSource(this.dataToSave[i]);
           this.itaTacticalPlanByGroupStageReports[i].dataSource.sort = this.sort;
         }
       },

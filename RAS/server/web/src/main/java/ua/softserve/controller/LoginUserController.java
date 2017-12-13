@@ -18,14 +18,14 @@ public class LoginUserController {
     // return "index";
     // }
 
-//    @GetMapping("/registr/{username}/{password}")
-//    public void registration(@PathVariable String username, @PathVariable String password) {
-//        LoginUser user = new LoginUser();
-//        user.setUsername(username);
-//        user.setPassword(password);
-////        user.setAuthority(Authority.ADMIN);
-//        userService.save(user);
-//    }
+    // @GetMapping("/registr/{username}/{password}")
+    // public void registration(@PathVariable String username, @PathVariable String password) {
+    // LoginUser user = new LoginUser();
+    // user.setUsername(username);
+    // user.setPassword(password);
+    //// user.setAuthority(Authority.ADMIN);
+    // userService.save(user);
+    // }
 
     @GetMapping("/success")
     public String success() {

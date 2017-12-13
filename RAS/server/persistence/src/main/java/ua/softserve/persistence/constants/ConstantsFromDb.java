@@ -35,7 +35,6 @@ public class ConstantsFromDb {
     public static int EL_PROFICIENT_ID = 20;
     public static int EL_PROFICIENT_HIGH_ID = 21;
 
-
     // AS - Academy Stage
     public static int AS_PLANNED_ID = 1;
     public static int AS_BOARDING_ID = 2;
@@ -69,5 +68,6 @@ public class ConstantsFromDb {
     public static int TT_EXPERT_ID = 2;
     public static int TT_INTERVIEWER_ID = 3;
 
-
+    //E - Employee
+    public static final Integer EE_ZERO_EMPLOYEE = 0;
 }

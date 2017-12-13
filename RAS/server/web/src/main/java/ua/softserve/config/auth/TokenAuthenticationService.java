@@ -8,4 +8,3 @@ public interface TokenAuthenticationService {
 
     Authentication getAuthentication(HttpServletRequest request);
 }
-

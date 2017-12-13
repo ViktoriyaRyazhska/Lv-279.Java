@@ -45,8 +45,8 @@ export class AddGroupComponent implements OnInit {
       'cityId': new FormControl(this.group.cityId),
       'startDateFormControl': new FormControl(this.group.startDate),
       'endDateFormControl': new FormControl(this.group.endDate),
-      'commonDirectionFormControl': new FormControl(this.group.directionId),
-      'directionFormControl': new FormControl(this.group.technologieId),
+      'commonDirectionFormControl': new FormControl(this.group.directionId, Validators.required),
+      'directionFormControl': new FormControl(this.group.technologieId, Validators.required),
       'profileInfoFormControl': new FormControl(this.group.profileId),
       'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate),
       'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment),
@@ -54,11 +54,19 @@ export class AddGroupComponent implements OnInit {
     });
   }
 
+  isFormValid(): boolean{
+    return this.signupForm.get('nameForSiteFormControl').valid;
+  }
+
   saveGroup() {
-    // console.log(this.signupForm);
-    this.group.setDataFromFormControl(this.signupForm);
-    this.addGroupService.post(this.group);
-    console.log(this.group);
+    if(this.isFormValid()){
+      this.group.setDataFromFormControl(this.signupForm);
+      this.isFormValid();
+      this.addGroupService.post(this.group);
+    }else{
+
+    }
+
   }
 
   // setDataToForm(){

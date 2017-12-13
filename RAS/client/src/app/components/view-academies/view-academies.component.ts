@@ -25,6 +25,8 @@ export class ViewAcademiesComponent implements OnInit {
   pager: any = {};
   pagedItems = [];
 
+  paymentStatus = [];
+
   displayedColumns =
     ['grName', 'nameForSite', 'technologyName', 'profileName',
       'paymentStatus', 'cityName', 'startDate', 'endDate',
@@ -59,7 +61,7 @@ export class ViewAcademiesComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
 
-
+        this.paymentStatus = ['Founded by SoftServe', 'Paid'];
         // this.setPage(1);
       },
       error => console.log(error)

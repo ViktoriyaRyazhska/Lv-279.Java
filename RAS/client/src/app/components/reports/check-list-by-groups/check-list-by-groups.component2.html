@@ -1,3 +1,4 @@
+<!--
 <div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort>
 
@@ -21,95 +22,129 @@
       <mat-cell *matCellDef="let element"> {{element.teachers}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="experts">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Experts</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.experts}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.englishLevelDefined">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>English level defined for group</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.englishLevelDefined}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.englishLevelCorrect">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>English Level is correct</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.englishLevelCorrect}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.entryScoreDefined">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Entry score is defined</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.entryScoreDefined}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.incomingTestDefined">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Incoming test is defined</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.incomingTestDefined}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.approvedByDefined">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Approved by is defined</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.approvedByDefined}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.teacherDefined">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Teacher(s) defined</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.teacherDefined}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.expertDefined">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Expert defined</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.expertDefined}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.groupStartedSuccessfully">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Group started successfully</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.groupStartedSuccessfully}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.test1">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test 1 is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.test1}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.test2">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test 2 is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.test2}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.test3">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test 3 is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.test3}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.test4">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test 4 is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.test4}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.test5">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test 5 is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.test5}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.test6">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test 6 is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.test6}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.test7">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test 7 is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.test7}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.test8">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test 8 is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.test8}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.test9">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test 9 is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.test9}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.test10">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test 10 is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.test10}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.intermediateTestBasePass">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Intermediate Test Base is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.intermediateTestBasePass}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.intermediateTestLangPass">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Intermediate Test Lang is pass</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.intermediateTestLangPass}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.teacherFeedbacksFilledIn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Teacher’s feedbacks filled in</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.teacherFeedbacksFilledIn}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.expertFeedbacksFilledIn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Expert’s feedbacks filled in</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.expertFeedbacksFilledIn}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="r.groupReadyToOffering">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Group ready to offering</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.r.groupReadyToOffering}} </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
   </mat-table>
 </div>
-
-<!--<div *ngIf="groups" class="container" style="margin: 0; padding: 0">-->
-
-  <!--<p-dataTable [value]="groups" [scrollable]="true" scrollHeight="400px" scrollWidth="800px"-->
-               <!--resizableColumns="true" columnResizeMode="expand" [loading]="loading">-->
-    <!--<p-header>Check List By Group</p-header>-->
-
-    <!--<p-headerColumnGroup>-->
-
-      <!--<p-row>-->
-        <!--<p-column header="Group name" [rowspan]="2"></p-column>-->
-        <!--<p-column header="Dev center" [rowspan]="2"></p-column>-->
-        <!--<p-column header="Status" [rowspan]="2"></p-column>-->
-        <!--<p-column header="Teachers" [rowspan]="2"></p-column>-->
-        <!--<p-column header="Experts" [rowspan]="2"></p-column>-->
-        <!--<p-column header="Group started successfully" [colspan]="7"></p-column>-->
-        <!--<p-column header="Group ready to offering" [colspan]="14"></p-column>-->
-        <!--<p-column header="Group ready for close" [colspan]="6"></p-column>-->
-        <!--<p-column header="Total, %" [rowspan]="2"></p-column>-->
-      <!--</p-row>-->
-      <!--<p-row>-->
-        <!--<p-column header="English level defined for group"></p-column>-->
-        <!--<p-column header="English Level is correct"></p-column>-->
-        <!--<p-column header="Entry score is defined"></p-column>-->
-        <!--<p-column header="Incoming test is defined"></p-column>-->
-        <!--<p-column header="Approved by is defined"></p-column>-->
-        <!--<p-column header="Teacher(s) defined"></p-column>-->
-        <!--<p-column header="Expert  defined"></p-column>-->
-        <!--<p-column header="Test 1 is pass"></p-column>-->
-        <!--<p-column header="Test 2 is pass"></p-column>-->
-        <!--<p-column header="Test 3 is pass"></p-column>-->
-        <!--<p-column header="Test 4 is pass"></p-column>-->
-        <!--<p-column header="Test 5 is pass"></p-column>-->
-        <!--<p-column header="Test 6 is pass"></p-column>-->
-        <!--<p-column header="Test 7 is pass"></p-column>-->
-        <!--<p-column header="Test 8 is pass"></p-column>-->
-        <!--<p-column header="Test 9 is pass"></p-column>-->
-        <!--<p-column header="Test 10 is pass"></p-column>-->
-        <!--<p-column header="Intermediate Test Base is pass"></p-column>-->
-        <!--<p-column header="Intermediate Test Lang is pass"></p-column>-->
-        <!--<p-column header="Teacher’s feedbacks filled in"></p-column>-->
-        <!--<p-column header="Expert’s feedbacks filled in"></p-column>-->
-        <!--<p-column header="Final Test Base is pass"></p-column>-->
-        <!--<p-column header="Final Test Lang is pass"></p-column>-->
-        <!--<p-column header="Interviewer defined"></p-column>-->
-        <!--<p-column header="Interviewers feedback – summary defined"></p-column>-->
-        <!--<p-column header="Experts load filled in"></p-column>-->
-        <!--<p-column header="Interviewers load filled in"></p-column>-->
-      <!--</p-row>-->
-    <!--</p-headerColumnGroup>-->
-
-    <!--<p-column field="groupName"></p-column>-->
-    <!--<p-column field="cityName"></p-column>-->
-    <!--<p-column field="status"></p-column>-->
-    <!--<p-column field="teachers"></p-column>-->
-    <!--<p-column field="experts"></p-column>-->
-    <!--<p-column field="r.englishLevelDefined"></p-column>-->
-    <!--<p-column field="r.englishLevelCorrect"></p-column>-->
-    <!--<p-column field="r.entryScoreDefined"></p-column>-->
-    <!--<p-column field="r.incomingTestDefined"></p-column>-->
-    <!--<p-column field="r.approvedByDefined"></p-column>-->
-    <!--<p-column field="r.teacherDefined"></p-column>-->
-    <!--<p-column field="r.expertDefined"></p-column>-->
-    <!--<p-column field="r.test1"></p-column>-->
-    <!--<p-column field="r.test2"></p-column>-->
-    <!--<p-column field="r.test3"></p-column>-->
-    <!--<p-column field="r.test4"></p-column>-->
-    <!--<p-column field="r.test5"></p-column>-->
-    <!--<p-column field="r.test6"></p-column>-->
-    <!--<p-column field="r.test7"></p-column>-->
-    <!--<p-column field="r.test8"></p-column>-->
-    <!--<p-column field="r.test9"></p-column>-->
-    <!--<p-column field="r.test10"></p-column>-->
-    <!--<p-column field="r.intermediateTestBasePass"></p-column>-->
-    <!--<p-column field="r.intermediateTestLangPass"></p-column>-->
-    <!--<p-column field="r.teacherFeedbacksFilledIn"></p-column>-->
-    <!--<p-column field="r.expertFeedbacksFilledIn"></p-column>-->
-    <!--<p-column field="r.finalTestBasePass"></p-column>-->
-    <!--<p-column field="r.finalTestLangPass"></p-column>-->
-    <!--<p-column field="r.interviewerDefined"></p-column>-->
-    <!--<p-column field="r.interviewerSummaryDefined"></p-column>-->
-    <!--<p-column field="r.expertsLoadFilledIn"></p-column>-->
-    <!--<p-column field="r.interviewersLoadFilledIn"></p-column>-->
-    <!--<p-column field="total"></p-column>-->
-  <!--</p-dataTable>-->
-
-<!--</div>-->
+-->

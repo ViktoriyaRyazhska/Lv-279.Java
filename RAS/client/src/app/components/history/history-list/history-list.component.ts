@@ -14,6 +14,7 @@ export class HistoryListComponent implements OnInit {
     , 'modifyDate', 'modifyBy'];
   dataSource = new MatTableDataSource();
 
+
   constructor(private historyService: HistoryService) {
   }
 
