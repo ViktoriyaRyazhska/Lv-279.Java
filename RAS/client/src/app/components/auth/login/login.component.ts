@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private loginService: LoginService,
-              private router:Router
+              private router: Router
               ) { }
 
   ngOnInit() {
@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     this.loginService.signIn(this.account)
       .subscribe((response:ResponseToken)=>{
         localStorage.setItem('jwt',response.token);
-        // this.router.navigate(['/ang/'],);
         this.error=false;
       }, error2 => {
           this.error = true;
