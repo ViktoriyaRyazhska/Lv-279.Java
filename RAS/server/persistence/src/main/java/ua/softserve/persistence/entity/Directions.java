@@ -6,15 +6,14 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "directions")
 public class Directions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "direction_id")
-    private int directionId;
+    private Integer directionId;
 
     @NotNull
     @Column(name = "name")
@@ -23,6 +22,5 @@ public class Directions {
     @Column(name = "ita")
     private Byte ita;
 
-    public Directions() {
-    }
+    public Directions() {}
 }

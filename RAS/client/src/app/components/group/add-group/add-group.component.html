@@ -1,17 +1,15 @@
 <div>
   <div class="container well">
     <div class="col-sm-12" id="form-test">
-      <form [formGroup]="signupForm">
+      <form [formGroup]="signupForm" id="formId" (ngSubmit)="saveGroup()">
         <ul class="col-sm-6 form-group" id="UL_left_column">
           <div class="row">
             <mat-form-field class="col-sm-6">
               <input matInput placeholder="Group Name:" formControlName="groupInfoFormControl" maxlength="50">
-              <!--<mat-error *ngIf="signupForm.invalid">{{getErrorMessage()}}</mat-error>-->
             </mat-form-field>
 
             <mat-form-field class="col-sm-6">
               <input matInput placeholder="Name for Site:" formControlName="nameForSiteFormControl" maxlength="50">
-              <!--<mat-error *ngIf="signupForm.invalid">{{getErrorMessage()}}</mat-error>-->
             </mat-form-field>
           </div>
 
@@ -45,9 +43,9 @@
 
           <div class="row">
             <mat-form-field class="col-sm-12">
-              <mat-select placeholder="Payment Status:" formControlName="cityId">
-                <mat-option [value]="1" selected>Founded By SoftServe</mat-option>
-                <mat-option [value]="0">Open Group</mat-option>
+              <mat-select placeholder="Payment Status:" formControlName="paymentStatusFormControl">
+                <mat-option [value]=1 selected>Founded By SoftServe</mat-option>
+                <mat-option [value]=0 >Open Group</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -87,41 +85,35 @@
             <mat-form-field class="col-sm-6">
               <input matInput type="number" placeholder="Students Planned to Graduate:"
                      formControlName="studentPlannedToGraduate" min="0" max="99">
-              <!--<mat-error *ngIf="options.get('fontSize')?.invalid">Min size: 10px</mat-error>-->
             </mat-form-field>
 
             <mat-form-field class="col-sm-6">
               <input matInput type="number" placeholder="Students Planned to Enrollment:"
                      formControlName="studentPlannedToEnrollment" min="0" max="99" maxlength="2">
-              <!--<mat-error *ngIf="options.get('fontSize')?.invalid">Min size: 10px</mat-error>-->
             </mat-form-field>
 
-            <!--<mat-form-field hideRequiredMarker class="col-sm-4">-->
-            <!--<input matInput type="number" placeholder="Students Actual:"-->
-            <!--formControlName="studentActualFromControl" min="0" max="99" maxlength="2">-->
-            <!--&lt;!&ndash;<mat-error *ngIf="options.get('fontSize')?.invalid">Min size: 10px</mat-error>&ndash;&gt;-->
-            <!--</mat-form-field>-->
           </div>
 
           <div class="row">
             <mat-form-field hideRequiredMarker class="col-sm-12">
-              <input matInput type="number" placeholder="Students Actual:"
+              <input matInput disabled type="number" placeholder="Students Actual:"
                      formControlName="studentActualFromControl" min="0" max="99" maxlength="2">
-              <!--<mat-error *ngIf="options.get('fontSize')?.invalid">Min size: 10px</mat-error>-->
             </mat-form-field>
           </div>
 
         </ul>
 
       </form>
+      <div class="row" id="btnSaveId" align="center">
+        <button mat-raised-button type="submit" form="formId" color="primary">Save Group</button>
+        <!--<mat-error *ngIf="signupForm.invalid">{{defaultInvalidInput}}</mat-error>-->
+      </div>
+    </div>
 
-    </div>
-    <div class="row" id="btnSaveId" align="center">
-      <button mat-raised-button color="primary" (ngSubmit)="saveGroup()">Save Group</button>
-      <!--<mat-error *ngIf="signupForm.invalid">{{defaultInvalidInput}}</mat-error>-->
-    </div>
   </div>
+
+
   <div>
-    <app-nav-tabs></app-nav-tabs>
+    <app-nav-tabs [academyId]="groupId"></app-nav-tabs>
   </div>
 </div>

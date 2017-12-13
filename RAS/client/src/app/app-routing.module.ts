@@ -25,7 +25,9 @@ const appRoutes: Routes = [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
     {path: 'students', component: StudentsComponent},
     {path: 'feedback', component: FeedbacksComponent},
-    {path: 'history', component: HistoryListComponent}]
+    {path: 'history/:id', component: HistoryListComponent},
+    {path: 'history', component: HistoryListComponent},
+    {path: 'tests', component: TestsNamesComponent}]
   },
   {path: 'ang/viewAcademies', component: ViewAcademiesComponent},
   {path: 'ang/students', component: StudentsComponent},

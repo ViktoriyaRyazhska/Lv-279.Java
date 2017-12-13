@@ -26,4 +26,7 @@ public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
      * @return returns data from GroupInfo table.
      */
     GroupInfo findByAcademyAcademyId(int academyId);
+
 }
+
+

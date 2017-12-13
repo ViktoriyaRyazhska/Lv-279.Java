@@ -1,99 +1,6 @@
-<!--<div *ngFor="let report of itaTacticalPlanByGroupStageReports">-->
-<!--<h1 align="center">{{report.name}}</h1>-->
-<!--<table class="table table-condensed table-hover table-bordered table-responsive table-striped">-->
-
-<!--<tr>-->
-<!--<th>Year</th>-->
-<!--<th>Month</th>-->
-<!--<th>Group ID</th>-->
-<!--<th>Group/Group feedbacks</th>-->
-<!--<th>CG</th>-->
-<!--<th>Profile</th>-->
-<!--<th>Location</th>-->
-<!--<th>#,requested</th>-->
-<!--<th>#,study in progress</th>-->
-<!--<th>#,graduated</th>-->
-<!--<th>#,hired</th>-->
-<!--<th>Group start Date</th>-->
-<!--<th>Group finish Date</th>-->
-<!--<th>Group status</th>-->
-<!--<th>Trainer</th>-->
-<!--<th>Comment</th>-->
-<!--<th>Payment status</th>-->
-<!--</tr>-->
-
-<!--<ng-container *ngFor="let item of report.report">-->
-<!--<tr>-->
-<!--<td>{{item.startDate|date: "yyyy"}}</td>-->
-<!--<td>{{item.startDate|date: "M"}}</td>-->
-<!--<td>{{item.groupId}}</td>-->
-<!--<td>{{item.groupName}}</td>-->
-<!--<td>{{item.cg}}</td>-->
-<!--<td>{{item.profile}}</td>-->
-<!--<td>{{item.location}}</td>-->
-<!--<td>{{item.requested}}</td>-->
-<!--<td>{{item.studyInProgress}}</td>-->
-<!--<td>{{item.graduated}}</td>-->
-<!--<td>{{item.hired}}</td>-->
-<!--<td>{{item.startDate|date: "dd/MM/yyyy"}}</td>-->
-<!--<td>{{item.endDate|date: "dd/MM/yyyy"}}</td>-->
-<!--<td>{{item.groupStatus}}</td>-->
-<!--<td>{{item.trainer}}</td>-->
-<!--<td>{{item.comment}}</td>-->
-<!--<td>{{item.paymentSatus}}</td>-->
-
-<!--</tr>-->
-<!--</ng-container>-->
-
-<!--</table>-->
-<!--</div>-->
-
-<!--<div *ngFor="let report of itaTacticalPlanByGroupStageReports">-->
-<!--<h1 align="center">{{report.name}}</h1>-->
-<!--<p-dataTable [value]="report.report" resizableColumns="true" reorderableColumns="true" scrollable="true">-->
-
-<!--<p-column field="startDate" header="Year" [style]="{'width':'4em'}">-->
-<!--<ng-template let-col let-item="rowData" pTemplate="body">-->
-<!--{{item[col.field]|date: "yyyy"}}-->
-<!--</ng-template>-->
-<!--</p-column>-->
-<!--<p-column field="startDate" header="Month" [style]="{'width':'4em'}">-->
-<!--<ng-template let-col let-item="rowData" pTemplate="body">-->
-<!--{{item[col.field]|date: "M"}}-->
-<!--</ng-template>-->
-<!--</p-column>-->
-<!--<p-column field="groupId" header="Group ID" [style]="{'width':'4em'}"></p-column>-->
-<!--<p-column field="groupName" header="Group/Group feedbacks" [style]="{'width':'10em'}"></p-column>-->
-<!--<p-column field="cg" header="CG" [style]="{'width':'6em'}"></p-column>-->
-<!--<p-column field="profile" header="Profile" [style]="{'width':'8em'}"></p-column>-->
-<!--<p-column field="location" header="Location" [style]="{'width':'6em'}"></p-column>-->
-<!--<p-column field="requested" header="#,requested" [style]="{'width':'4em'}"></p-column>-->
-<!--<p-column field="graduated" header="#,study in progress" [style]="{'width':'4em'}"></p-column>-->
-<!--<p-column field="hired" header="#,graduated" [style]="{'width':'4em'}"></p-column>-->
-<!--<p-column field="startDate" header="Group start Date" [style]="{'width':'8em'}">-->
-<!--<ng-template let-col let-item="rowData" pTemplate="body">-->
-<!--{{item[col.field]|date: "dd/MM/yyyy"}}-->
-<!--</ng-template>-->
-<!--</p-column>-->
-<!--<p-column field="endDate" header="Group finish Date" [style]="{'width':'8em'}">-->
-<!--<ng-template let-col let-item="rowData" pTemplate="body">-->
-<!--{{item[col.field]|date: "dd/MM/yyyy"}}-->
-<!--</ng-template>-->
-<!--</p-column>-->
-<!--<p-column field="groupStatus" header="Group status" [style]="{'width':'6em'}"></p-column>-->
-<!--<p-column field="trainer" header="Trainer" [style]="{'width':'10em'}"></p-column>-->
-<!--<p-column field="comment" header="Comment" [style]="{'width':'10em'}"></p-column>-->
-<!--<p-column field="paymentSatus" header="Payment status" [style]="{'width':'10em'}"></p-column>-->
-<!--</p-dataTable>-->
-<!--</div>-->
-
-
-<!--<td>{{item.groupName}}</td>-->
-
-<div *ngFor="let report of itaTacticalPlanByGroupStageReports; let i = index">
+<div *ngFor="let report of itaTacticalPlanByGroupStageReports">
   <h1 align="center">{{report.name}}</h1>
   <div class="example-container mat-elevation-z8">
-    <app-exporttoexcel [data]="dataToSave[i]"></app-exporttoexcel>
     <mat-table #table [dataSource]="report.dataSource" matSort>
 
       <ng-container matColumnDef="Year">
@@ -159,11 +66,6 @@
       <ng-container matColumnDef="Group finish Date">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Group finish Date</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.endDate|date: "dd/MM/yyyy"}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="Group status">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Group status</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.groupStatus}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Trainer">

@@ -15,12 +15,12 @@ export class ItaTacticalPlanByGroupStageComponent implements OnInit {
     {dataSource: new MatTableDataSource(), name: "List of planned launches of group (next 2 monthes)"},
     {dataSource: new MatTableDataSource(), name: "In Process"},
     {dataSource: new MatTableDataSource(), name: "Offering"},
-    {dataSource: new MatTableDataSource(), name: "Graduated"}
+    {dataSource: new MatTableDataSource(), name: "Graduated"},
+    {dataSource: new MatTableDataSource(), name: "List of planned releases"}
   ]
   dataToSave : any  = [];
   displayedColumns = ['Year', 'Month', 'Group ID', 'Group/Group feedbacks', 'CG', 'Profile', 'Location', '#,requested'
-    , '#,study in progress', '#,graduated', '#,hired', 'Group start Date', 'Group finish Date', 'Group status'
-    , 'Trainer', 'Comment', 'Payment status'];
+    , '#,study in progress', '#,graduated', '#,hired', 'Group start Date', 'Group finish Date', 'Trainer', 'Comment', 'Payment status'];
   @ViewChild(MatSort) sort: MatSort;
 
 
