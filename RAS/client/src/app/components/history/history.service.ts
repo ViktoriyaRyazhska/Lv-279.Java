@@ -12,7 +12,7 @@ export class HistoryService {
   }
 
   getAll(id: number): Observable<any> {
-    return this.http.get('http://localhost:8080/history/' + id);
+    return this.http.get(environment.serverUrl + 'history/' + id);
 
   }
 }
