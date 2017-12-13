@@ -6,8 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @Table(name = "group_info")
 public class GroupInfo {
@@ -26,16 +25,15 @@ public class GroupInfo {
 
     @NotNull
     @Column(name = "students_planned_to_graduate")
-    private int studentsPlannedToGraduate;
+    private Integer studentsPlannedToGraduate;
 
     @NotNull
     @Column(name = "students_planned_to_enrollment")
-    private int studentsPlannedToEnrollment;
+    private Integer studentsPlannedToEnrollment;
 
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private ProfileInfo profileInfo;
 
-    public GroupInfo() {
-    }
+    public GroupInfo() {}
 }
