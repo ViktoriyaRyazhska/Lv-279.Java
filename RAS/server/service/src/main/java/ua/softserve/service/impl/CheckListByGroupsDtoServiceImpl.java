@@ -88,13 +88,13 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
     private void setTeachers(Integer academyId, CheckListByGroupsDto checkListByGroupsDto) {
         List<GroupInfoTeachers> teachers = groupInfoTeachersRepository.findAllByAcademyIdAndTeacherTypeId(academyId,
-                TT_TEACHER_ID);
+                TEACHER_TYPE_TEACHER_ID);
         ;
         List<GroupInfoTeachers> experts = groupInfoTeachersRepository.findAllByAcademyIdAndTeacherTypeId(academyId,
-                TT_EXPERT_ID);
+                TEACHER_TYPE_EXPERT_ID);
         ;
         List<GroupInfoTeachers> interviewers = groupInfoTeachersRepository.findAllByAcademyIdAndTeacherTypeId(academyId,
-                TT_INTERVIEWER_ID);
+                TEACHER_TYPE_INTERVIEWER_ID);
         Map<String, Integer> r = checkListByGroupsDto.getR();
         checkListByGroupsDto.setTeachers(getTeachers(teachers));
         checkListByGroupsDto.setExperts(getTeachers(experts));
@@ -148,6 +148,6 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             return false;
         }
         int id = student.getStudentStatus().getId();
-        return id == SS_TRAINEE_ID || id == SS_ACCEPTED_PRE_OFFER_ID || id == SS_GRADUATED_ID;
+        return id == STUDENT_STATUS_TRAINEE_ID || id == STUDENT_STATUS_ACCEPTED_PRE_OFFER_ID || id == STUDENT_STATUS_GRADUATED_ID;
     }
 }
