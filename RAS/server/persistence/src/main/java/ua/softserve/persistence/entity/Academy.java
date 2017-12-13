@@ -51,27 +51,27 @@ public class Academy {
 
     @NotNull
     @Column(name = "free")
-    private Integer free;
+    private int free;
 
     @NotNull
     @Column(name = "status")
-    private Integer status;
+    private int status;
 
     @NotNull
     @Column(name = "has_tech")
-    private Integer hasTech;
+    private int hasTech;
 
     @NotNull
     @Column(name = "has_eng")
-    private Integer hasEng;
+    private int hasEng;
 
     @NotNull
     @Column(name = "has_first")
-    private Integer hasFirst;
+    private int hasFirst;
 
     @NotNull
     @Column(name = "not_synchronized")
-    private Integer notSynchronized;
+    private int notSynchronized;
 
     public Academy() {}
 }

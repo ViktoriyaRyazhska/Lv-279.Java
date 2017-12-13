@@ -17,7 +17,7 @@ public class City {
 
     @NotNull
     @Column(name = "crm_id")
-    private Integer crmId;
+    private int crmId;
 
     @Column(name = "ita")
     private Integer ita;
