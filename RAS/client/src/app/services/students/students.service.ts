@@ -21,6 +21,10 @@ export class StudentsService{
     return this.http.get(url);
   }
 
+  getEmployees():Observable<any>{
+    let url = environment.serverUrl+'students/employee';
+    return this.http.get(url);
+  }
   addUsers(object: number[], academyId:number):Observable<any>{
     let url = environment.serverUrl+'students/'+academyId+'/add';
     return this.http.post(url, object);

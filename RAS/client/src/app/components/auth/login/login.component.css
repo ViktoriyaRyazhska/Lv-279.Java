@@ -8,7 +8,8 @@
 .myerror{
   margin-top: 2%;
 }
-.mymatbtm{
+.mymatbtn{
   background-color: #3dbbd7;
   width: 100%;
+  font-weight: bold;
 }
