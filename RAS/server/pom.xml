@@ -12,7 +12,6 @@
     </parent>
 
     <modules>
-        <module>../client</module>
         <module>persistence</module>
         <module>service</module>
         <module>web</module>
