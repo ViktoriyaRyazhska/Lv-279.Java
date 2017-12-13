@@ -46,6 +46,7 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         dto.setEndDate(academy.getEndDate());
         dto.setGroupStatus(academy.getAcademyStages().getName());
         dto.setPaymentSatus(academy.getFree() == 1 ? "Founded by Softserve" : "Open group");
+        dto.setRequested(groupInfoRepository.findByAcademyAcademyId(academy.getAcademyId()).getStudentsPlannedToGraduate());
         GroupInfo academyInfo = groupInfoRepository.findByAcademyAcademyId(academy.getAcademyId());
         if (academyInfo != null) {
             dto.setGroupName(academyInfo.getGroupName());
@@ -111,9 +112,11 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         List<Student> allStudentsOfGroup = studentRepository.findAllByAcademy_AcademyId(dto.getGroupId());
         int studentRequested = 0;
         for (Student student : allStudentsOfGroup) {
-            if (student.getStudentStatus().getId() == AS_GRADUATED_ID) {
-                int currentValueGraduated = dto.getGraduated();
-                dto.setGraduated(++currentValueGraduated);
+            if (student == null) {
+                continue;
+            }
+            if (student.getStudentStatus() == null) {
+                continue;
             }
             if (student.getStudentStatus().getId() == SS_TRAINEE_ID
                     || student.getStudentStatus().getId() == SS_TRAINEE_ID) {

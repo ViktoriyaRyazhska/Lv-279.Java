@@ -80,7 +80,6 @@ public class GroupInfoServiceImpl implements GroupInfoService {
             getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
         }
         if (groupInfoList != null) {
-
             for (GroupInfo groupInfo : groupInfoList) {
                 AcademyDTO academyDTO = academyConverter.toDTO(groupInfo);
                 Academy academy = groupInfo.getAcademy();
@@ -105,12 +104,12 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                             }
                         }
                     }
-                    if (employeeList.size() != 0) {
+                    if(employeeList.size() != 0){
                         academyDTO.setExperts(employeeList);
                     }
                     if (studentStatuses != null) {
-                        countActualStudents = studentsService.countAllByAcademyAndStudentStatus(academy,
-                                studentStatuses);
+                        countActualStudents = studentsService
+                                .countAllByAcademyAndStudentStatus(academy, studentStatuses);
                     }
                     if (countActualStudents != null) {
                         academyDTO.setStudentsActual(countActualStudents);

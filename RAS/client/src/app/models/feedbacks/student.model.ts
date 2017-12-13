@@ -60,8 +60,7 @@ export class StudentStatus {
 }
 export class ApprovedBy {
   employeeId: number;
-  firstNameEng: string;
-  lastNameEng: string;
+  fullName: string;
 }
 export class Feedback {
   id: number;
