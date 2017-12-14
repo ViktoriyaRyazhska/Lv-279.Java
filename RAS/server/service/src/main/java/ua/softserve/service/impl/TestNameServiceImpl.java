@@ -16,9 +16,12 @@ public class TestNameServiceImpl implements TestNameService {
 
     @Override
     @Transactional
-    public void saveTestNames(List<TestName> testNames, Integer academyId) {
+    public String saveTestNames(List<TestName> testNames, Integer academyId) {
 
         for (TestName testName : testNames) {
+            if(testName.getTestName()==null || testName.getTestMaxScore()==null || testName.getTestName().equals("")) {
+                return TestNameService.NullValue;
+            }
             if (testName.getTestMaxScore()==0){
                 this.deleteTestName(testName);
             }
@@ -27,6 +30,7 @@ public class TestNameServiceImpl implements TestNameService {
                 testNameRepository.save(testName);
             }
         }
+        return TestNameService.DataIsGood;
     }
 
     @Override

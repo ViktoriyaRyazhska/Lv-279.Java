@@ -1,6 +1,7 @@
 package ua.softserve.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.Http401AuthenticationEntryPoint;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +29,10 @@ import ua.softserve.persistence.entity.Authority;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String AUTHORIZED_ROLE = Authority.USER.toString();
+    private final int MAX_AGE = 3600;
+
+    @Value("${client_cross_origin}")
+    private String url;
 
     @Autowired
     private UserDetailsService userService;
@@ -42,18 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().cors().disable();
+        http
+                .csrf().disable();
 
-        http.exceptionHandling().and().anonymous().and().servletApi().and().headers().cacheControl();
-
-        // http
-        //
-        // .authorizeRequests().antMatchers("/success").hasAuthority(AUTHORIZED_ROLE)
-        // .and()
-        // .exceptionHandling()
-        // .authenticationEntryPoint(new Http401AuthenticationEntryPoint(" "));
-
-        // http.addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http
+                .addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
@@ -84,10 +81,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200/").allowCredentials(true)
+                registry.addMapping("/**").allowedOrigins(url).allowCredentials(true)
                         .allowedHeaders("Access-Control-Allow-Credentials", "Content-Type",
                                 "Access-Control-Allow-Headers", "X-Requested-With", "Origin", "Accept")
-                        .allowedMethods("PUT", "DELETE", "GET", "POST").maxAge(3600);
+                        .allowedMethods("PUT", "DELETE", "GET", "POST").maxAge(MAX_AGE);
             }
         };
     }

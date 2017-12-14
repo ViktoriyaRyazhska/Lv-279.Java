@@ -20,8 +20,6 @@ public class LoginUserServiceImpl implements LoginUserService {
 
     @Autowired
     private LoginUserRepository loginUserRepository;
-    // @Autowired
-    // private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -30,10 +28,4 @@ public class LoginUserServiceImpl implements LoginUserService {
         user.ifPresent(detailsChecker::check);
         return user.orElseThrow(() -> new UsernameNotFoundException("user not found."));
     }
-
-    // @Override
-    // public void save(LoginUser loginUser) {
-    // loginUser.setPassword(passwordEncoder.encode(loginUser.getPassword()));
-    // loginUserRepository.save(loginUser);
-    // }
 }

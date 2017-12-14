@@ -16,12 +16,12 @@ import java.util.Optional;
 @Component
 public final class TokenHandlerImpl implements TokenHandler {
 
-    // @SuppressWarnings("unused")
-    // private static final Logger logger = LoggerFactory.getLogger(TokenHandlerImpl.class);
-
     private final String secret;
 
     private final LoginUserRepository userRepository;
+
+    @Value("${app.jwt.expiration}")
+    private Long expiration;
 
     @Autowired
     public TokenHandlerImpl(@Value("${app.jwt.secret}") String secret, LoginUserRepository userRepository) {
@@ -39,7 +39,7 @@ public final class TokenHandlerImpl implements TokenHandler {
 
     @Override
     public String createTokenForUser(LoginUser user) {
-        final ZonedDateTime afterOneWeek = ZonedDateTime.now().plusWeeks(1);
+        final ZonedDateTime afterOneWeek = ZonedDateTime.now().plusHours(expiration);
 
         return Jwts.builder().setSubject(String.valueOf(user.getId())).signWith(SignatureAlgorithm.HS512, secret)
                 .setExpiration(Date.from(afterOneWeek.toInstant())).compact();

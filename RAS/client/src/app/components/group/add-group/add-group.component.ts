@@ -74,21 +74,4 @@ export class AddGroupComponent implements OnInit {
 
   }
 
-  // setDataToForm(){
-  //   this.signupForm.setValue({
-  //     'groupInfoFormControl': ,
-  //     'nameForSiteFormControl': ,
-  //     'academyStagesId': ,
-  //     'cityId': ,
-  //     'startDateFormControl': ,
-  //     'endDateFormControl': ,
-  //     'commonDirectionFormControl': ,
-  //     'directionFormControl': ,
-  //     'profileInfoFormControl': ,
-  //     'studentPlannedToGraduate': ,
-  //     'studentPlannedToEnrollment':
-  //   });
-  // }
-
-
 }

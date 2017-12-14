@@ -21,15 +21,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /**
-     * Gets from DB list of all users.
-     *
-     * @return JSON object of list of all users from DB.
-     */
-    @GetMapping(value = "/user/getAllUsers", produces = { "application/json" })
-    public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
-    }
 
     @GetMapping(value = "/{id}/users", produces = { "application/json" })
     public List<UserShortViewDto> getStudentsByAcademy(@PathVariable("id") Integer academyId) {

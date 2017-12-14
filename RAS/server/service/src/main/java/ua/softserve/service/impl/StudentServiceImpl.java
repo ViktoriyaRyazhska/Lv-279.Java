@@ -16,7 +16,7 @@ import ua.softserve.service.dto.StudentViewDto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ua.softserve.persistence.constants.ConstantsFromDb.*;
+import static ua.softserve.persistence.constants.ConstantsFromDb.STUDENT_STATUS_TRAINEE_ID;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -33,42 +33,48 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional(readOnly = true)
     public List<StudentViewDto> getStudentsByAcademy(Integer academyId) {
-        return studentRepository.findAllByAcademyId(academyId).stream().map(StudentViewDto::of)
+        return studentRepository.findAllByAcademyId(academyId)
+                .stream()
+                .map(StudentViewDto::of)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<EmployeeEngShortDto> getAllEmployees() {
-        return employeeRepository.findAllSorted().stream().map(EmployeeEngShortDto::of).collect(Collectors.toList());
+        return employeeRepository.findAllSorted()
+                .stream()
+                .map(EmployeeEngShortDto::of)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public void addStudentsToAcademy(Integer academyId, List<Integer> students) {
-        StudentStatuses s = studentsStatusesRepository.findOne(STUDENT_STATUS_TRAINEE_ID);
-        studentRepository.save(students.stream().map(id -> {
-            Student existStudent = studentRepository.ifStudentExist(academyId, id);
-            return existStudent == null ? new Student(id, academyId) : existStudent.unRemove();
-        }).peek(student -> student.setStudentStatus(s))
-                .collect(Collectors.toList()));
+        List<Student> entities = students.stream()
+                .map(id -> {
+                    Student existStudent = studentRepository
+                            .findStudentByAcademy(academyId, id);
+                    return existStudent == null ?
+                            new Student(id, academyId, STUDENT_STATUS_TRAINEE_ID) :
+                            existStudent.unremove();
+                })
+                .collect(Collectors.toList());
+        studentRepository.save(entities);
     }
 
     @Override
     @Transactional
     public void removeStudentFromAcademy(Integer studentId) {
-        Student student = studentRepository.getOne(studentId);
-        student.setRemoved(true);
-        studentRepository.save(student);
+        studentRepository.updateRemovedStatus(studentId,true);
     }
 
     @Override
     @Transactional
     public void updateStudentOfAcademy(List<StudentViewDto> students) {
-        students.forEach(st -> {
-            EmployeeEngShortDto approvedBy = st.getApprovedBy();
-            studentRepository.save(st.update(studentRepository.findOne(st.getId()).setApprovedBy(
-                    employeeRepository.findOne(approvedBy == null ? ZERO_EMPLOYEE : approvedBy.getEmployeeId()))));
-        });
+        studentRepository.save(students
+                .stream()
+                .map(st -> st.update(studentRepository.findOne(st.getId())))
+                .collect(Collectors.toList()));
     }
 
     @Override
