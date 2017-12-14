@@ -18,7 +18,7 @@ export class TestsService {
   }
 
   addTests(tests: Tests[],groupId:number){
-    this.http.post<Tests[]>(environment.serverUrl + '/tests/add/' + groupId, tests)
+    this.http.post<Tests[]>(environment.serverUrl + 'tests/add/' + groupId, tests)
       .subscribe(resp => {
           console.log(resp);
         }, err => {
