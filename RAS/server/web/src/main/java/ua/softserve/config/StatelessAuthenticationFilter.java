@@ -32,7 +32,6 @@ public class StatelessAuthenticationFilter extends GenericFilterBean {
             Authentication authentication = tokenAuthenticationService.getAuthentication((HttpServletRequest) req);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(req, res);
-            SecurityContextHolder.getContext().setAuthentication(null);
         } catch (AuthenticationException | JwtException e) {
             SecurityContextHolder.clearContext();
             ((HttpServletResponse) res).setStatus(HttpServletResponse.SC_UNAUTHORIZED);

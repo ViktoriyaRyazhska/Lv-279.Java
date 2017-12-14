@@ -93,12 +93,6 @@ export class StudentsComponent implements OnInit {
     this.studentsService
       .remove(this.selectedStudent.id)
       .subscribe(() => {
-        // var index = this.students.indexOf(this.selectedStudent, 0);
-        // if (index > -1) {
-        //   this.students.splice(index, 1);
-        // }
-
-
         this.students = null;
         this.ngOnInit();
       });

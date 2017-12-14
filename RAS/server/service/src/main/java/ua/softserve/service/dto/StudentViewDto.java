@@ -31,6 +31,9 @@ public class StudentViewDto {
         student.setStudentStatus(studentStatus);
         student.setTeacherFeedback(teacherFeedback);
         student.setExpertFeedback(expertFeedback);
+        if (approvedBy != null) {
+            student.setApprovedBy(new Employee(approvedBy.getEmployeeId()));
+        }
         return student;
     }
 }
