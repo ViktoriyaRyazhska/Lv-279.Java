@@ -50,16 +50,14 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public void addStudentsToAcademy(Integer academyId, List<Integer> students) {
-        StudentStatuses studentStatuses = studentsStatusesRepository
-                .findOne(STUDENT_STATUS_TRAINEE_ID);
         List<Student> entities = students.stream()
                 .map(id -> {
                     Student existStudent = studentRepository
                             .findStudentByAcademy(academyId, id);
                     return existStudent == null ?
-                            new Student(id, academyId) : existStudent.unremove();
+                            new Student(id, academyId, STUDENT_STATUS_TRAINEE_ID) :
+                            existStudent.unremove();
                 })
-                .peek(student -> student.setStudentStatus(studentStatuses))
                 .collect(Collectors.toList());
         studentRepository.save(entities);
     }
@@ -67,9 +65,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public void removeStudentFromAcademy(Integer studentId) {
-        Student student = studentRepository.getOne(studentId);
-        student.setRemoved(true);
-        studentRepository.save(student);
+        studentRepository.updateRemovedStatus(studentId,true);
     }
 
     @Override
@@ -77,9 +73,7 @@ public class StudentServiceImpl implements StudentService {
     public void updateStudentOfAcademy(List<StudentViewDto> students) {
         studentRepository.save(students
                 .stream()
-                .map(st -> st
-                        .update(studentRepository
-                                .findOne(st.getId())))
+                .map(st -> st.update(studentRepository.findOne(st.getId())))
                 .collect(Collectors.toList()));
     }
 
