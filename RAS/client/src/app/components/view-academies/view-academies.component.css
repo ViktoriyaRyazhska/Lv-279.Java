@@ -1,8 +1,6 @@
 /*table {*/
   /*font-size: 0.75em;*/
 /*}*/
-
-
 input[type=date]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   display: none;
