@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {StudentFeedback, Data} from "../../../models/feedbacks/student.model";
+import {StudentFeedback, Data, Feedback} from "../../../models/feedbacks/student.model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Mark} from "../../../models/feedbacks/mark.model";
 import {MarkService} from "../../../services/feedbacks/marks.service";
@@ -76,7 +76,11 @@ export class FeedbackListComponent implements OnInit {
     this.studentsService.getAll(this.academyId).subscribe(
       data => {
         this.students = data;
+        console.log(this.students);
         this.students.forEach(st => st.data = st.data == null ? new Data() : st.data);
+        this.students.forEach(st => st.teacherFeedback = st.teacherFeedback == null ? new Feedback() : st.teacherFeedback);
+        this.students.forEach(st => st.expertFeedback = st.expertFeedback == null ? new Feedback() : st.expertFeedback);
+        console.log(this.students);
         console.log("loaded " + data.length);
       },
       error => console.log(error)
@@ -137,6 +141,7 @@ export class FeedbackListComponent implements OnInit {
   onProvideClick(student: StudentFeedback) {
     this.selectedStudent = student;
     this.displayProvideFeedback = true;
+
     this.displayTeacherFeedback = true;
     this.displayExpertFeedback = false;
     this.displayInterFeedback = false;
@@ -168,8 +173,6 @@ export class FeedbackListComponent implements OnInit {
       this.selectedStudent.data.interviewerComment = interForm.get('summary').value;
     }
   }
-
-
 
   initForms() {
     this.setBaseForms();

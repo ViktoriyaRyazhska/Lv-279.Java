@@ -11,10 +11,10 @@ import java.util.List;
 
 @Service
 public class MarkServiceImpl implements MarkService {
+
     @Autowired
     private MarkRepository markRepository;
 
-    @Transactional
     @Override
     public List<Mark> findAll() {
         return markRepository.findAll();
