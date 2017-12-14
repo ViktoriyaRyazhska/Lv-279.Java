@@ -15,19 +15,26 @@ export class TestsNamesComponent implements OnInit {
   tests : Tests[];
   static counter : number = 1;
   testsToDelete : Tests[] = [];
+  displayedColumns = ['testName', 'testMaxScore','testId'];
+  dataSource : MatTableDataSource<Tests>;
+  addTestsStatus : number;
 
   constructor(
     private testNamesService : TestsService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.groupId = +this.route.snapshot.params['id'];
+  }
 
   ngOnInit() {
-    this.groupId = +this.route.snapshot.params['id'];
     this.testNamesService.getAll(this.groupId).subscribe(data => {
       console.log(data)
       this.tests = data
       TestsNamesComponent.counter = this.tests.length;
+      this.dataSource = new MatTableDataSource<Tests>(this.tests);
     });
+
+
   }
 
   save() {
@@ -46,6 +53,7 @@ export class TestsNamesComponent implements OnInit {
     }
   }
   removeTest(test : Tests) {
+
     TestsNamesComponent.counter--;
     const indexOfTestToRemove = this.tests.indexOf(test);
     if(indexOfTestToRemove!=-1) {
