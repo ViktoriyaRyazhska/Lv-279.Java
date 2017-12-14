@@ -30,7 +30,7 @@ public class AuthenticationRestController {
     }
 
     @RequestMapping(value = "api/auth", method = RequestMethod.POST)
-    public AuthResponse createAuthenticationToken(@RequestBody AuthParams authenticationRequest){
+    public AuthResponse createAuthenticationToken(@RequestBody AuthParams authenticationRequest) {
         final UsernamePasswordAuthenticationToken loginToken = authenticationRequest.toAuthenticationToken();
         final Authentication authentication = authenticationManager.authenticate(loginToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);

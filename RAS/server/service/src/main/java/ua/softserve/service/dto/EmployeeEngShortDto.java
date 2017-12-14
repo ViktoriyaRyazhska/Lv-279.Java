@@ -15,6 +15,7 @@ public class EmployeeEngShortDto {
     private String fullName;
 
     public static EmployeeEngShortDto of(Employee employee) {
-        return new EmployeeEngShortDto(employee.getEmployeeId(), employee.getLastNameEng() + " "+ employee.getFirstNameEng());
+        return new EmployeeEngShortDto(employee.getEmployeeId(),
+                employee.getLastNameEng() + " " + employee.getFirstNameEng());
     }
 }

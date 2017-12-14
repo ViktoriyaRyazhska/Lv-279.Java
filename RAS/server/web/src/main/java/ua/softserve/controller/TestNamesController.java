@@ -9,7 +9,6 @@ import ua.softserve.service.TestNameService;
 
 import java.util.List;
 
-
 @RestController
 public class TestNamesController {
     @Autowired
@@ -21,7 +20,7 @@ public class TestNamesController {
     }
 
     @RequestMapping(value = "/tests/add/{id}", method = RequestMethod.POST, produces = { "application/json" })
-    public void saveTestsNames(@PathVariable("id") int groupId,@RequestBody List<TestName> testNames) {
-        testNameService.saveTestNames(testNames,groupId);
+    public void saveTestsNames(@PathVariable("id") int groupId, @RequestBody List<TestName> testNames) {
+        testNameService.saveTestNames(testNames, groupId);
     }
 }

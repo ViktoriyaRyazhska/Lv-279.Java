@@ -28,5 +28,3 @@ public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
     GroupInfo findByAcademyAcademyId(int academyId);
 
 }
-
-

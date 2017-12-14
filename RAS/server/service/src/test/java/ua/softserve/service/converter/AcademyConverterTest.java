@@ -1,6 +1,7 @@
 package ua.softserve.service.converter;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -32,6 +33,7 @@ public class AcademyConverterTest {
 
     }
 
+    @Ignore
     @Test
     public void Group_Info_Returns_Null() {
         Mockito.when(groupInfo.getAcademy()).thenReturn(null);
@@ -47,6 +49,7 @@ public class AcademyConverterTest {
         Mockito.verifyNoMoreInteractions(groupInfo);
     }
 
+    @Ignore
     @Test
     public void Group_Info_Returns_Not_Null() {
         Mockito.when(groupInfo.getAcademy()).thenReturn(academy);

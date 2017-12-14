@@ -26,4 +26,3 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     Student findStudentByAcademy(@Param("academyId") Integer academyId, @Param("id") Integer id);
 
 }
-

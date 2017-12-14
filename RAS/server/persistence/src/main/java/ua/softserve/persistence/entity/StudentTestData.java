@@ -81,7 +81,7 @@ public class StudentTestData {
 
     @Column(name = "interviewer_comment")
     private String interviewerComment;
-//
-//    @Formula("0")
-//    private int dummy;
+    //
+    // @Formula("0")
+    // private int dummy;
 }

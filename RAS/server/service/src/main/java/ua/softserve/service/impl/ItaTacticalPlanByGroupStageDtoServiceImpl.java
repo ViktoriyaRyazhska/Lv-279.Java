@@ -38,10 +38,13 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     EmployeeRepository employeeRepository;
 
     /**
-     * Method transforms information about one academy from all tables into one DTO object designed for ITA Tactical Plan by Group Stage.
+     * Method transforms information about one academy from all tables into one DTO object designed for ITA Tactical
+     * Plan by Group Stage.
      *
-     * @param id (int) indicates which group to form DTO object designed for ITA Tactical Plan by Group Stage.
-     * @return information about one academy from all tables into one DTO object designed for ITA Tactical Plan by Group Stage.
+     * @param id
+     *            (int) indicates which group to form DTO object designed for ITA Tactical Plan by Group Stage.
+     * @return information about one academy from all tables into one DTO object designed for ITA Tactical Plan by Group
+     *         Stage.
      */
     @Override
     public ItaTacticalPlanByGroupStageDto findById(int id) {
@@ -59,8 +62,8 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
                 dto.setCG(null);
             }
             if (academy.getCity() != null) {
-                dto.setLocation(
-                        languageTranslationsRepository.getOneCityNameTranslationByItemId(academy.getCity().getCityId()));
+                dto.setLocation(languageTranslationsRepository
+                        .getOneCityNameTranslationByItemId(academy.getCity().getCityId()));
             } else {
                 dto.setLocation(null);
             }
@@ -94,11 +97,12 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         return dto;
     }
 
-
     /**
-     * Method Generate data for weekly status meeting with GTA/HR/ITA partisipants. Contain list og available groups by stages.
+     * Method Generate data for weekly status meeting with GTA/HR/ITA partisipants. Contain list og available groups by
+     * stages.
      *
-     * @return List<List                               <                               ItaTacticalPlanByGroupStageDto>> with information from ITA Tactical Plan by Group Stage report.
+     * @return List<List < ItaTacticalPlanByGroupStageDto>> with information from ITA Tactical Plan by Group Stage
+     *         report.
      */
     @Override
     public List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStageReport() {
@@ -107,14 +111,15 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         List<ItaTacticalPlanByGroupStageDto> groupsInProces = new ArrayList<>();
         List<ItaTacticalPlanByGroupStageDto> groupsOffering = new ArrayList<>();
         List<ItaTacticalPlanByGroupStageDto> groupsGraduated = new ArrayList<>();
-        List<ItaTacticalPlanByGroupStageDto> listOfPlannedReleases= new ArrayList<>();
+        List<ItaTacticalPlanByGroupStageDto> listOfPlannedReleases = new ArrayList<>();
         List<Academy> academies = academyService.getAllAcademies();
         Calendar dateForComparison = new GregorianCalendar();
         dateForComparison.add(Calendar.MONTH, 2);
         Calendar academyStartDate = new GregorianCalendar();
         for (Academy a : academies) {
             academyStartDate.setTimeInMillis(a.getStartDate().getTime());
-            if ((a.getAcademyStages().getStageId() == ACADEMY_STAGE_PLANNED_ID) && academyStartDate.before(dateForComparison)) {
+            if ((a.getAcademyStages().getStageId() == ACADEMY_STAGE_PLANNED_ID)
+                    && academyStartDate.before(dateForComparison)) {
                 planedGroupForTwoMoth.add(this.findById(a.getAcademyId()));
             }
             if (a.getAcademyStages().getStageId() == ACADEMY_STAGE_IN_PROCESS_ID) {
@@ -141,7 +146,9 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     /**
      * Method calculation information about student status in the group
      *
-     * @param dto (ItaTacticalPlanByGroupStageDto) specifies which group to calculate the number of students with different statuses
+     * @param dto
+     *            (ItaTacticalPlanByGroupStageDto) specifies which group to calculate the number of students with
+     *            different statuses
      */
     private void calculationStudentsStatuses(ItaTacticalPlanByGroupStageDto dto) {
         List<Student> allStudentsOfGroup = studentRepository.findAllByAcademy_AcademyId(dto.getGroupId());
@@ -168,9 +175,11 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     }
 
     /**
-     * Method search and transforms information about all teachers and experts of group into one  StringBuilder object and set into dto.
+     * Method search and transforms information about all teachers and experts of group into one StringBuilder object
+     * and set into dto.
      *
-     * @param dto indicates for which dto search, transforms  and set information about trainers
+     * @param dto
+     *            indicates for which dto search, transforms and set information about trainers
      */
 
     private void setTrainer(ItaTacticalPlanByGroupStageDto dto) {

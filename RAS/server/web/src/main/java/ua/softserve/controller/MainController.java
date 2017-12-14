@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
-    @RequestMapping("/ang")
+    @RequestMapping("/ang*")
     public String init() {
         return "forward:/index.html";
     }

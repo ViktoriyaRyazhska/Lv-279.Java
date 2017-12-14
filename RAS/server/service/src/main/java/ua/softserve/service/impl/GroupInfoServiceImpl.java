@@ -96,19 +96,19 @@ public class GroupInfoServiceImpl implements GroupInfoService {
                     List<String> employeeList = new ArrayList<>();
                     if (getExpertsOfTheGroup != null) {
                         for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
-                            if ((groupInfoTeachers.getAcademy().getAcademyId() == academy.getAcademyId()) &&
-                                    groupInfoTeachers != null) {
+                            if ((groupInfoTeachers.getAcademy().getAcademyId() == academy.getAcademyId())
+                                    && groupInfoTeachers != null) {
                                 employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " "
                                         + groupInfoTeachers.getEmployee().getLastNameEng());
                             }
                         }
                     }
-                    if(employeeList.size() != 0){
+                    if (employeeList.size() != 0) {
                         academyDTO.setExperts(employeeList);
                     }
                     if (studentStatuses != null) {
-                        countActualStudents = studentsService
-                                .countAllByAcademyAndStudentStatus(academy, studentStatuses);
+                        countActualStudents = studentsService.countAllByAcademyAndStudentStatus(academy,
+                                studentStatuses);
                     }
                     if (countActualStudents != null) {
                         academyDTO.setStudentsActual(countActualStudents);

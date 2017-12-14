@@ -47,9 +47,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     @Override
     public List<CheckListByGroupsDto> getAllCheckListByGroupsDto() {
 
-        List<Academy> allAcademies = academyRepository.findAll().stream()
-                .limit(30)
-                .collect(Collectors.toList());
+        List<Academy> allAcademies = academyRepository.findAll().stream().limit(30).collect(Collectors.toList());
 
         List<CheckListByGroupsDto> CheckListByGroupsDtos = new ArrayList<>();
 
@@ -151,6 +149,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             return false;
         }
         int id = student.getStudentStatus().getId();
-        return id == STUDENT_STATUS_TRAINEE_ID || id == STUDENT_STATUS_ACCEPTED_PRE_OFFER_ID || id == STUDENT_STATUS_GRADUATED_ID;
+        return id == STUDENT_STATUS_TRAINEE_ID || id == STUDENT_STATUS_ACCEPTED_PRE_OFFER_ID
+                || id == STUDENT_STATUS_GRADUATED_ID;
     }
 }
