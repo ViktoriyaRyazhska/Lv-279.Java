@@ -23,6 +23,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatus);
 
     @Query("from Student s where s.academy.academyId =:academyId and s.user.id =:id")
-    Student ifStudentExist(@Param("academyId") Integer academyId, @Param("id") Integer id);
+    Student findStudentByAcademy(@Param("academyId") Integer academyId, @Param("id") Integer id);
 
 }
+

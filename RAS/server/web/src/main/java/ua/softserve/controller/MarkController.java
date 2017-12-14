@@ -19,7 +19,6 @@ public class MarkController {
     private MarkService markService;
 
     @RequestMapping(value = "/marks", method = RequestMethod.GET, produces = "application/json")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<Mark>> getAllMarks() {
         return new ResponseEntity<List<Mark>>(markService.findAll(), HttpStatus.OK);
     }

@@ -2,6 +2,7 @@ package ua.softserve.service;
 
 import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.service.dto.AcademyDTO;
+import ua.softserve.service.dto.AcademyForViewDTO;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface GroupInfoService {
 
     GroupInfo findOneGroupInfoByAcademyId(int groupInfoId);
 
-    List<AcademyDTO> getAllAcademies();
+    List<AcademyForViewDTO> getAllAcademies();
 
     List<GroupInfo> findAllWithOrder();
 }

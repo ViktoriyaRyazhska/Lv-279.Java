@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 import ua.softserve.service.dto.AcademyDTO;
+import ua.softserve.service.dto.AcademyForSaveDTO;
+import ua.softserve.service.dto.AcademyForViewDTO;
 
 import java.sql.Date;
 
@@ -39,45 +41,45 @@ public class AcademyConverter {
      *            is a object that will be transformed.
      * @return AcademyDTO object.
      */
-    public AcademyDTO toDTO(GroupInfo groupInfo) {
-        AcademyDTO academyDTO = new AcademyDTO();
+    public AcademyForViewDTO toDTO(GroupInfo groupInfo) {
+        AcademyForViewDTO academyForViewDTO = new AcademyForViewDTO();
         Academy academy = groupInfo.getAcademy();
         if (academy != null) {
-            academyDTO.setId(groupInfo.getGroupInfoId());
-            academyDTO.setAcademyId(groupInfo.getAcademy().getAcademyId());
+            academyForViewDTO.setId(groupInfo.getGroupInfoId());
+            academyForViewDTO.setAcademyId(groupInfo.getAcademy().getAcademyId());
             if (academy.getAcademyStages() != null) {
-                academyDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
+                academyForViewDTO.setAcademyStagesId(academy.getAcademyStages().getStageId());
             }
             if (academy.getStartDate() != null) {
-                academyDTO.setStartDate(academy.getStartDate().getTime());
+                academyForViewDTO.setStartDate(academy.getStartDate().getTime());
             }
             if (academy.getDirections() != null) {
-                academyDTO.setDirectionName(academy.getDirections().getName());
+                academyForViewDTO.setDirectionName(academy.getDirections().getName());
             }
             if (academy.getTechnologies() != null) {
-                academyDTO.setTechnologyName(academy.getTechnologies().getName());
+                academyForViewDTO.setTechnologyName(academy.getTechnologies().getName());
             }
-            academyDTO.setPayment(academy.getFree());
+            academyForViewDTO.setPayment(academy.getFree());
             if (academy.getFree() == 1) {
-                academyDTO.setPaymentStatus("Founded by SoftServe");
+                academyForViewDTO.setPaymentStatus("Founded by SoftServe");
             } else {
-                academyDTO.setPaymentStatus("Paid");
+                academyForViewDTO.setPaymentStatus("Paid");
             }
             if (academy.getEndDate() != null) {
-                academyDTO.setEndDate(academy.getEndDate().getTime());
+                academyForViewDTO.setEndDate(academy.getEndDate().getTime());
             }
-            academyDTO.setNameForSite(academy.getName());
+            academyForViewDTO.setNameForSite(academy.getName());
         }
         if (groupInfo.getProfileInfo() != null) {
-            academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
+            academyForViewDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
         }
-        academyDTO.setGrName(groupInfo.getGroupName());
-        academyDTO.setStudentPlannedToEnrollment(groupInfo.getStudentsPlannedToEnrollment());
-        academyDTO.setStudentPlannedToGraduate(groupInfo.getStudentsPlannedToGraduate());
-        return academyDTO;
+        academyForViewDTO.setGrName(groupInfo.getGroupName());
+        academyForViewDTO.setStudentPlannedToEnrollment(groupInfo.getStudentsPlannedToEnrollment());
+        academyForViewDTO.setStudentPlannedToGraduate(groupInfo.getStudentsPlannedToGraduate());
+        return academyForViewDTO;
     }
 
-    public Academy toEntity(AcademyDTO academyDTO) {
+    public Academy toEntity(AcademyForSaveDTO academyDTO) {
         Academy academy = new Academy();
 
         academy.setName(academyDTO.getNameForSite());
@@ -92,7 +94,7 @@ public class AcademyConverter {
         return academy;
     }
 
-    public GroupInfo groupInfoToEntity(int academyId, AcademyDTO academyDTO) {
+    public GroupInfo groupInfoToEntity(int academyId, AcademyForSaveDTO academyDTO) {
         GroupInfo groupInfo = new GroupInfo();
         groupInfo.setAcademy(getAcademyById(academyId));
         groupInfo.setGroupName(academyDTO.getGrName());

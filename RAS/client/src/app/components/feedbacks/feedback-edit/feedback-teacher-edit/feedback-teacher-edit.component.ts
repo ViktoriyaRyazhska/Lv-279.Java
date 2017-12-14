@@ -3,7 +3,6 @@ import {MarkService} from "../../../../services/feedbacks/marks.service";
 import {Mark} from "../../../../models/feedbacks/mark.model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {StudentFeedback} from "../../../../models/feedbacks/student.model";
-import {FeedbackService} from "../../../../services/feedbacks/feedback.service";
 
 export enum CharacteristicId {
   ONE = 1,
@@ -34,8 +33,7 @@ export class FeedbackTeacherEditComponent implements OnInit {
   getDesc: string;
   actDesc: string;
 
-  constructor(private markService: MarkService,
-              private feedbackService: FeedbackService) {
+  constructor(private markService: MarkService) {
     this.markService.getAllMarks().subscribe(
       data => {
         this.marks = data;

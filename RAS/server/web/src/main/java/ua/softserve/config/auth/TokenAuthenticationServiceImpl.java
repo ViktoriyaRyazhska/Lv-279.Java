@@ -1,6 +1,7 @@
 package ua.softserve.config.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Service
 class TokenAuthenticationServiceImpl implements TokenAuthenticationService {
+
+    @Value("${app.jwt.header}")
+    private String header;
 
     private final TokenHandler tokenHandler;
 
@@ -17,16 +21,10 @@ class TokenAuthenticationServiceImpl implements TokenAuthenticationService {
     }
 
     public Authentication getAuthentication(HttpServletRequest request) {
-        final String authHeader = request.getHeader("authorization");
+        final String authHeader = request.getHeader(header);
         if (authHeader == null)
             return null;
-        if (!authHeader.startsWith("Lv-279"))
-            return null;
 
-        final String jwt = authHeader.substring(7);
-        if (jwt.isEmpty())
-            return null;
-
-        return tokenHandler.parseUserFromToken(jwt).map(LoginUserAuthentication::new).orElse(null);
+        return tokenHandler.parseUserFromToken(authHeader).map(LoginUserAuthentication::new).orElse(null);
     }
 }

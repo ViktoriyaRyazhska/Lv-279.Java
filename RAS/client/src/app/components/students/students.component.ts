@@ -4,6 +4,7 @@ import {UsersService} from "../../services/users/users.service";
 import {UserPage, UserShort} from "../../models/userShort";
 import {Data, StudentFeedback, StudentStatus, ApprovedBy} from "../../models/feedbacks/student.model";
 import {SelectItem} from "primeng/primeng";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-students',
@@ -34,11 +35,15 @@ export class StudentsComponent implements OnInit {
 
 
 
-  constructor(private studentsService: StudentsService, private userService: UsersService) {
+  constructor(private studentsService: StudentsService,
+              private userService: UsersService,
+              private route: ActivatedRoute) {
     this.selectedStudent = new StudentFeedback();
   }
 
   ngOnInit() {
+    this.academyId = this.route.snapshot.params['id'];
+
     this.studentsService.getAll(this.academyId).subscribe(
       data => {
         this.students = data;
@@ -88,12 +93,6 @@ export class StudentsComponent implements OnInit {
     this.studentsService
       .remove(this.selectedStudent.id)
       .subscribe(() => {
-        // var index = this.students.indexOf(this.selectedStudent, 0);
-        // if (index > -1) {
-        //   this.students.splice(index, 1);
-        // }
-
-
         this.students = null;
         this.ngOnInit();
       });

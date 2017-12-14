@@ -30,15 +30,14 @@ public class AuthenticationRestController {
     }
 
     @RequestMapping(value = "api/auth", method = RequestMethod.POST)
-    public AuthResponse createAuthenticationToken(@RequestBody AuthParams authenticationRequest) throws AuthenticationException {
-
+    public AuthResponse createAuthenticationToken(@RequestBody AuthParams authenticationRequest){
         final UsernamePasswordAuthenticationToken loginToken = authenticationRequest.toAuthenticationToken();
         final Authentication authentication = authenticationManager.authenticate(loginToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return securityContextService.currentUser().map(u -> {
             final String token = tokenHandler.createTokenForUser(u);
             return new AuthenticationRestController.AuthResponse(token);
-        }).orElseThrow(RuntimeException::new);
+        }).orElse(new AuthenticationRestController.AuthResponse(HttpStatus.UNAUTHORIZED));
     }
 
     private static final class AuthParams {
@@ -76,8 +75,13 @@ public class AuthenticationRestController {
 
     private static final class AuthResponse {
         private String token;
+        private HttpStatus httpStatus;
 
         public AuthResponse() {
+        }
+
+        public AuthResponse(HttpStatus httpStatus) {
+            this.httpStatus = httpStatus;
         }
 
         public AuthResponse(String token) {
