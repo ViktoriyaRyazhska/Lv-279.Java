@@ -21,13 +21,11 @@ public class ProfileInfoServiceImpl implements ProfileService {
         profileRepository.save(profile);
     }
 
-    @Transactional
     @Override
     public ProfileInfo findOne(int id) {
         return profileRepository.findOne(id);
     }
 
-    @Transactional
     @Override
     public List<ProfileInfo> findAll() {
         return profileRepository.findAll();

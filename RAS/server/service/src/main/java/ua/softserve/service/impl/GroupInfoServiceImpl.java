@@ -7,11 +7,11 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
-import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyForViewDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Service processes information that returns Repositories.
@@ -72,7 +72,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         List<AcademyForViewDTO> academyDTOList = new ArrayList<>();
         Integer countActualStudents = null;
         List<GroupInfoTeachers> getExpertsOfTheGroup = null;
-        List<LanguageTranslations> languageTranslations = languageTranslationsService.getAllLanguageTranslationsName();
+        Set<LanguageTranslations> languageTranslations = languageTranslationsService.getAllLanguageTranslationsName();
         TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
         StudentStatuses studentStatuses = studentsStatusesService.findOne(ConstantsFromDb.STUDENT_STATUS_TRAINEE_ID);
         if (teacherTypes != null) {

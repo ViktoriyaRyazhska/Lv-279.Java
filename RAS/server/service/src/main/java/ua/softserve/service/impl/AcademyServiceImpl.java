@@ -8,7 +8,7 @@ import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
-import ua.softserve.service.dto.AcademyDTO;
+import ua.softserve.service.converter.GroupInfoConverter;
 import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.util.List;
@@ -37,7 +37,10 @@ public class AcademyServiceImpl implements AcademyService {
     GroupInfoService groupInfoService;
 
     @Autowired
-    private AcademyConverter academyConverter;
+    AcademyConverter academyConverter;
+
+    @Autowired
+    GroupInfoConverter groupInfoConverter;
 
     @Transactional
     @Override
@@ -49,14 +52,15 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public void saveAcademyFromAcademyDTO(AcademyForSaveDTO academyDTO) {
         Academy academy = academyConverter.toEntity(academyDTO);
-        System.out.println(academy.getStartDate());
+
         int academyId = save(academy);
 
         saveGroupInfo(academyId, academyDTO);
     }
 
-    private void saveGroupInfo(int academyId, AcademyForSaveDTO academyDTO) {
-        GroupInfo groupInfo = academyConverter.groupInfoToEntity(academyId, academyDTO);
+    @Transactional
+    public void saveGroupInfo(int academyId, AcademyForSaveDTO academyDTO) {
+        GroupInfo groupInfo = groupInfoConverter.toEntity(academyId, academyDTO);
         groupInfoService.save(groupInfo);
     }
 
