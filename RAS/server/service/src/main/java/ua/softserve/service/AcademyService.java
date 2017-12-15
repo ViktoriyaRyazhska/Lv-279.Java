@@ -7,7 +7,6 @@ import ua.softserve.service.dto.AcademyForSaveDTO;
 import java.util.List;
 
 public interface AcademyService {
-    Academy getById(Integer id);
 
     Integer save(Academy academy);
 

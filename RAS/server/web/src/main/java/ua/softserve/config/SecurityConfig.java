@@ -46,11 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable();
+        http.csrf().disable();
 
-        http
-                .addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

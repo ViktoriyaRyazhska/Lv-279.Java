@@ -31,4 +31,3 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query("update Student s set s.removed = :removed where s.id = :studentId")
     void updateRemovedStatus(@Param("studentId") Integer studentId,@Param("removed") boolean removed);
 }
-

@@ -14,12 +14,12 @@ public class AcademyStagesServiceimpl implements AcademyStagesService {
     @Autowired
     private AcademyStagesRepository academyRepository;
 
-    @Transactional(readOnly = true)
     @Override
     public List<AcademyStages> getAllAcademyStagesService() {
         return academyRepository.findAll();
     }
 
+    @Transactional
     @Override
     public void save(AcademyStages academyStages) {
         academyRepository.save(academyStages);
@@ -30,6 +30,7 @@ public class AcademyStagesServiceimpl implements AcademyStagesService {
         return academyRepository.findOne(id);
     }
 
+    @Transactional
     @Override
     public void remove(AcademyStages academyStages) {
         academyRepository.delete(academyStages);

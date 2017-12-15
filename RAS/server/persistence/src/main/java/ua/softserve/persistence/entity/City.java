@@ -6,7 +6,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "city")
 public class City {
@@ -22,5 +23,6 @@ public class City {
     @Column(name = "ita")
     private Integer ita;
 
-    public City() {}
+    public City() {
+    }
 }

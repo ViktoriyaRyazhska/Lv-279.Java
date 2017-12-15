@@ -36,5 +36,3 @@ public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
     List<GroupInformationDTO> findAllInfoAboutGroups();
 
 }
-
-
