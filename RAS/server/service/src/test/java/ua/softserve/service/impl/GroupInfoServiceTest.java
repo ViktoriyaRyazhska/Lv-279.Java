@@ -74,7 +74,7 @@ public class GroupInfoServiceTest {
         Mockito.when(studentsStatusesService.findOne(TRAINEE_STATUS_ID)).thenReturn(studentStatuses);
         Mockito.when(academyConverter.toDTO(groupInfo)).thenReturn(new AcademyForViewDTO());
 
-        groupInfoService.getAllAcademies();
+        groupInfoService.getInfoAboutStudents();
 
         Mockito.verify(languageTranslationsService).getAllLanguageTranslationsName();
         Mockito.verify(teacherTypeService).findOne(EXPERT_STATUS_ID);
@@ -92,7 +92,7 @@ public class GroupInfoServiceTest {
         Mockito.when(groupInfoService.findAllWithOrder()).thenReturn(null);
         Mockito.when(teacherTypeService.findOne(EXPERT_STATUS_ID)).thenReturn(teacherTypes);
 
-        groupInfoService.getAllAcademies();
+        groupInfoService.getInfoAboutStudents();
 
         Mockito.verify(languageTranslationsService).getAllLanguageTranslationsName();
         Mockito.verify(teacherTypeService).findOne(EXPERT_STATUS_ID);
@@ -109,7 +109,7 @@ public class GroupInfoServiceTest {
         Mockito.when(teacherTypeService.findOne(EXPERT_STATUS_ID)).thenReturn(teacherTypes);
         Mockito.when(groupInfoTeachersService.findAllByTeacherType(teacherTypes)).thenReturn(null);
 
-        groupInfoService.getAllAcademies();
+        groupInfoService.getInfoAboutStudents();
 
         Mockito.verify(languageTranslationsService).getAllLanguageTranslationsName();
         Mockito.verify(academyConverter).toDTO(groupInfo);
