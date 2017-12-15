@@ -39,12 +39,6 @@ public class AcademyServiceImpl implements AcademyService {
     @Autowired
     private AcademyConverter academyConverter;
 
-    @Transactional(readOnly = true)
-    @Override
-    public Academy getById(Integer id) {
-        return academyRepository.findOne(id);
-    }
-
     @Transactional
     @Override
     public Integer save(Academy academy) {
@@ -66,13 +60,11 @@ public class AcademyServiceImpl implements AcademyService {
         groupInfoService.save(groupInfo);
     }
 
-    @Transactional
     @Override
     public Academy findOne(int id) {
         return academyRepository.findOne(id);
     }
 
-    @Transactional
     @Override
     public AcademyForSaveDTO getAcademyDTO() {
         AcademyForSaveDTO academyDTO = new AcademyForSaveDTO();
@@ -84,7 +76,6 @@ public class AcademyServiceImpl implements AcademyService {
         return academyDTO;
     }
 
-    @Transactional
     @Override
     public List<Academy> getAllAcademies() {
         return academyRepository.findAll();

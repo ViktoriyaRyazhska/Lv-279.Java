@@ -23,7 +23,7 @@ public class AcademyController {
 
     @RequestMapping(value = "/academy/{academyId}", method = RequestMethod.GET, produces = { "application/json" })
     public ResponseEntity<Academy> getAcademy(@PathVariable Integer academyId) {
-        return new ResponseEntity<Academy>(academyService.getById(academyId), HttpStatus.OK);
+        return new ResponseEntity<>(academyService.findOne(academyId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/academy/addgroup", method = RequestMethod.GET, produces = { "application/json" })
