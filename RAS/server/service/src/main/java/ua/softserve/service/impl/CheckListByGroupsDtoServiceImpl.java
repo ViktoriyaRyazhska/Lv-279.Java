@@ -210,7 +210,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
         int flag = TRUE;
         for (Key key : Key.getByCategory(Category.GROUP_STARTED_SUCCESSFULLY)) {
-            flag *= report.get(key);
+            flag *= report.get(key.toString());
         }
         report.put(Key.GROUP_STARTED_SUCCESSFULLY.toString(), flag);
         if (flag == FALSE) {
@@ -219,7 +219,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         } else {
             flag = TRUE;
             for (Key key : Key.getByCategory(Category.GROUP_READY_TO_OFFERING)) {
-                flag *= report.get(key);
+                flag *= report.get(key.toString());
             }
             report.put(Key.GROUP_READY_TO_OFFERING.toString(), flag);
             if (flag == FALSE) {
@@ -227,7 +227,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             } else {
                 flag = TRUE;
                 for (Key key : Key.getByCategory(Category.GROUP_READY_FOR_CLOSE)) {
-                    flag *= report.get(key);
+                    flag *= report.get(key.toString());
                 }
                 report.put(Key.GROUP_READY_FOR_CLOSE.toString(), flag);
             }

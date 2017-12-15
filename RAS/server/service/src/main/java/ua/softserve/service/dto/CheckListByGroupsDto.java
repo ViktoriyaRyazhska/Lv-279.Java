@@ -13,18 +13,9 @@ package ua.softserve.service.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ua.softserve.persistence.entity.EnglishLevel;
-import ua.softserve.persistence.entity.GroupInfoTeachers;
-import ua.softserve.persistence.entity.Student;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import static ua.softserve.persistence.constants.ConstantsFromDb.ENGLISH_LEVEL_PRE_INTERMEDIATE_ID;
 
 @Getter
 @Setter
