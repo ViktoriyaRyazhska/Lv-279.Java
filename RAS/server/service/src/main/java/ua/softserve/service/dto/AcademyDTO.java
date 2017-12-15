@@ -6,6 +6,7 @@ import lombok.ToString;
 import ua.softserve.persistence.entity.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class AcademyDTO {
     private int studentPlannedToEnrollment;
     private int studentsActual;
     List<AcademyStages> academyStages;
-    List<LanguageTranslations> cityNames;
+    Set<LanguageTranslations> cityNames;
     List<Directions> direction;
     List<Technologies> technologie;
     List<ProfileInfo> profile;
