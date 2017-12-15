@@ -16,16 +16,21 @@ public class TestNameServiceImpl implements TestNameService {
 
     @Override
     @Transactional
-    public void saveTestNames(List<TestName> testNames, Integer academyId) {
+    public String saveTestNames(List<TestName> testNames, Integer academyId) {
 
         for (TestName testName : testNames) {
-            if (testName.getTestMaxScore() == 0) {
+            if(testName.getTestName()==null || testName.getTestMaxScore()==null || testName.getTestName().equals("")) {
+                return TestNameService.NullValue;
+            }
+            if (testName.getTestMaxScore()==0){
                 this.deleteTestName(testName);
-            } else {
+            }
+            else {
                 testName.setGroupId(academyId);
                 testNameRepository.save(testName);
             }
         }
+        return TestNameService.DataIsGood;
     }
 
     @Override
@@ -36,7 +41,7 @@ public class TestNameServiceImpl implements TestNameService {
     @Override
     @Transactional(readOnly = true)
     public List<TestName> findAllTestNamesByAcademyId(Integer groupId) {
-        return testNameRepository.findAllTestNamesBygroupId(groupId);
+        return  testNameRepository.findAllTestNamesBygroupId(groupId);
     }
 
     @Override

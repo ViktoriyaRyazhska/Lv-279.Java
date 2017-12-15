@@ -215,10 +215,10 @@
           <div>Summary comments (risks/strangths, recommendation):</div>
         </div>
         <div class="ui-g-4">
-          <div *ngIf="selectedStudent.teacherFeedback.summary != null">{{selectedStudent.teacherFeedback.summary}}</div>
+          <div *ngIf="selectedStudent.teacherFeedback.summary">{{selectedStudent.teacherFeedback.summary}}</div>
         </div>
         <div class="ui-g-4">
-          <div *ngIf="selectedStudent.teacherFeedback.summary != null">{{selectedStudent.expertFeedback.summary}}</div>
+          <div *ngIf="selectedStudent.expertFeedback.summary">{{selectedStudent.expertFeedback.summary}}</div>
         </div>
       </div>
 

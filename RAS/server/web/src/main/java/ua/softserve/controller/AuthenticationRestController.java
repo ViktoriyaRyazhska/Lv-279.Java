@@ -37,7 +37,7 @@ public class AuthenticationRestController {
         return securityContextService.currentUser().map(u -> {
             final String token = tokenHandler.createTokenForUser(u);
             return new AuthenticationRestController.AuthResponse(token);
-        }).orElse(new AuthenticationRestController.AuthResponse(HttpStatus.FORBIDDEN));
+        }).orElse(new AuthenticationRestController.AuthResponse(HttpStatus.UNAUTHORIZED));
     }
 
     private static final class AuthParams {

@@ -7,10 +7,11 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
-import ua.softserve.service.dto.AcademyDTO;
+import ua.softserve.service.dto.AcademyForViewDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Service processes information that returns Repositories.
@@ -66,12 +67,12 @@ public class GroupInfoServiceImpl implements GroupInfoService {
      * @return information about academies from all tables into one DTO object.
      */
     @Override
-    public List<AcademyDTO> getAllAcademies() {
+    public List<AcademyForViewDTO> getAllAcademies() {
         List<GroupInfo> groupInfoList = findAllWithOrder();
-        List<AcademyDTO> academyDTOList = new ArrayList<>();
+        List<AcademyForViewDTO> academyDTOList = new ArrayList<>();
         Integer countActualStudents = null;
         List<GroupInfoTeachers> getExpertsOfTheGroup = null;
-        List<LanguageTranslations> languageTranslations = languageTranslationsService.getAllLanguageTranslationsName();
+        Set<LanguageTranslations> languageTranslations = languageTranslationsService.getAllLanguageTranslationsName();
         TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
         StudentStatuses studentStatuses = studentsStatusesService.findOne(ConstantsFromDb.STUDENT_STATUS_TRAINEE_ID);
         if (teacherTypes != null) {
@@ -79,7 +80,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         }
         if (groupInfoList != null) {
             for (GroupInfo groupInfo : groupInfoList) {
-                AcademyDTO academyDTO = academyConverter.toDTO(groupInfo);
+                AcademyForViewDTO academyDTO = academyConverter.toDTO(groupInfo);
                 Academy academy = groupInfo.getAcademy();
                 if (academy != null) {
                     if (academy.getCity() != null) {
@@ -121,13 +122,13 @@ public class GroupInfoServiceImpl implements GroupInfoService {
             }
         }
 
-        AcademyDTO academyDTO = new AcademyDTO();
-        academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
-        academyDTO.setDirection(directionService.findAllDirectionsInIta());
-        academyDTO.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
-        academyDTO.setProfile(profileService.findAll());
-        academyDTO.setCityNames(languageTranslations);
-        academyDTOList.add(academyDTO);
+        AcademyForViewDTO academyForViewDTO = new AcademyForViewDTO();
+        academyForViewDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
+        academyForViewDTO.setDirection(directionService.findAllDirectionsInIta());
+        academyForViewDTO.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
+        academyForViewDTO.setProfile(profileService.findAll());
+        academyForViewDTO.setCityNames(languageTranslations);
+        academyDTOList.add(academyForViewDTO);
         return academyDTOList;
     }
 

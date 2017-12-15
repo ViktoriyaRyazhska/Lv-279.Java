@@ -8,6 +8,8 @@ import ua.softserve.persistence.entity.Academy;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.GroupInfoService;
 import ua.softserve.service.dto.AcademyDTO;
+import ua.softserve.service.dto.AcademyForSaveDTO;
+import ua.softserve.service.dto.AcademyForViewDTO;
 
 import java.util.List;
 
@@ -21,21 +23,21 @@ public class AcademyController {
 
     @RequestMapping(value = "/academy/{academyId}", method = RequestMethod.GET, produces = { "application/json" })
     public ResponseEntity<Academy> getAcademy(@PathVariable Integer academyId) {
-        return new ResponseEntity<Academy>(academyService.getById(academyId), HttpStatus.OK);
+        return new ResponseEntity<>(academyService.findOne(academyId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/academy/addgroup", method = RequestMethod.GET, produces = { "application/json" })
-    public ResponseEntity<AcademyDTO> getAllAcademies() {
-        return new ResponseEntity<AcademyDTO>(academyService.getAcademyDTO(), HttpStatus.OK);
+    public ResponseEntity<AcademyForSaveDTO> getAllAcademies() {
+        return new ResponseEntity<>(academyService.getAcademyDTO(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/academy/addgroup", method = RequestMethod.POST, produces = { "application/json" })
-    public void saveGroup(@RequestBody AcademyDTO academyDTO) {
+    public void saveGroup(@RequestBody AcademyForSaveDTO academyDTO) {
         academyService.saveAcademyFromAcademyDTO(academyDTO);
     }
 
     @RequestMapping(value = "/viewAcademies", method = RequestMethod.GET)
-    public ResponseEntity<List<AcademyDTO>> searchSite() {
+    public ResponseEntity<List<AcademyForViewDTO>> searchSite() {
         return new ResponseEntity<>(groupInfoService.getAllAcademies(), HttpStatus.OK);
     }
 }
