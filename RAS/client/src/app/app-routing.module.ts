@@ -17,9 +17,9 @@ import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
   {path: '', component: ViewAcademiesComponent},
-  {path: 'ang/addgroup', component: AddGroupComponent},
+  {path: 'ang/group/add', component: AddGroupComponent},
   {
-    path: 'ang/addgroup/:id', component: AddGroupComponent, children: [
+    path: 'ang/group/update/:id', component: AddGroupComponent, children: [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
 
     {path: 'students/:id', component: StudentsComponent},
