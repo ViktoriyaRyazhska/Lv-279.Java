@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -51,11 +50,12 @@ public class Student {
     @Column(columnDefinition = "tinyint")
     private boolean removed;
 
-    public Student(Integer userId, Integer academyId) {
+    public Student(Integer userId, Integer academyId, Integer status) {
         this.user = new User();
         this.user.setId(userId);
         this.academy = new Academy();
         this.academy.setAcademyId(academyId);
+        this.setStudentStatus(new StudentStatuses(status));
     }
 
     public Student setApprovedBy(Employee employee) {
@@ -63,7 +63,7 @@ public class Student {
         return this;
     }
 
-    public Student unRemove() {
+    public Student unremove() {
         removed = false;
         return this;
     }

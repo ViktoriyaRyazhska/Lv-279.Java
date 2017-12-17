@@ -21,13 +21,11 @@ public class DirectionServiceImpl implements DirectionService {
         directionsRepository.save(direction);
     }
 
-    @Transactional
     @Override
     public Directions findOne(int id) {
         return directionsRepository.findOne(id);
     }
 
-    @Transactional
     @Override
     public List<Directions> findAll() {
         return directionsRepository.findAll();

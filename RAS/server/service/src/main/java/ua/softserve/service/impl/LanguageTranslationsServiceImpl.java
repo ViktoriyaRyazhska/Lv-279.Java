@@ -7,6 +7,7 @@ import ua.softserve.persistence.repo.LanguageTranslationsRepository;
 import ua.softserve.service.LanguageTranslationsService;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class LanguageTranslationsServiceImpl implements LanguageTranslationsService {
@@ -14,7 +15,7 @@ public class LanguageTranslationsServiceImpl implements LanguageTranslationsServ
     LanguageTranslationsRepository languageTranslationsRepository;
 
     @Override
-    public List<LanguageTranslations> getAllLanguageTranslationsName() {
+    public Set<LanguageTranslations> getAllLanguageTranslationsName() {
         return languageTranslationsRepository.getAllLanguageTranslationsName();
     }
 

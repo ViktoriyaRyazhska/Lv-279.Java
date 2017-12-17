@@ -8,9 +8,11 @@ import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
-import ua.softserve.service.dto.AcademyDTO;
+import ua.softserve.service.converter.GroupInfoConverter;
+import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.util.List;
+import java.util.TreeMap;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
@@ -36,13 +38,10 @@ public class AcademyServiceImpl implements AcademyService {
     GroupInfoService groupInfoService;
 
     @Autowired
-    private AcademyConverter academyConverter;
+    AcademyConverter academyConverter;
 
-    @Transactional(readOnly = true)
-    @Override
-    public Academy getById(Integer id) {
-        return academyRepository.findOne(id);
-    }
+    @Autowired
+    GroupInfoConverter groupInfoConverter;
 
     @Transactional
     @Override
@@ -52,29 +51,28 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Transactional
     @Override
-    public void saveAcademyFromAcademyDTO(AcademyDTO academyDTO) {
+    public void saveAcademyFromAcademyDTO(AcademyForSaveDTO academyDTO) {
         Academy academy = academyConverter.toEntity(academyDTO);
-        System.out.println(academy.getStartDate());
+
         int academyId = save(academy);
 
         saveGroupInfo(academyId, academyDTO);
     }
 
-    private void saveGroupInfo(int academyId, AcademyDTO academyDTO) {
-        GroupInfo groupInfo = academyConverter.groupInfoToEntity(academyId, academyDTO);
+    @Transactional
+    public void saveGroupInfo(int academyId, AcademyForSaveDTO academyDTO) {
+        GroupInfo groupInfo = groupInfoConverter.toEntity(academyId, academyDTO);
         groupInfoService.save(groupInfo);
     }
 
-    @Transactional
     @Override
     public Academy findOne(int id) {
         return academyRepository.findOne(id);
     }
 
-    @Transactional
     @Override
-    public AcademyDTO getAcademyDTO() {
-        AcademyDTO academyDTO = new AcademyDTO();
+    public AcademyForSaveDTO getAcademyDTO() {
+        AcademyForSaveDTO academyDTO = new AcademyForSaveDTO();
         academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
         academyDTO.setDirection(directionService.findAllDirectionsInIta());
         academyDTO.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
@@ -83,56 +81,8 @@ public class AcademyServiceImpl implements AcademyService {
         return academyDTO;
     }
 
-    @Transactional
     @Override
     public List<Academy> getAllAcademies() {
         return academyRepository.findAll();
     }
-
-    // @Transactional
-    // @Override
-    // public void saveCustom(int id, String role, int[] arr, EmployeeService employeeService) {
-    // List<Employee> employees;
-    // Academy academy;
-    // if (role.equals("Teacher")) {
-    // academy = academyRepository.findWithEmployeeTeacher(id);
-    // employees = academy.getTeachers();
-    // for (int i : arr) {
-    // if (!employees.contains(employeeService.findOne(i))) {
-    // employees.add(employeeService.findOne(i));
-    // }
-    // }
-    // academy.setTeachers(employees);
-    // academyRepository.save(academy);
-    // for(Employee empl : employees) {
-    // employeeDirectionService.addEmployeeToGroup(id, empl,1);
-    // }
-    // } else if (role.equals("Expert")) {
-    // academy = academyRepository.findWithEmployeeExperts(id);
-    // employees = academy.getExperts();
-    // for (int i : arr) {
-    // if (!employees.contains(employeeService.findOne(i))) {
-    // employees.add(employeeService.findOne(i));
-    // }
-    // }
-    // academy.setExperts(employees);
-    // academyRepository.save(academy);
-    // for(Employee empl : employees) {
-    // employeeDirectionService.addEmployeeToGroup(id, empl,2);
-    // }
-    // } else if (role.equals("Interviewer")) {
-    // academy = academyRepository.findWithEmployeeInterviewers(id);
-    // employees = academy.getInterviewers();
-    // for (int i : arr) {
-    // if (!employees.contains(employeeService.findOne(i))) {
-    // employees.add(employeeService.findOne(i));
-    // }
-    // }
-    // academy.setInterviewers(employees);
-    // academyRepository.save(academy);
-    // for(Employee empl : employees) {
-    // employeeDirectionService.addEmployeeToGroup(id, empl,3);
-    // }
-    // } else throw new IllegalArgumentException();
-    // }
 }

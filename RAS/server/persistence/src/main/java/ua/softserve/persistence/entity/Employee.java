@@ -36,4 +36,8 @@ public class Employee {
 
     @Column(name = "second_name_ukr")
     private String secondNameUkr;
+
+    public Employee(Integer employeeId) {
+        this.employeeId = employeeId;
+    }
 }

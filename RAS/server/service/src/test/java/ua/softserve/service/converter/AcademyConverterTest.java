@@ -5,18 +5,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import ua.softserve.persistence.entity.*;
-import ua.softserve.persistence.repo.GroupInfoRepository;
-import ua.softserve.service.*;
-import ua.softserve.service.dto.AcademyDTO;
-import ua.softserve.service.impl.GroupInfoServiceImpl;
-import ua.softserve.service.impl.TechnologyServiceImpl;
-
-import java.util.Arrays;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AcademyConverterTest {
