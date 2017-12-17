@@ -32,22 +32,12 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     @Autowired
     private LanguageTranslationsRepository languageTranslationsRepository;
     @Autowired
-    private AcademyStagesRepository academyStagesRepository;
-    @Autowired
     private StudentRepository studentRepository;
     @Autowired
     private GroupInfoTeachersRepository groupInfoTeachersRepository;
 
     private static int TRUE = 1;
     private static int FALSE = 0;
-
-    private static Predicate<Student> CHECK_STUDENT_STATUS = student -> {
-        if (student == null || student.getStudentStatus() == null) {
-            return false;
-        }
-        int id = student.getStudentStatus().getId();
-        return id == STUDENT_STATUS_TRAINEE_ID || id == STUDENT_STATUS_ACCEPTED_PRE_OFFER_ID || id == STUDENT_STATUS_GRADUATED_ID;
-    };
 
     private enum Key {
         ENGLISH_LEVEL_DEFINED(Category.GROUP_STARTED_SUCCESSFULLY),
@@ -134,12 +124,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
         AcademyStages stage = academy.getAcademyStages();
 
-        List<Student> students = studentRepository
-                .findAllByAcademy_AcademyId(academyId);
-        students = (students == null) ? null : students
-                .stream()
-                .filter(CHECK_STUDENT_STATUS)
-                .collect(Collectors.toList());
+        List<Student> students = studentRepository.findAllActiveStudents(academyId);
 
         CheckListByGroupsDto checkListByGroupsDto = new CheckListByGroupsDto();
         checkListByGroupsDto.setCityName(cityName);
@@ -170,9 +155,9 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         Map<String, Integer> report = checkListByGroupsDto.getReport();
         checkListByGroupsDto.setTeachers(getTeachers(teachers));
         checkListByGroupsDto.setExperts(getTeachers(experts));
-        report.put(Key.TEACHER_DEFINED.toString(), (teachers != null) ? TRUE : FALSE);
-        report.put(Key.EXPERT_DEFINED.toString(), (experts != null) ? TRUE : FALSE);
-        report.put(Key.INTERVIEWER_DEFINED.toString(), (interviewers != null) ? TRUE : FALSE);
+        report.put(Key.TEACHER_DEFINED.toString(), (teachers != null && !teachers.isEmpty()) ? TRUE : FALSE);
+        report.put(Key.EXPERT_DEFINED.toString(), (experts != null && !experts.isEmpty()) ? TRUE : FALSE);
+        report.put(Key.INTERVIEWER_DEFINED.toString(), (interviewers != null && !interviewers.isEmpty()) ? TRUE : FALSE);
         report.put(Key.EXPERTS_LOAD_FILLED_IN.toString(), checkTeachers(git -> git.getContributedHours() != null, experts));
         report.put(Key.INTERVIEWERS_LOAD_FILLED_IN.toString(), checkTeachers(git -> git.getContributedHours() != null, interviewers));
     }
@@ -189,7 +174,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     }
 
     private Integer checkTeachers(Predicate<GroupInfoTeachers> predicate, List<GroupInfoTeachers> groupInfoTeachers) {
-        if (groupInfoTeachers == null) {
+        if (groupInfoTeachers == null || groupInfoTeachers.isEmpty()) {
             return FALSE;
         }
         for (GroupInfoTeachers git : groupInfoTeachers) {
@@ -239,48 +224,46 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
     static {
         predicates = new HashMap<>();
-        predicates.put(Key.ENGLISH_LEVEL_DEFINED, student -> student.getData().getEnglishLevel() != null);
+        predicates.put(Key.ENGLISH_LEVEL_DEFINED, student -> student.getData().getEnglishLevel() == null);
         predicates.put(Key.ENGLISH_LEVEL_CORRECT, student -> {
             EnglishLevel englishLevel = student.getData().getEnglishLevel();
-            return englishLevel != null && englishLevel.getEnglishLevelId() >= ENGLISH_LEVEL_PRE_INTERMEDIATE_ID;
+            return englishLevel != null && englishLevel.getEnglishLevelId() < ENGLISH_LEVEL_PRE_INTERMEDIATE_ID;
         });
-        predicates.put(Key.ENTRY_SCORE_DEFINED, student -> student.getData().getEntryScore() != null);
-        predicates.put(Key.INCOMING_TEST_DEFINED, student -> student.getData().getIncomingTest() != null);
-        predicates.put(Key.APPROVED_BY_DEFINED, student -> student.getApprovedBy() != null);
-        predicates.put(Key.INTERMEDIATE_TEST_BASE_PASS, student -> student.getData().getIntermBase() != null);
-        predicates.put(Key.INTERMEDIATE_TEST_LANG_PASS, student -> student.getData().getIntermLang() != null);
+        predicates.put(Key.ENTRY_SCORE_DEFINED, student -> student.getData().getEntryScore() == null);
+        predicates.put(Key.INCOMING_TEST_DEFINED, student -> student.getData().getIncomingTest() == null);
+        predicates.put(Key.APPROVED_BY_DEFINED, student -> student.getApprovedBy() == null);
+        predicates.put(Key.INTERMEDIATE_TEST_BASE_PASS, student -> student.getData().getIntermBase() == null);
+        predicates.put(Key.INTERMEDIATE_TEST_LANG_PASS, student -> student.getData().getIntermLang() == null);
         predicates.put(Key.TEACHER_FEEDBACKS_FILLED_IN,
-                student -> student.getTeacherFeedback() != null && student.getData().getTeacherScore() != null);
+                student -> student.getTeacherFeedback() == null && student.getData().getTeacherScore() == null);
         predicates.put(Key.EXPERT_FEEDBACKS_FILLED_IN,
-                student -> student.getExpertFeedback() != null && student.getData().getExpertScore() != null);
-        predicates.put(Key.FINAL_TEST_BASE_PASS, student -> student.getData().getFinalBase() != null);
-        predicates.put(Key.FINAL_TEST_LANG_PASS, student -> student.getData().getFinalLang() != null);
-        predicates.put(Key.INTERVIEWER_SUMMARY_DEFINED, student -> student.getData().getInterviewerComment() != null);
-        predicates.put(Key.TEST1, student -> student.getData().getTestOne() != null);
-        predicates.put(Key.TEST2, student -> student.getData().getTestTwo() != null);
-        predicates.put(Key.TEST3, student -> student.getData().getTestThree() != null);
-        predicates.put(Key.TEST4, student -> student.getData().getTestFour() != null);
-        predicates.put(Key.TEST5, student -> student.getData().getTestFive() != null);
-        predicates.put(Key.TEST6, student -> student.getData().getTestSix() != null);
-        predicates.put(Key.TEST7, student -> student.getData().getTestSeven() != null);
-        predicates.put(Key.TEST8, student -> student.getData().getTestEight() != null);
-        predicates.put(Key.TEST9, student -> student.getData().getTestNine() != null);
-        predicates.put(Key.TEST10, student -> student.getData().getTestTen() != null);
+                student -> student.getExpertFeedback() == null && student.getData().getExpertScore() == null);
+        predicates.put(Key.FINAL_TEST_BASE_PASS, student -> student.getData().getFinalBase() == null);
+        predicates.put(Key.FINAL_TEST_LANG_PASS, student -> student.getData().getFinalLang() == null);
+        predicates.put(Key.INTERVIEWER_SUMMARY_DEFINED, student -> student.getData().getInterviewerComment() == null);
+        predicates.put(Key.TEST1, student -> student.getData().getTestOne() == null);
+        predicates.put(Key.TEST2, student -> student.getData().getTestTwo() == null);
+        predicates.put(Key.TEST3, student -> student.getData().getTestThree() == null);
+        predicates.put(Key.TEST4, student -> student.getData().getTestFour() == null);
+        predicates.put(Key.TEST5, student -> student.getData().getTestFive() == null);
+        predicates.put(Key.TEST6, student -> student.getData().getTestSix() == null);
+        predicates.put(Key.TEST7, student -> student.getData().getTestSeven() == null);
+        predicates.put(Key.TEST8, student -> student.getData().getTestEight() == null);
+        predicates.put(Key.TEST9, student -> student.getData().getTestNine() == null);
+        predicates.put(Key.TEST10, student -> student.getData().getTestTen() == null);
     }
 
     public interface CheckPredicate<T> {
         boolean test(T t);
 
         default Integer check(List<T> list) {
-            if (list == null) {
+            if (list == null || list.isEmpty()) {
                 return FALSE;
             }
-            for (T t : list) {
-                if (!test(t)) {
-                    return FALSE;
-                }
-            }
-            return TRUE;
+            boolean testResult = list
+                    .stream()
+                    .anyMatch(this::test);
+            return (!testResult) ? TRUE : FALSE;
         }
     }
 }
