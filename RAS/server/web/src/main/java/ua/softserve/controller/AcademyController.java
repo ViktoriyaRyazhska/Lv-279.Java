@@ -41,8 +41,8 @@ public class AcademyController {
     }
 
     @RequestMapping(value = "/viewAcademies", method = RequestMethod.GET)
-    public ResponseEntity<Map<GroupInformationDTO, Integer>> searchSite() {
-        Map<GroupInformationDTO, Integer> allAcademies = groupInfoService.getInfoAboutStudents();
-        return new ResponseEntity<>(groupInfoService.getInfoAboutStudents(), HttpStatus.OK);
+    public ResponseEntity<List<AcademyForViewDTO>> searchSite() {
+//        Map<GroupInformationDTO, Integer> allAcademies = groupInfoService.getInfoAboutStudents();
+        return new ResponseEntity<>(groupInfoService.getAllAcademies(), HttpStatus.OK);
     }
 }
