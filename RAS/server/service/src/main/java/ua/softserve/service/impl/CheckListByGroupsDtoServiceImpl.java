@@ -96,12 +96,12 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
         List<Academy> allAcademies = academyRepository.findAll();
 
-        List<CheckListByGroupsDto> CheckListByGroupsDtos = new ArrayList<>();
+        List<CheckListByGroupsDto> checkListByGroupsDtos = new ArrayList<>();
 
         for (Academy academy : allAcademies) {
-            CheckListByGroupsDtos.add(getCheckListByGroupDtoByAcademy(academy));
+            checkListByGroupsDtos.add(getCheckListByGroupDtoByAcademy(academy));
         }
-        return CheckListByGroupsDtos;
+        return checkListByGroupsDtos;
     }
 
     private CheckListByGroupsDto getCheckListByGroupDtoByAcademy(Academy academy) {
