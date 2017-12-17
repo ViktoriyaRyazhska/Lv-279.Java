@@ -64,6 +64,7 @@ export class AddGroupComponent implements OnInit {
 
   saveGroup() {
     console.log(this.isFormValid());
+    console.log(this.route);
     if(this.isFormValid()){
       this.group.setDataFromFormControl(this.signupForm);
       console.log(this.group);

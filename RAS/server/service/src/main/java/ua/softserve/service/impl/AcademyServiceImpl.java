@@ -12,6 +12,7 @@ import ua.softserve.service.converter.GroupInfoConverter;
 import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.util.List;
+import java.util.TreeMap;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
@@ -84,5 +85,4 @@ public class AcademyServiceImpl implements AcademyService {
     public List<Academy> getAllAcademies() {
         return academyRepository.findAll();
     }
-
 }

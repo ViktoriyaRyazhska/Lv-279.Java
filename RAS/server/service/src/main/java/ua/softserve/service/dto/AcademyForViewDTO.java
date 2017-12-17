@@ -10,6 +10,8 @@ import java.util.List;
 @Setter
 @ToString
 public class AcademyForViewDTO extends AcademyDTO{
+    private Integer id;
+    private Integer academyId;
     private String paymentStatus;
     private String profileName;
     private String directionName;
@@ -17,6 +19,5 @@ public class AcademyForViewDTO extends AcademyDTO{
     private String cityName;
     private String status;
     private List<String> experts;
-    private Integer id;
-    private Integer academyId;
+    private String name;
 }
