@@ -65,28 +65,28 @@ public class GroupInfoServiceTest {
         groupInfo.setAcademy(new Academy());
         studentStatuses = new StudentStatuses();
     }
-    @Ignore
-    @Test
-    public void All_Services_Returns_Not_NULL() {
-        Mockito.when(languageTranslationsService.getAllLanguageTranslationsName())
-                .thenReturn(Arrays.asList(new LanguageTranslations(), new LanguageTranslations()));
-        Mockito.when(teacherTypeService.findOne(EXPERT_STATUS_ID)).thenReturn(teacherTypes);
-        Mockito.when(groupInfoService.findAllWithOrder()).thenReturn(Arrays.asList(groupInfo));
-        Mockito.when(studentsStatusesService.findOne(TRAINEE_STATUS_ID)).thenReturn(studentStatuses);
-        Mockito.when(academyConverter.toDTO(groupInfo)).thenReturn(new AcademyForViewDTO());
-
-        groupInfoService.getInfoAboutStudents();
-
-        Mockito.verify(languageTranslationsService).getAllLanguageTranslationsName();
-        Mockito.verify(teacherTypeService).findOne(EXPERT_STATUS_ID);
-        Mockito.verify(studentsStatusesService).findOne(TRAINEE_STATUS_ID);
-        Mockito.verify(groupInfoTeachersService).findAllByTeacherType(teacherTypes);
-        Mockito.verify(academyConverter).toDTO(groupInfo);
-        Mockito.verify(studentsService).countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
-
-        Mockito.verifyNoMoreInteractions(languageTranslationsService, teacherTypeService, studentsStatusesService,
-                groupInfoTeachersService, academyConverter, studentsService);
-    }
+//    @Ignore
+//    @Test
+//    public void All_Services_Returns_Not_NULL() {
+//        Mockito.when(languageTranslationsService.getAllLanguageTranslationsName())
+//                .thenReturn(Arrays.asList(new LanguageTranslations(), new LanguageTranslations()));
+//        Mockito.when(teacherTypeService.findOne(EXPERT_STATUS_ID)).thenReturn(teacherTypes);
+//        Mockito.when(groupInfoService.findAllWithOrder()).thenReturn(Arrays.asList(groupInfo));
+//        Mockito.when(studentsStatusesService.findOne(TRAINEE_STATUS_ID)).thenReturn(studentStatuses);
+//        Mockito.when(academyConverter.toDTO(groupInfo)).thenReturn(new AcademyForViewDTO());
+//
+//        groupInfoService.getInfoAboutStudents();
+//
+//        Mockito.verify(languageTranslationsService).getAllLanguageTranslationsName();
+//        Mockito.verify(teacherTypeService).findOne(EXPERT_STATUS_ID);
+//        Mockito.verify(studentsStatusesService).findOne(TRAINEE_STATUS_ID);
+//        Mockito.verify(groupInfoTeachersService).findAllByTeacherType(teacherTypes);
+//        Mockito.verify(academyConverter).toDTO(groupInfo);
+//        Mockito.verify(studentsService).countAllByAcademyAndStudentStatus(groupInfo.getAcademy(), studentStatuses);
+//
+//        Mockito.verifyNoMoreInteractions(languageTranslationsService, teacherTypeService, studentsStatusesService,
+//                groupInfoTeachersService, academyConverter, studentsService);
+//    }
     @Ignore
     @Test
     public void Group_Info_List_Return_NULL() {
