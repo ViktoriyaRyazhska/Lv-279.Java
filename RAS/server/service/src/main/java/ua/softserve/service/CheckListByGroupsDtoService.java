@@ -16,6 +16,6 @@ import java.util.List;
 
 public interface CheckListByGroupsDtoService {
 
-    List<CheckListByGroupsDto> getAllCheckListByGroupsDto(int skip);
+    List<CheckListByGroupsDto> getAllCheckListByGroupsDto();
 
 }
