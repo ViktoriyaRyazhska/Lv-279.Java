@@ -308,10 +308,15 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             if (list == null || list.isEmpty()) {
                 return FALSE;
             }
-            boolean testResult = list
+            /*boolean testResult = list
                     .stream()
-                    .anyMatch(this::test);
-            return (!testResult) ? TRUE : FALSE;
+                    .anyMatch(this::test);*/
+            for (T t : list) {
+                if (t == null || !test(t)) {
+                    return FALSE;
+                }
+            }
+            return TRUE;
         }
     }
 }
