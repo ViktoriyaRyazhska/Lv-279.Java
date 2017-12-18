@@ -13,31 +13,31 @@ export class StudentsService{
 
   getAll(academyId:number): Observable<any> {
     let url = environment.serverUrl+'students/'+academyId;
-    return this.http.get(url);
+    return this.http.get(url,{withCredentials: true});
   }
 
   getStatuses():Observable<any>{
     let url = environment.serverUrl+'students/statuses';
-    return this.http.get(url);
+    return this.http.get(url,{withCredentials: true});
   }
 
   getEmployees():Observable<any>{
     let url = environment.serverUrl+'students/employee';
-    return this.http.get(url);
+    return this.http.get(url, {withCredentials: true});
   }
   addUsers(object: number[], academyId:number):Observable<any>{
     let url = environment.serverUrl+'students/'+academyId+'/add';
-    return this.http.post(url, object);
+    return this.http.post(url, object, {withCredentials: true});
   }
 
   remove(studentId: number): Observable<any> {
     let url = environment.serverUrl+'students/'+studentId;
-    return this.http.delete(url);
+    return this.http.delete(url, {withCredentials: true});
   }
 
   update(students: StudentFeedback[]): Observable<any> {
     let url = environment.serverUrl+'students/update';
-    return this.http.put(url,students);
+    return this.http.put(url,students, {withCredentials: true});
   }
 
 }

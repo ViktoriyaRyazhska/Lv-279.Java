@@ -9,10 +9,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.header.Header;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.config.auth.TokenHandler;
 import ua.softserve.persistence.entity.LoginUser;
 import ua.softserve.service.SecurityContextService;
+
+import javax.servlet.http.Cookie;
 
 @RestController
 public class AuthenticationRestController {

@@ -40,6 +40,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 import { FilterCheckListByGroupsComponent } from './components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component';
+import {CookieService} from "angular2-cookie/core";
+import { ErrorComponent } from './components/error/error.component';
 
 
 
@@ -70,7 +72,8 @@ import { FilterCheckListByGroupsComponent } from './components/reports/check-lis
     ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
     TestsNamesComponent,
-    FilterCheckListByGroupsComponent
+    FilterCheckListByGroupsComponent,
+    ErrorComponent
 
   ],
   imports: [
@@ -95,7 +98,8 @@ import { FilterCheckListByGroupsComponent } from './components/reports/check-lis
     MatInputModule,
     MatButtonModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService],
+  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
+    CookieService],
 
   bootstrap: [AppComponent]
 })

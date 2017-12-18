@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {StudentFeedback, Data, Feedback} from "../../../models/feedbacks/student.model";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -20,6 +20,7 @@ export enum CharacteristicId {
   templateUrl: './feedback-list.component.html',
   styleUrls: ['./feedback-list.component.css']
 })
+@Injectable()
 export class FeedbackListComponent implements OnInit {
   private CharId: any = Object.assign({}, CharacteristicId);
 
@@ -58,7 +59,8 @@ export class FeedbackListComponent implements OnInit {
 
   constructor(private markService: MarkService,
               private studentsService: StudentsService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router:Router) {
 
   }
 
@@ -70,7 +72,10 @@ export class FeedbackListComponent implements OnInit {
         this.marks = data;
 
       },
-      error => console.log(error)
+      error => {
+        this.router.navigate(['ang/error']);
+        console.log(error)
+      }
     );
 
     this.studentsService.getAll(this.academyId).subscribe(

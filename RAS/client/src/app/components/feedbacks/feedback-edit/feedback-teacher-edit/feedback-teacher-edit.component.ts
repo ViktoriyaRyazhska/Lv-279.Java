@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {MarkService} from "../../../../services/feedbacks/marks.service";
 import {Mark} from "../../../../models/feedbacks/mark.model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {StudentFeedback} from "../../../../models/feedbacks/student.model";
+import {Router} from "@angular/router";
 
 export enum CharacteristicId {
   ONE = 1,
@@ -19,6 +20,7 @@ export enum CharacteristicId {
   styleUrls: ['./feedback-teacher-edit.component.css'],
   providers: [MarkService]
 })
+@Injectable()
 export class FeedbackTeacherEditComponent implements OnInit {
   private CharId: any = Object.assign({}, CharacteristicId);
   private signupForm: FormGroup;
@@ -33,13 +35,17 @@ export class FeedbackTeacherEditComponent implements OnInit {
   getDesc: string;
   actDesc: string;
 
-  constructor(private markService: MarkService) {
+  constructor(private markService: MarkService,
+              private router:Router) {
     this.markService.getAllMarks().subscribe(
       data => {
         this.marks = data;
 
       },
-      error => console.log(error)
+      error => {
+        this.router.navigate(['ang/error']);
+        console.log(error)
+      }
     );
   }
 
