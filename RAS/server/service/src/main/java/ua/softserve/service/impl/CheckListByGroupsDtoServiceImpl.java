@@ -117,7 +117,11 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
         AcademyStages stage = academy.getAcademyStages();
 
-        List<Student> students = studentRepository.findAllActiveStudents(academyId);
+        List<Student> students = studentRepository.findAllActiveStudents(academyId)
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(student -> student.getData() != null)
+                .collect(Collectors.toList());
 
         CheckListByGroupsDto checkListByGroupsDto = new CheckListByGroupsDto();
         checkListByGroupsDto.setCityName(cityName);
@@ -310,15 +314,9 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             }
             boolean testResult = list
                     .stream()
+                    .filter(Objects::nonNull)
                     .anyMatch(this::test);
             return (!testResult) ? TRUE : FALSE;
-
-            /*for (T t : list) {
-                if (t == null || !test(t)) {
-                    return FALSE;
-                }
-            }
-            return TRUE;*/
         }
     }
 }
