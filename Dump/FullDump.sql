@@ -756,7 +756,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `login_user` WRITE;
 /*!40000 ALTER TABLE `login_user` DISABLE KEYS */;
-INSERT INTO `login_user` VALUES (1,'','','USER','','','$2a$10$xsC3s4zqKO8CdStghFgqa.2/hw0ADFoNWPpjgiO2AOl3YhUUTnaUu','1',1),(2,'','','ADMIN','','','$2a$10$CQ.60ak/MVz4US0yLKU.NOYP2tQaNCVgnQbjm0AeR9yk63Ac/HhO2','admin',2);
+INSERT INTO `login_user` VALUES (1,'','','USER','','','$2a$10$xsC3s4zqKO8CdStghFgqa.2/hw0ADFoNWPpjgiO2AOl3YhUUTnaUu','1',1),(2,'','','ADMIN','','','$2a$10$CQ.60ak/MVz4US0yLKU.NOYP2tQaNCVgnQbjm0AeR9yk63Ac/HhO2','admin',2),(3,'','','TEACHER','','','$2a$10$eWhb7Uz/ieOnfQDBjTOWWevSdEDgFpBjyRbusymXjyivG6Ht.X6f2','teacher',NULL),(4,'','','INTERVIEWER','','','$2a$10$8p7pTBdJMoKM8IKhLMgFkeuysqKkKGVd7xhk7BKkcu2BQPeetZkai','interviewer',NULL),(5,'','','EXPERT','','','$2a$10$uk8HbiWWIWvwXSyAqD2Xq.fMBdsFBK2svLqf28JlZd61UmrAC6HYa','expert',NULL),(6,'','','NETWORK_LEAD','','','$2a$10$zeonP.zr.rIyW9TUyfWQDeaIVoOUjbBRUNW.hm3TBWWSBO9hIWUD2','network_lead',NULL),(7,'','','ITA_COORDINATOR','','','$2a$10$An57CJXxOWyxBIFTxktMOObveyoX3bi5sZUm28jEbj9xR/OtqNZBu','ita_coordinator',NULL),(8,'','','ITA_ADMIN','','','$2a$10$PmBrMG3w9qrpKjy2bociHuwMEiHXZAQrtbE2TXFWsrJwS2oSRAXzi','ita_admin',NULL),(9,'','','RECRUITER','','','$2a$10$UQQqlWUgVCROgFtzeXc1ieA7fZoFrZyX53uZNpn8XoPORou4tYd3i','recruiter',NULL),(10,'','','SOFTSERVE_PM','','','$2a$10$tNFEFOLoDMYt9vXNTAG/s../TnuMktsMvhQHsgyMvTdJtGn3WUrC.','softserve_pm',NULL);
 /*!40000 ALTER TABLE `login_user` ENABLE KEYS */;
 UNLOCK TABLES;
 

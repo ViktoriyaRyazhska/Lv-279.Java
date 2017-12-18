@@ -18,7 +18,10 @@ import ua.softserve.service.CheckListByGroupsDtoService;
 import ua.softserve.service.dto.CheckListByGroupsDto;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static ua.softserve.persistence.constants.ConstantsFromDb.*;
 
@@ -94,7 +97,10 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     @Override
     public List<CheckListByGroupsDto> getAllCheckListByGroupsDto() {
 
-        List<Academy> allAcademies = academyRepository.findAll();
+        List<Academy> allAcademies = academyRepository.findAll()
+                .stream()
+                .limit(50)
+                .collect(Collectors.toList());
 
         List<CheckListByGroupsDto> checkListByGroupsDtos = new ArrayList<>();
 
@@ -129,10 +135,11 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         checkListByGroupsDto.setStatus((stage != null) ? stage.getName() : "");
         setTeachers(academyId, checkListByGroupsDto);
         Map<String, Integer> report = checkListByGroupsDto.getReport();
+
         for (Map.Entry<Key, CheckPredicate<Student>> predicate : studentsPredicates.entrySet()) {
             report.put(
                     predicate.getKey().toString(),
-                    predicate.getValue().check(students)
+                    predicate.getValue().checkList(students)
             );
         }
 
@@ -161,7 +168,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             } else {
                 list = interviewers;
             }
-            report.put(key, predicate.getValue().check(list));
+            report.put(key, predicate.getValue().checkList(list));
         }
     }
 
@@ -237,13 +244,13 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             return data != null && data.getIntermLang() == null;
         });
         studentsPredicates.put(Key.TEACHER_FEEDBACKS_FILLED_IN, student -> {
-                StudentTestData data = student.getData();
-                return data != null && student.getTeacherFeedback() == null && data.getTeacherScore() == null;
-                });
+            StudentTestData data = student.getData();
+            return data != null && student.getTeacherFeedback() == null && data.getTeacherScore() == null;
+        });
         studentsPredicates.put(Key.EXPERT_FEEDBACKS_FILLED_IN, student -> {
-                    StudentTestData data = student.getData();
-                    return data != null && student.getExpertFeedback() == null && data.getExpertScore() == null;
-                });
+            StudentTestData data = student.getData();
+            return data != null && student.getExpertFeedback() == null && data.getExpertScore() == null;
+        });
         studentsPredicates.put(Key.FINAL_TEST_BASE_PASS, student -> {
             StudentTestData data = student.getData();
             return data != null && data.getFinalBase() == null;
@@ -308,7 +315,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     public interface CheckPredicate<T> {
         boolean test(T t);
 
-        default Integer check(List<T> list) {
+        default Integer checkList(List<T> list) {
             if (list == null || list.isEmpty()) {
                 return FALSE;
             }

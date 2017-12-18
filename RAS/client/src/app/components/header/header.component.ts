@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../auth/login/login.service";
 import {Router} from "@angular/router";
+import {CookieService} from "angular2-cookie/core";
 
 @Component({
   selector: 'app-header',
@@ -10,12 +11,13 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit {
 
   constructor(private loginService: LoginService,
-              private router:Router) { }
+              private router:Router,
+              private cookie:CookieService) { }
 
   ngOnInit() {
   }
   logout = () => {
-      localStorage.removeItem('jwt');
+      this.cookie.remove('token');
   };
 
 }

@@ -1,6 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Injectable, OnInit, ViewChild} from '@angular/core';
 import {ItaTacticalPlanByGroupStageService} from "./ita-tactical-plan-by-group-stage.service";
 import {MatSort, MatTableDataSource} from "@angular/material";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -9,6 +10,8 @@ import {MatSort, MatTableDataSource} from "@angular/material";
   styleUrls: ['./ita-tactical-plan-by-group-stage.component.css'],
   providers: [ItaTacticalPlanByGroupStageService]
 })
+
+@Injectable()
 export class ItaTacticalPlanByGroupStageComponent implements OnInit {
 
   itaTacticalPlanByGroupStageReports = [
@@ -24,7 +27,8 @@ export class ItaTacticalPlanByGroupStageComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private itaTacticalPlanByGroupStageService: ItaTacticalPlanByGroupStageService) {
+  constructor(private itaTacticalPlanByGroupStageService: ItaTacticalPlanByGroupStageService,
+              private router:Router) {
   }
 
   ngOnInit() {
@@ -43,6 +47,7 @@ export class ItaTacticalPlanByGroupStageComponent implements OnInit {
         }
       },
       error => {
+        this.router.navigate(['ang/error']);
         console.log(error)
       }
     );
