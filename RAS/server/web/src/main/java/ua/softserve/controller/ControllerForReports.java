@@ -30,9 +30,9 @@ public class ControllerForReports {
     @Autowired
     ItaTacticalPlanByGroupStageDtoService itaTacticalPlanByGroupStageDtoService;
 
-    @GetMapping(value = "/check_list_by_groups", produces = "application/json")
-    public ResponseEntity<List<CheckListByGroupsDto>> getCheckListByGroupsDto() {
-        return new ResponseEntity<>(checkListByGroupsDtoService.getAllCheckListByGroupsDto(), HttpStatus.OK);
+    @GetMapping(value = "/check_list_by_groups/{skip}", produces = "application/json")
+    public ResponseEntity<List<CheckListByGroupsDto>> getCheckListByGroupsDto(@PathVariable int skip) {
+        return new ResponseEntity<>(checkListByGroupsDtoService.getAllCheckListByGroupsDto(skip), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/itaTacticalPlanByGroupStage", method = RequestMethod.GET, produces = {

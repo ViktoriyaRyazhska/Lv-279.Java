@@ -92,11 +92,11 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
     }
 
     @Override
-    public List<CheckListByGroupsDto> getAllCheckListByGroupsDto() {
+    public List<CheckListByGroupsDto> getAllCheckListByGroupsDto(int skip) {
 
         List<Academy> allAcademies = academyRepository.findAll()
                 .stream()
-                .skip(1)
+                .skip(skip)
                 .limit(1)
                 .collect(Collectors.toList());
 
