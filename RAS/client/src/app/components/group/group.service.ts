@@ -9,7 +9,7 @@ export class GroupService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get('http://localhost:8080/academy');
+    return this.http.get('http://localhost:8080/academy',{withCredentials: true});
   }
 
 }
