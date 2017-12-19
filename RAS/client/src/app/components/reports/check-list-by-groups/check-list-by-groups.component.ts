@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {MatIconRegistry} from '@angular/material';
 import {ReportsService} from "../reports.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-check-list-by-groups',
@@ -9,10 +10,14 @@ import {DomSanitizer} from "@angular/platform-browser";
   styleUrls: ['./check-list-by-groups.component.css'],
   providers: [ReportsService]
 })
+@Injectable()
 export class CheckListByGroupsComponent implements OnInit{
   groups: any;
 
-  constructor(private reportsService: ReportsService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(private reportsService: ReportsService,
+              iconRegistry: MatIconRegistry,
+              sanitizer: DomSanitizer,
+              private router:Router) {
     iconRegistry.addSvgIcon(
       'icon1',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/examples/ic_check_black_24px.svg'));
@@ -26,7 +31,10 @@ export class CheckListByGroupsComponent implements OnInit{
       data => {
         this.groups = data;
       },
-      error => console.log(error)
+      error => {
+        this.router.navigate(['ang/error']);
+        console.log(error);
+      }
     );
 
   }

@@ -42,6 +42,8 @@ import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tac
 import { FilterCheckListByGroupsComponent } from './components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component';
 import { SearchbarComponent } from './components/view-academies/searchbar/searchbar.component';
 import {SearchBarService} from "./components/view-academies/search-bar.service";
+import {CookieService} from "angular2-cookie/core";
+import { ErrorComponent } from './components/error/error.component';
 
 
 
@@ -74,6 +76,8 @@ import {SearchBarService} from "./components/view-academies/search-bar.service";
     TestsNamesComponent,
     FilterCheckListByGroupsComponent,
     SearchbarComponent
+    FilterCheckListByGroupsComponent,
+    ErrorComponent
 
   ],
   imports: [
@@ -98,7 +102,8 @@ import {SearchBarService} from "./components/view-academies/search-bar.service";
     MatInputModule,
     MatButtonModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService, SearchBarService],
+  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
+    CookieService, SearchBarService],
 
   bootstrap: [AppComponent]
 })

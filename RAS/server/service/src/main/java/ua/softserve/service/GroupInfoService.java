@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 public interface GroupInfoService {
-    void save(GroupInfo groupInfo);
+    /*void save(GroupInfo groupInfo);
 
     // void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
 
@@ -27,5 +27,16 @@ public interface GroupInfoService {
 
     List<GroupInfo> findAllWithOrder();
 
-    List<GroupInformationDTO> findAllInfoAboutGroups();
+    List<GroupInformationDTO> findAllInfoAboutGroups();*/
+    void save(GroupInfo groupInfo);
+
+    // void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
+
+    GroupInfo findOne(int id);
+
+    GroupInfo findOneGroupInfoByAcademyId(int groupInfoId);
+
+    List<AcademyForViewDTO> getAllAcademies();
+
+    List<GroupInfo> findAllWithOrder();
 }

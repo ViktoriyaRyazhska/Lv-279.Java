@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {AddGroupService} from "./add-group.service";
 import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Group} from "./group.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-group',
@@ -12,6 +12,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./add-group.component.css'],
   providers: [HistoryService]
 })
+@Injectable()
 export class AddGroupComponent implements OnInit {
   private signupForm: FormGroup;
 
@@ -27,7 +28,8 @@ export class AddGroupComponent implements OnInit {
   private defaultInvalidInput: string = 'No data entered. Group will not be save';
 
   constructor(private addGroupService: AddGroupService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private router:Router) {}
 
 
   ngOnInit() {
@@ -39,6 +41,8 @@ export class AddGroupComponent implements OnInit {
       this.commonDirection = resp.direction;
       this.direction = resp.technologie;
       this.profile = resp.profile;
+    },error => {
+      this.router.navigate(['ang/error']);
     });
 
     this.signupForm = new FormGroup({
@@ -64,6 +68,7 @@ export class AddGroupComponent implements OnInit {
 
   saveGroup() {
     console.log(this.isFormValid());
+    console.log(this.route);
     if(this.isFormValid()){
       this.group.setDataFromFormControl(this.signupForm);
       console.log(this.group);
