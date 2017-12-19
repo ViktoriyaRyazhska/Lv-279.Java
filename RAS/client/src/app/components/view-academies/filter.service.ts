@@ -6,7 +6,7 @@ export class FilterService {
   constructor() { }
 
   transform(value: any, filterString: string, propName: string): any {
-    if (value.length === 0 || filterString === '' || filterString === null) {
+    if (value.length === 0 || filterString === '' || filterString === null || filterString === undefined) {
       return value;
     }
     const resultArray = [];
@@ -30,5 +30,4 @@ export class FilterService {
     }
     return resultArray;
   }
-
 }

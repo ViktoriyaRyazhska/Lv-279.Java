@@ -4,13 +4,15 @@
       <ul class="col-sm-6 form-group" id="UL_left_column">
         <div class="row">
           <mat-form-field class="col-sm-6">
-            <mat-select placeholder="Status:"> <!--(change)="onFilterField(groupForm)"-->
+            <mat-select placeholder="Status:">
+              <mat-option>None</mat-option>
               <mat-option *ngFor="let stages of academyStages" [value]="stages.name">{{ stages.name }}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="col-sm-6">
             <mat-select placeholder="Location:" name="cityName" (change)="getFilter(groupForm)" ngModel>
+              <mat-option>None</mat-option>
               <mat-option *ngFor="let city of cityNames" [value]="city.trasnlation">{{city.trasnlation}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -35,7 +37,7 @@
         <div class="row">
           <mat-form-field class="col-sm-12">
             <mat-select placeholder="Payment Status:" name="paymentStatus" (change)="getFilter(groupForm)" ngModel>
-              <mat-option value=null></mat-option>
+              <mat-option>None</mat-option>
               <mat-option *ngFor="let paym of paymentStatus" [value]="paym">{{paym}}
               </mat-option>
             </mat-select>
@@ -48,7 +50,7 @@
         <div class="row">
           <mat-form-field class="col-sm-12">
             <mat-select placeholder="Common Direction:" name="directionName" (change)="getFilter(groupForm)" ngModel>
-              <mat-option value=null></mat-option>
+              <mat-option>None</mat-option>
               <mat-option *ngFor="let direct of direction" [value]="direct.name">{{direct.name}}
               </mat-option>
             </mat-select>
@@ -58,14 +60,14 @@
         <div class="row">
           <mat-form-field class="col-sm-6">
             <mat-select placeholder="Direction:" name="technologyName" (change)="getFilter(groupForm)" ngModel>
-              <mat-option value="0" selected></mat-option>
+              <mat-option>None</mat-option>
               <mat-option *ngFor="let tech of technology" [value]="tech.name">{{ tech.name }}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="col-sm-6">
             <mat-select placeholder="Profile:" name="profileName" (change)="getFilter(groupForm)" ngModel>
-              <mat-option value="0"></mat-option>
+              <mat-option>None</mat-option>
               <mat-option *ngFor="let prof of profile" [value]="prof.profileName">{{ prof.profileName }}
               </mat-option>
             </mat-select>
