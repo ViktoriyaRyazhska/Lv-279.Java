@@ -9,6 +9,8 @@ import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
 import ua.softserve.service.converter.GroupInfoConverter;
+import ua.softserve.service.dto.AcademyDTO;
+import ua.softserve.service.dto.AcademyDropDownLists;
 import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.util.List;
@@ -71,14 +73,14 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     @Override
-    public AcademyForSaveDTO getAcademyDTO() {
-        AcademyForSaveDTO academyDTO = new AcademyForSaveDTO();
-        academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
-        academyDTO.setDirection(directionService.findAllDirectionsInIta());
-        academyDTO.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
-        academyDTO.setProfile(profileService.findAll());
-        academyDTO.setCityNames(languageTranslationsService.getAllLanguageTranslationsName());
-        return academyDTO;
+    public AcademyDropDownLists getAcademyDTO() {
+        AcademyDropDownLists academyDropDownLists = new AcademyDropDownLists();
+        academyDropDownLists.setAcademyStages(academyStagesService.getAllAcademyStagesService());
+        academyDropDownLists.setDirection(directionService.findAllDirectionsInIta());
+        academyDropDownLists.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
+        academyDropDownLists.setProfile(profileService.findAll());
+        academyDropDownLists.setCityNames(languageTranslationsService.getAllLanguageTranslationsName());
+        return academyDropDownLists;
     }
 
     @Override

@@ -40,6 +40,14 @@
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
 
         <log4j.version>2.6.2</log4j.version>
+
+        <modelmapper.version>0.7.4</modelmapper.version>
+
+        <mockito.version>2.12.0</mockito.version>
+
+        <hamcrest.version>1.3</hamcrest.version>
+
+
     </properties>
 
     <dependencies>

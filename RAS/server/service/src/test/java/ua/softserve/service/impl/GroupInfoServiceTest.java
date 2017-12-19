@@ -17,6 +17,7 @@ import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyForViewDTO;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GroupInfoServiceTest {
@@ -69,7 +70,7 @@ public class GroupInfoServiceTest {
     @Test
     public void All_Services_Returns_Not_NULL() {
         Mockito.when(languageTranslationsService.getAllLanguageTranslationsName())
-                .thenReturn(Arrays.asList(new LanguageTranslations(), new LanguageTranslations()));
+                .thenReturn(new HashSet<>(Arrays.asList(new LanguageTranslations(), new LanguageTranslations())));
         Mockito.when(teacherTypeService.findOne(EXPERT_STATUS_ID)).thenReturn(teacherTypes);
         Mockito.when(groupInfoService.findAllWithOrder()).thenReturn(Arrays.asList(groupInfo));
         Mockito.when(studentsStatusesService.findOne(TRAINEE_STATUS_ID)).thenReturn(studentStatuses);

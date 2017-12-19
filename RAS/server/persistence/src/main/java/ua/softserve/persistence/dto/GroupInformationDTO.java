@@ -12,7 +12,7 @@ import java.util.Date;
 @ToString
 @AllArgsConstructor
 public class GroupInformationDTO {
-    private Integer groupInfoId;
+    private Integer academyId;
     private String groupName;
     private Integer studentsPlannedToGraduate;
     private Integer studentsPlannedToEnrollment;
@@ -34,7 +34,7 @@ public class GroupInformationDTO {
         GroupInformationDTO that = (GroupInformationDTO) o;
 
         if (paymentStatus != that.paymentStatus) return false;
-        if (groupInfoId != null ? !groupInfoId.equals(that.groupInfoId) : that.groupInfoId != null) return false;
+        if (academyId != null ? !academyId.equals(that.academyId) : that.academyId != null) return false;
         if (groupName != null ? !groupName.equals(that.groupName) : that.groupName != null) return false;
         if (studentsPlannedToGraduate != null ? !studentsPlannedToGraduate.equals(that.studentsPlannedToGraduate) : that.studentsPlannedToGraduate != null)
             return false;
@@ -53,7 +53,7 @@ public class GroupInformationDTO {
 
     @Override
     public int hashCode() {
-        int result = groupInfoId != null ? groupInfoId.hashCode() : 0;
+        int result = academyId != null ? academyId.hashCode() : 0;
         result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
         result = 31 * result + (studentsPlannedToGraduate != null ? studentsPlannedToGraduate.hashCode() : 0);
         result = 31 * result + (studentsPlannedToEnrollment != null ? studentsPlannedToEnrollment.hashCode() : 0);
