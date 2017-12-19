@@ -19,7 +19,7 @@ export class FilterService {
   }
 
   transformDate(value: any, filterString: Date, propName: string): any {
-    if (value.length === 0 || filterString.toString() === '' || filterString === null) {
+    if (value.length === 0 || filterString === null || filterString.toString() === '' ) {
       return value;
     }
     const resultArray = [];
