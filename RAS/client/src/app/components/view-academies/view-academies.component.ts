@@ -45,8 +45,6 @@ export class ViewAcademiesComponent implements OnInit {
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-
-
       },
       error => console.log(error)
     );
@@ -62,6 +60,7 @@ export class ViewAcademiesComponent implements OnInit {
       }
       this.dataSource = new MatTableDataSource<Element>(this.filteredAcademies);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 }

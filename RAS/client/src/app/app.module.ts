@@ -75,7 +75,7 @@ import { ErrorComponent } from './components/error/error.component';
     CheckListByGroupsComponent,
     TestsNamesComponent,
     FilterCheckListByGroupsComponent,
-    SearchbarComponent
+    SearchbarComponent,
     FilterCheckListByGroupsComponent,
     ErrorComponent
 

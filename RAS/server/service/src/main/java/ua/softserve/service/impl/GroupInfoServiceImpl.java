@@ -13,10 +13,7 @@ import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyForViewDTO;
 import ua.softserve.service.dto.GroupAllInformationDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Service processes information that returns Repositories.
@@ -55,6 +52,9 @@ public class GroupInfoServiceImpl implements GroupInfoService {
 
     @Autowired
     private StudentsStatusesService studentsStatusesService;
+
+    @Autowired
+    private GroupInfoConverter groupInfoConverter;
 
     @Override
     public void save(GroupInfo groupInfo) {

@@ -36,7 +36,13 @@ public interface GroupInfoService {
 
     GroupInfo findOneGroupInfoByAcademyId(int groupInfoId);
 
+    Map<GroupInformationDTO, Integer> getInfoAboutStudents();
+
+    Set<GroupAllInformationDTO> getAllInfo();
+
     List<AcademyForViewDTO> getAllAcademies();
 
     List<GroupInfo> findAllWithOrder();
+
+    public List<GroupInformationDTO> findAllInfoAboutGroups();
 }
