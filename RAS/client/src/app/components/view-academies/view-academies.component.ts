@@ -5,6 +5,8 @@ import {FilterService} from "./filter.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
+import {SearchBarService} from "./search-bar.service";
+import {Form} from "@angular/forms";
 
 @Component({
   selector: 'app-view-academies',
@@ -15,16 +17,10 @@ import {MatSort} from "@angular/material/sort";
 export class ViewAcademiesComponent implements OnInit {
   academies = [];
   filteredAcademies = [];
-  academyStages: any[];
-  cityNames: any[];
-  direction: any[];
-  technology: any[];
-  profile: any[];
-  paymentStatus = [];
 
   displayedColumns =
     ['grName', 'nameForSite', 'technologyName', 'profileName',
-      'paymentStatus', 'cityName', 'startDate', 'endDate',
+      'paymentStatus', 'cityName', 'startDate', 'endDate', 'academyStage',
       'experts', 'studentPlannedToGraduate', 'studentPlannedToEnrollment',
       'studentsActual', 'hiredNotGraduated', 'directionName', 'interviewerFeedback'
     ];
@@ -45,26 +41,25 @@ export class ViewAcademiesComponent implements OnInit {
         this.academies = this.academies.slice(0, data.length - 2);
         this.filteredAcademies = this.academies;
 
-        this.academyStages = data[data.length - 1].academyStages;
-        this.cityNames = data[data.length - 1].cityNames;
-        this.direction = data[data.length - 1].direction;
-        this.profile = data[data.length - 1].profile;
-        this.technology = data[data.length - 1].technologie;
+        this.dataSource = new MatTableDataSource(this.filteredAcademies);
 
-        this.dataSource = new MatTableDataSource<Element>(this.filteredAcademies);
-
-        this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
 
-        this.paymentStatus = ['Founded by SoftServe', 'Paid'];
+
       },
       error => console.log(error)
     );
   }
-  onFilterField(event: Event, form) {
+
+  onFilterField(form) {
     this.filteredAcademies = this.academies;
-    Object.keys(form.value).forEach(key => {
-      this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.value[key], key);
+    Object.keys(form.form.value).forEach(key => {
+      if (key === 'startDate' || key === 'endDate') {
+        this.filteredAcademies = this.filterService.transformDate(this.filteredAcademies, form.form.value[key], key);
+      }else {
+        this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value[key], key);
+      }
       this.dataSource = new MatTableDataSource<Element>(this.filteredAcademies);
       this.dataSource.paginator = this.paginator;
     });
