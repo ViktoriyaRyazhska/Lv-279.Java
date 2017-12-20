@@ -67,45 +67,30 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     }
 
     /**
-     * Method transforms information about academies from all tables into one DTO object.
+     * Method contains information about group and information about experts in the group.
      *
-     * @return information about academies from all tables into one DTO object.
+     * @return DTO object that contains information about group.
      */
     @Override
-    public Map<GroupInformationDTO, Integer> getInfoAboutStudents() {
+    public List<GroupInformationDTO> getAllInfo() {
+        List<GroupInfoTeachers> getExpertsOfTheGroup = null;
         List<GroupInformationDTO> allInfoAboutGroups = findAllInfoAboutGroups();
-        Map<GroupInformationDTO, Integer> infoStudentMap= new HashMap<>();
-        for(GroupInformationDTO infoAboutGroup: allInfoAboutGroups){
-            if(infoStudentMap.containsKey(infoAboutGroup)){
-                infoStudentMap.put(infoAboutGroup, infoStudentMap.get(infoAboutGroup) + 1);
-            } else {
-                infoStudentMap.put(infoAboutGroup, 0);
-            }
+        TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
+        if (teacherTypes != null) {
+            getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
         }
-        for (Map.Entry<GroupInformationDTO, Integer> entry : infoStudentMap.entrySet())
-        {
-            if(entry.getValue() > 0){
-                infoStudentMap.put(entry.getKey(), entry.getValue() + 1);
+        if (getExpertsOfTheGroup != null) {
+            for (GroupInformationDTO groupInformationDTO : allInfoAboutGroups) {
+                for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
+                    if ((groupInfoTeachers.getAcademy().getAcademyId().equals(groupInformationDTO.getAcademyId()))) {
+                        groupInformationDTO.getFirstName().add(groupInfoTeachers.getEmployee().getFirstNameEng());
+                        groupInformationDTO.getLastName().add(groupInfoTeachers.getEmployee().getLastNameEng());
+                    }
+                }
             }
-        }
-        return infoStudentMap;
-    }
 
-    @Override
-    public Set<GroupAllInformationDTO> getAllInfo(){
-        Map<GroupInformationDTO, Integer> infoAboutStudents = getInfoAboutStudents();
-        Set<GroupAllInformationDTO> groupAllInformationDTOSet = new HashSet<>();
-        for (Map.Entry<GroupInformationDTO, Integer> entry : infoAboutStudents.entrySet())
-        {
-            GroupAllInformationDTO allInformationDTO = groupInfoConverter.InfoStudentsDTOToInfoGroupDTO(entry.getKey());
-            if(groupAllInformationDTOSet.contains(allInformationDTO)){
-
-            } else {
-                GroupAllInformationDTO groupAllInformationDTO = groupInfoConverter.InfoStudentsDTOToInfoGroupDTO(entry.getKey());
-                groupAllInformationDTOSet.add(groupAllInformationDTO);
-            }
         }
-        return null;
+        return allInfoAboutGroups;
     }
 
     /**

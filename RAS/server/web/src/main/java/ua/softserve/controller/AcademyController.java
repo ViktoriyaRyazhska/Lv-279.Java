@@ -41,7 +41,7 @@ public class AcademyController {
 
     @RequestMapping(value = "/viewAcademies", method = RequestMethod.GET, produces = { "application/json" })
     public ResponseEntity<List<AcademyForViewDTO>> searchSite() {
-        Set<GroupAllInformationDTO> allInfo = groupInfoService.getAllInfo();
+        List<GroupInformationDTO> allInfo = groupInfoService.getAllInfo();
         return new ResponseEntity<>(groupInfoService.getAllAcademies(), HttpStatus.OK);
     }
 }

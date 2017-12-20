@@ -34,15 +34,13 @@ public interface GroupInfoService {
 
     GroupInfo findOne(int id);
 
-    GroupInfo findOneGroupInfoByAcademyId(int groupInfoId);
-
-    Map<GroupInformationDTO, Integer> getInfoAboutStudents();
-
-    Set<GroupAllInformationDTO> getAllInfo();
+    List<GroupInformationDTO> getAllInfo();
 
     List<AcademyForViewDTO> getAllAcademies();
 
     List<GroupInfo> findAllWithOrder();
 
-    public List<GroupInformationDTO> findAllInfoAboutGroups();
+    List<GroupInformationDTO> findAllInfoAboutGroups();
+
+    GroupInfo findOneGroupInfoByAcademyId(int academyId);
 }
