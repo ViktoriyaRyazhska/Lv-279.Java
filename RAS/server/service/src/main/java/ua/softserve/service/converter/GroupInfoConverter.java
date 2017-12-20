@@ -18,7 +18,6 @@ public class GroupInfoConverter {
     @Autowired
     ProfileService profileService;
 
-
     public GroupInfo toEntity(int academyId, AcademyForSaveDTO academyDTO) {
         GroupInfo groupInfo = new GroupInfo();
         groupInfo.setAcademy(getAcademyById(academyId));

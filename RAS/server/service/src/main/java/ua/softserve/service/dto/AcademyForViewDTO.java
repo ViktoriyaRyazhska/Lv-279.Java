@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class AcademyForViewDTO extends AcademyDTO{
+public class AcademyForViewDTO extends AcademyDTO {
     private Integer id;
     private Integer academyId;
     private String paymentStatus;

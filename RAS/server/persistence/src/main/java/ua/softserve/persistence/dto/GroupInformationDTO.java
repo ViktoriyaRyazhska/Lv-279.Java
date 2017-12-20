@@ -28,26 +28,39 @@ public class GroupInformationDTO {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         GroupInformationDTO that = (GroupInformationDTO) o;
 
-        if (paymentStatus != that.paymentStatus) return false;
-        if (groupInfoId != null ? !groupInfoId.equals(that.groupInfoId) : that.groupInfoId != null) return false;
-        if (groupName != null ? !groupName.equals(that.groupName) : that.groupName != null) return false;
-        if (studentsPlannedToGraduate != null ? !studentsPlannedToGraduate.equals(that.studentsPlannedToGraduate) : that.studentsPlannedToGraduate != null)
+        if (paymentStatus != that.paymentStatus)
             return false;
-        if (studentsPlannedToEnrollment != null ? !studentsPlannedToEnrollment.equals(that.studentsPlannedToEnrollment) : that.studentsPlannedToEnrollment != null)
+        if (groupInfoId != null ? !groupInfoId.equals(that.groupInfoId) : that.groupInfoId != null)
             return false;
-        if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
-        if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
-        if (nameForSite != null ? !nameForSite.equals(that.nameForSite) : that.nameForSite != null) return false;
-        if (profileName != null ? !profileName.equals(that.profileName) : that.profileName != null) return false;
+        if (groupName != null ? !groupName.equals(that.groupName) : that.groupName != null)
+            return false;
+        if (studentsPlannedToGraduate != null ? !studentsPlannedToGraduate.equals(that.studentsPlannedToGraduate)
+                : that.studentsPlannedToGraduate != null)
+            return false;
+        if (studentsPlannedToEnrollment != null ? !studentsPlannedToEnrollment.equals(that.studentsPlannedToEnrollment)
+                : that.studentsPlannedToEnrollment != null)
+            return false;
+        if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null)
+            return false;
+        if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null)
+            return false;
+        if (nameForSite != null ? !nameForSite.equals(that.nameForSite) : that.nameForSite != null)
+            return false;
+        if (profileName != null ? !profileName.equals(that.profileName) : that.profileName != null)
+            return false;
         if (directionName != null ? !directionName.equals(that.directionName) : that.directionName != null)
             return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+        if (status != null ? !status.equals(that.status) : that.status != null)
+            return false;
+        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null)
+            return false;
         return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
     }
 

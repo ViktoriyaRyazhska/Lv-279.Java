@@ -72,11 +72,11 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Override
     public Map<GroupInformationDTO, Integer> getInfoAboutStudents() {
         List<GroupInformationDTO> allInfoAboutGroups = findAllInfoAboutGroups();
-        Map<GroupInformationDTO, Integer> infoStudentMap= new HashMap<>();
+        Map<GroupInformationDTO, Integer> infoStudentMap = new HashMap<>();
         infoStudentMap.put(allInfoAboutGroups.get(0), 1);
         allInfoAboutGroups.remove(0);
-        for(GroupInformationDTO infoAboutGroup: allInfoAboutGroups){
-            if(infoStudentMap.containsKey(infoAboutGroup)){
+        for (GroupInformationDTO infoAboutGroup : allInfoAboutGroups) {
+            if (infoStudentMap.containsKey(infoAboutGroup)) {
                 infoStudentMap.put(infoAboutGroup, infoStudentMap.get(infoAboutGroup) + 1);
             } else {
                 infoStudentMap.put(infoAboutGroup, 1);

@@ -20,15 +20,10 @@ public class StudentViewDto {
     private boolean removed;
 
     public static StudentViewDto of(Student student) {
-        return new StudentViewDto(student.getId(),
-                student.getUser(),
-                student.getAcademy().getAcademyId(),
-                student.getData(),
-                student.getStudentStatus(),
+        return new StudentViewDto(student.getId(), student.getUser(), student.getAcademy().getAcademyId(),
+                student.getData(), student.getStudentStatus(),
                 student.getApprovedBy() == null ? null : EmployeeEngShortDto.of(student.getApprovedBy()),
-                student.getTeacherFeedback(),
-                student.getExpertFeedback(),
-                student.isRemoved());
+                student.getTeacherFeedback(), student.getExpertFeedback(), student.isRemoved());
     }
 
     public Student update(Student student) {

@@ -64,4 +64,5 @@ public class ConstantsFromDb {
     public static int TEACHER_TYPE_INTERVIEWER_ID = 3;
 
     public static final Integer ZERO_EMPLOYEE = 0;
+
 }

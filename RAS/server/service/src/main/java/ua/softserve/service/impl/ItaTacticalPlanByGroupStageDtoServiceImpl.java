@@ -37,14 +37,14 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     @Autowired
     EmployeeRepository employeeRepository;
 
+
     /**
      * Method transforms information about one academy from all tables into one DTO object designed for ITA Tactical
      * Plan by Group Stage.
      *
-     * @param id
-     *            (int) indicates which group to form DTO object designed for ITA Tactical Plan by Group Stage.
+     * @param id (int) indicates which group to form DTO object designed for ITA Tactical Plan by Group Stage.
      * @return information about one academy from all tables into one DTO object designed for ITA Tactical Plan by Group
-     *         Stage.
+     * Stage.
      */
     @Override
     public ItaTacticalPlanByGroupStageDto findById(int id) {
@@ -101,85 +101,60 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
      * Method Generate data for weekly status meeting with GTA/HR/ITA partisipants. Contain list og available groups by
      * stages.
      *
-     * @return List<List < ItaTacticalPlanByGroupStageDto>> with information from ITA Tactical Plan by Group Stage
-     *         report.
+     * @return List<List<ItaTacticalPlanByGroupStageDto>> with information from ITA Tactical Plan by Group Stage
+     * report.
      */
     @Override
     public List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStageReport() {
         List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStage = new ArrayList<List<ItaTacticalPlanByGroupStageDto>>();
-        List<ItaTacticalPlanByGroupStageDto> planedGroupForTwoMoth = new ArrayList<>();
-        List<ItaTacticalPlanByGroupStageDto> groupsInProces = new ArrayList<>();
-        List<ItaTacticalPlanByGroupStageDto> groupsOffering = new ArrayList<>();
-        List<ItaTacticalPlanByGroupStageDto> groupsGraduated = new ArrayList<>();
-        List<ItaTacticalPlanByGroupStageDto> listOfPlannedReleases = new ArrayList<>();
+        List<ItaTacticalPlanByGroupStageDto> someReport = new ArrayList<>();
+        int[] academyStageIdByReport = {ACADEMY_STAGE_IN_PROCESS_ID, ACADEMY_STAGE_OFFERING_ID, ACADEMY_STAGE_GRADUATED_ID, ACADEMY_STAGE_BOARDING_ID};
         List<Academy> academies = academyService.getAllAcademies();
         Calendar dateForComparison = new GregorianCalendar();
         dateForComparison.add(Calendar.MONTH, 2);
         Calendar academyStartDate = new GregorianCalendar();
-        for (Academy a : academies) {
-            academyStartDate.setTimeInMillis(a.getStartDate().getTime());
-            if ((a.getAcademyStages().getStageId() == ACADEMY_STAGE_PLANNED_ID)
-                    && academyStartDate.before(dateForComparison)) {
-                planedGroupForTwoMoth.add(this.findById(a.getAcademyId()));
-            }
-            if (a.getAcademyStages().getStageId() == ACADEMY_STAGE_IN_PROCESS_ID) {
-                groupsInProces.add(this.findById(a.getAcademyId()));
-            }
-            if (a.getAcademyStages().getStageId() == ACADEMY_STAGE_OFFERING_ID) {
-                groupsOffering.add(this.findById(a.getAcademyId()));
-            }
-            if (a.getAcademyStages().getStageId() == ACADEMY_STAGE_GRADUATED_ID) {
-                groupsGraduated.add(this.findById(a.getAcademyId()));
-            }
-            if (a.getAcademyStages().getStageId() == ACADEMY_STAGE_BOARDING_ID) {
-                listOfPlannedReleases.add(this.findById(a.getAcademyId()));
-            }
+        academies.stream()
+                .filter(a -> {
+                    academyStartDate.setTimeInMillis(a.getStartDate().getTime());
+                    return a.getAcademyStages().getStageId() == ACADEMY_STAGE_PLANNED_ID
+                            && academyStartDate.before(dateForComparison);
+                })
+                .forEach(a -> someReport.add(this.findById(a.getAcademyId())));
+        itaTacticalPlanByGroupStage.add(someReport);
+        for (int i : academyStageIdByReport) {
+            someReport.clear();
+            academies.stream()
+                    .filter(a -> a.getAcademyStages().getStageId() == i)
+                    .forEach(a -> someReport.add(this.findById(a.getAcademyId())));
+            itaTacticalPlanByGroupStage.add(someReport);
         }
-        itaTacticalPlanByGroupStage.add(planedGroupForTwoMoth);
-        itaTacticalPlanByGroupStage.add(groupsInProces);
-        itaTacticalPlanByGroupStage.add(groupsOffering);
-        itaTacticalPlanByGroupStage.add(groupsGraduated);
-        itaTacticalPlanByGroupStage.add(listOfPlannedReleases);
         return itaTacticalPlanByGroupStage;
     }
 
     /**
      * Method calculation information about student status in the group
      *
-     * @param dto
-     *            (ItaTacticalPlanByGroupStageDto) specifies which group to calculate the number of students with
+     * @param dto (ItaTacticalPlanByGroupStageDto) specifies which group to calculate the number of students with
      *            different statuses
      */
     private void calculationStudentsStatuses(ItaTacticalPlanByGroupStageDto dto) {
         List<Student> allStudentsOfGroup = studentRepository.findAllByAcademy_AcademyId(dto.getGroupId());
-        int studentRequested = 0;
-        for (Student student : allStudentsOfGroup) {
-            if (student == null) {
-                continue;
-            }
-            if (student.getStudentStatus() == null) {
-                continue;
-            }
-            if (student.getStudentStatus().getId() == STUDENT_STATUS_TRAINEE_ID
-                    || student.getStudentStatus().getId() == STUDENT_STATUS_TRAINEE_ID) {
-                int currentValueStudentInProgress = dto.getStudyInProgress();
-                dto.setStudyInProgress(++currentValueStudentInProgress);
-            }
-            if (student.getStudentStatus().getId() == STUDENT_STATUS_HIRED_ID) {
-                int currentValueStudentHired = dto.getHired();
-                dto.setStudyInProgress(++currentValueStudentHired);
-            }
-            studentRequested++;
-        }
-        dto.setRequested(studentRequested);
+        dto.setStudyInProgress((int) allStudentsOfGroup.stream()
+                .filter(s -> s.getStudentStatus() != null && (s.getStudentStatus().getId() == STUDENT_STATUS_TRAINEE_ID || s.getStudentStatus().getId() == STUDENT_STATUS_TRAINEE_ID))
+                .count());
+        dto.setHired((int) allStudentsOfGroup.stream()
+                .filter(s -> s.getStudentStatus() != null && s.getStudentStatus().getId() == STUDENT_STATUS_HIRED_ID)
+                .count());
+        dto.setRequested((int) allStudentsOfGroup.stream()
+                .filter(s -> s != null)
+                .count());
     }
 
     /**
      * Method search and transforms information about all teachers and experts of group into one StringBuilder object
      * and set into dto.
      *
-     * @param dto
-     *            indicates for which dto search, transforms and set information about trainers
+     * @param dto indicates for which dto search, transforms and set information about trainers
      */
 
     private void setTrainer(ItaTacticalPlanByGroupStageDto dto) {
@@ -203,4 +178,8 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         dto.setTrainer(trainers);
 
     }
+
+
+
 }
+

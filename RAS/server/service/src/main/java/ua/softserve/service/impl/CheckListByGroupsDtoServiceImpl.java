@@ -46,43 +46,39 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             return false;
         }
         int id = student.getStudentStatus().getId();
-        return id == STUDENT_STATUS_TRAINEE_ID || id == STUDENT_STATUS_ACCEPTED_PRE_OFFER_ID || id == STUDENT_STATUS_GRADUATED_ID;
+        return id == STUDENT_STATUS_TRAINEE_ID || id == STUDENT_STATUS_ACCEPTED_PRE_OFFER_ID
+                || id == STUDENT_STATUS_GRADUATED_ID;
     };
 
     private enum Key {
-        ENGLISH_LEVEL_DEFINED(Category.GROUP_STARTED_SUCCESSFULLY),
-        ENGLISH_LEVEL_CORRECT(Category.GROUP_STARTED_SUCCESSFULLY),
-        ENTRY_SCORE_DEFINED(Category.GROUP_STARTED_SUCCESSFULLY),
-        INCOMING_TEST_DEFINED(Category.GROUP_STARTED_SUCCESSFULLY),
-        APPROVED_BY_DEFINED(Category.GROUP_STARTED_SUCCESSFULLY),
-        TEACHER_DEFINED(Category.GROUP_STARTED_SUCCESSFULLY),
-        EXPERT_DEFINED(Category.GROUP_STARTED_SUCCESSFULLY),
-        GROUP_STARTED_SUCCESSFULLY(Category.NO_CATEGORY),
+        ENGLISH_LEVEL_DEFINED(Category.GROUP_STARTED_SUCCESSFULLY), ENGLISH_LEVEL_CORRECT(
+                Category.GROUP_STARTED_SUCCESSFULLY), ENTRY_SCORE_DEFINED(
+                        Category.GROUP_STARTED_SUCCESSFULLY), INCOMING_TEST_DEFINED(
+                                Category.GROUP_STARTED_SUCCESSFULLY), APPROVED_BY_DEFINED(
+                                        Category.GROUP_STARTED_SUCCESSFULLY), TEACHER_DEFINED(
+                                                Category.GROUP_STARTED_SUCCESSFULLY), EXPERT_DEFINED(
+                                                        Category.GROUP_STARTED_SUCCESSFULLY), GROUP_STARTED_SUCCESSFULLY(
+                                                                Category.NO_CATEGORY),
 
-        TEST1(Category.GROUP_READY_TO_OFFERING),
-        TEST2(Category.GROUP_READY_TO_OFFERING),
-        TEST3(Category.GROUP_READY_TO_OFFERING),
-        TEST4(Category.GROUP_READY_TO_OFFERING),
-        TEST5(Category.GROUP_READY_TO_OFFERING),
-        INTERMEDIATE_TEST_BASE_PASS(Category.GROUP_READY_TO_OFFERING),
-        INTERMEDIATE_TEST_LANG_PASS(Category.GROUP_READY_TO_OFFERING),
-        TEACHER_FEEDBACKS_FILLED_IN(Category.GROUP_READY_TO_OFFERING),
-        EXPERT_FEEDBACKS_FILLED_IN(Category.GROUP_READY_TO_OFFERING),
-        GROUP_READY_TO_OFFERING(Category.NO_CATEGORY),
+        TEST1(Category.GROUP_READY_TO_OFFERING), TEST2(Category.GROUP_READY_TO_OFFERING), TEST3(
+                Category.GROUP_READY_TO_OFFERING), TEST4(Category.GROUP_READY_TO_OFFERING), TEST5(
+                        Category.GROUP_READY_TO_OFFERING), INTERMEDIATE_TEST_BASE_PASS(
+                                Category.GROUP_READY_TO_OFFERING), INTERMEDIATE_TEST_LANG_PASS(
+                                        Category.GROUP_READY_TO_OFFERING), TEACHER_FEEDBACKS_FILLED_IN(
+                                                Category.GROUP_READY_TO_OFFERING), EXPERT_FEEDBACKS_FILLED_IN(
+                                                        Category.GROUP_READY_TO_OFFERING), GROUP_READY_TO_OFFERING(
+                                                                Category.NO_CATEGORY),
 
-        FINAL_TEST_BASE_PASS(Category.GROUP_READY_FOR_CLOSE),
-        FINAL_TEST_LANG_PASS(Category.GROUP_READY_FOR_CLOSE),
-        INTERVIEWER_DEFINED(Category.GROUP_READY_FOR_CLOSE),
-        INTERVIEWER_SUMMARY_DEFINED(Category.GROUP_READY_FOR_CLOSE),
-        EXPERTS_LOAD_FILLED_IN(Category.GROUP_READY_FOR_CLOSE),
-        INTERVIEWERS_LOAD_FILLED_IN(Category.GROUP_READY_FOR_CLOSE),
-        GROUP_READY_FOR_CLOSE(Category.NO_CATEGORY),
+        FINAL_TEST_BASE_PASS(Category.GROUP_READY_FOR_CLOSE), FINAL_TEST_LANG_PASS(
+                Category.GROUP_READY_FOR_CLOSE), INTERVIEWER_DEFINED(
+                        Category.GROUP_READY_FOR_CLOSE), INTERVIEWER_SUMMARY_DEFINED(
+                                Category.GROUP_READY_FOR_CLOSE), EXPERTS_LOAD_FILLED_IN(
+                                        Category.GROUP_READY_FOR_CLOSE), INTERVIEWERS_LOAD_FILLED_IN(
+                                                Category.GROUP_READY_FOR_CLOSE), GROUP_READY_FOR_CLOSE(
+                                                        Category.NO_CATEGORY),
 
-        TEST6(Category.NO_CATEGORY),
-        TEST7(Category.NO_CATEGORY),
-        TEST8(Category.NO_CATEGORY),
-        TEST9(Category.NO_CATEGORY),
-        TEST10(Category.NO_CATEGORY);
+        TEST6(Category.NO_CATEGORY), TEST7(Category.NO_CATEGORY), TEST8(Category.NO_CATEGORY), TEST9(
+                Category.NO_CATEGORY), TEST10(Category.NO_CATEGORY);
 
         private Category category;
 
@@ -91,27 +87,18 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         }
 
         public static List<Key> getByCategory(Category category) {
-            return Arrays
-                    .stream(values())
-                    .filter(key -> key.category == category)
-                    .collect(Collectors.toList());
+            return Arrays.stream(values()).filter(key -> key.category == category).collect(Collectors.toList());
         }
     }
 
     private enum Category {
-        GROUP_STARTED_SUCCESSFULLY,
-        GROUP_READY_TO_OFFERING,
-        GROUP_READY_FOR_CLOSE,
-        NO_CATEGORY
+        GROUP_STARTED_SUCCESSFULLY, GROUP_READY_TO_OFFERING, GROUP_READY_FOR_CLOSE, NO_CATEGORY
     }
 
     @Override
     public List<CheckListByGroupsDto> getAllCheckListByGroupsDto() {
 
-        List<Academy> allAcademies = academyRepository.findAll()
-                .stream()
-                .limit(30)
-                .collect(Collectors.toList());
+        List<Academy> allAcademies = academyRepository.findAll().stream().limit(30).collect(Collectors.toList());
 
         List<CheckListByGroupsDto> CheckListByGroupsDtos = new ArrayList<>();
 
@@ -134,12 +121,9 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
         AcademyStages stage = academy.getAcademyStages();
 
-        List<Student> students = studentRepository
-                .findAllByAcademy_AcademyId(academyId);
-        students = (students == null) ? null : students
-                .stream()
-                .filter(CHECK_STUDENT_STATUS)
-                .collect(Collectors.toList());
+        List<Student> students = studentRepository.findAllByAcademy_AcademyId(academyId);
+        students = (students == null) ? null
+                : students.stream().filter(CHECK_STUDENT_STATUS).collect(Collectors.toList());
 
         CheckListByGroupsDto checkListByGroupsDto = new CheckListByGroupsDto();
         checkListByGroupsDto.setCityName(cityName);
@@ -148,10 +132,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         setTeachers(academyId, checkListByGroupsDto);
         Map<String, Integer> report = checkListByGroupsDto.getReport();
         for (Map.Entry<Key, CheckPredicate<Student>> predicate : predicates.entrySet()) {
-            report.put(
-                    predicate.getKey().toString(),
-                    predicate.getValue().check(students)
-            );
+            report.put(predicate.getKey().toString(), predicate.getValue().check(students));
         }
 
         setTotal(checkListByGroupsDto);
@@ -173,8 +154,10 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         report.put(Key.TEACHER_DEFINED.toString(), (teachers != null) ? TRUE : FALSE);
         report.put(Key.EXPERT_DEFINED.toString(), (experts != null) ? TRUE : FALSE);
         report.put(Key.INTERVIEWER_DEFINED.toString(), (interviewers != null) ? TRUE : FALSE);
-        report.put(Key.EXPERTS_LOAD_FILLED_IN.toString(), checkTeachers(git -> git.getContributedHours() != null, experts));
-        report.put(Key.INTERVIEWERS_LOAD_FILLED_IN.toString(), checkTeachers(git -> git.getContributedHours() != null, interviewers));
+        report.put(Key.EXPERTS_LOAD_FILLED_IN.toString(),
+                checkTeachers(git -> git.getContributedHours() != null, experts));
+        report.put(Key.INTERVIEWERS_LOAD_FILLED_IN.toString(),
+                checkTeachers(git -> git.getContributedHours() != null, interviewers));
     }
 
     private String getTeachers(List<GroupInfoTeachers> teachers) {

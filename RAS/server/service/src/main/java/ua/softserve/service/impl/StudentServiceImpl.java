@@ -33,47 +33,36 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional(readOnly = true)
     public List<StudentViewDto> getStudentsByAcademy(Integer academyId) {
-        return studentRepository.findAllByAcademyId(academyId)
-                .stream()
-                .map(StudentViewDto::of)
+        return studentRepository.findAllByAcademyId(academyId).stream().map(StudentViewDto::of)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<EmployeeEngShortDto> getAllEmployees() {
-        return employeeRepository.findAllSorted()
-                .stream()
-                .map(EmployeeEngShortDto::of)
-                .collect(Collectors.toList());
+        return employeeRepository.findAllSorted().stream().map(EmployeeEngShortDto::of).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public void addStudentsToAcademy(Integer academyId, List<Integer> students) {
-        List<Student> entities = students.stream()
-                .map(id -> {
-                    Student existStudent = studentRepository
-                            .findStudentByAcademy(academyId, id);
-                    return existStudent == null ?
-                            new Student(id, academyId, STUDENT_STATUS_TRAINEE_ID) :
-                            existStudent.unremove();
-                })
-                .collect(Collectors.toList());
+        List<Student> entities = students.stream().map(id -> {
+            Student existStudent = studentRepository.findStudentByAcademy(academyId, id);
+            return existStudent == null ? new Student(id, academyId, STUDENT_STATUS_TRAINEE_ID)
+                    : existStudent.unremove();
+        }).collect(Collectors.toList());
         studentRepository.save(entities);
     }
 
     @Override
     @Transactional
     public void removeStudentFromAcademy(Integer studentId) {
-        studentRepository.updateRemovedStatus(studentId,true);
+        studentRepository.updateRemovedStatus(studentId, true);
     }
 
     @Override
     @Transactional
     public void updateStudentOfAcademy(List<StudentViewDto> students) {
-        studentRepository.save(students
-                .stream()
-                .map(st -> st.update(studentRepository.findOne(st.getId())))
+        studentRepository.save(students.stream().map(st -> st.update(studentRepository.findOne(st.getId())))
                 .collect(Collectors.toList()));
     }
 

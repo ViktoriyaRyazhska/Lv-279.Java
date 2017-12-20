@@ -11,7 +11,7 @@ import ua.softserve.service.HistoryService;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class HistoryController {
     @Autowired
     private HistoryService historyService;
