@@ -30,12 +30,12 @@ public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
      */
     GroupInfo findByAcademyAcademyId(int academyId);
 
-    @Query("select new ua.softserve.persistence.dto.GroupInformationDTO(gi.groupInfoId, gi.groupName, gi.studentsPlannedToGraduate, gi.studentsPlannedToEnrollment, ac.startDate, ac.endDate, ac.free, ac.name, pi.profileName, tc.name, acS.name, empl.firstNameEng, empl.lastNameEng) " +
+    @Query("select new ua.softserve.persistence.dto.GroupInformationDTO(ac.academyId, gi.groupName, gi.studentsPlannedToGraduate, gi.studentsPlannedToEnrollment, ac.startDate, ac.endDate, ac.free, ac.name, pi.profileName, tc.name, acS.name, empl.firstNameEng, empl.lastNameEng) " +
             "from GroupInfo as gi, GroupInfoTeachers giT, Student stn left join gi.academy as ac " +
             "left join gi.profileInfo as pi left join pi.technologies as tc " +
             "left join ac.academyStages as acS left join giT.academy as giTAc left join giT.employee as empl " +
             "left join giT.teacherType as techT left join stn.academy as stnAc left join stn.studentStatus as stnStat " +
-            "where giTAc.academyId = ac.academyId and techT.teachertypeId = 2 and stnStat = 1 and stnAc.academyId = ac.academyId")
+            "where giTAc.academyId = ac.academyId and techT.teachertypeId = 2 and stnStat = 1 and stnAc.academyId = ac.academyId order by gi.groupInfoId desc")
     List<GroupInformationDTO> findAllInfoAboutGroups();
 
     @Query(value = "call getReportCheckList(:academy_id_in)", nativeQuery = true)

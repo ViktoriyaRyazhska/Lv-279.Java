@@ -1,0 +1,272 @@
+<div class="container well">
+  <div class="col-sm-12" id="form-test">
+    <form #groupForm="ngForm">
+      <ul class="col-sm-6 form-group" id="UL_left_column">
+        <div class="row">
+          <mat-form-field class="col-sm-6">
+            <mat-select placeholder="Status:"> <!--(change)="onFilterField(groupForm)"-->
+              <mat-option *ngFor="let stages of academyStages" [value]="stages.name">{{ stages.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-sm-6">
+            <mat-select placeholder="Location:" name="cityName" (change)="getFilter(groupForm)" ngModel>
+              <mat-option *ngFor="let city of cityNames" [value]="city.trasnlation">{{city.trasnlation}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-sm-6">
+            <input matInput [matDatepicker]="picker" placeholder="Start Date:" name="startDate"
+                   (dateInput) = "getFilter(groupForm)" ngModel>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="col-sm-6">
+            <input matInput [matDatepicker]="picker2" placeholder="End Date:" name="endDate"
+                   (dateInput) = "getFilter(groupForm)" ngModel><!--*ngIf = "isEndDateChange()"-->
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2 (blur)= "getFilter()"></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-sm-12">
+            <mat-select placeholder="Payment Status:" name="paymentStatus" (change)="getFilter(groupForm)" ngModel>
+              <mat-option value=null></mat-option>
+              <mat-option *ngFor="let paym of paymentStatus" [value]="paym">{{paym}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </ul>
+
+      <ul class="col-sm-6 form-group" id="UL_right_column">
+
+        <div class="row">
+          <mat-form-field class="col-sm-12">
+            <mat-select placeholder="Common Direction:" name="directionName" (change)="getFilter(groupForm)" ngModel>
+              <mat-option value=null></mat-option>
+              <mat-option *ngFor="let direct of direction" [value]="direct.name">{{direct.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-sm-6">
+            <mat-select placeholder="Direction:" name="technologyName" (change)="getFilter(groupForm)" ngModel>
+              <mat-option value="0" selected></mat-option>
+              <mat-option *ngFor="let tech of technology" [value]="tech.name">{{ tech.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-sm-6">
+            <mat-select placeholder="Profile:" name="profileName" (change)="getFilter(groupForm)" ngModel>
+              <mat-option value="0"></mat-option>
+              <mat-option *ngFor="let prof of profile" [value]="prof.profileName">{{ prof.profileName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-sm-6">
+            <input matInput type="number" placeholder="Students Planned to Graduate:" min="0" max="99"
+                   name = "studentPlannedToGraduate" (input)="getFilter(groupForm)" ngModel>
+          </mat-form-field>
+
+          <mat-form-field class="col-sm-6" >
+            <input matInput type="number" placeholder="Students Planned to Enrollment:" min="0" max="99" maxlength="2"
+                   name = "studentPlannedToEnrollment" (input)="getFilter(groupForm)" ngModel>
+          </mat-form-field>
+
+        </div>
+      </ul>
+    </form>
+
+  </div>
+</div>
+
+
+
+<!--
+
+<form #groupForm="ngForm">
+<mat-table #table [dataSource]="dataSource" matSort>
+
+  <ng-container matColumnDef='grName'>
+    <mat-header-cell *matHeaderCellDef>CCC</mat-header-cell>
+    <mat-cell *matCellDef>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Group name" name="grName" (input)="onFilterField($event, groupForm)" ngModel>
+      </mat-form-field>
+    </mat-cell>
+    <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element}}"> {{element.grName}} </a>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef='nameForSite'>
+    <mat-header-cell *matHeaderCellDef>CCC</mat-header-cell>
+    <mat-cell *matCellDef>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name For Site" name="nameForSite" (input)="onFilterField($event, groupForm)"
+               ngModel>
+      </mat-form-field>
+    </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.nameForSite}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="technologyName">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-select name="technologyName" placeholder="Technologies" (change)="onFilterField($event, groupForm)"
+                  ngModel>
+        <mat-option *ngFor="let tech of technology" [value]="tech.name">
+          {{tech.name}}
+        </mat-option>
+        <mat-option value="">
+          All Technologies
+        </mat-option>
+      </mat-select>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let element"> {{element.technologyName}}</mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="profileName">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-select name="profileName" placeholder="Direction" (change)="onFilterField($event, groupForm)"
+                  ngModel>
+        <mat-option *ngFor="let prof of profile" [value]="prof.profileName">
+          {{prof.profileName}}
+        </mat-option>
+        <mat-option value="">
+          All Directions
+        </mat-option>
+      </mat-select>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.profileName}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="paymentStatus">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-select name="paymentStatus" placeholder="Status" (change)="onFilterField($event, groupForm)"
+                  ngModel>
+        <mat-option *ngFor="let paym of paymentStatus" [value]="paym">
+          {{paym}}
+        </mat-option>
+        <mat-option value="">
+          Any status
+        </mat-option>
+      </mat-select>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.paymentStatus}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="cityName">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-select name="cityName" placeholder="City" (change)="onFilterField($event, groupForm)"
+                  ngModel>
+        <mat-option *ngFor="let city of cityNames" [value]="city.trasnlation">
+          {{city.trasnlation}}
+        </mat-option>
+        <mat-option value="">
+          All cities
+        </mat-option>
+      </mat-select>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.cityName}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="startDate">
+    <mat-header-cell *matHeaderCellDef>
+      <input type="date" name="startDate" (input)="onFilterField($event, groupForm)" class="form-control" ngModel>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.startDate | date: "dd.MM.yyyy"}}</mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="endDate">
+    <mat-header-cell *matHeaderCellDef>
+      <input type="date" name="endDate" (input)="onFilterField($event, groupForm)" class="form-control" ngModel>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.endDate | date: "dd.MM.yyyy"}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="experts">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Experts" name="experts" (input)="onFilterField($event, groupForm)" ngModel>
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.experts}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="studentPlannedToGraduate">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field>
+        <input matInput placeholder="Students Planned To Graduate" name="studentPlannedToGraduate"
+               (input)="onFilterField($event, groupForm)" ngModel>
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.studentPlannedToGraduate}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="studentPlannedToEnrollment">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field>
+        <input matInput placeholder="Students Planned To Enrollment" name="studentPlannedToEnrollment"
+               (input)="onFilterField($event, groupForm)" ngModel rows="3">
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.studentPlannedToEnrollment}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="studentsActual">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field>
+        <input matInput placeholder="Students Actual" name="studentsActual"
+               (input)="onFilterField($event, groupForm)" ngModel>
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.studentsActual}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="hiredNotGraduated">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field>
+        <input matInput placeholder="Hired Not Graduated" name="hiredNotGraduated"
+               (input)="onFilterField($event, groupForm)" ngModel>
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> -&#45;&#45;</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="directionName">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-select name="directionName" placeholder="Direction Name" (change)="onFilterField($event, groupForm)"
+                  ngModel>
+        <mat-option *ngFor="let direct of direction" [value]="direct.name">
+          {{direct.name}}
+        </mat-option>
+        <mat-option value="">
+          All Direction Names
+        </mat-option>
+      </mat-select>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.directionName}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="interviewerFeedback">
+    <mat-header-cell *matHeaderCellDef>Interviewer Feedback
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"><a routerLink="/ang/feedback/{{element.academyId}}">Provide</a></mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+</form>-->

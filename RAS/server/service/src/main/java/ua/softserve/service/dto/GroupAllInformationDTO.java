@@ -1,21 +1,22 @@
-package ua.softserve.persistence.dto;
+package ua.softserve.service.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-public class GroupInformationDTO {
+public class GroupAllInformationDTO {
     private Integer academyId;
     private String groupName;
     private Integer studentsPlannedToGraduate;
     private Integer studentsPlannedToEnrollment;
+    private Integer actualStudents;
     private Date startDate;
     private Date endDate;
     private int paymentStatus;
@@ -23,15 +24,17 @@ public class GroupInformationDTO {
     private String profileName;
     private String directionName;
     private String status;
-    private String firstName;
-    private String lastName;
+    private List<String> firstName;
+    private List<String> lastName;
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GroupInformationDTO that = (GroupInformationDTO) o;
+        GroupAllInformationDTO that = (GroupAllInformationDTO) o;
 
         if (paymentStatus != that.paymentStatus) return false;
         if (academyId != null ? !academyId.equals(that.academyId) : that.academyId != null) return false;
@@ -46,9 +49,7 @@ public class GroupInformationDTO {
         if (profileName != null ? !profileName.equals(that.profileName) : that.profileName != null) return false;
         if (directionName != null ? !directionName.equals(that.directionName) : that.directionName != null)
             return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+        return status != null ? status.equals(that.status) : that.status == null;
     }
 
     @Override
@@ -64,8 +65,17 @@ public class GroupInformationDTO {
         result = 31 * result + (profileName != null ? profileName.hashCode() : 0);
         result = 31 * result + (directionName != null ? directionName.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         return result;
+    }
+
+    public void setFirstName(String firstName) {
+
+        this.firstName = new ArrayList<>();
+        this.firstName.add(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = new ArrayList<>();
+        this.lastName.add(lastName);
     }
 }

@@ -250,5 +250,41 @@ export class StudentsComponent implements OnInit {
     );
   }
 
+  mySortCurrentControl(event: any) {
+    if (event.order === 1) {
+      this.students.sort((a:StudentFeedback, b:StudentFeedback) => {
 
+          const sortDesc = this.getCurrentControl(a)<this.getCurrentControl(b) ? -1 : 0;
+          return this.getCurrentControl(a)>this.getCurrentControl(b) ? 1 : sortDesc;
+
+      });
+    } else {
+      this.students.sort((a:StudentFeedback, b:StudentFeedback) => {
+
+          const sortDesc = this.getCurrentControl(a)<this.getCurrentControl(b) ? 1 : 0;
+          return this.getCurrentControl(a)>this.getCurrentControl(b) ? -1 : sortDesc;
+
+      });
+    }
+    this.students = [...this.students];
+  }
+
+  mySortTrainingScore(event: any) {
+    if (event.order === 1) {
+      this.students.sort((a:StudentFeedback, b:StudentFeedback) => {
+
+        const sortDesc = this.getTrainingScore(a)<this.getTrainingScore(b) ? -1 : 0;
+        return this.getTrainingScore(a)>this.getTrainingScore(b) ? 1 : sortDesc;
+
+      });
+    } else {
+      this.students.sort((a:StudentFeedback, b:StudentFeedback) => {
+
+        const sortDesc = this.getTrainingScore(a)<this.getTrainingScore(b) ? 1 : 0;
+        return this.getTrainingScore(a)>this.getTrainingScore(b) ? -1 : sortDesc;
+
+      });
+    }
+    this.students = [...this.students];
+  }
 }

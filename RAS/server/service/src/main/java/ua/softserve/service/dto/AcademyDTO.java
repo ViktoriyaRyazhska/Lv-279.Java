@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-public class AcademyDTO {
+public class AcademyDTO extends AcademyDropDownLists{
     private String grName;
     private String nameForSite;
     private int academyStagesId;
@@ -21,9 +21,5 @@ public class AcademyDTO {
     private int studentPlannedToGraduate;
     private int studentPlannedToEnrollment;
     private int studentsActual;
-    List<AcademyStages> academyStages;
-    Set<LanguageTranslations> cityNames;
-    List<Directions> direction;
-    List<Technologies> technologie;
-    List<ProfileInfo> profile;
+
 }
