@@ -5,7 +5,7 @@
 
     <ng-container matColumnDef='grName'>
       <mat-header-cell *matHeaderCellDef  mat-sort-header>Group Name</mat-header-cell>
-      <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element}}"> {{element.grName}} </a>
+      <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element.academyId}}"> {{element.grName}} </a>
       </mat-cell>
     </ng-container>
 
