@@ -2,6 +2,7 @@ package ua.softserve.service;
 
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.service.dto.AcademyDTO;
+import ua.softserve.service.dto.AcademyDropDownLists;
 import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface AcademyService {
 
     Academy findOne(int id);
 
-    AcademyForSaveDTO getAcademyDTO();
+    AcademyDropDownLists getAcademyDTO();
 
     List<Academy> getAllAcademies();
 }

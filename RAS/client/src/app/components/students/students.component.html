@@ -1,6 +1,6 @@
 <p-dataTable [value]="students" [editable]="true" resizableColumns="true" reorderableColumns="true" scrollable="true">
   <!--<p-column field="vin" header="Id" [editable]="true" [style]="{'width':'10em'}"></p-column>-->
-  <p-column field="user.id" header="Employee" [editable]="true" [filter]="true" [sortable]="true"
+  <p-column field="user.id" header="Employee" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'7em'}"></p-column>
   <p-column field="user.firstName" header="Name" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
@@ -136,17 +136,19 @@
       <input type="number" pInputText="" [(ngModel)]="student.data.finalLang" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
-  <p-column field="" header="Current Score" [editable]="false" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+
+
+  <p-column  header="Current Control" [editable]="false" [filter]="true"  sortable="custom"
+             (sortFunction)="mySortCurrentControl($event)" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
-       <span>
+       <span >
              {{this.getCurrentControl(student)}}
        </span>
     </ng-template>
 
   </p-column>
-  <p-column field="" header="Training Score" [editable]="false" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  <p-column field="" header="Training Score" [editable]="false" [filter]="true" sortable="custom"
+            (sortFunction)="mySortTrainingScore($event)" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span>
              {{this.getTrainingScore(student)}}
@@ -192,7 +194,7 @@
 <div style="align-items: center">
   <p-dialog header="User info" modal="false" dismissableMask="false" [(visible)]="displayStudentDetails" width="750">
     <div class="ui-g">
-      <div class="ui-g-5">
+      <div class="ui-g-6">
         <h4>Personal Information:</h4>
         <div class="ui-g-6">
           <div class="column">
@@ -213,7 +215,7 @@
           </div>
         </div>
       </div>
-      <div class="ui-g-5">
+      <div class="ui-g-6">
         <h4>Contact Information:</h4>
         <div class="ui-g-6">
           <div class="column">

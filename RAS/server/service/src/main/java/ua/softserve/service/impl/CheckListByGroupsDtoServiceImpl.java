@@ -209,100 +209,39 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         return flag;
     }
 
-    private static final Map<Key, CheckPredicate<Student>> studentsPredicates;
-    private static final Map<Key, CheckPredicate<GroupInfoTeachers>> teachersPredicates;
+    private final Map<Key, CheckPredicate<Student>> studentsPredicates;
+    private final Map<Key, CheckPredicate<GroupInfoTeachers>> teachersPredicates;
 
-    static {
+    {
         studentsPredicates = new HashMap<>();
-        studentsPredicates.put(Key.ENGLISH_LEVEL_DEFINED, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getEnglishLevel() == null;
-        });
+        studentsPredicates.put(Key.ENGLISH_LEVEL_DEFINED, student -> checkData(student) && student.getData().getEnglishLevel() == null);
         studentsPredicates.put(Key.ENGLISH_LEVEL_CORRECT, student -> {
-            StudentTestData data = student.getData();
-            if (data == null) {
+            if (!checkData(student)) {
                 return false;
             }
-            EnglishLevel englishLevel = data.getEnglishLevel();
+            EnglishLevel englishLevel = student.getData().getEnglishLevel();
             return englishLevel != null && englishLevel.getEnglishLevelId() < ENGLISH_LEVEL_PRE_INTERMEDIATE_ID;
         });
-        studentsPredicates.put(Key.ENTRY_SCORE_DEFINED, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getEntryScore() == null;
-        });
-        studentsPredicates.put(Key.INCOMING_TEST_DEFINED, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getIncomingTest() == null;
-        });
+        studentsPredicates.put(Key.ENTRY_SCORE_DEFINED, student -> checkData(student) && student.getData().getEntryScore() == null);
+        studentsPredicates.put(Key.INCOMING_TEST_DEFINED, student -> checkData(student) && student.getData().getIncomingTest() == null);
         studentsPredicates.put(Key.APPROVED_BY_DEFINED, student -> student.getApprovedBy() == null);
-        studentsPredicates.put(Key.INTERMEDIATE_TEST_BASE_PASS, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getIntermBase() == null;
-        });
-        studentsPredicates.put(Key.INTERMEDIATE_TEST_LANG_PASS, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getIntermLang() == null;
-        });
-        studentsPredicates.put(Key.TEACHER_FEEDBACKS_FILLED_IN, student -> {
-            StudentTestData data = student.getData();
-            return data != null && student.getTeacherFeedback() == null && data.getTeacherScore() == null;
-        });
-        studentsPredicates.put(Key.EXPERT_FEEDBACKS_FILLED_IN, student -> {
-            StudentTestData data = student.getData();
-            return data != null && student.getExpertFeedback() == null && data.getExpertScore() == null;
-        });
-        studentsPredicates.put(Key.FINAL_TEST_BASE_PASS, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getFinalBase() == null;
-        });
-        studentsPredicates.put(Key.FINAL_TEST_LANG_PASS, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getFinalLang() == null;
-        });
-        studentsPredicates.put(Key.INTERVIEWER_SUMMARY_DEFINED, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getInterviewerComment() == null;
-        });
-        studentsPredicates.put(Key.TEST1, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getTestOne() == null;
-        });
-        studentsPredicates.put(Key.TEST2, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getTestTwo() == null;
-        });
-        studentsPredicates.put(Key.TEST3, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getTestThree() == null;
-        });
-        studentsPredicates.put(Key.TEST4, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getTestFour() == null;
-        });
-        studentsPredicates.put(Key.TEST5, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getTestFive() == null;
-        });
-        studentsPredicates.put(Key.TEST6, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getTestSix() == null;
-        });
-        studentsPredicates.put(Key.TEST7, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getTestSeven() == null;
-        });
-        studentsPredicates.put(Key.TEST8, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getTestEight() == null;
-        });
-        studentsPredicates.put(Key.TEST9, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getTestNine() == null;
-        });
-        studentsPredicates.put(Key.TEST10, student -> {
-            StudentTestData data = student.getData();
-            return data != null && data.getTestTen() == null;
-        });
+        studentsPredicates.put(Key.INTERMEDIATE_TEST_BASE_PASS, student -> checkData(student) && student.getData().getIntermBase() == null);
+        studentsPredicates.put(Key.INTERMEDIATE_TEST_LANG_PASS, student -> checkData(student) && student.getData().getIntermLang() == null);
+        studentsPredicates.put(Key.TEACHER_FEEDBACKS_FILLED_IN, student -> student.getTeacherFeedback() == null && checkData(student) && student.getData().getTeacherScore() == null);
+        studentsPredicates.put(Key.EXPERT_FEEDBACKS_FILLED_IN, student -> student.getExpertFeedback() == null && checkData(student) && student.getData().getExpertScore() == null);
+        studentsPredicates.put(Key.FINAL_TEST_BASE_PASS, student -> checkData(student) && student.getData().getFinalBase() == null);
+        studentsPredicates.put(Key.FINAL_TEST_LANG_PASS, student -> checkData(student) && student.getData().getFinalLang() == null);
+        studentsPredicates.put(Key.INTERVIEWER_SUMMARY_DEFINED, student -> checkData(student) && student.getData().getInterviewerComment() == null);
+        studentsPredicates.put(Key.TEST1, student -> checkData(student) && student.getData().getTestOne() == null);
+        studentsPredicates.put(Key.TEST2, student -> checkData(student) && student.getData().getTestTwo() == null);
+        studentsPredicates.put(Key.TEST3, student -> checkData(student) && student.getData().getTestThree() == null);
+        studentsPredicates.put(Key.TEST4, student -> checkData(student) && student.getData().getTestFour() == null);
+        studentsPredicates.put(Key.TEST5, student -> checkData(student) && student.getData().getTestFive() == null);
+        studentsPredicates.put(Key.TEST6, student -> checkData(student) && student.getData().getTestSix() == null);
+        studentsPredicates.put(Key.TEST7, student -> checkData(student) && student.getData().getTestSeven() == null);
+        studentsPredicates.put(Key.TEST8, student -> checkData(student) && student.getData().getTestEight() == null);
+        studentsPredicates.put(Key.TEST9, student -> checkData(student) && student.getData().getTestNine() == null);
+        studentsPredicates.put(Key.TEST10, student -> checkData(student) && student.getData().getTestTen() == null);
 
         teachersPredicates = new HashMap<>();
         teachersPredicates.put(Key.TEACHER_DEFINED, git -> false);
@@ -312,7 +251,11 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         teachersPredicates.put(Key.INTERVIEWERS_LOAD_FILLED_IN, git -> git.getContributedHours() == null);
     }
 
-    public interface CheckPredicate<T> {
+    private boolean checkData(Student student) {
+        return student != null && student.getData() != null;
+    }
+
+    private interface CheckPredicate<T> {
         boolean test(T t);
 
         default Integer checkList(List<T> list) {
@@ -321,7 +264,6 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             }
             boolean testResult = list
                     .stream()
-                    .filter(Objects::nonNull)
                     .anyMatch(this::test);
             return (!testResult) ? TRUE : FALSE;
         }
