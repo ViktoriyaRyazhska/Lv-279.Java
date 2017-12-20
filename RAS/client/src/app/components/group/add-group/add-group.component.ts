@@ -5,6 +5,7 @@ import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Group} from "./group.model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ExcelDataType} from "xlsx";
 
 @Component({
   selector: 'app-add-group',
@@ -42,7 +43,9 @@ export class AddGroupComponent implements OnInit {
       this.direction = resp.technologie;
       this.profile = resp.profile;
     },error => {
-      this.router.navigate(['ang/error']);
+      if (error.status===403) {
+        this.router.navigate(['ang/error']);
+      }
     });
 
     this.signupForm = new FormGroup({
