@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.entity.History;
 import ua.softserve.service.HistoryService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,8 +17,8 @@ public class HistoryController {
     @Autowired
     private HistoryService historyService;
 
-    @RequestMapping(value = "/history/{id}", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "/history/{id}")
     public ResponseEntity<List<History>> getHistory(@PathVariable int id) {
         return new ResponseEntity<>(historyService.findByAcademyId(id), HttpStatus.OK);
-    }
+        }
 }

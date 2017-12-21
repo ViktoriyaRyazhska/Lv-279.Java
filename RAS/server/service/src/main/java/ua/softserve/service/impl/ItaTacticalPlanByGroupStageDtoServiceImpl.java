@@ -18,6 +18,8 @@ import ua.softserve.service.ItaTacticalPlanByGroupStageDtoService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+
 
 @Service
 public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPlanByGroupStageDtoService {
@@ -37,6 +39,23 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     @Autowired
     EmployeeRepository employeeRepository;
 
+    private final Set<Predicate<Academy>> fitersFromReport;
+
+    {
+        fitersFromReport = new LinkedHashSet<>();
+        fitersFromReport.add(a -> {
+            Calendar dateForComparison = new GregorianCalendar();
+            dateForComparison.add(Calendar.MONTH, 2);
+            Calendar academyStartDate = new GregorianCalendar();
+            academyStartDate.setTimeInMillis(a.getStartDate().getTime());
+            return a.getAcademyStages().getStageId() == ACADEMY_STAGE_PLANNED_ID
+                    && academyStartDate.before(dateForComparison);
+        });
+        fitersFromReport.add(a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_IN_PROCESS_ID);
+        fitersFromReport.add(a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_OFFERING_ID);
+        fitersFromReport.add(a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_GRADUATED_ID);
+        fitersFromReport.add(a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_BOARDING_ID);
+    }
 
     /**
      * Method transforms information about one academy from all tables into one DTO object designed for ITA Tactical
@@ -101,30 +120,17 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
      * Method Generate data for weekly status meeting with GTA/HR/ITA partisipants. Contain list og available groups by
      * stages.
      *
-     * @return List<List<ItaTacticalPlanByGroupStageDto>> with information from ITA Tactical Plan by Group Stage
+     * @return List<List   <   ItaTacticalPlanByGroupStageDto>> with information from ITA Tactical Plan by Group Stage
      * report.
      */
     @Override
     public List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStageReport() {
         List<List<ItaTacticalPlanByGroupStageDto>> itaTacticalPlanByGroupStage = new ArrayList<List<ItaTacticalPlanByGroupStageDto>>();
-        List<ItaTacticalPlanByGroupStageDto> someReport = new ArrayList<>();
-        int[] academyStageIdByReport = {ACADEMY_STAGE_IN_PROCESS_ID, ACADEMY_STAGE_OFFERING_ID, ACADEMY_STAGE_GRADUATED_ID, ACADEMY_STAGE_BOARDING_ID};
         List<Academy> academies = academyService.getAllAcademies();
-        Calendar dateForComparison = new GregorianCalendar();
-        dateForComparison.add(Calendar.MONTH, 2);
-        Calendar academyStartDate = new GregorianCalendar();
-        academies.stream()
-                .filter(a -> {
-                    academyStartDate.setTimeInMillis(a.getStartDate().getTime());
-                    return a.getAcademyStages().getStageId() == ACADEMY_STAGE_PLANNED_ID
-                            && academyStartDate.before(dateForComparison);
-                })
-                .forEach(a -> someReport.add(this.findById(a.getAcademyId())));
-        itaTacticalPlanByGroupStage.add(someReport);
-        for (int i : academyStageIdByReport) {
-            someReport.clear();
+        for (Predicate<Academy> filter : fitersFromReport) {
+            ArrayList<ItaTacticalPlanByGroupStageDto> someReport = new ArrayList<>();
             academies.stream()
-                    .filter(a -> a.getAcademyStages().getStageId() == i)
+                    .filter(filter)
                     .forEach(a -> someReport.add(this.findById(a.getAcademyId())));
             itaTacticalPlanByGroupStage.add(someReport);
         }
@@ -165,14 +171,15 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
                 .findAllByAcademyAndTeacherType(academyService.findOne(dto.getGroupId()), typeTeacher);
         List<GroupInfoTeachers> allExpertsOfGroup = groupInfoTeachersRepository
                 .findAllByAcademyAndTeacherType(academyService.findOne(dto.getGroupId()), typeExpert);
+
         for (GroupInfoTeachers teacherInfo : allTeachersOfGroup) {
             trainers.append(teacherInfo.getEmployee().getFirstNameEng() + " "
-                    + teacherInfo.getEmployee().getLastNameEng() + ", ");
+                    + teacherInfo.getEmployee().getLastNameEng());
         }
 
         for (GroupInfoTeachers infoTeachers : allExpertsOfGroup) {
             trainers.append(infoTeachers.getEmployee().getFirstNameEng() + " "
-                    + infoTeachers.getEmployee().getLastNameEng() + ", ");
+                    + infoTeachers.getEmployee().getLastNameEng());
         }
 
         dto.setTrainer(trainers);
@@ -180,6 +187,6 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     }
 
 
-
 }
+
 

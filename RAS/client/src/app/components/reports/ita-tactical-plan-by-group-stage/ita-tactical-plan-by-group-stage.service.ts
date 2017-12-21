@@ -9,7 +9,7 @@ export class ItaTacticalPlanByGroupStageService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get(environment.serverUrl+'reports/itaTacticalPlanByGroupStage');
+    return this.http.get(environment.serverUrl+'reports/ita_tactical_plan_by_group_stage');
   }
 
 }
