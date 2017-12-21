@@ -35,14 +35,18 @@ import {PrimeNgModules} from "./prime-ng.modules";
 
 import {MarkService} from "./services/feedbacks/marks.service";
 import {UsersService} from "./services/users/users.service";
-import {MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
+import {
+  MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule,
+  MatInputModule, MatExpansionModule
+} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 import { FilterCheckListByGroupsComponent } from './components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component';
-
-
-
+import { SearchbarComponent } from './components/view-academies/searchbar/searchbar.component';
+import {SearchBarService} from "./components/view-academies/search-bar.service";
+import {CookieService} from "angular2-cookie/core";
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +74,10 @@ import { FilterCheckListByGroupsComponent } from './components/reports/check-lis
     ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
     TestsNamesComponent,
-    FilterCheckListByGroupsComponent
+    FilterCheckListByGroupsComponent,
+    SearchbarComponent,
+    FilterCheckListByGroupsComponent,
+    ErrorComponent
 
   ],
   imports: [
@@ -93,9 +100,11 @@ import { FilterCheckListByGroupsComponent } from './components/reports/check-lis
     MatSelectModule,
     MatIconModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatExpansionModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService],
+  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
+    CookieService, SearchBarService],
 
   bootstrap: [AppComponent]
 })

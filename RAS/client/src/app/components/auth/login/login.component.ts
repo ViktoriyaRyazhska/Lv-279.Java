@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginAccount} from "./LoginAccount";
 import {LoginService} from "./login.service";
@@ -6,6 +6,7 @@ import {MyauthService} from "../myauth.service";
 import {getResponseURL} from "@angular/http/src/http_utils";
 import {ResponseToken} from "./ResponseToken";
 import {Router} from "@angular/router";
+import {CookieService} from "angular2-cookie/core";
 
 @Component({
   selector: 'app-login',
@@ -13,15 +14,19 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.css'],
   providers: [LoginService,MyauthService]
 })
+
+@Injectable()
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   account: LoginAccount;
+  resp: ResponseToken;
   error: boolean;
 
   constructor(private fb: FormBuilder,
               private loginService: LoginService,
-              private router: Router
+              private router: Router,
+              private cookie:CookieService
               ) { }
 
   ngOnInit() {
@@ -35,8 +40,11 @@ export class LoginComponent implements OnInit {
     this.account = this.loginForm.value;
     this.loginService.signIn(this.account)
       .subscribe((response:ResponseToken)=>{
-        localStorage.setItem('jwt',response.token);
+        // console.log('authority - '+response.authorities[0].authority);
+        // this.resp.username=response.username;
+        this.cookie.put('token',response.token);
         this.error=false;
+        this.router.navigate(['/']);
       }, error2 => {
           this.error = true;
         }

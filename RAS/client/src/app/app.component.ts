@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {LoginService} from "./components/auth/login/login.service";
+import {CookieService} from "angular2-cookie/core";
+import {isUndefined} from "util";
 
 @Component({
   selector: 'app-root',
@@ -8,12 +10,13 @@ import {LoginService} from "./components/auth/login/login.service";
 })
 export class AppComponent {
   isSignedIn: boolean;
-  constructor( private loginService: LoginService){
+  constructor( private loginService: LoginService,
+               private cookie:CookieService){
   }
   ngOnInit(){
     this.isSignedIn = this.loginService.isSignedIn();
   }
   isSignedInForApp(): boolean {
-    return localStorage.getItem('jwt') !== null;
+    return !isUndefined(this.cookie.get('token'));
   }
 }

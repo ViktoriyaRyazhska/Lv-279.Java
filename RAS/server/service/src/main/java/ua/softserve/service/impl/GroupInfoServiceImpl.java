@@ -3,15 +3,17 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.constants.ConstantsFromDb;
+import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
+import ua.softserve.service.converter.GroupInfoConverter;
+import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyForViewDTO;
+import ua.softserve.service.dto.GroupAllInformationDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Service processes information that returns Repositories.
@@ -51,6 +53,9 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Autowired
     private StudentsStatusesService studentsStatusesService;
 
+    @Autowired
+    private GroupInfoConverter groupInfoConverter;
+
     @Override
     public void save(GroupInfo groupInfo) {
         groupInfoRepository.save(groupInfo);
@@ -59,6 +64,33 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Override
     public GroupInfo findOne(int id) {
         return groupInfoRepository.findOne(id);
+    }
+
+    /**
+     * Method contains information about group and information about experts in the group.
+     *
+     * @return DTO object that contains information about group.
+     */
+    @Override
+    public List<GroupInformationDTO> getAllInfo() {
+        List<GroupInfoTeachers> getExpertsOfTheGroup = null;
+        List<GroupInformationDTO> allInfoAboutGroups = findAllInfoAboutGroups();
+        TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
+        if (teacherTypes != null) {
+            getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
+        }
+        if (getExpertsOfTheGroup != null) {
+            for (GroupInformationDTO groupInformationDTO : allInfoAboutGroups) {
+                for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
+                    if ((groupInfoTeachers.getAcademy().getAcademyId().equals(groupInformationDTO.getAcademyId()))) {
+                        groupInformationDTO.getFirstName().add(groupInfoTeachers.getEmployee().getFirstNameEng());
+                        groupInformationDTO.getLastName().add(groupInfoTeachers.getEmployee().getLastNameEng());
+                    }
+                }
+            }
+
+        }
+        return allInfoAboutGroups;
     }
 
     /**
@@ -140,6 +172,11 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Override
     public List<GroupInfo> findAllWithOrder() {
         return groupInfoRepository.findAllWithOrder();
+    }
+
+    @Override
+    public List<GroupInformationDTO> findAllInfoAboutGroups() {
+        return groupInfoRepository.findAllInfoAboutGroups();
     }
 
     @Override

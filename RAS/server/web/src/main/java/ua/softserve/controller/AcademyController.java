@@ -10,12 +10,11 @@ import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.GroupInfoService;
-import ua.softserve.service.dto.AcademyDTO;
-import ua.softserve.service.dto.AcademyForSaveDTO;
-import ua.softserve.service.dto.AcademyForViewDTO;
+import ua.softserve.service.dto.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 public class AcademyController {
@@ -30,8 +29,8 @@ public class AcademyController {
         return new ResponseEntity<>(academyService.findOne(academyId), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/academy/addgroup", method = RequestMethod.GET, produces = { "application/json" })
-    public ResponseEntity<AcademyForSaveDTO> getAllAcademies() {
+    @RequestMapping(value = {"/academy/addgroup", "/getDropDownList"}, method = RequestMethod.GET, produces = { "application/json" })
+    public ResponseEntity<AcademyDropDownLists> getAllAcademies() {
         return new ResponseEntity<>(academyService.getAcademyDTO(), HttpStatus.OK);
     }
 
@@ -40,9 +39,9 @@ public class AcademyController {
         academyService.saveAcademyFromAcademyDTO(academyDTO);
     }
 
-    @RequestMapping(value = "/viewAcademies", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewAcademies", method = RequestMethod.GET, produces = { "application/json" })
     public ResponseEntity<List<AcademyForViewDTO>> searchSite() {
-//        Map<GroupInformationDTO, Integer> allAcademies = groupInfoService.getInfoAboutStudents();
+        List<GroupInformationDTO> allInfo = groupInfoService.getAllInfo();
         return new ResponseEntity<>(groupInfoService.getAllAcademies(), HttpStatus.OK);
     }
 }
