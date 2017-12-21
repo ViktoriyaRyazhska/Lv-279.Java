@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {AddGroupService} from "./add-group.service";
 import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Group} from "./group.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-group',
@@ -12,6 +12,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./add-group.component.css'],
   providers: [HistoryService]
 })
+
 export class AddGroupComponent implements OnInit {
   private signupForm: FormGroup;
 
@@ -38,7 +39,8 @@ export class AddGroupComponent implements OnInit {
   ];
 
   constructor(private addGroupService: AddGroupService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router:Router) {
   }
 
 
@@ -51,6 +53,10 @@ export class AddGroupComponent implements OnInit {
       this.commonDirection = resp.direction;
       this.direction = resp.technologie;
       this.profile = resp.profile;
+    },error => {
+      if (error.status===403) {
+        this.router.navigate(['ang/error']);
+      }
     });
 
     this.signupForm = new FormGroup({
