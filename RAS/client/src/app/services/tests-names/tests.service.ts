@@ -21,14 +21,7 @@ export class TestsService {
     return this.http.get(environment.serverUrl + 'tests/add/' + groupId);
   }
 
-  addTests(tests: Tests[],groupId:number){
-    this.http.post<Tests[]>(environment.serverUrl + 'tests/add/' + groupId, tests)
-      .subscribe(resp => {
-          console.log(resp);
-        }, err => {
-          console.log('Error occured');
-        }
-      );
+  addTests(tests: Tests[],groupId:number) : Observable<any> {
+    return this.http.post<Tests[]>(environment.serverUrl + 'tests/add/' + groupId, tests);
   }
-
 }

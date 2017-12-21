@@ -12,7 +12,6 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
-import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyForViewDTO;
 
 import java.util.Arrays;
