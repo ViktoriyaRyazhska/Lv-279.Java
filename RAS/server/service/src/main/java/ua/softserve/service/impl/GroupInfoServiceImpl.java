@@ -75,12 +75,12 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     public Map<GroupInformationDTO, List<Employee>> getAllInfo() {
         HashMap<GroupInformationDTO, List<Employee>> map = new HashMap<>();
         List<GroupInformationDTO> allInfoAboutGroups = groupInfoRepository.findAllInfoAboutGroups();
-        for(GroupInformationDTO groupInformationDTO: allInfoAboutGroups){
-            if(map.containsKey(groupInformationDTO)){
+        for (GroupInformationDTO groupInformationDTO : allInfoAboutGroups) {
+            if (map.containsKey(groupInformationDTO)) {
                 map.get(groupInformationDTO).add(groupInformationDTO.getEmployee());
                 map.put(groupInformationDTO, map.get(groupInformationDTO));
-            }else {
-                ArrayList<Employee> listEmployee = new ArrayList<>();
+            } else {
+                List<Employee> listEmployee = new ArrayList<>();
                 listEmployee.add(groupInformationDTO.getEmployee());
                 map.put(groupInformationDTO, listEmployee);
             }
