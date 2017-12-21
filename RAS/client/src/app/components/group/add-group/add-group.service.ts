@@ -10,11 +10,11 @@ export class AddGroupService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get(environment.serverUrl+'academy/addgroup');
+    return this.http.get(environment.serverUrl+'academy/addgroup',{withCredentials: true});
   }
 
   post(object: any){
-    this.http.post(environment.serverUrl+'academy/addgroup', object)
+    this.http.post(environment.serverUrl+'academy/addgroup', object,{withCredentials: true})
       .subscribe(res => {
         console.log(res);
       }, err => {

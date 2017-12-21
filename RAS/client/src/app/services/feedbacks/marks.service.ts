@@ -11,6 +11,6 @@ export class MarkService {
 
   getAllMarks(): Observable<any> {
     let url = environment.serverUrl + 'marks';
-    return this.http.get(url);
+    return this.http.get(url,{withCredentials: true});
   }
 }

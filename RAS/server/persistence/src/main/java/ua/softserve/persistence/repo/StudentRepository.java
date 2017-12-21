@@ -12,15 +12,14 @@ import ua.softserve.persistence.entity.StudentStatuses;
 
 import java.util.List;
 
+import static ua.softserve.persistence.constants.ConstantsFromDb.*;
+
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     List<Student> findAllByAcademy_AcademyId(int academyId);
 
     List<Student> findAllByStudentStatus(StudentStatuses studentStatus);
-
-    @Query("from Student s where s.academy.academyId =:academyId and s.removed = false")
-    List<Student> findAllByAcademyId(@Param("academyId") Integer academyId);
 
     Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatus);
 
@@ -29,5 +28,14 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     @Modifying
     @Query("update Student s set s.removed = :removed where s.id = :studentId")
-    void updateRemovedStatus(@Param("studentId") Integer studentId, @Param("removed") boolean removed);
+    void updateRemovedStatus(@Param("studentId") Integer studentId,@Param("removed") boolean removed);
+
+    @Query("from Student s where s.academy.academyId =:academyId and s.removed = false")
+    List<Student> findAllByAcademyId(@Param("academyId") Integer academyId);
+
+    @Query(value = "SELECT * from students s where s.academy_id =:academyId and s.student_status_id in (" +
+            STUDENT_STATUS_TRAINEE_ID + "," +
+            STUDENT_STATUS_ACCEPTED_PRE_OFFER_ID + ", " +
+            STUDENT_STATUS_GRADUATED_ID + ")", nativeQuery = true)
+    List<Student> findAllActiveStudents(@Param("academyId") Integer academyId);
 }

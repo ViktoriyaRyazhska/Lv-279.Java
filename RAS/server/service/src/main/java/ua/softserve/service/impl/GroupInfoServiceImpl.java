@@ -8,13 +8,12 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
+import ua.softserve.service.converter.GroupInfoConverter;
 import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyForViewDTO;
+import ua.softserve.service.dto.GroupAllInformationDTO;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Service processes information that returns Repositories.
@@ -54,6 +53,9 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Autowired
     private StudentsStatusesService studentsStatusesService;
 
+    @Autowired
+    private GroupInfoConverter groupInfoConverter;
+
     @Override
     public void save(GroupInfo groupInfo) {
         groupInfoRepository.save(groupInfo);
@@ -65,24 +67,101 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     }
 
     /**
+     * Method contains information about group and information about experts in the group.
+     *
+     * @return DTO object that contains information about group.
+     */
+    @Override
+    public List<GroupInformationDTO> getAllInfo() {
+        List<GroupInfoTeachers> getExpertsOfTheGroup = null;
+        List<GroupInformationDTO> allInfoAboutGroups = findAllInfoAboutGroups();
+        TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
+        if (teacherTypes != null) {
+            getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
+        }
+        if (getExpertsOfTheGroup != null) {
+            for (GroupInformationDTO groupInformationDTO : allInfoAboutGroups) {
+                for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
+                    if ((groupInfoTeachers.getAcademy().getAcademyId().equals(groupInformationDTO.getAcademyId()))) {
+                        groupInformationDTO.getFirstName().add(groupInfoTeachers.getEmployee().getFirstNameEng());
+                        groupInformationDTO.getLastName().add(groupInfoTeachers.getEmployee().getLastNameEng());
+                    }
+                }
+            }
+
+        }
+        return allInfoAboutGroups;
+    }
+
+    /**
      * Method transforms information about academies from all tables into one DTO object.
      *
      * @return information about academies from all tables into one DTO object.
      */
     @Override
-    public Map<GroupInformationDTO, Integer> getInfoAboutStudents() {
-        List<GroupInformationDTO> allInfoAboutGroups = findAllInfoAboutGroups();
-        Map<GroupInformationDTO, Integer> infoStudentMap = new HashMap<>();
-        infoStudentMap.put(allInfoAboutGroups.get(0), 1);
-        allInfoAboutGroups.remove(0);
-        for (GroupInformationDTO infoAboutGroup : allInfoAboutGroups) {
-            if (infoStudentMap.containsKey(infoAboutGroup)) {
-                infoStudentMap.put(infoAboutGroup, infoStudentMap.get(infoAboutGroup) + 1);
-            } else {
-                infoStudentMap.put(infoAboutGroup, 1);
+    public List<AcademyForViewDTO> getAllAcademies() {
+        List<GroupInfo> groupInfoList = findAllWithOrder();
+        List<AcademyForViewDTO> academyDTOList = new ArrayList<>();
+        Integer countActualStudents = null;
+        List<GroupInfoTeachers> getExpertsOfTheGroup = null;
+        Set<LanguageTranslations> languageTranslations = languageTranslationsService.getAllLanguageTranslationsName();
+        TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
+        StudentStatuses studentStatuses = studentsStatusesService.findOne(ConstantsFromDb.STUDENT_STATUS_TRAINEE_ID);
+        if (teacherTypes != null) {
+            getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
+        }
+        if (groupInfoList != null) {
+            for (GroupInfo groupInfo : groupInfoList) {
+                AcademyForViewDTO academyDTO = academyConverter.toDTO(groupInfo);
+                Academy academy = groupInfo.getAcademy();
+                if (academy != null) {
+                    if (academy.getCity() != null) {
+                        for (LanguageTranslations languageTranslation : languageTranslations) {
+                            if (languageTranslation.getItemId() == academy.getCity().getCityId()) {
+                                academyDTO.setCityName(languageTranslation.getTrasnlation());
+                                break;
+                            }
+                        }
+                    }
+                    if (academy.getAcademyStages() != null) {
+                        academyDTO.setStatus(academy.getAcademyStages().getName());
+                    }
+                    List<String> employeeList = new ArrayList<>();
+                    if (getExpertsOfTheGroup != null) {
+                        for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
+                            if ((groupInfoTeachers.getAcademy().getAcademyId() == academy.getAcademyId())
+                                    && groupInfoTeachers != null) {
+                                employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " "
+                                        + groupInfoTeachers.getEmployee().getLastNameEng());
+                            }
+                        }
+                    }
+                    if (employeeList.size() != 0) {
+                        academyDTO.setExperts(employeeList);
+                    }
+                    if (studentStatuses != null) {
+                        countActualStudents = studentsService.countAllByAcademyAndStudentStatus(academy,
+                                studentStatuses);
+                    }
+                    if (countActualStudents != null) {
+                        academyDTO.setStudentsActual(countActualStudents);
+                    }
+                }
+                if (groupInfo.getProfileInfo() != null) {
+                    academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
+                }
+                academyDTOList.add(academyDTO);
             }
         }
-        return infoStudentMap;
+
+        AcademyForViewDTO academyForViewDTO = new AcademyForViewDTO();
+        academyForViewDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
+        academyForViewDTO.setDirection(directionService.findAllDirectionsInIta());
+        academyForViewDTO.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
+        academyForViewDTO.setProfile(profileService.findAll());
+        academyForViewDTO.setCityNames(languageTranslations);
+        academyDTOList.add(academyForViewDTO);
+        return academyDTOList;
     }
 
     /**

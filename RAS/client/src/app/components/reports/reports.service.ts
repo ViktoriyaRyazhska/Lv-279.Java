@@ -9,7 +9,7 @@ export class ReportsService {
   constructor(private http: HttpClient) { }
 
   getAllForCheckListReport(): Observable<any> {
-    return this.http.get<any>(environment.serverUrl+'reports/check_list_by_groups');
+    return this.http.get<any>(environment.serverUrl+'reports/check_list_by_groups',{withCredentials: true});
   }
 
 }
