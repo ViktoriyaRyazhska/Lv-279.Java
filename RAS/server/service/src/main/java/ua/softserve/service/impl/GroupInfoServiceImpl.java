@@ -69,28 +69,23 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     /**
      * Method contains information about group and information about experts in the group.
      *
-     * @return DTO object that contains information about group.
+     * @return Map that contains information about group.
      */
     @Override
-    public List<GroupInformationDTO> getAllInfo() {
-        List<GroupInfoTeachers> getExpertsOfTheGroup = null;
-        List<GroupInformationDTO> allInfoAboutGroups = findAllInfoAboutGroups();
-        TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
-        if (teacherTypes != null) {
-            getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
-        }
-        if (getExpertsOfTheGroup != null) {
-            for (GroupInformationDTO groupInformationDTO : allInfoAboutGroups) {
-                for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
-                    if ((groupInfoTeachers.getAcademy().getAcademyId().equals(groupInformationDTO.getAcademyId()))) {
-                        groupInformationDTO.getFirstName().add(groupInfoTeachers.getEmployee().getFirstNameEng());
-                        groupInformationDTO.getLastName().add(groupInfoTeachers.getEmployee().getLastNameEng());
-                    }
-                }
+    public Map<GroupInformationDTO, List<Employee>> getAllInfo() {
+        HashMap<GroupInformationDTO, List<Employee>> map = new HashMap<>();
+        List<GroupInformationDTO> allInfoAboutGroups = groupInfoRepository.findAllInfoAboutGroups();
+        for(GroupInformationDTO groupInformationDTO: allInfoAboutGroups){
+            if(map.containsKey(groupInformationDTO)){
+                map.get(groupInformationDTO).add(groupInformationDTO.getEmployee());
+                map.put(groupInformationDTO, map.get(groupInformationDTO));
+            }else {
+                ArrayList<Employee> listEmployee = new ArrayList<>();
+                listEmployee.add(groupInformationDTO.getEmployee());
+                map.put(groupInformationDTO, listEmployee);
             }
-
         }
-        return allInfoAboutGroups;
+        return map;
     }
 
     /**
