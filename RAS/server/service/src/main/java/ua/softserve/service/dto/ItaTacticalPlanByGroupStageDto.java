@@ -4,7 +4,6 @@ import lombok.*;
 
 import java.sql.Date;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,7 +11,7 @@ import java.sql.Date;
 @ToString
 public class ItaTacticalPlanByGroupStageDto {
 
-    private  int year;
+    private int year;
     private int month;
     private int groupId;
     private String groupName;

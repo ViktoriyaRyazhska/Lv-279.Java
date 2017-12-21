@@ -21,13 +21,11 @@ public class TechnologyServiceImpl implements TechnologyService {
         technologiesRepository.save(technologies);
     }
 
-    @Transactional
     @Override
     public Technologies findOne(int id) {
         return technologiesRepository.findOne(id);
     }
 
-    @Transactional
     @Override
     public List<Technologies> findAll() {
         return technologiesRepository.findAll();

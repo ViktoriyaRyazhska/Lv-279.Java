@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,8 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userService;
-    @Autowired
-    private StatelessAuthenticationFilter statelessAuthenticationFilter;
+
+    @Bean
+    public StatelessAuthenticationFilter statelessAuthenticationFilter(){
+        return new StatelessAuthenticationFilter();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -47,10 +51,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable();
-
+                .csrf().disable()
+//                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
+                .antMatchers("/reports/check_list_by_groups")
+                    .hasAnyAuthority(Authority.ITA_COORDINATOR.toString())
+                .antMatchers("/reports/itaTacticalPlanByGroupStage")
+                    .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(),Authority.SOFTSERVE_PM.toString(),Authority.RECRUITER.toString())
+                .antMatchers("/marks")
+                    .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(),Authority.RECRUITER.toString(),Authority.SOFTSERVE_PM.toString(),Authority.TEACHER.toString(),
+                            Authority.EXPERT.toString(),Authority.INTERVIEWER.toString())
+                .antMatchers("/students/**")
+                    .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(),Authority.RECRUITER.toString(),Authority.SOFTSERVE_PM.toString())
+                .antMatchers("/academy/**")
+                    .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(),Authority.ITA_ADMIN.toString())
+                .anyRequest().permitAll();
         http
-                .addFilterBefore(statelessAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(statelessAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http
+                .headers().cacheControl();
+
     }
 
     @Bean
@@ -81,13 +103,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins(url).allowCredentials(true)
-                        .allowedHeaders("Access-Control-Allow-Credentials", "Content-Type",
-                                "Access-Control-Allow-Headers", "X-Requested-With", "Origin", "Accept")
-                        .allowedMethods("PUT", "DELETE", "GET", "POST").maxAge(MAX_AGE);
+                registry.addMapping("/**")
+                        .allowedOrigins(url)
+                        .allowCredentials(true)
+                        .allowedHeaders("Access-Control-Allow-Credentials", "Content-Type", "Access-Control-Allow-Headers", "X-Requested-With", "Origin", "Accept")
+                        .allowedMethods("PUT", "DELETE", "GET", "POST")
+                        .maxAge(MAX_AGE);
             }
         };
     }
+
 
     @Bean
     public CorsFilter corsFilter() {

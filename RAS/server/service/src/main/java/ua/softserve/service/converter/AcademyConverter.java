@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
-import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyForSaveDTO;
 import ua.softserve.service.dto.AcademyForViewDTO;
 
@@ -27,12 +26,6 @@ public class AcademyConverter {
 
     @Autowired
     TechnologyService technologyService;
-
-    @Autowired
-    ProfileService profileService;
-
-    @Autowired
-    AcademyService academyService;
 
     /**
      * Method transforms GroupInfo Entity to AcademyDTO object.
@@ -94,17 +87,6 @@ public class AcademyConverter {
         return academy;
     }
 
-    public GroupInfo groupInfoToEntity(int academyId, AcademyForSaveDTO academyDTO) {
-        GroupInfo groupInfo = new GroupInfo();
-        groupInfo.setAcademy(getAcademyById(academyId));
-        groupInfo.setGroupName(academyDTO.getGrName());
-        groupInfo.setProfileInfo(getProfileInfo(academyDTO.getProfileId()));
-        groupInfo.setStudentsPlannedToEnrollment(academyDTO.getStudentPlannedToEnrollment());
-        groupInfo.setStudentsPlannedToGraduate(academyDTO.getStudentPlannedToGraduate());
-
-        return groupInfo;
-    }
-
     private Date convertLongToDate(Long dateMilliseconds) {
         return new Date(dateMilliseconds);
     }
@@ -123,14 +105,6 @@ public class AcademyConverter {
 
     private Technologies getTechnologies(int technologieId) {
         return technologyService.findOne(technologieId);
-    }
-
-    private ProfileInfo getProfileInfo(int profileInfoId) {
-        return profileService.findOne(profileInfoId);
-    }
-
-    private Academy getAcademyById(int academyId) {
-        return academyService.findOne(academyId);
     }
 
 }

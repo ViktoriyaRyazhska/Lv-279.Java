@@ -8,10 +8,13 @@ import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
+import ua.softserve.service.converter.GroupInfoConverter;
 import ua.softserve.service.dto.AcademyDTO;
+import ua.softserve.service.dto.AcademyDropDownLists;
 import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.util.List;
+import java.util.TreeMap;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
@@ -37,13 +40,10 @@ public class AcademyServiceImpl implements AcademyService {
     GroupInfoService groupInfoService;
 
     @Autowired
-    private AcademyConverter academyConverter;
+    AcademyConverter academyConverter;
 
-    @Transactional(readOnly = true)
-    @Override
-    public Academy getById(Integer id) {
-        return academyRepository.findOne(id);
-    }
+    @Autowired
+    GroupInfoConverter groupInfoConverter;
 
     @Transactional
     @Override
@@ -55,39 +55,36 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public void saveAcademyFromAcademyDTO(AcademyForSaveDTO academyDTO) {
         Academy academy = academyConverter.toEntity(academyDTO);
-        System.out.println(academy.getStartDate());
+
         int academyId = save(academy);
 
         saveGroupInfo(academyId, academyDTO);
     }
 
-    private void saveGroupInfo(int academyId, AcademyForSaveDTO academyDTO) {
-        GroupInfo groupInfo = academyConverter.groupInfoToEntity(academyId, academyDTO);
+    @Transactional
+    public void saveGroupInfo(int academyId, AcademyForSaveDTO academyDTO) {
+        GroupInfo groupInfo = groupInfoConverter.toEntity(academyId, academyDTO);
         groupInfoService.save(groupInfo);
     }
 
-    @Transactional
     @Override
     public Academy findOne(int id) {
         return academyRepository.findOne(id);
     }
 
-    @Transactional
     @Override
-    public AcademyForSaveDTO getAcademyDTO() {
-        AcademyForSaveDTO academyDTO = new AcademyForSaveDTO();
-        academyDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
-        academyDTO.setDirection(directionService.findAllDirectionsInIta());
-        academyDTO.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
-        academyDTO.setProfile(profileService.findAll());
-        academyDTO.setCityNames(languageTranslationsService.getAllLanguageTranslationsName());
-        return academyDTO;
+    public AcademyDropDownLists getAcademyDTO() {
+        AcademyDropDownLists academyDropDownLists = new AcademyDropDownLists();
+        academyDropDownLists.setAcademyStages(academyStagesService.getAllAcademyStagesService());
+        academyDropDownLists.setDirection(directionService.findAllDirectionsInIta());
+        academyDropDownLists.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
+        academyDropDownLists.setProfile(profileService.findAll());
+        academyDropDownLists.setCityNames(languageTranslationsService.getAllLanguageTranslationsName());
+        return academyDropDownLists;
     }
 
-    @Transactional
     @Override
     public List<Academy> getAllAcademies() {
         return academyRepository.findAll();
     }
-
 }

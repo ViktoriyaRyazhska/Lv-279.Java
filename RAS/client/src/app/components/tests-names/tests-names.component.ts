@@ -24,10 +24,12 @@ export class TestsNamesComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.groupId = +this.route.snapshot.params['id'];
+
     this.rForm = this.fb.group({
       'testName' : [null, Validators.required],
       'testMaxPoint' : [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3),Validators.max(1000),Validators.min(0)])]
     });
+
   }
 
   ngOnInit() {

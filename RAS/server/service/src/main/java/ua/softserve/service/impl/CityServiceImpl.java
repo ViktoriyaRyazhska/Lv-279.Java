@@ -32,16 +32,13 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public City findOne(int id) {
         return cityRepository.findOne(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<City> findAll() {
         return cityRepository.findAll();
-
     }
 
     @Override

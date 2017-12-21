@@ -13,13 +13,14 @@ import {HeaderComponent} from "./components/header/header.component";
 import {AppComponent} from "./app.component";
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component";
+import {ErrorComponent} from "./components/error/error.component";
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
   {path: '', component: ViewAcademiesComponent},
-  {path: 'ang/addgroup', component: AddGroupComponent},
+  {path: 'ang/group/add', component: AddGroupComponent},
   {
-    path: 'ang/addgroup/:id', component: AddGroupComponent, children: [
+    path: 'ang/group/update/:id', component: AddGroupComponent, children: [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
 
     {path: 'students/:id', component: StudentsComponent},
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
   {path: 'ang/students/:id', component: StudentsComponent},
   {path: 'ang/feedback/:id', component: FeedbacksComponent},
   {path: 'ang/history/:id', component: HistoryListComponent},
-  {path: 'ang', component: AppComponent}
+  {path: 'ang', component: AppComponent},
+  {path: 'ang/error', component: ErrorComponent}
 ];
 
 @NgModule({

@@ -6,10 +6,12 @@
           <div class="row">
             <mat-form-field class="col-sm-6">
               <input matInput placeholder="Group Name:" formControlName="groupInfoFormControl" maxlength="50">
+              <mat-error *ngIf="!signupForm.controls.groupInfoFormControl.valid">{{defaultInvalidInput}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="col-sm-6">
               <input matInput placeholder="Name for Site:" formControlName="nameForSiteFormControl" maxlength="50">
+              <mat-error *ngIf="!signupForm.controls.nameForSiteFormControl.valid">{{defaultInvalidInput}}</mat-error>
             </mat-form-field>
           </div>
 
@@ -32,20 +34,24 @@
               <input matInput [matDatepicker]="picker" placeholder="Start Date:" formControlName="startDateFormControl">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
+              <!--<mat-error *ngIf="!signupForm.controls.endDateFormControl.valid">{{defaultInvalidInput}}</mat-error>-->
             </mat-form-field>
 
             <mat-form-field class="col-sm-6">
               <input matInput [matDatepicker]="picker2" placeholder="End Date:" formControlName="endDateFormControl">
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
+              <!--<mat-error *ngIf="!signupForm.controls.endDateFormControl.valid && signupForm.get('endDateFormControl').value == null">{{defaultInvalidInput}}</mat-error>-->
             </mat-form-field>
+            <div align="center">
+              <mat-error *ngIf="isDateVilid()">Invalid time frame is chosen</mat-error>
+            </div>
           </div>
 
           <div class="row">
             <mat-form-field class="col-sm-12">
               <mat-select placeholder="Payment Status:" formControlName="paymentStatusFormControl">
-                <mat-option [value]=1 selected>Founded By SoftServe</mat-option>
-                <mat-option [value]=0 >Open Group</mat-option>
+                <mat-option *ngFor="let status of paymentStatusArray" [value]="status.free">{{ status.name }}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -83,7 +89,7 @@
 
           <div class="row">
             <mat-form-field class="col-sm-6">
-              <input matInput type="number" placeholder="Students Planned to Graduate:"
+              <input matInput placeholder="Students Planned to Graduate:"
                      formControlName="studentPlannedToGraduate" min="0" max="99">
             </mat-form-field>
 
@@ -103,11 +109,11 @@
 
         </ul>
 
+        <div class="row" id="btnSaveId" align="center">
+          <button mat-raised-button type="submit" color="primary">Save Group</button>
+          <!--<mat-error *ngIf="invalidForm">{{defaultInvalidInput}}</mat-error>-->
+        </div>
       </form>
-      <div class="row" id="btnSaveId" align="center">
-        <button mat-raised-button type="submit" (click)="saveGroup()" color="primary" routerLink="/ang/viewAcademies">Save Group</button>
-        <!--<mat-error *ngIf="signupForm.invalid">{{defaultInvalidInput}}</mat-error>-->
-      </div>
     </div>
 
   </div>

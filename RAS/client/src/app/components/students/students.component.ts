@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {StudentsService} from "../../services/students/students.service";
 import {UsersService} from "../../services/users/users.service";
 import {UserPage, UserShort} from "../../models/userShort";
 import {Data, StudentFeedback, StudentStatus, ApprovedBy} from "../../models/feedbacks/student.model";
 import {SelectItem} from "primeng/primeng";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.css']
 })
+@Injectable()
 export class StudentsComponent implements OnInit {
   private academyId: number = 586;
 
@@ -37,7 +38,8 @@ export class StudentsComponent implements OnInit {
 
   constructor(private studentsService: StudentsService,
               private userService: UsersService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router:Router) {
     this.selectedStudent = new StudentFeedback();
   }
 
@@ -66,7 +68,12 @@ export class StudentsComponent implements OnInit {
           error => console.log(error)
         );
       },
-      error => console.log(error)
+      error => {
+        if (error.status===403) {
+          this.router.navigate(['ang/error']);
+        }
+        console.log(error)
+      }
     );
     this.loadUsers({first: 0, rows: 15});
 
@@ -245,5 +252,41 @@ export class StudentsComponent implements OnInit {
     );
   }
 
+  mySortCurrentControl(event: any) {
+    if (event.order === 1) {
+      this.students.sort((a:StudentFeedback, b:StudentFeedback) => {
 
+          const sortDesc = this.getCurrentControl(a)<this.getCurrentControl(b) ? -1 : 0;
+          return this.getCurrentControl(a)>this.getCurrentControl(b) ? 1 : sortDesc;
+
+      });
+    } else {
+      this.students.sort((a:StudentFeedback, b:StudentFeedback) => {
+
+          const sortDesc = this.getCurrentControl(a)<this.getCurrentControl(b) ? 1 : 0;
+          return this.getCurrentControl(a)>this.getCurrentControl(b) ? -1 : sortDesc;
+
+      });
+    }
+    this.students = [...this.students];
+  }
+
+  mySortTrainingScore(event: any) {
+    if (event.order === 1) {
+      this.students.sort((a:StudentFeedback, b:StudentFeedback) => {
+
+        const sortDesc = this.getTrainingScore(a)<this.getTrainingScore(b) ? -1 : 0;
+        return this.getTrainingScore(a)>this.getTrainingScore(b) ? 1 : sortDesc;
+
+      });
+    } else {
+      this.students.sort((a:StudentFeedback, b:StudentFeedback) => {
+
+        const sortDesc = this.getTrainingScore(a)<this.getTrainingScore(b) ? 1 : 0;
+        return this.getTrainingScore(a)>this.getTrainingScore(b) ? -1 : sortDesc;
+
+      });
+    }
+    this.students = [...this.students];
+  }
 }

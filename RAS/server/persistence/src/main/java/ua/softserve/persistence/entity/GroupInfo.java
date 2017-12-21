@@ -6,9 +6,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
-@Table(name = "group_info")
+@Table(name = "group_info", uniqueConstraints = {@UniqueConstraint(columnNames = "academy_id")})
 public class GroupInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +17,7 @@ public class GroupInfo {
     private Integer groupInfoId;
 
     @OneToOne
+    @NotNull
     @JoinColumn(name = "academy_id")
     private Academy academy;
 
@@ -35,5 +37,6 @@ public class GroupInfo {
     @JoinColumn(name = "profile_id")
     private ProfileInfo profileInfo;
 
-    public GroupInfo() {}
+    public GroupInfo() {
+    }
 }

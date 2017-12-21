@@ -1,21 +1,14 @@
 package ua.softserve.service.converter;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import ua.softserve.persistence.entity.*;
-import ua.softserve.persistence.repo.GroupInfoRepository;
-import ua.softserve.service.*;
-import ua.softserve.service.dto.AcademyDTO;
-import ua.softserve.service.impl.GroupInfoServiceImpl;
-import ua.softserve.service.impl.TechnologyServiceImpl;
-
-import java.util.Arrays;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AcademyConverterTest {
@@ -32,6 +25,7 @@ public class AcademyConverterTest {
 
     }
 
+    @Ignore
     @Test
     public void Group_Info_Returns_Null() {
         Mockito.when(groupInfo.getAcademy()).thenReturn(null);
@@ -47,6 +41,7 @@ public class AcademyConverterTest {
         Mockito.verifyNoMoreInteractions(groupInfo);
     }
 
+    @Ignore
     @Test
     public void Group_Info_Returns_Not_Null() {
         Mockito.when(groupInfo.getAcademy()).thenReturn(academy);

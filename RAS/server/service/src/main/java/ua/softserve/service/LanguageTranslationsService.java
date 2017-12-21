@@ -3,10 +3,11 @@ package ua.softserve.service;
 import ua.softserve.persistence.entity.LanguageTranslations;
 
 import java.util.List;
+import java.util.Set;
 
 public interface LanguageTranslationsService {
 
-    List<LanguageTranslations> getAllLanguageTranslationsName();
+    Set<LanguageTranslations> getAllLanguageTranslationsName();
 
     void save(LanguageTranslations languageTranslations);
 
