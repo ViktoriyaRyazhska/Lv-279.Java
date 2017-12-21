@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AcademyForSaveDTO extends AcademyDTO{
+public class AcademyForSaveDTO extends AcademyDTO {
     private int directionId;
     private int technologieId;
     private int profileId;
