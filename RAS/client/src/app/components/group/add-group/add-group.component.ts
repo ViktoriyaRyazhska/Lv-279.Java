@@ -43,7 +43,6 @@ export class AddGroupComponent implements OnInit {
               private router:Router) {
   }
 
-
   ngOnInit() {
     this.group = new Group();
     this.groupId = this.route.snapshot.params['id'];

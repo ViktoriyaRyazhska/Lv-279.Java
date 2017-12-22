@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.GroupInfoService;
 import ua.softserve.service.dto.*;
@@ -18,6 +20,9 @@ public class AcademyController {
 
     @Autowired
     GroupInfoService groupInfoService;
+
+    @Autowired
+    GroupInfoRepository groupInfoRepository;
 
     @GetMapping(value = "/group/{id}")
     public ResponseEntity<Academy> getAcademy(@PathVariable Integer id) {
@@ -35,8 +40,10 @@ public class AcademyController {
         return ResponseEntity.ok().body(200);
     }
 
-    @RequestMapping(value = "/viewAcademies", method = RequestMethod.GET, produces = { "application/json" })
+    @GetMapping(value = "/viewAcademies")
     public ResponseEntity<List<AcademyForViewDTO>> searchSite() {
+        groupInfoRepository.findAll();
+        groupInfoService.getAllInfo();
         return new ResponseEntity<>(groupInfoService.getAllAcademies(), HttpStatus.OK);
     }
 }

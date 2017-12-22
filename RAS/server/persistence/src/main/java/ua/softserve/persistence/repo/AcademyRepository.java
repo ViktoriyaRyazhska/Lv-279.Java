@@ -1,6 +1,7 @@
 package ua.softserve.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ua.softserve.persistence.entity.Academy;
 
@@ -13,4 +14,7 @@ public interface AcademyRepository extends JpaRepository<Academy, Integer> {
     List<Academy> findAllByStartDateBetween(Timestamp d1, Timestamp d2);
 
     List<Academy> findAllByAcademyIdIn(List<Integer> listOfId);
+
+    @Query("select a.academyId from Academy a order by a.academyId")
+    List<Integer> findAllAcademyId();
 }

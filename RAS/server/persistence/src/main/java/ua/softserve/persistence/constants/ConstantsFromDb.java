@@ -12,6 +12,9 @@ package ua.softserve.persistence.constants;
 
 public class ConstantsFromDb {
 
+    public static byte TRUE = 1;
+    public static byte FALSE = 0;
+
     public final static int ENGLISH_LEVEL_BEGINNER_LOW_ID = 1;
     public final static int ENGLISH_LEVEL_BEGINNER_ID = 2;
     public final static int ENGLISH_LEVEL_BEGINNER_HIGH_ID = 3;

@@ -1,6 +1,7 @@
 package ua.softserve.service;
 
 import ua.softserve.persistence.dto.GroupInformationDTO;
+import ua.softserve.persistence.entity.Employee;
 import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyForViewDTO;
@@ -8,6 +9,7 @@ import ua.softserve.service.dto.GroupAllInformationDTO;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 public interface GroupInfoService {
@@ -34,7 +36,7 @@ public interface GroupInfoService {
 
     GroupInfo findOne(int id);
 
-    List<GroupInformationDTO> getAllInfo();
+    Map<GroupInformationDTO, List<Employee>> getAllInfo();
 
     List<AcademyForViewDTO> getAllAcademies();
 

@@ -114,12 +114,12 @@
           (mouseenter)="onMouseEnter('gro');"
           (mouseleave)="onMouseLeave('gro');"
           (click)="onMouseClick('gro');"
-      ><span>Teacher’s feedbacks filled in</span></th>
+      ><span>Teacher's feedbacks filled in</span></th>
       <th class="gro"
           (mouseenter)="onMouseEnter('gro');"
           (mouseleave)="onMouseLeave('gro');"
           (click)="onMouseClick('gro');"
-      ><span>Expert’s feedbacks filled in</span></th>
+      ><span>Expert's feedbacks filled in</span></th>
       <th class="gro master"
           (mouseenter)="onMouseEnter('gro');"
           (mouseleave)="onMouseLeave('gro');"
@@ -169,11 +169,11 @@
     <tbody>
     <ng-container *ngFor="let group of groups">
       <tr>
-        <td>{{group.groupName}}</td>
-        <td>{{group.cityName}}</td>
-        <td>{{group.status}}</td>
-        <td>{{group.teachers}}</td>
-        <td>{{group.experts}}</td>
+        <td>{{group.report.groupName}}</td>
+        <td>{{group.report.cityName}}</td>
+        <td>{{group.report.status}}</td>
+        <td>{{group.report.teachers}}</td>
+        <td>{{group.report.experts}}</td>
         <td class="gss"
             (mouseenter)="onMouseEnter('gss');"
             (mouseleave)="onMouseLeave('gss');"
