@@ -1,7 +1,6 @@
 package ua.softserve.service;
 
 import ua.softserve.persistence.entity.Academy;
-import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyDropDownLists;
 import ua.softserve.service.dto.AcademyForSaveDTO;
 
@@ -11,7 +10,7 @@ public interface AcademyService {
 
     Integer save(Academy academy);
 
-    void saveAcademyFromAcademyDTO(AcademyForSaveDTO academyDTO);
+    void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO);
 
     // void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
 

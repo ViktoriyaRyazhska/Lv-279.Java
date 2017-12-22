@@ -1,5 +1,7 @@
 package ua.softserve.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,15 +11,19 @@ import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
 import ua.softserve.service.converter.GroupInfoConverter;
-import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyDropDownLists;
 import ua.softserve.service.dto.AcademyForSaveDTO;
+import ua.softserve.service.exception.InvalidDataException;
+import ua.softserve.service.exception.InvalidTimeFrameException;
 
+import java.sql.Date;
 import java.util.List;
-import java.util.TreeMap;
+import java.util.NoSuchElementException;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
+    private final Logger logger = LoggerFactory.getLogger(AcademyServiceImpl.class.getName());
+
     @Autowired
     AcademyRepository academyRepository;
 
@@ -51,25 +57,66 @@ public class AcademyServiceImpl implements AcademyService {
         return academyRepository.save(academy).getAcademyId();
     }
 
-    @Transactional
-    @Override
-    public void saveAcademyFromAcademyDTO(AcademyForSaveDTO academyDTO) {
-        Academy academy = academyConverter.toEntity(academyDTO);
-
-        int academyId = save(academy);
-
-        saveGroupInfo(academyId, academyDTO);
+    private <T> boolean isNotNullNotEmpty(String fieldName, T t) {
+        if (t == null) {
+            logger.error(fieldName + " can't be null");
+            throw new InvalidDataException(fieldName + " can't be null");
+        } else if (t instanceof String) {
+            if (((String) t).isEmpty()) {
+                logger.error(fieldName + " can't be empty");
+                throw new InvalidDataException(fieldName + " can't be empty");
+            }
+        }
+        return true;
     }
 
+    private boolean isEndDateBiggestThanStartDate(Long startDate, Long endDate){
+        if (startDate > endDate) {
+            logger.error("End date can't be biggest than start date");
+            throw new InvalidTimeFrameException("End date can't be biggest than start date");
+        }
+        return true;
+    }
+
+    private boolean isAcademyDTOisValid(AcademyForSaveDTO academyDTO){
+        isNotNullNotEmpty("Group Name", academyDTO.getGrName());
+        isNotNullNotEmpty("Name for Site", academyDTO.getNameForSite());
+
+        isNotNullNotEmpty("Stard Date", academyDTO.getStartDate());
+        isNotNullNotEmpty("End Date", academyDTO.getEndDate());
+        isEndDateBiggestThanStartDate(academyDTO.getStartDate(), academyDTO.getEndDate());
+
+        return true;
+    }
+
+
     @Transactional
-    public void saveGroupInfo(int academyId, AcademyForSaveDTO academyDTO) {
-        GroupInfo groupInfo = groupInfoConverter.toEntity(academyId, academyDTO);
-        groupInfoService.save(groupInfo);
+    @Override
+    public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO) {
+//        isNotNullNotEmpty("Group Name", academyDTO.getGrName());
+//        isNotNullNotEmpty("Name for Site", academyDTO.getNameForSite());
+//        isDateValid(academyDTO.getStartDate(), academyDTO.getEndDate());
+
+        if(isAcademyDTOisValid(academyDTO)) {
+
+            Academy academy = academyConverter.toEntity(academyDTO);
+            int academyId = save(academy);
+
+            GroupInfo groupInfo = groupInfoConverter.toEntity(academyId, academyDTO);
+            groupInfoService.save(groupInfo);
+        }
     }
 
     @Override
     public Academy findOne(int id) {
-        return academyRepository.findOne(id);
+        logger.info("Before academyRepository.findOne(id)");
+
+        Academy findGroup = academyRepository.findOne(id);
+        if (findGroup == null) {
+            logger.error("Group not found");
+            throw new NoSuchElementException("Group not found");
+        }
+        return findGroup;
     }
 
     @Override
