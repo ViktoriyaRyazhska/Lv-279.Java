@@ -67,45 +67,25 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     }
 
     /**
-     * Method transforms information about academies from all tables into one DTO object.
+     * Method contains information about group and information about experts in the group.
      *
-     * @return information about academies from all tables into one DTO object.
+     * @return Map that contains information about group.
      */
     @Override
-    public Map<GroupInformationDTO, Integer> getInfoAboutStudents() {
-        List<GroupInformationDTO> allInfoAboutGroups = findAllInfoAboutGroups();
-        Map<GroupInformationDTO, Integer> infoStudentMap= new HashMap<>();
-        for(GroupInformationDTO infoAboutGroup: allInfoAboutGroups){
-            if(infoStudentMap.containsKey(infoAboutGroup)){
-                infoStudentMap.put(infoAboutGroup, infoStudentMap.get(infoAboutGroup) + 1);
+    public Map<GroupInformationDTO, List<Employee>> getAllInfo() {
+        HashMap<GroupInformationDTO, List<Employee>> map = new HashMap<>();
+        List<GroupInformationDTO> allInfoAboutGroups = groupInfoRepository.findAllInfoAboutGroups();
+        for (GroupInformationDTO groupInformationDTO : allInfoAboutGroups) {
+            if (map.containsKey(groupInformationDTO)) {
+                map.get(groupInformationDTO).add(groupInformationDTO.getEmployee());
+                map.put(groupInformationDTO, map.get(groupInformationDTO));
             } else {
-                infoStudentMap.put(infoAboutGroup, 0);
+                List<Employee> listEmployee = new ArrayList<>();
+                listEmployee.add(groupInformationDTO.getEmployee());
+                map.put(groupInformationDTO, listEmployee);
             }
         }
-        for (Map.Entry<GroupInformationDTO, Integer> entry : infoStudentMap.entrySet())
-        {
-            if(entry.getValue() > 0){
-                infoStudentMap.put(entry.getKey(), entry.getValue() + 1);
-            }
-        }
-        return infoStudentMap;
-    }
-
-    @Override
-    public Set<GroupAllInformationDTO> getAllInfo(){
-        Map<GroupInformationDTO, Integer> infoAboutStudents = getInfoAboutStudents();
-        Set<GroupAllInformationDTO> groupAllInformationDTOSet = new HashSet<>();
-        for (Map.Entry<GroupInformationDTO, Integer> entry : infoAboutStudents.entrySet())
-        {
-            GroupAllInformationDTO allInformationDTO = groupInfoConverter.InfoStudentsDTOToInfoGroupDTO(entry.getKey());
-            if(groupAllInformationDTOSet.contains(allInformationDTO)){
-
-            } else {
-                GroupAllInformationDTO groupAllInformationDTO = groupInfoConverter.InfoStudentsDTOToInfoGroupDTO(entry.getKey());
-                groupAllInformationDTOSet.add(groupAllInformationDTO);
-            }
-        }
-        return null;
+        return map;
     }
 
     /**

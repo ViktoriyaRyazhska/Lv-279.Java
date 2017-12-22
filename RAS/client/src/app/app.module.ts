@@ -35,7 +35,10 @@ import {PrimeNgModules} from "./prime-ng.modules";
 
 import {MarkService} from "./services/feedbacks/marks.service";
 import {UsersService} from "./services/users/users.service";
-import {MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule, MatInputModule} from "@angular/material";
+import {
+  MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule,
+  MatInputModule, MatExpansionModule
+} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
@@ -97,7 +100,8 @@ import { ErrorComponent } from './components/error/error.component';
     MatSelectModule,
     MatIconModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatExpansionModule
   ],
   providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
     CookieService, SearchBarService],

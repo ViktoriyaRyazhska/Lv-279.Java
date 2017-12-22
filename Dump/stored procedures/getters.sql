@@ -155,4 +155,11 @@ BEGIN
 	select count(employee_id) into countz from group_info_teachers
     where academy_id = academy_id_in and teacher_type_id = teacherType;
 END$$
+
+
+CREATE PROCEDURE get_teacher_contributed_hours(IN academy_id_in int, IN teacherType int, OUT countz int)
+BEGIN   
+	select count(contributed_hours) into countz from group_info_teachers
+    where academy_id = academy_id_in and teacher_type_id = teacherType;
+END$$
 DELIMITER ;

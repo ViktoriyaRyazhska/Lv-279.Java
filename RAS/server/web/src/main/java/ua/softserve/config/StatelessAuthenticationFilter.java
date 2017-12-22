@@ -35,9 +35,7 @@ public class StatelessAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("enter");
         Cookie[] cookies;
-        System.out.println(Arrays.toString(httpServletRequest.getCookies()));
         if (httpServletRequest.getCookies()!=null) {
             cookies = httpServletRequest.getCookies();
             for (Cookie cookie : cookies) {
@@ -46,7 +44,6 @@ public class StatelessAuthenticationFilter extends OncePerRequestFilter {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.get().getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-                    System.out.println("filter - " + SecurityContextHolder.getContext().getAuthentication().getAuthorities());
                 }
             }
         }

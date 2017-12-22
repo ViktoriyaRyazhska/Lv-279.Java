@@ -12,7 +12,7 @@ import {ActivatedRoute} from "@angular/router";
 
 export class HistoryListComponent implements OnInit {
   academyId: number;
-  displayedColumns = ['academyName', 'nameForSite', 'location', 'sartDate', 'endDate', 'sartDate', 'stage', 'direction'
+  displayedColumns = ['academyName', 'nameForSite', 'location', 'sartDate', 'endDate', 'stage', 'direction'
     , 'modifyDate', 'modifyBy'];
   dataSource = new MatTableDataSource();
 

@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   account: LoginAccount;
+  resp: ResponseToken;
   error: boolean;
 
   constructor(private fb: FormBuilder,
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
     this.account = this.loginForm.value;
     this.loginService.signIn(this.account)
       .subscribe((response:ResponseToken)=>{
-        // localStorage.setItem('jwt',response.token);
+        // console.log('authority - '+response.authorities[0].authority);
+        // this.resp.username=response.username;
         this.cookie.put('token',response.token);
         this.error=false;
         this.router.navigate(['/']);

@@ -14,42 +14,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ua.softserve.persistence.repo.GroupInfoRepository;
-import ua.softserve.service.CheckListByGroupsDtoService;
+import ua.softserve.persistence.dto.CheckListDto;
+import ua.softserve.service.CheckListReportService;
 import ua.softserve.service.ItaTacticalPlanByGroupStageDtoService;
-import ua.softserve.service.dto.CheckListByGroupsDto;
 import ua.softserve.service.dto.ItaTacticalPlanByGroupStageDto;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/reports")
 public class ControllerForReports {
 
     @Autowired
-    private CheckListByGroupsDtoService checkListByGroupsDtoService;
+    private CheckListReportService checkListReportService;
     @Autowired
     ItaTacticalPlanByGroupStageDtoService itaTacticalPlanByGroupStageDtoService;
-    @Autowired
-    private GroupInfoRepository groupInfoRepository;
 
-    @GetMapping(value = "/check_list_by_groups", produces = "application/json")
-    public ResponseEntity<List<CheckListByGroupsDto>> getCheckListByGroupsDto() {
-        return new ResponseEntity<>(checkListByGroupsDtoService.getAllCheckListByGroupsDto(), HttpStatus.OK);
+    @GetMapping("/check_list_by_groups")
+    public ResponseEntity<List<CheckListDto>> getCheckListByGroupsDto() {
+        return new ResponseEntity<>(checkListReportService.getCheckListDto(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/itaTacticalPlanByGroupStage", method = RequestMethod.GET, produces = {
-            "application/json" })
+    @GetMapping(value = "/ita_tactical_plan_by_group_stage")
     public ResponseEntity<List<List<ItaTacticalPlanByGroupStageDto>>> itaTacticalPlanByGroupStage() {
         return new ResponseEntity<>(itaTacticalPlanByGroupStageDtoService.itaTacticalPlanByGroupStageReport(),
-                HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/test/{id}", method = RequestMethod.GET, produces = {
-            "application/json" })
-    public ResponseEntity<Object> getReportCheckList(@PathVariable Integer id) {
-        return new ResponseEntity<>(groupInfoRepository.getReportCheckList(id),
                 HttpStatus.OK);
     }
 
