@@ -31,7 +31,7 @@ public class StudentStatuses {
 
     private String name;
 
-    public StudentStatuses(Integer status){
+    public StudentStatuses(Integer status) {
         this.setId(status);
     }
 }

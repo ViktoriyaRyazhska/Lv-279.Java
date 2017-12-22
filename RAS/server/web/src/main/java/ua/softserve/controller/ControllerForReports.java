@@ -44,8 +44,7 @@ public class ControllerForReports {
 //        return new ResponseEntity<>(checkListByGroupsDtoService.getAllCheckListByGroupsDto(), HttpStatus.OK);
 //    }
 
-    @RequestMapping(value = "/itaTacticalPlanByGroupStage", method = RequestMethod.GET, produces = {
-            "application/json" })
+    @GetMapping(value = "/ita_tactical_plan_by_group_stage")
     public ResponseEntity<List<List<ItaTacticalPlanByGroupStageDto>>> itaTacticalPlanByGroupStage() {
         return new ResponseEntity<>(itaTacticalPlanByGroupStageDtoService.itaTacticalPlanByGroupStageReport(),
                 HttpStatus.OK);

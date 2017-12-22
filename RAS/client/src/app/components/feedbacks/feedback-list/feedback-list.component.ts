@@ -73,7 +73,9 @@ export class FeedbackListComponent implements OnInit {
 
       },
       error => {
-        this.router.navigate(['ang/error']);
+        if (error.status===403) {
+          this.router.navigate(['ang/error']);
+        }
         console.log(error)
       }
     );

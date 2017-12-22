@@ -4,8 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import ua.softserve.persistence.entity.Employee;
+import ua.softserve.persistence.entity.GroupInfoTeachers;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,8 +28,8 @@ public class GroupInformationDTO {
     private String profileName;
     private String directionName;
     private String status;
-    private String firstName;
-    private String lastName;
+    private Long studentsActual;
+    private Employee employee;
 
     @Override
     public boolean equals(Object o) {
@@ -47,8 +52,7 @@ public class GroupInformationDTO {
         if (directionName != null ? !directionName.equals(that.directionName) : that.directionName != null)
             return false;
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+        return studentsActual != null ? studentsActual.equals(that.studentsActual) : that.studentsActual == null;
     }
 
     @Override
@@ -64,8 +68,7 @@ public class GroupInformationDTO {
         result = 31 * result + (profileName != null ? profileName.hashCode() : 0);
         result = 31 * result + (directionName != null ? directionName.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (studentsActual != null ? studentsActual.hashCode() : 0);
         return result;
     }
 }

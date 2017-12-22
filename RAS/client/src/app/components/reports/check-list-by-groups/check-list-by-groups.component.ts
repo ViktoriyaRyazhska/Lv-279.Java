@@ -32,7 +32,9 @@ export class CheckListByGroupsComponent implements OnInit{
         this.groups = data;
       },
       error => {
-        this.router.navigate(['ang/error']);
+        if (error.status===403) {
+          this.router.navigate(['ang/error']);
+        }
         console.log(error);
       }
     );

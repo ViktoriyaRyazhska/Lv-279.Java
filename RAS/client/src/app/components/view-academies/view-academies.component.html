@@ -1,56 +1,56 @@
-
 <app-searchbar (filterData)="onFilterField($event)"></app-searchbar>
+
 <div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef='grName'>
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Group Name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Group Name</mat-header-cell>
       <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element}}"> {{element.grName}} </a>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef='nameForSite'>
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Name For Site</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name For Site</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.nameForSite}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="technologyName">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Technology</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Technology</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.technologyName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="profileName">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Direction</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Direction</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.profileName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="paymentStatus">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Payment Status</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Payment Status</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.paymentStatus}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="cityName">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>City</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.cityName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="startDate">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Start Date</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.startDate | date: "dd.MM.yyyy"}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="endDate">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>End Date</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.endDate | date: "dd.MM.yyyy"}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="academyStage">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Status</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
       <mat-cell *matCellDef="let element">---</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="experts">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Experts</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Experts</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.experts}}</mat-cell>
     </ng-container>
 
