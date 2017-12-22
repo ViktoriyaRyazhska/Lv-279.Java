@@ -109,7 +109,7 @@ export class AddGroupComponent implements OnInit {
       this.invalidForm = false;
 
       console.log(this.group);
-      this.saveGroup();
+      this.sendData();
       console.log('valid');
     } else {
       console.log('invalid');
@@ -125,14 +125,14 @@ export class AddGroupComponent implements OnInit {
     return null;
   }
 
-  saveGroup(){
+  sendData(){
     this.addGroupService.saveGroup(this.group).subscribe(res => {
       if(res==200){
         this.router.navigate(['ang/viewAcademies']);
       }
       console.log(res);
     },error => {
-      //console.log(error)
+      console.log(error)
     });
   }
 
