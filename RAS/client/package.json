@@ -5,7 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href=/Lv279Java/",
+    "build": "ng build --dev --env=dev",
+    "buildJenkins": "ng build --base-href=/Lv279Java/ --dev --env=prod",
     "buildwatch": "ng build --watch",
     "test": "ng test",
     "lint": "ng lint",
