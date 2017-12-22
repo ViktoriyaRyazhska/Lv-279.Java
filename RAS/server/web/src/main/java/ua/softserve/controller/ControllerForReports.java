@@ -39,21 +39,10 @@ public class ControllerForReports {
         return new ResponseEntity<>(checkListByGroupsDtoService.getCheckListDto(), HttpStatus.OK);
     }
 
-//    @GetMapping(value = "/check_list_by_groups", produces = "application/json")
-//    public ResponseEntity<List<CheckListByGroupsDto>> getCheckListByGroupsDto() {
-//        return new ResponseEntity<>(checkListByGroupsDtoService.getAllCheckListByGroupsDto(), HttpStatus.OK);
-//    }
-
     @GetMapping(value = "/ita_tactical_plan_by_group_stage")
     public ResponseEntity<List<List<ItaTacticalPlanByGroupStageDto>>> itaTacticalPlanByGroupStage() {
         return new ResponseEntity<>(itaTacticalPlanByGroupStageDtoService.itaTacticalPlanByGroupStageReport(),
                 HttpStatus.OK);
     }
-
-    /*@GetMapping(value = "/test/{id}")
-    public ResponseEntity<CheckListDto> reportCheckList(@PathVariable Integer id) {
-        return new ResponseEntity<>(checkListRepository.reportCheckList(id),
-                HttpStatus.OK);
-    }*/
 
 }
