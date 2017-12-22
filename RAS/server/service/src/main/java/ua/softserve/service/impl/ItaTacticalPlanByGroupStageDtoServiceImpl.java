@@ -40,7 +40,6 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
     EmployeeRepository employeeRepository;
 
     private final Set<Predicate<Academy>> fitersFromReport;
-
     {
         fitersFromReport = new LinkedHashSet<>();
         fitersFromReport.add(a -> {
@@ -154,6 +153,7 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         dto.setRequested((int) allStudentsOfGroup.stream()
                 .filter(s -> s != null)
                 .count());
+        dto.setRequested(groupInfoRepository.findByAcademyAcademyId(dto.getGroupId()).getStudentsPlannedToEnrollment());
     }
 
     /**
@@ -185,7 +185,6 @@ public class ItaTacticalPlanByGroupStageDtoServiceImpl implements ItaTacticalPla
         dto.setTrainer(trainers);
 
     }
-
 
 }
 
