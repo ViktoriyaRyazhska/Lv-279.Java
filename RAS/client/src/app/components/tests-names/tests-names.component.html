@@ -97,29 +97,58 @@
     <!--</form>-->
 <!--</div>-->
 <!--</div>-->
-<div class="container">
- <form #myForm="ngForm">
-   <button *ngIf="tests" mat-raised-button type="submit" class="btn btn-primary" (click)="save(tests)">Save</button>
-   <button mat-raised-button (click)="addTest();">Add test</button><br><br>
-   <div class="row">
-     <div class="col-sm-6">Test Name</div>
-     <div class="col-sm-6">Max Point</div>
 
-   </div>
-   <div *ngIf="tests">
-   <div class="row" *ngFor="let test of tests;let i = index">
 
-     <mat-form-field class="col-sm-6 col-sm-6-customize" *ngIf="test.testMaxScore!=0">
-     <input matInput type="text" required minlength="3" data-value="{{test.testName}}" [(ngModel)]="test.testName" name = "test{{i}}">
-     </mat-form-field>
 
-     <mat-form-field class="col-sm-6 col-sm-6-maxscore-customize" *ngIf="test.testMaxScore!=0">
-     <input matInput type="number" required minlength="1" data-value="{{test.testMaxScore}}" [(ngModel)] = "test.testMaxScore" name = "testMaxScore + {{i}}">
-     </mat-form-field>
 
-     <button class="col-sm-6 col-sm-6-button-custom" *ngIf="test.testMaxScore!=0" type="submit" mat-button (click)="removeTest(test)">remove</button>
-   </div>
-   </div>
+<!--<div class="container">-->
+ <!--<form #myForm="ngForm">-->
+   <!--<button *ngIf="tests" mat-raised-button type="submit" class="btn btn-primary" (click)="save()">Save</button>-->
+   <!--<button mat-raised-button (click)="addTest();">Add test</button><br><br>-->
+   <!--<div class="row">-->
+     <!--<div class="col-sm-6">Test Name</div>-->
+     <!--<div class="col-sm-6">Max Point</div>-->
+   <!--</div>-->
+   <!--<div *ngIf="tests">-->
+   <!--<div class="row" *ngFor="let test of tests;let i = index">-->
 
- </form>
-</div>
+     <!--<mat-form-field class="col-sm-6 col-sm-6-customize" *ngIf="test.testMaxScore!=0">-->
+     <!--<input matInput type="text" [errorStateMatcher]="matcher" [formControl]="testName" data-value="{{test.testName}}" [(ngModel)]="test.testName" name = "test{{i}}">-->
+     <!--</mat-form-field>-->
+
+     <!--<mat-form-field class="col-sm-6 col-sm-6-maxscore-customize" *ngIf="test.testMaxScore!=0">-->
+     <!--<input matInput type="number" [errorStateMatcher]="matcher" [formControl]="testMaxPoint" data-value="{{test.testMaxScore}}" [(ngModel)] = "test.testMaxScore" name = "testMaxScore + {{i}}">-->
+     <!--</mat-form-field>-->
+
+     <!--<button class="col-sm-6 col-sm-6-button-custom" *ngIf="test.testMaxScore!=0" type="submit" mat-button (click)="removeTest(test)">remove</button>-->
+   <!--</div>-->
+   <!--</div>-->
+
+ <!--</form>-->
+<!--</div>-->
+
+
+ <div class="container">
+   <form [formGroup]="rForm" >
+     <button mat-raised-button type="submit" class="btn btn-primary" [disabled]="!rForm.valid" (click)="save()">Save</button>
+     <button mat-raised-button (click)="addTest();">Add test</button><br><br>
+     <div class="row">
+       <div class="col-sm-6">Test Name</div>
+       <div class="col-sm-6">Max Point</div>
+     </div>
+     <div *ngIf="tests">
+       <div class="row" *ngFor="let test of tests;let i = index">
+
+         <mat-form-field class="col-sm-6 col-sm-6-customize" *ngIf="test.testMaxScore!=0">
+           <input matInput id="testName{{i}}" type="text" [value]="test.testName" name = "test{{i}}" formControlName="testName">
+         </mat-form-field>
+
+         <mat-form-field class="col-sm-6 col-sm-6-maxscore-customize" *ngIf="test.testMaxScore!=0">
+           <input matInput id="testMaxPoint{{i}}" type="number" [value]="test.testMaxScore" name = "testMaxScore{{i}}"  formControlName="testMaxPoint">
+         </mat-form-field>
+
+         <button class="col-sm-6 col-sm-6-button-custom" *ngIf="test.testMaxScore!=0" type="submit" mat-button (click)="removeTest(test)">remove</button>
+       </div>
+     </div>
+   </form>
+ </div>

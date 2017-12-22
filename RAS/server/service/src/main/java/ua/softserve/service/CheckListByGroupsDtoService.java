@@ -11,11 +11,14 @@
 package ua.softserve.service;
 
 import ua.softserve.service.dto.CheckListByGroupsDto;
+import ua.softserve.persistence.dto.CheckListDto;
 
 import java.util.List;
 
 public interface CheckListByGroupsDtoService {
 
     List<CheckListByGroupsDto> getAllCheckListByGroupsDto();
+
+    List<CheckListDto> getCheckListDto();
 
 }

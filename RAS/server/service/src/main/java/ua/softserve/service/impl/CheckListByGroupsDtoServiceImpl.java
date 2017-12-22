@@ -16,6 +16,7 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.*;
 import ua.softserve.service.CheckListByGroupsDtoService;
 import ua.softserve.service.dto.CheckListByGroupsDto;
+import ua.softserve.persistence.dto.CheckListDto;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -96,7 +97,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
         List<Academy> allAcademies = academyRepository.findAll()
                 .stream()
-                .limit(5)
+                .limit(50)
                 .collect(Collectors.toList());
 
         List<CheckListByGroupsDto> checkListByGroupsDtos = new ArrayList<>();
@@ -105,6 +106,11 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             checkListByGroupsDtos.add(getCheckListByGroupDtoByAcademy(academy));
         }
         return checkListByGroupsDtos;
+    }
+
+    @Override
+    public List<CheckListDto> getCheckListDto() {
+        return null;
     }
 
     private CheckListByGroupsDto getCheckListByGroupDtoByAcademy(Academy academy) {
@@ -120,10 +126,7 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
 
         AcademyStages stage = academy.getAcademyStages();
 
-        List<Student> students = studentRepository.findAllActiveStudents(academyId)
-                .stream()
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        List<Student> students = studentRepository.findAllActiveStudents(academyId);
 
         CheckListByGroupsDto checkListByGroupsDto = new CheckListByGroupsDto();
         checkListByGroupsDto.setCityName(cityName);
@@ -132,29 +135,12 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         setTeachers(academyId, checkListByGroupsDto);
         Map<String, Integer> report = checkListByGroupsDto.getReport();
 
-        for (Student student : students) {
-            for (Map.Entry<Key, CheckPredicate<Student>> predicate : studentsPredicates.entrySet()) {
-                Integer result = predicate.getValue().checkOne(student);
-                String key = predicate.getKey().toString();
-                Integer prevResult = report.get(key);
-                if (prevResult == null) {
-                    prevResult = TRUE;
-                }
-                if (prevResult != FALSE) {
-                    report.put(
-                            key,
-                            prevResult * result
-                    );
-                }
-            }
-        }
-
-        /*for (Map.Entry<Key, CheckPredicate<Student>> predicate : studentsPredicates.entrySet()) {
+        for (Map.Entry<Key, CheckPredicate<Student>> predicate : studentsPredicates.entrySet()) {
             report.put(
                     predicate.getKey().toString(),
                     predicate.getValue().checkList(students)
             );
-        }*/
+        }
 
         setTotal(checkListByGroupsDto);
         return checkListByGroupsDto;
@@ -222,36 +208,39 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         return flag;
     }
 
-    private static final Map<Key, CheckPredicate<Student>> studentsPredicates;
-    private static final Map<Key, CheckPredicate<GroupInfoTeachers>> teachersPredicates;
+    private final Map<Key, CheckPredicate<Student>> studentsPredicates;
+    private final Map<Key, CheckPredicate<GroupInfoTeachers>> teachersPredicates;
 
-    static {
+    {
         studentsPredicates = new HashMap<>();
-        studentsPredicates.put(Key.ENGLISH_LEVEL_DEFINED, student -> student.getData().getEnglishLevel() == null);
+        studentsPredicates.put(Key.ENGLISH_LEVEL_DEFINED, student -> checkData(student) && student.getData().getEnglishLevel() == null);
         studentsPredicates.put(Key.ENGLISH_LEVEL_CORRECT, student -> {
+            if (!checkData(student)) {
+                return false;
+            }
             EnglishLevel englishLevel = student.getData().getEnglishLevel();
             return englishLevel != null && englishLevel.getEnglishLevelId() < ENGLISH_LEVEL_PRE_INTERMEDIATE_ID;
         });
-        studentsPredicates.put(Key.ENTRY_SCORE_DEFINED, student -> student.getData().getEntryScore() == null);
-        studentsPredicates.put(Key.INCOMING_TEST_DEFINED, student -> student.getData().getIncomingTest() == null);
+        studentsPredicates.put(Key.ENTRY_SCORE_DEFINED, student -> checkData(student) && student.getData().getEntryScore() == null);
+        studentsPredicates.put(Key.INCOMING_TEST_DEFINED, student -> checkData(student) && student.getData().getIncomingTest() == null);
         studentsPredicates.put(Key.APPROVED_BY_DEFINED, student -> student.getApprovedBy() == null);
-        studentsPredicates.put(Key.INTERMEDIATE_TEST_BASE_PASS, student -> student.getData().getIntermBase() == null);
-        studentsPredicates.put(Key.INTERMEDIATE_TEST_LANG_PASS, student -> student.getData().getIntermLang() == null);
-        studentsPredicates.put(Key.TEACHER_FEEDBACKS_FILLED_IN, student -> student.getTeacherFeedback() == null && student.getData().getTeacherScore() == null);
-        studentsPredicates.put(Key.EXPERT_FEEDBACKS_FILLED_IN, student -> student.getExpertFeedback() == null && student.getData().getExpertScore() == null);
-        studentsPredicates.put(Key.FINAL_TEST_BASE_PASS, student -> student.getData().getFinalBase() == null);
-        studentsPredicates.put(Key.FINAL_TEST_LANG_PASS, student -> student.getData().getFinalLang() == null);
-        studentsPredicates.put(Key.INTERVIEWER_SUMMARY_DEFINED, student -> student.getData().getInterviewerComment() == null);
-        studentsPredicates.put(Key.TEST1, student -> student.getData().getTestOne() == null);
-        studentsPredicates.put(Key.TEST2, student -> student.getData().getTestTwo() == null);
-        studentsPredicates.put(Key.TEST3, student -> student.getData().getTestThree() == null);
-        studentsPredicates.put(Key.TEST4, student -> student.getData().getTestFour() == null);
-        studentsPredicates.put(Key.TEST5, student -> student.getData().getTestFive() == null);
-        studentsPredicates.put(Key.TEST6, student -> student.getData().getTestSix() == null);
-        studentsPredicates.put(Key.TEST7, student -> student.getData().getTestSeven() == null);
-        studentsPredicates.put(Key.TEST8, student -> student.getData().getTestEight() == null);
-        studentsPredicates.put(Key.TEST9, student -> student.getData().getTestNine() == null);
-        studentsPredicates.put(Key.TEST10, student -> student.getData().getTestTen() == null);
+        studentsPredicates.put(Key.INTERMEDIATE_TEST_BASE_PASS, student -> checkData(student) && student.getData().getIntermBase() == null);
+        studentsPredicates.put(Key.INTERMEDIATE_TEST_LANG_PASS, student -> checkData(student) && student.getData().getIntermLang() == null);
+        studentsPredicates.put(Key.TEACHER_FEEDBACKS_FILLED_IN, student -> student.getTeacherFeedback() == null && checkData(student) && student.getData().getTeacherScore() == null);
+        studentsPredicates.put(Key.EXPERT_FEEDBACKS_FILLED_IN, student -> student.getExpertFeedback() == null && checkData(student) && student.getData().getExpertScore() == null);
+        studentsPredicates.put(Key.FINAL_TEST_BASE_PASS, student -> checkData(student) && student.getData().getFinalBase() == null);
+        studentsPredicates.put(Key.FINAL_TEST_LANG_PASS, student -> checkData(student) && student.getData().getFinalLang() == null);
+        studentsPredicates.put(Key.INTERVIEWER_SUMMARY_DEFINED, student -> checkData(student) && student.getData().getInterviewerComment() == null);
+        studentsPredicates.put(Key.TEST1, student -> checkData(student) && student.getData().getTestOne() == null);
+        studentsPredicates.put(Key.TEST2, student -> checkData(student) && student.getData().getTestTwo() == null);
+        studentsPredicates.put(Key.TEST3, student -> checkData(student) && student.getData().getTestThree() == null);
+        studentsPredicates.put(Key.TEST4, student -> checkData(student) && student.getData().getTestFour() == null);
+        studentsPredicates.put(Key.TEST5, student -> checkData(student) && student.getData().getTestFive() == null);
+        studentsPredicates.put(Key.TEST6, student -> checkData(student) && student.getData().getTestSix() == null);
+        studentsPredicates.put(Key.TEST7, student -> checkData(student) && student.getData().getTestSeven() == null);
+        studentsPredicates.put(Key.TEST8, student -> checkData(student) && student.getData().getTestEight() == null);
+        studentsPredicates.put(Key.TEST9, student -> checkData(student) && student.getData().getTestNine() == null);
+        studentsPredicates.put(Key.TEST10, student -> checkData(student) && student.getData().getTestTen() == null);
 
         teachersPredicates = new HashMap<>();
         teachersPredicates.put(Key.TEACHER_DEFINED, git -> false);
@@ -261,7 +250,11 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
         teachersPredicates.put(Key.INTERVIEWERS_LOAD_FILLED_IN, git -> git.getContributedHours() == null);
     }
 
-    public interface CheckPredicate<T> {
+    private boolean checkData(Student student) {
+        return student != null && student.getData() != null;
+    }
+
+    private interface CheckPredicate<T> {
         boolean test(T t);
 
         default Integer checkList(List<T> list) {
@@ -270,14 +263,8 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             }
             boolean testResult = list
                     .stream()
-                    .filter(Objects::nonNull)
                     .anyMatch(this::test);
             return (!testResult) ? TRUE : FALSE;
-        }
-
-        default Integer checkOne(T t) {
-            boolean test = this.test(t);
-            return !test ? TRUE : FALSE;
         }
     }
 }
