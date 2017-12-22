@@ -105,7 +105,7 @@ BEGIN
     call getTeachers(academy_id_in, 2, @experts_full_names);
    
     select 
-		gi.group_name as groupName,
+		gi.group_name,
         lt.trasnlation,
         acs.name,
         @teachers_full_names,

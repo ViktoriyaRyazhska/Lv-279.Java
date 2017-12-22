@@ -8,10 +8,12 @@
  * All rights reserved by DoubleO Team (Team#1)
  * */
 
-package ua.softserve.persistence.repo;
+package ua.softserve.persistence.repo.impl;
 
 import org.springframework.stereotype.Repository;
 import ua.softserve.persistence.dto.CheckListDto;
+import ua.softserve.persistence.repo.CheckListRepository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
@@ -23,7 +25,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
-public class CheckListRepositoryImpl implements CheckListRepository{
+public class CheckListRepositoryImpl implements CheckListRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
