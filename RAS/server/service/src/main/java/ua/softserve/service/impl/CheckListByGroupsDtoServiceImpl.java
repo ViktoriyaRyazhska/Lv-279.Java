@@ -16,12 +16,10 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.*;
 import ua.softserve.service.CheckListByGroupsDtoService;
 import ua.softserve.service.dto.CheckListByGroupsDto;
+import ua.softserve.persistence.dto.CheckListDto;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static ua.softserve.persistence.constants.ConstantsFromDb.*;
 
@@ -108,6 +106,11 @@ public class CheckListByGroupsDtoServiceImpl implements CheckListByGroupsDtoServ
             checkListByGroupsDtos.add(getCheckListByGroupDtoByAcademy(academy));
         }
         return checkListByGroupsDtos;
+    }
+
+    @Override
+    public List<CheckListDto> getCheckListDto() {
+        return null;
     }
 
     private CheckListByGroupsDto getCheckListByGroupDtoByAcademy(Academy academy) {

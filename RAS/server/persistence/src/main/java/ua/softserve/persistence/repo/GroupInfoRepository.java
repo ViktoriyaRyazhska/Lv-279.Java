@@ -2,13 +2,11 @@ package ua.softserve.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.GroupInfo;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Interface contains methods that works with GroupInfo table.
@@ -37,8 +35,5 @@ public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
             "left join giT.teacherType as techT left join stn.academy as stnAc left join stn.studentStatus as stnStat " +
             "where giTAc.academyId = ac.academyId and techT.teachertypeId = 2 and stnStat = 1 and stnAc.academyId = ac.academyId order by gi.groupInfoId desc")
     List<GroupInformationDTO> findAllInfoAboutGroups();
-
-    @Query(value = "call getReportCheckList(:academy_id_in)", nativeQuery = true)
-    Object getReportCheckList(@Param("academy_id_in") Integer academyId);
 
 }
