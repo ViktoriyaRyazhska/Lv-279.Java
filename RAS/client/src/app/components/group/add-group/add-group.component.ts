@@ -59,7 +59,7 @@ export class AddGroupComponent implements OnInit {
     });
 
     this.signupForm = new FormGroup({
-      'groupInfoFormControl': new FormControl(this.group.grName, [Validators.required]),
+      'groupInfoFormControl': new FormControl(this.group.grName),
       'nameForSiteFormControl': new FormControl(this.group.nameForSite, [Validators.required]),
       'academyStagesId': new FormControl(this.group.academyStagesId),
       'cityId': new FormControl(this.group.cityId),
@@ -106,7 +106,9 @@ export class AddGroupComponent implements OnInit {
     if (this.isFormValid()) {
       this.group.setDataFromFormControl(this.signupForm);
       this.invalidForm = false;
-      this.addGroupService.post(this.group);
+
+      console.log(this.group);
+      this.sendData();
       console.log('valid');
     } else {
       console.log('invalid');
@@ -120,6 +122,17 @@ export class AddGroupComponent implements OnInit {
       return null;
     }
     return null;
+  }
+
+  sendData(){
+    this.addGroupService.saveGroup(this.group).subscribe(res => {
+      if(res==200){
+        this.router.navigate(['ang/viewAcademies']);
+      }
+      console.log(res);
+    },error => {
+      console.log(error)
+    });
   }
 
 }
