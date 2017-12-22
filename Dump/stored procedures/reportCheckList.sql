@@ -63,10 +63,11 @@ BEGIN
     IF @experts <> 0 then set experts = 1; else set experts = 0; END IF;
     IF @interviewers <> 0 then set interviewers = 1; else set interviewers = 0;  END IF;
     IF @sc = 0 then set @sc = 10; END IF;
-    IF @min_english_level is null then set @min_english_level = 0; END IF;
     IF @sc - @approved_by <> 0 then set approved_by = 0; else set approved_by = 1; END IF;
     IF @sc - @english_level <> 0 then set english_level = 0; else set english_level = 1; END IF;
+    IF @min_english_level is null then set @min_english_level = 0; END IF;
     IF @min_english_level < 8 then set min_english_level = 0; else set min_english_level = 1; END IF;
+    IF english_level = 0 then set min_english_level = 0; end if;
     IF @sc - @entry_score <> 0 then set entry_score = 0; else set entry_score = 1; END IF;
     IF @sc - @final_base <> 0 then set final_base = 0; else set final_base = 1; END IF;
     IF @sc - @final_lang <> 0 then set final_lang = 0; else set final_lang = 1; END IF;
