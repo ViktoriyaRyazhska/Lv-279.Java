@@ -222,9 +222,10 @@ CREATE TABLE `group_info` (
   `group_name` varchar(255) NOT NULL,
   `students_planned_to_enrollment` int(11) NOT NULL,
   `students_planned_to_graduate` int(11) NOT NULL,
-  `academy_id` int(11) DEFAULT NULL,
+  `academy_id` int(11) NOT NULL,
   `profile_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`group_info_id`),
+  UNIQUE KEY UKc33qefxcb9awf9f62rv0dtpor (academy_id),
   KEY `FKapr4vej8719lprb5fhrdbxj43` (`academy_id`),
   KEY `FK8kbtjrfh6mvfog3glapoetv4r` (`profile_id`),
   CONSTRAINT `FK8kbtjrfh6mvfog3glapoetv4r` FOREIGN KEY (`profile_id`) REFERENCES `profile_info` (`profile_id`),
@@ -786,7 +787,15 @@ UNLOCK TABLES;
 
 LOCK TABLES `profile_info` WRITE;
 /*!40000 ALTER TABLE `profile_info` DISABLE KEYS */;
-INSERT INTO `profile_info` VALUES (1,'Ruby',49),(2,'Java: Web 2.0',3),(3,'Java: Web TAE',31),(4,'.NET: Web TAE',31),(5,'.NET: Web',4),(6,'Python',50),(7,'Python: Web TAE',31),(8,'DevOps: Unix',9),(9,'Generic QCE',41),(10,'Go',54),(11,'Apple: Mobile 2.0',53),(12,'MSSQL: Development',6),(13,'Web UI',11),(14,'NodeJS',11);
+INSERT INTO `profile_info` VALUES (1,'Ruby',49),
+(2,'Java: Web 2.0',3),(3,'Java: Web TAE',31),(4,'.NET: Web TAE',31),(5,'.NET: Web',4),(6,'Python',50),
+(7,'Python: Web TAE',31),(8,'DevOps: Unix',9),(9,'Generic QCE',41),(10,'Go',54),(11,'Apple: Mobile 2.0',53),(12,'MSSQL: Development',6),(13,'Web UI',11),
+(14,'NodeJS',11),
+(15,'C/C++: Mobile',15),
+(16,'C/C++: Unix',15),
+(17,'C/C++: Generic',15),
+(18,'Java Core',3),
+(19,'Java: Integration',3);
 /*!40000 ALTER TABLE `profile_info` ENABLE KEYS */;
 UNLOCK TABLES;
 

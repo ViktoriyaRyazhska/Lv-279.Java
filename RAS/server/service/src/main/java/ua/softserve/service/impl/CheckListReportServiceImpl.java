@@ -12,26 +12,21 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.softserve.persistence.entity.*;
-import ua.softserve.persistence.repo.*;
-import ua.softserve.service.CheckListByGroupsDtoService;
-import ua.softserve.service.dto.CheckListByGroupsDto;
 import ua.softserve.persistence.dto.CheckListDto;
+import ua.softserve.persistence.repo.AcademyRepository;
+import ua.softserve.persistence.repo.CheckListRepository;
+import ua.softserve.service.CheckListReportService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CheckListDtoServiceImpl implements CheckListByGroupsDtoService {
+public class CheckListReportServiceImpl implements CheckListReportService {
     @Autowired
     private AcademyRepository academyRepository;
     @Autowired
     private CheckListRepository checkListRepository;
-
-    @Override
-    public List<CheckListByGroupsDto> getAllCheckListByGroupsDto() {
-        return null;
-    }
 
     @Override
     public List<CheckListDto> getCheckListDto() {

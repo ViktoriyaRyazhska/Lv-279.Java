@@ -1,10 +1,10 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
-import {AddGroupService} from "./add-group.service";
 import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Group} from "./group.model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AddGroupService} from "./add-group.service";
 
 @Component({
   selector: 'app-add-group',
@@ -14,9 +14,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 
 export class AddGroupComponent implements OnInit {
-  private signupForm: FormGroup;
+  signupForm: FormGroup;
 
-  private group: Group;
+  group: Group;
 
   academyStatus: any[];
   city: any[];
@@ -28,6 +28,8 @@ export class AddGroupComponent implements OnInit {
   invalidForm: boolean = false;
 
   invalidDate: boolean = false;
+
+  navtab: boolean = false;
 
   numberPattern = '^(0|[1-9][0-9]*)$';
 
@@ -45,7 +47,20 @@ export class AddGroupComponent implements OnInit {
 
   ngOnInit() {
     this.group = new Group();
-    this.groupId = this.route.snapshot.params['id'];
+
+    this.getDropdownOnInit();
+
+    if(this.router.url.includes('group/update')){
+      this.navtab = true;
+      this.groupId = this.route.snapshot.params['id'];
+      this.formGroupOnInit();
+    }else if(this.router.url.includes('group/add')){
+      this.formGroupOnInit();
+    }
+
+  }
+
+  getDropdownOnInit(){
     this.addGroupService.getAll().subscribe(resp => {
       this.academyStatus = resp.academyStages;
       this.city = resp.cityNames;
@@ -57,7 +72,9 @@ export class AddGroupComponent implements OnInit {
         this.router.navigate(['ang/error']);
       }
     });
+  }
 
+  formGroupOnInit(){
     this.signupForm = new FormGroup({
       'groupInfoFormControl': new FormControl(this.group.grName, [Validators.required]),
       'nameForSiteFormControl': new FormControl(this.group.nameForSite, [Validators.required]),
@@ -106,7 +123,7 @@ export class AddGroupComponent implements OnInit {
     if (this.isFormValid()) {
       this.group.setDataFromFormControl(this.signupForm);
       this.invalidForm = false;
-      this.addGroupService.post(this.group);
+      this.sendData();
       console.log('valid');
     } else {
       console.log('invalid');
@@ -120,6 +137,16 @@ export class AddGroupComponent implements OnInit {
       return null;
     }
     return null;
+  }
+
+  private sendData(){
+    this.addGroupService.saveGroup(this.group).subscribe(res => {
+      if(res==200){
+        this.router.navigate(['ang/viewAcademies']);
+      }
+    },error => {
+      console.log(error)
+    });
   }
 
 }

@@ -24,19 +24,20 @@ public class AcademyController {
     @Autowired
     GroupInfoRepository groupInfoRepository;
 
-    @RequestMapping(value = "/academy/{academyId}", method = RequestMethod.GET, produces = { "application/json" })
-    public ResponseEntity<Academy> getAcademy(@PathVariable Integer academyId) {
-        return new ResponseEntity<>(academyService.findOne(academyId), HttpStatus.OK);
+    @GetMapping(value = "/group/{id}")
+    public ResponseEntity<Academy> getAcademy(@PathVariable Integer id) {
+        return new ResponseEntity<>(academyService.findOne(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/academy/addgroup", "/getDropDownList"}, method = RequestMethod.GET, produces = { "application/json" })
+    @GetMapping(value = {"/group", "/getDropDownList"})
     public ResponseEntity<AcademyDropDownLists> getAllAcademies() {
         return new ResponseEntity<>(academyService.getAcademyDTO(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/academy/addgroup", method = RequestMethod.POST, produces = { "application/json" })
-    public void saveGroup(@RequestBody AcademyForSaveDTO academyDTO) {
-        academyService.saveAcademyFromAcademyDTO(academyDTO);
+    @PostMapping(value = "/group/add")
+    public ResponseEntity saveGroup(@RequestBody AcademyForSaveDTO academyDTO) {
+        academyService.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
+        return ResponseEntity.ok().body(200);
     }
 
     @GetMapping(value = "/viewAcademies")

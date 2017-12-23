@@ -10,17 +10,11 @@ export class AddGroupService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get(environment.serverUrl+'academy/addgroup',{withCredentials: true});
+    return this.http.get(environment.serverUrl+'/group',{withCredentials: true});
   }
 
-  post(object: any){
-    this.http.post(environment.serverUrl+'academy/addgroup', object,{withCredentials: true})
-      .subscribe(res => {
-        console.log(res);
-      }, err => {
-        console.log('Error occured');
-      }
-    );
+  saveGroup(object: any): Observable<any> {
+    return this.http.post(environment.serverUrl+'/group/add', object,{withCredentials: true});
   }
 
 }

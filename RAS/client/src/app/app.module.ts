@@ -4,8 +4,6 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 
-import {GroupListComponent} from './components/group/group-list/group-list.component';
-import {GroupService} from './components/group/group.service';
 import {HistoryListComponent} from './components/history/history-list/history-list.component';
 import {ViewAcademiesComponent} from './components/view-academies/view-academies.component';
 import {AddGroupComponent} from "./components/group/add-group/add-group.component";
@@ -52,7 +50,6 @@ import { PaymentPipe } from './payment.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    GroupListComponent,
     HistoryListComponent,
     ViewAcademiesComponent,
     AddGroupComponent,
@@ -80,7 +77,6 @@ import { PaymentPipe } from './payment.pipe';
     FilterCheckListByGroupsComponent,
     ErrorComponent,
     PaymentPipe
-
   ],
   imports: [
     BrowserModule,
@@ -105,7 +101,7 @@ import { PaymentPipe } from './payment.pipe';
     MatButtonModule,
     MatExpansionModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
+  providers: [AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
     CookieService, SearchBarService],
 
   bootstrap: [AppComponent]
