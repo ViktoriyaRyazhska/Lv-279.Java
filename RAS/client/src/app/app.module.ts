@@ -77,7 +77,7 @@ import { PaymentPipe } from './payment.pipe';
     SearchbarComponent,
     FilterCheckListByGroupsComponent,
     ErrorComponent,
-    DialogComponent
+    DialogComponent,
     PaymentPipe
   ],
   imports: [
