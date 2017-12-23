@@ -14,13 +14,11 @@ public class HistoryServiceImpl implements HistoryService {
     @Autowired
     private HistoryRepository historyDAO;
 
-    @Transactional
     @Override
     public List<History> findByAcademyId(int academyId) {
         return historyDAO.findByAcademyId(academyId);
     }
 
-    @Transactional
     @Override
     public List<History> findAll() {
         return historyDAO.findAll();
