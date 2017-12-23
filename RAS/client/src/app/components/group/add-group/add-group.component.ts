@@ -5,6 +5,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Group} from "./group.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AddGroupService} from "./add-group.service";
+import {MatDialog} from "@angular/material";
+import {DialogComponent} from "../dialog/dialog.component";
 
 @Component({
   selector: 'app-add-group',
@@ -31,8 +33,6 @@ export class AddGroupComponent implements OnInit {
 
   navtab: boolean = false;
 
-  numberPattern = '^(0|[1-9][0-9]*)$';
-
   private defaultInvalidInput: string = 'No data entered. Group will not be save';
 
   paymentStatusArray: {name: string, free: number}[] = [
@@ -42,7 +42,8 @@ export class AddGroupComponent implements OnInit {
 
   constructor(private addGroupService: AddGroupService,
               private route: ActivatedRoute,
-              private router:Router) {
+              private router:Router,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -76,7 +77,7 @@ export class AddGroupComponent implements OnInit {
 
   formGroupOnInit(){
     this.signupForm = new FormGroup({
-      'groupInfoFormControl': new FormControl(this.group.grName, [Validators.required]),
+      'groupInfoFormControl': new FormControl(this.group.grName),
       'nameForSiteFormControl': new FormControl(this.group.nameForSite, [Validators.required]),
       'academyStagesId': new FormControl(this.group.academyStagesId),
       'cityId': new FormControl(this.group.cityId),
@@ -142,10 +143,31 @@ export class AddGroupComponent implements OnInit {
   private sendData(){
     this.addGroupService.saveGroup(this.group).subscribe(res => {
       if(res==200){
-        this.router.navigate(['ang/viewAcademies']);
+        this.openDialog();
       }
     },error => {
+      this.errorOpenDialog();
       console.log(error)
+    });
+  }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      data: {message: 'Group was successfully saved', err:false}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  errorOpenDialog(): void {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      data: {message: 'Something goes wrong', err: true}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
 
