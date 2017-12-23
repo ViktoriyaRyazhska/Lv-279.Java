@@ -14,6 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Enum of names of values for Check List By Groups Report.
+ * Values belong to particular category.
+ */
 public enum CheckListReportValue {
     groupName(CheckListReportCategory.NO_CATEGORY),
     cityName(CheckListReportCategory.NO_CATEGORY),

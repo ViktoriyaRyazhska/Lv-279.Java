@@ -10,6 +10,10 @@
 
 package ua.softserve.persistence.constants;
 
+
+/**
+ * Enum of categories for Check List By Groups Report
+ */
 public enum CheckListReportCategory {
     GROUP_STARTED_SUCCESSFULLY,
     GROUP_READY_TO_OFFERING,

@@ -14,8 +14,15 @@ import ua.softserve.persistence.dto.CheckListDto;
 
 import java.util.List;
 
+/**
+ * Check List By Groups Report Service.
+ */
 public interface CheckListReportService {
 
+    /**
+     * Generate Check List By Groups Report.
+     * @return list of Check List By Groups DTOs
+     */
     List<CheckListDto> getCheckListDto();
 
 }

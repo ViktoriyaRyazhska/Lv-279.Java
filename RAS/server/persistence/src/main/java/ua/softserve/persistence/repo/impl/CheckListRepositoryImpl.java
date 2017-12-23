@@ -26,12 +26,21 @@ import java.util.Map;
 import static ua.softserve.persistence.constants.ConstantsFromDb.FALSE;
 import static ua.softserve.persistence.constants.ConstantsFromDb.TRUE;
 
+/**
+ * Implementation of Check List By Groups Report Repository.
+ */
 @Repository
 public class CheckListRepositoryImpl implements CheckListRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * Returns Check List By Groups DTO by academy.
+     * This method calls stored procedure and put result to Check List By Groups DTO.
+     * @param academyId ID of academy.
+     * @return Check List By Groups DTO.
+     */
     public CheckListDto reportCheckList(Integer academyId){
         StoredProcedureQuery reportCheckList = entityManager.createStoredProcedureQuery("reportCheckList");
         reportCheckList.registerStoredProcedureParameter("academy_id_in", Integer.class, ParameterMode.IN);
@@ -48,6 +57,10 @@ public class CheckListRepositoryImpl implements CheckListRepository {
         return checkListDto;
     }
 
+    /**
+     * Calculate summary values of Check List By Groups DTO.
+     * @param checkListDto Check List By Groups DTO.
+     */
     private void setTotal(CheckListDto checkListDto) {
         Map<String, Object> report = checkListDto.getReport();
         double sum = 0;
@@ -72,6 +85,12 @@ public class CheckListRepositoryImpl implements CheckListRepository {
         }
     }
 
+    /**
+     * Check summary values of Check List By Groups DTO by particular category.
+     * @param category particular category.
+     * @param report values of report.
+     * @return returns true only when all values are 'TRUE'.
+     */
     private boolean checkCategory(CheckListReportCategory category, Map<String, Object> report) {
         return CheckListReportValue.getByCategory(category)
                 .stream()

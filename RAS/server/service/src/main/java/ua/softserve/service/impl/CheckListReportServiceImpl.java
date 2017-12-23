@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of Check List By Groups Report Service.
+ */
 @Service
 public class CheckListReportServiceImpl implements CheckListReportService {
     @Autowired
@@ -28,8 +31,13 @@ public class CheckListReportServiceImpl implements CheckListReportService {
     @Autowired
     private CheckListRepository checkListRepository;
 
+    /**
+     * Generate Check List By Groups Report.
+     * @return list of Check List By Groups DTOs
+     */
     @Override
     public List<CheckListDto> getCheckListDto() {
+        // TODO filters
         List<Integer> allAcademiesId = academyRepository.findAllAcademyId()
                 .stream()
                 .limit(50)

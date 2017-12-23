@@ -12,8 +12,16 @@ package ua.softserve.persistence.repo;
 
 import ua.softserve.persistence.dto.CheckListDto;
 
+/**
+ * Check List By Groups Report Repository.
+ */
 public interface CheckListRepository {
 
+    /**
+     * Returns Check List By Groups DTO by academy.
+     * @param academyId ID of academy.
+     * @return Check List By Groups DTO.
+     */
     CheckListDto reportCheckList(Integer academyId);
 
 }

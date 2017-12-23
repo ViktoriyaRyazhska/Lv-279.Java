@@ -22,6 +22,9 @@ import ua.softserve.service.CheckListReportService;
 
 import java.util.List;
 
+/**
+ * Controller of Reports generation
+ */
 @RestController
 @RequestMapping("/reports")
 public class ControllerForReports {
@@ -31,6 +34,10 @@ public class ControllerForReports {
     @Autowired
     ItaTacticalReportService itaTacticalReportService;
 
+    /**
+     * Returns response with generated Check List By Groups Report
+     * @return list of reports for all groups
+     */
     @GetMapping("/check_list_by_groups")
     public ResponseEntity<List<CheckListDto>> getCheckListByGroupsDto() {
         return new ResponseEntity<>(checkListReportService.getCheckListDto(), HttpStatus.OK);

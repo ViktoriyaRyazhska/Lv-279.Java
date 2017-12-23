@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Check List By Groups Report DTO
+ */
 @Getter
 @Setter
 @NoArgsConstructor
