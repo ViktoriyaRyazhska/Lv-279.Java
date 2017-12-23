@@ -47,6 +47,7 @@ import { SearchbarComponent } from './components/view-academies/searchbar/search
 import {SearchBarService} from "./components/view-academies/search-bar.service";
 import {CookieService} from "angular2-cookie/core";
 import { ErrorComponent } from './components/error/error.component';
+import { PaymentPipe } from './payment.pipe';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { ErrorComponent } from './components/error/error.component';
     FilterCheckListByGroupsComponent,
     SearchbarComponent,
     FilterCheckListByGroupsComponent,
-    ErrorComponent
+    ErrorComponent,
+    PaymentPipe
 
   ],
   imports: [

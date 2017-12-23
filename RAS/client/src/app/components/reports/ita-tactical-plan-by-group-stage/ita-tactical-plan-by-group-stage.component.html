@@ -1,8 +1,14 @@
 <div *ngFor="let report of itaTacticalPlanByGroupStageReports">
   <h1 align="center">{{report.name}}</h1>
   <div class="example-container mat-elevation-z8">
-    <mat-table #table [dataSource]="report.dataSource" matSort>
+  <table class="table table-striped">
+    <td>Total</td>
+    <td *ngFor="let total of report.totalStudentStatuses">{{total}}</td>
+    <td></td>
+  </table>
 
+
+      <mat-table #table [dataSource]="report.dataSource" matSort>
       <ng-container matColumnDef="Year">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Year</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.startDate| date:"yyyy"}}</mat-cell>
@@ -13,10 +19,10 @@
         <mat-cell *matCellDef="let element"> {{element.startDate| date:"M"}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="Group ID">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Group ID</mat-header-cell>
-        <mat-cell *matCellDef="let element"> <a routerLink ="mock">{{element.groupId}}</a></mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="Group ID">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Group ID</mat-header-cell>
+          <mat-cell *matCellDef="let element"> <a routerLink ="mock">{{element.academy_id}}</a></mat-cell>
+        </ng-container>
 
       <ng-container matColumnDef="Group/Group feedbacks">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Group/Group feedbacks</mat-header-cell>
@@ -70,7 +76,7 @@
 
       <ng-container matColumnDef="Trainer">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Trainer</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.trainer}}</mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.trainers}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Comment">
@@ -80,7 +86,7 @@
 
       <ng-container matColumnDef="Payment status">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Payment status</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.paymentSatus}}</mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.paymentSatus| payment}}</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
