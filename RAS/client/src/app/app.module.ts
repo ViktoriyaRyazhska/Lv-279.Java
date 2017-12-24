@@ -47,6 +47,7 @@ import {CookieService} from "angular2-cookie/core";
 import { ErrorComponent } from './components/error/error.component';
 import { DialogComponent } from './components/group/dialog/dialog.component';
 import { PaymentPipe } from './payment.pipe';
+import {DataService} from "./services/data.service";
 
 @NgModule({
   declarations: [
@@ -105,7 +106,7 @@ import { PaymentPipe } from './payment.pipe';
     MatDialogModule
   ],
   providers: [AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
-    CookieService, SearchBarService],
+    CookieService, SearchBarService, DataService],
   entryComponents: [DialogComponent],
   bootstrap: [AppComponent]
 })

@@ -7,6 +7,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {SearchBarService} from "./search-bar.service";
 import {Form} from "@angular/forms";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-view-academies',
@@ -31,7 +32,8 @@ export class ViewAcademiesComponent implements OnInit {
 
 
   constructor(private academyService: AcademyService,
-              private filterService: FilterService) {
+              private filterService: FilterService,
+              private data: DataService) {
   }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class ViewAcademiesComponent implements OnInit {
       },
       error => console.log(error)
     );
+    // this.data.currentMessage.subscribe(message => console.log(message));
   }
 
   onFilterField(form) {
@@ -62,5 +65,9 @@ export class ViewAcademiesComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  }
+
+  sendDataToAddGroupComponent(group: any){
+    this.data.setGroup(group);
   }
 }

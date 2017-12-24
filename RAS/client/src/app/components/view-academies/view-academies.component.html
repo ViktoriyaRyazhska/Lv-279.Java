@@ -5,8 +5,9 @@
 
     <ng-container matColumnDef='grName'>
       <mat-header-cell *matHeaderCellDef mat-sort-header>Group Name</mat-header-cell>
-      <mat-cell *matCellDef="let element"><a routerLink="/ang/group/update/{{element.academyId}}"> {{element.grName}} </a>
-      </mat-cell>
+      <!--<mat-cell *matCellDef="let element"><a routerLink="/ang/group/update/{{element.academyId}}"> {{element.grName}} </a>-->
+        <mat-cell *matCellDef="let element"><a (click)="sendDataToAddGroupComponent(element)" routerLink="/ang/group/update/{{element.academyId}}"> {{element.grName}} </a>
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef='nameForSite'>
@@ -31,7 +32,7 @@
 
     <ng-container matColumnDef="cityName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.cityName}}</mat-cell>
+      <mat-cell *matCellDef="let element" value="element.cityId"> {{element.cityName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="startDate">
