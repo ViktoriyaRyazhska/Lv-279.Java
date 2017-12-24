@@ -38,4 +38,6 @@ public class GroupInfo {
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private ProfileInfo profileInfo;
+
+
 }

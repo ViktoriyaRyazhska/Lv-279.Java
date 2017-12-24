@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.repo.GroupInfoCustomRepository;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.GroupInfoService;
@@ -24,26 +25,26 @@ public class AcademyController {
     @Autowired
     GroupInfoRepository groupInfoRepository;
 
+    @Autowired
+    GroupInfoCustomRepository groupInfoCustomRepository;
+
     @GetMapping(value = "/group/{id}")
     public ResponseEntity<Academy> getAcademy(@PathVariable Integer id) {
         return new ResponseEntity<>(academyService.findOne(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/group", "/getDropDownList"})
+    @RequestMapping(value = {"/academy/addgroup", "/getDropDownList"}, method = RequestMethod.GET, produces = { "application/json" })
     public ResponseEntity<AcademyDropDownLists> getAllAcademies() {
         return new ResponseEntity<>(academyService.getAcademyDTO(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/group/add")
-    public ResponseEntity saveGroup(@RequestBody AcademyForSaveDTO academyDTO) {
+    @RequestMapping(value = "/academy/addgroup", method = RequestMethod.POST, produces = { "application/json" })
+    public void saveGroup(@RequestBody AcademyForSaveDTO academyDTO) {
         academyService.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
-        return ResponseEntity.ok().body(200);
     }
 
     @GetMapping(value = "/viewAcademies")
-    public ResponseEntity<List<AcademyForViewDTO>> searchSite() {
-        groupInfoRepository.findAll();
-        groupInfoService.getAllInfo();
-        return new ResponseEntity<>(groupInfoService.getAllAcademies(), HttpStatus.OK);
+    public ResponseEntity<List<GroupInformationDTO>> searchSite() {
+        return new ResponseEntity<>(groupInfoService.getAllInformationAboutGroup(), HttpStatus.OK);
     }
 }
