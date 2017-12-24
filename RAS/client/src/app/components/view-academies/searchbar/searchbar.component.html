@@ -4,7 +4,7 @@
       <ul class="col-sm-6 form-group" id="UL_left_column">
         <div class="row">
           <mat-form-field class="col-sm-6">
-            <mat-select placeholder="Status:">
+            <mat-select placeholder="Status:" name="status" (change)="getFilter(groupForm)" ngModel>
               <mat-option>None</mat-option>
               <mat-option *ngFor="let stages of academyStages" [value]="stages.name">{{ stages.name }}</mat-option>
             </mat-select>
@@ -28,9 +28,9 @@
 
           <mat-form-field class="col-sm-6">
             <input matInput [matDatepicker]="picker2" placeholder="End Date:" name="endDate"
-                   (dateInput) = "getFilter(groupForm)" ngModel><!--*ngIf = "isEndDateChange()"-->
+                   (dateInput) = "getFilter(groupForm)" ngModel>
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2 (blur)= "getFilter()"></mat-datepicker>
+            <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
         </div>
 
@@ -49,7 +49,7 @@
 
         <div class="row">
           <mat-form-field class="col-sm-12">
-            <mat-select placeholder="Common Direction:" name="directionName" (change)="getFilter(groupForm)" ngModel>
+            <mat-select placeholder="Common Direction:" name="commonDirectionName" (change)="getFilter(groupForm)" ngModel>
               <mat-option>None</mat-option>
               <mat-option *ngFor="let direct of direction" [value]="direct.name">{{direct.name}}
               </mat-option>
@@ -59,8 +59,9 @@
 
         <div class="row">
           <mat-form-field class="col-sm-6">
-            <mat-select placeholder="Direction:" name="technologyName" (change)="getFilter(groupForm)" ngModel>
+            <mat-select placeholder="Direction:" name="directionName" (change)="getFilter(groupForm)" ngModel>
               <mat-option>None</mat-option>
+              <mat-option value="0" selected></mat-option>
               <mat-option *ngFor="let tech of technology" [value]="tech.name">{{ tech.name }}</mat-option>
             </mat-select>
           </mat-form-field>

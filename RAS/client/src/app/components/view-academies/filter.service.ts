@@ -11,7 +11,7 @@ export class FilterService {
     }
     const resultArray = [];
     for (const item of value) {
-      if (('' + item[propName]).includes('' + filterString)) {
+      if (('' + item[propName].toLowerCase()).includes('' + filterString.toLowerCase())) {
         resultArray.push(item);
       }
     }
@@ -24,7 +24,7 @@ export class FilterService {
     }
     const resultArray = [];
     for (const item of value) {
-      if (('' + item[propName]).includes('' + (filterString.getTime()))) {
+      if (('' + item[propName]) === ('' + (filterString.getTime()))) {
         resultArray.push(item);
       }
     }

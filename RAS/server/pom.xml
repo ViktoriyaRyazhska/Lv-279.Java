@@ -47,6 +47,8 @@
 
         <hamcrest.version>1.3</hamcrest.version>
 
+        <comons.lang.version>2.2</comons.lang.version>
+
 
     </properties>
 
