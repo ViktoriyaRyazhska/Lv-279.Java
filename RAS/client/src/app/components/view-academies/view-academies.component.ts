@@ -19,10 +19,10 @@ export class ViewAcademiesComponent implements OnInit {
   filteredAcademies = [];
 
   displayedColumns =
-    ['grName', 'nameForSite', 'technologyName', 'profileName',
-      'paymentStatus', 'cityName', 'startDate', 'endDate', 'academyStage',
+    ['groupName', 'nameForSite',
+      'directionName', 'profileName', 'cityName', 'startDate', 'endDate', 'status',
       'experts', 'studentPlannedToGraduate', 'studentPlannedToEnrollment',
-      'studentsActual', 'hiredNotGraduated', 'directionName', 'interviewerFeedback'
+      'studentsActual', 'hiredNotGraduated', 'commonDirectionName', 'interviewerFeedback'
     ];
   dataSource: any;
 
@@ -38,7 +38,8 @@ export class ViewAcademiesComponent implements OnInit {
     this.academyService.getAll().subscribe(
       data => {
         this.academies = data;
-        this.academies = this.academies.slice(0, data.length - 2);
+        this.academies = this.academies.slice(0, data.length);
+
         this.filteredAcademies = this.academies;
 
         this.dataSource = new MatTableDataSource(this.filteredAcademies);
