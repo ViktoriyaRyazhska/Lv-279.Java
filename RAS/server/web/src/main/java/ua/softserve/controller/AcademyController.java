@@ -33,12 +33,12 @@ public class AcademyController {
         return new ResponseEntity<>(academyService.findOne(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/academy/addgroup", "/getDropDownList"})
+    @GetMapping(value = {"/group", "/getDropDownList"})
     public ResponseEntity<AcademyDropDownLists> getAllAcademies() {
         return new ResponseEntity<>(academyService.getAcademyDTO(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/academy/addgroup")
+    @PostMapping(value = "/group/add")
     public ResponseEntity saveGroup(@RequestBody AcademyForSaveDTO academyDTO) {
         academyService.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
         return ResponseEntity.ok().body(200);
