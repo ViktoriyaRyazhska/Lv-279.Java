@@ -32,7 +32,7 @@ export class DataService {
   constructor() { }
 
   setGroup(group: Group) {
-    this.someObj.next(group)
+    this.someObj.next(group);
   }
 
 }

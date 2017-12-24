@@ -179,7 +179,7 @@ export class AddGroupComponent implements OnInit {
   updateGroup(){
     console.log(this.groupForUpdate);
     this.signupForm = new FormGroup({
-      'groupInfoFormControl': new FormControl(this.groupForUpdate.grName),
+      'groupInfoFormControl': new FormControl(this.groupForUpdate.groupName),
       'nameForSiteFormControl': new FormControl(this.groupForUpdate.nameForSite, [Validators.required]),
       'academyStagesId': new FormControl(this.group.academyStagesId),
       'cityId': new FormControl(this.group.cityId),
