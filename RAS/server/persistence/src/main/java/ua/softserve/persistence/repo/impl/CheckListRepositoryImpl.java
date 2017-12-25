@@ -22,6 +22,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static ua.softserve.persistence.constants.ConstantsFromDb.FALSE;
 import static ua.softserve.persistence.constants.ConstantsFromDb.TRUE;
@@ -50,8 +51,13 @@ public class CheckListRepositoryImpl implements CheckListRepository {
         int i = 0;
         CheckListDto checkListDto = new CheckListDto();
         Map<String, Object> report = new LinkedHashMap<>();
-        for (CheckListReportValue checkListReportValue : CheckListReportValue.values())
-            report.put(checkListReportValue.toString(), singleResult[i++]);
+        for (CheckListReportValue checkListReportValue : CheckListReportValue.values()) {
+            Object reportValue = singleResult[i++];
+            if (reportValue == null && i > 4) {
+                reportValue = (byte) 0;
+            }
+            report.put(checkListReportValue.toString(), reportValue);
+        }
         checkListDto.setReport(report);
         setTotal(checkListDto);
         return checkListDto;
@@ -64,13 +70,15 @@ public class CheckListRepositoryImpl implements CheckListRepository {
     private void setTotal(CheckListDto checkListDto) {
         Map<String, Object> report = checkListDto.getReport();
         double sum = 0;
+        int countOfReportValues = 0;
         for (Map.Entry<String, Object> s : report.entrySet()) {
             Object value = s.getValue();
             if (value instanceof Byte) {
                 sum += (Byte) value;
+                countOfReportValues++;
             }
         }
-        checkListDto.setTotal((double) Math.round((sum / report.size()) * 100 * 100) / 100);
+        checkListDto.setTotal((double) Math.round((sum / countOfReportValues) * 100 * 100) / 100);
 
         boolean flag = true;
 

@@ -10,7 +10,7 @@
 
 package ua.softserve.service;
 
-import ua.softserve.persistence.dto.CheckListDto;
+import ua.softserve.persistence.entity.views.CheckListReport;
 
 import java.util.List;
 
@@ -23,6 +23,6 @@ public interface CheckListReportService {
      * Generate Check List By Groups Report.
      * @return list of Check List By Groups DTOs
      */
-    List<CheckListDto> getCheckListDto();
+    List<CheckListReport> getCheckListDto();
 
 }
