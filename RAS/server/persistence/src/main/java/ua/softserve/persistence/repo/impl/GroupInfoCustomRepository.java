@@ -1,4 +1,4 @@
-package ua.softserve.persistence.repo;
+package ua.softserve.persistence.repo.impl;
 
 
 import org.hibernate.Session;
@@ -24,7 +24,7 @@ public class GroupInfoCustomRepository {
      *
      * @return information about groups.
      */
-    public List<GroupInformationDTO> queryWithAuthorBookCountHibernateMapping() {
+    public List<GroupInformationDTO> getAllInformationAboutGroups() {
         List<GroupInformationDTO> results = ((Session) this.em.getDelegate()).createSQLQuery(
                 "SELECT gI.academy_id as academyId, gI.group_name as groupName, gI.students_planned_to_graduate as studentsPlannedToGraduate, " +
                         "gI.students_planned_to_enrollment as studentsPlannedToEnrollment, pI.profile_name as profileName, " +

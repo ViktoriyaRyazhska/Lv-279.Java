@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.Academy;
-import ua.softserve.persistence.repo.GroupInfoCustomRepository;
+import ua.softserve.persistence.repo.impl.GroupInfoCustomRepository;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.GroupInfoService;
