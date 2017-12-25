@@ -16,5 +16,4 @@ export class AddGroupService {
   saveGroup(object: any): Observable<any> {
     return this.http.post(environment.serverUrl+'/group/add', object,{withCredentials: true});
   }
-
 }

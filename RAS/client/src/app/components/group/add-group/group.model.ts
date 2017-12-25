@@ -7,7 +7,7 @@ export class Group {
   academyStagesId: number = 1;
   startDate: number = null;
   endDate: number = null;
-  paymentStatus: number = 1;
+  payment: number = 1;
   cityId: number = 1;
   directionId: number = null;
   technologieId: number = null;
@@ -20,7 +20,7 @@ export class Group {
     this.grName = form.get('groupInfoFormControl').value;
     this.nameForSite = form.get('nameForSiteFormControl').value;
     this.academyStagesId = form.get('academyStagesId').value;
-    this.paymentStatus = form.get('paymentStatusFormControl').value;
+    this.payment = form.get('paymentStatusFormControl').value;
     this.cityId = form.get('cityId').value;
     this.startDate = new Date(form.get('startDateFormControl').value).getTime();
     this.endDate = new Date(form.get('endDateFormControl').value).getTime();

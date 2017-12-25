@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AddGroupService} from "./add-group.service";
 import {MatDialog} from "@angular/material";
 import {DialogComponent} from "../dialog/dialog.component";
+import {DataService} from "../../../services/data.service";
 
 @Component({
   selector: 'app-add-group',
@@ -33,6 +34,8 @@ export class AddGroupComponent implements OnInit {
 
   navtab: boolean = false;
 
+  groupForUpdate: any;
+
   private defaultInvalidInput: string = 'No data entered. Group will not be save';
 
   paymentStatusArray: {name: string, free: number}[] = [
@@ -43,7 +46,8 @@ export class AddGroupComponent implements OnInit {
   constructor(private addGroupService: AddGroupService,
               private route: ActivatedRoute,
               private router:Router,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private data: DataService) {
   }
 
   ngOnInit() {
@@ -53,12 +57,13 @@ export class AddGroupComponent implements OnInit {
 
     if(this.router.url.includes('group/update')){
       this.navtab = true;
+      this.data.currentMessage.subscribe(message => this.groupForUpdate = message);
       this.groupId = this.route.snapshot.params['id'];
-      this.formGroupOnInit();
+      this.updateGroup();
+      // this.formGroupOnInit();
     }else if(this.router.url.includes('group/add')){
       this.formGroupOnInit();
     }
-
   }
 
   getDropdownOnInit(){
@@ -77,7 +82,7 @@ export class AddGroupComponent implements OnInit {
 
   formGroupOnInit(){
     this.signupForm = new FormGroup({
-      'groupInfoFormControl': new FormControl(this.group.grName),
+      'groupInfoFormControl': new FormControl(this.group.grName, [Validators.required]),
       'nameForSiteFormControl': new FormControl(this.group.nameForSite, [Validators.required]),
       'academyStagesId': new FormControl(this.group.academyStagesId),
       'cityId': new FormControl(this.group.cityId),
@@ -86,7 +91,7 @@ export class AddGroupComponent implements OnInit {
       'commonDirectionFormControl': new FormControl(this.group.directionId),
       'directionFormControl': new FormControl(this.group.technologieId),
       'profileInfoFormControl': new FormControl(this.group.profileId),
-      'paymentStatusFormControl': new FormControl(this.group.paymentStatus),
+      'paymentStatusFormControl': new FormControl(this.group.payment),
       'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate /*, this.myValidator.bind(this)*/),
       'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment),
       'studentActualFromControl': new FormControl({value: this.group.studentActual, disabled: true})
@@ -157,7 +162,8 @@ export class AddGroupComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.router.navigate(['ang/viewAcademies']);
+
     });
   }
 
@@ -168,6 +174,25 @@ export class AddGroupComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+    });
+  }
+
+  updateGroup(){
+    console.log(this.groupForUpdate);
+    this.signupForm = new FormGroup({
+      'groupInfoFormControl': new FormControl(this.groupForUpdate.groupName),
+      'nameForSiteFormControl': new FormControl(this.groupForUpdate.nameForSite, [Validators.required]),
+      'academyStagesId': new FormControl(this.group.academyStagesId),
+      'cityId': new FormControl(this.group.cityId),
+      'startDateFormControl': new FormControl(new Date(this.groupForUpdate.startDate), [Validators.required]),
+      'endDateFormControl': new FormControl(new Date(this.groupForUpdate.endDate), [Validators.required]),
+      'commonDirectionFormControl': new FormControl(this.group.directionId),
+      'directionFormControl': new FormControl(this.group.technologieId),
+      'profileInfoFormControl': new FormControl(this.group.profileId),
+      'paymentStatusFormControl': new FormControl(this.group.payment),
+      'studentPlannedToGraduate': new FormControl(this.groupForUpdate.studentPlannedToGraduate /*, this.myValidator.bind(this)*/),
+      'studentPlannedToEnrollment': new FormControl(this.groupForUpdate.studentPlannedToEnrollment),
+      'studentActualFromControl': new FormControl({value: this.groupForUpdate.studentActual, disabled: false})
     });
   }
 
