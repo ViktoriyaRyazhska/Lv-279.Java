@@ -1,3 +1,4 @@
+SET SQL_SAFE_UPDATES = 0;
 drop view if exists check_list_report;
 create view  check_list_report as
 	select 
