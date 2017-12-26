@@ -1,0 +1,35 @@
+<div>
+  <!--<input-->
+  <!--type='text'-->
+  <!--style='padding:8px;margin:15px auto;width:30%;'-->
+  <!--placeholder='Type to filter the name column...'-->
+  <!--(keyup)='updateFilter($event)'-->
+  <!--/>-->
+  <ngx-datatable
+    #table
+    class='material'
+
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="10"
+    [rows]='rows'>
+    <ngx-datatable-column name="Group Name">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        {{column.name}}
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        <strong>{{value.groupName}}</strong>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Gender">
+      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span (click)="sort()">{{column.name}}</span>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.startDate | date: "dd.MM.yyyy"}}
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>

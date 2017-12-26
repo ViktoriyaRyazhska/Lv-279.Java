@@ -14,15 +14,11 @@ import {StudentsService} from "./services/students/students.service";
 import {ProfileInfoFilterPipe} from './components/group/add-group/add-group.pipe';
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
-import {FeedbackEditComponent} from "./components/feedbacks/feedback-edit/feedback-edit.component";
-import {FeedbackTeacherEditComponent} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.component";
-import {FeedbackExpertEditComponent} from "./components/feedbacks/feedback-edit/feedback-expert-edit/feedback-expert-edit.component";
-import {FeedbackInterviewerEditComponent} from "./components/feedbacks/feedback-edit/feedback-interviewer-edit/feedback-interviewer-edit.component";
 import {AppRoutingModule} from "./app-routing.module";
-import { LoginComponent } from './components/auth/login/login.component';
+import {LoginComponent} from './components/auth/login/login.component';
 import {LoginService} from "./components/auth/login/login.service";
 import {MyauthService} from "./components/auth/myauth.service";
-import {FeedbackEditPipe} from "./components/feedbacks/feedback-edit/feedback-edit.pipe";
+import {FeedbackEditPipe} from "./components/feedbacks/feedback-list/feedback-edit.pipe";
 import {HeaderComponent} from './components/header/header.component';
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
@@ -48,6 +44,10 @@ import { ErrorComponent } from './components/error/error.component';
 import { DialogComponent } from './components/group/dialog/dialog.component';
 import { PaymentPipe } from './payment.pipe';
 import {DataService} from "./services/data.service";
+import {BsModalService} from "ngx-bootstrap";
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+import { ViewAcademiesNgxComponent } from './components/view-academies/view-academies-ngx/view-academies-ngx.component';
 
 @NgModule({
   declarations: [
@@ -64,10 +64,6 @@ import {DataService} from "./services/data.service";
     FeedbackListComponent,
     FeedbackEditPipe,
     LoginComponent,
-    FeedbackEditComponent,
-    FeedbackTeacherEditComponent,
-    FeedbackExpertEditComponent,
-    FeedbackInterviewerEditComponent,
     FeedbackEditPipe,
     HeaderComponent,
     NavTabsComponent,
@@ -79,7 +75,8 @@ import {DataService} from "./services/data.service";
     FilterCheckListByGroupsComponent,
     ErrorComponent,
     DialogComponent,
-    PaymentPipe
+    PaymentPipe,
+    ViewAcademiesNgxComponent
   ],
   imports: [
     BrowserModule,
@@ -103,10 +100,12 @@ import {DataService} from "./services/data.service";
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    ModalModule.forRoot(),
+    NgxDatatableModule
   ],
   providers: [AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
-    CookieService, SearchBarService, DataService],
+    CookieService, SearchBarService, DataService, BsModalService],
   entryComponents: [DialogComponent],
   bootstrap: [AppComponent]
 })

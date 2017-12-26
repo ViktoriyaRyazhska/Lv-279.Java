@@ -239,8 +239,7 @@
   </p-dialog>
 </div>
 
-
-  <p-dialog header="Removing user" modal="false" dismissableMask="false" [(visible)]="displayRemovingDialog" width="750">
+<p-dialog header="Removing user" modal="false" dismissableMask="false" [(visible)]="displayRemovingDialog" width="750">
     <div>
       <div *ngIf="selectedStudent && selectedStudent.user">
        <h3>Are you really want to remove {{selectedStudent.user.firstName +" "+ selectedStudent.user.lastName}} from the group list?</h3>
@@ -252,8 +251,6 @@
     <button pButton type="button" (click)="removeSelectedStudent()" label="Remove" class="ui-button-danger"
             style="margin-top: 1em; float: right"></button>
   </p-dialog>
-
-
 
 <button mat-raised-button color="primary" (click)="addUserClick()">Add students</button>
 
