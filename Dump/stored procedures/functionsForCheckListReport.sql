@@ -550,27 +550,18 @@ begin
     return res;
 end//
 
-drop function if exists get_teachers_names//
-create function get_teachers_names (teacher_type int, id int)
-returns varchar(255) 
-deterministic
-begin
-	declare res varchar(255);
-    
-    SELECT teachers_select.name into res FROM 
-			(SELECT
-				group_concat(concat(" ",e.first_name_eng, " ", e.last_name_eng)) name,
-				a.academy_id  aid
+DROP FUNCTION IF EXISTS get_teachers_names//
+
+CREATE FUNCTION get_teachers_names(teacher_type int, id INT)
+  RETURNS VARCHAR(100)
+DETERMINISTIC
+  BEGIN
+    RETURN (SELECT
+				group_concat(concat(" ",e.first_name_eng, " ", e.last_name_eng)) name
 			FROM employee e
 				join group_info_teachers git
 					on git.employee_id = e.employee_id
-                join academy a
-					on git.academy_id = a.academy_id
-			WHERE git.teacher_type_id = teacher_type
-			GROUP BY a.academy_id) teachers_select
-		WHERE teachers_select.aid = id;
-    
-    return res;
-end//
+			WHERE git.academy_id = id and git.teacher_type_id = teacher_type);
+  END //
 
 DELIMITER ;
