@@ -19,7 +19,7 @@ public class ItaTacticalReport {
 
     @Id
     @Column(name = "academy_id")
-    private Integer academy_id;
+    private Integer academyId;
 
     @Column(name = "year")
     private int year;
@@ -42,7 +42,7 @@ public class ItaTacticalReport {
     @Column(name = "requested")
     private int requested;
 
-    @Column(name = "study_in_progress")
+    @Column(name = "student_in_progress")
     private int studyInProgress;
 
     @Column(name = "graduated")
