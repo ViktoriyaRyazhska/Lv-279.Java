@@ -25,9 +25,6 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Autowired
-    private StudentsStatusesRepository studentsStatusesRepository;
-
-    @Autowired
     private EmployeeRepository employeeRepository;
 
     /**
