@@ -16,11 +16,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.dto.CheckListDto;
 import ua.softserve.persistence.entity.ItaTacticalReport;
+import ua.softserve.persistence.repo.ItaTacticalReportRepository;
 import ua.softserve.service.ItaTacticalReportService;
 import ua.softserve.service.CheckListReportService;
 
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/reports")
@@ -30,6 +32,8 @@ public class ControllerForReports {
     private CheckListReportService checkListReportService;
     @Autowired
     ItaTacticalReportService itaTacticalReportService;
+    @Autowired
+    private ItaTacticalReportRepository itaTacticalReportRepository;
 
     @GetMapping("/check_list_by_groups")
     public ResponseEntity<List<CheckListDto>> getCheckListByGroupsDto() {
@@ -38,8 +42,13 @@ public class ControllerForReports {
 
 
     @GetMapping(value = "/ita_tactical_report")
-    public ResponseEntity<List<List<ItaTacticalReport>>> getItaTacticalrReport() {
+    public ResponseEntity<Map<String,List<ItaTacticalReport>>> getItaTacticalrReport() {
         return new ResponseEntity<>(itaTacticalReportService.generateItaTacticalReport(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/test")
+    public ResponseEntity<List<ItaTacticalReport>> test() {
+        return new ResponseEntity<>(itaTacticalReportRepository.findAll(), HttpStatus.OK);
     }
 
 

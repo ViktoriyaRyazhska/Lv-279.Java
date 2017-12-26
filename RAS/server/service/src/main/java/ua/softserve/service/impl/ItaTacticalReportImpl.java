@@ -10,6 +10,8 @@ import ua.softserve.service.ItaTacticalReportService;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static ua.softserve.persistence.constants.ConstantsFromDb.*;
 import static ua.softserve.persistence.constants.ConstantsFromDb.ACADEMY_STAGE_BOARDING_ID;
@@ -21,10 +23,10 @@ public class ItaTacticalReportImpl implements ItaTacticalReportService {
     @Autowired
     private AcademyService academyService;
 
-    private final Set<Predicate<Academy>> fitersFromReport;
+    private final Map<String, Predicate<Academy>> FITERS_FOR_REPORTS;
     {
-        fitersFromReport = new LinkedHashSet<>();
-        fitersFromReport.add(a -> {
+        FITERS_FOR_REPORTS = new HashMap<>();
+        FITERS_FOR_REPORTS.put("list_of_planned_next_2_monthes", a -> {
             Calendar dateForComparison = new GregorianCalendar();
             dateForComparison.add(Calendar.MONTH, 2);
             Calendar academyStartDate = new GregorianCalendar();
@@ -32,30 +34,30 @@ public class ItaTacticalReportImpl implements ItaTacticalReportService {
             return a.getAcademyStages().getStageId() == ACADEMY_STAGE_PLANNED_ID
                     && academyStartDate.before(dateForComparison);
         });
-        fitersFromReport.add(a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_IN_PROCESS_ID);
-        fitersFromReport.add(a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_OFFERING_ID);
-        fitersFromReport.add(a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_GRADUATED_ID);
-        fitersFromReport.add(a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_BOARDING_ID);
+        FITERS_FOR_REPORTS.put("in_process", a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_IN_PROCESS_ID);
+        FITERS_FOR_REPORTS.put("offering", a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_OFFERING_ID);
+        FITERS_FOR_REPORTS.put("graduated", a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_GRADUATED_ID);
+        FITERS_FOR_REPORTS.put("list_of_planned_releases", a -> a.getAcademyStages().getStageId() == ACADEMY_STAGE_BOARDING_ID);
     }
-
 
     @Override
     public ItaTacticalReport findById(int id) {
-
         return itaTacticalReportRepository.findOne(id);
     }
 
     @Override
-    public List<List<ItaTacticalReport>> generateItaTacticalReport() {
-        List<List<ItaTacticalReport>> itaTacticalReport = new ArrayList<>();
+    public Map<String, List<ItaTacticalReport>> generateItaTacticalReport() {
+        Map<String, List<ItaTacticalReport>> itaTacticalReport = new HashMap<>();
         List<Academy> academies = academyService.getAllAcademies();
-        for (Predicate<Academy> filter : fitersFromReport) {
-            ArrayList<ItaTacticalReport> someReport = new ArrayList<>();
-            academies.stream()
-                    .filter(filter)
-                    .forEach(a -> someReport.add(this.findById(a.getAcademyId())));
-            itaTacticalReport.add(someReport);
+        for (String filterName : FITERS_FOR_REPORTS.keySet()) {
+            List<Integer> ids = academies.stream()
+                    .filter(FITERS_FOR_REPORTS.get(filterName))
+                    .map(Academy::getAcademyId)
+                    .collect(Collectors.toList());
+            itaTacticalReport.put(filterName, itaTacticalReportRepository.findAllByAcademyIdIn(ids));
         }
         return itaTacticalReport;
     }
+
+
 }

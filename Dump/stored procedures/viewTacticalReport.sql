@@ -1,42 +1,29 @@
-create view  tacticalReport as
-SELECT
-  year(academy.start_date) year,
-  month(academy.start_date) month,
-  group_info.group_name,
-  profile_info.profile_name profile,
-  language_translations.trasnlation location,
-  group_info.students_planned_to_enrollment requested,
-  (SELECT count(students.student_status_id)
-   FROM students
-   WHERE students.academy_id = academy.academy_id AND students.student_status_id IN (1, 2, 3)) study_in_progress,
-  (SELECT count(students.student_status_id)
-   FROM students
-   WHERE students.academy_id = academy.academy_id AND students.student_status_id = 8) graduated,
-  (SELECT count(students.student_status_id) 
-   FROM students
-   WHERE students.academy_id = academy.academy_id AND students.student_status_id = 9) hired,
-  academy.start_date,
-  academy.end_date,
-  (SELECT selas.name
-   FROM (SELECT
-           group_concat(concat(" ",employee.first_name_eng, " ", employee.last_name_eng)) name,
-           academy.academy_id  aid
-         FROM employee, group_info_teachers, academy
-         WHERE group_info_teachers.academy_id = academy.academy_id AND
-               employee.employee_id = group_info_teachers.employee_id AND group_info_teachers.teacher_type_id IN (1, 2)
-         GROUP BY academy.academy_id) selas
-   WHERE selas.aid = academy.academy_id) trainers
-
-FROM academy
-  LEFT JOIN group_info
-    ON academy.academy_id = group_info.academy_id
-  LEFT JOIN profile_info
-    ON group_info.profile_id = profile_info.profile_id
-  LEFT JOIN language_translations
-    ON language_translations.item_id = academy.city_id
-  LEFT JOIN group_info_teachers
-    ON group_info_teachers.academy_id = academy.academy_id
-  LEFT JOIN employee
-    ON employee.employee_id = group_info_teachers.employee_id
-WHERE language_translations.local LIKE 'en' AND language_translations.tag LIKE 'city'
-group by academy.academy_id;
+drop view if exists tacticalReport;
+CREATE VIEW tacticalReport AS
+  SELECT
+    year(a.start_date)                                                                     year,
+    month(a.start_date)                                                                    month,
+    a.academy_id                                                                           academy_id,
+    gi.group_name,
+    t.name                                                                                       cg,
+    pi.profile_name                                                                    profile,
+    lt.trasnlation                                                            location,
+    gi.students_planned_to_enrollment                                                    requested,
+    get_student_in_progress (a.academy_id) student_in_progress,
+    get_student_status(a.academy_id, 8)         graduated,
+    get_student_status(a.academy_id, 9)          hired,
+    a.start_date,
+    a.end_date,
+    get_trainers(a.academy_id)                                                             trainers,
+    a.free                                                                                 payment_status
+  FROM academy a
+    LEFT JOIN group_info gi
+      ON a.academy_id = gi.academy_id
+    LEFT JOIN profile_info pi
+      ON gi.profile_id = pi.profile_id
+    LEFT JOIN language_translations lt
+      ON lt.item_id = a.city_id
+    LEFT JOIN technologies t
+      ON t.technology_id = a.technology_id
+    WHERE lt.local LIKE 'en' AND lt.tag LIKE 'city'
+  GROUP BY a.academy_id;
