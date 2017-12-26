@@ -16,7 +16,6 @@ import ua.softserve.service.dto.AcademyForSaveDTO;
 import ua.softserve.service.exception.InvalidDataException;
 import ua.softserve.service.exception.InvalidTimeFrameException;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -57,7 +56,7 @@ public class AcademyServiceImpl implements AcademyService {
         return academyRepository.save(academy).getAcademyId();
     }
 
-    private <T> boolean isNotNullNotEmpty(String fieldName, T t) {
+    private <T> void checkingForNotNullAndNotEmpty(String fieldName, T t) {
         if (t == null) {
             logger.error(fieldName + " can't be null");
             throw new InvalidDataException(fieldName + " can't be null");
@@ -67,24 +66,22 @@ public class AcademyServiceImpl implements AcademyService {
                 throw new InvalidDataException(fieldName + " can't be empty");
             }
         }
-        return true;
     }
 
-    private boolean isEndDateBiggestThanStartDate(Long startDate, Long endDate){
+    private void checkingIfEndDateBiggestThanStartDate(Long startDate, Long endDate) {
         if (startDate > endDate) {
             logger.error("End date can't be biggest than start date");
             throw new InvalidTimeFrameException("End date can't be biggest than start date");
         }
-        return true;
     }
 
-    private boolean isAcademyDTOisValid(AcademyForSaveDTO academyDTO){
-        isNotNullNotEmpty("Group Name", academyDTO.getGrName());
-        isNotNullNotEmpty("Name for Site", academyDTO.getNameForSite());
+    private boolean isAcademyDTOisValid(AcademyForSaveDTO academyDTO) {
+        checkingForNotNullAndNotEmpty("Group Name", academyDTO.getGrName());
+        checkingForNotNullAndNotEmpty("Name for Site", academyDTO.getNameForSite());
 
-        isNotNullNotEmpty("Stard Date", academyDTO.getStartDate());
-        isNotNullNotEmpty("End Date", academyDTO.getEndDate());
-        isEndDateBiggestThanStartDate(academyDTO.getStartDate(), academyDTO.getEndDate());
+        checkingForNotNullAndNotEmpty("Stard Date", academyDTO.getStartDate());
+        checkingForNotNullAndNotEmpty("End Date", academyDTO.getEndDate());
+        checkingIfEndDateBiggestThanStartDate(academyDTO.getStartDate(), academyDTO.getEndDate());
 
         return true;
     }
@@ -93,12 +90,7 @@ public class AcademyServiceImpl implements AcademyService {
     @Transactional
     @Override
     public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO) {
-//        isNotNullNotEmpty("Group Name", academyDTO.getGrName());
-//        isNotNullNotEmpty("Name for Site", academyDTO.getNameForSite());
-//        isDateValid(academyDTO.getStartDate(), academyDTO.getEndDate());
-
         if(isAcademyDTOisValid(academyDTO)) {
-
             Academy academy = academyConverter.toEntity(academyDTO);
             int academyId = save(academy);
 
@@ -113,8 +105,8 @@ public class AcademyServiceImpl implements AcademyService {
 
         Academy findGroup = academyRepository.findOne(id);
         if (findGroup == null) {
-            logger.error("Group not found");
-            throw new NoSuchElementException("Group not found");
+            logger.error("Group with id "+id+" not found");
+            throw new NoSuchElementException("Group with id "+id+" not found");
         }
         return findGroup;
     }

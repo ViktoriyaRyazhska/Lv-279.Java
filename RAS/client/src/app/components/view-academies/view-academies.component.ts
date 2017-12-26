@@ -7,6 +7,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {SearchBarService} from "./search-bar.service";
 import {Form} from "@angular/forms";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-view-academies',
@@ -19,10 +20,10 @@ export class ViewAcademiesComponent implements OnInit {
   filteredAcademies = [];
 
   displayedColumns =
-    ['grName', 'nameForSite', 'technologyName', 'profileName',
-      'paymentStatus', 'cityName', 'startDate', 'endDate', 'academyStage',
+    ['groupName', 'nameForSite',
+      'directionName', 'profileName', 'cityName', 'startDate', 'endDate', 'status',
       'experts', 'studentPlannedToGraduate', 'studentPlannedToEnrollment',
-      'studentsActual', 'hiredNotGraduated', 'directionName', 'interviewerFeedback'
+      'studentsActual', 'hiredNotGraduated', 'commonDirectionName', 'interviewerFeedback'
     ];
   dataSource: any;
 
@@ -31,14 +32,16 @@ export class ViewAcademiesComponent implements OnInit {
 
 
   constructor(private academyService: AcademyService,
-              private filterService: FilterService) {
+              private filterService: FilterService,
+              private data: DataService) {
   }
 
   ngOnInit() {
     this.academyService.getAll().subscribe(
       data => {
         this.academies = data;
-        this.academies = this.academies.slice(0, data.length - 2);
+        this.academies = this.academies.slice(0, data.length);
+
         this.filteredAcademies = this.academies;
 
         this.dataSource = new MatTableDataSource(this.filteredAcademies);
@@ -48,6 +51,7 @@ export class ViewAcademiesComponent implements OnInit {
       },
       error => console.log(error)
     );
+    // this.data.currentMessage.subscribe(message => console.log(message));
   }
 
   onFilterField(form) {
@@ -62,5 +66,9 @@ export class ViewAcademiesComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  }
+
+  sendDataToAddGroupComponent(group: any){
+    this.data.setGroup(group);
   }
 }

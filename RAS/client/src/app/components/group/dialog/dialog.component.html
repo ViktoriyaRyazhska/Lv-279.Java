@@ -1,0 +1,14 @@
+<div>
+  <div class="row" mat-dialog-content align="center">
+    <p id="suc" [ngStyle]="{'color': data.err ? '#CE0E2F' : '#008000' }">{{data.message}}</p>
+  </div>
+  <div class="row" mat-dialog-actions >
+
+    <button id="sucBtn"
+            mat-button
+            (click)="onNoClick()"
+            [ngStyle]="{'background-color': data.err ? '#CE0E2F' : '#008000' }"
+    ><b>OK</b></button>
+
+  </div>
+</div>

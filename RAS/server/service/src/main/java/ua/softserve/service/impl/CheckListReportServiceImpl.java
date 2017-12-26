@@ -12,36 +12,38 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.softserve.persistence.dto.CheckListDto;
+import ua.softserve.persistence.entity.views.CheckListReport;
 import ua.softserve.persistence.repo.AcademyRepository;
-import ua.softserve.persistence.repo.CheckListRepository;
+import ua.softserve.persistence.repo.CheckListReportRepository;
 import ua.softserve.service.CheckListReportService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of Check List By Groups Report Service.
+ */
 @Service
 public class CheckListReportServiceImpl implements CheckListReportService {
     @Autowired
     private AcademyRepository academyRepository;
     @Autowired
-    private CheckListRepository checkListRepository;
+    private CheckListReportRepository checkListReportRepository;
 
+    /**
+     * Generate Check List By Groups Report.
+     * @return list of Check List By Groups DTOs
+     */
     @Override
-    public List<CheckListDto> getCheckListDto() {
+    public List<CheckListReport> getCheckListDto() {
+        // TODO filters
         List<Integer> allAcademiesId = academyRepository.findAllAcademyId()
                 .stream()
                 .limit(50)
                 .collect(Collectors.toList());
-        System.out.println(allAcademiesId);
 
-        List<CheckListDto> checkListDtos = new ArrayList<>();
-
-        for (Integer academyId : allAcademiesId) {
-            checkListDtos.add(checkListRepository.reportCheckList(academyId));
-        }
-        return checkListDtos;
+        return checkListReportRepository.findAllByAcademyIdIn(allAcademiesId);
     }
 
 }

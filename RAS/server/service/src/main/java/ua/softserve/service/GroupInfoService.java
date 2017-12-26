@@ -23,7 +23,7 @@ public interface GroupInfoService {
 
     Map<GroupInformationDTO, Integer> getInfoAboutStudents();
 
-    Set<GroupAllInformationDTO> getAllInfo();
+    Set<GroupAllInformationDTO> getAllInformationAboutGroup();
 
     public List<AcademyForViewDTO> getAllAcademies();
 
@@ -36,13 +36,9 @@ public interface GroupInfoService {
 
     GroupInfo findOne(int id);
 
-    Map<GroupInformationDTO, List<Employee>> getAllInfo();
-
-    List<AcademyForViewDTO> getAllAcademies();
+    List<GroupInformationDTO> getAllInformationAboutGroup();
 
     List<GroupInfo> findAllWithOrder();
-
-    List<GroupInformationDTO> findAllInfoAboutGroups();
 
     GroupInfo findOneGroupInfoByAcademyId(int academyId);
 }
