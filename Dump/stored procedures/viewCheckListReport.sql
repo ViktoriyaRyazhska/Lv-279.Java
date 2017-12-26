@@ -1,16 +1,15 @@
-SET SQL_SAFE_UPDATES = 0;
 drop view if exists check_list_report;
 create view  check_list_report as
 	select 
 		
-		gi.academy_id, 
+		gi.academy_id,
 		gi.group_name group_name,
         lt.trasnlation city_name,
         acs.name status,
         
-        (select get_teachers_names(1, gi.academy_id)) teachers,
+        (SELECT get_teachers_names(1, gi.academy_id)) teachers,
         
-        (select get_teachers_names(1, gi.academy_id)) experts,
+        (SELECT get_teachers_names(2, gi.academy_id)) experts,
         
         (select count(*) from students s
 		where s.academy_id = a.academy_id and student_status_id in (1,3,8)) active_students_count,
