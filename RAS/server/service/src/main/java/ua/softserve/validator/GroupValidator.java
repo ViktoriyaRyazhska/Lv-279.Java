@@ -1,7 +1,8 @@
-package com.jplanes.blog.examples.model.validator;
+package ua.softserve.validator;
 
-import com.jplanes.blog.examples.model.Person;
+import ua.softserve.persistence.entity.GroupInfo;
+import ua.softserve.service.dto.AcademyForSaveDTO;
 
 public interface GroupValidator {
-    public void validate(GroupInfo groupInfo);
+        void validate(AcademyForSaveDTO academyForSaveDTO);
 }
