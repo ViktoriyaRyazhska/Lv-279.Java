@@ -10,11 +10,11 @@ public interface AcademyService {
 
     Integer save(Academy academy);
 
-//    void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO);
-
     Academy findOne(int id);
 
     AcademyDropDownLists getAcademyDTO();
 
     List<Academy> getAllAcademies();
+
+    void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO);
 }

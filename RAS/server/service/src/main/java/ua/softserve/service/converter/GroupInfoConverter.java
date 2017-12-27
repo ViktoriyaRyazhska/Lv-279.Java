@@ -1,13 +1,10 @@
 package ua.softserve.service.converter;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 import ua.softserve.service.dto.AcademyForSaveDTO;
-import ua.softserve.service.dto.GroupAllInformationDTO;
 
 import java.sql.Date;
 
@@ -34,12 +31,6 @@ public class GroupInfoConverter {
 
     @Autowired
     TechnologyService technologyService;
-
-    public GroupAllInformationDTO InfoStudentsDTOToInfoGroupDTO(GroupInformationDTO groupInformationDTO) {
-        ModelMapper modelMapper = new ModelMapper();
-        GroupAllInformationDTO groupAllInformationDTO = modelMapper.map(groupInformationDTO, GroupAllInformationDTO.class);
-        return groupAllInformationDTO;
-    }
 
     public AcademyForSaveDTO toDTO(GroupInfo groupInfo) {
         AcademyForSaveDTO academyForSaveDTO = new AcademyForSaveDTO();
