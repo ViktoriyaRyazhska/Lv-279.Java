@@ -8,17 +8,19 @@ import lombok.ToString;
 @Setter
 @ToString
 public class AcademyForSaveDTO {
+    private int academyId;
+    private int groupInfoId;
     private String grName;
     private String nameForSite;
-    private int academyStagesId;
     private Long startDate;
     private Long endDate;
     private int payment;
-    private int studentPlannedToGraduate;
-    private int studentPlannedToEnrollment;
-    private int studentsActual;
+    private int cityId;
+    private int academyStagesId;
     private int directionId;
     private int technologieId;
     private int profileId;
-    private int cityId;
+    private int studentPlannedToGraduate;
+    private int studentPlannedToEnrollment;
+    private int studentsActual;
 }

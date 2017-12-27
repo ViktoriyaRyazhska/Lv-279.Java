@@ -21,8 +21,8 @@ public class AcademyController {
     GroupInfoService groupInfoService;
 
     @GetMapping(value = "/group/{id}")
-    public ResponseEntity<Academy> getAcademy(@PathVariable Integer id) {
-        return new ResponseEntity<>(academyService.findOne(id), HttpStatus.OK);
+    public ResponseEntity<AcademyForSaveDTO> getAcademy(@PathVariable Integer id) {
+        return new ResponseEntity<>(groupInfoService.getAcademyForSaveDTO(id), HttpStatus.OK);
     }
 
     @GetMapping(value = {"/group", "/getDropDownList"})
@@ -32,8 +32,8 @@ public class AcademyController {
 
     @PostMapping(value = "/group/add")
     public ResponseEntity saveGroup(@RequestBody AcademyForSaveDTO academyDTO) {
-//        academyService.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
-        return ResponseEntity.ok().body(200);
+        academyService.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping(value = "/viewAcademies")

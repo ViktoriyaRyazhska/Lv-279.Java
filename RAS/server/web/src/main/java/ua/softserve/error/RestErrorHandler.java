@@ -1,4 +1,4 @@
-package ua.softserve.service.error;
+package ua.softserve.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

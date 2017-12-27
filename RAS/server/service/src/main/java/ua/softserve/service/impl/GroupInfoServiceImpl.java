@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.*;
-import ua.softserve.persistence.repo.impl.GroupInfoCustomRepository;
 import ua.softserve.persistence.repo.GroupInfoRepository;
+import ua.softserve.persistence.repo.impl.GroupInfoCustomRepository;
 import ua.softserve.service.*;
+import ua.softserve.service.converter.GroupInfoConverter;
+import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.util.*;
 
@@ -20,6 +22,18 @@ public class GroupInfoServiceImpl implements GroupInfoService {
 
     @Autowired
     private GroupInfoCustomRepository groupInfoCustomRepository;
+
+    @Autowired
+    private GroupInfoConverter groupInfoConverter;
+
+    @Autowired
+    DirectionService directionService;
+
+    @Autowired
+    TechnologyService technologyService;
+
+    @Autowired
+    CityService cityService;
 
     @Override
     public void save(GroupInfo groupInfo) {
@@ -70,5 +84,10 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Override
     public GroupInfo findOneGroupInfoByAcademyId(int academyId) {
         return groupInfoRepository.findByAcademyAcademyId(academyId);
+    }
+
+    @Override
+    public AcademyForSaveDTO getAcademyForSaveDTO(Integer groupId) {
+        return groupInfoConverter.toDTO(findOneGroupInfoByAcademyId(groupId));
     }
 }
