@@ -9,7 +9,6 @@ import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
-import ua.softserve.service.converter.AcademyConverter;
 import ua.softserve.service.converter.GroupInfoConverter;
 import ua.softserve.service.dto.AcademyDropDownLists;
 import ua.softserve.service.dto.AcademyForSaveDTO;
@@ -40,12 +39,6 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Autowired
     LanguageTranslationsService languageTranslationsService;
-
-    @Autowired
-    GroupInfoService groupInfoService;
-
-    @Autowired
-    AcademyConverter academyConverter;
 
     @Autowired
     GroupInfoConverter groupInfoConverter;
@@ -87,17 +80,17 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
 
-    @Transactional
-    @Override
-    public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO) {
-        if(isAcademyDTOisValid(academyDTO)) {
-            Academy academy = academyConverter.toEntity(academyDTO);
-            int academyId = save(academy);
-
-            GroupInfo groupInfo = groupInfoConverter.toEntity(academyId, academyDTO);
-            groupInfoService.save(groupInfo);
-        }
-    }
+//    @Transactional
+//    @Override
+//    public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO) {
+//        if(isAcademyDTOisValid(academyDTO)) {
+//            Academy academy = academyConverter.toEntity(academyDTO);
+//            int academyId = save(academy);
+//
+//            GroupInfo groupInfo = groupInfoConverter.toEntity(academyId, academyDTO);
+//            groupInfoService.save(groupInfo);
+//        }
+//    }
 
     @Override
     public Academy findOne(int id) {
@@ -111,6 +104,11 @@ public class AcademyServiceImpl implements AcademyService {
         return findGroup;
     }
 
+    /**
+     * Method combines information for dropdown lists on the UI to DTO.
+     *
+     * @return DTO that contains information for dropdown lists.
+     */
     @Override
     public AcademyDropDownLists getAcademyDTO() {
         AcademyDropDownLists academyDropDownLists = new AcademyDropDownLists();

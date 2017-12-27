@@ -29,7 +29,7 @@ public class GroupInfoCustomRepository {
                 "SELECT gI.academy_id as academyId, gI.group_name as groupName, gI.students_planned_to_graduate as studentsPlannedToGraduate, " +
                         "gI.students_planned_to_enrollment as studentsPlannedToEnrollment, pI.profile_name as profileName, " +
                         "ac.start_date as startDate, ac.end_date as endDate, ac.free as paymentStatus, ac.name as nameForSite, aSt.name as status, " +
-                        "tech.name as directionName, ac.free as paymentStatus, gIT.teacher_type_id as teacherType, dir.name as commonDirectionName, " +
+                        "tech.name as directionName, gIT.teacher_type_id as teacherType, dir.name as commonDirectionName, " +
                         "empl.first_name_eng as firstName, empl.last_name_eng as lastName, lt.trasnlation as cityName, " +
                         "(SELECT COUNT(stn.academy_id) from students as stn where stn.academy_id = gI.academy_id AND stn.student_status_id = 1) as studentsActual " +
                         "FROM group_info gI " +

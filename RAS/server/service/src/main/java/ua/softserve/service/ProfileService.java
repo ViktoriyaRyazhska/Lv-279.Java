@@ -12,6 +12,4 @@ public interface ProfileService {
     List<ProfileInfo> findAll();
 
     void remove(ProfileInfo profile);
-
-    List<String> findProfileNames();
 }

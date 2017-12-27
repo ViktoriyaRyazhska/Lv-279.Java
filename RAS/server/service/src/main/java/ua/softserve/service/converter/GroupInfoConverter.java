@@ -10,9 +10,6 @@ import ua.softserve.persistence.entity.ProfileInfo;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.ProfileService;
 import ua.softserve.service.dto.AcademyForSaveDTO;
-import ua.softserve.service.dto.GroupAllInformationDTO;
-
-import java.util.Date;
 
 @Service
 public class GroupInfoConverter {
@@ -22,12 +19,6 @@ public class GroupInfoConverter {
 
     @Autowired
     ProfileService profileService;
-
-    public GroupAllInformationDTO InfoStudentsDTOToInfoGroupDTO(GroupInformationDTO groupInformationDTO){
-        ModelMapper modelMapper = new ModelMapper();
-        GroupAllInformationDTO groupAllInformationDTO = modelMapper.map(groupInformationDTO, GroupAllInformationDTO.class);
-        return groupAllInformationDTO;
-    }
 
     public GroupInfo toEntity(int academyId, AcademyForSaveDTO academyDTO) {
         GroupInfo groupInfo = new GroupInfo();
