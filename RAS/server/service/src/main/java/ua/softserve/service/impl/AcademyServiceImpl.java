@@ -9,7 +9,6 @@ import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
-import ua.softserve.service.converter.AcademyConverter;
 import ua.softserve.service.converter.GroupInfoConverter;
 import ua.softserve.service.dto.AcademyDropDownLists;
 import ua.softserve.service.dto.AcademyForSaveDTO;
@@ -41,13 +40,10 @@ public class AcademyServiceImpl implements AcademyService {
     LanguageTranslationsService languageTranslationsService;
 
     @Autowired
-    GroupInfoService groupInfoService;
-
-    @Autowired
-    AcademyConverter academyConverter;
-
-    @Autowired
     GroupInfoConverter groupInfoConverter;
+
+    @Autowired
+    GroupInfoService groupInfoService;
 
     @Autowired
     GroupValidator groupValidator;
@@ -82,6 +78,11 @@ public class AcademyServiceImpl implements AcademyService {
         return findGroup;
     }
 
+    /**
+     * Method combines information for dropdown lists on the UI to DTO.
+     *
+     * @return DTO that contains information for dropdown lists.
+     */
     @Override
     public AcademyDropDownLists getAcademyDTO() {
         AcademyDropDownLists academyDropDownLists = new AcademyDropDownLists();

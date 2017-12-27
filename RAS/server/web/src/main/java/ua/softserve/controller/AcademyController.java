@@ -6,9 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.Academy;
-import ua.softserve.persistence.entity.GroupInfo;
-import ua.softserve.persistence.repo.GroupInfoCustomRepository;
-import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.GroupInfoService;
 import ua.softserve.service.dto.*;
@@ -22,12 +19,6 @@ public class AcademyController {
 
     @Autowired
     GroupInfoService groupInfoService;
-
-    @Autowired
-    GroupInfoRepository groupInfoRepository;
-
-    @Autowired
-    GroupInfoCustomRepository groupInfoCustomRepository;
 
     @GetMapping(value = "/group/{id}")
     public ResponseEntity<AcademyForSaveDTO> getAcademy(@PathVariable Integer id) {

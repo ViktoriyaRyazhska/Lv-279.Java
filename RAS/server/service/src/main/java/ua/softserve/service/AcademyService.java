@@ -10,9 +10,7 @@ public interface AcademyService {
 
     Integer save(Academy academy);
 
-    void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO);
-
-    // void saveCustom(int id,String role,int[] arr, EmployeeService employeeService);
+//    void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO);
 
     Academy findOne(int id);
 

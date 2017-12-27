@@ -25,11 +25,14 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Autowired
-    private StudentsStatusesRepository studentsStatusesRepository;
-
-    @Autowired
     private EmployeeRepository employeeRepository;
 
+    /**
+     * Get list of all students subscribed on some group
+     *
+     * @param academyId - academy/group id
+     * @return list of StudentsViewDto which will be displayed on UI
+     */
     @Override
     @Transactional(readOnly = true)
     public List<StudentViewDto> getStudentsByAcademy(Integer academyId) {
@@ -37,11 +40,24 @@ public class StudentServiceImpl implements StudentService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Get list of all Employees
+     *
+     * @return - list of EmployeeEngShortDto
+     * which contains all the necessary information about employee
+     * and displayed in the dropdown "Approved By" on UI
+     */
     @Override
     public List<EmployeeEngShortDto> getAllEmployees() {
         return employeeRepository.findAllSorted().stream().map(EmployeeEngShortDto::of).collect(Collectors.toList());
     }
 
+    /**
+     * Sign users to selected group
+     *
+     * @param academyId - selected group in which we want to add students
+     * @param students - list of users id that ones we want to add to our selected group
+     */
     @Override
     @Transactional
     public void addStudentsToAcademy(Integer academyId, List<Integer> students) {
@@ -53,12 +69,21 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(entities);
     }
 
+    /**
+     * Remove selected student from list of students
+     *
+     * @param studentId - id of student that we want to remove from list of students
+     */
     @Override
     @Transactional
     public void removeStudentFromAcademy(Integer studentId) {
         studentRepository.updateRemovedStatus(studentId, true);
     }
 
+    /**
+     * Save data about students to database
+     * @param students - list of StudentViewDto, which contains student activity data while passing the course
+     */
     @Override
     @Transactional
     public void updateStudentOfAcademy(List<StudentViewDto> students) {
