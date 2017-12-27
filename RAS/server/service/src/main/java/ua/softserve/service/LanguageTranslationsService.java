@@ -15,6 +15,4 @@ public interface LanguageTranslationsService {
 
     void remove(LanguageTranslations languageTranslations);
 
-    List<LanguageTranslations> findAllCities();
-
 }

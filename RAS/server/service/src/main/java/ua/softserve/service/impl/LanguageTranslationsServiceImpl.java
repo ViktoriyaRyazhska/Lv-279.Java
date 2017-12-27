@@ -33,10 +33,4 @@ public class LanguageTranslationsServiceImpl implements LanguageTranslationsServ
     public void remove(LanguageTranslations languageTranslations) {
         languageTranslationsRepository.delete(languageTranslations);
     }
-
-    @Override
-    public List<LanguageTranslations> findAllCities() {
-        return languageTranslationsRepository.findAllCities();
-    }
-
 }

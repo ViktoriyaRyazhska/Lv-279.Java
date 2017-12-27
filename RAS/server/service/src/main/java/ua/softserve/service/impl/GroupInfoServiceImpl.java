@@ -38,32 +38,32 @@ public class GroupInfoServiceImpl implements GroupInfoService {
      */
     @Override
     public List<GroupInformationDTO> getAllInformationAboutGroup() {
-        final Integer FIRST_ELEMENT_OF_THE_LIST = 0;
-        int listCounter = 0;
         List<GroupInformationDTO> groupInformation = groupInfoCustomRepository.getAllInformationAboutGroups();
-        GroupInformationDTO previousElement = null;
-        GroupInformationDTO currentElement = null;
-        for(GroupInformationDTO groupInformationDTO: groupInformation){
-            if(listCounter >= 2){
-                if(previousElement.equals(currentElement)) {
-                    previousElement.getFirstName().add(currentElement.getFirstName().get(FIRST_ELEMENT_OF_THE_LIST));
-                    previousElement.getLastName().add(currentElement.getLastName().get(FIRST_ELEMENT_OF_THE_LIST));
-                    groupInformation.remove(currentElement);
-                }
-            }
-            listCounter++;
-            previousElement = currentElement;
-            currentElement = groupInformationDTO;
-        }
-
-//        for (int i = 1; i < groupInformation.size(); i++) {
-//            if(groupInformation.get(i).equals(groupInformation.get(i-1))){
-//                groupInformation.get(i-1).getFirstName().add(groupInformation.get(i).getFirstName().get(0));
-//                groupInformation.get(i-1).getLastName().add(groupInformation.get(i).getLastName().get(0));
-//                groupInformation.remove(i);
-//                i--;
+//        final Integer FIRST_ELEMENT_OF_THE_LIST = 0;
+//        int listCounter = 0;
+//        GroupInformationDTO previousElement = null;
+//        GroupInformationDTO currentElement = null;
+//        for(GroupInformationDTO groupInformationDTO: groupInformation){
+//            if(listCounter >= 2){
+//                if(previousElement.equals(currentElement)) {
+//                    previousElement.getFirstName().add(currentElement.getFirstName().get(FIRST_ELEMENT_OF_THE_LIST));
+//                    previousElement.getLastName().add(currentElement.getLastName().get(FIRST_ELEMENT_OF_THE_LIST));
+//                    groupInformation.remove(currentElement);
+//                }
 //            }
+//            listCounter++;
+//            previousElement = currentElement;
+//            currentElement = groupInformationDTO;
 //        }
+
+        for (int i = 1; i < groupInformation.size(); i++) {
+            if(groupInformation.get(i).equals(groupInformation.get(i-1))){
+                groupInformation.get(i-1).getFirstName().add(groupInformation.get(i).getFirstName().get(0));
+                groupInformation.get(i-1).getLastName().add(groupInformation.get(i).getLastName().get(0));
+                groupInformation.remove(i);
+                i--;
+            }
+        }
         return groupInformation;
     }
 
