@@ -10,12 +10,12 @@ import static ua.softserve.service.util.validations.helper.StringValidationHelpe
 public class GroupValidatorImpl implements GroupValidator {
     @Override
     public void validate(AcademyForSaveDTO academyForSaveDTO) {
-        notNull.and(notEmpty).test(academyForSaveDTO.getGrName()).throwIfInvalidData("can't be null or empty");
-        lessThan(0).or(moreThan(50)).test(academyForSaveDTO.getGrName()).throwIfInvalidData();
-        notNull.and(notEmpty).test(academyForSaveDTO.getNameForSite()).throwIfInvalidData("can't be null or empty");
-        lessThan(0).or(moreThan(50)).test(academyForSaveDTO.getNameForSite()).throwIfInvalidData();
+        notNull.and(notEmpty).test(academyForSaveDTO.getGrName()).throwIfInvalidData();
+        lessThan(50).or(moreThan(0)).test(academyForSaveDTO.getGrName()).throwIfInvalidData();
+        notNull.and(notEmpty).test(academyForSaveDTO.getNameForSite()).throwIfInvalidData();
+        lessThan(50).or(moreThan(0)).test(academyForSaveDTO.getNameForSite()).throwIfInvalidData();
 
-        lowerThan(0).or(greaterThan(99)).test(academyForSaveDTO.getStudentPlannedToEnrollment()).throwIfInvalidData();
-        lowerThan(0).or(greaterThan(99)).test(academyForSaveDTO.getStudentPlannedToGraduate()).throwIfInvalidData();
+        lowerThan(99).or(greaterThan(0)).test(academyForSaveDTO.getStudentPlannedToEnrollment()).throwIfInvalidData();
+        lowerThan(99).or(greaterThan(0)).test(academyForSaveDTO.getStudentPlannedToGraduate()).throwIfInvalidData();
     }
 }
