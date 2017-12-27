@@ -2,6 +2,7 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.constants.ConstantsFromDb;
 import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.*;
@@ -10,8 +11,10 @@ import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.AcademyConverter;
 import ua.softserve.service.converter.GroupInfoConverter;
+import ua.softserve.service.dto.AcademyForSaveDTO;
 import ua.softserve.service.dto.AcademyForViewDTO;
 
+import java.sql.Date;
 import java.util.*;
 
 /**
@@ -26,37 +29,16 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     private GroupInfoCustomRepository groupInfoCustomRepository;
 
     @Autowired
-    private AcademyConverter academyConverter;
-
-    @Autowired
-    private AcademyStagesService academyStagesService;
-
-    @Autowired
-    private DirectionService directionService;
-
-    @Autowired
-    private TechnologyServiceImpl technologyServiceImpl;
-
-    @Autowired
-    private ProfileService profileService;
-
-    @Autowired
-    private LanguageTranslationsService languageTranslationsService;
-
-    @Autowired
-    private GroupInfoTeachersService groupInfoTeachersService;
-
-    @Autowired
-    private TeacherTypeService teacherTypeService;
-
-    @Autowired
-    private StudentService studentsService;
-
-    @Autowired
-    private StudentsStatusesService studentsStatusesService;
-
-    @Autowired
     private GroupInfoConverter groupInfoConverter;
+
+    @Autowired
+    DirectionService directionService;
+
+    @Autowired
+    TechnologyService technologyService;
+
+    @Autowired
+    CityService cityService;
 
     @Override
     public void save(GroupInfo groupInfo) {
@@ -100,5 +82,10 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Override
     public GroupInfo findOneGroupInfoByAcademyId(int academyId) {
         return groupInfoRepository.findByAcademyAcademyId(academyId);
+    }
+
+    @Override
+    public AcademyForSaveDTO getAcademyForSaveDTO(Integer groupId) {
+        return groupInfoConverter.toDTO(findOneGroupInfoByAcademyId(groupId));
     }
 }

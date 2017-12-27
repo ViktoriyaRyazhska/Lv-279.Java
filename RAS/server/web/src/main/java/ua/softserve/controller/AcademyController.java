@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.Academy;
+import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.GroupInfoCustomRepository;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.service.AcademyService;
@@ -29,8 +30,8 @@ public class AcademyController {
     GroupInfoCustomRepository groupInfoCustomRepository;
 
     @GetMapping(value = "/group/{id}")
-    public ResponseEntity<Academy> getAcademy(@PathVariable Integer id) {
-        return new ResponseEntity<>(academyService.findOne(id), HttpStatus.OK);
+    public ResponseEntity<AcademyForSaveDTO> getAcademy(@PathVariable Integer id) {
+        return new ResponseEntity<>(groupInfoService.getAcademyForSaveDTO(id), HttpStatus.OK);
     }
 
     @GetMapping(value = {"/group", "/getDropDownList"})
@@ -41,7 +42,7 @@ public class AcademyController {
     @PostMapping(value = "/group/add")
     public ResponseEntity saveGroup(@RequestBody AcademyForSaveDTO academyDTO) {
         academyService.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
-        return ResponseEntity.ok().body(200);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping(value = "/viewAcademies")

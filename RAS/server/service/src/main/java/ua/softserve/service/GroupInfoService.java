@@ -4,6 +4,7 @@ import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.Employee;
 import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.service.dto.AcademyDTO;
+import ua.softserve.service.dto.AcademyForSaveDTO;
 import ua.softserve.service.dto.AcademyForViewDTO;
 import ua.softserve.service.dto.GroupAllInformationDTO;
 
@@ -41,4 +42,6 @@ public interface GroupInfoService {
     List<GroupInfo> findAllWithOrder();
 
     GroupInfo findOneGroupInfoByAcademyId(int academyId);
+
+    AcademyForSaveDTO getAcademyForSaveDTO(Integer groupId);
 }

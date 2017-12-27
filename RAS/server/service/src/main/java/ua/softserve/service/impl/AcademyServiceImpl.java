@@ -13,8 +13,7 @@ import ua.softserve.service.converter.AcademyConverter;
 import ua.softserve.service.converter.GroupInfoConverter;
 import ua.softserve.service.dto.AcademyDropDownLists;
 import ua.softserve.service.dto.AcademyForSaveDTO;
-import ua.softserve.service.exception.InvalidDataException;
-import ua.softserve.service.exception.InvalidTimeFrameException;
+import ua.softserve.validator.GroupValidator;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -50,53 +49,25 @@ public class AcademyServiceImpl implements AcademyService {
     @Autowired
     GroupInfoConverter groupInfoConverter;
 
+    @Autowired
+    GroupValidator groupValidator;
+
     @Transactional
     @Override
     public Integer save(Academy academy) {
         return academyRepository.save(academy).getAcademyId();
     }
 
-    private <T> void checkingForNotNullAndNotEmpty(String fieldName, T t) {
-        if (t == null) {
-            logger.error(fieldName + " can't be null");
-            throw new InvalidDataException(fieldName + " can't be null");
-        } else if (t instanceof String) {
-            if (((String) t).isEmpty()) {
-                logger.error(fieldName + " can't be empty");
-                throw new InvalidDataException(fieldName + " can't be empty");
-            }
-        }
-    }
-
-    private void checkingIfEndDateBiggestThanStartDate(Long startDate, Long endDate) {
-        if (startDate > endDate) {
-            logger.error("End date can't be biggest than start date");
-            throw new InvalidTimeFrameException("End date can't be biggest than start date");
-        }
-    }
-
-    private boolean isAcademyDTOisValid(AcademyForSaveDTO academyDTO) {
-        checkingForNotNullAndNotEmpty("Group Name", academyDTO.getGrName());
-        checkingForNotNullAndNotEmpty("Name for Site", academyDTO.getNameForSite());
-
-        checkingForNotNullAndNotEmpty("Stard Date", academyDTO.getStartDate());
-        checkingForNotNullAndNotEmpty("End Date", academyDTO.getEndDate());
-        checkingIfEndDateBiggestThanStartDate(academyDTO.getStartDate(), academyDTO.getEndDate());
-
-        return true;
-    }
-
-
     @Transactional
     @Override
     public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO) {
-        if(isAcademyDTOisValid(academyDTO)) {
-            Academy academy = academyConverter.toEntity(academyDTO);
-            int academyId = save(academy);
+        groupValidator.validate(academyDTO);
 
-            GroupInfo groupInfo = groupInfoConverter.toEntity(academyId, academyDTO);
-            groupInfoService.save(groupInfo);
-        }
+        Academy academy = groupInfoConverter.academyToEntity(academyDTO);
+        int academyId = save(academy);
+
+        GroupInfo groupInfo = groupInfoConverter.groupInfoToEntity(academyId, academyDTO);
+        groupInfoService.save(groupInfo);
     }
 
     @Override
@@ -105,8 +76,8 @@ public class AcademyServiceImpl implements AcademyService {
 
         Academy findGroup = academyRepository.findOne(id);
         if (findGroup == null) {
-            logger.error("Group with id "+id+" not found");
-            throw new NoSuchElementException("Group with id "+id+" not found");
+            logger.error("Group with id " + id + " not found");
+            throw new NoSuchElementException("Group with id " + id + " not found");
         }
         return findGroup;
     }
