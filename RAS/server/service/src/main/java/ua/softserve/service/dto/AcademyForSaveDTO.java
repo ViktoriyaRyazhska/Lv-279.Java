@@ -8,6 +8,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class AcademyForSaveDTO extends AcademyDTO {
+    private int academyId;
+    private int groupInfoId;
     private int directionId;
     private int technologieId;
     private int profileId;
