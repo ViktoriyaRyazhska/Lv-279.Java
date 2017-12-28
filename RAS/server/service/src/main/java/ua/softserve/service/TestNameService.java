@@ -16,4 +16,6 @@ public interface TestNameService {
     List<TestName> findAllTestNamesByAcademyId(Integer groupId);
 
     void deleteTestName(TestName testName);
+
+    boolean isTestRemoved(TestName test);
 }

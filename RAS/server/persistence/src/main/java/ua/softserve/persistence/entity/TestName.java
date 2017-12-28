@@ -27,12 +27,17 @@ public class TestName {
     @Column(name = "test_max_score")
     private Double testMaxScore;
 
+    @Transient
+    private boolean removed;
+
     public TestName() {
+        this.removed = false;
     }
 
     public TestName(Integer group_id, String testName, double testMaxScore) {
         this.groupId = group_id;
         this.testName = testName;
         this.testMaxScore = testMaxScore;
+        this.removed = false;
     }
 }
