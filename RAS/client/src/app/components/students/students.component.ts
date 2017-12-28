@@ -5,6 +5,8 @@ import {UserPage, UserShort} from "../../models/userShort";
 import {Data, StudentFeedback, StudentStatus, ApprovedBy} from "../../models/feedbacks/student.model";
 import {SelectItem} from "primeng/primeng";
 import {ActivatedRoute, Router} from "@angular/router";
+import { Tests } from "../../models/tests";
+import { TestsService } from "../../services/tests-names/tests.service";
 
 @Component({
   selector: 'app-students',
@@ -14,6 +16,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 @Injectable()
 export class StudentsComponent implements OnInit {
   private academyId: number = 586;
+
+  tests : Tests[];
 
   private students: StudentFeedback[];
 
@@ -39,7 +43,8 @@ export class StudentsComponent implements OnInit {
   constructor(private studentsService: StudentsService,
               private userService: UsersService,
               private route: ActivatedRoute,
-              private router:Router) {
+              private router:Router,
+              private testNamesService : TestsService) {
     this.selectedStudent = new StudentFeedback();
   }
 
@@ -67,6 +72,16 @@ export class StudentsComponent implements OnInit {
           },
           error => console.log(error)
         );
+
+        this.testNamesService.getAll(this.academyId).subscribe(data => {
+            console.log(data);
+            this.tests = data;
+          },
+          error => console.log(error)
+        );
+
+
+
       },
       error => {
         if (error.status===403) {
