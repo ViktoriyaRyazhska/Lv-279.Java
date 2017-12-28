@@ -2,16 +2,13 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.softserve.persistence.constants.ConstantsFromDb;
 import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.GroupInfoRepository;
+import ua.softserve.persistence.repo.impl.GroupInfoCustomRepository;
 import ua.softserve.service.*;
-import ua.softserve.service.converter.AcademyConverter;
 import ua.softserve.service.converter.GroupInfoConverter;
-import ua.softserve.service.dto.AcademyDTO;
-import ua.softserve.service.dto.AcademyForViewDTO;
-import ua.softserve.service.dto.GroupAllInformationDTO;
+import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.util.*;
 
@@ -24,37 +21,19 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     private GroupInfoRepository groupInfoRepository;
 
     @Autowired
-    private AcademyConverter academyConverter;
-
-    @Autowired
-    private AcademyStagesService academyStagesService;
-
-    @Autowired
-    private DirectionService directionService;
-
-    @Autowired
-    private TechnologyServiceImpl technologyServiceImpl;
-
-    @Autowired
-    private ProfileService profileService;
-
-    @Autowired
-    private LanguageTranslationsService languageTranslationsService;
-
-    @Autowired
-    private GroupInfoTeachersService groupInfoTeachersService;
-
-    @Autowired
-    private TeacherTypeService teacherTypeService;
-
-    @Autowired
-    private StudentService studentsService;
-
-    @Autowired
-    private StudentsStatusesService studentsStatusesService;
+    private GroupInfoCustomRepository groupInfoCustomRepository;
 
     @Autowired
     private GroupInfoConverter groupInfoConverter;
+
+    @Autowired
+    DirectionService directionService;
+
+    @Autowired
+    TechnologyService technologyService;
+
+    @Autowired
+    CityService cityService;
 
     @Override
     public void save(GroupInfo groupInfo) {
@@ -67,120 +46,48 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     }
 
     /**
-     * Method contains information about group and information about experts in the group.
+     * Method combines information about groups and information about experts.
      *
-     * @return DTO object that contains information about group.
+     * @return List that contains information about group.
      */
     @Override
-    public List<GroupInformationDTO> getAllInfo() {
-        List<GroupInfoTeachers> getExpertsOfTheGroup = null;
-        List<GroupInformationDTO> allInfoAboutGroups = findAllInfoAboutGroups();
-        TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
-        if (teacherTypes != null) {
-            getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
-        }
-        if (getExpertsOfTheGroup != null) {
-            for (GroupInformationDTO groupInformationDTO : allInfoAboutGroups) {
-                for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
-                    if ((groupInfoTeachers.getAcademy().getAcademyId().equals(groupInformationDTO.getAcademyId()))) {
-                        groupInformationDTO.getFirstName().add(groupInfoTeachers.getEmployee().getFirstNameEng());
-                        groupInformationDTO.getLastName().add(groupInfoTeachers.getEmployee().getLastNameEng());
-                    }
-                }
-            }
+    public List<GroupInformationDTO> getAllInformationAboutGroup() {
+        List<GroupInformationDTO> groupInformation = groupInfoCustomRepository.getAllInformationAboutGroups();
+//        final Integer FIRST_ELEMENT_OF_THE_LIST = 0;
+//        int listCounter = 0;
+//        GroupInformationDTO previousElement = null;
+//        GroupInformationDTO currentElement = null;
+//        for(GroupInformationDTO groupInformationDTO: groupInformation){
+//            if(listCounter >= 2){
+//                if(previousElement.equals(currentElement)) {
+//                    previousElement.getFirstName().add(currentElement.getFirstName().get(FIRST_ELEMENT_OF_THE_LIST));
+//                    previousElement.getLastName().add(currentElement.getLastName().get(FIRST_ELEMENT_OF_THE_LIST));
+//                    groupInformation.remove(currentElement);
+//                }
+//            }
+//            listCounter++;
+//            previousElement = currentElement;
+//            currentElement = groupInformationDTO;
+//        }
 
-        }
-        return allInfoAboutGroups;
-    }
-
-    /**
-     * Method transforms information about academies from all tables into one DTO object.
-     *
-     * @return information about academies from all tables into one DTO object.
-     */
-    @Override
-    public List<AcademyForViewDTO> getAllAcademies() {
-        List<GroupInfo> groupInfoList = findAllWithOrder();
-        List<AcademyForViewDTO> academyDTOList = new ArrayList<>();
-        Integer countActualStudents = null;
-        List<GroupInfoTeachers> getExpertsOfTheGroup = null;
-        Set<LanguageTranslations> languageTranslations = languageTranslationsService.getAllLanguageTranslationsName();
-        TeacherTypes teacherTypes = teacherTypeService.findOne(ConstantsFromDb.TEACHER_TYPE_EXPERT_ID);
-        StudentStatuses studentStatuses = studentsStatusesService.findOne(ConstantsFromDb.STUDENT_STATUS_TRAINEE_ID);
-        if (teacherTypes != null) {
-            getExpertsOfTheGroup = groupInfoTeachersService.findAllByTeacherType(teacherTypes);
-        }
-        if (groupInfoList != null) {
-            for (GroupInfo groupInfo : groupInfoList) {
-                AcademyForViewDTO academyDTO = academyConverter.toDTO(groupInfo);
-                Academy academy = groupInfo.getAcademy();
-                if (academy != null) {
-                    if (academy.getCity() != null) {
-                        for (LanguageTranslations languageTranslation : languageTranslations) {
-                            if (languageTranslation.getItemId() == academy.getCity().getCityId()) {
-                                academyDTO.setCityName(languageTranslation.getTrasnlation());
-                                break;
-                            }
-                        }
-                    }
-                    if (academy.getAcademyStages() != null) {
-                        academyDTO.setStatus(academy.getAcademyStages().getName());
-                    }
-                    List<String> employeeList = new ArrayList<>();
-                    if (getExpertsOfTheGroup != null) {
-                        for (GroupInfoTeachers groupInfoTeachers : getExpertsOfTheGroup) {
-                            if ((groupInfoTeachers.getAcademy().getAcademyId() == academy.getAcademyId())
-                                    && groupInfoTeachers != null) {
-                                employeeList.add(groupInfoTeachers.getEmployee().getFirstNameEng() + " "
-                                        + groupInfoTeachers.getEmployee().getLastNameEng());
-                            }
-                        }
-                    }
-                    if (employeeList.size() != 0) {
-                        academyDTO.setExperts(employeeList);
-                    }
-                    if (studentStatuses != null) {
-                        countActualStudents = studentsService.countAllByAcademyAndStudentStatus(academy,
-                                studentStatuses);
-                    }
-                    if (countActualStudents != null) {
-                        academyDTO.setStudentsActual(countActualStudents);
-                    }
-                }
-                if (groupInfo.getProfileInfo() != null) {
-                    academyDTO.setProfileName(groupInfo.getProfileInfo().getProfileName());
-                }
-                academyDTOList.add(academyDTO);
+        for (int i = 1; i < groupInformation.size(); i++) {
+            if(groupInformation.get(i).equals(groupInformation.get(i-1))){
+                groupInformation.get(i-1).getFirstName().add(groupInformation.get(i).getFirstName().get(0));
+                groupInformation.get(i-1).getLastName().add(groupInformation.get(i).getLastName().get(0));
+                groupInformation.remove(i);
+                i--;
             }
         }
-
-        AcademyForViewDTO academyForViewDTO = new AcademyForViewDTO();
-        academyForViewDTO.setAcademyStages(academyStagesService.getAllAcademyStagesService());
-        academyForViewDTO.setDirection(directionService.findAllDirectionsInIta());
-        academyForViewDTO.setTechnologie(technologyServiceImpl.findAllTechonologyInIta());
-        academyForViewDTO.setProfile(profileService.findAll());
-        academyForViewDTO.setCityNames(languageTranslations);
-        academyDTOList.add(academyForViewDTO);
-        return academyDTOList;
-    }
-
-    /**
-     * Method returns data from GroupInfo table in order of adding records.
-     *
-     * @return data from GroupInfo table in order of adding records.
-     */
-    @Override
-    public List<GroupInfo> findAllWithOrder() {
-        return groupInfoRepository.findAllWithOrder();
-    }
-
-    @Override
-    public List<GroupInformationDTO> findAllInfoAboutGroups() {
-        return groupInfoRepository.findAllInfoAboutGroups();
+        return groupInformation;
     }
 
     @Override
     public GroupInfo findOneGroupInfoByAcademyId(int academyId) {
         return groupInfoRepository.findByAcademyAcademyId(academyId);
+    }
+
+    @Override
+    public AcademyForSaveDTO getAcademyForSaveDTO(Integer groupId) {
+        return groupInfoConverter.toDTO(findOneGroupInfoByAcademyId(groupId));
     }
 }

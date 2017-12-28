@@ -1,5 +1,7 @@
 package ua.softserve.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,17 +9,18 @@ import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
-import ua.softserve.service.converter.AcademyConverter;
 import ua.softserve.service.converter.GroupInfoConverter;
-import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyDropDownLists;
 import ua.softserve.service.dto.AcademyForSaveDTO;
+import ua.softserve.validator.GroupValidator;
 
 import java.util.List;
-import java.util.TreeMap;
+import java.util.NoSuchElementException;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
+    private final Logger logger = LoggerFactory.getLogger(AcademyServiceImpl.class.getName());
+
     @Autowired
     AcademyRepository academyRepository;
 
@@ -37,13 +40,13 @@ public class AcademyServiceImpl implements AcademyService {
     LanguageTranslationsService languageTranslationsService;
 
     @Autowired
+    GroupInfoConverter groupInfoConverter;
+
+    @Autowired
     GroupInfoService groupInfoService;
 
     @Autowired
-    AcademyConverter academyConverter;
-
-    @Autowired
-    GroupInfoConverter groupInfoConverter;
+    GroupValidator groupValidator;
 
     @Transactional
     @Override
@@ -53,25 +56,33 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Transactional
     @Override
-    public void saveAcademyFromAcademyDTO(AcademyForSaveDTO academyDTO) {
-        Academy academy = academyConverter.toEntity(academyDTO);
+    public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO) {
+        groupValidator.validate(academyDTO);
 
+        Academy academy = groupInfoConverter.academyToEntity(academyDTO);
         int academyId = save(academy);
 
-        saveGroupInfo(academyId, academyDTO);
-    }
-
-    @Transactional
-    public void saveGroupInfo(int academyId, AcademyForSaveDTO academyDTO) {
-        GroupInfo groupInfo = groupInfoConverter.toEntity(academyId, academyDTO);
+        GroupInfo groupInfo = groupInfoConverter.groupInfoToEntity(academyId, academyDTO);
         groupInfoService.save(groupInfo);
     }
 
     @Override
     public Academy findOne(int id) {
-        return academyRepository.findOne(id);
+        logger.info("Before academyRepository.findOne(id)");
+
+        Academy findGroup = academyRepository.findOne(id);
+        if (findGroup == null) {
+            logger.error("Group with id " + id + " not found");
+            throw new NoSuchElementException("Group with id " + id + " not found");
+        }
+        return findGroup;
     }
 
+    /**
+     * Method combines information for dropdown lists on the UI to DTO.
+     *
+     * @return DTO that contains information for dropdown lists.
+     */
     @Override
     public AcademyDropDownLists getAcademyDTO() {
         AcademyDropDownLists academyDropDownLists = new AcademyDropDownLists();

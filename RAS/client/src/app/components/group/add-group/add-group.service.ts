@@ -3,24 +3,27 @@ import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import {environment} from "../../../../environments/environment";
+import {Group} from "./group.model";
 
 @Injectable()
 export class AddGroupService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<any> {
-    return this.http.get(environment.serverUrl+'academy/addgroup',{withCredentials: true});
+  getDropdownList(): Observable<any> {
+    return this.http.get(environment.serverUrl+'/group',{withCredentials: true});
   }
 
-  post(object: any){
-    this.http.post(environment.serverUrl+'academy/addgroup', object,{withCredentials: true})
-      .subscribe(res => {
-        console.log(res);
-      }, err => {
-        console.log('Error occured');
-      }
-    );
+  getGroupById(groupId: number): Observable<any> {
+    return this.http.get(environment.serverUrl+'/group/'+groupId,{withCredentials: true});
+  }
+
+  saveGroup(object: any): Observable<any> {
+    return this.http.post(environment.serverUrl+'/group/add', object,{withCredentials: true});
+  }
+
+  updateGroup(group: Group): Observable<any> {
+    return this.http.put(environment.serverUrl+'group/update', group, {withCredentials: true});
   }
 
 }

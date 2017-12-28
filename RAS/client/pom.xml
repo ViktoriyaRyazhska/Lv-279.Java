@@ -46,13 +46,13 @@
                     </execution>
 
                     <execution>
-                        <id>npm run build</id>
+                        <id>npm run buildJenkins</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
 
                         <configuration>
-                            <arguments>run build</arguments>
+                            <arguments>run buildJenkins</arguments>
                         </configuration>
                     </execution>
                 </executions>

@@ -4,8 +4,6 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 
-import {GroupListComponent} from './components/group/group-list/group-list.component';
-import {GroupService} from './components/group/group.service';
 import {HistoryListComponent} from './components/history/history-list/history-list.component';
 import {ViewAcademiesComponent} from './components/view-academies/view-academies.component';
 import {AddGroupComponent} from "./components/group/add-group/add-group.component";
@@ -16,15 +14,11 @@ import {StudentsService} from "./services/students/students.service";
 import {ProfileInfoFilterPipe} from './components/group/add-group/add-group.pipe';
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
-import {FeedbackEditComponent} from "./components/feedbacks/feedback-edit/feedback-edit.component";
-import {FeedbackTeacherEditComponent} from "./components/feedbacks/feedback-edit/feedback-teacher-edit/feedback-teacher-edit.component";
-import {FeedbackExpertEditComponent} from "./components/feedbacks/feedback-edit/feedback-expert-edit/feedback-expert-edit.component";
-import {FeedbackInterviewerEditComponent} from "./components/feedbacks/feedback-edit/feedback-interviewer-edit/feedback-interviewer-edit.component";
 import {AppRoutingModule} from "./app-routing.module";
-import { LoginComponent } from './components/auth/login/login.component';
+import {LoginComponent} from './components/auth/login/login.component';
 import {LoginService} from "./components/auth/login/login.service";
 import {MyauthService} from "./components/auth/myauth.service";
-import {FeedbackEditPipe} from "./components/feedbacks/feedback-edit/feedback-edit.pipe";
+
 import {HeaderComponent} from './components/header/header.component';
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
@@ -33,25 +27,32 @@ import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
 
+import {MarkNamePipe} from "./components/feedbacks/feedback-list/mark-name.pipe";
+import {MarkPipe} from "./components/feedbacks/feedback-list/mark.pipe";
 import {MarkService} from "./services/feedbacks/marks.service";
 import {UsersService} from "./services/users/users.service";
 import {
-  MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule,
-  MatInputModule, MatExpansionModule
-} from "@angular/material";
+MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule,
+MatInputModule, MatExpansionModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule} from '@angular/material'
+import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule, MatDialogModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 import { FilterCheckListByGroupsComponent } from './components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component';
 import { SearchbarComponent } from './components/view-academies/searchbar/searchbar.component';
 import {SearchBarService} from "./components/view-academies/search-bar.service";
 import {CookieService} from "angular2-cookie/core";
 import { ErrorComponent } from './components/error/error.component';
+import { DialogComponent } from './components/group/dialog/dialog.component';
+import { PaymentPipe } from './payment.pipe';
+import {DataService} from "./services/data.service";
+import {BsModalService} from "ngx-bootstrap";
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+import { ViewAcademiesNgxComponent } from './components/view-academies/view-academies-ngx/view-academies-ngx.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GroupListComponent,
     HistoryListComponent,
     ViewAcademiesComponent,
     AddGroupComponent,
@@ -62,13 +63,9 @@ import { ErrorComponent } from './components/error/error.component';
     StudentsComponent,
     FeedbacksComponent,
     FeedbackListComponent,
-    FeedbackEditPipe,
+    MarkPipe,
+    MarkNamePipe,
     LoginComponent,
-    FeedbackEditComponent,
-    FeedbackTeacherEditComponent,
-    FeedbackExpertEditComponent,
-    FeedbackInterviewerEditComponent,
-    FeedbackEditPipe,
     HeaderComponent,
     NavTabsComponent,
     ItaTacticalPlanByGroupStageComponent,
@@ -77,8 +74,10 @@ import { ErrorComponent } from './components/error/error.component';
     FilterCheckListByGroupsComponent,
     SearchbarComponent,
     FilterCheckListByGroupsComponent,
-    ErrorComponent
-
+    ErrorComponent,
+    DialogComponent,
+    PaymentPipe,
+    ViewAcademiesNgxComponent
   ],
   imports: [
     BrowserModule,
@@ -101,11 +100,14 @@ import { ErrorComponent } from './components/error/error.component';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    ModalModule.forRoot(),
+    NgxDatatableModule
   ],
-  providers: [GroupService, AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
-    CookieService, SearchBarService],
-
+  providers: [AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
+    CookieService, SearchBarService, DataService, BsModalService],
+  entryComponents: [DialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="signupForm">
   <div class="container well">
     <div class="col-sm-12" id="form-test">
       <form [formGroup]="signupForm" id="formId" (ngSubmit)="saveGroup()">
@@ -120,7 +120,8 @@
 
 
 
-  <div>
+  <div [hidden]="!navtab">
     <app-nav-tabs [academyId]="groupId"></app-nav-tabs>
   </div>
 </div>
+

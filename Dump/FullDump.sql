@@ -222,9 +222,10 @@ CREATE TABLE `group_info` (
   `group_name` varchar(255) NOT NULL,
   `students_planned_to_enrollment` int(11) NOT NULL,
   `students_planned_to_graduate` int(11) NOT NULL,
-  `academy_id` int(11) DEFAULT NULL,
+  `academy_id` int(11) NOT NULL,
   `profile_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`group_info_id`),
+  UNIQUE KEY UKc33qefxcb9awf9f62rv0dtpor (academy_id),
   KEY `FKapr4vej8719lprb5fhrdbxj43` (`academy_id`),
   KEY `FK8kbtjrfh6mvfog3glapoetv4r` (`profile_id`),
   CONSTRAINT `FK8kbtjrfh6mvfog3glapoetv4r` FOREIGN KEY (`profile_id`) REFERENCES `profile_info` (`profile_id`),
@@ -786,7 +787,15 @@ UNLOCK TABLES;
 
 LOCK TABLES `profile_info` WRITE;
 /*!40000 ALTER TABLE `profile_info` DISABLE KEYS */;
-INSERT INTO `profile_info` VALUES (1,'Ruby',49),(2,'Java: Web 2.0',3),(3,'Java: Web TAE',31),(4,'.NET: Web TAE',31),(5,'.NET: Web',4),(6,'Python',50),(7,'Python: Web TAE',31),(8,'DevOps: Unix',9),(9,'Generic QCE',41),(10,'Go',54),(11,'Apple: Mobile 2.0',53),(12,'MSSQL: Development',6),(13,'Web UI',11),(14,'NodeJS',11);
+INSERT INTO `profile_info` VALUES (1,'Ruby',49),
+(2,'Java: Web 2.0',3),(3,'Java: Web TAE',31),(4,'.NET: Web TAE',31),(5,'.NET: Web',4),(6,'Python',50),
+(7,'Python: Web TAE',31),(8,'DevOps: Unix',9),(9,'Generic QCE',41),(10,'Go',54),(11,'Apple: Mobile 2.0',53),(12,'MSSQL: Development',6),(13,'Web UI',11),
+(14,'NodeJS',11),
+(15,'C/C++: Mobile',15),
+(16,'C/C++: Unix',15),
+(17,'C/C++: Generic',15),
+(18,'Java Core',3),
+(19,'Java: Integration',3);
 /*!40000 ALTER TABLE `profile_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -857,5 +866,672 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+    
+-- Functions for CheckListRepport
+
+DELIMITER //
+
+drop function if exists check_english_level//
+create function check_english_level (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(english_level_id) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_english_level_correct//
+create function check_english_level_correct (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    select check_english_level(ac, id) into @countz;
+    
+    if @countz <> 0 then
+		begin
+			select min(english_level_id) into @min_english_level from students s
+			where s.academy_id = id and student_status_id in (1,3,8);
+        
+			if @min_english_level >= 8 then set res = 1; end if;
+        end;
+	end if;
+    
+    return res;
+end//
+
+drop function if exists check_entry_score//
+create function check_entry_score (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(entry_score) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_incoming_test//
+create function check_incoming_test (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(incoming_test) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_approved_by//
+create function check_approved_by (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(employee_id) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_test_1//
+create function check_test_1 (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(test_1) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_test_2//
+create function check_test_2 (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(test_2) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_test_3//
+create function check_test_3 (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(test_3) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_test_4//
+create function check_test_4 (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(test_4) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_test_5//
+create function check_test_5 (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(test_5) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_test_6//
+create function check_test_6 (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(test_6) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_test_7//
+create function check_test_7 (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(test_7) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_test_8//
+create function check_test_8 (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(test_8) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_test_9//
+create function check_test_9 (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(test_9) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_test_10//
+create function check_test_10 (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(test_10) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_interm_test_base//
+create function check_interm_test_base (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(interm_test_base) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_interm_test_lang//
+create function check_interm_test_lang (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(interm_test_lang) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_teacher_feedback//
+create function check_teacher_feedback (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(teacher_student_feedback_id) into @teacher_feedback from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+    
+    select count(teacher_score) into @teacher_score from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+    
+    if ac - @teacher_feedback = 0 then 
+		if ac - @teacher_score = 0 then
+			set res = 1;
+		end if;
+	end if;
+    
+    return res;
+end//
+
+drop function if exists check_expert_feedback//
+create function check_expert_feedback (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(expert_student_feedback_id) into @expert_feedback from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+    
+    select count(expert_score) into @expert_score from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+    
+    if ac - @expert_feedback = 0 then 
+		if ac - @expert_score = 0 then
+			set res = 1;
+		end if;
+	end if;
+    
+    return res;
+end//
+
+drop function if exists check_final_base//
+create function check_final_base (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(final_base) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_final_lang//
+create function check_final_lang (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(final_lang) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_interviewer_summary//
+create function check_interviewer_summary (ac int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if ac = 0 then set ac = 10; end if;
+    
+    select count(interviewer_comment) into @countz from students s
+	where s.academy_id = id and student_status_id in (1,3,8);
+	
+    if ac - @countz = 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_assigned_teachers//
+create function check_assigned_teachers (teacher_type int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    select count(employee_id) into @countz from group_info_teachers git
+		where git.academy_id = id and teacher_type_id = teacher_type;
+	
+    if @countz <> 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists check_contributed_hours//
+create function check_contributed_hours (teacher_type int, id int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    select count(contributed_hours) into @countz from group_info_teachers git
+		where git.academy_id = id and teacher_type_id = teacher_type;
+	
+    if @countz <> 0 then set res = 1; end if;
+    
+    return res;
+end//
+
+drop function if exists group_started_successfuly//
+create function group_started_successfuly (i1 int, i2 int, i3 int, i4 int, i5 int, i6 int, i7 int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if i1 = 1 then
+		if i2 = 1 then
+			if i3 = 1 then
+				if i4 = 1 then
+					if i5 = 1 then
+						if i6 = 1 then
+							if i7 = 1 then
+								set res = 1;
+							end if;
+						end if;
+					end if;
+				end if;
+			end if;
+		end if;
+	end if;
+       
+    
+    return res;
+end//
+
+drop function if exists group_ready_to_offering//
+create function group_ready_to_offering (i1 int, i2 int, i3 int, i4 int, i5 int, i6 int, i7 int, i8 int, i9 int, i10 int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if i1 = 1 then
+		if i2 = 1 then
+			if i3 = 1 then
+				if i4 = 1 then
+					if i5 = 1 then
+						if i6 = 1 then
+							if i7 = 1 then
+								if i8 = 1 then
+									if i9 = 1 then
+										if i10 = 1 then
+											set res = 1;
+										end if;
+									end if;
+								end if;
+							end if;
+						end if;
+					end if;
+				end if;
+			end if;
+		end if;
+	end if;
+       
+    
+    return res;
+end//
+
+drop function if exists group_ready_for_close//
+create function group_ready_for_close (i1 int, i2 int, i3 int, i4 int, i5 int, i6 int, i7 int)
+returns int 
+deterministic
+begin
+	declare res int;
+    set res = 0;
+    
+    if i1 = 1 then
+		if i2 = 1 then
+			if i3 = 1 then
+				if i4 = 1 then
+					if i5 = 1 then
+						if i6 = 1 then
+							if i7 = 1 then
+								set res = 1;
+							end if;
+						end if;
+					end if;
+				end if;
+			end if;
+		end if;
+	end if;       
+    
+    return res;
+end//
+
+drop function if exists check_list_report_total//
+create function check_list_report_total (i1 int, i2 int, i3 int, i4 int, i5 int, i6 int, i7 int, i8 int, i9 int, i10 int, i11 int, i12 int,
+                                        i13 int, i14 int, i15 int, i16 int, i17 int, i18 int, i19 int, i20 int, i21 int, i22 int)
+returns float 
+deterministic
+begin
+	declare res float;
+    set res = 0;
+    
+    set res = i1 + i2 + i3 + i4 + i5 + i6 + i7 + i8 + i9 + i10 + i11 + i12 + i13 + i14 + i15 + i16 + i17 + i18 + i19 + i20 + i21 + i22;
+    set res = round(res / 22 * 100 * 100) / 100;
+    
+    return res;
+end//
+
+DROP FUNCTION IF EXISTS get_teachers_names//
+
+CREATE FUNCTION get_teachers_names(teacher_type int, id INT)
+  RETURNS VARCHAR(100)
+DETERMINISTIC
+  BEGIN
+    RETURN (SELECT
+				group_concat(concat(" ",e.first_name_eng, " ", e.last_name_eng)) name
+			FROM employee e
+				join group_info_teachers git
+					on git.employee_id = e.employee_id
+			WHERE git.academy_id = id and git.teacher_type_id = teacher_type);
+  END //
+
+DELIMITER ;
+
+-- view for CheckListReport
+drop view if exists check_list_report;
+create view  check_list_report as
+	select 
+		
+		gi.academy_id,
+		gi.group_name group_name,
+        lt.trasnlation city_name,
+        acs.name status,
+        
+        (SELECT get_teachers_names(1, gi.academy_id)) teachers,
+        
+        (SELECT get_teachers_names(2, gi.academy_id)) experts,
+        
+        (select count(*) from students s
+		where s.academy_id = a.academy_id and student_status_id in (1,3,8)) active_students_count,
+        
+        (select check_english_level(active_students_count, gi.academy_id)) english_level,
+        
+        (select check_english_level_correct(active_students_count, gi.academy_id)) english_level_correct,
+        
+		(select check_english_level(active_students_count, gi.academy_id)) entry_score,
+        
+        (select check_incoming_test(active_students_count, gi.academy_id)) incoming_test,
+        
+        (select check_approved_by(active_students_count, gi.academy_id)) approved_by,
+        
+        (select check_test_1(active_students_count, gi.academy_id)) test_1,
+        
+        (select check_test_2(active_students_count, gi.academy_id)) test_2,
+        
+        (select check_test_3(active_students_count, gi.academy_id)) test_3,
+        
+        (select check_test_4(active_students_count, gi.academy_id)) test_4,
+        
+        (select check_test_5(active_students_count, gi.academy_id)) test_5,
+        
+        (select check_test_6(active_students_count, gi.academy_id)) test_6,
+        
+        (select check_test_7(active_students_count, gi.academy_id)) test_7,
+        
+        (select check_test_8(active_students_count, gi.academy_id)) test_8,
+        
+        (select check_test_9(active_students_count, gi.academy_id)) test_9,
+        
+        (select check_test_10(active_students_count, gi.academy_id)) test_10,
+        
+        (select check_interm_test_base(active_students_count, gi.academy_id)) interm_test_base,
+        
+        (select check_interm_test_lang(active_students_count, gi.academy_id)) interm_test_lang,
+        
+        (select check_teacher_feedback(active_students_count, gi.academy_id)) teacher_feedback,
+        
+        (select check_expert_feedback(active_students_count, gi.academy_id)) expert_feedback,
+        
+        (select check_final_base(active_students_count, gi.academy_id)) final_base,
+        
+        (select check_final_lang(active_students_count, gi.academy_id)) final_lang,
+        
+        (select check_interviewer_summary(active_students_count, gi.academy_id)) interviewer_summary,
+                
+        (select check_assigned_teachers(1, gi.academy_id)) teachers_assigned,
+                
+        (select check_assigned_teachers(2, gi.academy_id)) experts_assigned,
+                
+        (select check_assigned_teachers(3, gi.academy_id)) interviewers_assigned,
+        
+        (select check_contributed_hours(2, gi.academy_id)) experts_load,
+        
+        (select check_contributed_hours(3, gi.academy_id)) interviewer_load,
+        
+        (select group_started_successfuly(
+			english_level, english_level_correct, entry_score, incoming_test, approved_by, teachers_assigned, experts_assigned)) group_started_successfuly,
+            
+		(select group_ready_to_offering(group_started_successfuly,
+            test_1, test_2, test_3, test_4, test_5, interm_test_base, interm_test_lang, teacher_feedback, expert_feedback)) group_ready_to_offering,
+        
+        (select group_ready_for_close(group_ready_to_offering,
+            final_base, final_lang, interviewers_assigned, interviewer_summary, experts_load, interviewer_load)) group_ready_for_close,
+        
+        (select check_list_report_total(
+			english_level, english_level_correct, entry_score, incoming_test, approved_by, teachers_assigned, experts_assigned,
+            test_1, test_2, test_3, test_4, test_5, interm_test_base, interm_test_lang, teacher_feedback, expert_feedback,
+            final_base, final_lang, interviewers_assigned, interviewer_summary, experts_load, interviewer_load)) total
+        
+	from academy a
+		join group_info gi
+			on gi.academy_id = a.academy_id
+		join academy_stages acs
+			on acs.stage_id = a.stage_id
+		join language_translations lt
+			on lt.item_id = a.city_id
+            and lt.tag like 'city'
+            and lt.local like 'en'
+	order by a.academy_id;
 
 -- Dump completed on 2017-12-17 13:52:32
+

@@ -3,9 +3,10 @@
 <div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef='grName'>
+    <ng-container matColumnDef='groupName'>
       <mat-header-cell *matHeaderCellDef mat-sort-header>Group Name</mat-header-cell>
-      <mat-cell *matCellDef="let element"><a routerLink="/ang/addgroup/{{element}}"> {{element.grName}} </a>
+      <!--<mat-cell *matCellDef="let element"><a routerLink="/ang/group/update/{{element.academyId}}"> {{element.groupName}} </a>-->
+        <mat-cell *matCellDef="let element"><a (click)="sendDataToAddGroupComponent(element)" routerLink="/ang/group/update/{{element.academyId}}"> {{element.groupName}} </a>
       </mat-cell>
     </ng-container>
 
@@ -14,13 +15,13 @@
       <mat-cell *matCellDef="let element"> {{element.nameForSite}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="technologyName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Technology</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.technologyName}}</mat-cell>
+    <ng-container matColumnDef="directionName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Direction</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.directionName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="profileName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Direction</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Profile</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.profileName}}</mat-cell>
     </ng-container>
 
@@ -44,24 +45,24 @@
       <mat-cell *matCellDef="let element"> {{element.endDate | date: "dd.MM.yyyy"}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="academyStage">
+    <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-      <mat-cell *matCellDef="let element">---</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="experts">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Experts</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.experts}}</mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstName + ' ' + element.lastName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="studentPlannedToGraduate">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Students Planned To Graduate</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.studentPlannedToGraduate}}</mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.studentsPlannedToGraduate}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="studentPlannedToEnrollment">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Students Planned To Enrollment</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.studentPlannedToEnrollment}}</mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.studentsPlannedToEnrollment}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="studentsActual">
@@ -71,12 +72,12 @@
 
     <ng-container matColumnDef="hiredNotGraduated">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Hired Not Graduated</mat-header-cell>
-      <mat-cell *matCellDef="let element"> ---</mat-cell>
+      <mat-cell *matCellDef="let element"> --- </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="directionName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Direction Name</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.directionName}}</mat-cell>
+    <ng-container matColumnDef="commonDirectionName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>CommonDirection</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.commonDirectionName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="interviewerFeedback">

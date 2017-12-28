@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {LoginService} from "./components/auth/login/login.service";
-import {CookieService} from "angular2-cookie/core";
+import {CookieService} from 'angular2-cookie/core';
 import {isUndefined} from "util";
 
 @Component({

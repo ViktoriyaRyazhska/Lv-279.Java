@@ -12,18 +12,16 @@ import java.util.List;
 @Service
 public class HistoryServiceImpl implements HistoryService {
     @Autowired
-    private HistoryRepository historyDAO;
+    private HistoryRepository historyRepository;
 
-    @Transactional
     @Override
     public List<History> findByAcademyId(int academyId) {
-        return historyDAO.findByAcademyId(academyId);
+        return historyRepository.findByAcademyId(academyId);
     }
 
-    @Transactional
     @Override
     public List<History> findAll() {
-        return historyDAO.findAll();
+        return historyRepository.findAll();
     }
 
 }

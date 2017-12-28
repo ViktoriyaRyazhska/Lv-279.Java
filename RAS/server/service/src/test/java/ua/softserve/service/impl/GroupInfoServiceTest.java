@@ -63,7 +63,8 @@
 //        groupInfo.setAcademy(new Academy());
 //        studentStatuses = new StudentStatuses();
 //    }
-////    @Ignore
+//
+//    //    @Ignore
 ////    @Test
 ////    public void All_Services_Returns_Not_NULL() {
 ////        Mockito.when(languageTranslationsService.getAllLanguageTranslationsName())
@@ -101,6 +102,7 @@
 //        Mockito.verifyNoMoreInteractions(languageTranslationsService, teacherTypeService, studentsStatusesService,
 //                groupInfoTeachersService, academyConverter, studentsService);
 //    }
+//
 //    @Ignore
 //    @Test
 //    public void Group_Info_Teacher_Service_Return_NULL() {

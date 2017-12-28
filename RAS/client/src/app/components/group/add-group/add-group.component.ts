@@ -1,10 +1,13 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
-import {AddGroupService} from "./add-group.service";
 import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Group} from "./group.model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AddGroupService} from "./add-group.service";
+import {MatDialog} from "@angular/material";
+import {DialogComponent} from "../dialog/dialog.component";
+import {DataService} from "../../../services/data.service";
 
 @Component({
   selector: 'app-add-group',
@@ -14,9 +17,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 
 export class AddGroupComponent implements OnInit {
-  private signupForm: FormGroup;
+  signupForm: FormGroup;
 
-  private group: Group;
+  group: Group;
 
   academyStatus: any[];
   city: any[];
@@ -29,7 +32,7 @@ export class AddGroupComponent implements OnInit {
 
   invalidDate: boolean = false;
 
-  numberPattern = '^(0|[1-9][0-9]*)$';
+  navtab: boolean = false;
 
   private defaultInvalidInput: string = 'No data entered. Group will not be save';
 
@@ -40,13 +43,26 @@ export class AddGroupComponent implements OnInit {
 
   constructor(private addGroupService: AddGroupService,
               private route: ActivatedRoute,
-              private router:Router) {
+              private router:Router,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.group = new Group();
     this.groupId = this.route.snapshot.params['id'];
-    this.addGroupService.getAll().subscribe(resp => {
+
+    this.getDropdownOnInit();
+
+    if(this.router.url.includes('group/update')){
+      this.navtab = true;
+      this.updateGroup();
+    }else if(this.router.url.includes('group/add')) {
+      this.formGroupOnInit();
+    }
+  }
+
+  getDropdownOnInit(){
+    this.addGroupService.getDropdownList().subscribe(resp => {
       this.academyStatus = resp.academyStages;
       this.city = resp.cityNames;
       this.commonDirection = resp.direction;
@@ -57,7 +73,9 @@ export class AddGroupComponent implements OnInit {
         this.router.navigate(['ang/error']);
       }
     });
+  }
 
+  formGroupOnInit(){
     this.signupForm = new FormGroup({
       'groupInfoFormControl': new FormControl(this.group.grName, [Validators.required]),
       'nameForSiteFormControl': new FormControl(this.group.nameForSite, [Validators.required]),
@@ -68,7 +86,7 @@ export class AddGroupComponent implements OnInit {
       'commonDirectionFormControl': new FormControl(this.group.directionId),
       'directionFormControl': new FormControl(this.group.technologieId),
       'profileInfoFormControl': new FormControl(this.group.profileId),
-      'paymentStatusFormControl': new FormControl(this.group.paymentStatus),
+      'paymentStatusFormControl': new FormControl(this.group.payment),
       'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate /*, this.myValidator.bind(this)*/),
       'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment),
       'studentActualFromControl': new FormControl({value: this.group.studentActual, disabled: true})
@@ -101,16 +119,14 @@ export class AddGroupComponent implements OnInit {
   }
 
   saveGroup() {
-    console.log(this.signupForm);
-
     if (this.isFormValid()) {
       this.group.setDataFromFormControl(this.signupForm);
       this.invalidForm = false;
-      this.addGroupService.post(this.group);
+      this.sendData();
       console.log('valid');
     } else {
-      console.log('invalid');
       this.invalidForm = true;
+      console.log('invalid');
     }
   }
 
@@ -120,6 +136,48 @@ export class AddGroupComponent implements OnInit {
       return null;
     }
     return null;
+  }
+
+  private sendData(){
+    this.addGroupService.saveGroup(this.group).subscribe(res => {
+      if(res==null || res == 200){
+        this.openDialog();
+      }
+    },error => {
+      this.errorOpenDialog();
+      console.log(error)
+    });
+  }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      data: {message: 'Group was successfully saved', err:false}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigate(['ang/viewAcademies']);
+
+    });
+  }
+
+  errorOpenDialog(): void {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      data: {message: 'Something goes wrong', err: true}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  updateGroup(){
+    this.addGroupService.getGroupById(this.groupId).subscribe(group => {
+      this.group.setDataToGroup(group);
+      this.formGroupOnInit();
+    },error => {
+      console.log(error);
+    });
+
   }
 
 }

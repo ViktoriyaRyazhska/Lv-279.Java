@@ -14,6 +14,7 @@ import {AppComponent} from "./app.component";
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component";
 import {ErrorComponent} from "./components/error/error.component";
+import {ViewAcademiesNgxComponent} from "./components/view-academies/view-academies-ngx/view-academies-ngx.component";
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
   {path: 'ang/viewAcademies', component: ViewAcademiesComponent, children: [
     {path: 'ggg', component: AddGroupComponent}
   ]},
+  {path: 'ang/viewAcademies/test', component: ViewAcademiesNgxComponent},
   {path: 'ang/students', component: StudentsComponent},
   {path: 'ang/feedback', component: FeedbacksComponent},
   {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},
