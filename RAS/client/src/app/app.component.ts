@@ -17,6 +17,6 @@ export class AppComponent {
     this.isSignedIn = this.loginService.isSignedIn();
   }
   isSignedInForApp(): boolean {
-    return !isUndefined(this.cookie.get('token'));
+    return !isUndefined(this.cookie.get('auth'));
   }
 }

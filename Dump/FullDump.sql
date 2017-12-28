@@ -165,6 +165,20 @@ CREATE TABLE `employee` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `employee_roles`
+--
+
+DROP TABLE IF EXISTS `employee_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employee_roles` (
+  `employeeroles_id` int(11) NOT NULL AUTO_INCREMENT,
+  `authority` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`employeeroles_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `english_level`
 --
 
@@ -355,7 +369,6 @@ CREATE TABLE `login_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account_non_expired` bit(1) NOT NULL,
   `account_non_locked` bit(1) NOT NULL,
-  `authority` varchar(255) DEFAULT NULL,
   `credentials_non_expired` bit(1) NOT NULL,
   `enabled` bit(1) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -364,7 +377,24 @@ CREATE TABLE `login_user` (
   PRIMARY KEY (`id`),
   KEY `FKctad27fryj7tnantkhbqggr1v` (`employee_id`),
   CONSTRAINT `FKctad27fryj7tnantkhbqggr1v` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `loginuser_employeeroles`
+--
+
+DROP TABLE IF EXISTS `loginuser_employeeroles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `loginuser_employeeroles` (
+  `id` int(11) NOT NULL,
+  `employeeroles_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`employeeroles_id`),
+  KEY `FKgvekcnf1ydg5qtikcho8shaae` (`employeeroles_id`),
+  CONSTRAINT `FKkl3g1t81y0pbexjofd0xn4ct7` FOREIGN KEY (`id`) REFERENCES `login_user` (`id`),
+  CONSTRAINT `FKgvekcnf1ydg5qtikcho8shaae` FOREIGN KEY (`employeeroles_id`) REFERENCES `employee_roles` (`employeeroles_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -674,6 +704,16 @@ INSERT INTO `employee` VALUES (1,'Ivan','Іван','Kostyuk','Костюк','П�
 UNLOCK TABLES;
 
 --
+-- Dumping data for table `employee_roles`
+--
+
+LOCK TABLES `employee_roles` WRITE;
+/*!40000 ALTER TABLE `employee_roles` DISABLE KEYS */;
+INSERT INTO `employee_roles` VALUES (1,'TEACHER'),(2,'EXPERT'),(3,'INTERVIEWER'),(4,'NETWORK_LEAD'),(5,'ITA_COORDINATOR'),(6,'ITA_ADMIN'),(7,'RECRUITER'),(8,'SOFTSERVE_PM');
+/*!40000 ALTER TABLE `employee_roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping data for table `english_level`
 --
 
@@ -757,8 +797,18 @@ UNLOCK TABLES;
 
 LOCK TABLES `login_user` WRITE;
 /*!40000 ALTER TABLE `login_user` DISABLE KEYS */;
-INSERT INTO `login_user` VALUES (1,'','','USER','','','$2a$10$xsC3s4zqKO8CdStghFgqa.2/hw0ADFoNWPpjgiO2AOl3YhUUTnaUu','1',1),(2,'','','ADMIN','','','$2a$10$CQ.60ak/MVz4US0yLKU.NOYP2tQaNCVgnQbjm0AeR9yk63Ac/HhO2','admin',2),(3,'','','TEACHER','','','$2a$10$eWhb7Uz/ieOnfQDBjTOWWevSdEDgFpBjyRbusymXjyivG6Ht.X6f2','teacher',NULL),(4,'','','INTERVIEWER','','','$2a$10$8p7pTBdJMoKM8IKhLMgFkeuysqKkKGVd7xhk7BKkcu2BQPeetZkai','interviewer',NULL),(5,'','','EXPERT','','','$2a$10$uk8HbiWWIWvwXSyAqD2Xq.fMBdsFBK2svLqf28JlZd61UmrAC6HYa','expert',NULL),(6,'','','NETWORK_LEAD','','','$2a$10$zeonP.zr.rIyW9TUyfWQDeaIVoOUjbBRUNW.hm3TBWWSBO9hIWUD2','network_lead',NULL),(7,'','','ITA_COORDINATOR','','','$2a$10$An57CJXxOWyxBIFTxktMOObveyoX3bi5sZUm28jEbj9xR/OtqNZBu','ita_coordinator',NULL),(8,'','','ITA_ADMIN','','','$2a$10$PmBrMG3w9qrpKjy2bociHuwMEiHXZAQrtbE2TXFWsrJwS2oSRAXzi','ita_admin',NULL),(9,'','','RECRUITER','','','$2a$10$UQQqlWUgVCROgFtzeXc1ieA7fZoFrZyX53uZNpn8XoPORou4tYd3i','recruiter',NULL),(10,'','','SOFTSERVE_PM','','','$2a$10$tNFEFOLoDMYt9vXNTAG/s../TnuMktsMvhQHsgyMvTdJtGn3WUrC.','softserve_pm',NULL);
+INSERT INTO `login_user` VALUES (1,'','','','','$2a$10$JADJ2scItwF5HfBETnge4e0YFyr8kgMHntRTZ7dkHAchGh3m/4qI6','teacher',NULL),(2,'','','','','$2a$10$uqhIxfglXQi/LEpAYzllcebWPUJcXmXqC/9ZlUPK6.ewAvtIEux.e','expert',NULL),(3,'','','','','$2a$10$LSaYypTfNTegjc4Zr.aXv.ZAS/Y6AAIWdYSaD0z9G8YQCopOQidIS','interviewer',NULL),(4,'','','','','$2a$10$qMmbBP3iuYd5zpESCauT8OK8llTbE9kF6rXoI8gqPdRaLNM2V3/rG','network_lead',NULL),(5,'','','','','$2a$10$dKevT15RapKefa69tl1/LOnmMl32GFofKzVWzdYmOV6rpoRHUC0oW','ita_coordinator',NULL),(6,'','','','','$2a$10$nfpCsY8OWOkhCZTfJ1lRAuDfsNmLcSCHbwxYupZX.a4dHV6pqJXJe','ita_admin',NULL),(7,'','','','','$2a$10$fnrARL/5xpDJwhMKpxnVSe0mh9IhczwJTjB7AXz6ZDaU4ZBEwagYq','recruiter',NULL),(8,'','','','','$2a$10$xjBTA4Jy5c1jkJyeQ8pmt.inINk2WR7zWzfWZCvt.7c3rKLVm7Gvy','softserve_pm',NULL);
 /*!40000 ALTER TABLE `login_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `loginuser_employeeroles`
+--
+
+LOCK TABLES `loginuser_employeeroles` WRITE;
+/*!40000 ALTER TABLE `loginuser_employeeroles` DISABLE KEYS */;
+INSERT INTO `loginuser_employeeroles` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8);
+/*!40000 ALTER TABLE `loginuser_employeeroles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

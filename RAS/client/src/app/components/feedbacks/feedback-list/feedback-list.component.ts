@@ -5,6 +5,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Mark} from "../../../models/feedbacks/mark.model";
 import {MarkService} from "../../../services/feedbacks/marks.service";
 import {StudentsService} from "../../../services/students/students.service";
+import {LoginService} from "../../auth/login/login.service";
 
 export enum CharacteristicId {
   ZERO = 0,
@@ -59,7 +60,8 @@ export class FeedbackListComponent implements OnInit {
   constructor(private markService: MarkService,
               private studentsService: StudentsService,
               private route: ActivatedRoute,
-              private router:Router) {
+              private router:Router,
+              private loginService: LoginService) {
   }
 
 

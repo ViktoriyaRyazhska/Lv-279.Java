@@ -26,6 +26,7 @@ import {TestsNamesComponent} from "./components/tests-names/tests-names.componen
 import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
+import {PaginationConfig, PaginationModule} from 'ngx-bootstrap';
 
 import {MarkNamePipe} from "./components/feedbacks/feedback-list/mark-name.pipe";
 import {MarkPipe} from "./components/feedbacks/feedback-list/mark.pipe";
@@ -42,10 +43,15 @@ import { SearchbarComponent } from './components/view-academies/searchbar/search
 import {SearchBarService} from "./components/view-academies/search-bar.service";
 import {CookieService} from "angular2-cookie/core";
 import { ErrorComponent } from './components/error/error.component';
+import {JwtHelper} from "angular2-jwt";
+import { EmployeeComponent } from './components/employee/employee.component';
+import { EmployeeAddComponent } from './components/employee/employee-add/employee-add.component';
+import {BsModalRef, BsModalService, ComponentLoaderFactory, PositioningService, ModalBackdropComponent} from "ngx-bootstrap";
+import {ModalContainerComponent} from "ngx-bootstrap/modal";
+import {EmployeeService} from "./components/employee/employee.service";
 import { DialogComponent } from './components/group/dialog/dialog.component';
 import { PaymentPipe } from './payment.pipe';
 import {DataService} from "./services/data.service";
-import {BsModalService} from "ngx-bootstrap";
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import { ViewAcademiesNgxComponent } from './components/view-academies/view-academies-ngx/view-academies-ngx.component';
@@ -75,10 +81,20 @@ import { ViewAcademiesNgxComponent } from './components/view-academies/view-acad
     SearchbarComponent,
     FilterCheckListByGroupsComponent,
     ErrorComponent,
+    EmployeeComponent,
+    EmployeeAddComponent,
+    // ModalBackdropComponent,
+    // ModalContainerComponent,
+    ErrorComponent,
     DialogComponent,
     PaymentPipe,
     ViewAcademiesNgxComponent
   ],
+  entryComponents: [
+    EmployeeAddComponent,
+    ModalBackdropComponent,
+    ModalContainerComponent,
+    DialogComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -101,13 +117,15 @@ import { ViewAcademiesNgxComponent } from './components/view-academies/view-acad
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
+    PaginationModule,
+    MatExpansionModule,
     MatDialogModule,
     ModalModule.forRoot(),
     NgxDatatableModule
   ],
   providers: [AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
-    CookieService, SearchBarService, DataService, BsModalService],
-  entryComponents: [DialogComponent],
+    CookieService, SearchBarService, DataService, JwtHelper, BsModalService, BsModalRef, ComponentLoaderFactory, PositioningService,PaginationConfig,
+  EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

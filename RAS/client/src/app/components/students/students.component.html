@@ -11,6 +11,7 @@
        </span>
     </ng-template>
   </p-column>
+  <span *ngIf="this.loginService.securityForAddStudent()">
   <p-column field="user.id" header="#" [editable]="false"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
@@ -19,6 +20,7 @@
        </span>
     </ng-template>
   </p-column>
+  </span>
   <p-column field="data.englishLevel.name" header="English Level" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'11em'}"></p-column>
   <p-column field="data.entryScore" header="Entry Score" [editable]="true" [filter]="true" [sortable]="true"
@@ -254,11 +256,13 @@
     <button pButton type="button" (click)="removeSelectedStudent()" label="Remove" class="ui-button-danger"
             style="margin-top: 1em; float: right"></button>
   </p-dialog>
-
+<span *ngIf="this.loginService.securityForAddStudent()">
 <button mat-raised-button color="primary" (click)="addUserClick()">Add students</button>
+</span>
 
+<span *ngIf="this.loginService.securityForAddStudentChanges()">
 <button mat-raised-button color="primary" class="saveColor" (click)="updateStudentsClick()">Save</button>
-
+</span>
 <p-dialog header="Add students" modal="false" [(visible)]="displayUsersList" [responsive]="true" width="450">
   <div *ngIf="users">
     <p-dataTable [value]="users.content" [lazy]="true" [(selection)]="selectedUsers" dataKey="id"

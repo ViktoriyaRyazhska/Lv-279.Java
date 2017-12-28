@@ -4,7 +4,9 @@
       <p-column header="Name" rowspan="3" field="user.firstName" [sortable]="true"
                 [style]="{'width':'10em'}"></p-column>
       <p-column rowspan="3" [style]="{'width':'10em'}"></p-column>
+      <span *ngIf="this.loginService.securityForProvideFeedback()">
       <p-column rowspan="3" [style]="{'width':'10em'}"></p-column>
+      </span>
 
       <p-column header="Teacher Mark" colspan="7" [style]="{'width':'70em'}"></p-column>
       <p-column header="Expert Mark" colspan="7" [style]="{'width':'70em'}"></p-column>
@@ -69,7 +71,9 @@
     <p-row>
       <p-column field="user.firstName" [filter]="true" [style]="{'width':'10em'}"></p-column>
       <p-column [style]="{'width':'10em'}"></p-column>
+      <span *ngIf="this.loginService.securityForProvideFeedback()">
       <p-column [style]="{'width':'10em'}"></p-column>
+      </span>
 
       <p-column field="teacherFeedback.learningAbility.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
@@ -167,6 +171,7 @@
     </ng-template>
   </p-column>
 
+  <span *ngIf="this.loginService.securityForProvideFeedback()">
   <p-column [style]="{'width':'10em'}">
       <ng-template let-col let-student="rowData" pTemplate="body">
         <span>
@@ -174,6 +179,7 @@
         </span>
       </ng-template>
     </p-column>
+  </span>
 
 
   <p-column field="teacherFeedback.learningAbility.name" [style]="{'width':'10em'}"></p-column>
@@ -437,7 +443,7 @@
   </div>
   <form [formGroup]="signupFeedbackForm" (ngSubmit)="onSaveClose()">
     <p-tabView (onChange)="setDataToStudent(signupFeedbackForm)">
-      <p-tabPanel header="Teacher">
+      <p-tabPanel header="Teacher" *ngIf="this.loginService.securityForTeacherFeedback()">
         <table *ngIf="selectedStudent && selectedStudent.user" class="table table-condensed table-bordered">
           <tr>
             <th width="25%">Characteristic</th>
@@ -593,7 +599,7 @@
           </tr>
         </table>
       </p-tabPanel>
-      <p-tabPanel header="Expert">
+      <p-tabPanel header="Expert" *ngIf="this.loginService.securityForExpertFeedback()">
         <table *ngIf="selectedStudent && selectedStudent.user" class="table table-condensed table-bordered">
           <tr>
             <th width="25%">Characteristic</th>
@@ -749,7 +755,7 @@
           </tr>
         </table>
       </p-tabPanel>
-      <p-tabPanel header="Interviewer">
+      <p-tabPanel header="Interviewer" *ngIf="this.loginService.securityForInterviewerFeedback()">
         <table *ngIf="selectedStudent && selectedStudent.user" class="table table-condensed table-bordered" width="900">
           <tr>
             <th width="100%">Summary comments (risks/strangths, recommendation):</th>

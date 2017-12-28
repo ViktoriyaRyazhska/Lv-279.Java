@@ -14,6 +14,7 @@ import {AppComponent} from "./app.component";
 import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component";
 import {ErrorComponent} from "./components/error/error.component";
+import {EmployeeComponent} from "./components/employee/employee.component";
 import {ViewAcademiesNgxComponent} from "./components/view-academies/view-academies-ngx/view-academies-ngx.component";
 
 const appRoutes: Routes = [
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
   {path: 'ang/feedback/:id', component: FeedbacksComponent},
   {path: 'ang/history/:id', component: HistoryListComponent},
   {path: 'ang', component: AppComponent},
-  {path: 'ang/error', component: ErrorComponent}
+  {path: 'ang/error', component: ErrorComponent},
+  {path: 'ang/employee/:id', component: EmployeeComponent}
 ];
 
 @NgModule({
