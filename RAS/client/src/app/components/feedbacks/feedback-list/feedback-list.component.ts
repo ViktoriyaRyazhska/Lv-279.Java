@@ -33,7 +33,7 @@ export class FeedbackListComponent implements OnInit {
   private selectedStudent: StudentFeedback;
 
   private updateStudents: StudentFeedback[] = [];
-  private marks: Array<Mark>;
+  private marks: Mark[];
 
   private displayStudentDetails: boolean;
   private displayOverallFeedback: boolean;
@@ -62,7 +62,12 @@ export class FeedbackListComponent implements OnInit {
               private router:Router) {
   }
 
-  ngOnInit() {
+
+
+
+
+
+ngOnInit() {
     this.academyId = this.route.snapshot.params['id'];
 
     this.markService.getAllMarks().subscribe(

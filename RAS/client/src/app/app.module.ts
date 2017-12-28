@@ -18,7 +18,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {LoginComponent} from './components/auth/login/login.component';
 import {LoginService} from "./components/auth/login/login.service";
 import {MyauthService} from "./components/auth/myauth.service";
-import {FeedbackEditPipe} from "./components/feedbacks/feedback-list/feedback-edit.pipe";
+
 import {HeaderComponent} from './components/header/header.component';
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
@@ -27,12 +27,13 @@ import {TestsService} from "./services/tests-names/tests.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
 
+import {MarkNamePipe} from "./components/feedbacks/feedback-list/mark-name.pipe";
+import {MarkPipe} from "./components/feedbacks/feedback-list/mark.pipe";
 import {MarkService} from "./services/feedbacks/marks.service";
 import {UsersService} from "./services/users/users.service";
 import {
-  MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule,
-  MatInputModule, MatExpansionModule
-} from "@angular/material";
+MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule,
+MatInputModule, MatExpansionModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule, MatDialogModule} from '@angular/material'
 import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
@@ -62,9 +63,9 @@ import { ViewAcademiesNgxComponent } from './components/view-academies/view-acad
     StudentsComponent,
     FeedbacksComponent,
     FeedbackListComponent,
-    FeedbackEditPipe,
+    MarkPipe,
+    MarkNamePipe,
     LoginComponent,
-    FeedbackEditPipe,
     HeaderComponent,
     NavTabsComponent,
     ItaTacticalPlanByGroupStageComponent,

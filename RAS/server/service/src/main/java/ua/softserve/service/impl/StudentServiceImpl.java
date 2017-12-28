@@ -28,10 +28,10 @@ public class StudentServiceImpl implements StudentService {
     private EmployeeRepository employeeRepository;
 
     /**
-     * Get list of all students subscribed on some group
+     * Get list of all students subscribed on some group.
      *
-     * @param academyId - academy/group id
-     * @return list of StudentsViewDto which will be displayed on UI
+     * @param academyId - academy/group id.
+     * @return list of StudentsViewDto which will be displayed on UI.
      */
     @Override
     @Transactional(readOnly = true)

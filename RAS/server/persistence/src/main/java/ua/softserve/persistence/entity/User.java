@@ -1,12 +1,3 @@
-/* User
-*
-* Version 1.0-SNAPSHOT
-*
-* 15.11.17
-*
-* All rights reserved by DoubleO Team (Team#1)
-*/
-
 package ua.softserve.persistence.entity;
 
 import lombok.AllArgsConstructor;
@@ -16,6 +7,7 @@ import lombok.Setter;
 import ua.softserve.util.encrypt.aes.EncryptConverter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -34,7 +26,8 @@ public class User {
     private String userName;
 
     @Convert(converter = EncryptConverter.class)
-    @Column(nullable = false)
+    @NotNull
+    @Column
     private String email;
 
     @Convert(converter = EncryptConverter.class)

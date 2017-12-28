@@ -1,4 +1,4 @@
-<p-dataTable [value]="students" [loading]="loading" scrollable="true" columnResizeMode="expand">
+<p-dataTable #dt [value]="students" [loading]="loading" scrollable="true" columnResizeMode="expand">
   <p-headerColumnGroup>
     <p-row>
       <p-column header="Name" rowspan="3" field="user.firstName" [sortable]="true"
@@ -71,21 +71,69 @@
       <p-column [style]="{'width':'10em'}"></p-column>
       <p-column [style]="{'width':'10em'}"></p-column>
 
-      <p-column field="teacherFeedback.learningAbility.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
-      <p-column field="teacherFeedback.overallTechnicalCompetence.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
-      <p-column field="teacherFeedback.passionalInitiative.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
-      <p-column field="teacherFeedback.teamWork.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
-      <p-column field="teacherFeedback.gettingThingsDone.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
-      <p-column field="teacherFeedback.activeCommunicator.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
+      <p-column field="teacherFeedback.learningAbility.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.ONE" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
+      <p-column field="teacherFeedback.overallTechnicalCompetence.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.TWO" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
+      <p-column field="teacherFeedback.passionalInitiative.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.THREE" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
+      <p-column field="teacherFeedback.teamWork.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.FOUR" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
+      <p-column field="teacherFeedback.gettingThingsDone.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.FIVE" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
+      <p-column field="teacherFeedback.activeCommunicator.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.SIX" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
 
       <p-column field="teacherFeedback.summary" [filter]="true" [style]="{'width':'10em'}"></p-column>
 
-      <p-column field="expertFeedback.learningAbility.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
-      <p-column field="expertFeedback.overallTechnicalCompetence.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
-      <p-column field="expertFeedback.passionalInitiative.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
-      <p-column field="expertFeedback.teamWork.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
-      <p-column field="expertFeedback.gettingThingsDone.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
-      <p-column field="expertFeedback.activeCommunicator.name" [filter]="true" [style]="{'width':'10em'}"></p-column>
+      <p-column field="expertFeedback.learningAbility.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.ONE" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
+      <p-column field="expertFeedback.overallTechnicalCompetence.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.TWO" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
+      <p-column field="expertFeedback.passionalInitiative.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.THREE" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
+      <p-column field="expertFeedback.teamWork.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.FOUR" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
+      <p-column field="expertFeedback.gettingThingsDone.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.FIVE" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
+      <p-column field="expertFeedback.activeCommunicator.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+        <ng-template pTemplate="filter" let-col>
+          <p-dropdown appendTo="body" [options]="marks | markNameFilter:CharId.SIX" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+        </ng-template>
+      </p-column>
 
       <p-column field="expertFeedback.summary" [filter]="true" [style]="{'width':'10em'}"></p-column>
 

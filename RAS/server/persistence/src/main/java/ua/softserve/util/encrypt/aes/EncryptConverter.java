@@ -9,7 +9,6 @@
 * */
 
 package ua.softserve.util.encrypt.aes;
-
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
