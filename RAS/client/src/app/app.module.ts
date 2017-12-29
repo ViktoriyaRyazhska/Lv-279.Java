@@ -9,15 +9,20 @@ import {ViewAcademiesComponent} from './components/view-academies/view-academies
 import {AddGroupComponent} from "./components/group/add-group/add-group.component";
 import {AddGroupService} from "./components/group/add-group/add-group.service";
 import {FilterPipe} from './components/view-academies/filter.pipe';
-import {StudentsComponent} from "./components/students/students.component";
-import {StudentsService} from "./services/students/students.service";
 import {ProfileInfoFilterPipe} from './components/group/add-group/add-group.pipe';
-import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
-import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {LoginComponent} from './components/auth/login/login.component';
 import {LoginService} from "./components/auth/login/login.service";
 import {MyauthService} from "./components/auth/myauth.service";
+
+import {StudentsComponent} from "./components/students/students.component";
+import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
+import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
+import {MarkService} from "./services/feedbacks/marks.service";
+import {StudentsService} from "./services/students/students.service";
+import {UsersService} from "./services/users/users.service";
+import {MarkNamePipe} from "./components/feedbacks/feedback-list/mark-name.pipe";
+import {MarkPipe} from "./components/feedbacks/feedback-list/mark.pipe";
 
 import {HeaderComponent} from './components/header/header.component';
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
@@ -28,10 +33,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PrimeNgModules} from "./prime-ng.modules";
 import {PaginationConfig, PaginationModule} from 'ngx-bootstrap';
 
-import {MarkNamePipe} from "./components/feedbacks/feedback-list/mark-name.pipe";
-import {MarkPipe} from "./components/feedbacks/feedback-list/mark.pipe";
-import {MarkService} from "./services/feedbacks/marks.service";
-import {UsersService} from "./services/users/users.service";
 import {
 MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModule, MatRadioModule,
 MatInputModule, MatExpansionModule} from "@angular/material";

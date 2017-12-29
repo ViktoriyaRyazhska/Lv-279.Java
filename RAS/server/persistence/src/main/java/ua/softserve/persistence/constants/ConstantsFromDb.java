@@ -66,5 +66,14 @@ public class ConstantsFromDb {
     public final static int TEACHER_TYPE_EXPERT_ID = 2;
     public final static int TEACHER_TYPE_INTERVIEWER_ID = 3;
 
+    public final static int SELF_REJECT_ID = 1;
+    public final static int NEW_TARGET_ID = 2;
+    public final static int REGISTERED_ID = 3;
+    public final static int TECH_TEST_ID = 4;
+    public final static int ENG_TEST_ID = 5;
+    public final static int HR_INTERVIEW_ID = 6;
+    public final static int STUDENT_ID = 7;
+    public final static int REJECT_ID = 8;
+
     public final static Integer ZERO_EMPLOYEE = 0;
 }

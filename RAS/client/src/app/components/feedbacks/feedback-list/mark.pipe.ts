@@ -5,8 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MarkPipe implements PipeTransform {
   transform(markArray: any, characteristicId: any): any {
-    if(markArray != null) {
-      return markArray.filter(mark => mark.characteristic.id == characteristicId);
+    const resultArray = [];
+    if(markArray != null){
+      markArray.filter(mark => mark.characteristic.id == characteristicId)
+        .forEach(mark => resultArray.push({label: mark.name, value: mark.id}));
+      return resultArray;
     }
   }
 }

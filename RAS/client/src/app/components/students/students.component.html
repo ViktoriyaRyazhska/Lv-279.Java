@@ -1,18 +1,16 @@
 <p-dataTable [value]="students" [editable]="true" resizableColumns="true" reorderableColumns="true" scrollable="true">
-  <!--<p-column field="vin" header="Id" [editable]="true" [style]="{'width':'10em'}"></p-column>-->
   <p-column field="user.id" header="Employee" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'7em'}"></p-column>
   <p-column field="user.firstName" header="Name" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span>
-         <!--<button type="text" (click)="onStudentClick(student)"  pButton  label="Show"> {{student.user.firstName +" "+ student.user.lastName}}</button>-->
           <a (click)="onStudentClick(student)"> {{student.user.firstName +" "+ student.user.lastName}}</a>
        </span>
     </ng-template>
   </p-column>
   <span *ngIf="this.loginService.securityForAddStudent()">
-  <p-column field="user.id" header="#" [editable]="false"
+  <p-column header="#" [editable]="false"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span>
@@ -75,62 +73,62 @@
     </ng-template>
   </p-column>
   <p-column *ngIf="tests[1]" header="{{tests[1].testName}}" field="data.testTwo" header="Test3" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData"  pTemplate="editor">
       <input type="number" pInputText="" [(ngModel)]="student.data.testTwo" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
 
   <p-column *ngIf="tests[2]" header="{{tests[2].testName}}" field="data.testThree" header="Test2" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
       <input type="number" pInputText="" [(ngModel)]="student.data.testThree" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
   <p-column *ngIf="tests[3]" header="{{tests[3].testName}}" field="data.testFour" header="Test4" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
       <input type="number" pInputText="" [(ngModel)]="student.data.testFour" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
   <p-column *ngIf="tests[4]" header="{{tests[4].testName}}" field="data.testFive" header="Test5" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
       <input type="number" pInputText="" [(ngModel)]="student.data.testFive" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
   <p-column *ngIf="tests[5]" header="{{tests[5].testName}}" field="data.testSix" header="Test6" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
       <input type="number" pInputText="" [(ngModel)]="student.data.testSix" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
   <p-column *ngIf="tests[6]" header="{{tests[6].testName}}" field="data.testSeven" header="Test7" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
       <input type="number" pInputText="" [(ngModel)]="student.data.testSeven" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
   <p-column *ngIf="tests[7]" header="{{tests[7].testName}}" field="data.testEight" header="Test8" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
       <input type="number" pInputText="" [(ngModel)]="student.data.testEight" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
   <p-column *ngIf="tests[8]" header="{{tests[8].testName}}" field="data.testNine" header="Test9" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
       <input type="number" pInputText="" [(ngModel)]="student.data.testNine" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
   <p-column *ngIf="tests[9]" header="{{tests[9].testName}}" field="data.testTen" header="Test10" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
       <input type="number" pInputText="" [(ngModel)]="student.data.testTen" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
   <p-column field="data.finalBase" header="Final, Base" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
       <input type="number" pInputText="" [(ngModel)]="student.data.finalBase" [class]="'form-control'" required="true" >
     </ng-template>
@@ -144,9 +142,9 @@
 
 
   <p-column  header="Current Control" [editable]="false" [filter]="true"  sortable="custom"
-             (sortFunction)="mySortCurrentControl($event)" [style]="{'width':'10em'}">
+  (sortFunction)="mySortCurrentControl($event)" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
-       <span >
+      <span >
              {{this.getCurrentControl(student)}}
        </span>
     </ng-template>
@@ -196,82 +194,71 @@
      </p-column>
 </p-dataTable>
 
-<div style="align-items: center">
-  <p-dialog header="User info" modal="false" dismissableMask="false" [(visible)]="displayStudentDetails" width="750">
-    <div class="ui-g">
-      <div class="ui-g-6">
-        <h4>Personal Information:</h4>
-        <div class="ui-g-6">
-          <div class="column">
-            <div>Id:</div>
-            <div>Name:</div>
-            <div>Age:</div>
-            <div>Education:</div>
-            <div>Strong Skills:</div>
-          </div>
-        </div>
-        <div class="ui-g-6">
-          <div class="column" *ngIf="selectedStudent && selectedStudent.user">
-            <div>{{selectedStudent.user.id}}</div>
-            <div>{{selectedStudent.user.firstName +" "+ selectedStudent.user.lastName}}</div>
-            <div>{{selectedStudent.age}}-</div>
-            <div>{{selectedStudent.education}}-</div>
-            <div>{{selectedStudent.strongSkills}}-</div>
-          </div>
-        </div>
+<span *ngIf="this.loginService.securityForAddStudent()">
+<button pButton type="button" (click)="addUserClick()" label="Add students"
+        style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em; float: left"></button>
+</span>
+<span *ngIf="this.loginService.securityForAddStudentChanges()">
+<button pButton type="button" (click)="updateStudentsClick()" label="Save" class="ui-button-success"
+        style="margin-top: 1em; margin-bottom: 1em; float: left"></button>
+</span>
+<p-dialog header="User info" [(visible)]="displayStudentDetails" dismissableMask="true" modal="false" width="450">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h4>Personal Information:</h4>
+      <div class="ui-g-4">
+        <div>Id:</div>
+        <div>Name:</div>
+        <div>Age:</div>
+        <div>Education:</div>
+        <div>Strong Skills:</div>
       </div>
-      <div class="ui-g-6">
-        <h4>Contact Information:</h4>
-        <div class="ui-g-6">
-          <div class="column">
-            <div>Email:</div>
-            <div>Messenger:</div>
-            <div>Phone:</div>
-            <div>Place Of Origin:</div>
-          </div>
-        </div>
-        <div class="ui-g-6">
-          <div class="column" *ngIf="selectedStudent && selectedStudent.user">
-            <div>{{selectedStudent.user.email}}</div>
-            <div>{{selectedStudent.messenger}}-</div>
-            <div>{{selectedStudent.user.phone}}</div>
-            <div>{{selectedStudent.placeOfOrigin}}-</div>
-          </div>
-        </div>
-
+      <div class="ui-g-8" *ngIf="selectedStudent && selectedStudent.user">
+        <div>{{selectedStudent.user.id}}</div>
+        <div>{{selectedStudent.user.firstName +" "+ selectedStudent.user.lastName}}</div>
+        <div>{{selectedStudent.age}}-</div>
+        <div>{{selectedStudent.education}}-</div>
+        <div>{{selectedStudent.strongSkills}}-</div>
       </div>
     </div>
-  </p-dialog>
-</div>
+
+    <div class="ui-g-12">
+      <h4>Contact Information:</h4>
+      <div class="ui-g-4">
+        <div>Email:</div>
+        <div>Messenger:</div>
+        <div>Phone:</div>
+        <div>Place Of Origin:</div>
+      </div>
+      <div class="ui-g-8" *ngIf="selectedStudent && selectedStudent.user">
+        <div>{{selectedStudent.user.email}}</div>
+        <div>{{selectedStudent.messenger}}-</div>
+        <div>{{selectedStudent.user.phone}}</div>
+        <div>{{selectedStudent.placeOfOrigin}}-</div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
 
 <p-dialog header="Removing user" modal="false" dismissableMask="false" [(visible)]="displayRemovingDialog" width="750">
-    <div>
+  <div>
       <div *ngIf="selectedStudent && selectedStudent.user">
-       <h3>Are you really want to remove {{selectedStudent.user.firstName +" "+ selectedStudent.user.lastName}} from the group list?</h3>
+        <h3>Are you really want to remove {{selectedStudent.user.firstName +" "+ selectedStudent.user.lastName}} from the group list?</h3>
       </div>
     </div>
-    <button pButton type="button" (click)="cancelRemovingClick()" label="Cancel" class="ui-button-secondary"
-            style="margin-top: 1em; float: right"></button>
+  <button pButton type="button" (click)="cancelRemovingClick()" label="Cancel" class="ui-button-secondary"
+  style="margin-top: 1em; float: right"></button>
 
-    <button pButton type="button" (click)="removeSelectedStudent()" label="Remove" class="ui-button-danger"
-            style="margin-top: 1em; float: right"></button>
-  </p-dialog>
-<span *ngIf="this.loginService.securityForAddStudent()">
-<button mat-raised-button color="primary" (click)="addUserClick()">Add students</button>
-</span>
+  <button pButton type="button" (click)="removeSelectedStudent()" label="Remove" class="ui-button-danger"
+  style="margin-top: 1em; float: right"></button>
+</p-dialog>
 
-<span *ngIf="this.loginService.securityForAddStudentChanges()">
-<button mat-raised-button color="primary" class="saveColor" (click)="updateStudentsClick()">Save</button>
-</span>
 <p-dialog header="Add students" modal="false" [(visible)]="displayUsersList" [responsive]="true" width="450">
   <div *ngIf="users">
-    <p-dataTable [value]="users.content" [lazy]="true" [(selection)]="selectedUsers" dataKey="id"
-                 [headerCheckboxToggleAllPages]="true"
-                 [paginator]="true" [rows]="users.numberOfElements" [pageLinks]="5" [rowsPerPageOptions]="[10,15,20]"
-                 [totalRecords]="users.totalElements" (onLazyLoad)="loadUsers($event)">
+    <p-dataTable [value]="users" [(selection)]="selectedUsers" dataKey="id" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
       <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
       <p-column field="id" header="Id" [filter]="true" [sortable]="true"></p-column>
-      <p-column field="fullName" header="Name" [filter]="false" [sortable]="true"></p-column>
+      <p-column field="fullName" header="Name" [filter]="true" [sortable]="true"></p-column>
     </p-dataTable>
 
     <button pButton type="button" (click)="cancelAddingClick()" label="Cancel" class="ui-button-secondary"
