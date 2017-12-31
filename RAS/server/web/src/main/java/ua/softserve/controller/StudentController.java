@@ -47,6 +47,11 @@ public class StudentController {
 
     @PutMapping("update")
     public void updateStudentsOfAcademy(@RequestBody List<StudentViewDto> studentViewDtos) {
+        studentService.updateStudentsOfAcademy(studentViewDtos);
+    }
+
+    @PutMapping("updateStudent")
+    public void updateStudentOfAcademy(@RequestBody StudentViewDto studentViewDtos) {
         studentService.updateStudentOfAcademy(studentViewDtos);
     }
 }

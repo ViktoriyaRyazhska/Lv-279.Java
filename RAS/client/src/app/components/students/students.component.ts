@@ -1,10 +1,13 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {StudentsService} from "../../services/students/students.service";
 import {UsersService} from "../../services/users/users.service";
-import {UserPage, UserShort} from "../../models/userShort";
-import {Data, StudentFeedback, StudentStatus, ApprovedBy} from "../../models/feedbacks/student.model";
+import {UserShort} from "../../models/userShort";
+import {Data, StudentFeedback, StudentStatus, ApprovedBy, Feedback} from "../../models/feedbacks/student.model";
 import {SelectItem} from "primeng/primeng";
 import {ActivatedRoute, Router} from "@angular/router";
+import {LoginService} from "../auth/login/login.service";
+import {Tests} from "../../models/tests";
+import {TestsService} from "../../services/tests-names/tests.service";
 
 @Component({
   selector: 'app-students',
@@ -13,7 +16,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 @Injectable()
 export class StudentsComponent implements OnInit {
-  private academyId: number = 586;
+  private academyId: number;
+
+  tests : Tests[];
 
   private students: StudentFeedback[];
 
@@ -23,23 +28,23 @@ export class StudentsComponent implements OnInit {
 
   private displayStudentDetails: boolean;
   private studentStatuses: StudentStatus[];
+  private users: UserShort[];
 
-  private users: UserPage = new UserPage();
   private selectedUsers: UserShort[];
-  private displayUsersList: boolean;
 
+  private displayUsersList: boolean;
   private displayRemovingDialog: boolean;
 
   private statusesDropdown: SelectItem[] = [];
 
   private employeesDropdown: SelectItem[] = [];
 
-
-
   constructor(private studentsService: StudentsService,
               private userService: UsersService,
               private route: ActivatedRoute,
-              private router:Router) {
+              private router: Router,
+              private loginService: LoginService,
+              private testNamesService : TestsService) {
     this.selectedStudent = new StudentFeedback();
   }
 
@@ -50,33 +55,49 @@ export class StudentsComponent implements OnInit {
       data => {
         this.students = data;
         this.students.forEach(st => st.data = st.data == null ? new Data() : st.data);
-        this.studentsService.getEmployees().subscribe(data=> {
+        this.students.forEach(st => st.teacherFeedback = st.teacherFeedback == null ? new Feedback() : st.teacherFeedback);
+        this.students.forEach(st => st.expertFeedback = st.expertFeedback == null ? new Feedback() : st.expertFeedback);
+
+        this.studentsService.getEmployees()
+          .subscribe(data => {
             this.employees = data;
-            this.employees.forEach(employee=>
+            this.employees.forEach(employee =>
               this.employeesDropdown
-                .push(
-                  {label: employee.fullName,
-                    value: employee}))
+                .push({label: employee.fullName, value: employee}))
           }
         );
 
-        this.studentsService.getStatuses().subscribe(data => {
+        this.studentsService.getStatuses()
+          .subscribe(data => {
             this.studentStatuses = data;
             this.studentStatuses.forEach(st => this.statusesDropdown.push({label: st.name, value: st}))
 
           },
           error => console.log(error)
         );
+
+        this.testNamesService.getAll(this.academyId).subscribe(data => {
+            console.log(data);
+            this.tests = data;
+          },
+          error => console.log(error)
+        );
       },
       error => {
-        if (error.status===403) {
+        if (error.status === 403) {
           this.router.navigate(['ang/error']);
         }
         console.log(error)
       }
     );
-    this.loadUsers({first: 0, rows: 15});
 
+    this.userService.getAll(this.academyId)
+      .subscribe(
+        data => {
+          this.users = data;
+        },
+        error => console.log(error)
+      )
     console.log(this.employeesDropdown);
   }
 
@@ -86,30 +107,37 @@ export class StudentsComponent implements OnInit {
     this.displayStudentDetails = true;
   }
 
-  removeDialogStudent(student: StudentFeedback){
+  removeDialogStudent(student: StudentFeedback) {
     this.selectedStudent = student;
     this.displayRemovingDialog = true;
-
   }
 
   cancelRemovingClick() {
-    this.displayRemovingDialog =  false;
+    this.displayRemovingDialog = false;
+  }
+
+  updateStudentsClick() {
+    this.studentsService.update(this.students)
+      .subscribe(() => {
+        this.students = null;
+        this.ngOnInit();
+      }
+    );
   }
 
   removeSelectedStudent() {
-    this.studentsService
-      .remove(this.selectedStudent.id)
+    this.studentsService.remove(this.selectedStudent.id)
       .subscribe(() => {
         this.students = null;
         this.ngOnInit();
       });
-    this.displayRemovingDialog =  false;
+    this.displayRemovingDialog = false;
   }
 
   addUserClick() {
-    this.loadUsers({first: 0, rows: 15});
     this.displayUsersList = true;
   }
+
 
   cancelAddingClick() {
     this.users = null;
@@ -117,10 +145,9 @@ export class StudentsComponent implements OnInit {
     this.displayUsersList = false;
   }
 
-
   acceptUsersClick() {
     this.studentsService
-      .addUsers(this.selectedUsers.map(user => user.id),this.academyId)
+      .addUsers(this.selectedUsers.map(user => user.id), this.academyId)
       .subscribe(() => {
         this.students = null;
         this.selectedUsers = [];
@@ -130,35 +157,12 @@ export class StudentsComponent implements OnInit {
     this.displayUsersList = false;
   }
 
-  loadUsers(event) {
-    console.log(event);
-
-    if (event.first != null && event.rows != null) {
-
-      let pageNum = event.first / event.rows;
-      let dir = event.sortOrder == -1 ? 'desc' : 'asc';
-
-      let idFilter = null;
-      if (event.filters != null && event.filters.id != null) {
-        idFilter = event.filters.id.value;
-      }
-
-      this.userService.page(pageNum, event.rows, dir, this.academyId, idFilter).subscribe(
-        data => {
-          this.users = data;
-
-        },
-        error => console.log(error)
-      );
-    }
-  }
-
-  private  calculate(student:StudentFeedback):number{
-    var sum:number = 0;
+  private calculate(student: StudentFeedback): number {
+    var sum: number = 0;
     var count: number = 0;
-    var avg :number;
+    var avg: number;
 
-    if(student.data!= null) {
+    if (student.data != null) {
       if (student.data.testOne != null) {
         sum += student.data.testOne;
         count++;
@@ -234,7 +238,7 @@ export class StudentsComponent implements OnInit {
     else return null;
   }
 
-   getCurrentControl(student:StudentFeedback) :number{
+  getCurrentControl(student:StudentFeedback) :number{
 
       var avg:number = this.calculate(student);
 
@@ -242,14 +246,6 @@ export class StudentsComponent implements OnInit {
         return Math.round(avg * 1000) / 1000;
       }
       else return avg;
-  }
-
-  updateStudentsClick(){
-    this.studentsService.update(this.students).subscribe(()=>{
-      this.students = null;
-      this.ngOnInit();
-      }
-    );
   }
 
   mySortCurrentControl(event: any) {

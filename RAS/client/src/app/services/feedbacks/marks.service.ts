@@ -8,9 +8,7 @@ import {Mark} from "../../models/feedbacks/mark.model";
 export class MarkService {
   private marks: Mark[];
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   getAllMarks(): Observable<any> {
     let url = environment.serverUrl + 'marks';

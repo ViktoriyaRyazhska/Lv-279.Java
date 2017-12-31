@@ -2,6 +2,7 @@ package ua.softserve.config;
 
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -33,37 +34,25 @@ public class StatelessAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private TokenHandler tokenHandler;
 
+    @Value("${app.jwt.tokenname}")
+    private String tokenName;
+
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+            FilterChain filterChain) throws ServletException, IOException {
         Cookie[] cookies;
-        if (httpServletRequest.getCookies()!=null) {
+        if (httpServletRequest.getCookies() != null) {
             cookies = httpServletRequest.getCookies();
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
+                if (cookie.getName().equals(tokenName)) {
                     Optional<UserDetails> userDetails = tokenHandler.parseUserFromToken(cookie.getValue());
-                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.get().getAuthorities());
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.get().getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
         }
-
-
-
-        filterChain.doFilter(httpServletRequest,httpServletResponse);
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
-
-
-//    @Override
-//    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-//            throws IOException, ServletException {
-//        try {
-//            Authentication authentication = tokenAuthenticationService.getAuthentication((HttpServletRequest) req);
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//            chain.doFilter(req, res);
-//        } catch (AuthenticationException | JwtException e) {
-//            SecurityContextHolder.clearContext();
-//            ((HttpServletResponse) res).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//        }
-//    }
 }

@@ -5,6 +5,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Mark} from "../../../models/feedbacks/mark.model";
 import {MarkService} from "../../../services/feedbacks/marks.service";
 import {StudentsService} from "../../../services/students/students.service";
+import {LoginService} from "../../auth/login/login.service";
 
 export enum CharacteristicId {
   ZERO = 0,
@@ -32,7 +33,7 @@ export class FeedbackListComponent implements OnInit {
   private students: StudentFeedback[];
   private selectedStudent: StudentFeedback;
 
-  private updateStudents: StudentFeedback[] = [];
+  private updateStudent: StudentFeedback;
   private marks: Mark[];
 
   private displayStudentDetails: boolean;
@@ -59,15 +60,11 @@ export class FeedbackListComponent implements OnInit {
   constructor(private markService: MarkService,
               private studentsService: StudentsService,
               private route: ActivatedRoute,
-              private router:Router) {
+              private router:Router,
+              private loginService: LoginService) {
   }
 
-
-
-
-
-
-ngOnInit() {
+  ngOnInit() {
     this.academyId = this.route.snapshot.params['id'];
 
     this.markService.getAllMarks().subscribe(
@@ -98,24 +95,22 @@ ngOnInit() {
 
   saveStudent(){
     this.setDataToStudent(this.signupFeedbackForm);
-    this.updateStudents.push(this.selectedStudent);
+    this.updateStudent = this.selectedStudent;
+
+    this.studentsService.updateStudent(this.updateStudent)
+      .subscribe(error => (
+        console.log(error)
+      ));
     console.log(this.selectedStudent);
-    this.studentsService.update(this.updateStudents)
-      .subscribe(() => {
-        this.updateStudents = [];
-      });
-    console.log(this.selectedStudent);
-    this.updateStudents = [];
+    this.updateStudent = null;
   }
 
   onStudentClick(student: StudentFeedback) {
-    console.log(student);
     this.selectedStudent = student;
     this.displayStudentDetails = true;
   }
 
   onOverallClick(student: StudentFeedback) {
-    console.log(student);
     this.selectedStudent = student;
     this.displayOverallFeedback = true;
   }
@@ -123,38 +118,43 @@ ngOnInit() {
   onProvideClick(student: StudentFeedback) {
     this.disabledPreviousButton = false;
     this.disabledNextButton = false;
+
     if(this.findStudentIndex(student) == this.CharId.ZERO){
       this.disabledPreviousButton = true;
     }
     if(this.findStudentIndex(student) == this.students.length - this.CharId.ONE){
       this.disabledNextButton = true;
     }
-    console.log(student);
     this.selectedStudent = student;
     this.displayProvideFeedback = true;
     this.initForms();
   }
 
   onSaveClose() {
-    this.saveStudent();
+    this.setDataToStudent(this.signupFeedbackForm);
+    this.updateStudent = this.selectedStudent;
+
+    this.studentsService.updateStudent(this.updateStudent)
+      .subscribe(() => {
+          this.students = null;
+          this.ngOnInit();
+        },
+        error => (
+          console.log(error)
+        ));
+    this.updateStudent = null;
     this.displayProvideFeedback = false;
-    this.ngOnInit();
   }
 
   onPreviousSave(student: StudentFeedback){
     this.disabledNextButton = false;
-    console.log(this.findStudentIndex(student));
 
     this.saveStudent();
     if((this.findStudentIndex(student) - this.CharId.ONE) != this.CharId.ZERO){
-      console.log(this.selectedStudent);
       this.selectedStudent = this.students[this.findStudentIndex(student) - this.CharId.ONE];
-      console.log(this.selectedStudent);
       this.initForms();
     } else {
-      console.log(this.selectedStudent);
       this.selectedStudent = this.students[this.findStudentIndex(student) - this.CharId.ONE];
-      console.log(this.selectedStudent);
       this.disabledPreviousButton = true;
       this.initForms();
     }
@@ -162,18 +162,13 @@ ngOnInit() {
 
   onNextSave(student: StudentFeedback) {
     this.disabledPreviousButton = false;
-    console.log(this.findStudentIndex(student));
 
     this.saveStudent();
     if((this.findStudentIndex(student) + this.CharId.ONE) != (this.students.length - this.CharId.ONE)) {
-      console.log(this.selectedStudent);
       this.selectedStudent = this.students[this.findStudentIndex(student) + this.CharId.ONE];
-      console.log(this.selectedStudent);
       this.initForms();
     } else {
-      console.log(this.selectedStudent);
       this.selectedStudent = this.students[this.findStudentIndex(student) + this.CharId.ONE];
-      console.log(this.selectedStudent);
       this.disabledNextButton = true;
       this.initForms();
     }
@@ -193,8 +188,6 @@ ngOnInit() {
     this.initFeedbackForm();
 
     this.descriptionSelector();
-
-    console.log(this.signupFeedbackForm);
   }
 
   setDataToStudent(feedbackForm: FormGroup) {

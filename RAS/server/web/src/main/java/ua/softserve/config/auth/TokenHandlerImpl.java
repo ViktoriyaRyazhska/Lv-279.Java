@@ -4,20 +4,21 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import ua.softserve.persistence.entity.LoginUser;
 import ua.softserve.persistence.repo.LoginUserRepository;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public final class TokenHandlerImpl implements TokenHandler {
 
+    private static final String CLAIM_KEY_AUTHORITY = "authority";
+    private static final int MILLISECONDS_TO_SECONDS = 1000;
     private final String secret;
-
     private final LoginUserRepository userRepository;
 
     @Value("${app.jwt.expiration}")
@@ -41,7 +42,18 @@ public final class TokenHandlerImpl implements TokenHandler {
     public String createTokenForUser(LoginUser user) {
         final ZonedDateTime afterOneWeek = ZonedDateTime.now().plusHours(expiration);
 
-        return Jwts.builder().setSubject(String.valueOf(user.getId())).signWith(SignatureAlgorithm.HS512, secret)
-                .setExpiration(Date.from(afterOneWeek.toInstant())).compact();
+        return Jwts.builder().setClaims(generateClaims(user)).setSubject(String.valueOf(user.getId()))
+                .signWith(SignatureAlgorithm.HS512, secret).setExpiration(generateExpirationDate()).compact();
     }
+
+    private Date generateExpirationDate() {
+        return new Date(System.currentTimeMillis() + expiration * MILLISECONDS_TO_SECONDS);
+    }
+
+    private Map<String, Object> generateClaims(LoginUser user) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(CLAIM_KEY_AUTHORITY, user.getAuthorities());
+        return claims;
+    }
+
 }

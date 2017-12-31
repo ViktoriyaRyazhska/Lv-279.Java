@@ -1,5 +1,6 @@
 package ua.softserve.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,10 @@ public class Employee {
 
     @Column(name = "second_name_ukr")
     private String secondNameUkr;
+
+    @OneToOne(mappedBy = "employee", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private LoginUser loginUser;
 
     public Employee(Integer employeeId) {
         this.employeeId = employeeId;

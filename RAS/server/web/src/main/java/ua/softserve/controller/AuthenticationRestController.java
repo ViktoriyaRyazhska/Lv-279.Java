@@ -1,21 +1,28 @@
 package ua.softserve.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.web.header.Header;
+import org.springframework.web.bind.annotation.*;
 import ua.softserve.config.auth.TokenHandler;
+import ua.softserve.persistence.entity.Authority;
 import ua.softserve.persistence.entity.LoginUser;
+import ua.softserve.persistence.repo.LoginUserRepository;
+import ua.softserve.service.EmployeeService;
 import ua.softserve.service.SecurityContextService;
 
+import javax.servlet.http.Cookie;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 public class AuthenticationRestController {
@@ -32,15 +39,14 @@ public class AuthenticationRestController {
         this.securityContextService = securityContextService;
     }
 
-    @RequestMapping(value = "api/auth", method = RequestMethod.POST)
+    @PostMapping("api/auth")
     public AuthResponse createAuthenticationToken(@RequestBody AuthParams authenticationRequest) {
         final UsernamePasswordAuthenticationToken loginToken = authenticationRequest.toAuthenticationToken();
         final Authentication authentication = authenticationManager.authenticate(loginToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        LoginUser principal = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return securityContextService.currentUser().map(u -> {
             final String token = tokenHandler.createTokenForUser(u);
-            return new AuthenticationRestController.AuthResponse(token, principal.getUsername(),principal.getAuthorities(),HttpStatus.OK);
+            return new AuthenticationRestController.AuthResponse(token, HttpStatus.OK);
         }).orElse(new AuthenticationRestController.AuthResponse(HttpStatus.UNAUTHORIZED));
     }
 
@@ -79,9 +85,8 @@ public class AuthenticationRestController {
 
     private static final class AuthResponse {
         private String token;
-        private String username;
-        private Collection<? extends GrantedAuthority> authorities;
         private HttpStatus httpStatus;
+
         public AuthResponse() {
         }
 
@@ -89,10 +94,8 @@ public class AuthenticationRestController {
             this.httpStatus = httpStatus;
         }
 
-        public AuthResponse(String token, String username, Collection<? extends GrantedAuthority> authorities, HttpStatus httpStatus) {
+        public AuthResponse(String token, HttpStatus httpStatus) {
             this.token = token;
-            this.username = username;
-            this.authorities = authorities;
             this.httpStatus = httpStatus;
         }
 
@@ -104,21 +107,12 @@ public class AuthenticationRestController {
             this.token = token;
         }
 
-
-        public String getUsername() {
-            return username;
+        public HttpStatus getHttpStatus() {
+            return httpStatus;
         }
 
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public Collection<? extends GrantedAuthority> getAuthorities() {
-            return authorities;
-        }
-
-        public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-            this.authorities = authorities;
+        public void setHttpStatus(HttpStatus httpStatus) {
+            this.httpStatus = httpStatus;
         }
     }
 }

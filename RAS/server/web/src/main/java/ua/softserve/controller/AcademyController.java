@@ -25,7 +25,7 @@ public class AcademyController {
         return new ResponseEntity<>(groupInfoService.getAcademyForSaveDTO(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/group", "/getDropDownList"})
+    @GetMapping(value = { "/group", "/getDropDownList" })
     public ResponseEntity<AcademyDropDownLists> getAllAcademies() {
         return new ResponseEntity<>(academyService.getAcademyDTO(), HttpStatus.OK);
     }

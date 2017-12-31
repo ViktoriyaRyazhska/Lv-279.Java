@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(value = "ua.softserve")
-@SpringBootApplication(scanBasePackages = "ua.softserve", exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication(scanBasePackages = "ua.softserve", exclude = { SecurityAutoConfiguration.class })
 public class WebInitializer extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
