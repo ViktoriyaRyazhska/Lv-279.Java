@@ -73,7 +73,7 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     /**
-     * Method return Academy
+     * Method return Academy by id
      *
      * @param id
      * @return Academy
@@ -108,6 +108,11 @@ public class AcademyServiceImpl implements AcademyService {
         return academyDropDownLists;
     }
 
+    /**
+     * Method return list of all Academy
+     *
+     * @return list of all Academy
+     */
     @Transactional
     @Override
     public List<Academy> getAllAcademies() {

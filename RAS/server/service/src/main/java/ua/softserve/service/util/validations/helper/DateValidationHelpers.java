@@ -9,6 +9,6 @@ import static java.lang.String.format;
 
 public class DateValidationHelpers {
     public static Validation<Long> startDateLessThanEndDate(long startDate){
-        return SimpleValidation.from((i) -> i > startDate, format("Start date must be less than End date."));
+        return SimpleValidation.from((i) -> i > startDate, "Start date must be less than End date.");
     }
 }
