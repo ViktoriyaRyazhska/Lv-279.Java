@@ -2,6 +2,7 @@ package ua.softserve.service.util.validations;
 
 
 import ua.softserve.service.exception.InvalidDataException;
+import ua.softserve.service.exception.InvalidTimeFrameException;
 
 public class ValidationResult {
 	private boolean valid;
@@ -30,6 +31,10 @@ public class ValidationResult {
 	
 	public void throwIfInvalidData(String fieldName) {
 		if(!isvalid()) throw new InvalidDataException(fieldName + " : " + getMesssage());
+	}
+
+	public void throwIfInvalidTimeFrameException() {
+		if(!isvalid()) throw new InvalidTimeFrameException(getMesssage());
 	}
 	
 	public String getMesssage() {
