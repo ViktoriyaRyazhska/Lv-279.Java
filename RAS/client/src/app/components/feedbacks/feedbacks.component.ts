@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-feedbacks',
@@ -6,6 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./feedbacks.component.css']
 })
 export class FeedbacksComponent implements OnInit {
+  @Input() groupId: number;
 
   constructor() {
   }

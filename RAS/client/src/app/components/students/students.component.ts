@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {StudentsService} from "../../services/students/students.service";
 import {UsersService} from "../../services/users/users.service";
 import {UserShort} from "../../models/userShort";
@@ -16,6 +16,8 @@ import {TestsService} from "../../services/tests-names/tests.service";
 })
 @Injectable()
 export class StudentsComponent implements OnInit {
+  @Input() groupId: number;
+
   private academyId: number;
 
   tests : Tests[];
@@ -49,7 +51,8 @@ export class StudentsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.academyId = this.route.snapshot.params['id'];
+    this.academyId = this.groupId;
+    // this.academyId = this.route.snapshot.params['id'];
 
     this.studentsService.getAll(this.academyId).subscribe(
       data => {

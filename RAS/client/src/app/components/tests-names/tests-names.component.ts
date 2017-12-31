@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Tests } from "../../models/tests";
 import { TestsService } from "../../services/tests-names/tests.service";
 import { ActivatedRoute } from "@angular/router";
@@ -11,7 +11,9 @@ import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angul
   styleUrls: ['./tests-names.component.css']
 })
 export class TestsNamesComponent implements OnInit {
-  groupId : number;
+  @Input() groupId: number;
+
+  //groupId : number;
   tests : Tests[];
   static counter : number = 1;
   rForm: FormGroup;
@@ -22,7 +24,7 @@ export class TestsNamesComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
   ) {
-    this.groupId = +this.route.snapshot.params['id'];
+    //this.groupId = +this.route.snapshot.params['id'];
     this.rForm = new FormGroup({
       testRows: this.fb.array([])
     });

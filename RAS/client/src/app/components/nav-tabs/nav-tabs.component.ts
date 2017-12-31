@@ -10,5 +10,7 @@ export class NavTabsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('!!!'+this.academyId);
+  }
 }
