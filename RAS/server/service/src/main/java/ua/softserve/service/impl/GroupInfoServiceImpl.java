@@ -2,6 +2,7 @@ package ua.softserve.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.GroupInfoRepository;
@@ -35,15 +36,21 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Autowired
     CityService cityService;
 
+    @Transactional
     @Override
     public void save(GroupInfo groupInfo) {
         groupInfoRepository.save(groupInfo);
     }
 
-    @Override
-    public GroupInfo findOne(int id) {
-        return groupInfoRepository.findOne(id);
-    }
+//    @Transactional
+//    @Override
+//    public GroupInfo findOne(Integer id) {
+//        GroupInfo groupInfo = groupInfoRepository.findOne(id);
+//        if(groupInfo==null){
+//            throw new NoSuchElementException("Group with id " + id + " not found");
+//        }
+//        return groupInfo;
+//    }
 
     /**
      * Method combines information about groups and information about experts.
@@ -81,9 +88,14 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         return groupInformation;
     }
 
+    @Transactional
     @Override
-    public GroupInfo findOneGroupInfoByAcademyId(int academyId) {
-        return groupInfoRepository.findByAcademyAcademyId(academyId);
+    public GroupInfo findOneGroupInfoByAcademyId(Integer academyId) {
+        GroupInfo groupInfo = groupInfoRepository.findByAcademyAcademyId(academyId);
+        if(groupInfo==null){
+            throw new NoSuchElementException("Group with id " + academyId + " not found");
+        }
+        return groupInfo;
     }
 
     @Override
