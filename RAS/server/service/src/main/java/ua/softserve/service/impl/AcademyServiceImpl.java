@@ -16,6 +16,7 @@ import ua.softserve.validator.GroupValidator;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
@@ -54,6 +55,11 @@ public class AcademyServiceImpl implements AcademyService {
         return academyRepository.save(academy).getAcademyId();
     }
 
+    /**
+     * Method saves academy than saves group info
+     *
+     * @param academyDTO
+     */
     @Transactional
     @Override
     public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO) {
@@ -66,6 +72,13 @@ public class AcademyServiceImpl implements AcademyService {
         groupInfoService.save(groupInfo);
     }
 
+    /**
+     * Method return Academy
+     *
+     * @param id
+     * @return Academy
+     */
+    @Transactional
     @Override
     public Academy findOne(int id) {
         logger.info("Before academyRepository.findOne(id)");
@@ -83,6 +96,7 @@ public class AcademyServiceImpl implements AcademyService {
      *
      * @return DTO that contains information for dropdown lists.
      */
+    @Transactional
     @Override
     public AcademyDropDownLists getAcademyDTO() {
         AcademyDropDownLists academyDropDownLists = new AcademyDropDownLists();
@@ -94,6 +108,7 @@ public class AcademyServiceImpl implements AcademyService {
         return academyDropDownLists;
     }
 
+    @Transactional
     @Override
     public List<Academy> getAllAcademies() {
         return academyRepository.findAll();
