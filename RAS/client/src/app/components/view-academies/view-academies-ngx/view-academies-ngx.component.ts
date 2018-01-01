@@ -85,5 +85,4 @@ export class ViewAcademiesNgxComponent implements OnInit {
   setEndDateOpt(event) {
     this.endDateOpt = event.option;
   }
-
 }

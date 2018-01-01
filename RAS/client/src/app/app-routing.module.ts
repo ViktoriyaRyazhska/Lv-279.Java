@@ -30,10 +30,10 @@ const appRoutes: Routes = [
     {path: 'tests/:id', component: TestsNamesComponent}]
 
   },
-  {path: 'ang/viewAcademies', component: ViewAcademiesComponent, children: [
+  {path: 'ang/viewAcademies', component: ViewAcademiesNgxComponent, children: [
     {path: 'ggg', component: AddGroupComponent}
   ]},
-  {path: 'ang/viewAcademies/test', component: ViewAcademiesNgxComponent},
+  // {path: 'ang/viewAcademies/test', component: ViewAcademiesNgxComponent},
   {path: 'ang/students', component: StudentsComponent},
   {path: 'ang/feedback', component: FeedbacksComponent},
   {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},
