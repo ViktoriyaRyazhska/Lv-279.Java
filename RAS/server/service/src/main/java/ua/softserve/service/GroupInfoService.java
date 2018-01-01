@@ -9,11 +9,11 @@ import java.util.List;
 public interface GroupInfoService {
     void save(GroupInfo groupInfo);
 
-    GroupInfo findOne(int id);
+//    GroupInfo findOne(int id);
 
     List<GroupInformationDTO> getAllInformationAboutGroup();
 
-    GroupInfo findOneGroupInfoByAcademyId(int academyId);
+    GroupInfo findOneGroupInfoByAcademyId(Integer academyId);
 
     AcademyForSaveDTO getAcademyForSaveDTO(Integer groupId);
 }

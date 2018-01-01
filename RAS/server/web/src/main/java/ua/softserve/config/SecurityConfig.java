@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userService;
 
     @Bean
-    public StatelessAuthenticationFilter statelessAuthenticationFilter(){
+    public StatelessAuthenticationFilter statelessAuthenticationFilter() {
         return new StatelessAuthenticationFilter();
     }
 
@@ -50,28 +50,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-//                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .antMatchers("/reports/check_list_by_groups")
-                    .hasAnyAuthority(Authority.ITA_COORDINATOR.toString())
+        http.csrf().disable()
+                // .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS).permitAll().antMatchers("/reports/check_list_by_groups")
+                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString())
                 .antMatchers("/reports/itaTacticalPlanByGroupStage")
-                    .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(),Authority.SOFTSERVE_PM.toString(),Authority.RECRUITER.toString())
+                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(),
+                        Authority.SOFTSERVE_PM.toString(), Authority.RECRUITER.toString())
                 .antMatchers("/marks")
-                    .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(),Authority.RECRUITER.toString(),Authority.SOFTSERVE_PM.toString(),Authority.TEACHER.toString(),
-                            Authority.EXPERT.toString(),Authority.INTERVIEWER.toString())
-                .antMatchers("/students/**")
-                    .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(),Authority.RECRUITER.toString(),Authority.SOFTSERVE_PM.toString())
-                .antMatchers("/academy/**")
-                    .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(),Authority.ITA_ADMIN.toString())
+                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(),
+                        Authority.RECRUITER.toString(), Authority.SOFTSERVE_PM.toString(), Authority.TEACHER.toString(),
+                        Authority.EXPERT.toString(), Authority.INTERVIEWER.toString())
+                .antMatchers("/students/update")
+                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(),
+                        Authority.TEACHER.toString(), Authority.EXPERT.toString(), Authority.INTERVIEWER.toString())
+                .antMatchers("/group/add")
+                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString())
+                .antMatchers("/students/**/add")
+                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(),
+                        Authority.RECRUITER.toString())
+
                 .anyRequest().permitAll();
-        http
-                .addFilterBefore(statelessAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-        http
-                .headers().cacheControl();
+        http.addFilterBefore(statelessAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.headers().cacheControl();
 
     }
 
@@ -103,16 +105,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins(url)
-                        .allowCredentials(true)
-                        .allowedHeaders("Access-Control-Allow-Credentials", "Content-Type", "Access-Control-Allow-Headers", "X-Requested-With", "Origin", "Accept")
-                        .allowedMethods("PUT", "DELETE", "GET", "POST")
-                        .maxAge(MAX_AGE);
+                registry.addMapping("/**").allowedOrigins(url).allowCredentials(true)
+                        .allowedHeaders("Access-Control-Allow-Credentials", "Content-Type",
+                                "Access-Control-Allow-Headers", "X-Requested-With", "Origin", "Accept")
+                        .allowedMethods("PUT", "DELETE", "GET", "POST").maxAge(MAX_AGE);
             }
         };
     }
-
 
     @Bean
     public CorsFilter corsFilter() {

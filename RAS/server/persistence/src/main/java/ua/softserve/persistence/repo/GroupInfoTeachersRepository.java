@@ -8,6 +8,7 @@ import ua.softserve.persistence.entity.GroupInfoTeachers;
 import ua.softserve.persistence.entity.TeacherTypes;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GroupInfoTeachersRepository extends JpaRepository<GroupInfoTeachers, Integer> {
     List<GroupInfoTeachers> findAllByAcademyAndTeacherType(Academy academy, TeacherTypes teacherType);
@@ -17,5 +18,9 @@ public interface GroupInfoTeachersRepository extends JpaRepository<GroupInfoTeac
     List<GroupInfoTeachers> findAllByAcademyIdAndTeacherTypeId(@Param("aid") Integer aid, @Param("ttid") Integer ttid);
 
     List<GroupInfoTeachers> findAllByTeacherType(TeacherTypes teacherType);
+
+    // List<GroupInfoTeachers> findAllByAcademyAcademyId(int id);
+
+    List<GroupInfoTeachers> findAllByAcademy_AcademyId(Integer academy_academyId);
 
 }

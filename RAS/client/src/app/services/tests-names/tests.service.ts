@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {Tests} from "../../models/tests";
-import {TestsMock} from "./TestsMock";
-import {of} from "rxjs/observable/of";
 import {HttpClient} from '@angular/common/http';
 import {environment} from "../../../environments/environment";
 
@@ -10,7 +8,6 @@ import {environment} from "../../../environments/environment";
 @Injectable()
 export class TestsService {
 
-  private testsMock : TestsMock = new TestsMock();
   constructor(private http: HttpClient) {}
 
   getAll(groupId:number): Observable<any> {

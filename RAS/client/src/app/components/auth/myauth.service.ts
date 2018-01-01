@@ -4,7 +4,6 @@ import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class MyauthService{
-  private SERVER_ADDRESS: 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }
 
@@ -14,5 +13,4 @@ export class MyauthService{
   post(url: string, body: any) {
     return this.http.post(url, body, {withCredentials: true});
   }
-
 }

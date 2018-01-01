@@ -8,6 +8,7 @@ import {AddGroupService} from "./add-group.service";
 import {MatDialog} from "@angular/material";
 import {DialogComponent} from "../dialog/dialog.component";
 import {DataService} from "../../../services/data.service";
+import {LoginService} from "../../auth/login/login.service";
 
 @Component({
   selector: 'app-add-group',
@@ -44,7 +45,8 @@ export class AddGroupComponent implements OnInit {
   constructor(private addGroupService: AddGroupService,
               private route: ActivatedRoute,
               private router:Router,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private loginService: LoginService) {
   }
 
   ngOnInit() {

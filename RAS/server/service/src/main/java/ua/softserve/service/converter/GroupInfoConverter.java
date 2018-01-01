@@ -34,15 +34,12 @@ public class GroupInfoConverter {
 
     public AcademyForSaveDTO toDTO(GroupInfo groupInfo) {
         AcademyForSaveDTO academyForSaveDTO = new AcademyForSaveDTO();
-
         academyForSaveDTO.setAcademyId(groupInfo.getAcademy().getAcademyId());
         academyForSaveDTO.setGroupInfoId(groupInfo.getGroupInfoId());
         academyForSaveDTO.setGrName(groupInfo.getGroupName());
-
         if (groupInfo.getAcademy().getName() != null) {
             academyForSaveDTO.setNameForSite(groupInfo.getAcademy().getName());
         }
-
         academyForSaveDTO.setStartDate(groupInfo.getAcademy().getStartDate().getTime());
         academyForSaveDTO.setEndDate(groupInfo.getAcademy().getEndDate().getTime());
         if(groupInfo.getAcademy().getTechnologies() != null) {
@@ -61,7 +58,6 @@ public class GroupInfoConverter {
             academyForSaveDTO.setCityId(groupInfo.getAcademy().getCity().getCityId());
         }
         academyForSaveDTO.setPayment(groupInfo.getAcademy().getFree());
-
         academyForSaveDTO.setStudentPlannedToGraduate(groupInfo.getStudentsPlannedToGraduate());
         academyForSaveDTO.setStudentPlannedToEnrollment(groupInfo.getStudentsPlannedToEnrollment());
 //        academyForSaveDTO.setStudentsActual();
@@ -75,7 +71,7 @@ public class GroupInfoConverter {
         if (academyDTO.getAcademyId() == 0) {
             groupInfo = new GroupInfo();
         } else {
-            groupInfo = groupInfoService.findOne(academyDTO.getGroupInfoId());
+            groupInfo = groupInfoService.findOneGroupInfoByAcademyId(academyDTO.getGroupInfoId());
             groupInfo.setGroupInfoId(academyDTO.getGroupInfoId());
         }
 

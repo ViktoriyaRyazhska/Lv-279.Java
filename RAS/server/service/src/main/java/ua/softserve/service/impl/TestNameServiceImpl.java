@@ -23,7 +23,7 @@ public class TestNameServiceImpl implements TestNameService {
                     || testName.getTestName().equals("")) {
                 return TestNameService.NullValue;
             }
-            if (testName.getTestMaxScore() == 0) {
+            if (testName.isRemoved()) {
                 this.deleteTestName(testName);
             } else {
                 testName.setGroupId(academyId);
@@ -48,5 +48,10 @@ public class TestNameServiceImpl implements TestNameService {
     @Transactional
     public void deleteTestName(TestName testName) {
         testNameRepository.delete(testName);
+    }
+
+    @Override
+    public boolean isTestRemoved(TestName test) {
+        return test.isRemoved();
     }
 }
