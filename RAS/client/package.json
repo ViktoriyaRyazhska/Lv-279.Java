@@ -42,9 +42,9 @@
     "primeng": "^5.0.2",
     "rxjs": "^5.5.6",
     "universalify": "^0.1.1",
-    "xlsx": "^0.11.15",
+    "xlsx": "^0.11.16",
     "xlsx-style": "^0.8.13",
-    "zone.js": "^0.8.18"
+    "zone.js": "^0.8.19"
   },
   "devDependencies": {
     "@angular/cli": "1.5.2",
