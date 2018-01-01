@@ -118,4 +118,9 @@ public class StudentServiceImpl implements StudentService {
     public Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatuses) {
         return studentRepository.countAllByAcademyAndStudentStatus(academy, studentStatuses);
     }
+
+    @Override
+    public Integer countAllByAcademyId(Integer academyId) {
+        return studentRepository.countAllByAcademy_AcademyId(academyId);
+    }
 }
