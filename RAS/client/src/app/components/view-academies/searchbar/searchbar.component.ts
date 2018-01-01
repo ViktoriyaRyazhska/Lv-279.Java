@@ -1,7 +1,10 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SearchBarService} from "../search-bar.service";
 import {Group} from "../../group/add-group/group.model";
 import {Form, FormControl, FormGroup} from "@angular/forms";
+import {DataService} from "../../../services/data.service";
+import {FilterService} from "../filter.service";
+import {AcademyService} from "../academy.service";
 
 @Component({
   selector: 'app-searchbar',
@@ -9,17 +12,25 @@ import {Form, FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./searchbar.component.css']
 })
 export class SearchbarComponent implements OnInit {
-
   academyStages: any[];
   cityNames: any[];
   direction: any[];
   technology: any[];
   profile: any[];
   paymentStatus = [];
-  @Output() filterData = new EventEmitter<{form: Form}>();
+  startDateOpt = 'Equals';
+  endDateOpt = 'Equals';
+  @Output() filterData = new EventEmitter<{ form: Form }>();
+  @Output() startDateOp = new EventEmitter<{ option: string }>();
+  @Output() endDateOp = new EventEmitter<{ option: string }>();
+
+  @Input('search') searchBar = true;
 
 
-  constructor(private searchBarServise: SearchBarService) {
+  constructor(private searchBarServise: SearchBarService,
+              private academyService: AcademyService,
+              private filterService: FilterService,
+              private data: DataService) {
   }
 
   ngOnInit() {
@@ -40,4 +51,23 @@ export class SearchbarComponent implements OnInit {
   getFilter(form) {
     this.filterData.emit({form: form});
   }
+
+  startDateOption(event) {
+    if (event.value === undefined) {
+      this.startDateOpt = 'Equals';
+    } else {
+      this.startDateOpt = event.value.toString();
+    }
+    this.startDateOp.emit({option: this.startDateOpt});
+  }
+
+  endDateOption(event) {
+    if (event.value === undefined) {
+      this.endDateOpt = 'Equals';
+    } else {
+      this.endDateOpt = event.value.toString();
+    }
+    this.endDateOp.emit({option: this.endDateOpt});
+  }
+
 }

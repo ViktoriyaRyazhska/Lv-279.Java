@@ -1,35 +1,132 @@
+<app-searchbar (filterData)="onFilterField($event)"
+               (startDateOp)="setStartDateOpt($event)"
+               (endDateOp)="setEndDateOpt($event)"
+                [search] = "searchBar"></app-searchbar>
+<button mat-button (click)="showBar()">{{searchBar == true ? 'Show Search Bar' : 'Hide Search Bar'}}</button>
 <div>
-  <!--<input-->
-  <!--type='text'-->
-  <!--style='padding:8px;margin:15px auto;width:30%;'-->
-  <!--placeholder='Type to filter the name column...'-->
-  <!--(keyup)='updateFilter($event)'-->
-  <!--/>-->
   <ngx-datatable
     #table
-    class='material'
-
+    class="material"
+    [rows]="rows"
+    [sortType]="'single'"
     [columnMode]="'force'"
-    [headerHeight]="50"
+    [headerHeight]="'auto'"
     [footerHeight]="50"
     [rowHeight]="'auto'"
     [limit]="10"
-    [rows]='rows'>
+    [scrollbarH]="true">
+
     <ngx-datatable-column name="Group Name">
-      <ng-template let-column="column" ngx-datatable-header-template>
-        {{column.name}}
-      </ng-template>
       <ng-template let-value="value" ngx-datatable-cell-template>
-        <strong>{{value.groupName}}</strong>
+        {{value}}
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Gender">
-      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-        <span (click)="sort()">{{column.name}}</span>
-      </ng-template>
+
+    <ngx-datatable-column name="Name For Site">
       <ng-template let-value="value" ngx-datatable-cell-template>
-        {{value.startDate | date: "dd.MM.yyyy"}}
+        {{value}}
       </ng-template>
     </ngx-datatable-column>
+
+    <ngx-datatable-column name="directionName" [sortable]="true">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span class="datatable-header-cell-wrapper">
+          <span class="datatable-header-cell-label draggable" (click)="sort()">
+            Direction
+          </span>
+        </span>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="profileName" [sortable]="true">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span class="datatable-header-cell-wrapper">
+          <span class="datatable-header-cell-label draggable" (click)="sort()">
+            Profile
+          </span>
+        </span>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="cityName" [sortable]="true">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span class="datatable-header-cell-wrapper">
+          <span class="datatable-header-cell-label draggable" (click)="sort()">
+            Location
+          </span>
+        </span>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Start Date">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value | date: "dd.MM.yyyy"}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="End Date">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value | date: "dd.MM.yyyy"}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Status">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Experts">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Students Planned To Graduate">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Students Planned To Enrollment">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Students Actual">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="commonDirectionName" [sortable]="true">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span class="datatable-header-cell-wrapper">
+          <span class="datatable-header-cell-label draggable" (click)="sort()">
+            Common Direction
+          </span>
+        </span>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Payment Status">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
   </ngx-datatable>
 </div>
