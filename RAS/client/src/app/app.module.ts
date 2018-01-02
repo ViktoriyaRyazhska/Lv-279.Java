@@ -35,19 +35,20 @@ import {
 } from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule, MatDialogModule} from '@angular/material'
-import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 import { FilterCheckListByGroupsComponent } from './components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component';
 import { SearchbarComponent } from './components/view-academies/searchbar/searchbar.component';
 import {SearchBarService} from "./components/view-academies/search-bar.service";
 import {CookieService} from "angular2-cookie/core";
 import { ErrorComponent } from './components/error/error.component';
 import { DialogComponent } from './components/group/dialog/dialog.component';
-import { PaymentPipe } from './payment.pipe';
 import {DataService} from "./services/data.service";
 import {BsModalService} from "ngx-bootstrap";
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import { ViewAcademiesNgxComponent } from './components/view-academies/view-academies-ngx/view-academies-ngx.component';
+import {DxButtonModule, DxDataGridModule} from "devextreme-angular";
+import { ItaTacticalReportComponent } from './components/reports/ita-tactical-report/ita-tactical-report.component';
+import {ItaTacticalReportService} from "./components/reports/ita-tactical-report/ita-tactical-report.service";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,6 @@ import { ViewAcademiesNgxComponent } from './components/view-academies/view-acad
     FeedbackEditPipe,
     HeaderComponent,
     NavTabsComponent,
-    ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
     TestsNamesComponent,
     FilterCheckListByGroupsComponent,
@@ -75,8 +75,8 @@ import { ViewAcademiesNgxComponent } from './components/view-academies/view-acad
     FilterCheckListByGroupsComponent,
     ErrorComponent,
     DialogComponent,
-    PaymentPipe,
-    ViewAcademiesNgxComponent
+    ViewAcademiesNgxComponent,
+    ItaTacticalReportComponent
   ],
   imports: [
     BrowserModule,
@@ -102,10 +102,12 @@ import { ViewAcademiesNgxComponent } from './components/view-academies/view-acad
     MatExpansionModule,
     MatDialogModule,
     ModalModule.forRoot(),
-    NgxDatatableModule
+    NgxDatatableModule,
+    DxButtonModule,
+    DxDataGridModule
   ],
   providers: [AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
-    CookieService, SearchBarService, DataService, BsModalService],
+    CookieService, SearchBarService, DataService, BsModalService, ItaTacticalReportService],
   entryComponents: [DialogComponent],
   bootstrap: [AppComponent]
 })

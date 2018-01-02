@@ -1,0 +1,81 @@
+<body class="dx-viewport">
+<div class="demo-container">
+
+  <dx-data-grid id="gridContainer"
+                [dataSource]="itaTacticalPlanReports"
+                [allowColumnResizing]="true">
+    <dxo-export [enabled]="true" fileName="report" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-paging [enabled]="false"></dxo-paging>
+    <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+
+    <dxi-column dataField="year"
+                caption="Year"></dxi-column>
+    <dxi-column dataField="month"
+                caption="Moth"></dxi-column>
+    <dxi-column dataField="academyId"
+                caption="Group ID"></dxi-column>
+    <dxi-column dataField="groupName"
+                caption="Group/Group feedbacks"></dxi-column>
+    <dxi-column dataField="cg"
+                caption="CG"></dxi-column>
+    <dxi-column dataField="profile"
+                caption="Profile"></dxi-column>
+    <dxi-column dataField="location"
+                caption="Location"></dxi-column>
+    <dxi-column dataField="requested"
+                caption="requested"></dxi-column>
+    <dxi-column dataField="studyInProgress"
+                caption="study in progress"></dxi-column>
+    <dxi-column dataField="graduated"
+                caption="graduated"></dxi-column>
+    <dxi-column dataField="hired"
+                caption="hired"></dxi-column>
+    <dxi-column dataField="startDate"
+                caption="Group start Date"
+                dataType="date"></dxi-column>
+    <dxi-column dataField="endDate"
+                caption="Group finish Date"
+                dataType="date"></dxi-column>
+    <dxi-column dataField="trainers"
+                caption="Trainer"
+                [width]="350"></dxi-column>
+    <dxi-column dataField=""
+                aption="Comment"></dxi-column>
+    <dxi-column [calculateCellValue]="calculateCellValue"
+                capion="Payment status"></dxi-column>
+    <dxi-column dataField="reportName"
+                [groupIndex]="0"
+                aption="Report name"></dxi-column>
+
+    <dxo-summary>
+      <dxi-group-item
+        column="requested"
+        summaryType="sum"
+        displayFormat="{0}"
+        [alignByColumn]="true">
+      </dxi-group-item>
+      <dxi-group-item
+        column="studyInProgress"
+        summaryType="sum"
+        displayFormat="{0}"
+        [alignByColumn]="true">
+      </dxi-group-item>
+      <dxi-group-item
+        column="graduated"
+        summaryType="sum"
+        displayFormat="{0}"
+        [alignByColumn]="true">
+      </dxi-group-item>
+      <dxi-group-item
+        column="hired"
+        summaryType="sum"
+        displayFormat="{0}"
+        [alignByColumn]="true">
+      </dxi-group-item>
+    </dxo-summary>
+
+  </dx-data-grid>
+</div>
+</body>
