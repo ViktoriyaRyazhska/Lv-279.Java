@@ -23,7 +23,6 @@ import {StudentsService} from "./services/students/students.service";
 import {UsersService} from "./services/users/users.service";
 import {MarkNamePipe} from "./components/feedbacks/feedback-list/mark-name.pipe";
 import {MarkPipe} from "./components/feedbacks/feedback-list/mark.pipe";
-
 import {HeaderComponent} from './components/header/header.component';
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
@@ -128,7 +127,7 @@ import {ItaTacticalReportService} from "./components/reports/ita-tactical-report
   ],
   providers: [AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
     CookieService, SearchBarService, DataService, JwtHelper, BsModalService, BsModalRef, ComponentLoaderFactory, PositioningService,PaginationConfig,
-  EmployeeService],
+  EmployeeService,ItaTacticalReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

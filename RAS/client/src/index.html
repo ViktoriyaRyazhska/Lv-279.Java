@@ -6,28 +6,10 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.4/css/dx.spa.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.4/css/dx.common.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.4/css/dx.light.css" />
 
-  <script src="https://unpkg.com/core-js@2.4.1/client/shim.min.js"></script>
-  <script src="https://unpkg.com/reflect-metadata@0.1.3/Reflect.js"></script>
-  <script src="https://unpkg.com/systemjs@0.19.31/dist/system.js"></script>
-
-
-  <script>
-    System.import('app')
-      .then(function(viz) {
-        System.import("devextreme/viz/themes").then(function(viz) {
-          viz.currentTheme("generic.light");
-          viz.refreshTheme();
-        });
-      })
-      .catch(console.error.bind(console));
-  </script>
 </head>
 <body>
   <app-root></app-root>
