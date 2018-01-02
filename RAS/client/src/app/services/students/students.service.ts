@@ -22,7 +22,7 @@ export class StudentsService{
   }
 
   updateStudent(student: StudentFeedback): Observable<any> {
-    let url = environment.serverUrl+'students/updateStudent';
+    let url = environment.serverUrl+'students/update_student';
     return this.http.put(url,student, {withCredentials: true});
   }
 

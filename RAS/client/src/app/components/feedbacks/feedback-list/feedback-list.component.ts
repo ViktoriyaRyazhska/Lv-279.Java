@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {StudentFeedback, Data, Feedback} from "../../../models/feedbacks/student.model";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -25,6 +25,8 @@ export enum CharacteristicId {
 })
 @Injectable()
 export class FeedbackListComponent implements OnInit {
+  @Input() groupId: number;
+
   private CharId: any = Object.assign({}, CharacteristicId);
 
   private academyId: number;
@@ -33,8 +35,8 @@ export class FeedbackListComponent implements OnInit {
 
   private students: StudentFeedback[];
   private selectedStudent: StudentFeedback;
-
   private updateStudent: StudentFeedback;
+
   private marks: Mark[];
 
   private displayStudentDetails: boolean;
@@ -69,7 +71,7 @@ export class FeedbackListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.academyId = this.route.snapshot.params['id'];
+    this.academyId = this.groupId;
 
   this.loginService.check1(this.academyId).subscribe(data=>{
     if (data==true && this.loginService.isAuthoryty(Authority.TEACHER)){

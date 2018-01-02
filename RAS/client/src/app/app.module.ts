@@ -16,7 +16,7 @@ import {LoginService} from "./components/auth/login/login.service";
 import {MyauthService} from "./components/auth/myauth.service";
 
 import {StudentsComponent} from "./components/students/students.component";
-import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
+
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {MarkService} from "./services/feedbacks/marks.service";
 import {StudentsService} from "./services/students/students.service";
@@ -68,7 +68,6 @@ import {ItaTacticalReportService} from "./components/reports/ita-tactical-report
     StudentsComponent,
     ProfileInfoFilterPipe,
     StudentsComponent,
-    FeedbacksComponent,
     FeedbackListComponent,
     MarkPipe,
     MarkNamePipe,

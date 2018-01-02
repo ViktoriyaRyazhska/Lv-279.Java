@@ -52,7 +52,6 @@ export class StudentsComponent implements OnInit {
 
   ngOnInit() {
     this.academyId = this.groupId;
-    // this.academyId = this.route.snapshot.params['id'];
 
     this.studentsService.getAll(this.academyId).subscribe(
       data => {
@@ -79,7 +78,8 @@ export class StudentsComponent implements OnInit {
           error => console.log(error)
         );
 
-        this.testNamesService.getAll(this.academyId).subscribe(data => {
+        this.testNamesService.getAll(this.academyId)
+          .subscribe(data => {
             console.log(data);
             this.tests = data;
           },
