@@ -8,6 +8,7 @@ import {TabViewModule} from 'primeng/primeng';
 import {SpinnerModule} from 'primeng/primeng';
 import {CheckboxModule} from "primeng/components/checkbox/checkbox";
 import {InputTextareaModule} from 'primeng/primeng';
+import {RadioButtonModule} from 'primeng/primeng';
 
 @NgModule({
   exports: [
@@ -23,7 +24,8 @@ import {InputTextareaModule} from 'primeng/primeng';
     CheckboxModule,
     TabViewModule,
     SpinnerModule,
-    InputTextareaModule
+    InputTextareaModule,
+    RadioButtonModule
   ]
 })
 export class PrimeNgModules {}

@@ -10,4 +10,6 @@ public interface EmployeeService {
     Employee findEmployeesByLoginUserId(int loginUser_id);
 
     List<Employee> findEmployeesByTeacherType();
+
+    Employee findOne(Integer id);
 }

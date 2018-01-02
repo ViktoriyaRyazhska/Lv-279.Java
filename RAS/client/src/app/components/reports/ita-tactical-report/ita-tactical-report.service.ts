@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
 import {environment} from "../../../../environments/environment";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class ItaTacticalPlanByGroupStageService {
+export class ItaTacticalReportService {
 
   constructor(private http: HttpClient) { }
 
@@ -13,4 +13,3 @@ export class ItaTacticalPlanByGroupStageService {
   }
 
 }
-

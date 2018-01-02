@@ -35,4 +35,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         // .collect(Collectors.toList());
         return new ArrayList<>();
     }
+
+    @Override
+    public Employee findOne(Integer id) {
+        return employeeRepository.findOne(id);
+    }
 }
