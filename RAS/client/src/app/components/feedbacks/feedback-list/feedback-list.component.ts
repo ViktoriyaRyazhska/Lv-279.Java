@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {StudentFeedback, Data, Feedback} from "../../../models/feedbacks/student.model";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -6,6 +6,7 @@ import {Mark} from "../../../models/feedbacks/mark.model";
 import {MarkService} from "../../../services/feedbacks/marks.service";
 import {StudentsService} from "../../../services/students/students.service";
 import {LoginService} from "../../auth/login/login.service";
+import {Authority} from "../../auth/Authority";
 
 export enum CharacteristicId {
   ZERO = 0,
@@ -24,6 +25,8 @@ export enum CharacteristicId {
 })
 @Injectable()
 export class FeedbackListComponent implements OnInit {
+  @Input() groupId: number;
+
   private CharId: any = Object.assign({}, CharacteristicId);
 
   private academyId: number;
@@ -32,8 +35,8 @@ export class FeedbackListComponent implements OnInit {
 
   private students: StudentFeedback[];
   private selectedStudent: StudentFeedback;
-
   private updateStudent: StudentFeedback;
+
   private marks: Mark[];
 
   private displayStudentDetails: boolean;
@@ -56,6 +59,9 @@ export class FeedbackListComponent implements OnInit {
   private teamDescExpert: string;
   private getDescExpert: string;
   private actDescExpert: string;
+  private isAssignedAsTeacher:boolean;
+  private isAssignedAsExpert:boolean;
+  private isAssignedAsInterviewer:boolean;
 
   constructor(private markService: MarkService,
               private studentsService: StudentsService,
@@ -65,7 +71,19 @@ export class FeedbackListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.academyId = this.route.snapshot.params['id'];
+    this.academyId = this.groupId;
+
+  this.loginService.check1(this.academyId).subscribe(data=>{
+    if (data==true && this.loginService.isAuthoryty(Authority.TEACHER)){
+      this.isAssignedAsTeacher=true;
+    }
+    if (data==true && this.loginService.isAuthoryty(Authority.EXPERT)){
+      this.isAssignedAsExpert=true;
+    }
+    if (data==true && this.loginService.isAuthoryty(Authority.INTERVIEWER)){
+      this.isAssignedAsInterviewer=true;
+    }
+  });
 
     this.markService.getAllMarks().subscribe(
       data => {

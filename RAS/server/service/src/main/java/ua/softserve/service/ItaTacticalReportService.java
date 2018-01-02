@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface ItaTacticalReportService {
 
-    ItaTacticalReport findById(int id);
-    Map<String,List<ItaTacticalReport>> generateItaTacticalReport();
+    List<ItaTacticalReport> generateItaTacticalReport();
+
 }

@@ -16,14 +16,13 @@ import {LoginService} from "./components/auth/login/login.service";
 import {MyauthService} from "./components/auth/myauth.service";
 
 import {StudentsComponent} from "./components/students/students.component";
-import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
+
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {MarkService} from "./services/feedbacks/marks.service";
 import {StudentsService} from "./services/students/students.service";
 import {UsersService} from "./services/users/users.service";
 import {MarkNamePipe} from "./components/feedbacks/feedback-list/mark-name.pipe";
 import {MarkPipe} from "./components/feedbacks/feedback-list/mark.pipe";
-
 import {HeaderComponent} from './components/header/header.component';
 import {NavTabsComponent} from './components/nav-tabs/nav-tabs.component';
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
@@ -38,7 +37,6 @@ MatSortModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSelectModul
 MatInputModule, MatExpansionModule} from "@angular/material";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatButtonModule, MatDialogModule} from '@angular/material'
-import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 import { FilterCheckListByGroupsComponent } from './components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component';
 import { SearchbarComponent } from './components/view-academies/searchbar/searchbar.component';
 import {SearchBarService} from "./components/view-academies/search-bar.service";
@@ -51,11 +49,13 @@ import {BsModalRef, BsModalService, ComponentLoaderFactory, PositioningService, 
 import {ModalContainerComponent} from "ngx-bootstrap/modal";
 import {EmployeeService} from "./components/employee/employee.service";
 import { DialogComponent } from './components/group/dialog/dialog.component';
-import { PaymentPipe } from './payment.pipe';
 import {DataService} from "./services/data.service";
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import { ViewAcademiesNgxComponent } from './components/view-academies/view-academies-ngx/view-academies-ngx.component';
+import {DxButtonModule, DxDataGridModule, DxLoadIndicatorModule} from "devextreme-angular";
+import { ItaTacticalReportComponent } from './components/reports/ita-tactical-report/ita-tactical-report.component';
+import {ItaTacticalReportService} from "./components/reports/ita-tactical-report/ita-tactical-report.service";
 
 @NgModule({
   declarations: [
@@ -68,14 +68,12 @@ import { ViewAcademiesNgxComponent } from './components/view-academies/view-acad
     StudentsComponent,
     ProfileInfoFilterPipe,
     StudentsComponent,
-    FeedbacksComponent,
     FeedbackListComponent,
     MarkPipe,
     MarkNamePipe,
     LoginComponent,
     HeaderComponent,
     NavTabsComponent,
-    ItaTacticalPlanByGroupStageComponent,
     CheckListByGroupsComponent,
     TestsNamesComponent,
     FilterCheckListByGroupsComponent,
@@ -88,8 +86,8 @@ import { ViewAcademiesNgxComponent } from './components/view-academies/view-acad
     // ModalContainerComponent,
     ErrorComponent,
     DialogComponent,
-    PaymentPipe,
-    ViewAcademiesNgxComponent
+    ViewAcademiesNgxComponent,
+    ItaTacticalReportComponent
   ],
   entryComponents: [
     EmployeeAddComponent,
@@ -122,11 +120,14 @@ import { ViewAcademiesNgxComponent } from './components/view-academies/view-acad
     MatExpansionModule,
     MatDialogModule,
     ModalModule.forRoot(),
-    NgxDatatableModule
+    NgxDatatableModule,
+    DxButtonModule,
+    DxDataGridModule,
+    DxLoadIndicatorModule
   ],
   providers: [AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
     CookieService, SearchBarService, DataService, JwtHelper, BsModalService, BsModalRef, ComponentLoaderFactory, PositioningService,PaginationConfig,
-  EmployeeService],
+  EmployeeService,ItaTacticalReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

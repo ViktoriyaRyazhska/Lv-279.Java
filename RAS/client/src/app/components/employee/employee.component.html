@@ -1,4 +1,50 @@
-<p>
-  employee works!
-  <button type="button" class="btn btn-primary" (click)="openModalWithComponent()">Create modal with component</button>
-</p>
+<!--<p>-->
+  <!--employee works!-->
+  <!--<button type="button" class="btn btn-primary" (click)="openModalWithComponent()">Create modal with component</button>-->
+<!--</p>-->
+
+
+<button mat-raised-button color="primary" (click)="addEmployeeClick()">Add employee</button>
+
+<p-dialog header="Add employee" modal="false" [(visible)]="displayUsersList" [responsive]="true" width="480">
+    <p-tabView>
+    <p-tabPanel header="TEACHER" [(selected)]="selectedTeacher">
+      <p-dataTable [value]="this.employeesTeacher" [(selection)]="selectedEmployee" dataKey="employeeId"
+                   [paginator]="true" [rows]="10" [headerCheckboxToggleAllPages]="true">
+        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+        <p-column field="firstNameEng" header="First Name" [filter]="true" [sortable]="true"></p-column>
+        <p-column field="lastNameEng" header="Last Name" [filter]="true" [sortable]="true"></p-column>
+      </p-dataTable>
+    </p-tabPanel>
+    <p-tabPanel header="EXPERT" [(selected)]="selectedExpert">
+      <p-dataTable [value]="this.employeesExpert" [(selection)]="selectedEmployee" dataKey="employeeId"
+                   [paginator]="true" [rows]="10" [headerCheckboxToggleAllPages]="true">
+        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+        <p-column field="firstNameEng" header="First Name" [filter]="true" [sortable]="true"></p-column>
+        <p-column field="lastNameEng" header="Last Name" [filter]="true" [sortable]="true"></p-column>
+      </p-dataTable>
+    </p-tabPanel>
+    <p-tabPanel header="INTERVIEWER" [(selected)]="selectedInterviewer">
+      <p-dataTable [value]="this.employeesInterviewer" [(selection)]="selectedEmployee" dataKey="employeeId"
+                   [paginator]="true" [rows]="10" [headerCheckboxToggleAllPages]="true">
+        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+        <p-column field="firstNameEng" header="First Name" [filter]="true" [sortable]="true"></p-column>
+        <p-column field="lastNameEng" header="Last Name" [filter]="true" [sortable]="true"></p-column>
+      </p-dataTable>
+    </p-tabPanel>
+    </p-tabView>
+
+<div class="myfootertable">
+  <p-dataTable [value]="selectedEmployee" scrollable="true" scrollHeight="85px">
+    <p-column field="firstNameEng" header="First Name"></p-column>
+    <p-column field="lastNameEng" header="Last Name"></p-column>
+    <p-column field="teacherType" header="Teacher Type"></p-column>
+  </p-dataTable>
+</div>
+
+    <button pButton type="button" (click)="cancelAddingClick()" label="Cancel" class="ui-button-secondary"
+            style="margin-top: 1em; float: right"></button>
+
+    <button pButton type="button" (click)="acceptEmployeesClick()" label="Assign" class="ui-button-success"
+            style="margin-top: 1em; float: right"></button>
+</p-dialog>

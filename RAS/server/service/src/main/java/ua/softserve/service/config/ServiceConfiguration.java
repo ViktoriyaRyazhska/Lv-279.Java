@@ -8,7 +8,7 @@ import ua.softserve.validator.impl.GroupValidatorImpl;
 @Configuration
 public class ServiceConfiguration {
     @Bean
-    GroupValidator groupValidator(){
+    GroupValidator groupValidator() {
         return new GroupValidatorImpl();
     }
 }
