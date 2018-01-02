@@ -155,11 +155,12 @@
 
 
  <div class="container" *ngIf="rForm">
-   <form [formGroup]="rForm">
 
+   <div class="center">
+   <form [formGroup]="rForm" *ngIf="tests; else error">
      <div class="row">
-        <button mat-raised-button (click)="addTest();">Add test</button>
-        <button mat-raised-button type="submit" class="btn btn-primary" [disabled]="!rForm.valid" (click)="save()">Save</button>
+        <button class="col-sm-1-cust" mat-raised-button (click)="addTest();">Add test</button>
+        <button class="btn btn-primary" mat-raised-button type="submit" [disabled]="!rForm.valid" (click)="save()">Save</button>
         <button mat-raised-button (click)="cancelChanges();">Cancel</button><br><br>
      </div>
 
@@ -184,4 +185,6 @@
        </div>
      </div>
    </form>
+     <ng-template #error> Something went wrong !!!</ng-template>
+ </div>
  </div>
