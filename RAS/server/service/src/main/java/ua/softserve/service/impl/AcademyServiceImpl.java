@@ -10,13 +10,12 @@ import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.GroupInfoConverter;
+import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyDropDownLists;
-import ua.softserve.service.dto.AcademyForSaveDTO;
 import ua.softserve.validator.GroupValidator;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
@@ -62,7 +61,7 @@ public class AcademyServiceImpl implements AcademyService {
      */
     @Transactional
     @Override
-    public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO) {
+    public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyDTO academyDTO) {
         groupValidator.validate(academyDTO);
 
         Academy academy = groupInfoConverter.academyToEntity(academyDTO);
