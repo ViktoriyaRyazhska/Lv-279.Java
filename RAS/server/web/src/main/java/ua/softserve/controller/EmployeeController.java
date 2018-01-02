@@ -40,8 +40,6 @@ public class EmployeeController {
 
     @PostMapping("/assign")
     public void addStudents(@RequestBody List<GroupInfoTeachersDTO> object) {
-        System.out.println("_______________________");
-        System.out.println("+"+object);
         groupInfoTeachersService.save(object);
     }
 }

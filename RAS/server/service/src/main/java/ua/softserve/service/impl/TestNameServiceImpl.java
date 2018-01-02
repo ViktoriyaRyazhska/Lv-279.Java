@@ -14,6 +14,9 @@ public class TestNameServiceImpl implements TestNameService {
     @Autowired
     private TestNameRepository testNameRepository;
 
+    @Autowired
+    private AcademyServiceImpl academyService;
+
     @Override
     @Transactional
     public String saveTestNames(List<TestName> testNames, Integer academyId) {
@@ -26,7 +29,7 @@ public class TestNameServiceImpl implements TestNameService {
             if (testName.isRemoved()) {
                 this.deleteTestName(testName);
             } else {
-                testName.setGroupId(academyId);
+                testName.setGroupId(academyService.findOne(academyId));
                 testNameRepository.save(testName);
             }
         }
@@ -41,7 +44,7 @@ public class TestNameServiceImpl implements TestNameService {
     @Override
     @Transactional(readOnly = true)
     public List<TestName> findAllTestNamesByAcademyId(Integer groupId) {
-        return testNameRepository.findAllTestNamesBygroupId(groupId);
+        return testNameRepository.findAllTestNamesByGroupId(academyService.findOne(groupId));
     }
 
     @Override

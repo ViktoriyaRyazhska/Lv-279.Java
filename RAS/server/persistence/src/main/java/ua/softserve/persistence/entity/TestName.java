@@ -16,8 +16,9 @@ public class TestName {
     @Column(name = "id")
     private Long testId;
 
-    @Column(name = "academy_id")
-    private Integer groupId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "academy_id")
+    private Academy groupId;
 
     @NotNull
     @Column(name = "test_name")
@@ -34,7 +35,7 @@ public class TestName {
         this.removed = false;
     }
 
-    public TestName(Integer group_id, String testName, double testMaxScore) {
+    public TestName(Academy group_id, String testName, Double testMaxScore) {
         this.groupId = group_id;
         this.testName = testName;
         this.testMaxScore = testMaxScore;

@@ -10,6 +10,8 @@ import ua.softserve.service.dto.UserShortViewDto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ua.softserve.persistence.constants.ConstantsFromDb.*;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -19,7 +21,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<UserShortViewDto> getAllUsersByAcademyAndStatus(Integer academyId) {
-        return userRepository.findAllByAcademyAndStatus(academyId).stream()
+        return userRepository.findAllByAcademyAndStatus(academyId, STUDENT_ID).stream()
                 .map(UserShortViewDto::of)
                 .collect(Collectors.toList());
     }

@@ -10,6 +10,7 @@ import ua.softserve.persistence.entity.TestName;
 import ua.softserve.service.TestNameService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 public class TestNamesController {
@@ -18,12 +19,19 @@ public class TestNamesController {
 
     private static final Logger logger = LogManager.getLogger(TestNamesController.class);
 
-    @RequestMapping(value = "/tests/{id}", method = RequestMethod.GET, produces = { "application/json" })
-    public ResponseEntity<List<TestName>> showTestsNames(@PathVariable("id") Integer groupId) {
-        return new ResponseEntity<List<TestName>>(testNameService.findAllTestNamesByAcademyId(groupId), HttpStatus.OK);
+    @GetMapping(value = "/tests/{id}")
+    public ResponseEntity showTestsNames(@PathVariable("id") Integer groupId) {
+        try{
+            return new ResponseEntity<List<TestName>>(testNameService.findAllTestNamesByAcademyId(groupId), HttpStatus.OK);
+        }
+        catch (NoSuchElementException e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Group with id " + groupId + " not found");
+        }
     }
 
-    @RequestMapping(value = "/tests/add/{id}", method = RequestMethod.POST, produces = { "application/json" })
+    @PostMapping(value = "/tests/add/{id}")
     public ResponseEntity<Integer> saveTestsNames(@PathVariable("id") int groupId,@RequestBody List<TestName> testNames) {
 
         if(testNameService.saveTestNames(testNames,groupId).equals("success")) {

@@ -13,7 +13,7 @@ import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angul
 export class TestsNamesComponent implements OnInit {
   @Input() groupId: number;
 
-  //groupId : number;
+  groupId2 : number;
   tests : Tests[];
   static counter : number = 1;
   rForm: FormGroup;
@@ -24,14 +24,14 @@ export class TestsNamesComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
   ) {
-    //this.groupId = +this.route.snapshot.params['id'];
+    this.groupId2 = +this.route.snapshot.params['id'];
     this.rForm = new FormGroup({
       testRows: this.fb.array([])
     });
   }
 
   ngOnInit() {
-    this.testNamesService.getAll(this.groupId).subscribe(data => {
+    this.testNamesService.getAll(this.groupId2).subscribe(data => {
       console.log(data);
       this.tests = data;
       TestsNamesComponent.counter = this.tests.length;
@@ -64,17 +64,18 @@ export class TestsNamesComponent implements OnInit {
       for (let i = 0; i < this.testRows.length; i++) {
         let item = this.testRows.at(i);
         let test = new Tests(item.get('testName').value, item.get('testMaxScore').value);
-        test.setTestRowsWithFormGroup(item, this.groupId);
+        test.setTestRowsWithFormGroup(item);
         this.tests.push(test);
       }
     }
     this.testRows.controls = [];
     console.log(this.testRows.length);
-    this.testNamesService.addTests(this.tests, this.groupId).subscribe(() => {
+    this.testNamesService.addTests(this.tests, this.groupId2).subscribe(() => {
       this.tests = null;
       this.ngOnInit()
     });
   }
+
 
   isFormValid(): boolean {
     return this.rForm.valid;
@@ -97,7 +98,7 @@ export class TestsNamesComponent implements OnInit {
     if(index>=0) {
       let test : Tests = new Tests('',0);
       item.get('removed').value = true;
-      test.setTestRowsWithFormGroup(item, this.groupId);
+      test.setTestRowsWithFormGroup(item);
       this.testRows.controls.splice(index,1,this.createTestRow(test));
     }
   }

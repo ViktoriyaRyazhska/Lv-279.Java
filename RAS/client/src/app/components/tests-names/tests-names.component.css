@@ -102,15 +102,16 @@ input[type=date]::-webkit-inner-spin-button {
 /*}*/
 
 .col-sm-6 {
-  width: 30%
+  width: 38%
 }
 .col-sm-6-button-custom {
   width: 7% ;
 }
 
 .col-sm-6-maxscore-customize {
-  width: 20%;
+  width: 22%;
 }
+
 
 .container {
   width: 98%;
@@ -119,3 +120,19 @@ input[type=date]::-webkit-inner-spin-button {
 .mat-input-element {
   text-align: center;
 }
+
+.col-sm-1-cust {
+  margin-right: 22.5%;
+}
+
+.center {
+  width: 70%;
+  margin: auto;
+}
+
+/*.col-sm-6-customize .mat-form-field-infix {*/
+  /*padding: .4375em 0;*/
+  /*border-top: .14375em solid transparent;*/
+/*}*/
+
+

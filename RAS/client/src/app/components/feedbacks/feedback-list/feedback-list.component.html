@@ -694,7 +694,6 @@
               <div>Summary comments (risks/strangths, recommendation):</div>
             </td>
             <td colspan="2" width="75%">
-              <!--<textarea pInputTextarea formControlName="summaryExpert" heigth [style]="{'width':'100%', 'height':'100%'}"></textarea>-->
               <input type="text" pInputText formControlName="summaryExpert" style="width: 100%; height: 100%">
             </td>
           </tr>
@@ -707,13 +706,13 @@
           </tr>
           <tr>
             <td width="100%">
-              <!--<textarea pInputTextarea formControlName="summary" [style]="{'width':'100%', 'height':'100%'}"></textarea>-->
               <input type="text" pInputText formControlName="summary" style="width: 100%; height: 100%">
             </td>
           </tr>
         </table>
       </p-tabPanel>
     </p-tabView>
+
     <button pButton type="submit" label="Save & Close"></button>
     <button pButton type="button" [disabled]="disabledPreviousButton" label="Save & Previous"
             (click)="onPreviousSave(selectedStudent)"></button>
