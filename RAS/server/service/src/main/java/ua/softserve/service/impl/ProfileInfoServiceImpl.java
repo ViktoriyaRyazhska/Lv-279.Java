@@ -36,9 +36,4 @@ public class ProfileInfoServiceImpl implements ProfileService {
     public void remove(ProfileInfo profile) {
         profileRepository.delete(profile);
     }
-
-    @Override
-    public List<String> findProfileNames() {
-        return profileRepository.findProfileNames();
-    }
 }

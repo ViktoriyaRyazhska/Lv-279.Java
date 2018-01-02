@@ -112,10 +112,8 @@ input[type=date]::-webkit-inner-spin-button {
   width: 20%;
 }
 
-
 .container {
   width: 98%;
-  text-align: center;
 }
 
 .mat-input-element {

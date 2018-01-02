@@ -25,7 +25,7 @@ public class GroupInformationDTO {
     private Integer studentsPlannedToEnrollment;
     private Long startDate;
     private Long endDate;
-    private Integer paymentStatus;
+    private String paymentStatus;
     private String nameForSite;
     private String profileName;
     private String directionName;
@@ -53,6 +53,15 @@ public class GroupInformationDTO {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate.getTime();
+    }
+
+    public void setPaymentStatus(Integer paymentStatus) {
+        if (paymentStatus == 1) {
+            this.paymentStatus = "Founded by SoftServe";
+        } else {
+            this.paymentStatus = "Paid";
+        }
+
     }
 
     @Override

@@ -12,4 +12,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     @Query("from Employee e order by e.lastNameEng, e.firstNameEng")
     List<Employee> findAllSorted();
+
+    Employee findEmployeesByLoginUserId(int loginUser_id);
 }

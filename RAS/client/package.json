@@ -29,6 +29,7 @@
     "@swimlane/ngx-datatable": "^11.1.7",
     "angular": "^1.6.8",
     "angular2-cookie": "^1.2.6",
+    "angular2-jwt": "^0.2.3",
     "bootstrap": "^3.3.7",
     "cldr-data": "^32.0.0",
     "core-js": "^2.5.3",
@@ -47,7 +48,9 @@
     "primeng": "^5.0.2",
     "rxjs": "^5.5.6",
     "universalify": "^0.1.1",
-    "zone.js": "^0.8.18"
+    "xlsx": "^0.11.16",
+    "xlsx-style": "^0.8.13",
+    "zone.js": "^0.8.19"
   },
   "devDependencies": {
     "@angular/cli": "1.5.2",
@@ -55,7 +58,7 @@
     "@angular/language-service": "^5.1.2",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
-    "@types/node": "^6.0.93",
+    "@types/node": "^6.0.95",
     "codelyzer": "~3.2.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",

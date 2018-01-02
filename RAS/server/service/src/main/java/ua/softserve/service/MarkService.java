@@ -3,10 +3,12 @@ package ua.softserve.service;
 import ua.softserve.persistence.entity.Mark;
 
 import java.util.List;
-
+/**
+ * Mark Service.
+ */
 public interface MarkService {
     /**
-     * Returns all marks from DB.
+     * Returns all feedbacks marks from DB.
      *
      * @return list of marks.
      */

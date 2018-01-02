@@ -2,11 +2,13 @@ import {FormGroup} from '@angular/forms';
 
 export class Group {
 
+  academyId: number = null;
+  groupInfoId: number = null;
   grName: string = null;
   nameForSite: string = null;
   academyStagesId: number = 1;
-  startDate: number = null;
-  endDate: number = null;
+  startDate = null;
+  endDate = null;
   payment: number = 1;
   cityId: number = 1;
   directionId: number = null;
@@ -30,6 +32,24 @@ export class Group {
     this.studentPlannedToGraduate = form.get('studentPlannedToGraduate').value;
     this.studentPlannedToEnrollment = form.get('studentPlannedToEnrollment').value;
     this.studentActual = form.get('studentActualFromControl').value;
+  }
+
+  setDataToGroup(group: any){
+    this.academyId = group.academyId;
+    this.groupInfoId = group.groupInfoId;
+    this.grName = group.grName;
+    this.nameForSite = group.nameForSite;
+    this.academyStagesId = group.academyStagesId;
+    this.payment = group.payment;
+    this.cityId = group.cityId;
+    this.startDate = new Date(group.startDate);
+    this.endDate = new Date(group.endDate);
+    this.directionId = group.directionId;
+    this.technologieId = group.technologieId;
+    this.profileId = group.profileId;
+    this.studentPlannedToGraduate = group.studentPlannedToGraduate;
+    this.studentPlannedToEnrollment = group.studentPlannedToEnrollment;
+    // this.studentActual = group.studentActual;
   }
 
 }

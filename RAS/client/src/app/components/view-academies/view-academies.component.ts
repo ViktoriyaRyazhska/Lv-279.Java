@@ -59,9 +59,11 @@ export class ViewAcademiesComponent implements OnInit {
   onFilterField(form) {
     this.filteredAcademies = this.academies;
     Object.keys(form.form.value).forEach(key => {
-      if (key === 'startDate' || key === 'endDate') {
-        this.filteredAcademies = this.filterService.transformDate(this.filteredAcademies, form.form.value[key], key);
-      }else {
+      if (key === 'startDate') {
+        this.filteredAcademies = this.filterService.transformStartDate(this.filteredAcademies, form.form.value[key], form.form.value['startDateOption'], key);
+      } else if (key === 'endDate') {
+        this.filteredAcademies = this.filterService.transformEndDate(this.filteredAcademies, form.form.value[key], form.form.value['endDateOption'], key);
+      } else {
         this.filteredAcademies = this.filterService.transform(this.filteredAcademies, form.form.value[key], key);
       }
       this.dataSource = new MatTableDataSource<Element>(this.filteredAcademies);

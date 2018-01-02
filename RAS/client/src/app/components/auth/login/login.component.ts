@@ -7,6 +7,9 @@ import {getResponseURL} from "@angular/http/src/http_utils";
 import {ResponseToken} from "./ResponseToken";
 import {Router} from "@angular/router";
 import {CookieService} from "angular2-cookie/core";
+import {JwtHelper} from "angular2-jwt";
+import {Authority} from "../Authority";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-login',
@@ -20,13 +23,12 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   account: LoginAccount;
-  resp: ResponseToken;
   error: boolean;
 
   constructor(private fb: FormBuilder,
               private loginService: LoginService,
               private router: Router,
-              private cookie:CookieService
+              private cookie:CookieService,
               ) { }
 
   ngOnInit() {
@@ -40,9 +42,7 @@ export class LoginComponent implements OnInit {
     this.account = this.loginForm.value;
     this.loginService.signIn(this.account)
       .subscribe((response:ResponseToken)=>{
-        // console.log('authority - '+response.authorities[0].authority);
-        // this.resp.username=response.username;
-        this.cookie.put('token',response.token);
+        this.cookie.put('auth',response.token);
         this.error=false;
         this.router.navigate(['/']);
       }, error2 => {

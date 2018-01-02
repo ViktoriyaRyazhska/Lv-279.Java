@@ -8,6 +8,7 @@ import {AddGroupService} from "./add-group.service";
 import {MatDialog} from "@angular/material";
 import {DialogComponent} from "../dialog/dialog.component";
 import {DataService} from "../../../services/data.service";
+import {LoginService} from "../../auth/login/login.service";
 
 @Component({
   selector: 'app-add-group',
@@ -34,8 +35,6 @@ export class AddGroupComponent implements OnInit {
 
   navtab: boolean = false;
 
-  groupForUpdate: any;
-
   private defaultInvalidInput: string = 'No data entered. Group will not be save';
 
   paymentStatusArray: {name: string, free: number}[] = [
@@ -47,27 +46,25 @@ export class AddGroupComponent implements OnInit {
               private route: ActivatedRoute,
               private router:Router,
               public dialog: MatDialog,
-              private data: DataService) {
+              private loginService: LoginService) {
   }
 
   ngOnInit() {
     this.group = new Group();
+    this.groupId = this.route.snapshot.params['id'];
 
     this.getDropdownOnInit();
 
     if(this.router.url.includes('group/update')){
       this.navtab = true;
-      this.data.currentMessage.subscribe(message => this.groupForUpdate = message);
-      this.groupId = this.route.snapshot.params['id'];
       this.updateGroup();
-      // this.formGroupOnInit();
-    }else if(this.router.url.includes('group/add')){
+    }else if(this.router.url.includes('group/add')) {
       this.formGroupOnInit();
     }
   }
 
   getDropdownOnInit(){
-    this.addGroupService.getAll().subscribe(resp => {
+    this.addGroupService.getDropdownList().subscribe(resp => {
       this.academyStatus = resp.academyStages;
       this.city = resp.cityNames;
       this.commonDirection = resp.direction;
@@ -124,16 +121,14 @@ export class AddGroupComponent implements OnInit {
   }
 
   saveGroup() {
-    console.log(this.signupForm);
-
     if (this.isFormValid()) {
       this.group.setDataFromFormControl(this.signupForm);
       this.invalidForm = false;
       this.sendData();
       console.log('valid');
     } else {
-      console.log('invalid');
       this.invalidForm = true;
+      console.log('invalid');
     }
   }
 
@@ -147,7 +142,7 @@ export class AddGroupComponent implements OnInit {
 
   private sendData(){
     this.addGroupService.saveGroup(this.group).subscribe(res => {
-      if(res==200){
+      if(res==null || res == 200){
         this.openDialog();
       }
     },error => {
@@ -178,22 +173,13 @@ export class AddGroupComponent implements OnInit {
   }
 
   updateGroup(){
-    console.log(this.groupForUpdate);
-    this.signupForm = new FormGroup({
-      'groupInfoFormControl': new FormControl(this.groupForUpdate.groupName),
-      'nameForSiteFormControl': new FormControl(this.groupForUpdate.nameForSite, [Validators.required]),
-      'academyStagesId': new FormControl(this.group.academyStagesId),
-      'cityId': new FormControl(this.group.cityId),
-      'startDateFormControl': new FormControl(new Date(this.groupForUpdate.startDate), [Validators.required]),
-      'endDateFormControl': new FormControl(new Date(this.groupForUpdate.endDate), [Validators.required]),
-      'commonDirectionFormControl': new FormControl(this.group.directionId),
-      'directionFormControl': new FormControl(this.group.technologieId),
-      'profileInfoFormControl': new FormControl(this.group.profileId),
-      'paymentStatusFormControl': new FormControl(this.group.payment),
-      'studentPlannedToGraduate': new FormControl(this.groupForUpdate.studentPlannedToGraduate /*, this.myValidator.bind(this)*/),
-      'studentPlannedToEnrollment': new FormControl(this.groupForUpdate.studentPlannedToEnrollment),
-      'studentActualFromControl': new FormControl({value: this.groupForUpdate.studentActual, disabled: false})
+    this.addGroupService.getGroupById(this.groupId).subscribe(group => {
+      this.group.setDataToGroup(group);
+      this.formGroupOnInit();
+    },error => {
+      console.log(error);
     });
+
   }
 
 }

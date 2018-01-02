@@ -12,8 +12,7 @@ public interface StudentService {
     /**
      * Returns accepted students by academy id
      *
-     * @param academyId
-     *            - academy/group id
+     * @param academyId - academy/group id
      * @return list of students
      */
     List<StudentViewDto> getStudentsByAcademy(Integer academyId);
@@ -22,10 +21,11 @@ public interface StudentService {
 
     void removeStudentFromAcademy(Integer studentId);
 
-    void updateStudentOfAcademy(List<StudentViewDto> students);
+    void updateStudentsOfAcademy(List<StudentViewDto> students);
+
+    void updateStudentOfAcademy(StudentViewDto student);
 
     Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatuses);
 
     List<EmployeeEngShortDto> getAllEmployees();
-
 }

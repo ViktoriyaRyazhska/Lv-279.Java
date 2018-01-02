@@ -1,13 +1,3 @@
-/*
-* Mark
-*
-* Version 1.0-SNAPSHOT
-*
-* 02.12.17
-*
-* All rights reserved by DoubleO Team (Team#1)
-* */
-
 package ua.softserve.persistence.entity;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +18,7 @@ public class Characteristic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "characteristic_id")
-    private int id;
+    private Integer id;
 
     private String name;
 }

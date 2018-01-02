@@ -21,6 +21,4 @@ export class SearchBarService {
     return this.http.get(environment.serverUrl + '/getDropDownList');
   }
 
-
-
 }

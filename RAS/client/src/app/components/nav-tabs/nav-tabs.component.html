@@ -1,7 +1,31 @@
-<nav mat-tab-nav-bar>
-  <a mat-tab-link routerLink="students/{{academyId}}">Students</a>
-  <a mat-tab-link routerLink="history/{{academyId}}">History</a>
-  <a mat-tab-link routerLink="feedback/{{academyId}}">Feedbacks</a>
-  <a mat-tab-link routerLink="tests/{{academyId}}">Tests</a>
-</nav>
-<router-outlet></router-outlet>
+<!--<nav mat-tab-nav-bar>-->
+  <!--<a mat-tab-link routerLink="students/{{academyId}}">Students</a>-->
+  <!--<a mat-tab-link routerLink="history/{{academyId}}">History</a>-->
+  <!--<a mat-tab-link routerLink="feedback/{{academyId}}">Feedbacks</a>-->
+  <!--<a mat-tab-link routerLink="tests/{{academyId}}">Tests</a>-->
+<!--</nav>-->
+<!--<router-outlet></router-outlet>-->
+
+<p-tabView>
+
+  <p-tabPanel header="Students" [selected]="true">
+    <app-students [groupId]="academyId" ></app-students>
+  </p-tabPanel>
+
+  <p-tabPanel header="Employee">
+    <app-employee [groupId]="academyId"></app-employee>
+  </p-tabPanel>
+
+  <p-tabPanel header="History">
+    <app-history-list [groupId]="academyId"></app-history-list>
+  </p-tabPanel>
+
+  <p-tabPanel header="Feedback">
+    <app-feedbacks [groupId]="academyId"></app-feedbacks>
+  </p-tabPanel>
+
+  <p-tabPanel header="Tests">
+    <app-tests-names [groupId]="academyId"></app-tests-names>
+  </p-tabPanel>
+
+</p-tabView>
