@@ -9,14 +9,11 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.GroupInfoConverter;
-import ua.softserve.service.dto.AcademyForSaveDTO;
-import ua.softserve.service.exception.InvalidDataException;
-import ua.softserve.service.exception.InvalidTimeFrameException;
+import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.validator.impl.GroupValidatorImpl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -48,7 +45,7 @@ public class AcademyServiceImplTest {
     List<Academy> listAcademys;
 
     @Mock
-    AcademyForSaveDTO academyForSaveDTO;
+    AcademyDTO academyDTO;
 
     @Mock
     Academy academy;
@@ -67,11 +64,11 @@ public class AcademyServiceImplTest {
 
     @Before
     public void setUp() {
-        academyForSaveDTO = new AcademyForSaveDTO();
-        academyForSaveDTO.setGrName("Group Name");
-        academyForSaveDTO.setNameForSite("Name For Site");
-        academyForSaveDTO.setStartDate(15000000L);
-        academyForSaveDTO.setEndDate(16000000L);
+        academyDTO = new AcademyDTO();
+        academyDTO.setGrName("Group Name");
+        academyDTO.setNameForSite("Name For Site");
+        academyDTO.setStartDate(15000000L);
+        academyDTO.setEndDate(16000000L);
     }
 
     @Test
@@ -106,16 +103,16 @@ public class AcademyServiceImplTest {
 
     @Test
     public void saveAcademyAndGroupInfoFromAcademyDTO() throws Exception {
-        doNothing().when(groupValidator).validate(academyForSaveDTO);
-        when(groupInfoConverter.academyToEntity(academyForSaveDTO)).thenReturn(academy);
+        doNothing().when(groupValidator).validate(academyDTO);
+        when(groupInfoConverter.academyToEntity(academyDTO)).thenReturn(academy);
         when(academyRepository.save(academy)).thenReturn(academy);
-        when(groupInfoConverter.groupInfoToEntity(academy.getAcademyId(), academyForSaveDTO)).thenReturn(groupInfo);
+        when(groupInfoConverter.groupInfoToEntity(academy.getAcademyId(), academyDTO)).thenReturn(groupInfo);
         doNothing().when(groupInfoService).save(groupInfo);
-        academyServiceImpl.saveAcademyAndGroupInfoFromAcademyDTO(academyForSaveDTO);
-        verify(groupValidator).validate(academyForSaveDTO);
-        verify(groupInfoConverter).academyToEntity(academyForSaveDTO);
+        academyServiceImpl.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
+        verify(groupValidator).validate(academyDTO);
+        verify(groupInfoConverter).academyToEntity(academyDTO);
         verify(academyRepository).save(academy);
-        verify(groupInfoConverter).groupInfoToEntity(academy.getAcademyId(), academyForSaveDTO);
+        verify(groupInfoConverter).groupInfoToEntity(academy.getAcademyId(), academyDTO);
         verify(groupInfoService).save(groupInfo);
         verifyNoMoreInteractions(groupValidator, groupInfoConverter, academyRepository, groupInfoConverter, groupInfoService);
 
