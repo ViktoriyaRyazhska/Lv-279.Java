@@ -53,7 +53,7 @@ import {DataService} from "./services/data.service";
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import { ViewAcademiesNgxComponent } from './components/view-academies/view-academies-ngx/view-academies-ngx.component';
-import {DxButtonModule, DxDataGridModule} from "devextreme-angular";
+import {DxButtonModule, DxDataGridModule, DxLoadIndicatorModule} from "devextreme-angular";
 import { ItaTacticalReportComponent } from './components/reports/ita-tactical-report/ita-tactical-report.component';
 import {ItaTacticalReportService} from "./components/reports/ita-tactical-report/ita-tactical-report.service";
 
@@ -123,7 +123,8 @@ import {ItaTacticalReportService} from "./components/reports/ita-tactical-report
     ModalModule.forRoot(),
     NgxDatatableModule,
     DxButtonModule,
-    DxDataGridModule
+    DxDataGridModule,
+    DxLoadIndicatorModule
   ],
   providers: [AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
     CookieService, SearchBarService, DataService, JwtHelper, BsModalService, BsModalRef, ComponentLoaderFactory, PositioningService,PaginationConfig,

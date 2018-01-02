@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ItaTacticalReportService} from "./ita-tactical-report.service";
 
-
 @Component({
   selector: 'app-ita-tactical-report',
   templateUrl: './ita-tactical-report.component.html',
@@ -11,6 +10,7 @@ import {ItaTacticalReportService} from "./ita-tactical-report.service";
 export class ItaTacticalReportComponent implements OnInit {
 
   itaTacticalPlanReports = [];
+  loadIndicatorVisible = true;
 
   constructor(private itaTacticalReportService: ItaTacticalReportService,
               private router: Router) {
@@ -24,6 +24,7 @@ export class ItaTacticalReportComponent implements OnInit {
     this.itaTacticalReportService.getAll().subscribe(
       data => {
         this.itaTacticalPlanReports = data;
+        this.loadIndicatorVisible = false;
             },
       error => {
         if (error.status === 403) {
