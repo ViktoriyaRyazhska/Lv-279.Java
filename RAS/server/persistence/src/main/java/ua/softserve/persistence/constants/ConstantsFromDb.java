@@ -76,4 +76,7 @@ public class ConstantsFromDb {
     public final static int REJECT_ID = 8;
 
     public final static Integer ZERO_EMPLOYEE = 0;
+
+    public static final int DEFAULT_INVOLVED=0;
+    public static final int DEFAULT_CONTRIBUTED_HOURS=0;
 }
