@@ -8,6 +8,8 @@ import {ResponseToken} from "./ResponseToken";
 import {Router} from "@angular/router";
 import {CookieService} from "angular2-cookie/core";
 import {JwtHelper} from "angular2-jwt";
+import {Authority} from "../Authority";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-login',
@@ -41,7 +43,6 @@ export class LoginComponent implements OnInit {
     this.loginService.signIn(this.account)
       .subscribe((response:ResponseToken)=>{
         this.cookie.put('auth',response.token);
-        console.log(this.loginService.securityForProvideFeedback());
         this.error=false;
         this.router.navigate(['/']);
       }, error2 => {

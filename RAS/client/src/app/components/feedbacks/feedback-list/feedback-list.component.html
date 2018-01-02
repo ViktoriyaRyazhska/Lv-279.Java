@@ -4,7 +4,7 @@
       <p-column header="Name" rowspan="3" field="user.firstName" [sortable]="true"
                 [style]="{'width':'10em'}"></p-column>
       <p-column rowspan="3" [style]="{'width':'10em'}"></p-column>
-      <span *ngIf="this.loginService.securityForProvideFeedback()">
+      <span *ngIf="this.isAssignedAsTeacher || this.isAssignedAsExpert || this.isAssignedAsInterviewer || this.loginService.securityForProvideFeedback()">
       <p-column rowspan="3" [style]="{'width':'10em'}"></p-column>
       </span>
 
@@ -71,7 +71,7 @@
     <p-row>
       <p-column field="user.firstName" [filter]="true" [style]="{'width':'10em'}"></p-column>
       <p-column [style]="{'width':'10em'}"></p-column>
-      <span *ngIf="this.loginService.securityForProvideFeedback()">
+      <span *ngIf="this.isAssignedAsTeacher || this.isAssignedAsExpert || this.isAssignedAsInterviewer || this.loginService.securityForProvideFeedback()">
       <p-column [style]="{'width':'10em'}"></p-column>
       </span>
 
@@ -171,7 +171,7 @@
     </ng-template>
   </p-column>
 
-  <span *ngIf="this.loginService.securityForProvideFeedback()">
+  <span *ngIf="this.isAssignedAsTeacher || this.isAssignedAsExpert || this.isAssignedAsInterviewer || this.loginService.securityForProvideFeedback()">
   <p-column [style]="{'width':'10em'}">
       <ng-template let-col let-student="rowData" pTemplate="body">
         <span>
@@ -442,7 +442,7 @@
   </div>
   <form [formGroup]="signupFeedbackForm" (ngSubmit)="onSaveClose()">
     <p-tabView (onChange)="setDataToStudent(signupFeedbackForm)">
-      <p-tabPanel header="Teacher" *ngIf="this.loginService.securityForTeacherFeedback()">
+      <p-tabPanel header="Teacher" *ngIf="this.isAssignedAsTeacher || this.loginService.securityForProvideFeedback()">
         <table *ngIf="selectedStudent && selectedStudent.user" class="table table-condensed table-bordered">
           <tr>
             <td align="center" valign="middle" style="font-weight:bold" width="25%">Characteristic</td>
@@ -571,7 +571,7 @@
           </tr>
         </table>
       </p-tabPanel>
-      <p-tabPanel header="Expert" *ngIf="this.loginService.securityForExpertFeedback()">
+      <p-tabPanel header="Expert" *ngIf="this.isAssignedAsExpert || this.loginService.securityForProvideFeedback()">
         <table *ngIf="selectedStudent && selectedStudent.user" class="table table-condensed table-bordered">
           <tr>
             <td align="center" valign="middle" width="25%" style="font-weight:bold">Characteristic</td>
@@ -700,7 +700,7 @@
           </tr>
         </table>
       </p-tabPanel>
-      <p-tabPanel header="Interviewer" *ngIf="this.loginService.securityForInterviewerFeedback()">
+      <p-tabPanel header="Interviewer" *ngIf="this.isAssignedAsInterviewer || this.loginService.securityForProvideFeedback()">
         <table *ngIf="selectedStudent && selectedStudent.user" class="table table-condensed table-bordered" width="900">
           <tr>
             <td width="100%" style="font-weight:bold">Summary comments (risks/strangths, recommendation):</td>
