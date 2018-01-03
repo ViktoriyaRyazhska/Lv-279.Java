@@ -51,13 +51,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                // .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS).permitAll().antMatchers("/reports/check_list_by_groups")
-                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString())
-                .antMatchers("/reports/itaTacticalPlanByGroupStage")
-                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(),
-                        Authority.SOFTSERVE_PM.toString(), Authority.RECRUITER.toString())
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
+
+                .antMatchers("/employee/assign")
+                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(), Authority.NETWORK_LEAD.toString())
+                .antMatchers("/employee/update")
+                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(), Authority.NETWORK_LEAD.toString())
                 .antMatchers("/marks")
                 .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(),
                         Authority.RECRUITER.toString(), Authority.SOFTSERVE_PM.toString(), Authority.TEACHER.toString(),

@@ -84,15 +84,8 @@ export class LoginService {
     return  this.isAuthoryty(Authority.ITA_ADMIN) || this.isAuthoryty(Authority.ITA_COORDINATOR);
   }
 
-  securityForTeacherFeedback():boolean{
-    return this.isAuthoryty(Authority.TEACHER) || this.isAuthoryty(Authority.ITA_ADMIN) || this.isAuthoryty(Authority.ITA_COORDINATOR);
+  securityForAssignEmployee():boolean{
+    return  this.isAuthoryty(Authority.ITA_ADMIN) || this.isAuthoryty(Authority.ITA_COORDINATOR) || this.isAuthoryty(Authority.NETWORK_LEAD);
   }
 
-  securityForExpertFeedback():boolean{
-    return this.isAuthoryty(Authority.EXPERT) || this.isAuthoryty(Authority.ITA_ADMIN) || this.isAuthoryty(Authority.ITA_COORDINATOR);
-  }
-
-  securityForInterviewerFeedback():boolean{
-    return this.isAuthoryty(Authority.INTERVIEWER) || this.isAuthoryty(Authority.ITA_ADMIN) || this.isAuthoryty(Authority.ITA_COORDINATOR);
-  }
 }
