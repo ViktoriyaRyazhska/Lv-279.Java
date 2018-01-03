@@ -4,8 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ua.softserve.service.dto.AcademyDTO;
-import ua.softserve.service.exception.InvalidDataException;
-import ua.softserve.service.exception.InvalidTimeFrameException;
+import ua.softserve.service.exception.DataException;
+import ua.softserve.service.exception.TimeFrameException;
 import ua.softserve.validator.impl.GroupValidatorImpl;
 
 import static org.junit.Assert.*;
@@ -37,7 +37,7 @@ public class GroupValidatorTest {
         try {
             groupValidator.validate(academyDTO);
             fail();
-        } catch (InvalidDataException e) {
+        } catch (DataException e) {
             assertTrue(e.getMessage().contains("Group Name"));
         }
     }
@@ -48,7 +48,7 @@ public class GroupValidatorTest {
         try {
             groupValidator.validate(academyDTO);
             fail();
-        } catch (InvalidDataException e) {
+        } catch (DataException e) {
             assertTrue(e.getMessage().contains("Group Name"));
         }
     }
@@ -59,7 +59,7 @@ public class GroupValidatorTest {
         try {
             groupValidator.validate(academyDTO);
             fail();
-        } catch (InvalidDataException e) {
+        } catch (DataException e) {
             assertTrue(e.getMessage().contains("Name for Site"));
         }
     }
@@ -70,48 +70,48 @@ public class GroupValidatorTest {
         try {
             groupValidator.validate(academyDTO);
             fail();
-        } catch (InvalidDataException e) {
+        } catch (DataException e) {
             assertTrue(e.getMessage().contains("Name for Site"));
         }
     }
 
-    @Test(expected = InvalidDataException.class)
+    @Test(expected = DataException.class)
     public void ifGroupNameLennghtMoreThan50Char() throws Exception {
         academyDTO.setGrName("1234567891234567891234567891234567891234567891234567");
         groupValidator.validate(academyDTO);
     }
 
-    @Test(expected = InvalidDataException.class)
+    @Test(expected = DataException.class)
     public void ifNameForSiteLennghtMoreThan50Char() throws Exception {
         academyDTO.setNameForSite("1234567891234567891234567891234567891234567891234567");
         groupValidator.validate(academyDTO);
     }
 
-    @Test(expected = InvalidDataException.class)
+    @Test(expected = DataException.class)
     public void ifStudentPlannedToGraduateMoreThan99() throws Exception {
         academyDTO.setStudentPlannedToGraduate(101);
         groupValidator.validate(academyDTO);
     }
 
-    @Test(expected = InvalidDataException.class)
+    @Test(expected = DataException.class)
     public void ifStudentPlannedToGraduateLessThan0() throws Exception {
         academyDTO.setStudentPlannedToGraduate(-2);
         groupValidator.validate(academyDTO);
     }
 
-    @Test(expected = InvalidDataException.class)
+    @Test(expected = DataException.class)
     public void ifStudentPlannedToEnrollmentMoreThan99() throws Exception {
         academyDTO.setStudentPlannedToEnrollment(101);
         groupValidator.validate(academyDTO);
     }
 
-    @Test(expected = InvalidDataException.class)
+    @Test(expected = DataException.class)
     public void ifStudentPlannedToEnrollmentLessThan0() throws Exception {
         academyDTO.setStudentPlannedToEnrollment(-2);
         groupValidator.validate(academyDTO);
     }
 
-    @Test(expected = InvalidTimeFrameException.class)
+    @Test(expected = TimeFrameException.class)
     public void startDateLessThanEndDate() throws Exception {
         academyDTO.setStartDate(160000000L);
           academyDTO.setEndDate(150000000L);

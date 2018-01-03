@@ -12,28 +12,28 @@ import java.util.Optional;
 
 @Service
 public class GroupInfoConverter {
-
-    @Autowired
-    AcademyService academyService;
-
-    @Autowired
-    ProfileService profileService;
-
-    @Autowired
-    GroupInfoService groupInfoService;
-
-    @Autowired
-    CityService cityService;
-
-    @Autowired
-    AcademyStagesService academyStagesService;
-
-    @Autowired
-    DirectionService directionService;
-
-    @Autowired
-    TechnologyService technologyService;
-
+//
+//    @Autowired
+//    AcademyService academyService;
+//
+//    @Autowired
+//    ProfileService profileService;
+//
+//    @Autowired
+//    GroupInfoService groupInfoService;
+//
+//    @Autowired
+//    CityService cityService;
+//
+//    @Autowired
+//    AcademyStagesService academyStagesService;
+//
+//    @Autowired
+//    DirectionService directionService;
+//
+//    @Autowired
+//    TechnologyService technologyService;
+//
     @Autowired
     StudentService studentService;
 
@@ -64,88 +64,87 @@ public class GroupInfoConverter {
         academyDTO.setStudentPlannedToGraduate(groupInfo.getStudentsPlannedToGraduate());
         academyDTO.setStudentPlannedToEnrollment(groupInfo.getStudentsPlannedToEnrollment());
         academyDTO.setStudentsActual(studentService.countAllByAcademyId(groupInfo.getAcademy().getAcademyId()));
-        academyDTO.setModifyBy(((Optional<LoginUser>) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).get().getUsername());
 
         return academyDTO;
     }
 
-    /**
-     * Method convert AcademyDTO to GroupInfo.
-     *
-     * @param academyId
-     * @param academyDTO
-     * @return GroupInfo
-     */
-    public GroupInfo groupInfoToEntity(int academyId, AcademyDTO academyDTO) {
-        GroupInfo groupInfo;
-
-        if (academyDTO.getGroupInfoId() == 0) {
-            groupInfo = new GroupInfo();
-        } else {
-            groupInfo = groupInfoService.findOneGroupInfoByAcademyId(academyDTO.getAcademyId());
-        }
-
-        groupInfo.setAcademy(getAcademyById(academyId));
-        groupInfo.setGroupName(academyDTO.getGrName());
-        groupInfo.setProfileInfo(getProfileInfo(academyDTO.getProfileId()));
-        groupInfo.setStudentsPlannedToEnrollment(academyDTO.getStudentPlannedToEnrollment());
-        groupInfo.setStudentsPlannedToGraduate(academyDTO.getStudentPlannedToGraduate());
-
-        return groupInfo;
-    }
-
-    /**
-     * Method convert AcademyDTO to Academy
-     *
-     * @param academyDTO
-     * @return Academy
-     */
-    public Academy academyToEntity(AcademyDTO academyDTO) {
-        Academy academy;
-
-        if (academyDTO.getAcademyId() == 0) {
-            academy = new Academy();
-        } else {
-            academy = academyService.findOne(academyDTO.getAcademyId());
-        }
-
-        academy.setName(academyDTO.getNameForSite());
-        academy.setAcademyStages(getAcademyStages(academyDTO.getAcademyStagesId()));
-        academy.setStartDate(convertLongToDate(academyDTO.getStartDate()));
-        academy.setEndDate(convertLongToDate(academyDTO.getEndDate()));
-        academy.setCity(getCity(academyDTO.getCityId()));
-        academy.setFree(academyDTO.getPayment());
-        academy.setDirections(getDirection(academyDTO.getDirectionId()));
-        academy.setTechnologies(getTechnologies(academyDTO.getTechnologieId()));
-
-        return academy;
-    }
-
-    private Academy getAcademyById(int academyId) {
-        return academyService.findOne(academyId);
-    }
-
-    private ProfileInfo getProfileInfo(int profileInfoId) {
-        return profileService.findOne(profileInfoId);
-    }
-
-    private Date convertLongToDate(Long dateMilliseconds) {
-        return new Date(dateMilliseconds);
-    }
-
-    private City getCity(int id) {
-        return cityService.findOne(id);
-    }
-
-    private AcademyStages getAcademyStages(int academyStagesId) {
-        return academyStagesService.findOne(academyStagesId);
-    }
-
-    private Directions getDirection(int direcrionId) {
-        return directionService.findOne(direcrionId);
-    }
-
-    private Technologies getTechnologies(int technologieId) {
-        return technologyService.findOne(technologieId);
-    }
+//    /**
+//     * Method convert AcademyDTO to GroupInfo.
+//     *
+//     * @param academyId
+//     * @param academyDTO
+//     * @return GroupInfo
+//     */
+//    public GroupInfo groupInfoToEntity(int academyId, AcademyDTO academyDTO) {
+//        GroupInfo groupInfo;
+//
+//        if (academyDTO.getGroupInfoId() == 0) {
+//            groupInfo = new GroupInfo();
+//        } else {
+//            groupInfo = groupInfoService.findOneGroupInfoByAcademyId(academyDTO.getAcademyId());
+//        }
+//
+//        groupInfo.setAcademy(getAcademyById(academyId));
+//        groupInfo.setGroupName(academyDTO.getGrName());
+//        groupInfo.setProfileInfo(getProfileInfo(academyDTO.getProfileId()));
+//        groupInfo.setStudentsPlannedToEnrollment(academyDTO.getStudentPlannedToEnrollment());
+//        groupInfo.setStudentsPlannedToGraduate(academyDTO.getStudentPlannedToGraduate());
+//
+//        return groupInfo;
+//    }
+//
+//    /**
+//     * Method convert AcademyDTO to Academy
+//     *
+//     * @param academyDTO
+//     * @return Academy
+//     */
+//    public Academy academyToEntity(AcademyDTO academyDTO) {
+//        Academy academy;
+//
+//        if (academyDTO.getAcademyId() == 0) {
+//            academy = new Academy();
+//        } else {
+//            academy = academyService.findOne(academyDTO.getAcademyId());
+//        }
+//
+//        academy.setName(academyDTO.getNameForSite());
+//        academy.setAcademyStages(getAcademyStages(academyDTO.getAcademyStagesId()));
+//        academy.setStartDate(convertLongToDate(academyDTO.getStartDate()));
+//        academy.setEndDate(convertLongToDate(academyDTO.getEndDate()));
+//        academy.setCity(getCity(academyDTO.getCityId()));
+//        academy.setFree(academyDTO.getPayment());
+//        academy.setDirections(getDirection(academyDTO.getDirectionId()));
+//        academy.setTechnologies(getTechnologies(academyDTO.getTechnologieId()));
+//
+//        return academy;
+//    }
+//
+//    private Academy getAcademyById(int academyId) {
+//        return academyService.findOne(academyId);
+//    }
+//
+//    private ProfileInfo getProfileInfo(int profileInfoId) {
+//        return profileService.findOne(profileInfoId);
+//    }
+//
+//    private Date convertLongToDate(Long dateMilliseconds) {
+//        return new Date(dateMilliseconds);
+//    }
+//
+//    private City getCity(int id) {
+//        return cityService.findOne(id);
+//    }
+//
+//    private AcademyStages getAcademyStages(int academyStagesId) {
+//        return academyStagesService.findOne(academyStagesId);
+//    }
+//
+//    private Directions getDirection(int direcrionId) {
+//        return directionService.findOne(direcrionId);
+//    }
+//
+//    private Technologies getTechnologies(int technologieId) {
+//        return technologyService.findOne(technologieId);
+//    }
 }

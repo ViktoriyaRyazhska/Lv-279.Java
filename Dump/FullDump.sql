@@ -554,7 +554,6 @@ CREATE TABLE `technologies` (
 --
 -- Table structure for table `testes_names`
 --
-
 DROP TABLE IF EXISTS `testes_names`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -563,8 +562,11 @@ CREATE TABLE `testes_names` (
   `academy_id` int(11) DEFAULT NULL,
   `test_max_score` double NOT NULL,
   `test_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `FKdfx1cqnsxkiv9hsv5augmolsb` (`academy_id`),
+  CONSTRAINT `FKdfx1cqnsxkiv9hsv5augmolsb` FOREIGN KEY (`academy_id`) REFERENCES `academy` (`academy_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

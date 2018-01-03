@@ -10,9 +10,9 @@
   </p-column>
 </p-dataTable>
 
-<button mat-raised-button color="primary" (click)="addEmployeeClick()">Add employee</button>
+<button *ngIf="this.loginService.securityForAssignEmployee()" mat-raised-button color="primary" (click)="addEmployeeClick()">Add employee</button>
 <span>
-<button mat-raised-button color="primary" (click)="updateEmployee()">Save</button>
+<button *ngIf="this.loginService.securityForAssignEmployee()" mat-raised-button color="primary" (click)="updateEmployee()">Save</button>
 </span>
 
 <p-dialog header="Add employee" modal="false" [(visible)]="displayUsersList" [responsive]="true" width="480">

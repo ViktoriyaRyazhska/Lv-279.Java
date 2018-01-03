@@ -17,7 +17,7 @@ nav li a{
   color: #383838;
 }
 .myemployee{
-  cursor: pointer;
+  /*cursor: pointer;*/
   text-decoration: underline ;
 }
 
