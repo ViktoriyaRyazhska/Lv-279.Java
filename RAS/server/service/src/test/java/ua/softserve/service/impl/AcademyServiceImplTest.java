@@ -1,7 +1,6 @@
 package ua.softserve.service.impl;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
@@ -9,7 +8,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
-import ua.softserve.service.converter.GroupInfoConverter;
 import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.validator.impl.GroupValidatorImpl;
 
@@ -53,9 +51,6 @@ public class AcademyServiceImplTest {
 
     @Spy
     GroupInfo groupInfo;
-
-    @Mock
-    GroupInfoConverter groupInfoConverter;
 
     @Mock
     GroupValidatorImpl groupValidator;
