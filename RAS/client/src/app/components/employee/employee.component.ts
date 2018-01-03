@@ -1,11 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {EmployeeAddComponent} from "./employee-add/employee-add.component";
 import {Employee} from "./Employee";
 import {EmployeeService} from "./employee.service";
 import {GroupInfoTeachers} from "./GroupInfoTeachers";
-import {forEach} from "@angular/router/src/utils/collection";
 import {Authority} from "../auth/Authority";
+import {LoginService} from "../auth/login/login.service";
 
 @Component({
   selector: 'app-employee',
@@ -21,17 +19,12 @@ export class EmployeeComponent implements OnInit {
   private selectedEmployee: Employee[];
   private acceptedEmployees = [];
   private groupInfoTeachers: GroupInfoTeachers[];
-  private selectedTeacher:boolean;
-  private selectedExpert:boolean;
-  private selectedInterviewer:boolean;
 
 
-  constructor(private employeeService:EmployeeService) {}
+  constructor(private employeeService:EmployeeService,
+              private loginService:LoginService) {}
 
   ngOnInit() {
-    this.selectedTeacher=true;
-    this.selectedExpert=false;
-    this.selectedInterviewer=false;
     this.employeeService.getGroupInfoTeachers(this.groupId).subscribe(data=>{
       this.groupInfoTeachers=data;
     });
@@ -67,11 +60,11 @@ export class EmployeeComponent implements OnInit {
 
   acceptEmployeesClick() {
     this.employeeService.assignEmployee(this.convertToArrayOfGroupInfoTeachers(this.selectedEmployee)).subscribe(data=>{
+      this.employeeService.getGroupInfoTeachers(this.groupId).subscribe(data1=>{
+        this.groupInfoTeachers=data1;
+      });
       this.selectedEmployee = [];
       this.displayUsersList = false;
-      this.employeeService.getGroupInfoTeachers(this.groupId).subscribe(data=>{
-        this.groupInfoTeachers=data;
-      });
     });
   }
 
@@ -98,6 +91,9 @@ export class EmployeeComponent implements OnInit {
   parsecontributedHours(groupInfoTeachers: GroupInfoTeachers[]):GroupInfoTeachers[]{
     this.groupInfoTeachers.forEach(data=>{
       data.contributedHours=parseInt(data.contributedHours+'');
+      if (data.contributedHours<0){
+        data.contributedHours=0;
+      }
     });
     return this.groupInfoTeachers;
   }

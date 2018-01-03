@@ -3,12 +3,16 @@
   <p-column field="employee.firstNameEng" header="First Name" [editable]="false"></p-column>
   <p-column field="employee.lastNameEng" header="Last Name" [editable]="false"></p-column>
   <p-column field="teacherType.name" header="Role" [editable]="false"></p-column>
-  <p-column field="contributedHours" header="Contributed Hours" [editable]="true"></p-column>
+  <p-column field="contributedHours" header="Contributed Hours" [editable]="true">
+    <ng-template let-col let-groupInfoTeacher="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="groupInfoTeacher.contributedHours" [class]="'form-control'" required="true" >
+    </ng-template>
+  </p-column>
 </p-dataTable>
 
-<button mat-raised-button color="primary" (click)="addEmployeeClick()">Add employee</button>
+<button *ngIf="this.loginService.securityForAssignEmployee()" mat-raised-button color="primary" (click)="addEmployeeClick()">Add employee</button>
 <span>
-<button mat-raised-button color="primary" (click)="updateEmployee()">Save</button>
+<button *ngIf="this.loginService.securityForAssignEmployee()" mat-raised-button color="primary" (click)="updateEmployee()">Save</button>
 </span>
 
 <p-dialog header="Add employee" modal="false" [(visible)]="displayUsersList" [responsive]="true" width="480">

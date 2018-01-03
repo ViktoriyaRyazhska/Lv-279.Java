@@ -16,6 +16,7 @@ export class ViewAcademiesNgxComponent implements OnInit {
   searchBar = true;
   startDateOpt = 'Equals';
   endDateOpt = 'Equals';
+  addgroup = false;
 
   constructor(private academyService: AcademyService,
               private filterService: FilterService) {
@@ -54,5 +55,9 @@ export class ViewAcademiesNgxComponent implements OnInit {
 
   setEndDateOpt(event) {
     this.endDateOpt = event.option;
+  }
+
+  showAddGroup() {
+    this.addgroup = !this.addgroup;
   }
 }

@@ -8,20 +8,20 @@ import {StudentsComponent} from "./components/students/students.component";
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 import {LoginComponent} from "./components/auth/login/login.component";
+import {HeaderComponent} from "./components/header/header.component";
 import {AppComponent} from "./app.component";
 import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component";
 import {ErrorComponent} from "./components/error/error.component";
 import {EmployeeComponent} from "./components/employee/employee.component";
 import {ViewAcademiesNgxComponent} from "./components/view-academies/view-academies-ngx/view-academies-ngx.component";
-import {UpdateGroupComponent} from "./components/group/update-group/update-group.component";
-import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {ItaTacticalReportComponent} from "./components/reports/ita-tactical-report/ita-tactical-report.component";
+import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
+import {UpdateGroupComponent} from "./components/group/update-group/update-group.component";
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
   {path: '', component: ViewAcademiesNgxComponent},
   {path: 'ang/group/add', component: AddGroupComponent},
-
   {
     path: 'ang/group/update/:id', component: UpdateGroupComponent, children: [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
@@ -32,10 +32,8 @@ const appRoutes: Routes = [
     {path: 'tests/:id', component: TestsNamesComponent}]
 
   },
-  {path: 'ang/viewAcademies', component: ViewAcademiesComponent, children: [
-    {path: 'ggg', component: AddGroupComponent}
-  ]},
-  {path: 'ang/viewAcademies/test', component: ViewAcademiesNgxComponent},
+  {path: 'ang/viewAcademies', component: ViewAcademiesNgxComponent},
+  // {path: 'ang/viewAcademies/test', component: ViewAcademiesNgxComponent},
   {path: 'ang/students', component: StudentsComponent},
   {path: 'ang/feedback', component: FeedbackListComponent},
   {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},

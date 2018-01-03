@@ -62,6 +62,7 @@ public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
         return groupInfoTeachersRepository.findAllByAcademy_AcademyId(academy_academyId);
     }
 
+    @Transactional
     @Override
     public void updateGroupInfoTeachers(List<GroupInfoTeachers> groupInfoTeachers) {
         groupInfoTeachersRepository.save(groupInfoTeachers);

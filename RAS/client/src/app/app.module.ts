@@ -44,7 +44,6 @@ import {CookieService} from "angular2-cookie/core";
 import { ErrorComponent } from './components/error/error.component';
 import {JwtHelper} from "angular2-jwt";
 import { EmployeeComponent } from './components/employee/employee.component';
-import { EmployeeAddComponent } from './components/employee/employee-add/employee-add.component';
 import {BsModalRef, BsModalService, ComponentLoaderFactory, PositioningService, ModalBackdropComponent} from "ngx-bootstrap";
 import {ModalContainerComponent} from "ngx-bootstrap/modal";
 import {EmployeeService} from "./components/employee/employee.service";
@@ -57,7 +56,6 @@ import {DxButtonModule, DxDataGridModule, DxLoadIndicatorModule} from "devextrem
 import { ItaTacticalReportComponent } from './components/reports/ita-tactical-report/ita-tactical-report.component';
 import {ItaTacticalReportService} from "./components/reports/ita-tactical-report/ita-tactical-report.service";
 import { UpdateGroupComponent } from './components/group/update-group/update-group.component';
-import { UpdateDialogComponent } from './components/group/update-dialog/update-dialog.component';
 
 @NgModule({
   declarations: [
@@ -83,19 +81,16 @@ import { UpdateDialogComponent } from './components/group/update-dialog/update-d
     FilterCheckListByGroupsComponent,
     ErrorComponent,
     EmployeeComponent,
-    EmployeeAddComponent,
     // ModalBackdropComponent,
     // ModalContainerComponent,
     ErrorComponent,
     DialogComponent,
     ViewAcademiesNgxComponent,
     UpdateGroupComponent,
-    UpdateDialogComponent,
     ViewAcademiesNgxComponent,
     ItaTacticalReportComponent
   ],
   entryComponents: [
-    EmployeeAddComponent,
     ModalBackdropComponent,
     ModalContainerComponent,
     DialogComponent],
