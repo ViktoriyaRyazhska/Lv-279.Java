@@ -1,5 +1,7 @@
 package ua.softserve.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ import java.util.*;
  */
 @Service
 public class GroupInfoServiceImpl implements GroupInfoService {
+    private final Logger logger = LoggerFactory.getLogger(AcademyServiceImpl.class.getName());
+
     @Autowired
     private GroupInfoRepository groupInfoRepository;
 
@@ -42,16 +46,6 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         groupInfoRepository.save(groupInfo);
     }
 
-//    @Transactional
-//    @Override
-//    public GroupInfo findOne(Integer id) {
-//        GroupInfo groupInfo = groupInfoRepository.findOne(id);
-//        if(groupInfo==null){
-//            throw new NoSuchElementException("Group with id " + id + " not found");
-//        }
-//        return groupInfo;
-//    }
-
     /**
      * Method combines information about groups and information about experts.
      *
@@ -70,8 +64,11 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Transactional
     @Override
     public GroupInfo findOneGroupInfoByAcademyId(Integer academyId) {
+        logger.info("Before groupInfoRepository.findByAcademyAcademyId(academyId)");
+
         GroupInfo groupInfo = groupInfoRepository.findByAcademyAcademyId(academyId);
         if (groupInfo == null) {
+            logger.error("Group with id " + academyId + " not found");
             throw new NoSuchElementException("Group with id " + academyId + " not found");
         }
         return groupInfo;
