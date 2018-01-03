@@ -10,7 +10,6 @@ import ua.softserve.persistence.entity.*;
 import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.persistence.repo.impl.GroupInfoCustomRepository;
 import ua.softserve.service.*;
-import ua.softserve.service.converter.GroupInfoConverter;
 import ua.softserve.service.dto.AcademyDTO;
 
 import java.util.*;
@@ -20,16 +19,13 @@ import java.util.*;
  */
 @Service
 public class GroupInfoServiceImpl implements GroupInfoService {
-    private final Logger logger = LoggerFactory.getLogger(AcademyServiceImpl.class.getName());
+    private final Logger logger = LoggerFactory.getLogger(GroupInfoServiceImpl.class.getName());
 
     @Autowired
     private GroupInfoRepository groupInfoRepository;
 
     @Autowired
     private GroupInfoCustomRepository groupInfoCustomRepository;
-
-    @Autowired
-    private GroupInfoConverter groupInfoConverter;
 
     @Autowired
     DirectionService directionService;
@@ -39,6 +35,9 @@ public class GroupInfoServiceImpl implements GroupInfoService {
 
     @Autowired
     CityService cityService;
+
+    @Autowired
+    StudentService studentService;
 
     @Transactional
     @Override
@@ -74,8 +73,37 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         return groupInfo;
     }
 
-    @Override
+
     public AcademyDTO getAcademyDTObyId(Integer groupId) {
-        return groupInfoConverter.toDTO(findOneGroupInfoByAcademyId(groupId));
+        GroupInfo groupInfo = findOneGroupInfoByAcademyId(groupId);
+        AcademyDTO academyDTO = new AcademyDTO();
+        academyDTO.setAcademyId(groupInfo.getAcademy().getAcademyId());
+        academyDTO.setGroupInfoId(groupInfo.getGroupInfoId());
+        academyDTO.setGrName(groupInfo.getGroupName());
+        academyDTO.setNameForSite(groupInfo.getAcademy().getName());
+        academyDTO.setStartDate(groupInfo.getAcademy().getStartDate().getTime());
+        academyDTO.setEndDate(groupInfo.getAcademy().getEndDate().getTime());
+        if(groupInfo.getAcademy().getTechnologies() != null) {
+            academyDTO.setTechnologieId(groupInfo.getAcademy().getTechnologies().getTechnologyId());
+        }
+        if(groupInfo.getAcademy().getDirections() != null){
+            academyDTO.setDirectionId(groupInfo.getAcademy().getDirections().getDirectionId());
+        }
+        if(groupInfo.getProfileInfo() != null) {
+            academyDTO.setProfileId(groupInfo.getProfileInfo().getProfileId());
+        }
+        if(groupInfo.getAcademy().getAcademyStages() != null) {
+            academyDTO.setAcademyStagesId(groupInfo.getAcademy().getAcademyStages().getStageId());
+        }
+        if(groupInfo.getAcademy().getCity() != null) {
+            academyDTO.setCityId(groupInfo.getAcademy().getCity().getCityId());
+        }
+        academyDTO.setPayment(groupInfo.getAcademy().getFree());
+        academyDTO.setStudentPlannedToGraduate(groupInfo.getStudentsPlannedToGraduate());
+        academyDTO.setStudentPlannedToEnrollment(groupInfo.getStudentsPlannedToEnrollment());
+
+        academyDTO.setStudentsActual(studentService.countAllByAcademyId(groupInfo.getAcademy().getAcademyId()));
+
+        return academyDTO;
     }
 }
