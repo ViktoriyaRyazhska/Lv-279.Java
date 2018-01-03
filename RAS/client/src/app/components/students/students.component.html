@@ -1,4 +1,4 @@
-<p-dataTable [value]="students" [editable]="true" resizableColumns="true" reorderableColumns="true" scrollable="true">
+<p-dataTable [value]="students" *ngIf="tests" [editable]="true" resizableColumns="true" reorderableColumns="true" scrollable="true">
   <p-column field="user.id" header="Employee" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'7em'}"></p-column>
   <p-column field="user.firstName" header="Name" [editable]="false" [filter]="true" [sortable]="true"

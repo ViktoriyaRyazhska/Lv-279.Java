@@ -16,13 +16,15 @@ import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-
 import {ErrorComponent} from "./components/error/error.component";
 import {EmployeeComponent} from "./components/employee/employee.component";
 import {ViewAcademiesNgxComponent} from "./components/view-academies/view-academies-ngx/view-academies-ngx.component";
+import {UpdateGroupComponent} from "./components/group/update-group/update-group.component";
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
   {path: '', component: ViewAcademiesComponent},
   {path: 'ang/group/add', component: AddGroupComponent},
+
   {
-    path: 'ang/group/update/:id', component: AddGroupComponent, children: [
+    path: 'ang/group/update/:id', component: UpdateGroupComponent, children: [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
 
     {path: 'students/:id', component: StudentsComponent},

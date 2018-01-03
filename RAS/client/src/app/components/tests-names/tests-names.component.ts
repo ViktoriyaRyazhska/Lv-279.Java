@@ -13,7 +13,7 @@ import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angul
 export class TestsNamesComponent implements OnInit {
   @Input() groupId: number;
 
-  //groupId : number;
+  // groupId : number;
   tests : Tests[];
   static counter : number = 1;
   rForm: FormGroup;
@@ -24,7 +24,7 @@ export class TestsNamesComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
   ) {
-    //this.groupId = +this.route.snapshot.params['id'];
+    this.groupId = +this.route.snapshot.params['id'];
     this.rForm = new FormGroup({
       testRows: this.fb.array([])
     });

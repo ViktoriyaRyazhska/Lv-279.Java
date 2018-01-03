@@ -57,6 +57,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import { ViewAcademiesNgxComponent } from './components/view-academies/view-academies-ngx/view-academies-ngx.component';
 import { UpdateGroupComponent } from './components/group/update-group/update-group.component';
+import { UpdateDialogComponent } from './components/group/update-dialog/update-dialog.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { UpdateGroupComponent } from './components/group/update-group/update-gro
     DialogComponent,
     PaymentPipe,
     ViewAcademiesNgxComponent,
-    UpdateGroupComponent
+    UpdateGroupComponent,
+    UpdateDialogComponent
   ],
   entryComponents: [
     EmployeeAddComponent,
