@@ -1,4 +1,4 @@
- import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -37,14 +37,14 @@ export class AddGroupComponent implements OnInit {
 
   private defaultInvalidInput: string = 'No data entered. Group will not be save';
 
-  paymentStatusArray: {name: string, free: number}[] = [
+  paymentStatusArray: { name: string, free: number }[] = [
     {'name': 'Open Group', 'free': 0},
     {'name': 'Founded by SoftServe', 'free': 1}
   ];
 
   constructor(private addGroupService: AddGroupService,
               private route: ActivatedRoute,
-              private router:Router,
+              private router: Router,
               public dialog: MatDialog,
               private loginService: LoginService) {
   }
@@ -55,29 +55,29 @@ export class AddGroupComponent implements OnInit {
 
     this.getDropdownOnInit();
 
-    if(this.router.url.includes('group/update')){
+    if (this.router.url.includes('group/update')) {
       this.navtab = true;
       this.updateGroup();
-    }else if(this.router.url.includes('group/add')) {
+    } else if (this.router.url.includes('group/add')) {
       this.formGroupOnInit();
     }
   }
 
-  getDropdownOnInit(){
+  getDropdownOnInit() {
     this.addGroupService.getDropdownList().subscribe(resp => {
       this.academyStatus = resp.academyStages;
       this.city = resp.cityNames;
       this.commonDirection = resp.direction;
       this.direction = resp.technologie;
       this.profile = resp.profile;
-    },error => {
-      if (error.status===403) {
+    }, error => {
+      if (error.status === 403) {
         this.router.navigate(['ang/error']);
       }
     });
   }
 
-  formGroupOnInit(){
+  formGroupOnInit() {
     this.signupForm = new FormGroup({
       'groupInfoFormControl': new FormControl(this.group.grName, [Validators.required]),
       'nameForSiteFormControl': new FormControl(this.group.nameForSite, [Validators.required]),
@@ -89,7 +89,7 @@ export class AddGroupComponent implements OnInit {
       'directionFormControl': new FormControl(this.group.technologieId),
       'profileInfoFormControl': new FormControl(this.group.profileId),
       'paymentStatusFormControl': new FormControl(this.group.payment),
-      'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate , [this.myValidator.bind(this)]),
+      'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate, [this.myValidator.bind(this)]),
       'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment, [Validators.pattern(/^[0-9]+[0-9]*$/)]),
       'studentActualFromControl': new FormControl({value: this.group.studentActual, disabled: true})
     });
@@ -133,20 +133,20 @@ export class AddGroupComponent implements OnInit {
     }
   }
 
-  private sendData(){
+  private sendData() {
     this.addGroupService.saveGroup(this.group).subscribe(res => {
-      if(res==null || res == 200){
+      if (res == null || res == 200) {
         this.openDialog();
       }
-    },error => {
+    }, error => {
       this.errorOpenDialog();
-      console.log(error)
+      console.log(error);
     });
   }
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogComponent, {
-      data: {message: 'Group was successfully saved', err:false}
+      data: {message: 'Group was successfully saved', err: false}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -164,11 +164,11 @@ export class AddGroupComponent implements OnInit {
     });
   }
 
-  updateGroup(){
+  updateGroup() {
     this.addGroupService.getGroupById(this.groupId).subscribe(group => {
       this.group.setDataToGroup(group);
       this.formGroupOnInit();
-    },error => {
+    }, error => {
       console.log(error);
     });
   }
@@ -176,7 +176,7 @@ export class AddGroupComponent implements OnInit {
   myValidator(control: FormControl): { [s: string]: boolean } {
     let value;
 
-    try{
+    try {
       value = control.value.toLocaleString();
       // control.setValue(this.replace(value));
     } catch (e) {
@@ -194,7 +194,7 @@ export class AddGroupComponent implements OnInit {
     return null;
   }
 
-  replace(stringToReplace: string): number{
+  replace(stringToReplace: string): number {
     stringToReplace = stringToReplace.replace(/\D/g, "");
     console.log(stringToReplace);
     return parseInt(stringToReplace, 10);

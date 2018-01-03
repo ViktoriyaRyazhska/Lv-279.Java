@@ -18,7 +18,7 @@ export class SearchBarService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(environment.serverUrl + '/getDropDownList');
+    return this.http.get(environment.serverUrl + '/get-dropdown-list');
   }
 
 }

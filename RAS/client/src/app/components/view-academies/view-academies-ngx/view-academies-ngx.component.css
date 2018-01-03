@@ -10,56 +10,9 @@ button.mat-primary {
   background-color: #00B4D5;
 }
 
-/**
-   * Header Styles
-   */
-.datatable-header-cell {
-  text-align: left;
-  padding: .9rem 1.2rem;
-  font-weight: 400;
-  color: rgba(0,0,0,.54);
-  vertical-align: bottom;
-  font-size: 15px;
-  font-weight: 500;
-
-.datatable-header-cell-wrapper {
-  position: relative;
-}
-
-&.longpress {
-.draggable::after {
-  transition: transform 400ms ease, opacity 400ms ease;
-  opacity: .5;
-  transform: scale(1);
-}
-}
-
-.draggable::after {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -30px 0 0 -30px;
-  height: 60px;
-  width: 60px;
-  background: #eee;
-  border-radius: 100%;
-  opacity: 1;
-  filter: none;
-  transform: scale(0);
-  z-index: 9999;
-  pointer-events: none;
-}
-
-&.dragging {
-.resize-handle {
-  border-right: none;
-}
-}
-}
-
-.resize-handle {
-  border-right:solid 1px #eee;
+.ngx-datatable.bootstrap {
+  box-shadow: none;
+  font-size: 1px;
 }
 
 

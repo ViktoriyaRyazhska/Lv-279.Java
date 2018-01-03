@@ -9,6 +9,6 @@ export class AcademyService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(environment.serverUrl + '/viewAcademies');
+    return this.http.get(environment.serverUrl + '/view-groupinfo');
   }
 }
