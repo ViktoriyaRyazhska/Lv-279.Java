@@ -9,6 +9,9 @@ import {MatDialog} from "@angular/material";
 import {DialogComponent} from "../dialog/dialog.component";
 import {DataService} from "../../../services/data.service";
 import {LoginService} from "../../auth/login/login.service";
+ import {HistoryListComponent} from "../../history/history-list/history-list.component";
+ import {registerLocaleData} from "@angular/common";
+ import list from "devextreme/ui/list";
 
 @Component({
   selector: 'app-add-group',
@@ -41,6 +44,7 @@ export class AddGroupComponent implements OnInit {
     {'name': 'Open Group', 'free': 0},
     {'name': 'Founded by SoftServe', 'free': 1}
   ];
+
 
   constructor(private addGroupService: AddGroupService,
               private route: ActivatedRoute,
@@ -127,6 +131,7 @@ export class AddGroupComponent implements OnInit {
       this.invalidForm = false;
       this.sendData();
       console.log('valid');
+
     } else {
       this.invalidForm = true;
       console.log('invalid');
@@ -168,6 +173,7 @@ export class AddGroupComponent implements OnInit {
     this.addGroupService.getGroupById(this.groupId).subscribe(group => {
       this.group.setDataToGroup(group);
       this.formGroupOnInit();
+
     },error => {
       console.log(error);
     });

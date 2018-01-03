@@ -19,6 +19,7 @@ export class HistoryListComponent implements OnInit {
   constructor(private historyService: HistoryService,
               private route: ActivatedRoute) {
   }
+
   ngOnInit() {
     this.academyId = this.groupId;
     this.historyService.getAll(this.academyId).subscribe(
