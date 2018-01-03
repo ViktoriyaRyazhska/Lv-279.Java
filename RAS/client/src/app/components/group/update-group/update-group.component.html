@@ -1,0 +1,127 @@
+<div *ngIf="signupForm">
+  <div class="container well">
+    <div class="col-sm-12" id="form-test">
+      <form [formGroup]="signupForm" id="formId" (ngSubmit)="saveGroup()">
+        <ul class="col-sm-6 form-group" id="UL_left_column">
+          <div class="row">
+            <mat-form-field class="col-sm-6">
+              <input matInput placeholder="Group Name:" formControlName="groupInfoFormControl" maxlength="50">
+              <mat-error *ngIf="!signupForm.controls.groupInfoFormControl.valid">{{defaultInvalidInput}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-6">
+              <input matInput placeholder="Name for Site:" formControlName="nameForSiteFormControl" maxlength="50">
+              <mat-error *ngIf="!signupForm.controls.nameForSiteFormControl.valid">{{defaultInvalidInput}}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="Status:" formControlName="academyStagesId">
+                <mat-option *ngFor="let stages of academyStatus" [value]="stages.stageId">{{ stages.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="Location:" formControlName="cityId">
+                <mat-option *ngFor="let city of city" [value]="city.itemId">{{city.trasnlation}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field class="col-sm-6">
+              <input matInput [matDatepicker]="picker" placeholder="Start Date:" formControlName="startDateFormControl">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <!--<mat-error *ngIf="!signupForm.controls.endDateFormControl.valid">{{defaultInvalidInput}}</mat-error>-->
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-6">
+              <input matInput [matDatepicker]="picker2" placeholder="End Date:" formControlName="endDateFormControl">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+              <!--<mat-error *ngIf="!signupForm.controls.endDateFormControl.valid && signupForm.get('endDateFormControl').value == null">{{defaultInvalidInput}}</mat-error>-->
+            </mat-form-field>
+            <div align="center">
+              <mat-error *ngIf="isDateVilid()">Invalid time frame is chosen</mat-error>
+            </div>
+          </div>
+
+          <div class="row">
+            <mat-form-field class="col-sm-12">
+              <mat-select placeholder="Payment Status:" formControlName="paymentStatusFormControl">
+                <mat-option *ngFor="let status of paymentStatusArray" [value]="status.free">{{ status.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </ul>
+
+        <ul class="col-sm-6 form-group" id="UL_right_column">
+
+          <div class="row">
+            <mat-form-field class="col-sm-12">
+              <mat-select placeholder="Common Direction:" formControlName="commonDirectionFormControl">
+                <mat-option value=null></mat-option>
+                <mat-option *ngFor="let direct of commonDirection" [value]="direct.directionId">{{direct.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="Direction:" formControlName="directionFormControl">
+                <mat-option value="0" selected></mat-option>
+                <mat-option *ngFor="let tech of direction" [value]="tech.technologyId">{{ tech.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="Profile:" formControlName="profileInfoFormControl">
+                <mat-option value="0"></mat-option>
+                <mat-option *ngFor="let prof of profile | profileFilter:signupForm.get('directionFormControl').value"
+                            [value]="prof.profileId">{{ prof.profileName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field class="col-sm-6">
+              <input matInput type="number" placeholder="Students Planned to Graduate:"
+                     formControlName="studentPlannedToGraduate" min="0" max="99" maxlength="2">
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-6">
+              <input matInput type="number" placeholder="Students Planned to Enrollment:"
+                     formControlName="studentPlannedToEnrollment" min="0" max="99" maxlength="2">
+            </mat-form-field>
+
+          </div>
+
+          <div class="row">
+            <mat-form-field hideRequiredMarker class="col-sm-12">
+              <input matInput disabled type="number" placeholder="Students Actual:"
+                     formControlName="studentActualFromControl" min="0" max="99" maxlength="2">
+            </mat-form-field>
+          </div>
+
+        </ul>
+
+        <div class="row" id="btnSaveId" align="center" *ngIf="this.loginService.securityForAddGroup()">
+          <button mat-raised-button type="submit" color="primary">Update Group</button>
+          <!--<mat-error *ngIf="invalidForm">{{defaultInvalidInput}}</mat-error>-->
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+
+  <div>
+    <app-nav-tabs [academyId]="groupId"></app-nav-tabs>
+  </div>
+</div>
+

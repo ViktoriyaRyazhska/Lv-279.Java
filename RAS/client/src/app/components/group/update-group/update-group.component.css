@@ -1,0 +1,124 @@
+/*#form-div {*/
+/*height: 280px;*/
+/*}*/
+
+.container{
+  /*width: 50%;*/
+}
+
+.form-group label{
+  font-size: 0.75em;
+}
+
+#saveGroupBtn{
+  margin-top: 20px;
+}
+
+#UL_left_column {
+  border-right: 1px solid rgb(204, 204, 204);
+  /*flex-flow: column wrap;*/
+  font: normal normal 400 normal 16px / 16px "Roboto Condensed", "SF Compact Display", "Helvetica Neue Condensed", sans-serif;
+  /*list-style: none outside none;*/
+  margin: 0px;
+  /*padding: 0px 70px;*/
+}
+#UL_right_column {
+  font: normal normal 400 normal 16px / 16px "Roboto Condensed", "SF Compact Display", "Helvetica Neue Condensed", sans-serif;
+  /*list-style: none outside none;*/
+  margin: 0px;
+  /*padding: 0px 70px;*/
+}
+/*input[type=number]::-webkit-inner-spin-button,*/
+/*input[type=number]::-webkit-outer-spin-button {*/
+/*-webkit-appearance: none;*/
+/*-moz-appearance: none;*/
+/*appearance: none;*/
+/*margin: 0;*/
+/*}*/
+
+input[type=date]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
+/*Validation*/
+/*input.ng-invalid.ng-touched {*/
+/*border-color: #FF0000;*/
+/*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);*/
+/*}*/
+
+.btn-primary {
+  color: #fff;
+  background-color: #00B4D5;
+  border-color: #0090aa;
+}
+
+.help-block {
+  font-size: 0.65em;
+}
+
+.help-block {
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: black;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.col-sm-12 {
+  width: 100%
+}
+
+
+
+@media (min-width: 768px) {
+  .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
+    float: left
+  }
+
+  .col-sm-12 {
+    width: 100%
+  }
+
+  .col-sm-6 {
+    width: 50%
+  }
+
+
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px
+}
+
+button.mat-primary {
+  background-color: #00B4D5;
+}
+
+#btnSaveId{
+  float: left;
+  width: 100%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.mat-button, .mat-raised-button{
+  background-color: #3dbbd7;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration:none;
+  font-weight: bold;
+}
+

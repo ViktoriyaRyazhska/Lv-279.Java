@@ -80,7 +80,7 @@ public class GroupInfoConverter {
             groupInfo = new GroupInfo();
         } else {
             groupInfo = groupInfoService.findOneGroupInfoByAcademyId(academyDTO.getAcademyId());
-            groupInfo.setGroupInfoId(academyDTO.getGroupInfoId());
+            //groupInfo.setGroupInfoId(academyDTO.getGroupInfoId());
         }
 
         groupInfo.setAcademy(getAcademyById(academyId));
@@ -105,7 +105,7 @@ public class GroupInfoConverter {
             academy = new Academy();
         } else {
             academy = academyService.findOne(academyDTO.getAcademyId());
-            academy.setAcademyId(academyDTO.getAcademyId());
+            //academy.setAcademyId(academyDTO.getAcademyId());
         }
 
         academy.setName(academyDTO.getNameForSite());
