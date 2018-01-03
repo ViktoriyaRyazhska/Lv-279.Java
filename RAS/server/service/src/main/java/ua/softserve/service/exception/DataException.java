@@ -1,7 +1,7 @@
 package ua.softserve.service.exception;
 
-public class InvalidDataException extends  RuntimeException {
-    public InvalidDataException(String message) {
+public class DataException extends  RuntimeException {
+    public DataException(String message) {
         super(message);
     }
 }

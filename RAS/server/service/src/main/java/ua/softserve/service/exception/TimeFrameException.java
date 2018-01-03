@@ -1,7 +1,7 @@
 package ua.softserve.service.exception;
 
-public class InvalidTimeFrameException extends RuntimeException {
-    public InvalidTimeFrameException(String message) {
+public class TimeFrameException extends Exception {
+    public TimeFrameException(String message) {
         super(message);
     }
 }
