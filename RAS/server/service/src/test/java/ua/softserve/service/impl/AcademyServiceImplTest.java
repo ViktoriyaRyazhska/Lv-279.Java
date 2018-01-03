@@ -101,22 +101,22 @@ public class AcademyServiceImplTest {
         verify(academyRepository).save(academy);
     }
 
-    @Test
-    public void saveAcademyAndGroupInfoFromAcademyDTO() throws Exception {
-        doNothing().when(groupValidator).validate(academyDTO);
-        when(groupInfoConverter.academyToEntity(academyDTO)).thenReturn(academy);
-        when(academyRepository.save(academy)).thenReturn(academy);
-        when(groupInfoConverter.groupInfoToEntity(academy.getAcademyId(), academyDTO)).thenReturn(groupInfo);
-        doNothing().when(groupInfoService).save(groupInfo);
-        academyServiceImpl.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
-        verify(groupValidator).validate(academyDTO);
-        verify(groupInfoConverter).academyToEntity(academyDTO);
-        verify(academyRepository).save(academy);
-        verify(groupInfoConverter).groupInfoToEntity(academy.getAcademyId(), academyDTO);
-        verify(groupInfoService).save(groupInfo);
-        verifyNoMoreInteractions(groupValidator, groupInfoConverter, academyRepository, groupInfoConverter, groupInfoService);
-
-    }
+//    @Test
+//    public void saveAcademyAndGroupInfoFromAcademyDTO() throws Exception {
+//        doNothing().when(groupValidator).validate(academyDTO);
+//        when(groupInfoConverter.academyToEntity(academyDTO)).thenReturn(academy);
+//        when(academyRepository.save(academy)).thenReturn(academy);
+//        when(groupInfoConverter.groupInfoToEntity(academy.getAcademyId(), academyDTO)).thenReturn(groupInfo);
+//        doNothing().when(groupInfoService).save(groupInfo);
+//        academyServiceImpl.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
+//        verify(groupValidator).validate(academyDTO);
+//        verify(groupInfoConverter).academyToEntity(academyDTO);
+//        verify(academyRepository).save(academy);
+//        verify(groupInfoConverter).groupInfoToEntity(academy.getAcademyId(), academyDTO);
+//        verify(groupInfoService).save(groupInfo);
+//        verifyNoMoreInteractions(groupValidator, groupInfoConverter, academyRepository, groupInfoConverter, groupInfoService);
+//
+//    }
 
     @Test
     public void getAllAcademies() throws Exception {
