@@ -18,8 +18,7 @@ export class ViewAcademiesNgxComponent implements OnInit {
   endDateOpt = 'Equals';
 
   constructor(private academyService: AcademyService,
-              private filterService: FilterService,
-              private data: DataService) {
+              private filterService: FilterService) {
   }
 
   ngOnInit() {
