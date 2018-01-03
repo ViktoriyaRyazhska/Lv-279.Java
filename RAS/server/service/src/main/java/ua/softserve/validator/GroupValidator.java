@@ -1,8 +1,7 @@
 package ua.softserve.validator;
 
-import ua.softserve.persistence.entity.GroupInfo;
-import ua.softserve.service.dto.AcademyForSaveDTO;
+import ua.softserve.service.dto.AcademyDTO;
 
 public interface GroupValidator {
-        void validate(AcademyForSaveDTO academyForSaveDTO);
+        void validate(AcademyDTO academyDTO);
 }

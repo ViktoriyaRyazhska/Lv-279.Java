@@ -56,6 +56,7 @@ import { ViewAcademiesNgxComponent } from './components/view-academies/view-acad
 import {DxButtonModule, DxDataGridModule, DxLoadIndicatorModule} from "devextreme-angular";
 import { ItaTacticalReportComponent } from './components/reports/ita-tactical-report/ita-tactical-report.component';
 import {ItaTacticalReportService} from "./components/reports/ita-tactical-report/ita-tactical-report.service";
+import { UpdateGroupComponent } from './components/group/update-group/update-group.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,8 @@ import {ItaTacticalReportService} from "./components/reports/ita-tactical-report
     // ModalContainerComponent,
     ErrorComponent,
     DialogComponent,
+    ViewAcademiesNgxComponent,
+    UpdateGroupComponent,
     ViewAcademiesNgxComponent,
     ItaTacticalReportComponent
   ],

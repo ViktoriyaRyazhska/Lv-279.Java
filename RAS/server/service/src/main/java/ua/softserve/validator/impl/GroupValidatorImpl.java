@@ -1,7 +1,7 @@
 package ua.softserve.validator.impl;
 
 
-import ua.softserve.service.dto.AcademyForSaveDTO;
+import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.validator.GroupValidator;
 
 import static ua.softserve.service.util.validations.helper.DateValidationHelpers.startDateLessThanEndDate;
@@ -11,13 +11,13 @@ import static ua.softserve.service.util.validations.helper.StringValidationHelpe
 
 public class GroupValidatorImpl implements GroupValidator {
     @Override
-    public void validate(AcademyForSaveDTO academyForSaveDTO) {
-        notNull.and(notEmpty).test(academyForSaveDTO.getGrName()).throwIfInvalidData("Group Name");
-        lessThan(50).test(academyForSaveDTO.getGrName()).throwIfInvalidData("Group Name");
-        notNull.and(notEmpty).test(academyForSaveDTO.getNameForSite()).throwIfInvalidData("Name for Site");
-        lessThan(50).test(academyForSaveDTO.getNameForSite()).throwIfInvalidData("Name for Site");
-        startDateLessThanEndDate(academyForSaveDTO.getStartDate()).test(academyForSaveDTO.getEndDate()).throwIfInvalidTimeFrameException();
-        lowerThan(99).and(greaterThan(0)).test(academyForSaveDTO.getStudentPlannedToEnrollment()).throwIfInvalidData();
-        lowerThan(99).and(greaterThan(0)).test(academyForSaveDTO.getStudentPlannedToGraduate()).throwIfInvalidData();
+    public void validate(AcademyDTO academyDTO) {
+        notNull.and(notEmpty).test(academyDTO.getGrName()).throwIfInvalidData("Group Name");
+        lessThan(50).test(academyDTO.getGrName()).throwIfInvalidData("Group Name");
+        notNull.and(notEmpty).test(academyDTO.getNameForSite()).throwIfInvalidData("Name for Site");
+        lessThan(50).test(academyDTO.getNameForSite()).throwIfInvalidData("Name for Site");
+        startDateLessThanEndDate(academyDTO.getStartDate()).test(academyDTO.getEndDate()).throwIfInvalidTimeFrameException();
+        lowerThan(99).and(greaterThan(0)).test(academyDTO.getStudentPlannedToEnrollment()).throwIfInvalidData();
+        lowerThan(99).and(greaterThan(0)).test(academyDTO.getStudentPlannedToGraduate()).throwIfInvalidData();
     }
 }

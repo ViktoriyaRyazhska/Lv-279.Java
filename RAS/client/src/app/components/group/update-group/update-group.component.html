@@ -110,7 +110,7 @@
         </ul>
 
         <div class="row" id="btnSaveId" align="center" *ngIf="this.loginService.securityForAddGroup()">
-          <button mat-raised-button type="submit" color="primary">Save Group</button>
+          <button mat-raised-button type="submit" color="primary">Update Group</button>
           <!--<mat-error *ngIf="invalidForm">{{defaultInvalidInput}}</mat-error>-->
         </div>
       </form>
@@ -120,8 +120,8 @@
 
 
 
-  <!--<div [hidden]="!navtab">-->
-    <!--<app-nav-tabs [academyId]="groupId"></app-nav-tabs>-->
-  <!--</div>-->
+  <div>
+    <app-nav-tabs [academyId]="groupId"></app-nav-tabs>
+  </div>
 </div>
 

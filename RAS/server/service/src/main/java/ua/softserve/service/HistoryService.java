@@ -1,7 +1,6 @@
 package ua.softserve.service;
 
 import ua.softserve.persistence.entity.History;
-import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.util.List;
 

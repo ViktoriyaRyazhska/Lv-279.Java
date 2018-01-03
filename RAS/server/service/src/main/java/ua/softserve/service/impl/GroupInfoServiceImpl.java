@@ -9,7 +9,7 @@ import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.persistence.repo.impl.GroupInfoCustomRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.GroupInfoConverter;
-import ua.softserve.service.dto.AcademyForSaveDTO;
+import ua.softserve.service.dto.AcademyDTO;
 
 import java.util.*;
 
@@ -62,6 +62,11 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         return groupInfoCustomRepository.getAllInformationAboutGroups();
     }
 
+    /**
+     * Method returns GroupInfo by id
+     * @param academyId
+     * @return GroupInfo
+     */
     @Transactional
     @Override
     public GroupInfo findOneGroupInfoByAcademyId(Integer academyId) {
@@ -73,7 +78,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     }
 
     @Override
-    public AcademyForSaveDTO getAcademyForSaveDTO(Integer groupId) {
+    public AcademyDTO getAcademyDTObyId(Integer groupId) {
         return groupInfoConverter.toDTO(findOneGroupInfoByAcademyId(groupId));
     }
 }
