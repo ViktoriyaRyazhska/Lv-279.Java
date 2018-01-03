@@ -9,6 +9,9 @@ export class ProfileInfoFilterPipe implements PipeTransform {
     if(directionId == null || directionId == 0){
       return [];
     }
-    return directionId ? profileInfoArray.filter(profileInfo => profileInfo.technologies.technologyId == directionId) : profileInfoArray;
+    if(profileInfoArray == undefined){
+      return [];
+    }else {
+    return directionId ? profileInfoArray.filter(profileInfo => profileInfo.technologies.technologyId == directionId) : profileInfoArray;}
   }
 }
