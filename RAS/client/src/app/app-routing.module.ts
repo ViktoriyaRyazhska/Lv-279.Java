@@ -5,18 +5,17 @@ import {ViewAcademiesComponent} from "./components/view-academies/view-academies
 import {AddGroupComponent} from "./components/group/add-group/add-group.component";
 import {HistoryListComponent} from "./components/history/history-list/history-list.component";
 import {StudentsComponent} from "./components/students/students.component";
-import {ItaTacticalPlanByGroupStageComponent} from "./components/reports/ita-tactical-plan-by-group-stage/ita-tactical-plan-by-group-stage.component";
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 import {LoginComponent} from "./components/auth/login/login.component";
-import {HeaderComponent} from "./components/header/header.component";
 import {AppComponent} from "./app.component";
-import {FeedbacksComponent} from "./components/feedbacks/feedbacks.component";
 import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component";
 import {ErrorComponent} from "./components/error/error.component";
 import {EmployeeComponent} from "./components/employee/employee.component";
 import {ViewAcademiesNgxComponent} from "./components/view-academies/view-academies-ngx/view-academies-ngx.component";
 import {UpdateGroupComponent} from "./components/group/update-group/update-group.component";
+import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
+import {ItaTacticalReportComponent} from "./components/reports/ita-tactical-report/ita-tactical-report.component";
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
@@ -28,7 +27,7 @@ const appRoutes: Routes = [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
 
     {path: 'students/:id', component: StudentsComponent},
-    {path: 'feedback/:id', component: FeedbacksComponent},
+    {path: 'feedback/:id', component: FeedbackListComponent},
     {path: 'history/:id', component: HistoryListComponent},
     {path: 'tests/:id', component: TestsNamesComponent}]
 
@@ -38,13 +37,13 @@ const appRoutes: Routes = [
   ]},
   {path: 'ang/viewAcademies/test', component: ViewAcademiesNgxComponent},
   {path: 'ang/students', component: StudentsComponent},
-  {path: 'ang/feedback', component: FeedbacksComponent},
+  {path: 'ang/feedback', component: FeedbackListComponent},
   {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},
   {path: 'ang/reports/filterCheckListByGroups', component: FilterCheckListByGroupsComponent},
-  {path: 'ang/reports/ita-tactical-plan-by-group-stage', component: ItaTacticalPlanByGroupStageComponent},
+  {path: 'ang/reports/ita-tactical-plan-by-group-stage', component: ItaTacticalReportComponent},
   {path: 'ang/tests/:id', component: TestsNamesComponent},
   {path: 'ang/students/:id', component: StudentsComponent},
-  {path: 'ang/feedback/:id', component: FeedbacksComponent},
+  {path: 'ang/feedback/:id', component: FeedbackListComponent},
   {path: 'ang/history/:id', component: HistoryListComponent},
   {path: 'ang', component: AppComponent},
   {path: 'ang/error', component: ErrorComponent},

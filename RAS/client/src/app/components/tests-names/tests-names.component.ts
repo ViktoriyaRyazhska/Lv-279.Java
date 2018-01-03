@@ -64,7 +64,7 @@ export class TestsNamesComponent implements OnInit {
       for (let i = 0; i < this.testRows.length; i++) {
         let item = this.testRows.at(i);
         let test = new Tests(item.get('testName').value, item.get('testMaxScore').value);
-        test.setTestRowsWithFormGroup(item, this.groupId);
+        test.setTestRowsWithFormGroup(item);
         this.tests.push(test);
       }
     }
@@ -97,7 +97,7 @@ export class TestsNamesComponent implements OnInit {
     if(index>=0) {
       let test : Tests = new Tests('',0);
       item.get('removed').value = true;
-      test.setTestRowsWithFormGroup(item, this.groupId);
+      test.setTestRowsWithFormGroup(item);
       this.testRows.controls.splice(index,1,this.createTestRow(test));
     }
   }

@@ -8,7 +8,6 @@ import ua.softserve.persistence.entity.History;
 import ua.softserve.persistence.entity.LoginUser;
 import ua.softserve.persistence.repo.HistoryRepository;
 import ua.softserve.service.HistoryService;
-import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.util.List;
 import java.util.Optional;

@@ -88,7 +88,6 @@ import { UpdateDialogComponent } from './components/group/update-dialog/update-d
     // ModalContainerComponent,
     ErrorComponent,
     DialogComponent,
-    PaymentPipe,
     ViewAcademiesNgxComponent,
     UpdateGroupComponent,
     UpdateDialogComponent,
