@@ -155,7 +155,7 @@ export class AddGroupComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.router.navigate(['ang/viewAcademies']);
+      this.router.navigate(['']);
     });
   }
 
