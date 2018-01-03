@@ -19,7 +19,7 @@ import {ItaTacticalReportComponent} from "./components/reports/ita-tactical-repo
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
-  {path: '', component: ViewAcademiesComponent},
+  {path: '', component: ViewAcademiesNgxComponent},
   {path: 'ang/group/add', component: AddGroupComponent},
 
   {

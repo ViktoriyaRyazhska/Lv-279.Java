@@ -59,22 +59,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
      */
     @Override
     public List<GroupInformationDTO> getAllInformationAboutGroup() {
-        List<GroupInformationDTO> groupInformation = groupInfoCustomRepository.getAllInformationAboutGroups();
-        final Integer FIRST_ELEMENT_OF_THE_LIST = 0;
-        final Integer START_ITERATOR_INDEX = 1;
-        ListIterator<GroupInformationDTO> iterator = groupInformation.listIterator(START_ITERATOR_INDEX);
-        while (iterator.hasNext()) {
-            GroupInformationDTO previous = iterator.previous();
-            iterator.next();
-            GroupInformationDTO next = iterator.next();
-            if (previous.equals(next)) {
-                previous.getFirstName().add(next.getFirstName().get(FIRST_ELEMENT_OF_THE_LIST));
-                previous.getLastName().add(next.getLastName().get(FIRST_ELEMENT_OF_THE_LIST));
-                iterator.remove();
-
-            }
-        }
-        return groupInformation;
+        return groupInfoCustomRepository.getAllInformationAboutGroups();
     }
 
     /**
