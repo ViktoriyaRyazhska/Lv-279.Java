@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.Student;
 import ua.softserve.persistence.entity.StudentStatuses;
@@ -34,12 +33,4 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     @Query("from Student s where s.academy.academyId =:academyId and s.removed = false")
     List<Student> findAllByAcademyId(@Param("academyId") Integer academyId);
-
-
-    @Query(value = "SELECT * from students s where s.academy_id =:academyId and s.student_status_id " +
-            "in ( :statusTrainee, :statusAcceptedPreOffer,  :statusGraduated)", nativeQuery = true)
-    List<Student> findAllActiveStudents(@Param("academyId") Integer academyId,
-                                        @Param("statusTrainee") Integer statusTrainee,
-                                        @Param("statusAcceptedPreOffer") Integer statusAcceptedPreOffer,
-                                        @Param("statusGraduated") Integer statusGraduated);
 }
