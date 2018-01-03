@@ -1,11 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {EmployeeAddComponent} from "./employee-add/employee-add.component";
 import {Employee} from "./Employee";
 import {EmployeeService} from "./employee.service";
 import {GroupInfoTeachers} from "./GroupInfoTeachers";
-import {forEach} from "@angular/router/src/utils/collection";
 import {Authority} from "../auth/Authority";
+import {LoginService} from "../auth/login/login.service";
 
 @Component({
   selector: 'app-employee',
@@ -23,7 +21,8 @@ export class EmployeeComponent implements OnInit {
   private groupInfoTeachers: GroupInfoTeachers[];
 
 
-  constructor(private employeeService:EmployeeService) {}
+  constructor(private employeeService:EmployeeService,
+              private loginService:LoginService) {}
 
   ngOnInit() {
     this.employeeService.getGroupInfoTeachers(this.groupId).subscribe(data=>{

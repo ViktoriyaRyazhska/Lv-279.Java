@@ -34,7 +34,7 @@ public class StudentServiceImpl implements StudentService {
      * @return list of StudentsViewDto which will be displayed on UI.
      */
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<StudentViewDto> getStudentsByAcademy(Integer academyId) {
         return studentRepository.findAllByAcademyId(academyId).stream()
                 .map(StudentViewDto::of)
@@ -44,14 +44,16 @@ public class StudentServiceImpl implements StudentService {
     /**
      * Get list of all Employees
      *
-     * @return - list of EmployeeEngShortDto.
+     * @return - list of EmployeeEngShortDto
      * which contains all the necessary information about employee
      * and displayed in the dropdown "Approved By" on UI.
      */
     @Override
+    @Transactional
     public List<EmployeeEngShortDto> getAllEmployees() {
         return employeeRepository.findAllSorted().stream()
-                .map(EmployeeEngShortDto::of).collect(Collectors.toList());
+                .map(EmployeeEngShortDto::of)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -108,7 +110,6 @@ public class StudentServiceImpl implements StudentService {
 
 
     /**
-     * ??? Bohdan.
      * @param academy
      * @param studentStatuses
      * @return
@@ -121,6 +122,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Integer countAllByAcademyId(Integer academyId) {
-        return studentRepository.countAllByAcademy_AcademyId(academyId);
+        return studentRepository.countAllByAcademy_AcademyIdAndRemovedIsFalse(academyId);
     }
 }

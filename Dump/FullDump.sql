@@ -1699,8 +1699,8 @@ DETERMINISTIC
 
  DELIMITER ;
  
- drop view if exists tacticalReport;
-CREATE VIEW tacticalReport AS
+ drop view if exists tacticalreport;
+CREATE VIEW tacticalreport AS
   SELECT
     year(a.start_date)                                                                     year,
     month(a.start_date)                                                                    month,

@@ -1,7 +1,7 @@
-<p-tabView>
+<p-tabView >
 
   <p-tabPanel header="Students" [selected]="true">
-    <app-students [groupId]="academyId" ></app-students>
+    <app-students [groupId]="academyId"></app-students>
   </p-tabPanel>
 
   <p-tabPanel header="Employee">
@@ -12,8 +12,8 @@
     <app-history-list [groupId]="academyId"></app-history-list>
   </p-tabPanel>
 
-  <p-tabPanel header="Feedback">
-    <app-feedback-list [groupId]="academyId"></app-feedback-list>
+  <p-tabPanel header="Feedback" (click)="feedback.onStudentsChange()">
+    <app-feedback-list #feedback [groupId]="academyId"></app-feedback-list>
   </p-tabPanel>
 
   <p-tabPanel header="Tests">
@@ -21,3 +21,5 @@
   </p-tabPanel>
 
 </p-tabView>
+
+

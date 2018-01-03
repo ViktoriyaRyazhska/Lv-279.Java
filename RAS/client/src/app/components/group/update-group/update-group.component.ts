@@ -120,7 +120,7 @@ export class UpdateGroupComponent implements OnInit {
       'profileInfoFormControl': new FormControl(this.group.profileId),
       'paymentStatusFormControl': new FormControl(this.group.payment),
       'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate , [this.myValidator.bind(this)]),
-      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment, [Validators.pattern(/^[0-9]+[0-9]*$/)]),
+      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment, [this.myValidator.bind(this)]),
       'studentActualFromControl': new FormControl({value: this.group.studentActual, disabled: true})
     });
   }
@@ -142,7 +142,7 @@ export class UpdateGroupComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.router.navigate(['ang/viewAcademies']);
+     // this.router.navigate(['ang/viewAcademies']);
     });
   }
 
@@ -170,7 +170,6 @@ export class UpdateGroupComponent implements OnInit {
 
     try{
       value = control.value.toLocaleString();
-      // control.setValue(this.replace(value));
     } catch (e) {
       value = '0';
     }
@@ -179,10 +178,10 @@ export class UpdateGroupComponent implements OnInit {
       control.setValue(this.replace(value));
       return null;
     }
-    // else if(value.length > 2){
-    //   console.log(control.value);
-    //   return null;
-    // }
+    else if(control.value > 99){
+      control.setValue(0);
+      return null;
+    }
     return null;
   }
 
