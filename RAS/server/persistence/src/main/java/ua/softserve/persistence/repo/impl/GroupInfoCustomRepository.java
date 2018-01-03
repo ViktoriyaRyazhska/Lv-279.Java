@@ -30,7 +30,7 @@ public class GroupInfoCustomRepository {
                         "gI.students_planned_to_enrollment as studentsPlannedToEnrollment, pI.profile_name as profileName, " +
                         "ac.start_date as startDate, ac.end_date as endDate, ac.free as paymentStatus, ac.name as nameForSite, aSt.name as status, " +
                         "tech.name as directionName, gIT.teacher_type_id as teacherType, dir.name as commonDirectionName, " +
-                        "empl.first_name_eng as firstName, empl.last_name_eng as lastName, lt.trasnlation as cityName, " +
+                        "group_concat(first_name_eng, \" \", empl.last_name_eng separator ', ') as experts, lt.trasnlation as cityName, " +
                         "(SELECT COUNT(stn.academy_id) from students as stn where stn.academy_id = gI.academy_id AND stn.student_status_id = 1) as studentsActual " +
                         "FROM group_info gI " +
                         "LEFT JOIN group_info_teachers gIT ON gIT.academy_id = gI.academy_id " +
@@ -43,7 +43,7 @@ public class GroupInfoCustomRepository {
                         "LEFT JOIN city as c ON ac.city_id = c.city_id " +
                         "JOIN  language_translations as lt ON c.city_id = lt.item_id " +
                         "WHERE c.ita = 1 and lt.tag = 'city' and lt.local = 'en' AND (teacher_type_id IS NULL OR gIT.teacher_type_id = 2) " +
-                        "ORDER BY gI.academy_id DESC, gIT.teacher_type_id ASC"
+                        "GROUP BY gI.academy_id ORDER BY gI.academy_id DESC, gIT.teacher_type_id ASC"
         )
                 .addScalar("academyId", StandardBasicTypes.INTEGER)
                 .addScalar("groupName", StandardBasicTypes.STRING)
@@ -59,8 +59,7 @@ public class GroupInfoCustomRepository {
                 .addScalar("status", StandardBasicTypes.STRING)
                 .addScalar("cityName", StandardBasicTypes.STRING)
                 .addScalar("studentsActual", StandardBasicTypes.LONG)
-                .addScalar("firstName", StandardBasicTypes.STRING)
-                .addScalar("lastName", StandardBasicTypes.STRING)
+                .addScalar("experts", StandardBasicTypes.STRING)
                 .addScalar("teacherType", StandardBasicTypes.INTEGER)
                 .setResultTransformer(new AliasToBeanResultTransformer(GroupInformationDTO.class))
                 .list();
