@@ -21,17 +21,11 @@ export class EmployeeComponent implements OnInit {
   private selectedEmployee: Employee[];
   private acceptedEmployees = [];
   private groupInfoTeachers: GroupInfoTeachers[];
-  private selectedTeacher:boolean;
-  private selectedExpert:boolean;
-  private selectedInterviewer:boolean;
 
 
   constructor(private employeeService:EmployeeService) {}
 
   ngOnInit() {
-    this.selectedTeacher=true;
-    this.selectedExpert=false;
-    this.selectedInterviewer=false;
     this.employeeService.getGroupInfoTeachers(this.groupId).subscribe(data=>{
       this.groupInfoTeachers=data;
     });
@@ -67,11 +61,11 @@ export class EmployeeComponent implements OnInit {
 
   acceptEmployeesClick() {
     this.employeeService.assignEmployee(this.convertToArrayOfGroupInfoTeachers(this.selectedEmployee)).subscribe(data=>{
+      this.employeeService.getGroupInfoTeachers(this.groupId).subscribe(data1=>{
+        this.groupInfoTeachers=data1;
+      });
       this.selectedEmployee = [];
       this.displayUsersList = false;
-      this.employeeService.getGroupInfoTeachers(this.groupId).subscribe(data=>{
-        this.groupInfoTeachers=data;
-      });
     });
   }
 
@@ -98,6 +92,9 @@ export class EmployeeComponent implements OnInit {
   parsecontributedHours(groupInfoTeachers: GroupInfoTeachers[]):GroupInfoTeachers[]{
     this.groupInfoTeachers.forEach(data=>{
       data.contributedHours=parseInt(data.contributedHours+'');
+      if (data.contributedHours<0){
+        data.contributedHours=0;
+      }
     });
     return this.groupInfoTeachers;
   }

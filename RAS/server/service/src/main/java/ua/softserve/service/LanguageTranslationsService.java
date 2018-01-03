@@ -14,5 +14,4 @@ public interface LanguageTranslationsService {
     LanguageTranslations findOne(int id);
 
     void remove(LanguageTranslations languageTranslations);
-
 }

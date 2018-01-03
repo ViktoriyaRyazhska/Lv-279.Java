@@ -8,11 +8,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.entity.Employee;
 import ua.softserve.persistence.entity.GroupInfoTeachers;
+import ua.softserve.persistence.entity.LoginUser;
 import ua.softserve.service.EmployeeService;
 import ua.softserve.service.GroupInfoTeachersService;
 import ua.softserve.service.dto.GroupInfoTeachersDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("employee")
@@ -22,6 +24,12 @@ public class EmployeeController {
     private EmployeeService employeeService;
     @Autowired
     private GroupInfoTeachersService groupInfoTeachersService;
+
+    @GetMapping("/getemployee")
+    public ResponseEntity<Employee> getEmployee() {
+        return new ResponseEntity<Employee>(employeeService.findEmployeesByLoginUserId(((Optional<LoginUser>) SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal()).get().getId()), HttpStatus.OK);
+    }
 
     @GetMapping("/experts")
     public ResponseEntity<List<Employee>> getExperts() {

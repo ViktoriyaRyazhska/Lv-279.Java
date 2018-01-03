@@ -9,7 +9,7 @@ import ua.softserve.persistence.repo.GroupInfoRepository;
 import ua.softserve.persistence.repo.impl.GroupInfoCustomRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.GroupInfoConverter;
-import ua.softserve.service.dto.AcademyForSaveDTO;
+import ua.softserve.service.dto.AcademyDTO;
 
 import java.util.*;
 
@@ -59,24 +59,14 @@ public class GroupInfoServiceImpl implements GroupInfoService {
      */
     @Override
     public List<GroupInformationDTO> getAllInformationAboutGroup() {
-        List<GroupInformationDTO> groupInformation = groupInfoCustomRepository.getAllInformationAboutGroups();
-        final Integer FIRST_ELEMENT_OF_THE_LIST = 0;
-        final Integer START_ITERATOR_INDEX = 1;
-        ListIterator<GroupInformationDTO> iterator = groupInformation.listIterator(START_ITERATOR_INDEX);
-        while (iterator.hasNext()) {
-            GroupInformationDTO previous = iterator.previous();
-            iterator.next();
-            GroupInformationDTO next = iterator.next();
-            if (previous.equals(next)) {
-                previous.getFirstName().add(next.getFirstName().get(FIRST_ELEMENT_OF_THE_LIST));
-                previous.getLastName().add(next.getLastName().get(FIRST_ELEMENT_OF_THE_LIST));
-                iterator.remove();
-
-            }
-        }
-        return groupInformation;
+        return groupInfoCustomRepository.getAllInformationAboutGroups();
     }
 
+    /**
+     * Method returns GroupInfo by id
+     * @param academyId
+     * @return GroupInfo
+     */
     @Transactional
     @Override
     public GroupInfo findOneGroupInfoByAcademyId(Integer academyId) {
@@ -88,7 +78,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     }
 
     @Override
-    public AcademyForSaveDTO getAcademyForSaveDTO(Integer groupId) {
+    public AcademyDTO getAcademyDTObyId(Integer groupId) {
         return groupInfoConverter.toDTO(findOneGroupInfoByAcademyId(groupId));
     }
 }

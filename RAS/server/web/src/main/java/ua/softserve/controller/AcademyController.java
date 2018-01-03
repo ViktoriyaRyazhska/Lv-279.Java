@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.dto.GroupInformationDTO;
-import ua.softserve.persistence.entity.Academy;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.GroupInfoService;
 import ua.softserve.service.dto.*;
@@ -21,17 +20,17 @@ public class AcademyController {
     GroupInfoService groupInfoService;
 
     @GetMapping(value = "/group/{id}")
-    public ResponseEntity<AcademyForSaveDTO> getAcademy(@PathVariable Integer id) {
-        return new ResponseEntity<>(groupInfoService.getAcademyForSaveDTO(id), HttpStatus.OK);
+    public ResponseEntity<AcademyDTO> getAcademyDTObyId(@PathVariable Integer id) {
+        return new ResponseEntity<>(groupInfoService.getAcademyDTObyId(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = { "/group", "/getDropDownList" })
-    public ResponseEntity<AcademyDropDownLists> getAllAcademies() {
+    @GetMapping(value = { "/dropdown", "/getDropDownList" })
+    public ResponseEntity<AcademyDropDownLists> getDropdownList() {
         return new ResponseEntity<>(academyService.getAcademyDTO(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/group/add")
-    public ResponseEntity saveGroup(@RequestBody AcademyForSaveDTO academyDTO) {
+    public ResponseEntity saveGroup(@RequestBody AcademyDTO academyDTO) {
         academyService.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
         return new ResponseEntity(HttpStatus.OK);
     }

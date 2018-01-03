@@ -27,5 +27,7 @@ public interface StudentService {
 
     Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatuses);
 
+    Integer countAllByAcademyId(Integer academyId);
+
     List<EmployeeEngShortDto> getAllEmployees();
 }

@@ -49,7 +49,7 @@ export class Group {
     this.profileId = group.profileId;
     this.studentPlannedToGraduate = group.studentPlannedToGraduate;
     this.studentPlannedToEnrollment = group.studentPlannedToEnrollment;
-    // this.studentActual = group.studentActual;
+    this.studentActual = group.studentsActual;
   }
 
 }

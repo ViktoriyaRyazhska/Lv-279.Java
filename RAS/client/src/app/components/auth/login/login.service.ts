@@ -26,6 +26,10 @@ export class LoginService {
     return this.auth.get(environment.serverUrl+'employee/isassigned/'+academyId);
   }
 
+  getEmployee(){
+    return this.auth.get(environment.serverUrl+'employee/getemployee/');
+  }
+
   isAssignedAsEmployeeToGroup(academyId:number): boolean{
     let isAssigned;
     this.check1(academyId).subscribe(data=>{

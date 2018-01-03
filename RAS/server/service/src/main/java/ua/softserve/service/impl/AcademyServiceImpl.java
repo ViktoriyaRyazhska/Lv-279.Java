@@ -10,13 +10,12 @@ import ua.softserve.persistence.entity.GroupInfo;
 import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.converter.GroupInfoConverter;
+import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyDropDownLists;
-import ua.softserve.service.dto.AcademyForSaveDTO;
 import ua.softserve.validator.GroupValidator;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
@@ -65,10 +64,21 @@ public class AcademyServiceImpl implements AcademyService {
      */
     @Transactional
     @Override
-    public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyForSaveDTO academyDTO) {
+    public void saveAcademyAndGroupInfoFromAcademyDTO(AcademyDTO academyDTO) {
         groupValidator.validate(academyDTO);
 
         Academy academy = groupInfoConverter.academyToEntity(academyDTO);
+
+
+//        academy.setName(academyDTO.getNameForSite());
+//        academy.setAcademyStages(getAcademyStages(academyDTO.getAcademyStagesId()));
+//        academy.setStartDate(convertLongToDate(academyDTO.getStartDate()));
+//        academy.setEndDate(convertLongToDate(academyDTO.getEndDate()));
+//        academy.setCity(getCity(academyDTO.getCityId()));
+//        academy.setFree(academyDTO.getPayment());
+//        academy.setDirections(getDirection(academyDTO.getDirectionId()));
+//        academy.setTechnologies(getTechnologies(academyDTO.getTechnologieId()));
+
         int academyId = save(academy);
 
         GroupInfo groupInfo = groupInfoConverter.groupInfoToEntity(academyId, academyDTO);
@@ -122,4 +132,32 @@ public class AcademyServiceImpl implements AcademyService {
     public List<Academy> getAllAcademies() {
         return academyRepository.findAll();
     }
+
+//        private Academy getAcademyById(int academyId) {
+//        return academyService.findOne(academyId);
+//    }
+//
+//    private ProfileInfo getProfileInfo(int profileInfoId) {
+//        return profileService.findOne(profileInfoId);
+//    }
+//
+//    private Date convertLongToDate(Long dateMilliseconds) {
+//        return new Date(dateMilliseconds);
+//    }
+//
+//    private City getCity(int id) {
+//        return cityService.findOne(id);
+//    }
+//
+//    private AcademyStages getAcademyStages(int academyStagesId) {
+//        return academyStagesService.findOne(academyStagesId);
+//    }
+//
+//    private Directions getDirection(int direcrionId) {
+//        return directionService.findOne(direcrionId);
+//    }
+//
+//    private Technologies getTechnologies(int technologieId) {
+//        return technologyService.findOne(technologieId);
+//    }
 }
