@@ -19,7 +19,7 @@ import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedba
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
-  {path: '', component: ViewAcademiesComponent},
+  {path: '', component: ViewAcademiesNgxComponent},
   {path: 'ang/group/add', component: AddGroupComponent},
   {
     path: 'ang/group/update/:id', component: AddGroupComponent, children: [

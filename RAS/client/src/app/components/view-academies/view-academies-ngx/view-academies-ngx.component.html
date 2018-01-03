@@ -17,8 +17,8 @@
     [scrollbarH]="true">
 
     <ngx-datatable-column name="Group Name">
-      <ng-template let-value="value" ngx-datatable-cell-template>
-        {{value}}
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <a (click)="sendDataToAddGroupComponent(element)" routerLink="/ang/group/update/{{row.academyId}}"> {{value}} </a>
       </ng-template>
     </ngx-datatable-column>
 
