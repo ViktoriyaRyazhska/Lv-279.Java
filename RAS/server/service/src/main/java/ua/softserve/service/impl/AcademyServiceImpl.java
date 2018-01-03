@@ -61,6 +61,12 @@ public class AcademyServiceImpl implements AcademyService {
     @Autowired
     StudentService studentService;
 
+    /**
+     * Saves a given entity.
+     *
+     * @param academy
+     * @return id of saved entity.
+     */
     @Transactional
     @Override
     public Integer save(Academy academy) {
@@ -68,9 +74,9 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     /**
-     * Method saves academy than saves group info
+     * Validate academyDTO if all is good saves Academy and GroupInfo entity.
      *
-     * @param academyDTO
+     * @param academyDTO what is come from client.
      */
     @Transactional
     @Override
@@ -105,10 +111,11 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     /**
-     * Method return Academy by id
+     * Retrieves an entity by its id.
      *
-     * @param id
-     * @return Academy
+     * @param id must not be {@literal null}.
+     * @return the entity with the given id or {@literal null} if none found
+     * @throws NoSuchElementException if {@code id} is {@literal null}
      */
     @Transactional
     @Override
@@ -141,9 +148,9 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     /**
-     * Method return list of all Academy
+     * Method returns all instances of the Academy type.
      *
-     * @return list of all Academy
+     * @return all entities
      */
     @Transactional
     @Override
