@@ -14,7 +14,6 @@ import ua.softserve.service.SecurityContextService;
 
 import java.util.Optional;
 
-@Transactional
 @Service
 public class LoginUserServiceImpl implements LoginUserService {
 

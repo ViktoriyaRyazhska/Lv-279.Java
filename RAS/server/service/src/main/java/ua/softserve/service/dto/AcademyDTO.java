@@ -23,4 +23,5 @@ public class AcademyDTO {
     private int studentPlannedToGraduate;
     private int studentPlannedToEnrollment;
     private int studentsActual;
+    private String modifyBy;
 }

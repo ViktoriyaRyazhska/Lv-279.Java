@@ -1,16 +1,16 @@
-.container{
+.container {
   margin-top: -10px;
   padding: 0;
   width: 100%;
 }
 
-.capture-fixed{
+.capture-fixed {
   position: fixed;
 }
 
-/*.table thead tr th {
-  vertical-align: middle;
-}*/
+/*.table thead tr th {*/
+/*vertical-align: middle;*/
+/*}*/
 
 th span {
   writing-mode: tb-rl
@@ -27,7 +27,7 @@ div {
 }
 
 @media (max-width: 1815px) {
-  table{
+  table {
     font-size: 0.8em;
   }
 
@@ -42,13 +42,45 @@ div {
     border-collapse: collapse;
   }
 
-  td:nth-child(1), th:nth-child(1) { min-width: 90px; max-width: 90px; vertical-align: middle}
-  td:nth-child(2), th:nth-child(2) { min-width: 90px; max-width: 90px; vertical-align: middle}
-  td:nth-child(3), th:nth-child(3) { min-width: 90px; max-width: 90px; vertical-align: middle}
-  td:nth-child(4), th:nth-child(4) { min-width: 100px; max-width: 100px; vertical-align: middle}
-  td:nth-child(5), th:nth-child(5) { min-width: 100px; max-width: 100px; vertical-align: middle}
-  td:nth-child(n+6), th:nth-child(n+6) { min-width: 25px; max-width: 25px}
-  td:nth-child(36), th:nth-child(36) { min-width: 45px; max-width: 45px}
+  td:nth-child(1), th:nth-child(1) {
+    min-width: 90px;
+    max-width: 90px;
+    vertical-align: middle
+  }
+
+  td:nth-child(2), th:nth-child(2) {
+    min-width: 90px;
+    max-width: 90px;
+    vertical-align: middle
+  }
+
+  td:nth-child(3), th:nth-child(3) {
+    min-width: 90px;
+    max-width: 90px;
+    vertical-align: middle
+  }
+
+  td:nth-child(4), th:nth-child(4) {
+    min-width: 100px;
+    max-width: 100px;
+    vertical-align: middle
+  }
+
+  td:nth-child(5), th:nth-child(5) {
+    min-width: 100px;
+    max-width: 100px;
+    vertical-align: middle
+  }
+
+  td:nth-child(n+6), th:nth-child(n+6) {
+    min-width: 25px;
+    max-width: 25px
+  }
+
+  td:nth-child(36), th:nth-child(36) {
+    min-width: 45px;
+    max-width: 45px
+  }
 
   thead tr {
     display: block;
@@ -72,7 +104,7 @@ div {
 }
 
 @media (max-width: 2000px) and (min-width: 1821px) {
-  table{
+  table {
     font-size: 1em;
   }
 
@@ -87,13 +119,45 @@ div {
     border-collapse: collapse;
   }
 
-  td:nth-child(1), th:nth-child(1) { min-width: 120px; max-width: 120px; vertical-align: middle}
-  td:nth-child(2), th:nth-child(2) { min-width: 100px; max-width: 100px; vertical-align: middle}
-  td:nth-child(3), th:nth-child(3) { min-width: 100px; max-width: 100px; vertical-align: middle}
-  td:nth-child(4), th:nth-child(4) { min-width: 200px; max-width: 200px; vertical-align: middle}
-  td:nth-child(5), th:nth-child(5) { min-width: 200px; max-width: 200px; vertical-align: middle}
-  td:nth-child(n+6), th:nth-child(n+6) { min-width: 35px; max-width: 35px}
-  td:nth-child(36), th:nth-child(36) { min-width: 45px; max-width: 45px}
+  td:nth-child(1), th:nth-child(1) {
+    min-width: 120px;
+    max-width: 120px;
+    vertical-align: middle
+  }
+
+  td:nth-child(2), th:nth-child(2) {
+    min-width: 100px;
+    max-width: 100px;
+    vertical-align: middle
+  }
+
+  td:nth-child(3), th:nth-child(3) {
+    min-width: 100px;
+    max-width: 100px;
+    vertical-align: middle
+  }
+
+  td:nth-child(4), th:nth-child(4) {
+    min-width: 200px;
+    max-width: 200px;
+    vertical-align: middle
+  }
+
+  td:nth-child(5), th:nth-child(5) {
+    min-width: 200px;
+    max-width: 200px;
+    vertical-align: middle
+  }
+
+  td:nth-child(n+6), th:nth-child(n+6) {
+    min-width: 35px;
+    max-width: 35px
+  }
+
+  td:nth-child(36), th:nth-child(36) {
+    min-width: 45px;
+    max-width: 45px
+  }
 
   thead tr {
     display: block;
@@ -115,3 +179,24 @@ div {
     width: 24px;
   }
 }
+
+.block {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+dx-load-indicator {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border: none;
+}
+
+

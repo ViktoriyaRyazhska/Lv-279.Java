@@ -1,4 +1,4 @@
-<p-dataTable [value]="students" *ngIf="tests" [editable]="true" resizableColumns="true" reorderableColumns="true" scrollable="true">
+<p-dataTable  *ngIf="tests" [value]="students" [editable]="true" resizableColumns="true" reorderableColumns="true" scrollable="true">
   <p-column field="user.id" header="Employee" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'7em'}"></p-column>
   <p-column field="user.firstName" header="Name" [editable]="false" [filter]="true" [sortable]="true"
@@ -127,6 +127,7 @@
       <input type="number" pInputText="" [(ngModel)]="student.data.testTen" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
+
   <p-column field="data.finalBase" header="Final, Base" [editable]="true" [filter]="true" [sortable]="true"
   [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
@@ -157,22 +158,23 @@
              {{this.getTrainingScore(student)}}
        </span>
     </ng-template></p-column>
+
   <p-column field="data.teacherScore" header="Teacher Score" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.teacherScore" [class]="'form-control'" required="true" >
+      <input type="number" [(ngModel)]="student.data.teacherScore" [min]="0" [max]="5" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
   <p-column field="data.expertScore" header="Expert Score" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.expertScore" [class]="'form-control'" required="true" >
+      <input type="number" [(ngModel)]="student.data.expertScore" [min]="0" [max]="5" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
-  <p-column field="data.interviewerScore" header="Interviewer Score" [editable]="true" [filter]="true" [sortable]="true"
+  <p-column field="data.interviewerScore" header="Interviewer Score" [editable]="true"  [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.interviewerScore" [class]="'form-control'" required="true" >
+      <input type="number" [(ngModel)]="student.data.interviewerScore" [min]="0" [max]="5" [class]="'form-control'" required="true" >
     </ng-template>
   </p-column>
   <p-column field="studentStatus.name" header="Student status" [editable]="true" [filter]="true" [sortable]="true"
@@ -239,6 +241,7 @@
     </div>
   </div>
 </p-dialog>
+
 
 <p-dialog header="Removing user" modal="false" dismissableMask="false" [(visible)]="displayRemovingDialog" width="750">
   <div>

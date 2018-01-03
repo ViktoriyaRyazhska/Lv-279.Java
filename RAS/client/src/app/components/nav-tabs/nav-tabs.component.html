@@ -1,15 +1,11 @@
-<!--<nav mat-tab-nav-bar>-->
-  <!--<a mat-tab-link routerLink="students/{{academyId}}">Students</a>-->
-  <!--<a mat-tab-link routerLink="history/{{academyId}}">History</a>-->
-  <!--<a mat-tab-link routerLink="feedback/{{academyId}}">Feedbacks</a>-->
-  <!--<a mat-tab-link routerLink="tests/{{academyId}}">Tests</a>-->
-<!--</nav>-->
-<!--<router-outlet></router-outlet>-->
-
 <p-tabView>
 
   <p-tabPanel header="Students" [selected]="true">
     <app-students [groupId]="academyId" ></app-students>
+  </p-tabPanel>
+
+  <p-tabPanel header="Employee">
+    <app-employee [groupId]="academyId"></app-employee>
   </p-tabPanel>
 
   <p-tabPanel header="History">
@@ -17,7 +13,7 @@
   </p-tabPanel>
 
   <p-tabPanel header="Feedback">
-    <app-feedbacks [groupId]="academyId"></app-feedbacks>
+    <app-feedback-list [groupId]="academyId"></app-feedback-list>
   </p-tabPanel>
 
   <p-tabPanel header="Tests">

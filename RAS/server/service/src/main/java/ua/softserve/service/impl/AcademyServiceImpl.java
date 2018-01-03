@@ -48,6 +48,9 @@ public class AcademyServiceImpl implements AcademyService {
     @Autowired
     GroupValidator groupValidator;
 
+    @Autowired
+    HistoryService historyService;
+
     @Transactional
     @Override
     public Integer save(Academy academy) {
@@ -80,7 +83,8 @@ public class AcademyServiceImpl implements AcademyService {
 
         GroupInfo groupInfo = groupInfoConverter.groupInfoToEntity(academyId, academyDTO);
         groupInfoService.save(groupInfo);
-    }
+        historyService.saveModifyby(academyId);
+           }
 
     /**
      * Method return Academy by id

@@ -1,12 +1,14 @@
 package ua.softserve.service.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 import ua.softserve.service.dto.AcademyDTO;
 
 import java.sql.Date;
+import java.util.Optional;
 
 @Service
 public class GroupInfoConverter {
@@ -62,6 +64,7 @@ public class GroupInfoConverter {
         academyDTO.setStudentPlannedToGraduate(groupInfo.getStudentsPlannedToGraduate());
         academyDTO.setStudentPlannedToEnrollment(groupInfo.getStudentsPlannedToEnrollment());
         academyDTO.setStudentsActual(studentService.countAllByAcademyId(groupInfo.getAcademy().getAcademyId()));
+        academyDTO.setModifyBy(((Optional<LoginUser>) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).get().getUsername());
 
         return academyDTO;
     }
@@ -80,7 +83,6 @@ public class GroupInfoConverter {
             groupInfo = new GroupInfo();
         } else {
             groupInfo = groupInfoService.findOneGroupInfoByAcademyId(academyDTO.getAcademyId());
-            //groupInfo.setGroupInfoId(academyDTO.getGroupInfoId());
         }
 
         groupInfo.setAcademy(getAcademyById(academyId));
@@ -105,7 +107,6 @@ public class GroupInfoConverter {
             academy = new Academy();
         } else {
             academy = academyService.findOne(academyDTO.getAcademyId());
-            //academy.setAcademyId(academyDTO.getAcademyId());
         }
 
         academy.setName(academyDTO.getNameForSite());

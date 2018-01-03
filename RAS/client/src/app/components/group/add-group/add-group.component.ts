@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+ import {Component, Injectable, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';

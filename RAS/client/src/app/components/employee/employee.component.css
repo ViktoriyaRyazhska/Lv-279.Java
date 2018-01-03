@@ -1,0 +1,23 @@
+.myradio1{
+  margin-left: -35%;
+}
+.myradio{
+  margin-left: 30%;
+}
+.myfootertable{
+  margin-top: 10px;
+}
+
+.mat-button, .mat-raised-button{
+  background-color: #3dbbd7;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration:none;
+  font-weight: bold;
+
+  margin: 1em 0em 1em 1em;
+}
+span .mat-raised-button{
+  background: #5cb85c;
+}

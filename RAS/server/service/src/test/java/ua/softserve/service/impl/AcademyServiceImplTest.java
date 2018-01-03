@@ -124,7 +124,4 @@ public class AcademyServiceImplTest {
         academyServiceImpl.getAllAcademies();
         verify(academyRepository).findAll();
     }
-
-
-
 }

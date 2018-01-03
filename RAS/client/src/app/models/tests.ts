@@ -1,7 +1,7 @@
 import {FormGroup} from "@angular/forms";
 export class Tests {
   testId : number;
-  groupId : number;
+  groupId : any;
   testMaxScore: number;
   testName: string;
   removed: boolean;
@@ -11,10 +11,9 @@ export class Tests {
     this.testName = tstName;
   }
 
-  setTestRowsWithFormGroup(item : any, groupId : number) {
+  setTestRowsWithFormGroup(item : any) {
     this.testMaxScore = item.get('testMaxScore').value;
     this.testName = item.get('testName').value;
-    this.groupId = groupId;
     if(item.get('testId').value!=null) {
       this.testId = item.get('testId').value;
     }

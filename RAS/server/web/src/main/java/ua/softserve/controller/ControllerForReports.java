@@ -51,14 +51,10 @@ public class ControllerForReports {
 
 
     @GetMapping(value = "/ita_tactical_report")
-    public ResponseEntity<Map<String,List<ItaTacticalReport>>> getItaTacticalrReport() {
+    public ResponseEntity<List<ItaTacticalReport>> getItaTacticalrReport() {
         return new ResponseEntity<>(itaTacticalReportService.generateItaTacticalReport(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/test")
-    public ResponseEntity<List<ItaTacticalReport>> test() {
-        return new ResponseEntity<>(itaTacticalReportRepository.findAll(), HttpStatus.OK);
-    }
 
 
 }

@@ -3,12 +3,17 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.GroupInfoTeachers;
 import ua.softserve.persistence.entity.LoginUser;
 import ua.softserve.persistence.entity.TeacherTypes;
 import ua.softserve.persistence.repo.GroupInfoTeachersRepository;
+import ua.softserve.service.EmployeeService;
 import ua.softserve.service.GroupInfoTeachersService;
+import ua.softserve.service.SecurityContextService;
+import ua.softserve.service.converter.GroupInfoTeachersConverter;
+import ua.softserve.service.dto.GroupInfoTeachersDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +22,10 @@ import java.util.Optional;
 public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
     @Autowired
     private GroupInfoTeachersRepository groupInfoTeachersRepository;
+    @Autowired
+    private EmployeeService employeeService;
+    @Autowired
+    private GroupInfoTeachersConverter groupInfoTeachersConverter;
 
     @Override
     public List<GroupInfoTeachers> findAllByAcademyAndTeacherType(Academy academy, TeacherTypes teacherType) {
@@ -30,15 +39,31 @@ public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
 
     @Override
     public Boolean isAssignToGroup(Integer id) {
-        Optional<LoginUser> principal = (Optional<LoginUser>) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
         for (GroupInfoTeachers groupInfoTeachers : groupInfoTeachersRepository.findAllByAcademy_AcademyId(id)) {
-            if (groupInfoTeachers.getEmployee().getEmployeeId().equals(
-                    ((Optional<LoginUser>) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).get()
-                            .getId())) {
+            if (groupInfoTeachers.getEmployee().getEmployeeId().equals
+                    (employeeService.findEmployeesByLoginUserId(((Optional<LoginUser>) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).get()
+                            .getId()).getEmployeeId())) {
                 return true;
             }
         }
         return false;
+    }
+
+    @Transactional
+    @Override
+    public void save(List<GroupInfoTeachersDTO> object) {
+        object.stream().forEach(groupInfoTeachersDTO -> {
+            groupInfoTeachersRepository.save(groupInfoTeachersConverter.convertDtoToEntity(groupInfoTeachersDTO));
+        });
+    }
+
+    @Override
+    public List<GroupInfoTeachers> findAllByAcademy_AcademyId(Integer academy_academyId) {
+        return groupInfoTeachersRepository.findAllByAcademy_AcademyId(academy_academyId);
+    }
+
+    @Override
+    public void updateGroupInfoTeachers(List<GroupInfoTeachers> groupInfoTeachers) {
+        groupInfoTeachersRepository.save(groupInfoTeachers);
     }
 }

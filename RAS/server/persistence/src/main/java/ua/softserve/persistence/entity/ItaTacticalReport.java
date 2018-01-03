@@ -2,10 +2,7 @@ package ua.softserve.persistence.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Getter
@@ -65,4 +62,6 @@ public class ItaTacticalReport {
 
     @Column(name = "payment_status")
     private int paymentSatus;
+    @Transient
+    private String reportName;
 }

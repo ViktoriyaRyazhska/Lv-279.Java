@@ -11,13 +11,14 @@ import {Router} from "@angular/router";
   providers: [ReportsService]
 })
 @Injectable()
-export class CheckListByGroupsComponent implements OnInit{
+export class CheckListByGroupsComponent implements OnInit {
   groups: any;
+  loadIndicatorVisible = true;
 
   constructor(private reportsService: ReportsService,
               iconRegistry: MatIconRegistry,
               sanitizer: DomSanitizer,
-              private router:Router) {
+              private router: Router) {
     iconRegistry.addSvgIcon(
       'icon1',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/examples/ic_check_black_24px.svg'));
@@ -30,9 +31,10 @@ export class CheckListByGroupsComponent implements OnInit{
     this.reportsService.getAllForCheckListReport().subscribe(
       data => {
         this.groups = data;
+        this.loadIndicatorVisible =false;
       },
       error => {
-        if (error.status===403) {
+        if (error.status === 403) {
           this.router.navigate(['ang/error']);
         }
         console.log(error);
@@ -41,21 +43,21 @@ export class CheckListByGroupsComponent implements OnInit{
 
   }
 
-  onMouseEnter(s: string){
+  onMouseEnter(s: string) {
     let elementsByClassName = document.getElementsByClassName(s);
     for (let i = 0; i < elementsByClassName.length; i++) {
       elementsByClassName[i].setAttribute('style', 'background: oldlace; cursor: pointer;');
     }
   }
 
-  onMouseLeave(s: string){
+  onMouseLeave(s: string) {
     let elementsByClassName = document.getElementsByClassName(s);
     for (let i = 0; i < elementsByClassName.length; i++) {
       elementsByClassName[i].setAttribute('style', 'background: initial');
     }
   }
 
-  onMouseClick(s: string){
+  onMouseClick(s: string) {
     let elementsByClassName = document.getElementsByClassName(s);
     for (let i = 0; i < elementsByClassName.length; i++) {
       if (!elementsByClassName[i].className.endsWith('master')) {
