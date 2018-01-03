@@ -24,7 +24,7 @@ public class AcademyController {
         return new ResponseEntity<>(groupInfoService.getAcademyDTObyId(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = { "/dropdown", "/getDropDownList" })
+    @GetMapping(value = { "/dropdown", "/get-dropdown-list" })
     public ResponseEntity<AcademyDropDownLists> getDropdownList() {
         return new ResponseEntity<>(academyService.getAcademyDTO(), HttpStatus.OK);
     }
@@ -35,7 +35,7 @@ public class AcademyController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/viewAcademies")
+    @GetMapping(value = "/view-groupinfo")
     public ResponseEntity<List<GroupInformationDTO>> searchSite() {
         return new ResponseEntity<>(groupInfoService.getAllInformationAboutGroup(), HttpStatus.OK);
     }
