@@ -16,13 +16,14 @@ import {EmployeeComponent} from "./components/employee/employee.component";
 import {ViewAcademiesNgxComponent} from "./components/view-academies/view-academies-ngx/view-academies-ngx.component";
 import {ItaTacticalReportComponent} from "./components/reports/ita-tactical-report/ita-tactical-report.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
+import {UpdateGroupComponent} from "./components/group/update-group/update-group.component";
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
   {path: '', component: ViewAcademiesNgxComponent},
   {path: 'ang/group/add', component: AddGroupComponent},
   {
-    path: 'ang/group/update/:id', component: AddGroupComponent, children: [
+    path: 'ang/group/update/:id', component: UpdateGroupComponent, children: [
     {path: '', redirectTo: 'students', pathMatch: 'full'},
 
     {path: 'students/:id', component: StudentsComponent},
