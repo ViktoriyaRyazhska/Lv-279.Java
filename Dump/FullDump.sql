@@ -853,7 +853,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `login_user` WRITE;
 /*!40000 ALTER TABLE `login_user` DISABLE KEYS */;
-INSERT INTO `login_user` VALUES (1,'','','','','$2a$10$JADJ2scItwF5HfBETnge4e0YFyr8kgMHntRTZ7dkHAchGh3m/4qI6','teacher',NULL),(2,'','','','','$2a$10$uqhIxfglXQi/LEpAYzllcebWPUJcXmXqC/9ZlUPK6.ewAvtIEux.e','expert',NULL),(3,'','','','','$2a$10$LSaYypTfNTegjc4Zr.aXv.ZAS/Y6AAIWdYSaD0z9G8YQCopOQidIS','interviewer',NULL),(4,'','','','','$2a$10$qMmbBP3iuYd5zpESCauT8OK8llTbE9kF6rXoI8gqPdRaLNM2V3/rG','network_lead',NULL),(5,'','','','','$2a$10$dKevT15RapKefa69tl1/LOnmMl32GFofKzVWzdYmOV6rpoRHUC0oW','ita_coordinator',NULL),(6,'','','','','$2a$10$nfpCsY8OWOkhCZTfJ1lRAuDfsNmLcSCHbwxYupZX.a4dHV6pqJXJe','ita_admin',NULL),(7,'','','','','$2a$10$fnrARL/5xpDJwhMKpxnVSe0mh9IhczwJTjB7AXz6ZDaU4ZBEwagYq','recruiter',NULL),(8,'','','','','$2a$10$xjBTA4Jy5c1jkJyeQ8pmt.inINk2WR7zWzfWZCvt.7c3rKLVm7Gvy','softserve_pm',NULL);
+INSERT INTO `login_user` VALUES (1,'','','','','$2a$10$JADJ2scItwF5HfBETnge4e0YFyr8kgMHntRTZ7dkHAchGh3m/4qI6','teacher',1),(2,'','','','','$2a$10$uqhIxfglXQi/LEpAYzllcebWPUJcXmXqC/9ZlUPK6.ewAvtIEux.e','expert',2),(3,'','','','','$2a$10$LSaYypTfNTegjc4Zr.aXv.ZAS/Y6AAIWdYSaD0z9G8YQCopOQidIS','interviewer',3),(4,'','','','','$2a$10$qMmbBP3iuYd5zpESCauT8OK8llTbE9kF6rXoI8gqPdRaLNM2V3/rG','network_lead',4),(5,'','','','','$2a$10$dKevT15RapKefa69tl1/LOnmMl32GFofKzVWzdYmOV6rpoRHUC0oW','ita_coordinator',5),(6,'','','','','$2a$10$nfpCsY8OWOkhCZTfJ1lRAuDfsNmLcSCHbwxYupZX.a4dHV6pqJXJe','ita_admin',6),(7,'','','','','$2a$10$fnrARL/5xpDJwhMKpxnVSe0mh9IhczwJTjB7AXz6ZDaU4ZBEwagYq','recruiter',7),(8,'','','','','$2a$10$xjBTA4Jy5c1jkJyeQ8pmt.inINk2WR7zWzfWZCvt.7c3rKLVm7Gvy','softserve_pm',8);
 /*!40000 ALTER TABLE `login_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1706,7 +1706,7 @@ CREATE VIEW tacticalReport AS
     gi.group_name,
     t.name                                                                                       cg,
     pi.profile_name                                                                    profile,
-    lt.trasnlation                                                            location,
+    lt.trasnlation                                                           			 location,
     gi.students_planned_to_enrollment                                                    requested,
     get_student_in_progress (a.academy_id) student_in_progress,
     get_student_status(a.academy_id, 8)         graduated,
