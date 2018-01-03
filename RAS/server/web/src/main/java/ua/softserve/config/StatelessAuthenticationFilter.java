@@ -12,7 +12,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ua.softserve.config.auth.TokenAuthenticationService;
 import ua.softserve.config.auth.TokenHandler;
 
 import javax.servlet.FilterChain;
@@ -30,8 +29,6 @@ import java.util.Optional;
 public class StatelessAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private TokenAuthenticationService tokenAuthenticationService;
-    @Autowired
     private TokenHandler tokenHandler;
 
     @Value("${app.jwt.tokenname}")
@@ -43,15 +40,21 @@ public class StatelessAuthenticationFilter extends OncePerRequestFilter {
         Cookie[] cookies;
         if (httpServletRequest.getCookies() != null) {
             cookies = httpServletRequest.getCookies();
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(tokenName)) {
-                    Optional<UserDetails> userDetails = tokenHandler.parseUserFromToken(cookie.getValue());
+            Arrays.stream(cookies).filter(cookie -> cookie.getName().equals(tokenName)).forEach(cookie -> {
+                        Optional<UserDetails> userDetails = tokenHandler.parseUserFromToken(cookie.getValue());
+                        if (tokenHandler.isTokenExpired(cookie.getValue())){
+                            cookie.setValue("");
+                            cookie.setPath("/");
+                            cookie.setMaxAge(0);
+                            httpServletResponse.addCookie(cookie);
+                            return;
+                        }
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.get().getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-                }
-            }
+                    }
+            );
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }

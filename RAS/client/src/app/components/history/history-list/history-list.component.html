@@ -1,50 +1,11 @@
-<div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource">
-
-    <ng-container matColumnDef="academyName">
-      <mat-header-cell *matHeaderCellDef>Group name</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.academyName}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="nameForSite">
-      <mat-header-cell *matHeaderCellDef>Name for site</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.nameForSite}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="location">
-      <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.location}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="sartDate">
-      <mat-header-cell *matHeaderCellDef>Start Date</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.sartDate |date: "dd/MM/yy"}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="endDate">
-      <mat-header-cell *matHeaderCellDef>End Date</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.endDate|date: "dd/MM/yy" }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="stage">
-      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.stage}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="direction">
-      <mat-header-cell *matHeaderCellDef>Common Direction</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.direction}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="modifyDate">
-      <mat-header-cell *matHeaderCellDef>Modify Date</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.modifyDate|date: "dd/MM/yy hh:mm"}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="modifyBy">
-      <mat-header-cell *matHeaderCellDef>Modify by</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.modifyBy}}</mat-cell>
-    </ng-container>
-
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-  </mat-table>
-</div>
+<p-dataTable [value]="dataTable">
+  <p-column field="academyName" header="Group name"></p-column>
+  <p-column field="nameForSite" header="Name for site"></p-column>
+  <p-column field="location" header="Location"></p-column>
+  <p-column field="sartDate" header="Start Date"></p-column>
+  <p-column field="endDate" header="End Date"></p-column>
+  <p-column field="stage" header="Status"></p-column>
+  <p-column field="direction" header="Common Direction"></p-column>
+  <p-column field="modifyDate" header="Modify Date"></p-column>
+  <p-column field="modifyBy" header="Modify by"></p-column>
+</p-dataTable>

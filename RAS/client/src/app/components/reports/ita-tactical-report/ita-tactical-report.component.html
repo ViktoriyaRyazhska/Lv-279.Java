@@ -1,10 +1,10 @@
-<body class="dx-viewport">
-<div class="demo-container">
-  <div class="form" align="center">
-    <dx-load-indicator id="large-indicator" height="100" width="100" [visible]="loadIndicatorVisible"></dx-load-indicator>
+
+  <div id="block">
+    <dx-load-indicator id="large-indicator" height="60" width="60" [visible]="loadIndicatorVisible"></dx-load-indicator>
   </div>
 
 
+<div class="demo-container">
   <dx-data-grid id="gridContainer"
                 [dataSource]="itaTacticalPlanReports"
                 [allowColumnResizing]="true"
@@ -83,4 +83,4 @@
 
   </dx-data-grid>
 </div>
-</body>
+

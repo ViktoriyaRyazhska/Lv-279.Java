@@ -15,4 +15,8 @@ public interface GroupInfoTeachersService {
     Boolean isAssignToGroup(Integer id);
 
     void save(List<GroupInfoTeachersDTO> object);
+
+    List<GroupInfoTeachers> findAllByAcademy_AcademyId(Integer academy_academyId);
+
+    void updateGroupInfoTeachers(List<GroupInfoTeachers> groupInfoTeachers);
 }

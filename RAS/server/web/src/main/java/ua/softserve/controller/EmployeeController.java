@@ -23,11 +23,6 @@ public class EmployeeController {
     @Autowired
     private GroupInfoTeachersService groupInfoTeachersService;
 
-    @GetMapping("/teachers")
-    public ResponseEntity<List<Employee>> getTeachers() {
-        return new ResponseEntity<List<Employee>>(employeeService.findEmployeesByTeacherType(), HttpStatus.OK);
-    }
-
     @GetMapping("/experts")
     public ResponseEntity<List<Employee>> getExperts() {
         return new ResponseEntity<List<Employee>>(employeeService.findAll(), HttpStatus.OK);
@@ -39,7 +34,19 @@ public class EmployeeController {
     }
 
     @PostMapping("/assign")
-    public void addStudents(@RequestBody List<GroupInfoTeachersDTO> object) {
+    public ResponseEntity addStudents(@RequestBody List<GroupInfoTeachersDTO> object) {
         groupInfoTeachersService.save(object);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/group/{id}")
+    public ResponseEntity<List<GroupInfoTeachers>> getGroupInfoTeachers(@PathVariable("id") Integer id){
+        return new ResponseEntity<List<GroupInfoTeachers>>(groupInfoTeachersService.findAllByAcademy_AcademyId(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity updateGroupInfoTeachers(@RequestBody List<GroupInfoTeachers> groupInfoTeachers){
+        groupInfoTeachersService.updateGroupInfoTeachers(groupInfoTeachers);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
