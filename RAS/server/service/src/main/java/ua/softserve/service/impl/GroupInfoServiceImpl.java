@@ -56,9 +56,11 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     }
 
     /**
-     * Method returns GroupInfo by id
-     * @param academyId
-     * @return GroupInfo
+     * Method returns GroupInfo by academy id.
+     *
+     * @param academyId must not be {@literal null}.
+     * @return GroupInfo entity
+     * @throws NoSuchElementException if {@code id} is {@literal null}
      */
     @Transactional
     @Override
@@ -74,8 +76,14 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     }
 
 
-    public AcademyDTO getAcademyDTObyId(Integer groupId) {
-        GroupInfo groupInfo = findOneGroupInfoByAcademyId(groupId);
+    /**
+     * Method convert GroupInfo to AcademyDTO.
+     *
+     * @param academyId must not be {@literal null}.
+     * @return AcademyDTO
+     */
+    public AcademyDTO getAcademyDTObyId(Integer academyId) {
+        GroupInfo groupInfo = findOneGroupInfoByAcademyId(academyId);
         AcademyDTO academyDTO = new AcademyDTO();
         academyDTO.setAcademyId(groupInfo.getAcademy().getAcademyId());
         academyDTO.setGroupInfoId(groupInfo.getGroupInfoId());
