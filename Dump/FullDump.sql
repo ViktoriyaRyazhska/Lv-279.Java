@@ -1726,6 +1726,8 @@ CREATE VIEW tacticalReport AS
       ON t.technology_id = a.technology_id
     WHERE lt.local LIKE 'en' AND lt.tag LIKE 'city'
   GROUP BY a.academy_id;
+  
+  UPDATE history set modify_by = 'ita_admin' where modify_by is null;
 
 -- Dump completed on 2017-12-17 13:52:32
 

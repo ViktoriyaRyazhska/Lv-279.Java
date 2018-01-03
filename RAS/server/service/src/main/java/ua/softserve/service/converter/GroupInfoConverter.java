@@ -1,12 +1,14 @@
 package ua.softserve.service.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
 import ua.softserve.service.dto.AcademyForSaveDTO;
 
 import java.sql.Date;
+import java.util.Optional;
 
 @Service
 public class GroupInfoConverter {
@@ -61,7 +63,7 @@ public class GroupInfoConverter {
         academyForSaveDTO.setStudentPlannedToGraduate(groupInfo.getStudentsPlannedToGraduate());
         academyForSaveDTO.setStudentPlannedToEnrollment(groupInfo.getStudentsPlannedToEnrollment());
 //        academyForSaveDTO.setStudentsActual();
-
+        academyForSaveDTO.setModifyBy(((Optional<LoginUser>) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).get().getUsername());
         return academyForSaveDTO;
     }
 
