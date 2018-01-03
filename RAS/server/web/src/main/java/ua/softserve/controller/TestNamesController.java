@@ -34,7 +34,7 @@ public class TestNamesController {
     @PostMapping(value = "/tests/add/{id}")
     public ResponseEntity<Integer> saveTestsNames(@PathVariable("id") int groupId,@RequestBody List<TestName> testNames) {
 
-        if(testNameService.saveTestNames(testNames,groupId).equals("success")) {
+        if(testNameService.saveTestNames(testNames,groupId)==200) {
             logger.info("test names successfully saved");
             return new ResponseEntity<Integer>(0, HttpStatus.OK);
         }

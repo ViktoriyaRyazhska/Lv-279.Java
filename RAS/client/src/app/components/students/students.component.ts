@@ -104,7 +104,6 @@ export class StudentsComponent implements OnInit {
     console.log(this.employeesDropdown);
   }
 
-
   onStudentClick(student: StudentFeedback) {
     this.selectedStudent = student;
     this.displayStudentDetails = true;
@@ -140,7 +139,6 @@ export class StudentsComponent implements OnInit {
   addUserClick() {
     this.displayUsersList = true;
   }
-
 
   cancelAddingClick() {
     this.users = null;

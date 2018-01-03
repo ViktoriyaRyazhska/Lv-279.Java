@@ -1,5 +1,7 @@
 package ua.softserve.service.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,23 +19,30 @@ public class TestNameServiceImpl implements TestNameService {
     @Autowired
     private AcademyServiceImpl academyService;
 
+    private static final Logger logger = LogManager.getLogger(TestNameServiceImpl.class);
+
     @Override
     @Transactional
-    public String saveTestNames(List<TestName> testNames, Integer academyId) {
+    public int saveTestNames(List<TestName> testNames, Integer academyId) {
 
         for (TestName testName : testNames) {
             if (testName.getTestName() == null || testName.getTestMaxScore() == null
                     || testName.getTestName().equals("")) {
-                return TestNameService.NullValue;
+                logger.info("Do not send us 'null'! Try again!");
+                return TestNameService.DataIsWrong;
             }
-            if (testName.isRemoved()) {
+            if (testName.getTestName().length() >= 50) {
+                logger.info("Test name is incorrect");
+                return TestNameService.DataIsWrong;
+            }
+            if (testName.isRemoved()){
                 this.deleteTestName(testName);
             } else {
                 testName.setGroupId(academyService.findOne(academyId));
                 testNameRepository.save(testName);
             }
         }
-        return TestNameService.DataIsGood;
+        return TestNameService.DataIsOk;
     }
 
     @Override

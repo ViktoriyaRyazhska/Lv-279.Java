@@ -13,7 +13,7 @@ import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angul
 export class TestsNamesComponent implements OnInit {
   @Input() groupId: number;
 
-  groupId2 : number;
+  // groupId2 : number;
   tests : Tests[];
   static counter : number = 1;
   rForm: FormGroup;
@@ -24,14 +24,14 @@ export class TestsNamesComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
   ) {
-    this.groupId2 = +this.route.snapshot.params['id'];
+    // this.groupId2 = +this.route.snapshot.params['id'];
     this.rForm = new FormGroup({
       testRows: this.fb.array([])
     });
   }
 
   ngOnInit() {
-    this.testNamesService.getAll(this.groupId2).subscribe(data => {
+    this.testNamesService.getAll(this.groupId).subscribe(data => {
       console.log(data);
       this.tests = data;
       TestsNamesComponent.counter = this.tests.length;
@@ -70,12 +70,11 @@ export class TestsNamesComponent implements OnInit {
     }
     this.testRows.controls = [];
     console.log(this.testRows.length);
-    this.testNamesService.addTests(this.tests, this.groupId2).subscribe(() => {
+    this.testNamesService.addTests(this.tests, this.groupId).subscribe(() => {
       this.tests = null;
       this.ngOnInit()
     });
   }
-
 
   isFormValid(): boolean {
     return this.rForm.valid;
