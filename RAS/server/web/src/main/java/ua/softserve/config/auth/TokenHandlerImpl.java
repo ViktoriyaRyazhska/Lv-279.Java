@@ -1,5 +1,6 @@
 package ua.softserve.config.auth;
 
+import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 import ua.softserve.persistence.entity.LoginUser;
 import ua.softserve.persistence.repo.LoginUserRepository;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.time.ZonedDateTime;
 import java.util.*;
 
@@ -34,16 +37,16 @@ public final class TokenHandlerImpl implements TokenHandler {
     public Optional<UserDetails> parseUserFromToken(String token) {
         final String subject = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
         final LoginUser user = userRepository.findOne(Integer.valueOf(subject));
-
         return Optional.ofNullable(user);
     }
 
     @Override
     public String createTokenForUser(LoginUser user) {
-        final ZonedDateTime afterOneWeek = ZonedDateTime.now().plusHours(expiration);
-
-        return Jwts.builder().setClaims(generateClaims(user)).setSubject(String.valueOf(user.getId()))
-                .signWith(SignatureAlgorithm.HS512, secret).setExpiration(generateExpirationDate()).compact();
+        return Jwts.builder().setClaims(generateClaims(user))
+                .setSubject(String.valueOf(user.getId()))
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .setExpiration(generateExpirationDate())
+                .compact();
     }
 
     private Date generateExpirationDate() {
@@ -54,6 +57,21 @@ public final class TokenHandlerImpl implements TokenHandler {
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_AUTHORITY, user.getAuthorities());
         return claims;
+    }
+
+    private Date getCreatedDateFromToken(String token) {
+        Date created;
+        try {
+            created = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getExpiration();
+        } catch (NullPointerException e) {
+            created = null;
+        }
+        return created;
+    }
+
+    public Boolean isTokenExpired(String token) {
+        final Date tokenExpiration = getCreatedDateFromToken(token);
+        return tokenExpiration.before(new Date());
     }
 
 }

@@ -46,7 +46,6 @@ public class EmployeeController {
 
     @PutMapping("/update")
     public ResponseEntity updateGroupInfoTeachers(@RequestBody List<GroupInfoTeachers> groupInfoTeachers){
-        System.out.println(groupInfoTeachers.get(0).getId());
         groupInfoTeachersService.updateGroupInfoTeachers(groupInfoTeachers);
         return new ResponseEntity(HttpStatus.OK);
     }

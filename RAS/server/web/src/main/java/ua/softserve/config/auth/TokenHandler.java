@@ -13,4 +13,6 @@ public interface TokenHandler {
 
     String createTokenForUser(LoginUser user);
 
+    Boolean isTokenExpired(String token);
+
 }
