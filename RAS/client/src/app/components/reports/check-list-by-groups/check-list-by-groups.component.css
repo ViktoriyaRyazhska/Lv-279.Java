@@ -8,9 +8,9 @@
   position: fixed;
 }
 
-/*.table thead tr th {
+.table thead tr th {
   vertical-align: middle;
-}*/
+}
 
 th span {
   writing-mode: tb-rl

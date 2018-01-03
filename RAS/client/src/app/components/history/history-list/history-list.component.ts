@@ -25,15 +25,12 @@ export class HistoryListComponent implements OnInit {
 
   ngOnInit() {
     this.academyId = this.groupId;
-    // this.academyId = this.route.snapshot.params['id'];
     this.historyService.getAll(this.academyId).subscribe(
       data => {
         this.dataSource = new MatTableDataSource(data);
       },
       error => console.log(error)
     );
-
-    console.log(this.academyId);
   }
 
 }
