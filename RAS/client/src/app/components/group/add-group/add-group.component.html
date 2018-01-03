@@ -89,8 +89,8 @@
 
           <div class="row">
             <mat-form-field class="col-sm-6">
-              <input matInput placeholder="Students Planned to Graduate:"
-                     formControlName="studentPlannedToGraduate" min="0" max="99">
+              <input matInput type="number" placeholder="Students Planned to Graduate:"
+                     formControlName="studentPlannedToGraduate" min="0" max="99" maxlength="2">
             </mat-form-field>
 
             <mat-form-field class="col-sm-6">
@@ -120,8 +120,8 @@
 
 
 
-  <div [hidden]="!navtab">
-    <app-nav-tabs [academyId]="groupId"></app-nav-tabs>
-  </div>
+  <!--<div [hidden]="!navtab">-->
+    <!--<app-nav-tabs [academyId]="groupId"></app-nav-tabs>-->
+  <!--</div>-->
 </div>
 

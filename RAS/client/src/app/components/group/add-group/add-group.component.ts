@@ -89,8 +89,8 @@ export class AddGroupComponent implements OnInit {
       'directionFormControl': new FormControl(this.group.technologieId),
       'profileInfoFormControl': new FormControl(this.group.profileId),
       'paymentStatusFormControl': new FormControl(this.group.payment),
-      'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate /*, this.myValidator.bind(this)*/),
-      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment),
+      'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate , [this.myValidator.bind(this)]),
+      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment, [Validators.pattern(/^[0-9]+[0-9]*$/)]),
       'studentActualFromControl': new FormControl({value: this.group.studentActual, disabled: true})
     });
   }
@@ -121,6 +121,7 @@ export class AddGroupComponent implements OnInit {
   }
 
   saveGroup() {
+
     if (this.isFormValid()) {
       this.group.setDataFromFormControl(this.signupForm);
       this.invalidForm = false;
@@ -130,14 +131,6 @@ export class AddGroupComponent implements OnInit {
       this.invalidForm = true;
       console.log('invalid');
     }
-  }
-
-  myValidator(control: FormControl): { [s: string]: boolean } {
-    if (control.value < 0 || control.value > 99) {
-      control.setValue(0);
-      return null;
-    }
-    return null;
   }
 
   private sendData(){
@@ -158,7 +151,6 @@ export class AddGroupComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.router.navigate(['ang/viewAcademies']);
-
     });
   }
 
@@ -179,7 +171,33 @@ export class AddGroupComponent implements OnInit {
     },error => {
       console.log(error);
     });
+  }
 
+  myValidator(control: FormControl): { [s: string]: boolean } {
+    let value;
+
+    try{
+      value = control.value.toLocaleString();
+      // control.setValue(this.replace(value));
+    } catch (e) {
+      value = '0';
+    }
+
+    if (control.value < 0) {
+      control.setValue(this.replace(value));
+      return null;
+    }
+    // else if(value.length > 2){
+    //   console.log(control.value);
+    //   return null;
+    // }
+    return null;
+  }
+
+  replace(stringToReplace: string): number{
+    stringToReplace = stringToReplace.replace(/\D/g, "");
+    console.log(stringToReplace);
+    return parseInt(stringToReplace, 10);
   }
 
 }
