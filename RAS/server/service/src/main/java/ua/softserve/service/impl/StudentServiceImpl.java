@@ -121,6 +121,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Integer countAllByAcademyId(Integer academyId) {
-        return studentRepository.countAllByAcademy_AcademyId(academyId);
+        return studentRepository.countAllByAcademy_AcademyIdAndRemovedIsFalse(academyId);
     }
 }
