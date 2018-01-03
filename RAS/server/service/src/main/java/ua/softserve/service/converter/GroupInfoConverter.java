@@ -71,7 +71,7 @@ public class GroupInfoConverter {
         if (academyDTO.getAcademyId() == 0) {
             groupInfo = new GroupInfo();
         } else {
-            groupInfo = groupInfoService.findOneGroupInfoByAcademyId(academyDTO.getGroupInfoId());
+            groupInfo = groupInfoService.findOneGroupInfoByAcademyId(academyDTO.getAcademyId());
             groupInfo.setGroupInfoId(academyDTO.getGroupInfoId());
         }
 
