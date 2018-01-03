@@ -14,20 +14,16 @@ export class HistoryListComponent implements OnInit {
   @Input() groupId: number;
 
   academyId: number;
-  displayedColumns = ['academyName', 'nameForSite', 'location', 'sartDate', 'endDate', 'stage', 'direction'
-    , 'modifyDate', 'modifyBy'];
-  dataSource = new MatTableDataSource();
+  dataTable;
 
   constructor(private historyService: HistoryService,
               private route: ActivatedRoute) {
   }
-
-
   ngOnInit() {
     this.academyId = this.groupId;
     this.historyService.getAll(this.academyId).subscribe(
       data => {
-        this.dataSource = new MatTableDataSource(data);
+        this.dataTable = data;
       },
       error => console.log(error)
     );
