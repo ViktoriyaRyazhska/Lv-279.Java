@@ -3,6 +3,7 @@ package ua.softserve.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.GroupInfoTeachers;
 import ua.softserve.persistence.entity.LoginUser;
@@ -25,6 +26,7 @@ public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
     private EmployeeService employeeService;
     @Autowired
     private GroupInfoTeachersConverter groupInfoTeachersConverter;
+
     @Override
     public List<GroupInfoTeachers> findAllByAcademyAndTeacherType(Academy academy, TeacherTypes teacherType) {
         return groupInfoTeachersRepository.findAllByAcademyAndTeacherType(academy, teacherType);
@@ -47,10 +49,21 @@ public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
         return false;
     }
 
+    @Transactional
     @Override
     public void save(List<GroupInfoTeachersDTO> object) {
         object.stream().forEach(groupInfoTeachersDTO -> {
             groupInfoTeachersRepository.save(groupInfoTeachersConverter.convertDtoToEntity(groupInfoTeachersDTO));
         });
+    }
+
+    @Override
+    public List<GroupInfoTeachers> findAllByAcademy_AcademyId(Integer academy_academyId) {
+        return groupInfoTeachersRepository.findAllByAcademy_AcademyId(academy_academyId);
+    }
+
+    @Override
+    public void updateGroupInfoTeachers(List<GroupInfoTeachers> groupInfoTeachers) {
+        groupInfoTeachersRepository.save(groupInfoTeachers);
     }
 }

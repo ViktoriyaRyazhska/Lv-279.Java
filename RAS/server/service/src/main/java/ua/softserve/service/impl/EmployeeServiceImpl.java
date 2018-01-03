@@ -28,15 +28,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findEmployeesByTeacherType() {
-        // return employeeRepository.findAll().stream()
-        // .filter(employee -> employee.getLoginUser()!=null &&
-        // employee.getLoginUser().getAuthoritiess().contains(Authority.TEACHER))
-        // .collect(Collectors.toList());
-        return new ArrayList<>();
-    }
-
-    @Override
     public Employee findOne(Integer id) {
         return employeeRepository.findOne(id);
     }

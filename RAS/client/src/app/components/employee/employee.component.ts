@@ -20,6 +20,7 @@ export class EmployeeComponent implements OnInit {
   private employeesInterviewer: Employee[];
   private selectedEmployee: Employee[];
   private acceptedEmployees = [];
+  private groupInfoTeachers: GroupInfoTeachers[];
   private selectedTeacher:boolean;
   private selectedExpert:boolean;
   private selectedInterviewer:boolean;
@@ -31,6 +32,10 @@ export class EmployeeComponent implements OnInit {
     this.selectedTeacher=true;
     this.selectedExpert=false;
     this.selectedInterviewer=false;
+    this.employeeService.getGroupInfoTeachers(this.groupId).subscribe(data=>{
+      this.groupInfoTeachers=data;
+    });
+
     this.employeeService.findAllExperts().subscribe(data=>{
       this.employeesTeacher=data;
       this.employeesTeacher.forEach(somedata=>{
@@ -61,11 +66,12 @@ export class EmployeeComponent implements OnInit {
   }
 
   acceptEmployeesClick() {
-    console.log(this.selectedEmployee);
-    console.log(this.convertToArrayOfGroupInfoTeachers(this.selectedEmployee));
     this.employeeService.assignEmployee(this.convertToArrayOfGroupInfoTeachers(this.selectedEmployee)).subscribe(data=>{
       this.selectedEmployee = [];
       this.displayUsersList = false;
+      this.employeeService.getGroupInfoTeachers(this.groupId).subscribe(data=>{
+        this.groupInfoTeachers=data;
+      });
     });
   }
 
@@ -77,5 +83,22 @@ export class EmployeeComponent implements OnInit {
      this.acceptedEmployees[i].teacherType=this.selectedEmployee[i].teacherType;
    }
     return this.acceptedEmployees;
+  }
+
+  updateEmployee(){
+    this.employeeService.update(this.parsecontributedHours(this.groupInfoTeachers)).subscribe(()=>{
+        this.groupInfoTeachers=[];
+        this.employeeService.getGroupInfoTeachers(this.groupId).subscribe(data=>{
+          this.groupInfoTeachers=data;
+        });
+    },error2 => console.log(error2),
+      () => console.log('groupInfoTeachers was updated'))
+  }
+
+  parsecontributedHours(groupInfoTeachers: GroupInfoTeachers[]):GroupInfoTeachers[]{
+    this.groupInfoTeachers.forEach(data=>{
+      data.contributedHours=parseInt(data.contributedHours+'');
+    });
+    return this.groupInfoTeachers;
   }
 }
