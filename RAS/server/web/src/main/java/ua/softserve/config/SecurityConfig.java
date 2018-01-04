@@ -53,11 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
-
-                .antMatchers("/employee/assign")
-                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(), Authority.NETWORK_LEAD.toString())
-                .antMatchers("/employee/update")
-                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(), Authority.NETWORK_LEAD.toString())
+                .antMatchers("/employee/assign", "/employee/update", "/employee/delete/**")
+                .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(),
+                        Authority.NETWORK_LEAD.toString())
                 .antMatchers("/marks")
                 .hasAnyAuthority(Authority.ITA_COORDINATOR.toString(), Authority.ITA_ADMIN.toString(),
                         Authority.RECRUITER.toString(), Authority.SOFTSERVE_PM.toString(), Authority.TEACHER.toString(),

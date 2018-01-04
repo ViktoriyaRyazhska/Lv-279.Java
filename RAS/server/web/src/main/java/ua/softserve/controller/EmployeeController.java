@@ -57,4 +57,10 @@ public class EmployeeController {
         groupInfoTeachersService.updateGroupInfoTeachers(groupInfoTeachers);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteGroupInfoTeachers(@PathVariable("id") Integer id){
+        groupInfoTeachersService.deleteGroupInfoTeachers(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }

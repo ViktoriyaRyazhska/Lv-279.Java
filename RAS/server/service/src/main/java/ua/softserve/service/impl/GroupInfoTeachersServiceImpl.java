@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @Service
 public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
+
     @Autowired
     private GroupInfoTeachersRepository groupInfoTeachersRepository;
     @Autowired
@@ -67,4 +68,11 @@ public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
     public void updateGroupInfoTeachers(List<GroupInfoTeachers> groupInfoTeachers) {
         groupInfoTeachersRepository.save(groupInfoTeachers);
     }
+
+    @Transactional
+    @Override
+    public void deleteGroupInfoTeachers(Integer id) {
+        groupInfoTeachersRepository.deleteGroupInfoTeachersById(id);
+    }
+
 }
