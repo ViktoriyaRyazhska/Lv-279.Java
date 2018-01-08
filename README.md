@@ -10,7 +10,7 @@ After you have installed all necessary tools:
 - clone this repo: https://github.com/ViktoriyaRyazhska/Lv-279.Java.git
 - Properties file: Lv-279.Java/RAS/server/web/src/main/resources/application.properties
 - Open console in folder Lv-279.Java/ and run :
-	* 	mysql -u YOUR_USER_NAME -pYOUR_PASSWORD < Dump/FullDump.sql
+	* 	mysql -u root -proot ss_ps_db < Dump/FullDump.sql
 - Open console in folder Lv-279.Java/RAS/server/ and run :
 	*	mvn clean install
 	*	mvn -f ./web/pom.xml spring-boot:run
