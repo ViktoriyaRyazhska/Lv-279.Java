@@ -10,8 +10,7 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    @Query("from Employee e order by e.lastNameEng, e.firstNameEng")
-    List<Employee> findAllSorted();
+    List<Employee> findAllByOrderByLastNameEngAscFirstNameEngAsc();
 
     Employee findEmployeesByLoginUserId(int loginUser_id);
 }
