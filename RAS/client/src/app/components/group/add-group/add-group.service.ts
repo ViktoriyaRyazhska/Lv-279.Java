@@ -11,7 +11,7 @@ export class AddGroupService {
   constructor(private http: HttpClient) {}
 
   getDropdownList(): Observable<any> {
-    return this.http.get(environment.serverUrl+'/group',{withCredentials: true});
+    return this.http.get(environment.serverUrl+'/dropdown',{withCredentials: true});
   }
 
   getGroupById(groupId: number): Observable<any> {

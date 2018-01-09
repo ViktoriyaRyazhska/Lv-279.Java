@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.ItaTacticalReport;
+import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.persistence.repo.ItaTacticalReportRepository;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.ItaTacticalReportService;
@@ -21,7 +22,7 @@ public class ItaTacticalReportImpl implements ItaTacticalReportService {
     @Autowired
     private ItaTacticalReportRepository itaTacticalReportRepository;
     @Autowired
-    private AcademyService academyService;
+    private AcademyRepository academyRepository;
 
     private final Map<String, Predicate<Academy>> FITERS_FOR_REPORTS;
 
@@ -44,8 +45,7 @@ public class ItaTacticalReportImpl implements ItaTacticalReportService {
     @Override
     public List<ItaTacticalReport> generateItaTacticalReport() {
         List<ItaTacticalReport> itaTacticalReport = new LinkedList<>();
-        List<Academy> academies = academyService.getAllAcademies();
-        List<ItaTacticalReport> oneReport;
+        List<Academy> academies = academyRepository.findAll();
         for (String reportName : FITERS_FOR_REPORTS.keySet()) {
             List<Integer> ids = academies.stream()
                     .filter(FITERS_FOR_REPORTS.get(reportName))

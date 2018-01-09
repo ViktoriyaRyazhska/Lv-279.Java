@@ -1,12 +1,14 @@
 package ua.softserve.service.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ua.softserve.persistence.entity.*;
 import ua.softserve.service.*;
-import ua.softserve.service.dto.AcademyForSaveDTO;
+import ua.softserve.service.dto.AcademyDTO;
 
 import java.sql.Date;
+import java.util.Optional;
 
 @Service
 public class GroupInfoConverter {
@@ -32,47 +34,55 @@ public class GroupInfoConverter {
     @Autowired
     TechnologyService technologyService;
 
-    public AcademyForSaveDTO toDTO(GroupInfo groupInfo) {
-        AcademyForSaveDTO academyForSaveDTO = new AcademyForSaveDTO();
-        academyForSaveDTO.setAcademyId(groupInfo.getAcademy().getAcademyId());
-        academyForSaveDTO.setGroupInfoId(groupInfo.getGroupInfoId());
-        academyForSaveDTO.setGrName(groupInfo.getGroupName());
-        if (groupInfo.getAcademy().getName() != null) {
-            academyForSaveDTO.setNameForSite(groupInfo.getAcademy().getName());
-        }
-        academyForSaveDTO.setStartDate(groupInfo.getAcademy().getStartDate().getTime());
-        academyForSaveDTO.setEndDate(groupInfo.getAcademy().getEndDate().getTime());
+    @Autowired
+    StudentService studentService;
+
+    public AcademyDTO toDTO(GroupInfo groupInfo) {
+        AcademyDTO academyDTO = new AcademyDTO();
+        academyDTO.setAcademyId(groupInfo.getAcademy().getAcademyId());
+        academyDTO.setGroupInfoId(groupInfo.getGroupInfoId());
+        academyDTO.setGrName(groupInfo.getGroupName());
+        academyDTO.setNameForSite(groupInfo.getAcademy().getName());
+        academyDTO.setStartDate(groupInfo.getAcademy().getStartDate().getTime());
+        academyDTO.setEndDate(groupInfo.getAcademy().getEndDate().getTime());
         if(groupInfo.getAcademy().getTechnologies() != null) {
-            academyForSaveDTO.setTechnologieId(groupInfo.getAcademy().getTechnologies().getTechnologyId());
+            academyDTO.setTechnologieId(groupInfo.getAcademy().getTechnologies().getTechnologyId());
         }
         if(groupInfo.getAcademy().getDirections() != null){
-            academyForSaveDTO.setDirectionId(groupInfo.getAcademy().getDirections().getDirectionId());
+            academyDTO.setDirectionId(groupInfo.getAcademy().getDirections().getDirectionId());
         }
         if(groupInfo.getProfileInfo() != null) {
-            academyForSaveDTO.setProfileId(groupInfo.getProfileInfo().getProfileId());
+            academyDTO.setProfileId(groupInfo.getProfileInfo().getProfileId());
         }
         if(groupInfo.getAcademy().getAcademyStages() != null) {
-            academyForSaveDTO.setAcademyStagesId(groupInfo.getAcademy().getAcademyStages().getStageId());
+            academyDTO.setAcademyStagesId(groupInfo.getAcademy().getAcademyStages().getStageId());
         }
         if(groupInfo.getAcademy().getCity() != null) {
-            academyForSaveDTO.setCityId(groupInfo.getAcademy().getCity().getCityId());
+            academyDTO.setCityId(groupInfo.getAcademy().getCity().getCityId());
         }
-        academyForSaveDTO.setPayment(groupInfo.getAcademy().getFree());
-        academyForSaveDTO.setStudentPlannedToGraduate(groupInfo.getStudentsPlannedToGraduate());
-        academyForSaveDTO.setStudentPlannedToEnrollment(groupInfo.getStudentsPlannedToEnrollment());
-//        academyForSaveDTO.setStudentsActual();
+        academyDTO.setPayment(groupInfo.getAcademy().getFree());
+        academyDTO.setStudentPlannedToGraduate(groupInfo.getStudentsPlannedToGraduate());
+        academyDTO.setStudentPlannedToEnrollment(groupInfo.getStudentsPlannedToEnrollment());
+        academyDTO.setStudentsActual(studentService.countAllByAcademyId(groupInfo.getAcademy().getAcademyId()));
+        academyDTO.setModifyBy(((Optional<LoginUser>) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).get().getUsername());
 
-        return academyForSaveDTO;
+        return academyDTO;
     }
 
-    public GroupInfo groupInfoToEntity(int academyId, AcademyForSaveDTO academyDTO) {
+    /**
+     * Method convert AcademyDTO to GroupInfo.
+     *
+     * @param academyId
+     * @param academyDTO
+     * @return GroupInfo
+     */
+    public GroupInfo groupInfoToEntity(int academyId, AcademyDTO academyDTO) {
         GroupInfo groupInfo;
 
-        if (academyDTO.getAcademyId() == 0) {
+        if (academyDTO.getGroupInfoId() == 0) {
             groupInfo = new GroupInfo();
         } else {
-            groupInfo = groupInfoService.findOneGroupInfoByAcademyId(academyDTO.getGroupInfoId());
-            groupInfo.setGroupInfoId(academyDTO.getGroupInfoId());
+            groupInfo = groupInfoService.findOneGroupInfoByAcademyId(academyDTO.getAcademyId());
         }
 
         groupInfo.setAcademy(getAcademyById(academyId));
@@ -84,14 +94,19 @@ public class GroupInfoConverter {
         return groupInfo;
     }
 
-    public Academy academyToEntity(AcademyForSaveDTO academyDTO) {
+    /**
+     * Method convert AcademyDTO to Academy
+     *
+     * @param academyDTO
+     * @return Academy
+     */
+    public Academy academyToEntity(AcademyDTO academyDTO) {
         Academy academy;
 
         if (academyDTO.getAcademyId() == 0) {
             academy = new Academy();
         } else {
             academy = academyService.findOne(academyDTO.getAcademyId());
-            academy.setAcademyId(academyDTO.getAcademyId());
         }
 
         academy.setName(academyDTO.getNameForSite());

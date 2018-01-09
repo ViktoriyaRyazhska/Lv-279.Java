@@ -33,19 +33,8 @@ public class GroupInformationDTO {
     private String status;
     private String cityName;
     private Long studentsActual;
-    private List<String> firstName;
-    private List<String> lastName;
+    private String experts;
     private Integer teacherType;
-
-    public void setFirstName(String firstName) {
-        this.firstName = new ArrayList<>();
-        this.firstName.add(firstName);
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = new ArrayList<>();
-        this.lastName.add(lastName);
-    }
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate.getTime();
@@ -62,53 +51,5 @@ public class GroupInformationDTO {
             this.paymentStatus = "Paid";
         }
 
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        GroupInformationDTO that = (GroupInformationDTO) o;
-
-        return new EqualsBuilder()
-                .append(academyId, that.academyId)
-                .append(groupName, that.groupName)
-                .append(studentsPlannedToGraduate, that.studentsPlannedToGraduate)
-                .append(studentsPlannedToEnrollment, that.studentsPlannedToEnrollment)
-                .append(startDate, that.startDate)
-                .append(endDate, that.endDate)
-                .append(paymentStatus, that.paymentStatus)
-                .append(nameForSite, that.nameForSite)
-                .append(profileName, that.profileName)
-                .append(directionName, that.directionName)
-                .append(commonDirectionName, that.commonDirectionName)
-                .append(status, that.status)
-                .append(cityName, that.cityName)
-                .append(studentsActual, that.studentsActual)
-                .append(teacherType, that.teacherType)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(academyId)
-                .append(groupName)
-                .append(studentsPlannedToGraduate)
-                .append(studentsPlannedToEnrollment)
-                .append(startDate)
-                .append(endDate)
-                .append(paymentStatus)
-                .append(nameForSite)
-                .append(profileName)
-                .append(directionName)
-                .append(commonDirectionName)
-                .append(status)
-                .append(cityName)
-                .append(studentsActual)
-                .append(teacherType)
-                .toHashCode();
     }
 }

@@ -32,15 +32,15 @@ public class TestNamesController {
     }
 
     @PostMapping(value = "/tests/add/{id}")
-    public ResponseEntity<Integer> saveTestsNames(@PathVariable("id") int groupId,@RequestBody List<TestName> testNames) {
+    public ResponseEntity saveTestsNames(@PathVariable("id") int groupId,@RequestBody List<TestName> testNames) {
 
-        if(testNameService.saveTestNames(testNames,groupId)==200) {
+        if(testNameService.saveTestNames(testNames,groupId)) {
             logger.info("test names successfully saved");
-            return new ResponseEntity<Integer>(0, HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.CREATED);
         }
         else{
             logger.info("Bad request");
-            return new ResponseEntity<Integer>(1,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
 }

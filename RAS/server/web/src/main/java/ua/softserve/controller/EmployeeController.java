@@ -8,11 +8,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.entity.Employee;
 import ua.softserve.persistence.entity.GroupInfoTeachers;
+import ua.softserve.persistence.entity.LoginUser;
 import ua.softserve.service.EmployeeService;
 import ua.softserve.service.GroupInfoTeachersService;
 import ua.softserve.service.dto.GroupInfoTeachersDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("employee")
@@ -23,9 +25,10 @@ public class EmployeeController {
     @Autowired
     private GroupInfoTeachersService groupInfoTeachersService;
 
-    @GetMapping("/teachers")
-    public ResponseEntity<List<Employee>> getTeachers() {
-        return new ResponseEntity<List<Employee>>(employeeService.findEmployeesByTeacherType(), HttpStatus.OK);
+    @GetMapping("/getemployee")
+    public ResponseEntity<Employee> getEmployee() {
+        return new ResponseEntity<Employee>(employeeService.findEmployeesByLoginUserId(((Optional<LoginUser>) SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal()).get().getId()), HttpStatus.OK);
     }
 
     @GetMapping("/experts")
@@ -39,9 +42,19 @@ public class EmployeeController {
     }
 
     @PostMapping("/assign")
-    public void addStudents(@RequestBody List<GroupInfoTeachersDTO> object) {
-        System.out.println("_______________________");
-        System.out.println("+"+object);
+    public ResponseEntity addStudents(@RequestBody List<GroupInfoTeachersDTO> object) {
         groupInfoTeachersService.save(object);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/group/{id}")
+    public ResponseEntity<List<GroupInfoTeachers>> getGroupInfoTeachers(@PathVariable("id") Integer id){
+        return new ResponseEntity<List<GroupInfoTeachers>>(groupInfoTeachersService.findAllByAcademy_AcademyId(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity updateGroupInfoTeachers(@RequestBody List<GroupInfoTeachers> groupInfoTeachers){
+        groupInfoTeachersService.updateGroupInfoTeachers(groupInfoTeachers);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

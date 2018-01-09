@@ -1,9 +1,14 @@
-<body class="dx-viewport">
-<div class="demo-container">
 
+  <div id="block">
+    <dx-load-indicator id="large-indicator" height="60" width="60" [visible]="loadIndicatorVisible"></dx-load-indicator>
+  </div>
+
+
+<div class="demo-container">
   <dx-data-grid id="gridContainer"
                 [dataSource]="itaTacticalPlanReports"
-                [allowColumnResizing]="true">
+                [allowColumnResizing]="true"
+                [visible]="!loadIndicatorVisible">
     <dxo-export [enabled]="true" fileName="report" [allowExportSelectedData]="true"></dxo-export>
     <dxo-selection mode="multiple"></dxo-selection>
     <dxo-group-panel [visible]="true"></dxo-group-panel>
@@ -78,4 +83,4 @@
 
   </dx-data-grid>
 </div>
-</body>
+

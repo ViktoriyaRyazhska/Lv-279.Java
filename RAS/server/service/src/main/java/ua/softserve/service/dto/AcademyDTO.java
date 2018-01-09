@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AcademyForSaveDTO {
+public class AcademyDTO {
     private int academyId;
     private int groupInfoId;
     private String grName;
@@ -23,4 +23,5 @@ public class AcademyForSaveDTO {
     private int studentPlannedToGraduate;
     private int studentPlannedToEnrollment;
     private int studentsActual;
+    private String modifyBy;
 }

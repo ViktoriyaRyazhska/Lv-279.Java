@@ -2,7 +2,7 @@ package ua.softserve.service;
 
 import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.persistence.entity.GroupInfo;
-import ua.softserve.service.dto.AcademyForSaveDTO;
+import ua.softserve.service.dto.AcademyDTO;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ public interface GroupInfoService {
 
     GroupInfo findOneGroupInfoByAcademyId(Integer academyId);
 
-    AcademyForSaveDTO getAcademyForSaveDTO(Integer groupId);
+    AcademyDTO getAcademyDTObyId(Integer groupId);
 }

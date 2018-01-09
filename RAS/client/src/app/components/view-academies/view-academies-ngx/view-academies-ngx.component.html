@@ -1,8 +1,13 @@
+<app-add-group></app-add-group>
+
 <app-searchbar (filterData)="onFilterField($event)"
                (startDateOp)="setStartDateOpt($event)"
                (endDateOp)="setEndDateOpt($event)"
-                [search] = "searchBar"></app-searchbar>
-<button mat-button (click)="showBar()">{{searchBar == true ? 'Show Search Bar' : 'Hide Search Bar'}}</button>
+               [search]="searchBar"></app-searchbar>
+<div class="row">
+  <button mat-button (click)="showBar()">{{searchBar == true ? 'Show Search Bar' : 'Hide Search Bar'}}</button>
+  <button mat-button (click)="showAddGroup()">Add Group</button>
+</div>
 <div>
   <ngx-datatable
     #table
@@ -17,8 +22,8 @@
     [scrollbarH]="true">
 
     <ngx-datatable-column name="Group Name">
-      <ng-template let-value="value" ngx-datatable-cell-template>
-        {{value}}
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <a routerLink="/ang/group/update/{{row.academyId}}"> {{value}} </a>
       </ng-template>
     </ngx-datatable-column>
 

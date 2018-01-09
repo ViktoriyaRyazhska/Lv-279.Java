@@ -28,7 +28,7 @@ public class ValidationResult {
 	public void throwIfInvalidData() {
 		if(!isValid()) throw new InvalidDataException(getMesssage());
 	}
-	
+
 	public void throwIfInvalidData(String fieldName) {
 		if(!isValid()) throw new InvalidDataException(fieldName + " : " + getMesssage());
 	}

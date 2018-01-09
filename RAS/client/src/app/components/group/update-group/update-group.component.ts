@@ -1,23 +1,22 @@
- import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Group} from "./group.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AddGroupService} from "./add-group.service";
 import {MatDialog} from "@angular/material";
 import {DialogComponent} from "../dialog/dialog.component";
 import {DataService} from "../../../services/data.service";
 import {LoginService} from "../../auth/login/login.service";
+import {Group} from "../add-group/group.model";
+import {AddGroupService} from "../add-group/add-group.service";
 
 @Component({
-  selector: 'app-add-group',
-  templateUrl: './add-group.component.html',
-  styleUrls: ['./add-group.component.css'],
-  providers: [HistoryService]
+  selector: 'app-update-group',
+  templateUrl: './update-group.component.html',
+  styleUrls: ['./update-group.component.css']
 })
+export class UpdateGroupComponent implements OnInit {
 
-export class AddGroupComponent implements OnInit {
   signupForm: FormGroup;
 
   group: Group;
@@ -54,13 +53,7 @@ export class AddGroupComponent implements OnInit {
     this.groupId = this.route.snapshot.params['id'];
 
     this.getDropdownOnInit();
-
-    if(this.router.url.includes('group/update')){
-      this.navtab = true;
-      this.updateGroup();
-    }else if(this.router.url.includes('group/add')) {
-      this.formGroupOnInit();
-    }
+    this.updateGroup();
   }
 
   getDropdownOnInit(){
@@ -74,24 +67,6 @@ export class AddGroupComponent implements OnInit {
       if (error.status===403) {
         this.router.navigate(['ang/error']);
       }
-    });
-  }
-
-  formGroupOnInit(){
-    this.signupForm = new FormGroup({
-      'groupInfoFormControl': new FormControl(this.group.grName, [Validators.required]),
-      'nameForSiteFormControl': new FormControl(this.group.nameForSite, [Validators.required]),
-      'academyStagesId': new FormControl(this.group.academyStagesId),
-      'cityId': new FormControl(this.group.cityId),
-      'startDateFormControl': new FormControl(this.group.startDate, [Validators.required]),
-      'endDateFormControl': new FormControl(this.group.endDate, [Validators.required]),
-      'commonDirectionFormControl': new FormControl(this.group.directionId),
-      'directionFormControl': new FormControl(this.group.technologieId),
-      'profileInfoFormControl': new FormControl(this.group.profileId),
-      'paymentStatusFormControl': new FormControl(this.group.payment),
-      'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate , [this.myValidator.bind(this)]),
-      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment, [Validators.pattern(/^[0-9]+[0-9]*$/)]),
-      'studentActualFromControl': new FormControl({value: this.group.studentActual, disabled: true})
     });
   }
 
@@ -121,7 +96,6 @@ export class AddGroupComponent implements OnInit {
   }
 
   saveGroup() {
-
     if (this.isFormValid()) {
       this.group.setDataFromFormControl(this.signupForm);
       this.invalidForm = false;
@@ -131,6 +105,24 @@ export class AddGroupComponent implements OnInit {
       this.invalidForm = true;
       console.log('invalid');
     }
+  }
+
+  formGroupOnInit(){
+    this.signupForm = new FormGroup({
+      'groupInfoFormControl': new FormControl(this.group.grName, [Validators.required]),
+      'nameForSiteFormControl': new FormControl(this.group.nameForSite, [Validators.required]),
+      'academyStagesId': new FormControl(this.group.academyStagesId),
+      'cityId': new FormControl(this.group.cityId),
+      'startDateFormControl': new FormControl(this.group.startDate, [Validators.required]),
+      'endDateFormControl': new FormControl(this.group.endDate, [Validators.required]),
+      'commonDirectionFormControl': new FormControl(this.group.directionId),
+      'directionFormControl': new FormControl(this.group.technologieId),
+      'profileInfoFormControl': new FormControl(this.group.profileId),
+      'paymentStatusFormControl': new FormControl(this.group.payment),
+      'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate , [this.myValidator.bind(this)]),
+      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment, [Validators.pattern(/^[0-9]+[0-9]*$/)]),
+      'studentActualFromControl': new FormControl({value: this.group.studentActual, disabled: true})
+    });
   }
 
   private sendData(){
@@ -146,7 +138,7 @@ export class AddGroupComponent implements OnInit {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogComponent, {
-      data: {message: 'Group was successfully saved', err:false}
+      data: {message: 'Group was successfully updated', err:false}
     });
 
     dialogRef.afterClosed().subscribe(result => {

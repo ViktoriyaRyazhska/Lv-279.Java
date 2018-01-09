@@ -8,7 +8,7 @@ public interface TestNameService {
     public static final int DataIsWrong = 400;
     public static final int DataIsOk = 200;
 
-    int saveTestNames(List<TestName> testNames, Integer academyId);
+    boolean saveTestNames(List<TestName> testNames, Integer academyId);
 
     List<TestName> findAllTestNames();
 
