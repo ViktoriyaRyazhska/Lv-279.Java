@@ -17,12 +17,10 @@ public class GroupValidatorImpl implements GroupValidator {
 
     @Override
     public void validate(AcademyDTO academyDTO) {
-        notNull.and(notEmpty).test(academyDTO.getGrName()).throwIfInvalidData("Group Name");
-        lessThan(MAX_LENGHT_OF_GROUP_NAME).test(academyDTO.getGrName()).throwIfInvalidData("Group Name");
-        notNull.and(notEmpty).test(academyDTO.getNameForSite()).throwIfInvalidData("Name for Site");
-        lessThan(MAX_LENGHT_OF_NAME_FOR_SITE).test(academyDTO.getNameForSite()).throwIfInvalidData("Name for Site");
+        notNull.and(notEmpty).and(lessThan(MAX_LENGHT_OF_GROUP_NAME)).test(academyDTO.getGrName()).throwIfInvalidData("Group Name");
+        notNull.and(notEmpty).and(lessThan(MAX_LENGHT_OF_NAME_FOR_SITE)).test(academyDTO.getNameForSite()).throwIfInvalidData("Name for Site");
         startDateLessThanEndDate(academyDTO.getStartDate()).test(academyDTO.getEndDate()).throwIfInvalidTimeFrameException();
-        lowerThan(MAX_STUDENT_COUNT).and(greaterThan(MIN_STUDENT_COUNT)).test(academyDTO.getStudentPlannedToEnrollment()).throwIfInvalidData();
-        lowerThan(MAX_STUDENT_COUNT).and(greaterThan(MIN_STUDENT_COUNT)).test(academyDTO.getStudentPlannedToGraduate()).throwIfInvalidData();
+        lowerThan(MAX_STUDENT_COUNT).and(greaterThan(MIN_STUDENT_COUNT)).test(academyDTO.getStudentPlannedToEnrollment()).throwIfInvalidData("Student planned to enrollment");
+        lowerThan(MAX_STUDENT_COUNT).and(greaterThan(MIN_STUDENT_COUNT)).test(academyDTO.getStudentPlannedToGraduate()).throwIfInvalidData("Student planned to graduate");
     }
 }

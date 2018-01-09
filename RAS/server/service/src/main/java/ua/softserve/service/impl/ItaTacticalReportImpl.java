@@ -27,7 +27,7 @@ public class ItaTacticalReportImpl implements ItaTacticalReportService {
     private final Map<String, Predicate<Academy>> FITERS_FOR_REPORTS;
 
     {
-        FITERS_FOR_REPORTS = new HashMap<>();
+        FITERS_FOR_REPORTS = new LinkedHashMap<>();
         FITERS_FOR_REPORTS.put("List of planned launches of group (next 2 monthes)", a -> {
             Calendar dateForComparison = new GregorianCalendar();
             dateForComparison.add(Calendar.MONTH, 2);
