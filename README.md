@@ -10,6 +10,7 @@ After you have installed all necessary tools:
 - clone this repo: https://github.com/ViktoriyaRyazhska/Lv-279.Java.git
 - Properties file: Lv-279.Java/RAS/server/web/src/main/resources/application.properties
 - Open console in folder Lv-279.Java/ and run :
+   	*	git checkout development
 	* 	mysql -u YOUR_USER_NAME -pYOUR_PASSWORD < Dump/FullDump.sql
 - Open console in folder Lv-279.Java/RAS/server/ and run :
 	*	mvn clean install

@@ -4,27 +4,34 @@ import { TestsService } from "../../services/tests-names/tests.service";
 import { ActivatedRoute } from "@angular/router";
 import { Constants } from "./Constants";
 import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
+import {StudentsComponent} from "../students/students.component";
+
 
 @Component({
+  providers:[StudentsComponent],
   selector: 'app-tests-names',
   templateUrl: './tests-names.component.html',
   styleUrls: ['./tests-names.component.css']
 })
 export class TestsNamesComponent implements OnInit {
   @Input() groupId: number;
+  @Input() studRef : StudentsComponent;
 
-  // groupId : number;
+  // groupId2 : number;
   tests : Tests[];
   static counter : number = 1;
   rForm: FormGroup;
   testRows: FormArray;
+  respStatus : string;
+  loadIndicatorVisible = true;
 
   constructor(
     private testNamesService : TestsService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    private stComponent : StudentsComponent,
   ) {
-    this.groupId = +this.route.snapshot.params['id'];
+    // this.groupId2 = +this.route.snapshot.params['id'];
     this.rForm = new FormGroup({
       testRows: this.fb.array([])
     });
@@ -35,6 +42,7 @@ export class TestsNamesComponent implements OnInit {
       console.log(data);
       this.tests = data;
       TestsNamesComponent.counter = this.tests.length;
+      this.loadIndicatorVisible = false;
 
       if (TestsNamesComponent.counter<=0){
         this.createDefaultTests();
@@ -72,8 +80,10 @@ export class TestsNamesComponent implements OnInit {
     console.log(this.testRows.length);
     this.testNamesService.addTests(this.tests, this.groupId).subscribe(() => {
       this.tests = null;
-      this.ngOnInit()
+      this.ngOnInit();
     });
+
+    this.studRef.setTests(this.tests);
   }
 
   isFormValid(): boolean {

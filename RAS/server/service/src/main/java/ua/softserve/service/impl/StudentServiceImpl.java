@@ -36,7 +36,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public List<StudentViewDto> getStudentsByAcademy(Integer academyId) {
-        return studentRepository.findAllByAcademyId(academyId).stream()
+        return studentRepository.findAllByAcademy_AcademyIdAndRemovedIsFalse(academyId).stream()
                 .map(StudentViewDto::of)
                 .collect(Collectors.toList());
     }
@@ -51,7 +51,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public List<EmployeeEngShortDto> getAllEmployees() {
-        return employeeRepository.findAllSorted().stream()
+        return employeeRepository.findAllByOrderByLastNameEngAscFirstNameEngAsc().stream()
                 .map(EmployeeEngShortDto::of)
                 .collect(Collectors.toList());
     }
@@ -66,7 +66,7 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public void addStudentsToAcademy(Integer academyId, List<Integer> students) {
         List<Student> entities = students.stream().map(id -> {
-            Student existStudent = studentRepository.findStudentByAcademy(academyId, id);
+            Student existStudent = studentRepository.findStudentByAcademy_AcademyIdAndUser_Id(academyId, id);
             return existStudent == null ? new Student(id, academyId, STUDENT_STATUS_TRAINEE_ID)
                     : existStudent.unremove();
         }).collect(Collectors.toList());
