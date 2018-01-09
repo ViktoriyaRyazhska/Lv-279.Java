@@ -181,10 +181,25 @@
            <mat-error *ngIf="item">Please enter number in range from 0 to 1000</mat-error>
          </mat-form-field>
 
-         <button *ngIf="item.get('removed').value != true" class="col-sm-6 col-sm-6-button-custom"  type="submit" mat-button (click)="removeTest(i,item)">remove</button>
+         <button *ngIf="item.get('removed').value != true" class="col-sm-6 col-sm-6-button-custom"  type="submit" mat-button (click)="removeDialog(i,item)">remove</button>
        </div>
      </div>
    </form>
      <ng-template #error> Something went wrong !!!</ng-template>
  </div>
  </div>
+
+
+ <p-dialog header="Removing test Name" modal="false" dismissableMask="false" [(visible)]="displayRemoveDialog" width="750">
+   <div>
+     <div *ngIf="currTest">
+       <h3>Are you really want to remove {{currTest.get('testName').value}} from the
+         test list?</h3>
+     </div>
+   </div>
+   <button pButton type="button" (click)="cancelRemovingClick()"  label="Cancel" class="ui-button-secondary"
+           style="margin-top: 1em; float: right"></button>
+
+   <button pButton type="button" (click)="removeTest()"  label="Remove" class="ui-button-danger"
+           style="margin-top: 1em; float: right"></button>
+ </p-dialog>

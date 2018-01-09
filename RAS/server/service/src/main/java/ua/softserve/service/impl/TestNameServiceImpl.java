@@ -62,7 +62,6 @@ public class TestNameServiceImpl implements TestNameService {
             return false;
         }
         return true;
-
     }
 
     public boolean isValidTestNames(TestName testName) {

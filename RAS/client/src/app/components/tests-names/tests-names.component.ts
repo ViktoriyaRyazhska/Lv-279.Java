@@ -23,7 +23,9 @@ export class TestsNamesComponent implements OnInit {
   rForm: FormGroup;
   testRows: FormArray;
   respStatus : string;
-  loadIndicatorVisible = true;
+  displayRemoveDialog : boolean;
+  currTest : any;
+  currIndex : number;
 
   constructor(
     private testNamesService : TestsService,
@@ -42,7 +44,6 @@ export class TestsNamesComponent implements OnInit {
       console.log(data);
       this.tests = data;
       TestsNamesComponent.counter = this.tests.length;
-      this.loadIndicatorVisible = false;
 
       if (TestsNamesComponent.counter<=0){
         this.createDefaultTests();
@@ -102,14 +103,23 @@ export class TestsNamesComponent implements OnInit {
     }
   }
 
-  removeTest(index : number, item : any) {
+  removeTest() {
     TestsNamesComponent.counter--;
-    if(index>=0) {
       let test : Tests = new Tests('',0);
-      item.get('removed').value = true;
-      test.setTestRowsWithFormGroup(item);
-      this.testRows.controls.splice(index,1,this.createTestRow(test));
-    }
+      this.currTest.get('removed').value = true;
+      test.setTestRowsWithFormGroup(this.currTest);
+      this.testRows.controls.splice(this.currIndex,1,this.createTestRow(test));
+      this.displayRemoveDialog = false;
+  }
+
+  removeDialog (index : number, item : any) {
+      this.displayRemoveDialog = true;
+      this.currIndex = index;
+      this.currTest = item;
+  }
+
+  cancelRemovingClick() {
+    this.displayRemoveDialog = false;
   }
 
   cancelChanges () {
