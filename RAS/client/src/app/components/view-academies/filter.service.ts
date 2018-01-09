@@ -12,7 +12,7 @@ export class FilterService {
     }
     const resultArray = [];
     for (const item of value) {
-      if (typeof filterString === 'string') {
+      if (typeof filterString === 'string' && item[propName] != null) {
         if (('' + item[propName].toString().toLowerCase()).includes('' + filterString.toLowerCase())) {
           resultArray.push(item);
         }

@@ -9,6 +9,9 @@ import {MatDialog} from "@angular/material";
 import {DialogComponent} from "../dialog/dialog.component";
 import {DataService} from "../../../services/data.service";
 import {LoginService} from "../../auth/login/login.service";
+ import {HistoryListComponent} from "../../history/history-list/history-list.component";
+ import {registerLocaleData} from "@angular/common";
+ import list from "devextreme/ui/list";
 
 @Component({
   selector: 'app-add-group',
@@ -41,6 +44,7 @@ export class AddGroupComponent implements OnInit {
     {'name': 'Open Group', 'free': 0},
     {'name': 'Founded by SoftServe', 'free': 1}
   ];
+
 
   constructor(private addGroupService: AddGroupService,
               private route: ActivatedRoute,
@@ -90,7 +94,7 @@ export class AddGroupComponent implements OnInit {
       'profileInfoFormControl': new FormControl(this.group.profileId),
       'paymentStatusFormControl': new FormControl(this.group.payment),
       'studentPlannedToGraduate': new FormControl(this.group.studentPlannedToGraduate , [this.myValidator.bind(this)]),
-      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment, [Validators.pattern(/^[0-9]+[0-9]*$/)]),
+      'studentPlannedToEnrollment': new FormControl(this.group.studentPlannedToEnrollment, [this.myValidator.bind(this)/*, Validators.pattern(/^[0-9]+[0-9]*$/)*/]),
       'studentActualFromControl': new FormControl({value: this.group.studentActual, disabled: true})
     });
   }
@@ -127,6 +131,7 @@ export class AddGroupComponent implements OnInit {
       this.invalidForm = false;
       this.sendData();
       console.log('valid');
+
     } else {
       this.invalidForm = true;
       console.log('invalid');
@@ -150,7 +155,7 @@ export class AddGroupComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.router.navigate(['ang/viewAcademies']);
+      this.router.navigate(['']);
     });
   }
 
@@ -168,6 +173,7 @@ export class AddGroupComponent implements OnInit {
     this.addGroupService.getGroupById(this.groupId).subscribe(group => {
       this.group.setDataToGroup(group);
       this.formGroupOnInit();
+
     },error => {
       console.log(error);
     });
@@ -178,7 +184,6 @@ export class AddGroupComponent implements OnInit {
 
     try{
       value = control.value.toLocaleString();
-      // control.setValue(this.replace(value));
     } catch (e) {
       value = '0';
     }
@@ -187,10 +192,10 @@ export class AddGroupComponent implements OnInit {
       control.setValue(this.replace(value));
       return null;
     }
-    // else if(value.length > 2){
-    //   console.log(control.value);
-    //   return null;
-    // }
+    else if(control.value > 99){
+      control.setValue(0);
+      return null;
+    }
     return null;
   }
 

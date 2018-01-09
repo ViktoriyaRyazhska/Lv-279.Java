@@ -11,9 +11,6 @@ import org.springframework.stereotype.Component;
 import ua.softserve.persistence.entity.LoginUser;
 import ua.softserve.persistence.repo.LoginUserRepository;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import java.time.ZonedDateTime;
 import java.util.*;
 
 @Component
@@ -59,7 +56,7 @@ public final class TokenHandlerImpl implements TokenHandler {
         return claims;
     }
 
-    private Date getCreatedDateFromToken(String token) {
+    public Date getCreatedDateFromToken(String token) {
         Date created;
         try {
             created = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getExpiration();
@@ -73,5 +70,4 @@ public final class TokenHandlerImpl implements TokenHandler {
         final Date tokenExpiration = getCreatedDateFromToken(token);
         return tokenExpiration.before(new Date());
     }
-
 }

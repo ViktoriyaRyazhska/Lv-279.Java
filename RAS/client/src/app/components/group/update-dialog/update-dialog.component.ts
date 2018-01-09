@@ -3,13 +3,13 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  selector: 'app-update-dialog',
+  templateUrl: './update-dialog.component.html',
+  styleUrls: ['./update-dialog.component.css']
 })
-export class DialogComponent implements OnInit {
+export class UpdateDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>,
+  constructor(public dialogRef: MatDialogRef<UpdateDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, private router:Router) { }
 
   ngOnInit() {}
@@ -17,7 +17,7 @@ export class DialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
     if(!this.data.err){
-    this.router.navigate(['']);
+      this.router.navigate(['ang/viewAcademies']);
     }
   }
 

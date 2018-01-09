@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class GroupInfoTeachers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "academy_id")
@@ -34,4 +34,5 @@ public class GroupInfoTeachers {
     @ManyToOne
     @JoinColumn(name = "teacher_type_id")
     private TeacherTypes teacherType;
+
 }

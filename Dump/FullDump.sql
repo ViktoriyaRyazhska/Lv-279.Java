@@ -4,8 +4,8 @@
 -- ------------------------------------------------------
 -- Server version	5.7.20-0ubuntu0.16.04.1
 
-drop database ss_ps_db;
-create database if not exists ss_ps_db;
+drop database if exists ss_ps_db;
+create database ss_ps_db;
 use ss_ps_db;
 SET SQL_SAFE_UPDATES = 0;
 
@@ -1699,8 +1699,8 @@ DETERMINISTIC
 
  DELIMITER ;
  
- drop view if exists tacticalReport;
-CREATE VIEW tacticalReport AS
+ drop view if exists tacticalreport;
+CREATE VIEW tacticalreport AS
   SELECT
     year(a.start_date)                                                                     year,
     month(a.start_date)                                                                    month,

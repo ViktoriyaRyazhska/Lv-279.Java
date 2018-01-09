@@ -19,4 +19,6 @@ public interface GroupInfoTeachersService {
     List<GroupInfoTeachers> findAllByAcademy_AcademyId(Integer academy_academyId);
 
     void updateGroupInfoTeachers(List<GroupInfoTeachers> groupInfoTeachers);
+
+    void deleteGroupInfoTeachers(Integer id);
 }

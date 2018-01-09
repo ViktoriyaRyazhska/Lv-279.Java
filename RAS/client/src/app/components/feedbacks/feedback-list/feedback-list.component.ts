@@ -59,38 +59,39 @@ export class FeedbackListComponent implements OnInit {
   private teamDescExpert: string;
   private getDescExpert: string;
   private actDescExpert: string;
-  private isAssignedAsTeacher:boolean;
-  private isAssignedAsExpert:boolean;
-  private isAssignedAsInterviewer:boolean;
+
+  private isAssignedAsTeacher: boolean;
+  private isAssignedAsExpert: boolean;
+  private isAssignedAsInterviewer: boolean;
 
   constructor(private markService: MarkService,
               private studentsService: StudentsService,
               private route: ActivatedRoute,
-              private router:Router,
+              private router: Router,
               private loginService: LoginService) {
   }
 
   ngOnInit() {
     this.academyId = this.groupId;
 
-  this.loginService.check1(this.academyId).subscribe(data=>{
-    if (data==true && this.loginService.isAuthoryty(Authority.TEACHER)){
-      this.isAssignedAsTeacher=true;
-    }
-    if (data==true && this.loginService.isAuthoryty(Authority.EXPERT)){
-      this.isAssignedAsExpert=true;
-    }
-    if (data==true && this.loginService.isAuthoryty(Authority.INTERVIEWER)){
-      this.isAssignedAsInterviewer=true;
-    }
-  });
+    this.loginService.check1(this.academyId).subscribe(data => {
+      if (data == true && this.loginService.isAuthoryty(Authority.TEACHER)) {
+        this.isAssignedAsTeacher = true;
+      }
+      if (data == true && this.loginService.isAuthoryty(Authority.EXPERT)) {
+        this.isAssignedAsExpert = true;
+      }
+      if (data == true && this.loginService.isAuthoryty(Authority.INTERVIEWER)) {
+        this.isAssignedAsInterviewer = true;
+      }
+    });
 
     this.markService.getAllMarks().subscribe(
       data => {
         this.marks = data;
       },
       error => {
-        if (error.status===403) {
+        if (error.status === 403) {
           this.router.navigate(['ang/error']);
         }
         console.log(error)
@@ -111,7 +112,7 @@ export class FeedbackListComponent implements OnInit {
     this.setBaseForms();
   }
 
-  saveStudent(){
+  saveStudent() {
     this.setDataToStudent(this.signupFeedbackForm);
     this.updateStudent = this.selectedStudent;
 
@@ -137,10 +138,10 @@ export class FeedbackListComponent implements OnInit {
     this.disabledPreviousButton = false;
     this.disabledNextButton = false;
 
-    if(this.findStudentIndex(student) == this.CharId.ZERO){
+    if (this.findStudentIndex(student) == this.CharId.ZERO) {
       this.disabledPreviousButton = true;
     }
-    if(this.findStudentIndex(student) == this.students.length - this.CharId.ONE){
+    if (this.findStudentIndex(student) == this.students.length - this.CharId.ONE) {
       this.disabledNextButton = true;
     }
     this.selectedStudent = student;
@@ -164,11 +165,11 @@ export class FeedbackListComponent implements OnInit {
     this.displayProvideFeedback = false;
   }
 
-  onPreviousSave(student: StudentFeedback){
+  onPreviousSave(student: StudentFeedback) {
     this.disabledNextButton = false;
 
     this.saveStudent();
-    if((this.findStudentIndex(student) - this.CharId.ONE) != this.CharId.ZERO){
+    if ((this.findStudentIndex(student) - this.CharId.ONE) != this.CharId.ZERO) {
       this.selectedStudent = this.students[this.findStudentIndex(student) - this.CharId.ONE];
       this.initForms();
     } else {
@@ -178,11 +179,15 @@ export class FeedbackListComponent implements OnInit {
     }
   }
 
+  public onStudentsChange() {
+    console.log("im here!!");
+    this.ngOnInit();
+  }
   onNextSave(student: StudentFeedback) {
     this.disabledPreviousButton = false;
 
     this.saveStudent();
-    if((this.findStudentIndex(student) + this.CharId.ONE) != (this.students.length - this.CharId.ONE)) {
+    if ((this.findStudentIndex(student) + this.CharId.ONE) != (this.students.length - this.CharId.ONE)) {
       this.selectedStudent = this.students[this.findStudentIndex(student) + this.CharId.ONE];
       this.initForms();
     } else {
@@ -192,8 +197,8 @@ export class FeedbackListComponent implements OnInit {
     }
   }
 
-  findStudentIndex (student: StudentFeedback) : number {
-    if(this.students != null && this.students.indexOf(student) != -1) {
+  findStudentIndex(student: StudentFeedback): number {
+    if (this.students != null && this.students.indexOf(student) != -1) {
       return this.students.indexOf(student)
     }
   }

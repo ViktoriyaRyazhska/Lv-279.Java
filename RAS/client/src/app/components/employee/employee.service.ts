@@ -29,4 +29,9 @@ export class EmployeeService {
     let url = environment.serverUrl+'employee/update';
     return this.http.put(url, groupInfoTeachers, {withCredentials: true});
   }
+
+  remove(id:number): Observable<any>{
+    let url = environment.serverUrl+'employee/delete/'+id;
+    return this.http.delete(url, {withCredentials: true});
+  }
 }

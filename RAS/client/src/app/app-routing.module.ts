@@ -32,8 +32,6 @@ const appRoutes: Routes = [
     {path: 'tests/:id', component: TestsNamesComponent}]
 
   },
-  {path: 'ang/viewAcademies', component: ViewAcademiesNgxComponent},
-  // {path: 'ang/viewAcademies/test', component: ViewAcademiesNgxComponent},
   {path: 'ang/students', component: StudentsComponent},
   {path: 'ang/feedback', component: FeedbackListComponent},
   {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},

@@ -8,7 +8,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../auth/login/login.service";
 import {Tests} from "../../models/tests";
 import {TestsService} from "../../services/tests-names/tests.service";
-import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-students',
@@ -55,7 +54,6 @@ export class StudentsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("student components");
     this.academyId = this.groupId;
 
     this.studentsService.getAll(this.academyId).subscribe(

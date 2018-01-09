@@ -1,17 +1,17 @@
 <div class="container-fluid" [hidden]="searchBar">
   <div id="form-test">
     <form #groupForm="ngForm">
-      <ul class="col-sm-6 form-group" id="UL_left_column">
+      <ul class="col-sm-5 form-group" id="UL_left_column">
         <div class="row">
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-4">
             <input matInput placeholder="Group Name" name="groupName" (input)="getFilter(groupForm)" ngModel>
           </mat-form-field>
 
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-4">
             <input matInput placeholder="Name For Site" name="nameForSite" (input)="getFilter(groupForm)" ngModel>
           </mat-form-field>
 
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-4">
             <mat-select placeholder="Direction:" name="directionName" (change)="getFilter(groupForm)" ngModel>
               <mat-option>None</mat-option>
               <mat-option *ngFor="let tech of technology" [value]="tech.name">{{ tech.name }}</mat-option>
@@ -20,7 +20,7 @@
         </div>
 
         <div class="row">
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-6">
             <mat-select placeholder="Start Date Options" name="startDateOption" (change)="startDateOption($event)"
                         (change)="getFilter(groupForm)">
               <mat-option>None</mat-option>
@@ -30,7 +30,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-6">
             <input matInput [matDatepicker]="picker" placeholder="Start Date:" name="startDate"
                    (dateInput)="getFilter(groupForm)" ngModel>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -39,7 +39,7 @@
         </div>
         <div class="row">
 
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-6">
             <mat-select placeholder="End Date Options" name="endDateOption" (change)="endDateOption($event)"
                         (change)="getFilter(groupForm)">
               <mat-option>None</mat-option>
@@ -49,7 +49,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-6">
             <input matInput [matDatepicker]="picker2" placeholder="End Date:" name="endDate"
                    (dateInput)="getFilter(groupForm)" ngModel>
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -59,19 +59,17 @@
         </div>
       </ul>
 
-      <ul class="col-sm-6 form-group" id="UL_right_column">
-
-
+      <ul class="col-sm-5 form-group" id="UL_right_column">
         <div class="row">
 
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-4">
             <mat-select placeholder="Status:" name="status" (change)="getFilter(groupForm)" ngModel>
               <mat-option>None</mat-option>
               <mat-option *ngFor="let stages of academyStages" [value]="stages.name">{{ stages.name }}</mat-option>
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-4">
             <input matInput placeholder="Experts" name="experts" (input)="getFilter(groupForm)" ngModel>
           </mat-form-field>
 
@@ -98,7 +96,7 @@
         </div>
 
         <div class="row">
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-4">
             <mat-select placeholder="Payment Status:" name="paymentStatus" (change)="getFilter(groupForm)" ngModel>
               <mat-option>None</mat-option>
               <mat-option *ngFor="let paym of paymentStatus" [value]="paym">{{paym}}
@@ -106,14 +104,14 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-4">
             <mat-select placeholder="Location:" name="cityName" (change)="getFilter(groupForm)" ngModel>
               <mat-option>None</mat-option>
               <mat-option *ngFor="let city of cityNames" [value]="city.trasnlation">{{city.trasnlation}}</mat-option>
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="col-sm-3">
+          <mat-form-field class="col-sm-4">
             <mat-select placeholder="Profile:" name="profileName" (change)="getFilter(groupForm)" ngModel>
               <mat-option>None</mat-option>
               <mat-option *ngFor="let prof of profile" [value]="prof.profileName">{{ prof.profileName }}
@@ -123,106 +121,5 @@
         </div>
       </ul>
     </form>
-
   </div>
 </div>
-
-<!--
-
-<html>
-<body>
-<div class="area"></div>
-<nav class="main-menu">
-  <ul>
-    <li>
-      <a href="http://justinfarrow.com">
-        <i class="fa fa-home fa-2x"></i>
-        <span class="nav-text">
-                            Dashboard
-                        </span>
-      </a>
-
-    </li>
-    <li class="has-subnav">
-      <a href="#">
-        <i class="fa fa-laptop fa-2x"></i>
-        <span class="nav-text">
-                            UI Components
-                        </span>
-      </a>
-
-    </li>
-    <li class="has-subnav">
-      <a href="#">
-        <i class="fa fa-list fa-2x"></i>
-        <span class="nav-text">
-                            Forms
-                        </span>
-      </a>
-
-    </li>
-    <li class="has-subnav">
-      <a href="#">
-        <i class="fa fa-folder-open fa-2x"></i>
-        <span class="nav-text">
-                            Pages
-                        </span>
-      </a>
-
-    </li>
-    <li>
-      <a href="#">
-        <i class="fa fa-bar-chart-o fa-2x"></i>
-        <span class="nav-text">
-                            Graphs and Statistics
-                        </span>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <i class="fa fa-font fa-2x"></i>
-        <span class="nav-text">
-                            Typography and Icons
-                        </span>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <i class="fa fa-table fa-2x"></i>
-        <span class="nav-text">
-                            Tables
-                        </span>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <i class="fa fa-map-marker fa-2x"></i>
-        <span class="nav-text">
-                            Maps
-                        </span>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <i class="fa fa-info fa-2x"></i>
-        <span class="nav-text">
-                            Documentation
-                        </span>
-      </a>
-    </li>
-  </ul>
-
-  <ul class="logout">
-    <li>
-      <a href="#">
-        <i class="fa fa-power-off fa-2x"></i>
-        <span class="nav-text">
-                            Logout
-                        </span>
-      </a>
-    </li>
-  </ul>
-</nav>
-</body>
-</html>
--->

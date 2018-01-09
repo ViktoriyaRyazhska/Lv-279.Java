@@ -1,0 +1,18 @@
+#buttons, ngx-datatable {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+ngx-datatable{
+  margin-top: 10px;
+}
+
+button.mat-primary {
+  background-color: #00B4D5;
+}
+
+.ngx-datatable.bootstrap {
+  box-shadow: none;
+  font-size: 1px;
+}
+
+

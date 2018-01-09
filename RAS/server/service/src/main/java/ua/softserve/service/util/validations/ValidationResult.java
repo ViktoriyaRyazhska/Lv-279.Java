@@ -1,8 +1,8 @@
 package ua.softserve.service.util.validations;
 
 
-import ua.softserve.service.exception.InvalidDataException;
-import ua.softserve.service.exception.InvalidTimeFrameException;
+import ua.softserve.service.exception.DataException;
+import ua.softserve.service.exception.TimeFrameException;
 
 public class ValidationResult {
 	private boolean valid;
@@ -26,15 +26,15 @@ public class ValidationResult {
 	}
 	
 	public void throwIfInvalidData() {
-		if(!isValid()) throw new InvalidDataException(getMesssage());
+		if(!isValid()) throw new DataException(getMesssage());
 	}
 
 	public void throwIfInvalidData(String fieldName) {
-		if(!isValid()) throw new InvalidDataException(fieldName + " : " + getMesssage());
+		if(!isValid()) throw new DataException(fieldName + " : " + getMesssage());
 	}
 
-	public void throwIfInvalidTimeFrameException() {
-		if(!isValid()) throw new InvalidTimeFrameException(getMesssage());
+	public void throwIfInvalidTimeFrameException() throws TimeFrameException {
+		if(!isValid()) throw new TimeFrameException(getMesssage());
 	}
 	
 	public String getMesssage() {
