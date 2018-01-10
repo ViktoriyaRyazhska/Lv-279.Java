@@ -1730,6 +1730,16 @@ CREATE VIEW tacticalreport AS
   GROUP BY a.academy_id;
   
   UPDATE history set modify_by = 'ita_admin' where modify_by is null;
+  
+DELIMITER //
+drop procedure IF EXISTS find_users//
+CREATE PROCEDURE find_users (in academyId int, in academyStatus int)
+begin
+	select * from users as u where u.id 
+	in (select ia.user_id from ita_academy as ia where ia.academy_id = academyId and ia.it_academy_status_id = academyStatus)
+	and u.id not in (select s.user_id from students as s where s.academy_id = academyId and s.removed = false);
+end//
+DELIMITER ;
 
 -- Dump completed on 2017-12-17 13:52:32
 
