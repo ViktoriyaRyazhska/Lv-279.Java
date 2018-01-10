@@ -16,6 +16,7 @@ import {StudentsComponent} from "../students/students.component";
 export class TestsNamesComponent implements OnInit {
   @Input() groupId: number;
   @Input() studRef : StudentsComponent;
+  @Input() techDirect : number;
 
   // groupId2 : number;
   tests : Tests[];

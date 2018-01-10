@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class NavTabsComponent implements OnInit {
   @Input() academyId: number;
+  @Input() techDirection : number;
 
   constructor() {}
 
