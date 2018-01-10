@@ -101,6 +101,7 @@ export class StudentsComponent implements OnInit {
       .subscribe(
         data => {
           this.users = data;
+          console.log(data);
         },
         error => console.log(error)
       )
