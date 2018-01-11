@@ -7,6 +7,7 @@ import {MarkService} from "../../../services/feedbacks/marks.service";
 import {StudentsService} from "../../../services/students/students.service";
 import {LoginService} from "../../auth/login/login.service";
 import {Authority} from "../../auth/Authority";
+import {FeedbackService} from "../../../services/feedbacks/feedback.service";
 
 export enum CharacteristicId {
   ZERO = 0,
@@ -35,7 +36,10 @@ export class FeedbackListComponent implements OnInit {
 
   private students: StudentFeedback[];
   private selectedStudent: StudentFeedback;
-  private updateStudent: StudentFeedback;
+
+  private teacherFeedback: Feedback;
+  private expertFeedback: Feedback;
+  private interviewerComment: string;
 
   private marks: Mark[];
 
@@ -66,6 +70,7 @@ export class FeedbackListComponent implements OnInit {
 
   constructor(private markService: MarkService,
               private studentsService: StudentsService,
+              private feedbackService: FeedbackService,
               private route: ActivatedRoute,
               private router: Router,
               private loginService: LoginService) {
@@ -114,14 +119,69 @@ export class FeedbackListComponent implements OnInit {
 
   saveStudent() {
     this.setDataToStudent(this.signupFeedbackForm);
-    this.updateStudent = this.selectedStudent;
+    console.log(this.isAssignedAsTeacher);
+    console.log(this.isAssignedAsExpert);
+    console.log(this.isAssignedAsInterviewer);
+    if(this.isAssignedAsTeacher) {
+      this.setDataToTeacherFeedback(this.selectedStudent);
+      this.feedbackService.updateFeedback(this.teacherFeedback)
+        .subscribe(() => {
+            this.teacherFeedback = new Feedback();
+          },
+          error => (
+            console.log(error)
+          ));
+    }
+    if(this.isAssignedAsExpert) {
+      this.setDataToExpertFeedback(this.selectedStudent);
+      this.feedbackService.updateFeedback(this.expertFeedback)
+        .subscribe(() => {
+            this.expertFeedback = new Feedback();
+          },
+          error => (
+            console.log(error)
+          ));
+    }
+    if(this.isAssignedAsInterviewer) {
+      this.setDataToInterviewerComment(this.selectedStudent);
+      this.feedbackService.updateInterviewerComment(this.interviewerComment, this.selectedStudent.id)
+        .subscribe(() => {
+            this.interviewerComment = null;
+          },
+          error => (
+            console.log(error)
+          ));
+    }
 
-    this.studentsService.updateStudent(this.updateStudent)
-      .subscribe(error => (
-        console.log(error)
-      ));
-    console.log(this.selectedStudent);
-    this.updateStudent = null;
+    if(this.isAssignedAsInterviewer != true && this.isAssignedAsExpert != true && this.isAssignedAsTeacher != true) {
+      console.log(this.isAssignedAsTeacher);
+      console.log(this.isAssignedAsExpert);
+      console.log(this.isAssignedAsInterviewer);
+      this.setDataToTeacherFeedback(this.selectedStudent);
+      this.setDataToExpertFeedback(this.selectedStudent);
+      this.setDataToInterviewerComment(this.selectedStudent);
+      this.feedbackService.updateFeedback(this.teacherFeedback)
+        .subscribe(() => {
+            this.teacherFeedback = new Feedback();
+          },
+          error => (
+            console.log(error)
+          ));
+      this.feedbackService.updateFeedback(this.expertFeedback)
+        .subscribe(() => {
+            this.expertFeedback = new Feedback();
+          },
+          error => (
+            console.log(error)
+          ));
+      this.feedbackService.updateInterviewerComment(this.interviewerComment, this.selectedStudent.id)
+        .subscribe(() => {
+            this.interviewerComment = null;
+          },
+          error => (
+            console.log(error)
+          ));
+    }
   }
 
   onStudentClick(student: StudentFeedback) {
@@ -151,17 +211,77 @@ export class FeedbackListComponent implements OnInit {
 
   onSaveClose() {
     this.setDataToStudent(this.signupFeedbackForm);
-    this.updateStudent = this.selectedStudent;
+    console.log(this.isAssignedAsTeacher);
+    console.log(this.isAssignedAsExpert);
+    console.log(this.isAssignedAsInterviewer);
+    if(this.isAssignedAsTeacher) {
+      this.setDataToTeacherFeedback(this.selectedStudent);
+      this.feedbackService.updateFeedback(this.teacherFeedback)
+        .subscribe(() => {
+                  this.teacherFeedback = new Feedback();
+                  this.ngOnInit();
+                },
+                error => (
+                  console.log(error)
+                ));
+    }
+    if(this.isAssignedAsExpert) {
+      this.setDataToExpertFeedback(this.selectedStudent);
+      this.feedbackService.updateFeedback(this.expertFeedback)
+        .subscribe(() => {
+            this.expertFeedback = new Feedback();
+            this.ngOnInit();
+          },
+          error => (
+            console.log(error)
+          ));
+    }
+    if(this.isAssignedAsInterviewer) {
+      this.setDataToInterviewerComment(this.selectedStudent);
+      console.log(this.interviewerComment, this.selectedStudent.id);
+      this.feedbackService.updateInterviewerComment(this.interviewerComment, this.selectedStudent.id)
+        .subscribe(() => {
+            this.interviewerComment = null;
+            this.ngOnInit();
+          },
+          error => (
+            console.log(error)
+          ));
+    }
 
-    this.studentsService.updateStudent(this.updateStudent)
-      .subscribe(() => {
-          this.students = null;
-          this.ngOnInit();
-        },
-        error => (
-          console.log(error)
-        ));
-    this.updateStudent = null;
+    if(this.isAssignedAsInterviewer != true && this.isAssignedAsExpert != true && this.isAssignedAsTeacher != true) {
+      console.log(this.isAssignedAsTeacher);
+      console.log(this.isAssignedAsExpert);
+      console.log(this.isAssignedAsInterviewer);
+      this.setDataToTeacherFeedback(this.selectedStudent);
+      this.setDataToExpertFeedback(this.selectedStudent);
+      this.setDataToInterviewerComment(this.selectedStudent);
+      this.feedbackService.updateFeedback(this.teacherFeedback)
+        .subscribe(() => {
+            this.teacherFeedback = new Feedback();
+            this.ngOnInit();
+          },
+          error => (
+            console.log(error)
+          ));
+      this.feedbackService.updateFeedback(this.expertFeedback)
+        .subscribe(() => {
+            this.expertFeedback = new Feedback();
+            this.ngOnInit();
+          },
+          error => (
+            console.log(error)
+          ));
+      this.feedbackService.updateInterviewerComment(this.interviewerComment, this.selectedStudent.id)
+        .subscribe(() => {
+            this.interviewerComment = null;
+            this.ngOnInit();
+          },
+          error => (
+            console.log(error)
+          ));
+    }
+
     this.displayProvideFeedback = false;
   }
 
@@ -179,10 +299,6 @@ export class FeedbackListComponent implements OnInit {
     }
   }
 
-  public onStudentsChange() {
-    console.log("im here!!");
-    this.ngOnInit();
-  }
   onNextSave(student: StudentFeedback) {
     this.disabledPreviousButton = false;
 
@@ -235,6 +351,22 @@ export class FeedbackListComponent implements OnInit {
     if (this.selectedStudent.data != null) {
       this.selectedStudent.data.interviewerComment = feedbackForm.get('summary').value;
     }
+  }
+
+  setDataToTeacherFeedback(student: StudentFeedback){
+    if (student.teacherFeedback != null) {
+      this.teacherFeedback = student.teacherFeedback;
+    }
+  }
+
+  setDataToExpertFeedback(student: StudentFeedback){
+    if (student.expertFeedback != null) {
+      this.expertFeedback = student.expertFeedback;
+    }
+  }
+
+  setDataToInterviewerComment(student: StudentFeedback){
+      this.interviewerComment = student.data.interviewerComment;
   }
 
   initFeedbackForm() {
@@ -323,6 +455,11 @@ export class FeedbackListComponent implements OnInit {
 
   onChoose() {
     this.descriptionSelector();
+  }
+
+  public onStudentsChange() {
+    console.log("im here!!");
+    this.ngOnInit();
   }
 
   descriptionSelector() {
