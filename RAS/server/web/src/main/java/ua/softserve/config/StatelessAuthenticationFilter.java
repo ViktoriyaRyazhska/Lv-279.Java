@@ -45,14 +45,14 @@ public class StatelessAuthenticationFilter extends OncePerRequestFilter {
             cookies = httpServletRequest.getCookies();
             Arrays.stream(cookies).filter(cookie -> cookie.getName().equals(tokenName)).forEach(cookie -> {
                         Optional<UserDetails> userDetails = tokenHandler.parseUserFromToken(cookie.getValue());
-//                        if (tokenHandler.isTokenExpired(cookie.getValue())) {
-//                            cookie.setValue("");
-//                            cookie.setPath("/");
-//                            cookie.setMaxAge(0);
-//                            httpServletResponse.addCookie(cookie);
-//                            return;
-//                        }
-//                        httpServletResponse.addCookie(new Cookie(tokenName, tokenHandler.createTokenForUser((LoginUser) userDetails.get())));
+                        if (tokenHandler.isTokenExpired(cookie.getValue())) {
+                            cookie.setValue("");
+                            cookie.setPath("/");
+                            cookie.setMaxAge(0);
+                            httpServletResponse.addCookie(cookie);
+                            return;
+                        }
+                        httpServletResponse.addCookie(new Cookie(tokenName, tokenHandler.createTokenForUser((LoginUser) userDetails.get())));
                         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                                 userDetails, null, userDetails.get().getAuthorities());
                         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));

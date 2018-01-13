@@ -1,6 +1,5 @@
 package ua.softserve.persistence.dto;
 
-
 import lombok.*;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -16,8 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class GroupInformationDTO {
     private Integer academyId;
     private String groupName;

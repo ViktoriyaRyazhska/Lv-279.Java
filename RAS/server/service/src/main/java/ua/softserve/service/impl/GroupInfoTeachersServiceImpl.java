@@ -11,7 +11,6 @@ import ua.softserve.persistence.entity.TeacherTypes;
 import ua.softserve.persistence.repo.GroupInfoTeachersRepository;
 import ua.softserve.service.EmployeeService;
 import ua.softserve.service.GroupInfoTeachersService;
-import ua.softserve.service.SecurityContextService;
 import ua.softserve.service.converter.GroupInfoTeachersConverter;
 import ua.softserve.service.dto.GroupInfoTeachersDTO;
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.repo.UserRepository;
+import ua.softserve.persistence.repo.impl.UserCustomRepository;
 import ua.softserve.service.UserService;
 import ua.softserve.service.dto.UserShortViewDto;
 
@@ -16,7 +17,7 @@ import static ua.softserve.persistence.constants.ConstantsFromDb.*;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserCustomRepository userCustomRepository;
 
 
     /**
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<UserShortViewDto> getAllUsersByAcademyAndStatus(Integer academyId) {
-        return userRepository.findAllByAcademyAndStatus(academyId, STUDENT_ID).stream()
+        return userCustomRepository.findUsersForGroup(academyId, STUDENT_ID).stream()
                 .map(UserShortViewDto::of)
                 .collect(Collectors.toList());
     }
