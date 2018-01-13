@@ -1,7 +1,7 @@
 <div *ngIf="signupForm">
   <div class="container well">
     <div class="col-sm-12" id="form-test">
-      <form [formGroup]="signupForm" id="formId" (ngSubmit)="saveGroup()">
+      <form [formGroup]="signupForm" id="formId">
         <ul class="col-sm-6 form-group" id="UL_left_column">
           <div class="row">
             <mat-form-field class="col-sm-6">
@@ -110,7 +110,8 @@
         </ul>
 
         <div class="row" id="btnSaveId" align="center" *ngIf="this.loginService.securityForAddGroup()">
-          <button mat-raised-button type="submit" color="primary">Update Group</button>
+          <button mat-raised-button type="submit" (click)="createGroupBasedOnThis()" color="primary">Create Group</button>
+          <button mat-raised-button type="submit" (click)="saveGroup()" color="primary">Update Group</button>
           <!--<mat-error *ngIf="invalidForm">{{defaultInvalidInput}}</mat-error>-->
         </div>
       </form>
