@@ -27,10 +27,7 @@ export class SearchbarComponent implements OnInit {
   @Input('search') searchBar = true;
 
 
-  constructor(private searchBarServise: SearchBarService,
-              private academyService: AcademyService,
-              private filterService: FilterService,
-              private data: DataService) {
+  constructor(private searchBarServise: SearchBarService) {
   }
 
   ngOnInit() {

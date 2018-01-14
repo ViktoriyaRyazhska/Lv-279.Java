@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AcademyService} from "../academy.service";
 import {FilterService} from "../filter.service";
 import {DataService} from "../../../services/data.service";
@@ -8,6 +8,7 @@ import {PagerService} from "../pager.service";
   selector: 'app-view-academies-ngx',
   templateUrl: './view-academies-ngx.component.html',
   styleUrls: ['./view-academies-ngx.component.css'],
+  encapsulation: ViewEncapsulation.None,
   providers: [AcademyService, PagerService, FilterService]
 })
 export class ViewAcademiesNgxComponent implements OnInit {
@@ -17,19 +18,25 @@ export class ViewAcademiesNgxComponent implements OnInit {
   startDateOpt = 'Equals';
   endDateOpt = 'Equals';
   addgroup = false;
+  loadIndicatorVisible = true;
 
   constructor(private academyService: AcademyService,
               private filterService: FilterService) {
   }
 
   ngOnInit() {
+    var startDate = new Date().getTime();
     this.academyService.getAll().subscribe(
       data => {
         this.academies = data;
         this.rows = this.academies;
+        var endDate = new Date().getTime();
+        this.loadIndicatorVisible = false;
+        console.log("Time for executing method for returning group info : " + (endDate - startDate)/1000);
       },
       error => console.log(error)
     );
+
   }
 
   onFilterField(form) {

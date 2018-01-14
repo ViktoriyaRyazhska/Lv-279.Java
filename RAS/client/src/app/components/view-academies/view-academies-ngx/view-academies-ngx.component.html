@@ -9,129 +9,135 @@
   <button mat-raised-button routerLink="ang/group/add" type="submit" color="primary">Add Group</button>
 </div>
 
-<ngx-datatable
-  #table
-  class="material"
-  [rows]="rows"
-  [sortType]="'single'"
-  [columnMode]="'force'"
-  [headerHeight]="'auto'"
-  [footerHeight]="50"
-  [rowHeight]="'auto'"
-  [limit]="7"
-  [scrollbarH]="true">
+<div id="block">
+  <dx-load-indicator id="large-indicator" height="60" width="60" [visible]="loadIndicatorVisible"></dx-load-indicator>
+</div>
 
-  <ngx-datatable-column name="Group Name">
-    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-      <a routerLink="/ang/group/update/{{row.academyId}}"> {{value}} </a>
-    </ng-template>
-  </ngx-datatable-column>
+<div class="bla-bla" [hidden] = "loadIndicatorVisible">
+  <ngx-datatable class = "table11"
+    #table
+    class="material"
+    [rows]="rows"
+    [sortType]="'single'"
+    [columnMode]="'force'"
+    [headerHeight]="'auto'"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="7"
+    [scrollbarH]="true">
 
-  <ngx-datatable-column name="Name For Site">
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+    <ngx-datatable-column name="Group Name">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <a routerLink="/ang/group/update/{{row.academyId}}"> {{value}} </a>
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="directionName" [sortable]="true">
-    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+    <ngx-datatable-column name="Name For Site">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="directionName" [sortable]="true">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
         <span class="datatable-header-cell-wrapper">
           <span class="datatable-header-cell-label draggable" (click)="sort()">
-            Direction
+              Direction
           </span>
         </span>
-    </ng-template>
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="profileName" [sortable]="true">
-    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+
+    <ngx-datatable-column name="profileName" [sortable]="true">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
         <span class="datatable-header-cell-wrapper">
           <span class="datatable-header-cell-label draggable" (click)="sort()">
             Profile
           </span>
         </span>
-    </ng-template>
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="cityName" [sortable]="true">
-    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+    <ngx-datatable-column name="cityName" [sortable]="true">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
         <span class="datatable-header-cell-wrapper">
           <span class="datatable-header-cell-label draggable" (click)="sort()">
             Location
           </span>
         </span>
-    </ng-template>
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="Start Date">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      {{value | date: "dd.MM.yyyy"}}
-    </ng-template>
-  </ngx-datatable-column>
+    <ngx-datatable-column name="Start Date">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value | date: "dd.MM.yyyy"}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="End Date">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      {{value | date: "dd.MM.yyyy"}}
-    </ng-template>
-  </ngx-datatable-column>
+    <ngx-datatable-column name="End Date">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value | date: "dd.MM.yyyy"}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="Status">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+    <ngx-datatable-column name="Status">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="Experts">
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+    <ngx-datatable-column name="Experts">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="Students Planned To Graduate">
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+    <ngx-datatable-column name="Students Planned To Graduate">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="Students Planned To Enrollment">
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+    <ngx-datatable-column name="Students Planned To Enrollment">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="Students Actual">
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+    <ngx-datatable-column name="Students Actual">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="commonDirectionName" [sortable]="true">
-    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+    <ngx-datatable-column name="commonDirectionName" [sortable]="true">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
         <span class="datatable-header-cell-wrapper">
           <span class="datatable-header-cell-label draggable" (click)="sort()">
             Common Direction
           </span>
         </span>
-    </ng-template>
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
 
-  <ngx-datatable-column name="Payment Status">
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
+    <ngx-datatable-column name="Payment Status">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
 
-</ngx-datatable>
-
+  </ngx-datatable>
+</div>
