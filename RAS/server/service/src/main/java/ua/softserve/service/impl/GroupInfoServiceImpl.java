@@ -52,7 +52,12 @@ public class GroupInfoServiceImpl implements GroupInfoService {
      */
     @Override
     public List<GroupInformationDTO> getAllInformationAboutGroup() {
-        return groupInfoCustomRepository.getAllInformationAboutGroups();
+        logger.info("Before groupInfoRepository.getAllInformationAboutGroup()");
+        long startTime = System.currentTimeMillis();
+        List<GroupInformationDTO> informationAboutGroups = groupInfoCustomRepository.getAllInformationAboutGroups();
+        long endTime = System.currentTimeMillis();
+        logger.info("Time for executing getAllInformationAboutGroup() method in the service : " + (float)(endTime - startTime)/1000);
+        return informationAboutGroups;
     }
 
     /**

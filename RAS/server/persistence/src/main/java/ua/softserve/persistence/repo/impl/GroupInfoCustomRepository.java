@@ -1,23 +1,22 @@
 package ua.softserve.persistence.repo.impl;
 
-
 import org.hibernate.Session;
 import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.hibernate.type.StandardBasicTypes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ua.softserve.persistence.dto.GroupInformationDTO;
-import ua.softserve.persistence.entity.*;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class GroupInfoCustomRepository {
     @PersistenceContext
     private EntityManager em;
 
+    private static final Logger logger = LoggerFactory.getLogger(GroupInfoCustomRepository.class);
     /**
      * Method returns information about groups and creates new DTOs
      * when there are two or more experts in the group.
@@ -25,6 +24,8 @@ public class GroupInfoCustomRepository {
      * @return information about groups.
      */
     public List<GroupInformationDTO> getAllInformationAboutGroups() {
+        logger.info("Before getAllInformationAboutGroup() in the repository");
+        long startTime = System.currentTimeMillis();
             List<GroupInformationDTO> results = ((Session) this.em.getDelegate()).createSQLQuery(
                     "SELECT gI.academy_id as academyId, gI.group_name as groupName, gI.students_planned_to_graduate as studentsPlannedToGraduate, " +
                             "gI.students_planned_to_enrollment as studentsPlannedToEnrollment, pI.profile_name as profileName, " +
@@ -64,6 +65,8 @@ public class GroupInfoCustomRepository {
                 .addScalar("teacherType", StandardBasicTypes.INTEGER)
                 .setResultTransformer(new AliasToBeanResultTransformer(GroupInformationDTO.class))
                 .list();
+        long endTime = System.currentTimeMillis();
+        logger.info("Time for executing getAllInformationAboutGroup() method in the repository : " + (float)(endTime - startTime)/1000);
         return results;
     }
 }

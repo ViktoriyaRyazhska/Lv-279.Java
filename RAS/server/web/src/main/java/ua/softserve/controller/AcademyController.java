@@ -45,6 +45,10 @@ public class AcademyController {
 
     @GetMapping(value = "/view-groupinfo")
     public ResponseEntity<List<GroupInformationDTO>> searchSite() {
-        return new ResponseEntity<>(groupInfoService.getAllInformationAboutGroup(), HttpStatus.OK);
+        long startTime = System.currentTimeMillis();
+        List<GroupInformationDTO> informationAboutGroup = groupInfoService.getAllInformationAboutGroup();
+        long endTime = System.currentTimeMillis();
+        logger.info("Time for executing getAllInformationAboutGroup() method in the controller : " + (float)(endTime - startTime)/1000);
+        return new ResponseEntity<>(informationAboutGroup, HttpStatus.OK);
     }
 }
