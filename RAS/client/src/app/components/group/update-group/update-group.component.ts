@@ -36,6 +36,8 @@ export class UpdateGroupComponent implements OnInit {
 
   private defaultInvalidInput: string = 'No data entered. Group will not be save';
 
+  resultMessage: string = '';
+
   paymentStatusArray: {name: string, free: number}[] = [
     {'name': 'Open Group', 'free': 0},
     {'name': 'Founded by SoftServe', 'free': 1}
@@ -99,6 +101,23 @@ export class UpdateGroupComponent implements OnInit {
     if (this.isFormValid()) {
       this.group.setDataFromFormControl(this.signupForm);
       this.invalidForm = false;
+      this.resultMessage = 'Group was successfully updated';
+      this.sendData();
+      console.log('valid');
+    } else {
+      this.invalidForm = true;
+      console.log('invalid');
+    }
+  }
+
+  createGroupBasedOnThis(){
+    if (this.isFormValid()) {
+      this.group.academyId = 0;
+      this.group.groupInfoId = 0;
+      this.group.setDataFromFormControl(this.signupForm);
+      this.invalidForm = false;
+      console.log(this.group);
+      this.resultMessage = 'Group was successfully created';
       this.sendData();
       console.log('valid');
     } else {
@@ -138,7 +157,7 @@ export class UpdateGroupComponent implements OnInit {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogComponent, {
-      data: {message: 'Group was successfully updated', err:false}
+      data: {message: this.resultMessage, err:false}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -190,5 +209,7 @@ export class UpdateGroupComponent implements OnInit {
     console.log(stringToReplace);
     return parseInt(stringToReplace, 10);
   }
+
+
 
 }

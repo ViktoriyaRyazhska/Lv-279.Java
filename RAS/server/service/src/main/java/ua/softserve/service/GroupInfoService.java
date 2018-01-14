@@ -9,8 +9,6 @@ import java.util.List;
 public interface GroupInfoService {
     void save(GroupInfo groupInfo);
 
-//    GroupInfo findOne(int id);
-
     List<GroupInformationDTO> getAllInformationAboutGroup();
 
     GroupInfo findOneGroupInfoByAcademyId(Integer academyId);

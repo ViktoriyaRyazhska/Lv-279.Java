@@ -19,6 +19,7 @@ import {StudentsComponent} from "./components/students/students.component";
 
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {MarkService} from "./services/feedbacks/marks.service";
+import {FeedbackService} from "./services/feedbacks/feedback.service";
 import {StudentsService} from "./services/students/students.service";
 import {UsersService} from "./services/users/users.service";
 import {MarkNamePipe} from "./components/feedbacks/feedback-list/mark-name.pipe";
@@ -126,8 +127,8 @@ import { UpdateGroupComponent } from './components/group/update-group/update-gro
     DxLoadIndicatorModule
   ],
   providers: [AddGroupService, StudentsService, LoginService, MyauthService, TestsService, UsersService, MarkService,
-    CookieService, SearchBarService, DataService, JwtHelper, BsModalService, BsModalRef, ComponentLoaderFactory, PositioningService,PaginationConfig,
-  EmployeeService,ItaTacticalReportService],
+    FeedbackService, CookieService, SearchBarService, DataService, JwtHelper, BsModalService, BsModalRef,
+    ComponentLoaderFactory, PositioningService,PaginationConfig,EmployeeService,ItaTacticalReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

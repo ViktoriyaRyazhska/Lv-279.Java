@@ -18,8 +18,7 @@ public class GroupInfoCustomRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(GroupInfoCustomRepository.class);
     /**
-     * Method returns information about groups and creates new DTOs
-     * when there are two or more experts in the group.
+     * Method returns information about groups and creates new DTOs for every group.
      *
      * @return information about groups.
      */

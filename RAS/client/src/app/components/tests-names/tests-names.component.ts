@@ -4,27 +4,37 @@ import { TestsService } from "../../services/tests-names/tests.service";
 import { ActivatedRoute } from "@angular/router";
 import { Constants } from "./Constants";
 import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
+import {StudentsComponent} from "../students/students.component";
+
 
 @Component({
+  providers:[StudentsComponent],
   selector: 'app-tests-names',
   templateUrl: './tests-names.component.html',
   styleUrls: ['./tests-names.component.css']
 })
 export class TestsNamesComponent implements OnInit {
   @Input() groupId: number;
+  @Input() studRef : StudentsComponent;
+  @Input() techDirect : number;
 
-  // groupId : number;
+  // groupId2 : number;
   tests : Tests[];
   static counter : number = 1;
   rForm: FormGroup;
   testRows: FormArray;
+  respStatus : string;
+  displayRemoveDialog : boolean;
+  currTest : any;
+  currIndex : number;
 
   constructor(
     private testNamesService : TestsService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    private stComponent : StudentsComponent,
   ) {
-    this.groupId = +this.route.snapshot.params['id'];
+    // this.groupId2 = +this.route.snapshot.params['id'];
     this.rForm = new FormGroup({
       testRows: this.fb.array([])
     });
@@ -72,8 +82,10 @@ export class TestsNamesComponent implements OnInit {
     console.log(this.testRows.length);
     this.testNamesService.addTests(this.tests, this.groupId).subscribe(() => {
       this.tests = null;
-      this.ngOnInit()
+      this.ngOnInit();
     });
+
+    this.studRef.setTests(this.tests);
   }
 
   isFormValid(): boolean {
@@ -92,14 +104,23 @@ export class TestsNamesComponent implements OnInit {
     }
   }
 
-  removeTest(index : number, item : any) {
+  removeTest() {
     TestsNamesComponent.counter--;
-    if(index>=0) {
       let test : Tests = new Tests('',0);
-      item.get('removed').value = true;
-      test.setTestRowsWithFormGroup(item);
-      this.testRows.controls.splice(index,1,this.createTestRow(test));
-    }
+      this.currTest.get('removed').value = true;
+      test.setTestRowsWithFormGroup(this.currTest);
+      this.testRows.controls.splice(this.currIndex,1,this.createTestRow(test));
+      this.displayRemoveDialog = false;
+  }
+
+  removeDialog (index : number, item : any) {
+      this.displayRemoveDialog = true;
+      this.currIndex = index;
+      this.currTest = item;
+  }
+
+  cancelRemovingClick() {
+    this.displayRemoveDialog = false;
   }
 
   cancelChanges () {
