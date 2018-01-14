@@ -12,6 +12,8 @@ import ua.softserve.service.GroupInfoService;
 import ua.softserve.service.dto.*;
 import ua.softserve.service.impl.AcademyServiceImpl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController

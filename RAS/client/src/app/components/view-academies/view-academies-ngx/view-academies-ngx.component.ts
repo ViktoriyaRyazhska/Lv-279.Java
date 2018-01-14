@@ -3,6 +3,8 @@ import {AcademyService} from "../academy.service";
 import {FilterService} from "../filter.service";
 import {DataService} from "../../../services/data.service";
 import {PagerService} from "../pager.service";
+import {MatDialog} from "@angular/material";
+import {DialogComponent} from "../../group/dialog/dialog.component";
 
 @Component({
   selector: 'app-view-academies-ngx',
@@ -21,13 +23,17 @@ export class ViewAcademiesNgxComponent implements OnInit {
   loadIndicatorVisible = true;
 
   constructor(private academyService: AcademyService,
-              private filterService: FilterService) {
+              private filterService: FilterService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
     var startDate = new Date().getTime();
     this.academyService.getAll().subscribe(
       data => {
+        if(data.length == 0){
+          this.openDialog();
+        }
         this.academies = data;
         this.rows = this.academies;
         var endDate = new Date().getTime();
@@ -49,6 +55,12 @@ export class ViewAcademiesNgxComponent implements OnInit {
       } else {
         this.rows = this.filterService.transform(this.rows, form.form.value[key], key);
       }
+    });
+  }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      data: {message: 'There was no data loaded', err:false}
     });
   }
 
