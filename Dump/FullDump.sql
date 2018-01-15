@@ -570,6 +570,23 @@ CREATE TABLE `testes_names` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for `tests_name_template`
+--
+DROP TABLE IF EXISTS `tests_name_template`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tests_name_template` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `test_max_score` double NOT NULL,
+  `test_name` varchar(255) DEFAULT NULL,
+  `template_direction_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK2rgwvy7duk5kwlusmtu1lbfom` (`template_direction_id`),
+  CONSTRAINT `FK2rgwvy7duk5kwlusmtu1lbfom` FOREIGN KEY (`template_direction_id`) REFERENCES `technologies` (`technology_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `users`
 --
 
