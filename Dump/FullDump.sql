@@ -973,6 +973,17 @@ LOCK TABLES `testes_names` WRITE;
 /*!40000 ALTER TABLE `testes_names` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Dumping data for table `tests_name_templat`
+--
+
+LOCK TABLES `tests_name_template` WRITE;
+/*!40000 ALTER TABLE `tests_name_template` DISABLE KEYS */;
+INSERT INTO `ss_ps_db`.`tests_name_template` VALUES (1,10,'string',3), (2,10,'sql java',3), (3,10,'uml',3),(4,10,'threads',3), (5,10,'tags',2), (6,10,'dom',2),(7,10,'basic html',2), (8,10,'.net basic',4), (9,10,'.net oop',4),(10,10,'ios basic',5), (11,10,'database',5), (12,10,'basic of c ',5), (13,10,'ios pro',5);
+/*!40000 ALTER TABLE `tests_name_template` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Dumping data for table `ita_academy_statuses`
 --
