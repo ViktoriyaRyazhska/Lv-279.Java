@@ -7,4 +7,5 @@ import java.util.List;
 public interface TestNamesTemplateService {
     List<TestNamesTemplate> getTestTemplates();
     TestNamesTemplate getTestTemplateByDirectionId(Integer directionId);
+    List <TestNamesTemplate> getAllByDirectionId(Integer directionId);
 }

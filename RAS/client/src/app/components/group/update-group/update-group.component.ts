@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit, ViewChild} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {HistoryService} from "../../history/history.service";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -9,6 +9,8 @@ import {DataService} from "../../../services/data.service";
 import {LoginService} from "../../auth/login/login.service";
 import {Group} from "../add-group/group.model";
 import {AddGroupService} from "../add-group/add-group.service";
+import {TestsNamesComponent} from "../../tests-names/tests-names.component";
+import {NavTabsComponent} from "../../nav-tabs/nav-tabs.component";
 
 @Component({
   selector: 'app-update-group',
@@ -16,6 +18,7 @@ import {AddGroupService} from "../add-group/add-group.service";
   styleUrls: ['./update-group.component.css']
 })
 export class UpdateGroupComponent implements OnInit {
+  @ViewChild(NavTabsComponent) child;
 
   signupForm: FormGroup;
 
@@ -56,6 +59,11 @@ export class UpdateGroupComponent implements OnInit {
 
     this.getDropdownOnInit();
     this.updateGroup();
+  }
+
+  testNamesUpdate() {
+
+    // this.child.getAppTestNamesTemplate(this.signupForm.get('directionFormControl').value);
   }
 
   getDropdownOnInit(){

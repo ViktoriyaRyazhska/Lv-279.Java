@@ -73,7 +73,7 @@
             <mat-form-field class="col-sm-6">
               <mat-select placeholder="Direction:" formControlName="directionFormControl">
                 <mat-option value="0" selected></mat-option>
-                <mat-option *ngFor="let tech of direction" [value]="tech.technologyId">{{ tech.name }}</mat-option>
+                <mat-option *ngFor="let tech of direction" [value]="tech.technologyId" (click)="testNamesUpdate()">{{ tech.name }}</mat-option>
               </mat-select>
             </mat-form-field>
 

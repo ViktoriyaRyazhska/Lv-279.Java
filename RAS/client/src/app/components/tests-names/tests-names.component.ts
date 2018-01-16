@@ -19,20 +19,20 @@ export class TestsNamesComponent implements OnInit {
   @Input() techDirect : number;
 
   // groupId2 : number;
-  tests : Tests[];
+  private tests : Tests[];
   static counter : number = 1;
-  rForm: FormGroup;
-  testRows: FormArray;
-  respStatus : string;
-  displayRemoveDialog : boolean;
-  currTest : any;
-  currIndex : number;
+  private rForm: FormGroup;
+  private testRows: FormArray;
+  private respStatus : string;
+  private displayRemoveDialog : boolean;
+  private currTest : any;
+  private currIndex : number;
+  private testTemplate : Tests[];
 
   constructor(
     private testNamesService : TestsService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private stComponent : StudentsComponent,
   ) {
     // this.groupId2 = +this.route.snapshot.params['id'];
     this.rForm = new FormGroup({
@@ -41,7 +41,10 @@ export class TestsNamesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.testNamesService.getAll(this.groupId).subscribe(data => {
+    if(this.techDirect == null) {
+      this.techDirect = 0;
+    }
+    this.testNamesService.getAll(this.groupId, this.techDirect).subscribe(data => {
       console.log(data);
       this.tests = data;
       TestsNamesComponent.counter = this.tests.length;
@@ -142,6 +145,28 @@ export class TestsNamesComponent implements OnInit {
     for(let i=0;i<5;i++) {
       this.addTest();
     }
+  }
+
+
+  getTestsTemplate(directionId:number) {
+    this.tests = [];
+    this.testRows.controls = [];
+    this.testNamesService.getTestTemplates(directionId).subscribe(data => {
+      console.log(data);
+      this.tests = data;
+
+      TestsNamesComponent.counter = this.tests.length;
+
+      if (TestsNamesComponent.counter<=0){
+        this.createDefaultTests();
+      }
+      else {
+        this.testRows = this.rForm.get('testRows') as FormArray;
+        for (let i = 0; i < this.tests.length; i++) {
+          this.testRows.push(this.createTestRow(this.tests[i]));
+        }
+      }
+    });
   }
 }
 

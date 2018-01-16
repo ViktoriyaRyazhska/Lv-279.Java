@@ -10,7 +10,7 @@ public interface TestNameService {
 
     List<TestName> findAllTestNames();
 
-    List<TestName> findAllTestNamesByAcademyId(Integer groupId);
+    List<TestName> findAllTestNamesByAcademyId(Integer groupId, Integer directionId);
 
     void deleteTestName(TestName testName);
 

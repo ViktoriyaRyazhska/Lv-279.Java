@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.entity.TestName;
+import ua.softserve.persistence.entity.TestNamesTemplate;
+import ua.softserve.persistence.repo.TechnologiesRepository;
 import ua.softserve.persistence.repo.TestNameRepository;
 import ua.softserve.service.TestNameService;
+import ua.softserve.service.TestNamesTemplateService;
 import ua.softserve.service.exception.InvalidDataException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,31 +24,18 @@ public class TestNameServiceImpl implements TestNameService {
     @Autowired
     private AcademyServiceImpl academyService;
 
+    @Autowired
+    private TestNamesTemplateService testNamesTemplateService;
+
+    @Autowired
+    private TechnologiesRepository technologiesRepository;
+
     private static final Logger logger = LogManager.getLogger(TestNameServiceImpl.class);
 
     @Override
     @Transactional
     public boolean saveTestNames(List<TestName> testNames, Integer academyId) {
 
-//        for (TestName testName : testNames) {
-//            if (testName.getTestName() == null || testName.getTestMaxScore() == null
-//                    || testName.getTestName().equals("")) {
-//                logger.info("Do not send us 'null'! Try again!");
-//                return TestNameService.DataIsWrong;
-//            }
-//            if (testName.getTestName().length() >= 50) {
-//                logger.info("Test name is incorrect");
-//                return TestNameService.DataIsWrong;
-//            }
-//            if (testName.isRemoved()){
-//                this.deleteTestName(testName);
-//            } else {
-//                testName.setGroupId(academyService.findOne(academyId));
-//                testNameRepository.save(testName);
-//            }
-//        }
-
-//        return TestNameService.DataIsOk;
         try {
             testNames.stream()
                     .filter(this::isValidTestNames)
@@ -82,8 +73,18 @@ public class TestNameServiceImpl implements TestNameService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<TestName> findAllTestNamesByAcademyId(Integer groupId) {
-        return testNameRepository.findAllTestNamesByGroupId(academyService.findOne(groupId));
+    public List<TestName> findAllTestNamesByAcademyId(Integer groupId, Integer directionId) {
+        if (testNameRepository.findAllTestNamesByGroupId(academyService.findOne(groupId)).isEmpty()){
+            List<TestNamesTemplate> testNamesTemplates = testNamesTemplateService.getAllByDirectionId(directionId);
+            List<TestName> testNames = new ArrayList<>();
+            for (TestNamesTemplate testNamesTemplate : testNamesTemplates){
+                testNames.add(new TestName(academyService.findOne(groupId),testNamesTemplate.getTestName(),testNamesTemplate.getTestMaxScore()));
+            }
+            return testNames;
+        }
+        else {
+            return testNameRepository.findAllTestNamesByGroupId(academyService.findOne(groupId));
+        }
     }
 
     @Override

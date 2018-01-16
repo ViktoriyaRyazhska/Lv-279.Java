@@ -10,8 +10,12 @@ export class TestsService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(groupId:number): Observable<any> {
-    return this.http.get(environment.serverUrl + 'tests/' + groupId);
+  getAll(groupId:number,techDirect:number): Observable<any> {
+    return this.http.get(environment.serverUrl + 'tests/' + groupId + '/' + techDirect);
+  }
+
+  getTestTemplates(techDirect:number): Observable<any> {
+    return this.http.get(environment.serverUrl + '/tests/template/' + techDirect);
   }
 
   getResponse(groupId:number): Observable<any> {

@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../auth/login/login.service";
 import {Tests} from "../../models/tests";
 import {TestsService} from "../../services/tests-names/tests.service";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-students',
@@ -17,10 +18,11 @@ import {TestsService} from "../../services/tests-names/tests.service";
 @Injectable()
 export class StudentsComponent implements OnInit {
   @Input() groupId: number;
+  @Input() techDirect : number;
 
   private academyId: number;
 
-  tests: Tests[];
+  private tests: Tests[];
 
   private students: StudentFeedback[];
 
@@ -81,7 +83,7 @@ export class StudentsComponent implements OnInit {
             error => console.log(error)
           );
 
-        this.testNamesService.getAll(this.academyId)
+        this.testNamesService.getAll(this.academyId, this.techDirect)
           .subscribe(data => {
               console.log(data);
               this.tests = data;
@@ -123,7 +125,7 @@ export class StudentsComponent implements OnInit {
   }
 
   updateStudentsClick() {
-    if (this.parseTestsMraks()) {
+    if (this.parseTestsMarks()) {
       this.studentsService.update(this.students)
         .subscribe(() => {
             this.students = null;
@@ -297,9 +299,10 @@ export class StudentsComponent implements OnInit {
     this.students = [...this.students];
   }
 
-  parseTestsMraks(): boolean {
+  parseTestsMarks(): boolean {
     for (let k = 0; k < this.students.length; k++) {
       let i = 0;
+
       if (this.tests[0] != null) {
         i = parseInt(this.students[k].data.testOne + '')
         if (i > this.tests[0].testMaxScore || i < 0) {
@@ -307,6 +310,7 @@ export class StudentsComponent implements OnInit {
           return false;
         }
       }
+
       if (this.tests[1] != null) {
         i = parseInt(this.students[k].data.testTwo + '')
         if (i > this.tests[1].testMaxScore || i < 0) {
@@ -322,6 +326,7 @@ export class StudentsComponent implements OnInit {
           return false;
         }
       }
+
       if (this.tests[3] != null) {
         i = parseInt(this.students[k].data.testFour + '')
         if (i > this.tests[3].testMaxScore || i < 0) {
@@ -337,6 +342,7 @@ export class StudentsComponent implements OnInit {
           return false;
         }
       }
+
       if (this.tests[5] != null) {
         i = parseInt(this.students[k].data.testSix + '')
         if (i > this.tests[5].testMaxScore || i < 0) {
@@ -344,6 +350,7 @@ export class StudentsComponent implements OnInit {
           return false;
         }
       }
+
       if (this.tests[6] != null) {
         i = parseInt(this.students[k].data.testSeven + '')
         if (i > this.tests[6].testMaxScore || i < 0) {
@@ -351,6 +358,7 @@ export class StudentsComponent implements OnInit {
           return false;
         }
       }
+
       if (this.tests[7] != null) {
         i = parseInt(this.students[k].data.testEight + '')
         if (i > this.tests[7].testMaxScore || i < 0) {
@@ -358,6 +366,7 @@ export class StudentsComponent implements OnInit {
           return false;
         }
       }
+
       if (this.tests[8] != null) {
         i = parseInt(this.students[k].data.testNine + '')
         if (i > this.tests[8].testMaxScore || i < 0) {
@@ -365,6 +374,7 @@ export class StudentsComponent implements OnInit {
           return false;
         }
       }
+
       if (this.tests[9] != null) {
         i = parseInt(this.students[k].data.testTen + '')
         if (i > this.tests[9].testMaxScore || i < 0) {
@@ -378,6 +388,12 @@ export class StudentsComponent implements OnInit {
 
   setTests (tests : Tests[]) {
     this.tests = [];
+    tests.forEach(test=>{
+      if(test.isRemoved()) {
+        let i = tests.indexOf(test);
+        tests.splice(i, 1);
+      }
+    });
     this.tests = tests;
   }
 }

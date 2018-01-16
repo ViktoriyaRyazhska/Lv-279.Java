@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.entity.TestName;
+import ua.softserve.persistence.entity.TestNamesTemplate;
 import ua.softserve.service.TestNameService;
+import ua.softserve.service.TestNamesTemplateService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,14 +17,17 @@ import java.util.NoSuchElementException;
 @RestController
 public class TestNamesController {
     @Autowired
-    TestNameService testNameService;
+    private TestNameService testNameService;
+
+    @Autowired
+    private TestNamesTemplateService testNamesTemplateService;
 
     private static final Logger logger = LogManager.getLogger(TestNamesController.class);
 
-    @GetMapping(value = "/tests/{id}")
-    public ResponseEntity showTestsNames(@PathVariable("id") Integer groupId) {
+    @GetMapping(value = "/tests/{id}/{directionId}")
+    public ResponseEntity showTestsNames(@PathVariable("id") Integer groupId, @PathVariable("directionId") Integer directionId) {
         try{
-            return new ResponseEntity<List<TestName>>(testNameService.findAllTestNamesByAcademyId(groupId), HttpStatus.OK);
+            return new ResponseEntity<List<TestName>>(testNameService.findAllTestNamesByAcademyId(groupId, directionId), HttpStatus.OK);
         }
         catch (NoSuchElementException e) {
             return ResponseEntity
@@ -41,6 +46,18 @@ public class TestNamesController {
         else{
             logger.info("Bad request");
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/tests/template/{directionId}")
+    public ResponseEntity getTestsTemplate(@PathVariable("directionId") Integer directionId) {
+        try{
+            return new ResponseEntity<List<TestNamesTemplate>>(testNamesTemplateService.getAllByDirectionId(directionId), HttpStatus.OK);
+        }
+        catch (NoSuchElementException e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("template with id " + directionId + " not found");
         }
     }
 }

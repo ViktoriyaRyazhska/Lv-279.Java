@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-nav-tabs',
@@ -8,7 +8,11 @@ import {Component, Input, OnInit} from '@angular/core';
 export class NavTabsComponent implements OnInit {
   @Input() academyId: number;
   @Input() techDirection : number;
+  @ViewChild('appTestNames') child;
 
+  getAppTestNamesTemplate (directId:number){
+    this.child.getTestsTemplate(directId);
+  }
   constructor() {}
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 <p-tabView (onChange)="feedback.onStudentsChange()">
 
   <p-tabPanel header="Students" [selected]="true">
-    <app-students [groupId]="academyId" #appStud ></app-students>
+    <app-students [groupId]="academyId" [techDirect] = "techDirection" #appStud></app-students>
   </p-tabPanel>
 
   <p-tabPanel header="Employee">
@@ -17,7 +17,7 @@
   </p-tabPanel>
 
   <p-tabPanel header="Tests">
-    <app-tests-names [groupId]="academyId" [studRef]="appStud" [techDirect] = "techDirection" ></app-tests-names>
+    <app-tests-names [groupId]="academyId" [studRef]="appStud" [techDirect] = "techDirection" #appTestNames></app-tests-names>
   </p-tabPanel>
 
 </p-tabView>
