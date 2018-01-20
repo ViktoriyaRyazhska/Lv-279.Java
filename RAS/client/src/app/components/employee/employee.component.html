@@ -12,7 +12,7 @@
   <p-column header="#" [editable]="false" [style]="{'width':'10em'}">
     <ng-template let-col let-groupInfoTeacher="rowData" pTemplate="body">
        <span>
-        <a (click)="removeEmployee(groupInfoTeacher)">Remove</a>
+        <a class="cur" (click)="removeEmployee(groupInfoTeacher)">Remove</a>
        </span>
     </ng-template>
   </p-column>

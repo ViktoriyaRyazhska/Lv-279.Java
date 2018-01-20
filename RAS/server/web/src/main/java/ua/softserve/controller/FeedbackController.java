@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import ua.softserve.persistence.entity.Feedback;
 import ua.softserve.service.FeedbackService;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
