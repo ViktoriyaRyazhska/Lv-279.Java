@@ -14,4 +14,6 @@ public interface GroupInfoService {
     GroupInfo findOneGroupInfoByAcademyId(Integer academyId);
 
     AcademyDTO getAcademyDTObyId(Integer groupId);
+
+    List<GroupInfo> findAllGroupsWithAcademies();
 }

@@ -24,7 +24,6 @@ public class FeedbackController {
     @PutMapping("update_comment/{studentId}")
     public ResponseEntity updateInterviewerComment(@RequestBody String comment, @PathVariable("studentId") Integer studentId) {
         feedbackService.updateInterviewerComment(comment, studentId);
-        System.out.println(comment);
         return new ResponseEntity(HttpStatus.OK);
     }
 }
