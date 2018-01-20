@@ -429,7 +429,7 @@
   </div>
 </p-dialog>
 
-<p-dialog header="Edit Student Overall Feedback" [(visible)]="displayProvideFeedback" (onHide)="onSaveClose()" modal="false" width="1000">
+<p-dialog header="Edit Student Overall Feedback" [(visible)]="displayProvideFeedback" modal="false" width="1000">
   <div *ngIf="selectedStudent && selectedStudent.user">
     <h4>{{selectedStudent.user.firstName +" "+ selectedStudent.user.lastName}}</h4>
     <div class="ui-g-12">

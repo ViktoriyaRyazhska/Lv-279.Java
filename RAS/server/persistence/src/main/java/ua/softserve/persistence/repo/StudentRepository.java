@@ -24,11 +24,11 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     List<Student> findAllByAcademy_AcademyIdAndRemovedIsFalse (int academyId);
 
-    @Modifying
-    @Query("update Student s set s.removed = :removed where s.id = :studentId")
-    void updateRemovedStatus(@Param("studentId") Integer studentId,@Param("removed") boolean removed);
-
-    @Modifying
-    @Query("update Student s set s.data.interviewerComment = :comment where s.id = :studentId")
-    void updateInterviewerComment(@Param("comment") String comment, @Param("studentId") Integer studentId);
+//    @Modifying
+//    @Query("update Student s set s.removed = :removed where s.id = :studentId")
+//    void updateRemovedStatus(@Param("studentId") Integer studentId,@Param("removed") boolean removed);
+//
+//    @Modifying
+//    @Query("update Student s set s.data.interviewerComment = :comment where s.id = :studentId")
+//    void updateInterviewerComment(@Param("comment") String comment, @Param("studentId") Integer studentId);
 }

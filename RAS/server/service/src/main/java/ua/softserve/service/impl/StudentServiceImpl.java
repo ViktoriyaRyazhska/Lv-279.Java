@@ -81,7 +81,9 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public void removeStudentFromAcademy(Integer studentId) {
-        studentRepository.updateRemovedStatus(studentId, true);
+        Student existStudent = studentRepository.findOne(studentId);
+        existStudent.setRemoved(true);
+        studentRepository.save(existStudent);
     }
 
     /**

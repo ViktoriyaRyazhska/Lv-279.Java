@@ -26,6 +26,8 @@ public class FeedbackServiceImpl implements FeedbackService{
     @Override
     @Transactional
     public void updateInterviewerComment(String comment, Integer studentId) {
-        studentRepository.updateInterviewerComment(comment, studentId);
+        Student existStudent = studentRepository.findOne(studentId);
+        existStudent.getData().setInterviewerComment(comment);
+        studentRepository.save(existStudent);
     }
 }
