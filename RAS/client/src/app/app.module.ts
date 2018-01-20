@@ -57,6 +57,7 @@ import {DxButtonModule, DxDataGridModule, DxLoadIndicatorModule} from "devextrem
 import { ItaTacticalReportComponent } from './components/reports/ita-tactical-report/ita-tactical-report.component';
 import {ItaTacticalReportService} from "./components/reports/ita-tactical-report/ita-tactical-report.service";
 import { UpdateGroupComponent } from './components/group/update-group/update-group.component';
+import { GroupOverviewByTraineesComponent } from './components/reports/group-overview-by-trainees/group-overview-by-trainees.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { UpdateGroupComponent } from './components/group/update-group/update-gro
     ViewAcademiesNgxComponent,
     UpdateGroupComponent,
     ViewAcademiesNgxComponent,
-    ItaTacticalReportComponent
+    ItaTacticalReportComponent,
+    GroupOverviewByTraineesComponent
   ],
   entryComponents: [
     ModalBackdropComponent,

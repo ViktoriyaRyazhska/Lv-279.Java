@@ -1,0 +1,51 @@
+<div *ngIf="signupForm">
+  <div class="container well">
+    <div class="col-sm-12" id="form-test">
+      <form [formGroup]="signupForm" id="formId" (ngSubmit)="showReport()">
+        <ul class="col-sm-6 form-group" id="UL_left_column">
+          <div class="row">
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="End Date:" formControlName="endDateFormControl">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let date of endYears" [value]="date">{{ date }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="CD:" formControlName="commonDirectionFormControl">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let cd of commonDirection" [value]="cd.directionId">{{ cd.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </ul>
+
+        <ul class="col-sm-6 form-group" id="UL_right_column">
+          <div class="row">
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="Translation:" formControlName="cityIdFormControl">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let city of cityNames" [value]="city.itemId">{{ city.trasnlation }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-6">
+              <mat-select placeholder="Group Name:" formControlName="groupNameFormControl">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let name of groupNames"
+                            [value]="name">{{ name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </ul>
+
+        <div class="row" id="btnSaveId" align="center">
+          <button mat-raised-button type="submit" color="primary">Show Report</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+

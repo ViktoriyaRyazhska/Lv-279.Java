@@ -31,14 +31,14 @@ export class ViewAcademiesNgxComponent implements OnInit {
     var startDate = new Date().getTime();
     this.academyService.getAll().subscribe(
       data => {
-        if(data.length == 0){
+        if (data.length == 0) {
           this.openDialog();
         }
         this.academies = data;
         this.rows = this.academies;
         var endDate = new Date().getTime();
         this.loadIndicatorVisible = false;
-        console.log("Time for executing method for returning group info : " + (endDate - startDate)/1000);
+        console.log("Time for executing method for returning group info : " + (endDate - startDate) / 1000);
       },
       error => console.log(error)
     );
@@ -60,7 +60,7 @@ export class ViewAcademiesNgxComponent implements OnInit {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogComponent, {
-      data: {message: 'There was no data loaded', err:false}
+      data: {message: 'There was no data loaded', err: false}
     });
   }
 

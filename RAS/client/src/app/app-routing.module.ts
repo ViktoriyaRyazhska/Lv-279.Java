@@ -17,6 +17,7 @@ import {ViewAcademiesNgxComponent} from "./components/view-academies/view-academ
 import {ItaTacticalReportComponent} from "./components/reports/ita-tactical-report/ita-tactical-report.component";
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {UpdateGroupComponent} from "./components/group/update-group/update-group.component";
+import {GroupOverviewByTraineesComponent} from "./components/reports/group-overview-by-trainees/group-overview-by-trainees.component";
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
   {path: 'ang/reports/checkListByGroups', component: CheckListByGroupsComponent},
   {path: 'ang/reports/filterCheckListByGroups', component: FilterCheckListByGroupsComponent},
   {path: 'ang/reports/ita-tactical-plan-by-group-stage', component: ItaTacticalReportComponent},
+  {path: 'ang/reports/group-overview-by-trainees', component: GroupOverviewByTraineesComponent},
   {path: 'ang/tests/:id', component: TestsNamesComponent},
   {path: 'ang/students/:id', component: StudentsComponent},
   {path: 'ang/feedback/:id', component: FeedbackListComponent},
