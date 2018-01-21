@@ -39,7 +39,7 @@ public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
 
     @Override
     public Boolean isAssignToGroup(Integer id) {
-        for (GroupInfoTeachers groupInfoTeachers : groupInfoTeachersRepository.findAllByAcademy_AcademyId(id)) {
+        for (GroupInfoTeachers groupInfoTeachers : groupInfoTeachersRepository.findAllByAcademyAcademyId(id)) {
             if (groupInfoTeachers.getEmployee().getEmployeeId().equals
                     (employeeService.findEmployeesByLoginUserId(((Optional<LoginUser>) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).get()
                             .getId()).getEmployeeId())) {
@@ -58,8 +58,8 @@ public class GroupInfoTeachersServiceImpl implements GroupInfoTeachersService {
     }
 
     @Override
-    public List<GroupInfoTeachers> findAllByAcademy_AcademyId(Integer academy_academyId) {
-        return groupInfoTeachersRepository.findAllByAcademy_AcademyId(academy_academyId);
+    public List<GroupInfoTeachers> findAllByAcademy_AcademyId(Integer academyAcademyId) {
+        return groupInfoTeachersRepository.findAllByAcademyAcademyId(academyAcademyId);
     }
 
     @Transactional

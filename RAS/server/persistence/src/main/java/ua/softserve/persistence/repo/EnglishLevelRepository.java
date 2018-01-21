@@ -6,5 +6,4 @@ import ua.softserve.persistence.entity.EnglishLevel;
 
 @Repository
 public interface EnglishLevelRepository extends JpaRepository<EnglishLevel, Integer> {
-
 }

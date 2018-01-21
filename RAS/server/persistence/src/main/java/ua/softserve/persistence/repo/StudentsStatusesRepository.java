@@ -6,5 +6,4 @@ import ua.softserve.persistence.entity.StudentStatuses;
 
 @Repository
 public interface StudentsStatusesRepository extends JpaRepository<StudentStatuses, Integer> {
-
 }

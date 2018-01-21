@@ -13,13 +13,9 @@ import java.util.Optional;
 public interface GroupInfoTeachersRepository extends JpaRepository<GroupInfoTeachers, Integer> {
     List<GroupInfoTeachers> findAllByAcademyAndTeacherType(Academy academy, TeacherTypes teacherType);
 
-    @Query(value = "select * from group_info_teachers git where git.academy_id = :aid"
-            + " and git.teacher_type_id = :ttid", nativeQuery = true)
-    List<GroupInfoTeachers> findAllByAcademyIdAndTeacherTypeId(@Param("aid") Integer aid, @Param("ttid") Integer ttid);
-
     List<GroupInfoTeachers> findAllByTeacherType(TeacherTypes teacherType);
 
-    List<GroupInfoTeachers> findAllByAcademy_AcademyId(Integer academy_academyId);
+    List<GroupInfoTeachers> findAllByAcademyAcademyId(Integer academyAcademyId);
 
     void deleteGroupInfoTeachersById(Integer id);
 
