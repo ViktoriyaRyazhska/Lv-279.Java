@@ -6,7 +6,7 @@
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span>
-          <a (click)="onStudentClick(student)"> {{student.user.firstName +" "+ student.user.lastName}}</a>
+          <a class="cur" (click)="onStudentClick(student)"> {{student.user.firstName +" "+ student.user.lastName}}</a>
        </span>
     </ng-template>
   </p-column>
@@ -15,7 +15,7 @@
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span>
-        <a (click)="removeDialogStudent(student)">Remove</a>
+        <a class="cur" (click)="removeDialogStudent(student)">Remove</a>
        </span>
     </ng-template>
   </p-column>
@@ -185,8 +185,6 @@
                   [autoWidth]="false" [style]="{'width':'100%'}" required="true"></p-dropdown>
     </ng-template>
   </p-column>
-  <!--<p-column field="personStatus" header="Personal status" [editable]="false" [filter]="true" [sortable]="true"-->
-  <!--[style]="{'width':'10em'}"></p-column>-->
   <p-column field="approvedBy.fullName" header="Approved By" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">

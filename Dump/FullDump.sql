@@ -1763,9 +1763,13 @@ DELIMITER //
 drop procedure IF EXISTS find_users//
 CREATE PROCEDURE find_users (in academyId int, in academyStatus int)
 begin
-	select * from users as u where u.id 
-	in (select ia.user_id from ita_academy as ia where ia.academy_id = academyId and ia.it_academy_status_id = academyStatus)
-	and u.id not in (select s.user_id from students as s where s.academy_id = academyId and s.removed = false);
+	select u.*
+    from users as u
+	join students as s on u.id = s.user_id
+	join ita_academy as ia on u.id = ia.user_id
+	where ia.it_academy_status_id = academyStatus and s.removed = true and  ia.academy_id = academyId
+    group by u.id
+    order by u.id;
 end//
 DELIMITER ;
 
