@@ -25,19 +25,19 @@ public class StudentController {
     @Autowired
     StudentsStatusesService statusesService;
 
-    @GetMapping("{id}")
+    @GetMapping(value = {"{id}", "/get-group-overview-report/{id}"})
     public ResponseEntity<List<StudentViewDto>> getStudentsByAcademy(@PathVariable("id") Integer academyId) {
-        return new ResponseEntity<List<StudentViewDto>>(studentService.getStudentsByAcademy(academyId), HttpStatus.OK);
+        return new ResponseEntity<>(studentService.getStudentsByAcademy(academyId), HttpStatus.OK);
     }
 
     @GetMapping("statuses")
     public ResponseEntity<List<StudentStatuses>> getAllStatuses() {
-        return new ResponseEntity<List<StudentStatuses>>(statusesService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(statusesService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("employee")
     public ResponseEntity<List<EmployeeEngShortDto>> getAllEmployees() {
-        return new ResponseEntity<List<EmployeeEngShortDto>>(studentService.getAllEmployees(), HttpStatus.OK);
+        return new ResponseEntity<>(studentService.getAllEmployees(), HttpStatus.OK);
     }
 
     @PostMapping("{id}/add")
