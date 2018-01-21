@@ -9,23 +9,13 @@ import java.util.List;
 
 public interface StudentService {
 
-    /**
-     * Returns accepted students by academy id
-     *
-     * @param academyId - academy/group id
-     * @return list of students
-     */
     List<StudentViewDto> getStudentsByAcademy(Integer academyId);
 
-    void addStudentsToAcademy(Integer academyId, List<Integer> students);
+    boolean addStudentsToAcademy(Integer academyId, List<Integer> students);
 
-    void removeStudentFromAcademy(Integer studentId);
+    boolean removeStudentFromAcademy(Integer studentId);
 
-    void updateStudentsOfAcademy(List<StudentViewDto> students);
-
-    void updateStudentOfAcademy(StudentViewDto student);
-
-    Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatuses);
+    boolean updateStudentsOfAcademy(List<StudentViewDto> students);
 
     Integer countAllByAcademyId(Integer academyId);
 

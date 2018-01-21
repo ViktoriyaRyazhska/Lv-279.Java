@@ -15,13 +15,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-@NamedStoredProcedureQuery(name = "findUsers",
-                procedureName = "find_users",
-                resultClasses = {User.class},
-                parameters = {
-                        @StoredProcedureParameter(name = "academyId", type = Integer.class, mode = ParameterMode.IN),
-                        @StoredProcedureParameter(name = "academyStatus", type = Integer.class, mode = ParameterMode.IN)
-                })
 public class User {
 
     @Id

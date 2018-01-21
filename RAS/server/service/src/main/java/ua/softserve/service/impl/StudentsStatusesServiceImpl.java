@@ -14,13 +14,13 @@ public class StudentsStatusesServiceImpl implements StudentsStatusesService {
     @Autowired
     private StudentsStatusesRepository studentsStatusesRepository;
 
+    /**
+     * Get all existing student statuses.
+     *
+     * @return list of all existing student statuses.
+     */
     @Override
     public List<StudentStatuses> findAll() {
         return studentsStatusesRepository.findAll();
-    }
-
-    @Override
-    public StudentStatuses findOne(int id) {
-        return studentsStatusesRepository.findOne(id);
     }
 }

@@ -16,9 +16,9 @@ public class MarkServiceImpl implements MarkService {
     private MarkRepository markRepository;
 
     /**
-     * Get list of all Marks
+     * Get list of all Marks.
      *
-     * @return list of Marks
+     * @return list of Marks.
      */
     @Override
     public List<Mark> findAll() {
