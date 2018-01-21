@@ -11,4 +11,8 @@ export class GroupOverviewService {
   getAll(): Observable<any> {
     return this.http.get(environment.serverUrl + '/get-group-overview-dropdown');
   }
+
+  showReport(groupId: number): Observable<any> {
+    return this.http.get(environment.serverUrl + 'students/get-group-overview-report/' + groupId, {withCredentials: true});
+  }
 }

@@ -30,15 +30,16 @@
             </mat-form-field>
 
             <mat-form-field class="col-sm-6">
-              <mat-select placeholder="Group Name:" formControlName="groupNameFormControl">
+              <mat-select placeholder="Group Name:" formControlName="groupIdFormControl">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let group of groupArray | groupNamesFilter:
                                                         signupForm.get('endDateFormControl').value:
                                                         signupForm.get('commonDirectionFormControl').value:
                                                         signupForm.get('cityIdFormControl').value"
-                            [value]="group">{{ group.groupName}}
+                            [value]="group.groupId">{{ group.groupName}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="!signupForm.controls.groupIdFormControl.valid">{{defaultInvalidInput}}</mat-error>
             </mat-form-field>
           </div>
         </ul>
@@ -48,7 +49,10 @@
         </div>
       </form>
     </div>
-
   </div>
+</div>
+
+<div class="table" [hidden] = "showRep">
+  <app-group-overview-table [studentsInfo] = "studentsInfo"></app-group-overview-table>
 </div>
 

@@ -59,6 +59,7 @@ import {ItaTacticalReportService} from "./components/reports/ita-tactical-report
 import { UpdateGroupComponent } from './components/group/update-group/update-group.component';
 import { GroupOverviewByTraineesComponent } from './components/reports/group-overview-by-trainees/group-overview-by-trainees.component';
 import { GroupNamesFilterPipe } from './components/reports/group-overview-by-trainees/group-names-filter.pipe';
+import { GroupOverviewTableComponent } from './components/reports/group-overview-by-trainees/group-overview-table/group-overview-table.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { GroupNamesFilterPipe } from './components/reports/group-overview-by-tra
     ViewAcademiesNgxComponent,
     ItaTacticalReportComponent,
     GroupOverviewByTraineesComponent,
-    GroupNamesFilterPipe
+    GroupNamesFilterPipe,
+    GroupOverviewTableComponent
   ],
   entryComponents: [
     ModalBackdropComponent,
