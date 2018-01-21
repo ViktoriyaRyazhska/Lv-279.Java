@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.softserve.persistence.repo.UserRepository;
-import ua.softserve.persistence.repo.impl.UserCustomRepository;
 import ua.softserve.service.UserService;
 import ua.softserve.service.dto.UserShortViewDto;
 
@@ -17,25 +16,7 @@ import static ua.softserve.persistence.constants.ConstantsFromDb.*;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserCustomRepository userCustomRepository;
-
-    @Autowired
     private UserRepository userRepository;
-
-    /**
-     * Get list of all Users belonging to the group.
-     *
-     * @param academyId - selected group in which we want to add students.
-     * @return list of UserShortViewDto
-     * which contains all Users with status Student.
-     */
-//    @Override
-//    @Transactional
-//    public List<UserShortViewDto> getAllUsersByAcademyAndStatus(Integer academyId) {
-//        return userCustomRepository.findUsersForGroup(academyId, STUDENT_ID).stream()
-//                .map(UserShortViewDto::of)
-//                .collect(Collectors.toList());
-//    }
 
     /**
      * Get list of all Users belonging to the group.

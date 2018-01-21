@@ -21,11 +21,6 @@ export class StudentsService{
     return this.http.put(url,students, {withCredentials: true});
   }
 
-  updateStudent(student: StudentFeedback): Observable<any> {
-    let url = environment.serverUrl+'students/update_student';
-    return this.http.put(url,student, {withCredentials: true});
-  }
-
   remove(studentId: number): Observable<any> {
     let url = environment.serverUrl+'students/'+studentId;
     return this.http.delete(url, {withCredentials: true});

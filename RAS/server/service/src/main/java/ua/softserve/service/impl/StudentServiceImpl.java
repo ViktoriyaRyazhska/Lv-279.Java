@@ -1,11 +1,11 @@
 package ua.softserve.service.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.Student;
-import ua.softserve.persistence.entity.StudentStatuses;
 import ua.softserve.persistence.repo.EmployeeRepository;
 import ua.softserve.persistence.repo.StudentRepository;
 
@@ -20,6 +20,7 @@ import static ua.softserve.persistence.constants.ConstantsFromDb.STUDENT_STATUS_
 
 @Service
 public class StudentServiceImpl implements StudentService {
+    private static final Logger logger = LogManager.getLogger(StudentServiceImpl.class);
 
     @Autowired
     private StudentRepository studentRepository;
@@ -44,7 +45,7 @@ public class StudentServiceImpl implements StudentService {
     /**
      * Get list of all Employees
      *
-     * @return - list of EmployeeEngShortDto
+     * @return list of EmployeeEngShortDto
      * which contains all the necessary information about employee
      * and displayed in the dropdown "Approved By" on UI.
      */
@@ -60,17 +61,23 @@ public class StudentServiceImpl implements StudentService {
      * Sign users to selected group
      *
      * @param academyId - selected group in which we want to add students.
-     * @param students - list of users id that ones we want to add to our selected group.
+     * @param students  - list of users id that ones we want to add to our selected group.
      */
     @Override
     @Transactional
-    public void addStudentsToAcademy(Integer academyId, List<Integer> students) {
-        List<Student> entities = students.stream().map(id -> {
-            Student existStudent = studentRepository.findStudentByAcademyAcademyIdAndUserId(academyId, id);
-            return existStudent == null ? new Student(id, academyId, STUDENT_STATUS_TRAINEE_ID)
-                    : existStudent.unremove();
-        }).collect(Collectors.toList());
-        studentRepository.save(entities);
+    public boolean addStudentsToAcademy(Integer academyId, List<Integer> students) {
+        try {
+            List<Student> entities = students.stream().map(id -> {
+                Student existStudent = studentRepository.findStudentByAcademyAcademyIdAndUserId(academyId, id);
+                return existStudent == null ? new Student(id, academyId, STUDENT_STATUS_TRAINEE_ID)
+                        : existStudent.unremove();
+            }).collect(Collectors.toList());
+            studentRepository.save(entities);
+        } catch (RuntimeException e) {
+            logger.catching(e);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -80,10 +87,16 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     @Transactional
-    public void removeStudentFromAcademy(Integer studentId) {
-        Student existStudent = studentRepository.findOne(studentId);
-        existStudent.setRemoved(true);
-        studentRepository.save(existStudent);
+    public boolean removeStudentFromAcademy(Integer studentId) {
+        try {
+            Student existStudent = studentRepository.findOne(studentId);
+            existStudent.setRemoved(true);
+            studentRepository.save(existStudent);
+        } catch (RuntimeException e) {
+            logger.catching(e);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -93,35 +106,24 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     @Transactional
-    public void updateStudentsOfAcademy(List<StudentViewDto> students) {
-        studentRepository.save(students.stream()
-                .map(st -> st.update(studentRepository.findOne(st.getId())))
-                .collect(Collectors.toList()));
+    public boolean updateStudentsOfAcademy(List<StudentViewDto> students) {
+        try {
+            studentRepository.save(students.stream()
+                    .map(st -> st.update(studentRepository.findOne(st.getId())))
+                    .collect(Collectors.toList()));
+        } catch (RuntimeException e) {
+            logger.catching(e);
+            return false;
+        }
+        return true;
     }
 
     /**
-     * Save data about student to database.
+     * Count existing students in the selected group.
      *
-     * @param student - StudentViewDto, which contains student activity data while passing the course.
+     * @param academyId - selected group in which we want to count students.
+     * @return number of existing students in the selected group.
      */
-    @Override
-    @Transactional
-    public void updateStudentOfAcademy(StudentViewDto student) {
-        studentRepository.save(student.update(studentRepository.findOne(student.getId())));
-    }
-
-
-    /**
-     * @param academy
-     * @param studentStatuses
-     * @return
-     */
-    @Override
-    @Transactional
-    public Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatuses) {
-        return studentRepository.countAllByAcademyAndStudentStatus(academy, studentStatuses);
-    }
-
     @Override
     public Integer countAllByAcademyId(Integer academyId) {
         return studentRepository.countAllByAcademyAcademyIdAndRemovedIsFalse(academyId);

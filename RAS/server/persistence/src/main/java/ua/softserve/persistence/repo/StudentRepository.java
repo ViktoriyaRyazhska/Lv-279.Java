@@ -16,8 +16,6 @@ import static ua.softserve.persistence.constants.ConstantsFromDb.*;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-    Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatus);
-
     Integer countAllByAcademyAcademyIdAndRemovedIsFalse(int academyId);
 
     Student findStudentByAcademyAcademyIdAndUserId(int academyId, int userId);
