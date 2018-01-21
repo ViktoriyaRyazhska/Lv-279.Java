@@ -8,16 +8,7 @@ import {StudentsService} from "../../../services/students/students.service";
 import {LoginService} from "../../auth/login/login.service";
 import {Authority} from "../../auth/Authority";
 import {FeedbackService} from "../../../services/feedbacks/feedback.service";
-
-export enum CharacteristicId {
-  ZERO = 0,
-  ONE = 1,
-  TWO = 2,
-  THREE = 3,
-  FOUR = 4,
-  FIVE = 5,
-  SIX = 6
-}
+import {CharacteristicId} from "../../../models/feedbacks/characteristic";
 
 @Component({
   selector: 'app-feedback-list',
@@ -71,7 +62,6 @@ export class FeedbackListComponent implements OnInit {
   constructor(private markService: MarkService,
               private studentsService: StudentsService,
               private feedbackService: FeedbackService,
-              private route: ActivatedRoute,
               private router: Router,
               private loginService: LoginService) {
   }
@@ -122,7 +112,7 @@ export class FeedbackListComponent implements OnInit {
     console.log(this.isAssignedAsTeacher);
     console.log(this.isAssignedAsExpert);
     console.log(this.isAssignedAsInterviewer);
-    if(this.isAssignedAsTeacher) {
+    if (this.isAssignedAsTeacher) {
       this.setDataToTeacherFeedback(this.selectedStudent);
       this.feedbackService.updateFeedback(this.teacherFeedback)
         .subscribe(() => {
@@ -132,7 +122,7 @@ export class FeedbackListComponent implements OnInit {
             console.log(error)
           ));
     }
-    if(this.isAssignedAsExpert) {
+    if (this.isAssignedAsExpert) {
       this.setDataToExpertFeedback(this.selectedStudent);
       this.feedbackService.updateFeedback(this.expertFeedback)
         .subscribe(() => {
@@ -142,7 +132,7 @@ export class FeedbackListComponent implements OnInit {
             console.log(error)
           ));
     }
-    if(this.isAssignedAsInterviewer) {
+    if (this.isAssignedAsInterviewer) {
       this.setDataToInterviewerComment(this.selectedStudent);
       this.feedbackService.updateInterviewerComment(this.interviewerComment, this.selectedStudent.id)
         .subscribe(() => {
@@ -153,7 +143,7 @@ export class FeedbackListComponent implements OnInit {
           ));
     }
 
-    if(this.isAssignedAsInterviewer != true && this.isAssignedAsExpert != true && this.isAssignedAsTeacher != true) {
+    if (this.isAssignedAsInterviewer != true && this.isAssignedAsExpert != true && this.isAssignedAsTeacher != true) {
       console.log(this.isAssignedAsTeacher);
       console.log(this.isAssignedAsExpert);
       console.log(this.isAssignedAsInterviewer);
@@ -214,18 +204,18 @@ export class FeedbackListComponent implements OnInit {
     console.log(this.isAssignedAsTeacher);
     console.log(this.isAssignedAsExpert);
     console.log(this.isAssignedAsInterviewer);
-    if(this.isAssignedAsTeacher) {
+    if (this.isAssignedAsTeacher) {
       this.setDataToTeacherFeedback(this.selectedStudent);
       this.feedbackService.updateFeedback(this.teacherFeedback)
         .subscribe(() => {
-                  this.teacherFeedback = new Feedback();
-                  this.ngOnInit();
-                },
-                error => (
-                  console.log(error)
-                ));
+            this.teacherFeedback = new Feedback();
+            this.ngOnInit();
+          },
+          error => (
+            console.log(error)
+          ));
     }
-    if(this.isAssignedAsExpert) {
+    if (this.isAssignedAsExpert) {
       this.setDataToExpertFeedback(this.selectedStudent);
       this.feedbackService.updateFeedback(this.expertFeedback)
         .subscribe(() => {
@@ -236,7 +226,7 @@ export class FeedbackListComponent implements OnInit {
             console.log(error)
           ));
     }
-    if(this.isAssignedAsInterviewer) {
+    if (this.isAssignedAsInterviewer) {
       this.setDataToInterviewerComment(this.selectedStudent);
       console.log(this.interviewerComment, this.selectedStudent.id);
       this.feedbackService.updateInterviewerComment(this.interviewerComment, this.selectedStudent.id)
@@ -249,7 +239,7 @@ export class FeedbackListComponent implements OnInit {
           ));
     }
 
-    if(this.isAssignedAsInterviewer != true && this.isAssignedAsExpert != true && this.isAssignedAsTeacher != true) {
+    if (this.isAssignedAsInterviewer != true && this.isAssignedAsExpert != true && this.isAssignedAsTeacher != true) {
       console.log(this.isAssignedAsTeacher);
       console.log(this.isAssignedAsExpert);
       console.log(this.isAssignedAsInterviewer);
@@ -353,67 +343,82 @@ export class FeedbackListComponent implements OnInit {
     }
   }
 
-  setDataToTeacherFeedback(student: StudentFeedback){
+  setDataToTeacherFeedback(student: StudentFeedback) {
     if (student.teacherFeedback != null) {
       this.teacherFeedback = student.teacherFeedback;
     }
   }
 
-  setDataToExpertFeedback(student: StudentFeedback){
+  setDataToExpertFeedback(student: StudentFeedback) {
     if (student.expertFeedback != null) {
       this.expertFeedback = student.expertFeedback;
     }
   }
 
-  setDataToInterviewerComment(student: StudentFeedback){
-      this.interviewerComment = student.data.interviewerComment;
+  setDataToInterviewerComment(student: StudentFeedback) {
+    this.interviewerComment = student.data.interviewerComment;
   }
 
   initFeedbackForm() {
     if (this.selectedStudent.teacherFeedback.learningAbility != null) {
-      this.signupFeedbackForm.patchValue({'learningAbilityTeacher': this.selectedStudent.teacherFeedback.learningAbility.id});
+      this.signupFeedbackForm.patchValue(
+        {'learningAbilityTeacher': this.selectedStudent.teacherFeedback.learningAbility.id});
     }
     if (this.selectedStudent.teacherFeedback.overallTechnicalCompetence != null) {
-      this.signupFeedbackForm.patchValue({'overallTechCompetenceTeacher': this.selectedStudent.teacherFeedback.overallTechnicalCompetence.id});
+      this.signupFeedbackForm.patchValue(
+        {'overallTechCompetenceTeacher': this.selectedStudent.teacherFeedback.overallTechnicalCompetence.id});
     }
     if (this.selectedStudent.teacherFeedback.passionalInitiative != null) {
-      this.signupFeedbackForm.patchValue({'passionalInitiativeTeacher': this.selectedStudent.teacherFeedback.passionalInitiative.id});
+      this.signupFeedbackForm.patchValue(
+        {'passionalInitiativeTeacher': this.selectedStudent.teacherFeedback.passionalInitiative.id});
     }
     if (this.selectedStudent.teacherFeedback.teamWork != null) {
-      this.signupFeedbackForm.patchValue({'teamWorkTeacher': this.selectedStudent.teacherFeedback.teamWork.id});
+      this.signupFeedbackForm.patchValue(
+        {'teamWorkTeacher': this.selectedStudent.teacherFeedback.teamWork.id});
     }
     if (this.selectedStudent.teacherFeedback.gettingThingsDone != null) {
-      this.signupFeedbackForm.patchValue({'getThingsDoneTeacher': this.selectedStudent.teacherFeedback.gettingThingsDone.id});
+      this.signupFeedbackForm.patchValue(
+        {'getThingsDoneTeacher': this.selectedStudent.teacherFeedback.gettingThingsDone.id});
     }
     if (this.selectedStudent.teacherFeedback.activeCommunicator != null) {
-      this.signupFeedbackForm.patchValue({'activeCommunicatorTeacher': this.selectedStudent.teacherFeedback.activeCommunicator.id});
+      this.signupFeedbackForm.patchValue(
+        {'activeCommunicatorTeacher': this.selectedStudent.teacherFeedback.activeCommunicator.id});
     }
     if (this.selectedStudent.teacherFeedback.summary != null) {
-      this.signupFeedbackForm.patchValue({'summaryTeacher': this.selectedStudent.teacherFeedback.summary});
+      this.signupFeedbackForm.patchValue(
+        {'summaryTeacher': this.selectedStudent.teacherFeedback.summary});
     }
     if (this.selectedStudent.expertFeedback.learningAbility != null) {
-      this.signupFeedbackForm.patchValue({'learningAbilityExpert': this.selectedStudent.expertFeedback.learningAbility.id});
+      this.signupFeedbackForm.patchValue(
+        {'learningAbilityExpert': this.selectedStudent.expertFeedback.learningAbility.id});
     }
     if (this.selectedStudent.expertFeedback.overallTechnicalCompetence != null) {
-      this.signupFeedbackForm.patchValue({'overallTechCompetenceExpert': this.selectedStudent.expertFeedback.overallTechnicalCompetence.id});
+      this.signupFeedbackForm.patchValue(
+        {'overallTechCompetenceExpert': this.selectedStudent.expertFeedback.overallTechnicalCompetence.id});
     }
     if (this.selectedStudent.expertFeedback.passionalInitiative != null) {
-      this.signupFeedbackForm.patchValue({'passionalInitiativeExpert': this.selectedStudent.expertFeedback.passionalInitiative.id});
+      this.signupFeedbackForm.patchValue(
+        {'passionalInitiativeExpert': this.selectedStudent.expertFeedback.passionalInitiative.id});
     }
     if (this.selectedStudent.expertFeedback.teamWork != null) {
-      this.signupFeedbackForm.patchValue({'teamWorkExpert': this.selectedStudent.expertFeedback.teamWork.id});
+      this.signupFeedbackForm.patchValue(
+        {'teamWorkExpert': this.selectedStudent.expertFeedback.teamWork.id});
     }
     if (this.selectedStudent.expertFeedback.gettingThingsDone != null) {
-      this.signupFeedbackForm.patchValue({'getThingsDoneExpert': this.selectedStudent.expertFeedback.gettingThingsDone.id});
+      this.signupFeedbackForm.patchValue(
+        {'getThingsDoneExpert': this.selectedStudent.expertFeedback.gettingThingsDone.id});
     }
     if (this.selectedStudent.expertFeedback.activeCommunicator != null) {
-      this.signupFeedbackForm.patchValue({'activeCommunicatorExpert': this.selectedStudent.expertFeedback.activeCommunicator.id});
+      this.signupFeedbackForm.patchValue(
+        {'activeCommunicatorExpert': this.selectedStudent.expertFeedback.activeCommunicator.id});
     }
     if (this.selectedStudent.expertFeedback.summary != null) {
-      this.signupFeedbackForm.patchValue({'summaryExpert': this.selectedStudent.expertFeedback.summary});
+      this.signupFeedbackForm.patchValue(
+        {'summaryExpert': this.selectedStudent.expertFeedback.summary});
     }
     if (this.selectedStudent.data.interviewerComment != null) {
-      this.signupFeedbackForm.patchValue({'summary': this.selectedStudent.data.interviewerComment});
+      this.signupFeedbackForm.patchValue(
+        {'summary': this.selectedStudent.data.interviewerComment});
     }
   }
 
@@ -465,44 +470,68 @@ export class FeedbackListComponent implements OnInit {
   descriptionSelector() {
     if (this.marks != null) {
       for (let mark of this.marks) {
-        if (this.signupFeedbackForm.get('learningAbilityTeacher').value != null && mark.id == this.signupFeedbackForm.get('learningAbilityTeacher').value && mark.characteristic.id == this.CharId.ONE) {
+        if (this.signupFeedbackForm.get('learningAbilityTeacher').value != null &&
+          mark.id == this.signupFeedbackForm.get('learningAbilityTeacher').value &&
+          mark.characteristic.id == this.CharId.ONE) {
           this.learnDescTeacher = mark.description;
         }
-        if (this.signupFeedbackForm.get('overallTechCompetenceTeacher').value != null && mark.id == this.signupFeedbackForm.get('overallTechCompetenceTeacher').value && mark.characteristic.id == this.CharId.TWO) {
+        if (this.signupFeedbackForm.get('overallTechCompetenceTeacher').value != null &&
+          mark.id == this.signupFeedbackForm.get('overallTechCompetenceTeacher').value &&
+          mark.characteristic.id == this.CharId.TWO) {
           this.overallDescTeacher = mark.description;
         }
-        if (this.signupFeedbackForm.get('passionalInitiativeTeacher').value != null && mark.id == this.signupFeedbackForm.get('passionalInitiativeTeacher').value && mark.characteristic.id == this.CharId.THREE) {
+        if (this.signupFeedbackForm.get('passionalInitiativeTeacher').value != null &&
+          mark.id == this.signupFeedbackForm.get('passionalInitiativeTeacher').value &&
+          mark.characteristic.id == this.CharId.THREE) {
           this.passDescTeacher = mark.description;
         }
-        if (this.signupFeedbackForm.get('teamWorkTeacher').value != null && mark.id == this.signupFeedbackForm.get('teamWorkTeacher').value && mark.characteristic.id == this.CharId.FOUR) {
+        if (this.signupFeedbackForm.get('teamWorkTeacher').value != null &&
+          mark.id == this.signupFeedbackForm.get('teamWorkTeacher').value &&
+          mark.characteristic.id == this.CharId.FOUR) {
           this.teamDescTeacher = mark.description;
         }
-        if (this.signupFeedbackForm.get('getThingsDoneTeacher').value != null && mark.id == this.signupFeedbackForm.get('getThingsDoneTeacher').value && mark.characteristic.id == this.CharId.FIVE) {
+        if (this.signupFeedbackForm.get('getThingsDoneTeacher').value != null &&
+          mark.id == this.signupFeedbackForm.get('getThingsDoneTeacher').value &&
+          mark.characteristic.id == this.CharId.FIVE) {
           this.getDescTeacher = mark.description;
         }
-        if (this.signupFeedbackForm.get('activeCommunicatorTeacher').value != null && mark.id == this.signupFeedbackForm.get('activeCommunicatorTeacher').value && mark.characteristic.id == this.CharId.SIX) {
+        if (this.signupFeedbackForm.get('activeCommunicatorTeacher').value != null &&
+          mark.id == this.signupFeedbackForm.get('activeCommunicatorTeacher').value &&
+          mark.characteristic.id == this.CharId.SIX) {
           this.actDescTeacher = mark.description;
         }
       }
     }
     if (this.marks != null) {
       for (let mark of this.marks) {
-        if (this.signupFeedbackForm.get('learningAbilityExpert').value != null && mark.id == this.signupFeedbackForm.get('learningAbilityExpert').value && mark.characteristic.id == this.CharId.ONE) {
+        if (this.signupFeedbackForm.get('learningAbilityExpert').value != null &&
+          mark.id == this.signupFeedbackForm.get('learningAbilityExpert').value &&
+          mark.characteristic.id == this.CharId.ONE) {
           this.learnDescExpert = mark.description;
         }
-        if (this.signupFeedbackForm.get('overallTechCompetenceExpert').value != null && mark.id == this.signupFeedbackForm.get('overallTechCompetenceExpert').value && mark.characteristic.id == this.CharId.TWO) {
+        if (this.signupFeedbackForm.get('overallTechCompetenceExpert').value != null &&
+          mark.id == this.signupFeedbackForm.get('overallTechCompetenceExpert').value &&
+          mark.characteristic.id == this.CharId.TWO) {
           this.overallDescExpert = mark.description;
         }
-        if (this.signupFeedbackForm.get('passionalInitiativeExpert').value != null && mark.id == this.signupFeedbackForm.get('passionalInitiativeExpert').value && mark.characteristic.id == this.CharId.THREE) {
+        if (this.signupFeedbackForm.get('passionalInitiativeExpert').value != null &&
+          mark.id == this.signupFeedbackForm.get('passionalInitiativeExpert').value &&
+          mark.characteristic.id == this.CharId.THREE) {
           this.passDescExpert = mark.description;
         }
-        if (this.signupFeedbackForm.get('teamWorkExpert').value != null && mark.id == this.signupFeedbackForm.get('teamWorkExpert').value && mark.characteristic.id == this.CharId.FOUR) {
+        if (this.signupFeedbackForm.get('teamWorkExpert').value != null &&
+          mark.id == this.signupFeedbackForm.get('teamWorkExpert').value &&
+          mark.characteristic.id == this.CharId.FOUR) {
           this.teamDescExpert = mark.description;
         }
-        if (this.signupFeedbackForm.get('getThingsDoneExpert').value != null && mark.id == this.signupFeedbackForm.get('getThingsDoneExpert').value && mark.characteristic.id == this.CharId.FIVE) {
+        if (this.signupFeedbackForm.get('getThingsDoneExpert').value != null &&
+          mark.id == this.signupFeedbackForm.get('getThingsDoneExpert').value &&
+          mark.characteristic.id == this.CharId.FIVE) {
           this.getDescExpert = mark.description;
         }
-        if (this.signupFeedbackForm.get('activeCommunicatorExpert').value != null && mark.id == this.signupFeedbackForm.get('activeCommunicatorExpert').value && mark.characteristic.id == this.CharId.SIX) {
+        if (this.signupFeedbackForm.get('activeCommunicatorExpert').value != null &&
+          mark.id == this.signupFeedbackForm.get('activeCommunicatorExpert').value &&
+          mark.characteristic.id == this.CharId.SIX) {
           this.actDescExpert = mark.description;
         }
       }

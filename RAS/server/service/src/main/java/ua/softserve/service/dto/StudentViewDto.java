@@ -29,8 +29,8 @@ public class StudentViewDto {
     public Student update(Student student) {
         student.setData(data);
         student.setStudentStatus(studentStatus);
-        student.setTeacherFeedback(teacherFeedback);
-        student.setExpertFeedback(expertFeedback);
+//        student.setTeacherFeedback(teacherFeedback);
+//        student.setExpertFeedback(expertFeedback);
         if (approvedBy != null) {
             student.setApprovedBy(new Employee(approvedBy.getEmployeeId()));
         }
