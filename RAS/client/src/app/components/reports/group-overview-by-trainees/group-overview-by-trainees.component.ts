@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {GroupOverviewService} from "./group-overview.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {GroupOverview} from "./group-overview.model";
+import {GroupInfo} from "./group-info.model";
 
 @Component({
   selector: 'app-group-overview-by-trainees',
@@ -11,12 +12,14 @@ import {GroupOverview} from "./group-overview.model";
 })
 export class GroupOverviewByTraineesComponent implements OnInit {
   endYears = [];
-  groupNames = [];
+  groupArray = [];
   cityNames: any[];
   commonDirection: any[];
 
   signupForm: FormGroup;
   group: GroupOverview;
+
+  groupInfo: GroupInfo;
 
   constructor(private groupOverview: GroupOverviewService) {
   }
@@ -29,8 +32,18 @@ export class GroupOverviewByTraineesComponent implements OnInit {
         this.cityNames = data.cityNames;
         this.commonDirection = data.direction;
         for (let elem of data.groupNames) {
-          this.groupNames.push(elem.groupName);
+          this.groupInfo = new GroupInfo();
+          this.groupInfo.groupName = elem.groupName;
+          if (elem.academy.directions != null) {
+            this.groupInfo.directionId = elem.academy.directions.directionId;
+          }
+          if (elem.academy.city != null) {
+            this.groupInfo.cityId = elem.academy.city.cityId;
+          }
           elem.academy.endDate = elem.academy.endDate.split('-')[0];
+          this.groupInfo.endDate = elem.academy.endDate;
+          this.groupArray.push(this.groupInfo);
+
           if (!this.endYears.includes(elem.academy.endDate)) {
             this.endYears.push(elem.academy.endDate);
           }

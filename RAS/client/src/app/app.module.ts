@@ -58,6 +58,7 @@ import { ItaTacticalReportComponent } from './components/reports/ita-tactical-re
 import {ItaTacticalReportService} from "./components/reports/ita-tactical-report/ita-tactical-report.service";
 import { UpdateGroupComponent } from './components/group/update-group/update-group.component';
 import { GroupOverviewByTraineesComponent } from './components/reports/group-overview-by-trainees/group-overview-by-trainees.component';
+import { GroupNamesFilterPipe } from './components/reports/group-overview-by-trainees/group-names-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { GroupOverviewByTraineesComponent } from './components/reports/group-ove
     UpdateGroupComponent,
     ViewAcademiesNgxComponent,
     ItaTacticalReportComponent,
-    GroupOverviewByTraineesComponent
+    GroupOverviewByTraineesComponent,
+    GroupNamesFilterPipe
   ],
   entryComponents: [
     ModalBackdropComponent,

@@ -32,8 +32,11 @@
             <mat-form-field class="col-sm-6">
               <mat-select placeholder="Group Name:" formControlName="groupNameFormControl">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let name of groupNames"
-                            [value]="name">{{ name }}
+                <mat-option *ngFor="let group of groupArray | groupNamesFilter:
+                                                        signupForm.get('endDateFormControl').value:
+                                                        signupForm.get('commonDirectionFormControl').value:
+                                                        signupForm.get('cityIdFormControl').value"
+                            [value]="group">{{ group.groupName}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
