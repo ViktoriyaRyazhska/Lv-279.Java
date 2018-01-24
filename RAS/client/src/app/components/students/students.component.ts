@@ -8,7 +8,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../auth/login/login.service";
 import {Tests} from "../../models/tests";
 import {TestsService} from "../../services/tests-names/tests.service";
-import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-students',
@@ -18,7 +17,7 @@ import {forEach} from "@angular/router/src/utils/collection";
 @Injectable()
 export class StudentsComponent implements OnInit {
   @Input() groupId: number;
-  @Input() techDirect : number;
+  @Input() techDirect: number;
 
   private academyId: number;
 
@@ -50,8 +49,7 @@ export class StudentsComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private loginService: LoginService,
-              private testNamesService: TestsService,
-  ) {
+              private testNamesService: TestsService,) {
     this.selectedStudent = new StudentFeedback();
   }
 
@@ -106,7 +104,7 @@ export class StudentsComponent implements OnInit {
           console.log(data);
         },
         error => console.log(error)
-      )
+      );
     console.log(this.employeesDropdown);
   }
 
@@ -132,9 +130,7 @@ export class StudentsComponent implements OnInit {
             this.ngOnInit();
           }
         );
-    }
-
-    else {
+    } else {
       this.displayInvalidSavingDialog = true;
     }
   }
@@ -142,9 +138,10 @@ export class StudentsComponent implements OnInit {
   removeSelectedStudent() {
     this.studentsService.remove(this.selectedStudent.id)
       .subscribe(() => {
-        this.students = null;
-        this.ngOnInit();
-      });
+          this.students = null;
+          this.ngOnInit();
+        }
+      );
     this.displayRemovingDialog = false;
   }
 
@@ -235,7 +232,6 @@ export class StudentsComponent implements OnInit {
       count++;
       sum += avg;
     }
-
     if (student.data.finalBase != null) {
       sum += student.data.finalBase;
       count++;
@@ -244,11 +240,9 @@ export class StudentsComponent implements OnInit {
       sum += student.data.finalLang;
       count++;
     }
-
     if (count != 0) {
       return Math.round((sum / count) * 1000) / 1000;
-    }
-    else return null;
+    } else return null;
   }
 
   getCurrentControl(student: StudentFeedback): number {
@@ -257,24 +251,19 @@ export class StudentsComponent implements OnInit {
 
     if (avg != null) {
       return Math.round(avg * 1000) / 1000;
-    }
-    else return avg;
+    } else return avg;
   }
 
   mySortCurrentControl(event: any) {
     if (event.order === 1) {
       this.students.sort((a: StudentFeedback, b: StudentFeedback) => {
-
         const sortDesc = this.getCurrentControl(a) < this.getCurrentControl(b) ? -1 : 0;
         return this.getCurrentControl(a) > this.getCurrentControl(b) ? 1 : sortDesc;
-
       });
     } else {
       this.students.sort((a: StudentFeedback, b: StudentFeedback) => {
-
         const sortDesc = this.getCurrentControl(a) < this.getCurrentControl(b) ? 1 : 0;
         return this.getCurrentControl(a) > this.getCurrentControl(b) ? -1 : sortDesc;
-
       });
     }
     this.students = [...this.students];
@@ -283,17 +272,13 @@ export class StudentsComponent implements OnInit {
   mySortTrainingScore(event: any) {
     if (event.order === 1) {
       this.students.sort((a: StudentFeedback, b: StudentFeedback) => {
-
         const sortDesc = this.getTrainingScore(a) < this.getTrainingScore(b) ? -1 : 0;
         return this.getTrainingScore(a) > this.getTrainingScore(b) ? 1 : sortDesc;
-
       });
     } else {
       this.students.sort((a: StudentFeedback, b: StudentFeedback) => {
-
         const sortDesc = this.getTrainingScore(a) < this.getTrainingScore(b) ? 1 : 0;
         return this.getTrainingScore(a) > this.getTrainingScore(b) ? -1 : sortDesc;
-
       });
     }
     this.students = [...this.students];
@@ -386,10 +371,10 @@ export class StudentsComponent implements OnInit {
     return true;
   }
 
-  setTests (tests : Tests[]) {
+  setTests(tests: Tests[]) {
     this.tests = [];
-    tests.forEach(test=>{
-      if(test.isRemoved()) {
+    tests.forEach(test => {
+      if (test.isRemoved()) {
         let i = tests.indexOf(test);
         tests.splice(i, 1);
       }
