@@ -60,6 +60,8 @@ import { UpdateGroupComponent } from './components/group/update-group/update-gro
 import { GroupOverviewByTraineesComponent } from './components/reports/group-overview-by-trainees/group-overview-by-trainees.component';
 import { GroupNamesFilterPipe } from './components/reports/group-overview-by-trainees/group-names-filter.pipe';
 import { GroupOverviewTableComponent } from './components/reports/group-overview-by-trainees/group-overview-table/group-overview-table.component';
+import { NotFoundErrorComponent } from './components/error/not-found-error/not-found-error.component';
+import { StudentDialogComponent } from './components/reports/group-overview-by-trainees/student-dialog/student-dialog.component';
 
 @NgModule({
   declarations: [
@@ -95,12 +97,16 @@ import { GroupOverviewTableComponent } from './components/reports/group-overview
     ItaTacticalReportComponent,
     GroupOverviewByTraineesComponent,
     GroupNamesFilterPipe,
-    GroupOverviewTableComponent
+    GroupOverviewTableComponent,
+    NotFoundErrorComponent,
+    StudentDialogComponent
   ],
   entryComponents: [
     ModalBackdropComponent,
     ModalContainerComponent,
-    DialogComponent],
+    DialogComponent,
+    StudentDialogComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

@@ -1,3 +1,66 @@
-<p>
-  group-overview-table works!
-</p>
+<div class="demo-container">
+  <dx-data-grid id="gridContainer"
+                [dataSource]="studentsArray"
+                [allowColumnResizing]="true"
+                [visible]="!loadIndicatorVisible">
+    <dxo-export [enabled]="true" fileName="report" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+    <dxo-paging [enabled]="false"></dxo-paging>
+    <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+
+
+    <dxi-column dataField="id"
+                caption="Candidate Id"></dxi-column>
+    <dxi-column caption="Candidate Name" dataField="user" cellTemplate="cellTemplate"
+                [allowExporting]="false"></dxi-column>
+    <!--<dxi-column id="CCC" caption="Candidate Name" dataField="user.firstName"></dxi-column>-->
+
+    <dxi-column dataField=""
+                caption="Progress Index"></dxi-column>
+    <dxi-column dataField=""
+                caption="Final Index, of 1000"></dxi-column>
+    <dxi-column dataField="cg"
+                caption="Entry Score, of 6"></dxi-column>
+
+    <dxi-column caption="Expert">
+      <dxi-column dataField="expertFeedback.learningAbility.name"
+                  caption="Learning Ability"></dxi-column>
+      <dxi-column dataField="expertFeedback.overallTechnicalCompetence.name"
+                  caption="Overall Technical Competence"></dxi-column>
+      <dxi-column dataField="expertFeedback.passionalInitiative.name"
+                  caption="Proffesional Initiative"></dxi-column>
+      <dxi-column dataField="expertFeedback.gettingThingsDone.name"
+                  caption="Getting Things Done"></dxi-column>
+      <dxi-column dataField="expertFeedback.activeCommunicator.name"
+                  caption="Active Communicator"></dxi-column>
+      <dxi-column dataField="expertFeedback.summary"
+                  caption="Summary"></dxi-column>
+    </dxi-column>
+
+    <dxi-column caption="Teacher">
+      <dxi-column dataField="teacherFeedback.learningAbility.name"
+                  caption="Learning Ability"></dxi-column>
+      <dxi-column dataField="teacherFeedback.overallTechnicalCompetence.name"
+                  caption="Overall Technical Competence"></dxi-column>
+      <dxi-column dataField="teacherFeedback.passionalInitiative.name"
+                  caption="Proffesional Initiative"></dxi-column>
+      <dxi-column dataField="teacherFeedback.teamWork.name"
+                  caption="Team Work"></dxi-column>
+      <dxi-column dataField="teacherFeedback.gettingThingsDone.name"
+                  caption="Getting Things Done"></dxi-column>
+      <dxi-column dataField="teacherFeedback.activeCommunicator.name"
+                  caption="Active Communicator"></dxi-column>
+      <dxi-column dataField="teacherFeedback.summary"
+                  caption="Summary"></dxi-column>
+    </dxi-column>
+
+    <dxi-column dataField="location"
+                caption="Final Score, of 6"></dxi-column>
+
+    <div *dxTemplate="let data of 'cellTemplate'">
+      <a class="cur" (click)="showDialog(data.value.id)">{{data.value.firstName}}</a>
+    </div>
+  </dx-data-grid>
+</div>
+

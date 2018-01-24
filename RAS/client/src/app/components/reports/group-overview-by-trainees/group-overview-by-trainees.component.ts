@@ -66,6 +66,7 @@ export class GroupOverviewByTraineesComponent implements OnInit {
   formGroupOnInit() {
     this.signupForm = new FormGroup({
       'groupIdFormControl': new FormControl(this.group.groupId, [Validators.required]),
+      'groupNameFormControl': new FormControl(this.group.groupName),
       'cityIdFormControl': new FormControl(this.group.cityId),
       'endDateFormControl': new FormControl(this.group.endDate),
       'commonDirectionFormControl': new FormControl(this.group.directionId)
@@ -77,8 +78,7 @@ export class GroupOverviewByTraineesComponent implements OnInit {
       this.showRep = false;
       this.groupOverview.showReport(this.signupForm.get('groupIdFormControl').value).subscribe(
         data => {
-          this.studentsInfo = data;
-          this.child.bbb(data);
+          this.child.showReportTable(data);
         },
         error2 => console.log(error2)
       );

@@ -18,6 +18,7 @@ import {ItaTacticalReportComponent} from "./components/reports/ita-tactical-repo
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {UpdateGroupComponent} from "./components/group/update-group/update-group.component";
 import {GroupOverviewByTraineesComponent} from "./components/reports/group-overview-by-trainees/group-overview-by-trainees.component";
+import {NotFoundErrorComponent} from "./components/error/not-found-error/not-found-error.component";
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
   {path: 'ang/history/:id', component: HistoryListComponent},
   {path: 'ang', component: AppComponent},
   {path: 'ang/error', component: ErrorComponent},
-  {path: 'ang/employee/:id', component: EmployeeComponent}
+  {path: 'ang/employee/:id', component: EmployeeComponent},
+  {path: '**', component: NotFoundErrorComponent}
 ];
 
 @NgModule({
