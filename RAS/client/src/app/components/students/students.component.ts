@@ -75,6 +75,8 @@ export class StudentsComponent implements OnInit {
         this.studentsService.getStatuses()
           .subscribe(data => {
               this.studentStatuses = data;
+              this.statusesDropdown = [];
+              console.log(this.studentStatuses)
               this.studentStatuses.forEach(st => this.statusesDropdown.push({label: st.name, value: st}))
 
             },
@@ -172,44 +174,44 @@ export class StudentsComponent implements OnInit {
     var count: number = 0;
     var avg: number;
 
-    if (student.data != null) {
-      if (student.data.testOne != null) {
+    if (student.data != null && this.tests != null) {
+      if (student.data.testOne != null && this.tests[0]) {
         sum += student.data.testOne;
         count++;
       }
-      if (student.data.testOne != null) {
+      if (student.data.testOne != null && this.tests[1]) {
         sum += student.data.testTwo;
         count++;
       }
-      if (student.data.testThree != null) {
+      if (student.data.testThree != null && this.tests[2]) {
         sum += student.data.testThree;
         count++;
       }
-      if (student.data.testFour != null) {
+      if (student.data.testFour != null && this.tests[3]) {
         sum += student.data.testFour;
         count++;
       }
-      if (student.data.testFive != null) {
+      if (student.data.testFive != null && this.tests[4]) {
         sum += student.data.testFive;
         count++;
       }
-      if (student.data.testSix != null) {
+      if (student.data.testSix != null && this.tests[5]) {
         sum += student.data.testSix;
         count++;
       }
-      if (student.data.testSeven != null) {
+      if (student.data.testSeven != null && this.tests[6]) {
         sum += student.data.testSeven;
         count++;
       }
-      if (student.data.testEight != null) {
+      if (student.data.testEight != null && this.tests[7]) {
         sum += student.data.testEight;
         count++;
       }
-      if (student.data.testNine != null) {
+      if (student.data.testNine != null && this.tests[8]) {
         sum += student.data.testNine;
         count++;
       }
-      if (student.data.testTen != null) {
+      if (student.data.testTen != null && this.tests[9]) {
         sum += student.data.testTen;
         count++;
       }
