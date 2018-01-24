@@ -1,21 +1,21 @@
 <p-dataTable *ngIf="tests" [value]="students" [editable]="true" resizableColumns="true" reorderableColumns="true"
-             scrollable="true">
+             scrollable="true" columnResizeMode="expand">
   <p-column field="user.id" header="Employee" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'7em'}"></p-column>
   <p-column field="user.firstName" header="Name" [editable]="false" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span>
-          <a class="cur" (click)="onStudentClick(student)"> {{student.user.firstName +" "+ student.user.lastName}}</a>
+          <a class="cur" (click)="onStudentClick(student)">{{student.user.firstName +" "+ student.user.lastName}}</a>
        </span>
     </ng-template>
   </p-column>
   <span *ngIf="this.loginService.securityForAddStudent()">
-  <p-column header="#" [editable]="false"
-            [style]="{'width':'10em'}">
-    <ng-template let-col let-student="rowData" pTemplate="body">
+  <p-column [editable]="false" [resizable]="false"
+            [style]="{'width':'7em'}">
+    <ng-template  let-col let-student="rowData" pTemplate="body">
        <span>
-        <a class="cur" (click)="removeDialogStudent(student)">Remove</a>
+        <button pButton (click)="removeDialogStudent(student)" label="Remove" class="ui-button-danger"></button>
        </span>
     </ng-template>
   </p-column>
@@ -25,104 +25,116 @@
   <p-column field="data.entryScore" header="Entry Score" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-
       <input type="number" pInputText="" [(ngModel)]="student.data.entryScore" [class]="'form-control'" required="true">
-
     </ng-template>
   </p-column>
+
   <p-column field="data.intermBase" header="Interm. Test. Base" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-
       <input type="number" pInputText="" [(ngModel)]="student.data.intermBase" [class]="'form-control'" required="true">
-
     </ng-template>
   </p-column>
+
   <p-column field="data.intermLang" header="Interm. Test. Lang" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-
       <input type="number" pInputText="" [(ngModel)]="student.data.intermLang" [class]="'form-control'" required="true">
-
     </ng-template>
   </p-column>
+
   <p-column field="data.engGram" header="English Grammar Score" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-
       <input type="number" pInputText="" [(ngModel)]="student.data.engGram" [class]="'form-control'" required="true">
-
     </ng-template>
   </p-column>
 
   <p-column field="data.incomingTest" header="Incoming Test" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-
-      <input type="number" pInputText="" [(ngModel)]="student.data.incomingTest" [class]="'form-control'" required="true" >
-
+      <input type="number" pInputText="" [(ngModel)]="student.data.incomingTest" [class]="'form-control'"
+             required="true">
     </ng-template>
   </p-column>
 
-  <p-column *ngIf="tests[0]" header="{{tests[0].testName}}" field="data.testOne" [editable]="true" [filter]="true" [sortable]="true"
-            [style]="{'width':'10em'}">
+  <p-column *ngIf="tests[0]" header="{{tests[0].testName}}" field="data.testOne" [editable]="true" [filter]="true"
+            [sortable]="true" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.testOne" [class]="'form-control'" required="true" placeholder=" 0 - {{tests[0].testMaxScore}}">
-    </ng-template>
-  </p-column>
-  <p-column *ngIf="tests[1]" header="{{tests[1].testName}}" field="data.testTwo" [editable]="true" [filter]="true" [sortable]="true"
-  [style]="{'width':'10em'}">
-    <ng-template let-col let-student="rowData"  pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.testTwo" [class]="'form-control'" required="true" placeholder=" 0 - {{tests[1].testMaxScore}}">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testOne" [class]="'form-control'" required="true"
+             placeholder=" 0 - {{tests[0].testMaxScore}}">
     </ng-template>
   </p-column>
 
-  <p-column *ngIf="tests[2]" header="{{tests[2].testName}}" field="data.testThree" [editable]="true" [filter]="true" [sortable]="true"
-  [style]="{'width':'10em'}">
+  <p-column *ngIf="tests[1]" header="{{tests[1].testName}}" field="data.testTwo" [editable]="true" [filter]="true"
+            [sortable]="true" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.testThree" [class]="'form-control'" required="true" placeholder=" 0 - {{tests[2].testMaxScore}}">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testTwo" [class]="'form-control'" required="true"
+             placeholder=" 0 - {{tests[1].testMaxScore}}">
     </ng-template>
   </p-column>
-  <p-column *ngIf="tests[3]" header="{{tests[3].testName}}" field="data.testFour" [editable]="true" [filter]="true" [sortable]="true"
-  [style]="{'width':'10em'}">
+
+  <p-column *ngIf="tests[2]" header="{{tests[2].testName}}" field="data.testThree" [editable]="true" [filter]="true"
+            [sortable]="true" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.testFour" [class]="'form-control'" required="true" placeholder=" 0 - {{tests[3].testMaxScore}}">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testThree" [class]="'form-control'" required="true"
+             placeholder=" 0 - {{tests[2].testMaxScore}}">
     </ng-template>
   </p-column>
-  <p-column *ngIf="tests[4]" header="{{tests[4].testName}}" field="data.testFive"  [editable]="true" [filter]="true" [sortable]="true"
-  [style]="{'width':'10em'}">
+
+  <p-column *ngIf="tests[3]" header="{{tests[3].testName}}" field="data.testFour" [editable]="true" [filter]="true"
+            [sortable]="true" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.testFive" [class]="'form-control'" required="true" placeholder=" 0 - {{tests[4].testMaxScore}}">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testFour" [class]="'form-control'" required="true"
+             placeholder=" 0 - {{tests[3].testMaxScore}}">
     </ng-template>
   </p-column>
-  <p-column *ngIf="tests[5]" header="{{tests[5].testName}}" field="data.testSix" [editable]="true" [filter]="true" [sortable]="true"
-  [style]="{'width':'10em'}">
+
+  <p-column *ngIf="tests[4]" header="{{tests[4].testName}}" field="data.testFive" [editable]="true" [filter]="true"
+            [sortable]="true" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.testSix" [class]="'form-control'" required="true" placeholder=" 0 - {{tests[5].testMaxScore}}">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testFive" [class]="'form-control'" required="true"
+             placeholder=" 0 - {{tests[4].testMaxScore}}">
     </ng-template>
   </p-column>
-  <p-column *ngIf="tests[6]" header="{{tests[6].testName}}" field="data.testSeven" [editable]="true" [filter]="true" [sortable]="true"
-  [style]="{'width':'10em'}">
+
+  <p-column *ngIf="tests[5]" header="{{tests[5].testName}}" field="data.testSix" [editable]="true" [filter]="true"
+            [sortable]="true" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.testSeven" [class]="'form-control'" required="true" placeholder=" 0 - {{tests[6].testMaxScore}}">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testSix" [class]="'form-control'" required="true"
+             placeholder=" 0 - {{tests[5].testMaxScore}}">
     </ng-template>
   </p-column>
-  <p-column *ngIf="tests[7]" header="{{tests[7].testName}}" field="data.testEight" [editable]="true" [filter]="true" [sortable]="true"
-  [style]="{'width':'10em'}">
+
+  <p-column *ngIf="tests[6]" header="{{tests[6].testName}}" field="data.testSeven" [editable]="true" [filter]="true"
+            [sortable]="true" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.testEight" [class]="'form-control'" required="true" placeholder=" 0 - {{tests[7].testMaxScore}}">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testSeven" [class]="'form-control'" required="true"
+             placeholder=" 0 - {{tests[6].testMaxScore}}">
     </ng-template>
   </p-column>
-  <p-column *ngIf="tests[8]" header="{{tests[8].testName}}" field="data.testNine" [editable]="true" [filter]="true" [sortable]="true"
-  [style]="{'width':'10em'}">
+
+  <p-column *ngIf="tests[7]" header="{{tests[7].testName}}" field="data.testEight" [editable]="true" [filter]="true"
+            [sortable]="true" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.testNine" [class]="'form-control'" required="true" placeholder=" 0 - {{tests[8].testMaxScore}}">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testEight" [class]="'form-control'" required="true"
+             placeholder=" 0 - {{tests[7].testMaxScore}}">
     </ng-template>
   </p-column>
-  <p-column *ngIf="tests[9]" header="{{tests[9].testName}}" field="data.testTen" [editable]="true" [filter]="true" [sortable]="true"
-  [style]="{'width':'10em'}">
+
+  <p-column *ngIf="tests[8]" header="{{tests[8].testName}}" field="data.testNine" [editable]="true" [filter]="true"
+            [sortable]="true" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
-      <input type="number" pInputText="" [(ngModel)]="student.data.testTen" [class]="'form-control'" required="true" placeholder=" 0 - {{tests[9].testMaxScore}}">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testNine" [class]="'form-control'" required="true"
+             placeholder=" 0 - {{tests[8].testMaxScore}}">
+    </ng-template>
+  </p-column>
+
+  <p-column *ngIf="tests[9]" header="{{tests[9].testName}}" field="data.testTen" [editable]="true" [filter]="true"
+            [sortable]="true" [style]="{'width':'10em'}">
+    <ng-template let-col let-student="rowData" pTemplate="editor">
+      <input type="number" pInputText="" [(ngModel)]="student.data.testTen" [class]="'form-control'" required="true"
+             placeholder=" 0 - {{tests[9].testMaxScore}}">
     </ng-template>
   </p-column>
 
@@ -132,6 +144,7 @@
       <input type="number" pInputText="" [(ngModel)]="student.data.finalBase" [class]="'form-control'" required="true">
     </ng-template>
   </p-column>
+
   <p-column field="data.finalLang" header="Final, Lang" [editable]="true" [filter]="true" [sortable]="true"
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
@@ -144,7 +157,7 @@
             (sortFunction)="mySortCurrentControl($event)" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
       <span>
-             {{this.getCurrentControl(student)}}
+          {{this.getCurrentControl(student)}}
        </span>
     </ng-template>
 
@@ -153,7 +166,7 @@
             (sortFunction)="mySortTrainingScore($event)" [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
        <span>
-             {{this.getTrainingScore(student)}}
+          {{this.getTrainingScore(student)}}
        </span>
     </ng-template>
   </p-column>
@@ -190,20 +203,17 @@
             [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="editor">
       <p-dropdown appendTo="body" filter="true" [(ngModel)]="student.approvedBy" [options]="employeesDropdown"
-                  [autoWidth]="true" [style]="{'width':'100%'}" required="true">
-
-
-      </p-dropdown>
+                  [autoWidth]="true" [style]="{'width':'100%'}" required="true"></p-dropdown>
     </ng-template>
   </p-column>
 </p-dataTable>
 
 
 <span *ngIf="this.loginService.securityForAddStudent()">
-<button mat-raised-button color="primary" (click)="addUserClick()">Add Students</button>
+  <button mat-raised-button color="primary" (click)="addUserClick()">Add Students</button>
 </span>
 <span *ngIf="this.loginService.securityForAddStudentChanges()">
-<button mat-raised-button color="primary" class="saveColor" (click)="updateStudentsClick()">Save</button>
+  <button mat-raised-button color="primary" class="saveColor" (click)="updateStudentsClick()">Save</button>
 </span>
 
 
@@ -253,10 +263,10 @@
         group list?</h3>
     </div>
   </div>
-  <button pButton type="button" (click)="cancelRemovingClick()"  label="Cancel" class="ui-button-secondary"
+  <button pButton type="button" (click)="cancelRemovingClick()" label="Cancel" class="ui-button-secondary"
           style="margin-top: 1em; float: right"></button>
 
-  <button pButton type="button" (click)="removeSelectedStudent()"  label="Remove" class="ui-button-danger"
+  <button pButton type="button" (click)="removeSelectedStudent()" label="Remove" class="ui-button-danger"
           style="margin-top: 1em; float: right"></button>
 </p-dialog>
 
@@ -277,9 +287,10 @@
 </p-dialog>
 
 
-<p-dialog header="Invalid data" modal="false" dismissableMask="false" [(visible)]="displayInvalidSavingDialog" width="750">
+<p-dialog header="Invalid data" modal="false" dismissableMask="false" [(visible)]="displayInvalidSavingDialog"
+          width="750">
   <div>
-    <h3> Invalid Data</h3>
-    <p>Can not save data</p>
+    <h3>Invalid Data</h3>
+    <h4>Can not save data</h4>
   </div>
 </p-dialog>

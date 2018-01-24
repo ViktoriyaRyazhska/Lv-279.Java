@@ -562,6 +562,7 @@ CREATE TABLE `testes_names` (
   `academy_id` int(11) DEFAULT NULL,
   `test_max_score` double NOT NULL,
   `test_name` varchar(255) NOT NULL,
+  `test_sequence` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKdfx1cqnsxkiv9hsv5augmolsb` (`academy_id`),
   CONSTRAINT `FKdfx1cqnsxkiv9hsv5augmolsb` FOREIGN KEY (`academy_id`) REFERENCES `academy` (`academy_id`)

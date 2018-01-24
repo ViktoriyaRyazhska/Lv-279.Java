@@ -64,6 +64,8 @@ import { MaxValidatorDirective } from './validators/lengthValidator/max-validato
 import { GroupOverviewByTraineesComponent } from './components/reports/group-overview-by-trainees/group-overview-by-trainees.component';
 import { GroupNamesFilterPipe } from './components/reports/group-overview-by-trainees/group-names-filter.pipe';
 import { GroupOverviewTableComponent } from './components/reports/group-overview-by-trainees/group-overview-table/group-overview-table.component';
+import { NotFoundErrorComponent } from './components/error/not-found-error/not-found-error.component';
+import { StudentDialogComponent } from './components/reports/group-overview-by-trainees/student-dialog/student-dialog.component';
 import { ExistValidatorDirective } from './validators/exist-validator.directive';
 
 @NgModule({
@@ -104,12 +106,16 @@ import { ExistValidatorDirective } from './validators/exist-validator.directive'
     GroupOverviewByTraineesComponent,
     GroupNamesFilterPipe,
     GroupOverviewTableComponent,
-    ExistValidatorDirective
+    ExistValidatorDirective,
+    NotFoundErrorComponent,
+    StudentDialogComponent
   ],
   entryComponents: [
     ModalBackdropComponent,
     ModalContainerComponent,
-    DialogComponent],
+    DialogComponent,
+    StudentDialogComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

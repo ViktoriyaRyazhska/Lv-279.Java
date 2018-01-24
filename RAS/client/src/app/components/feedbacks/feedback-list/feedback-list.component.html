@@ -6,7 +6,8 @@
 
       <p-column rowspan="3" [style]="{'width':'10em'}"></p-column>
 
-      <span *ngIf="this.isAssignedAsTeacher || this.isAssignedAsExpert || this.isAssignedAsInterviewer || this.loginService.securityForProvideFeedback()">
+      <span *ngIf="this.isAssignedAsTeacher || this.isAssignedAsExpert || this.isAssignedAsInterviewer ||
+        this.loginService.securityForProvideFeedback()">
         <p-column rowspan="3" [style]="{'width':'10em'}"></p-column>
       </span>
 
@@ -31,7 +32,7 @@
       <p-column header="Contact Comment" [sortable]="true" rowspan="3" [style]="{'width':'10em'}"></p-column>
     </p-row>
     <p-row>
-      <p-column header="Tchnical Result" colspan="2" [style]="{'width':'20em'}"></p-column>
+      <p-column header="Technical Result" colspan="2" [style]="{'width':'20em'}"></p-column>
       <p-column header="Soft Skills" colspan="4" [style]="{'width':'40em'}"></p-column>
 
       <p-column header="Summary Comments" rowspan="2" field="teacherFeedback.summary" [sortable]="true"
@@ -73,71 +74,108 @@
     <p-row>
       <p-column field="user.firstName" [filter]="true" [style]="{'width':'10em'}"></p-column>
       <p-column [style]="{'width':'10em'}"></p-column>
-      <span *ngIf="this.isAssignedAsTeacher || this.isAssignedAsExpert || this.isAssignedAsInterviewer || this.loginService.securityForProvideFeedback()">
+      <span *ngIf="this.isAssignedAsTeacher || this.isAssignedAsExpert || this.isAssignedAsInterviewer ||
+      this.loginService.securityForProvideFeedback()">
       <p-column [style]="{'width':'10em'}"></p-column>
       </span>
 
-      <p-column field="teacherFeedback.learningAbility.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="teacherFeedback.learningAbility.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.ONE" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.ONE" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
-      <p-column field="teacherFeedback.overallTechnicalCompetence.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="teacherFeedback.overallTechnicalCompetence.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.TWO" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.TWO" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
-      <p-column field="teacherFeedback.passionalInitiative.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="teacherFeedback.passionalInitiative.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.THREE" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.THREE" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
-      <p-column field="teacherFeedback.teamWork.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="teacherFeedback.teamWork.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.FOUR" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.FOUR" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
-      <p-column field="teacherFeedback.gettingThingsDone.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="teacherFeedback.gettingThingsDone.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.FIVE" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.FIVE" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
-      <p-column field="teacherFeedback.activeCommunicator.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="teacherFeedback.activeCommunicator.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.SIX" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.SIX" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
 
       <p-column field="teacherFeedback.summary" [filter]="true" [style]="{'width':'10em'}"></p-column>
 
-      <p-column field="expertFeedback.learningAbility.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="expertFeedback.learningAbility.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.ONE" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.ONE" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
-      <p-column field="expertFeedback.overallTechnicalCompetence.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="expertFeedback.overallTechnicalCompetence.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.TWO" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.TWO" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
-      <p-column field="expertFeedback.passionalInitiative.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="expertFeedback.passionalInitiative.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.THREE" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.THREE" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
-      <p-column field="expertFeedback.teamWork.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="expertFeedback.teamWork.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.FOUR" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.FOUR" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
-      <p-column field="expertFeedback.gettingThingsDone.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="expertFeedback.gettingThingsDone.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.FIVE" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.FIVE" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
-      <p-column field="expertFeedback.activeCommunicator.name" [filter]="true" filterMatchMode="equals" [style]="{'width':'10em'}">
+      <p-column field="expertFeedback.activeCommunicator.name" [filter]="true" filterMatchMode="equals"
+                [style]="{'width':'10em'}">
         <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="marks | markNameFilter:CharId.SIX" appendTo="body" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)" styleClass="ui-column-filter"></p-dropdown>
+          <p-dropdown [options]="marks | markNameFilter:CharId.SIX" appendTo="body" [style]="{'width':'100%'}"
+                      (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter"></p-dropdown>
         </ng-template>
       </p-column>
 
@@ -173,7 +211,9 @@
     </ng-template>
   </p-column>
 
-  <span *ngIf="this.isAssignedAsTeacher || this.isAssignedAsExpert || this.isAssignedAsInterviewer || this.loginService.securityForProvideFeedback()">
+  <span
+    *ngIf="this.isAssignedAsTeacher || this.isAssignedAsExpert || this.isAssignedAsInterviewer ||
+          this.loginService.securityForProvideFeedback()">
   <p-column [style]="{'width':'10em'}">
       <ng-template let-col let-student="rowData" pTemplate="body">
         <span>
@@ -254,7 +294,8 @@
   </div>
 </p-dialog>
 
-<p-dialog header="Student Overall Feedback" [(visible)]="displayOverallFeedback" dismissableMask="true" modal="false" width="600">
+<p-dialog header="Student Overall Feedback" [(visible)]="displayOverallFeedback" dismissableMask="true" modal="false"
+          width="600">
   <div class="ui-g">
     <div class="ui-g-12">
       <div *ngIf="selectedStudent && selectedStudent.user">
@@ -295,7 +336,7 @@
         <td align="center" valign="middle" style="font-weight:bold" width="30%">Expert</td>
       </tr>
       <tr>
-        <td align="center" valign="middle" style="font-weight:bold" colspan="3">Soft Skills</td>
+        <td align="center" valign="middle" style="font-weight:bold" colspan="3">Technical Result</td>
       </tr>
       <tr>
         <td>
@@ -461,7 +502,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.ONE" formControlName="learningAbilityTeacher"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -478,7 +520,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.TWO" formControlName="overallTechCompetenceTeacher"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -498,7 +541,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.THREE" formControlName="passionalInitiativeTeacher"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -515,7 +559,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.FOUR" formControlName="teamWorkTeacher"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -532,7 +577,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.FIVE" formControlName="getThingsDoneTeacher"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -549,7 +595,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.SIX" formControlName="activeCommunicatorTeacher"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -589,7 +636,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.ONE" formControlName="learningAbilityExpert"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%','overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%','overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -606,7 +654,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.TWO" formControlName="overallTechCompetenceExpert"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -626,7 +675,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.THREE" formControlName="passionalInitiativeExpert"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -643,7 +693,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.FOUR" formControlName="teamWorkExpert"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -660,7 +711,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.FIVE" formControlName="getThingsDoneExpert"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -677,7 +729,8 @@
             <td>
               <div>
                 <p-dropdown [options]="marks | markFilter:CharId.SIX" formControlName="activeCommunicatorExpert"
-                            placeholder="Select a Mark" autoWidth="false" [style]="{'width':'100%', 'overflow':'visible'}"
+                            placeholder="Select a Mark" autoWidth="false"
+                            [style]="{'width':'100%', 'overflow':'visible'}"
                             (onChange)="onChoose()"></p-dropdown>
               </div>
             </td>
@@ -700,7 +753,8 @@
           </tr>
         </table>
       </p-tabPanel>
-      <p-tabPanel header="Interviewer" *ngIf="this.isAssignedAsInterviewer || this.loginService.securityForProvideFeedback()">
+      <p-tabPanel header="Interviewer"
+                  *ngIf="this.isAssignedAsInterviewer || this.loginService.securityForProvideFeedback()">
         <table *ngIf="selectedStudent && selectedStudent.user" class="table table-condensed table-bordered" width="900">
           <tr>
             <td width="100%" style="font-weight:bold">Summary comments (risks/strangths, recommendation):</td>

@@ -31,11 +31,13 @@
 
             <mat-form-field class="col-sm-6">
               <mat-select placeholder="Group Name:" formControlName="groupIdFormControl">
+                <input matInput placeholder="Search" formControlName="groupNameFormControl">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let group of groupArray | groupNamesFilter:
                                                         signupForm.get('endDateFormControl').value:
                                                         signupForm.get('commonDirectionFormControl').value:
-                                                        signupForm.get('cityIdFormControl').value"
+                                                        signupForm.get('cityIdFormControl').value:
+                                                        signupForm.get('groupNameFormControl').value"
                             [value]="group.groupId">{{ group.groupName}}
                 </mat-option>
               </mat-select>
@@ -53,6 +55,6 @@
 </div>
 
 <div class="table" [hidden] = "showRep">
-  <app-group-overview-table [studentsInfo] = "studentsInfo"></app-group-overview-table>
+  <app-group-overview-table></app-group-overview-table>
 </div>
 

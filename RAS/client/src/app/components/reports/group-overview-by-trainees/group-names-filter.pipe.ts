@@ -5,7 +5,10 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class GroupNamesFilterPipe implements PipeTransform {
 
-  transform(groupArray: any, endDate: any, commonDirection: any, cityId: any): any {
+  transform(groupArray: any, endDate: any, commonDirection: any, cityId: any, groupNameFilter: any): any {
+    if(groupNameFilter != null){
+      groupArray = groupArray.filter(group => group.groupName.includes(groupNameFilter));
+    }
     if ((endDate === null || endDate === undefined) && (commonDirection === null || commonDirection === undefined)
       && (cityId === null || cityId === undefined)) {
       return groupArray;

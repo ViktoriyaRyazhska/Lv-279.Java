@@ -1,0 +1,157 @@
+<div mat-dialog-content>
+  <h3>{{data.selectedStudent.user.firstName}}</h3>
+</div>
+<div mat-dialog-content align="center">
+  <table class="table table-condensed table-bordered">
+    <tr>
+      <td align="center" valign="middle" style="font-weight:bold" width="35%">Characteristic</td>
+      <td align="center" valign="middle" style="font-weight:bold" width="30%">Teacher</td>
+      <td align="center" valign="middle" style="font-weight:bold" width="30%">Expert</td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle" style="font-weight:bold" colspan="3">Technical Skills</td>
+    </tr>
+    <tr>
+      <td>
+        <div>Learning ability:</div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.teacherFeedback.learningAbility">
+          {{data.selectedStudent.teacherFeedback.learningAbility.name}}
+        </div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.expertFeedback.learningAbility">
+          {{data.selectedStudent.expertFeedback.learningAbility.name}}
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div>Overall technical competence:</div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.teacherFeedback.overallTechnicalCompetence">
+          {{data.selectedStudent.teacherFeedback.overallTechnicalCompetence.name}}
+        </div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.expertFeedback.overallTechnicalCompetence">
+          {{data.selectedStudent.expertFeedback.overallTechnicalCompetence.name}}
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle" style="font-weight:bold" colspan="3">Soft Skills</td>
+    </tr>
+    <tr>
+      <td>
+        <div>Passional initiative:</div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.teacherFeedback.passionalInitiative">
+          {{data.selectedStudent.teacherFeedback.passionalInitiative.name}}
+        </div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.expertFeedback.passionalInitiative">
+          {{data.selectedStudent.expertFeedback.passionalInitiative.name}}
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div>Team work:</div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.teacherFeedback.teamWork">
+          {{data.selectedStudent.teacherFeedback.teamWork.name}}
+        </div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.expertFeedback.teamWork">
+          {{data.selectedStudent.expertFeedback.teamWork.name}}
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div>Getting things done:</div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.teacherFeedback.gettingThingsDone">
+          {{data.selectedStudent.teacherFeedback.gettingThingsDone.name}}
+        </div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.expertFeedback.gettingThingsDone">
+          {{data.selectedStudent.expertFeedback.gettingThingsDone.name}}
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div>Active Communicator:</div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.teacherFeedback.activeCommunicator">
+          {{data.selectedStudent.teacherFeedback.activeCommunicator.name}}
+        </div>
+      </td>
+      <td>
+        <div *ngIf="data.selectedStudent.expertFeedback.activeCommunicator">
+          {{data.selectedStudent.expertFeedback.activeCommunicator.name}}
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle" colspan="3" style="font-weight:bold">Summary</td>
+    </tr>
+    <tr>
+      <td>
+        <div>Summary comments (risks/strangths, recommendation):</div>
+      </td>
+      <td>
+        <div class="ui-g-4">
+          <div *ngIf="data.selectedStudent.teacherFeedback.summary">{{data.selectedStudent.teacherFeedback.summary}}
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="ui-g-4">
+          <div *ngIf="data.selectedStudent.expertFeedback.summary">{{data.selectedStudent.expertFeedback.summary}}
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <table class="table table-condensed table-bordered">
+    <tr>
+      <td width="35%">
+        <div>HR Comment:</div>
+      </td>
+      <td width="60%"></td>
+    </tr>
+    <tr>
+      <td width="35%">
+        <div>Interviewer Comment:</div>
+      </td>
+      <td width="60%">
+        <div class="ui-g-8" *ngIf="data.selectedStudent.data">
+          <div>{{data.selectedStudent.data.interviewerComment}}</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+<div align="center" mat-dialog-actions>
+  <button id="sucBtn"
+          mat-button
+          (click)="onNoClick()"
+  ><b>OK</b></button>
+</div>
+
+
+
+

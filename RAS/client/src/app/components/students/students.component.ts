@@ -8,7 +8,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../auth/login/login.service";
 import {Tests} from "../../models/tests";
 import {TestsService} from "../../services/tests-names/tests.service";
-import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-students',
@@ -18,7 +17,7 @@ import {forEach} from "@angular/router/src/utils/collection";
 @Injectable()
 export class StudentsComponent implements OnInit {
   @Input() groupId: number;
-  @Input() techDirect : number;
+  @Input() techDirect: number;
 
   private academyId: number;
 
@@ -77,6 +76,8 @@ export class StudentsComponent implements OnInit {
         this.studentsService.getStatuses()
           .subscribe(data => {
               this.studentStatuses = data;
+              this.statusesDropdown = [];
+              console.log(this.studentStatuses)
               this.studentStatuses.forEach(st => this.statusesDropdown.push({label: st.name, value: st}))
 
             },
@@ -106,7 +107,7 @@ export class StudentsComponent implements OnInit {
           console.log(data);
         },
         error => console.log(error)
-      )
+      );
     console.log(this.employeesDropdown);
   }
 
@@ -132,9 +133,7 @@ export class StudentsComponent implements OnInit {
             this.ngOnInit();
           }
         );
-    }
-
-    else {
+    } else {
       this.displayInvalidSavingDialog = true;
     }
   }
@@ -142,9 +141,10 @@ export class StudentsComponent implements OnInit {
   removeSelectedStudent() {
     this.studentsService.remove(this.selectedStudent.id)
       .subscribe(() => {
-        this.students = null;
-        this.ngOnInit();
-      });
+          this.students = null;
+          this.ngOnInit();
+        }
+      );
     this.displayRemovingDialog = false;
   }
 
@@ -175,44 +175,44 @@ export class StudentsComponent implements OnInit {
     var count: number = 0;
     var avg: number;
 
-    if (student.data != null) {
-      if (student.data.testOne != null) {
+    if (student.data != null && this.tests != null) {
+      if (student.data.testOne != null && this.tests[0]) {
         sum += student.data.testOne;
         count++;
       }
-      if (student.data.testOne != null) {
+      if (student.data.testOne != null && this.tests[1]) {
         sum += student.data.testTwo;
         count++;
       }
-      if (student.data.testThree != null) {
+      if (student.data.testThree != null && this.tests[2]) {
         sum += student.data.testThree;
         count++;
       }
-      if (student.data.testFour != null) {
+      if (student.data.testFour != null && this.tests[3]) {
         sum += student.data.testFour;
         count++;
       }
-      if (student.data.testFive != null) {
+      if (student.data.testFive != null && this.tests[4]) {
         sum += student.data.testFive;
         count++;
       }
-      if (student.data.testSix != null) {
+      if (student.data.testSix != null && this.tests[5]) {
         sum += student.data.testSix;
         count++;
       }
-      if (student.data.testSeven != null) {
+      if (student.data.testSeven != null && this.tests[6]) {
         sum += student.data.testSeven;
         count++;
       }
-      if (student.data.testEight != null) {
+      if (student.data.testEight != null && this.tests[7]) {
         sum += student.data.testEight;
         count++;
       }
-      if (student.data.testNine != null) {
+      if (student.data.testNine != null && this.tests[8]) {
         sum += student.data.testNine;
         count++;
       }
-      if (student.data.testTen != null) {
+      if (student.data.testTen != null && this.tests[9]) {
         sum += student.data.testTen;
         count++;
       }
@@ -247,8 +247,7 @@ export class StudentsComponent implements OnInit {
 
     if (count != 0) {
       return Math.round((sum / count) * 1000) / 1000;
-    }
-    else return null;
+    } else return null;
   }
 
   getCurrentControl(student: StudentFeedback): number {
@@ -257,8 +256,7 @@ export class StudentsComponent implements OnInit {
 
     if (avg != null) {
       return Math.round(avg * 1000) / 1000;
-    }
-    else return avg;
+    } else return avg;
   }
 
   mySortCurrentControl(event: any) {
@@ -283,8 +281,10 @@ export class StudentsComponent implements OnInit {
   mySortTrainingScore(event: any) {
     if (event.order === 1) {
       this.students.sort((a: StudentFeedback, b: StudentFeedback) => {
+
         const sortDesc = this.getTrainingScore(a) < this.getTrainingScore(b) ? -1 : 0;
         return this.getTrainingScore(a) > this.getTrainingScore(b) ? 1 : sortDesc;
+
       });
     } else {
       this.students.sort((a: StudentFeedback, b: StudentFeedback) => {
@@ -384,7 +384,7 @@ export class StudentsComponent implements OnInit {
     return true;
   }
 
-  setTests (tests : Tests[]) {
+  setTests(tests: Tests[]) {
     this.tests = [];
 
     tests.sort(function (a, b) {

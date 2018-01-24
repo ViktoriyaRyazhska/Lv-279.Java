@@ -1,14 +1,12 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 
-import {ViewAcademiesComponent} from "./components/view-academies/view-academies.component";
 import {AddGroupComponent} from "./components/group/add-group/add-group.component";
 import {HistoryListComponent} from "./components/history/history-list/history-list.component";
 import {StudentsComponent} from "./components/students/students.component";
 import {CheckListByGroupsComponent} from "./components/reports/check-list-by-groups/check-list-by-groups.component";
 import {TestsNamesComponent} from "./components/tests-names/tests-names.component";
 import {LoginComponent} from "./components/auth/login/login.component";
-import {HeaderComponent} from "./components/header/header.component";
 import {AppComponent} from "./app.component";
 import {FilterCheckListByGroupsComponent} from "./components/reports/check-list-by-groups/filter-check-list-by-groups/filter-check-list-by-groups.component";
 import {ErrorComponent} from "./components/error/error.component";
@@ -18,6 +16,7 @@ import {ItaTacticalReportComponent} from "./components/reports/ita-tactical-repo
 import {FeedbackListComponent} from "./components/feedbacks/feedback-list/feedback-list.component";
 import {UpdateGroupComponent} from "./components/group/update-group/update-group.component";
 import {GroupOverviewByTraineesComponent} from "./components/reports/group-overview-by-trainees/group-overview-by-trainees.component";
+import {NotFoundErrorComponent} from "./components/error/not-found-error/not-found-error.component";
 
 const appRoutes: Routes = [
   {path: 'ang/login', component: LoginComponent},
@@ -45,7 +44,8 @@ const appRoutes: Routes = [
   {path: 'ang/history/:id', component: HistoryListComponent},
   {path: 'ang', component: AppComponent},
   {path: 'ang/error', component: ErrorComponent},
-  {path: 'ang/employee/:id', component: EmployeeComponent}
+  {path: 'ang/employee/:id', component: EmployeeComponent},
+  {path: '**', component: NotFoundErrorComponent}
 ];
 
 @NgModule({

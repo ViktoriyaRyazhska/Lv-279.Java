@@ -23,7 +23,6 @@ public class GroupInfoCustomRepository {
      * @return information about groups.
      */
     public List<GroupInformationDTO> getAllInformationAboutGroups() {
-        logger.info("Before getAllInformationAboutGroup() in the repository");
         long startTime = System.currentTimeMillis();
             List<GroupInformationDTO> results = ((Session) this.em.getDelegate()).createSQLQuery(
                     "SELECT gI.academy_id as academyId, gI.group_name as groupName, gI.students_planned_to_graduate as studentsPlannedToGraduate, " +
