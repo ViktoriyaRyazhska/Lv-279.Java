@@ -1,205 +1,129 @@
- <!--<table class="table table-striped table-hover table-bordered">-->
-    <!--<thead class="thead-dark">-->
-    <!--<tr>-->
-      <!--<th>Test name</th>-->
-      <!--<th>Max point</th>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--<tr *ngFor="let test of tests">-->
-      <!--&lt;!&ndash;<td><input type="text" class="form-control input-sm" [(ngModel)]="test.testName" name="test{{i+1}}" value="{{test.testName}}"></td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td><input type="text" class="form-control input-sm" [(ngModel)]="test.testMaxScore" value="{{test.testMaxScore}}"></td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td><button class="btn btn-primary" (click)="removeTest(test);">remove</button></td>&ndash;&gt;-->
-      <!--<td>-->
+<!--<div class="container" *ngIf="rForm">-->
 
-      <!--</td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
-  <!--</table>-->
-  <!--<div class="row" id="saveTestsNames" align="center">-->
-    <!--<button type="submit" class="btn btn-primary" (click)="save(tests)">Save-->
-    <!--</button>-->
-    <!--<button type="submit" class="btn btn-primary" (click)="save">Cancel-->
-    <!--</button>-->
-    <!--<mat-form-field *ngFor="let test of tests">-->
-      <!--<input matInput placeholder="Input" data-value="{{test.testName}}">-->
-    <!--</mat-form-field>-->
+  <!--<div class="center">-->
+    <!--<form [formGroup]="rForm" *ngIf="tests; else error">-->
+      <!--<div class="row">-->
+        <!--&lt;!&ndash;<button class="col-sm-1-cust" mat-raised-button (click)="addTest();">Add test</button>&ndash;&gt;-->
+        <!--<button class="btn btn-primary" mat-raised-button type="submit" [disabled]="!rForm.valid" (click)="save()">-->
+          <!--Save-->
+        <!--</button>-->
+        <!--<button mat-raised-button (click)="cancelChanges();">Cancel</button>-->
+        <!--<br><br>-->
+      <!--</div>-->
 
- <!--=======================================================-->
-    <!--<div class="example-container mat-elevation-z8">-->
-      <!--<form #myForm="ngForm">-->
-      <!--<mat-table #table [dataSource]="dataSource">-->
-        <!--<ng-container matColumnDef="testName">-->
-          <!--<mat-header-cell *matHeaderCellDef> Test Name </mat-header-cell>-->
-          <!--<mat-cell *matCellDef="let row;let i = index">-->
-            <!--&lt;!&ndash;<mat-form-field>&ndash;&gt;-->
-              <!--&lt;!&ndash;<input matInput type="text" placeholder="Test Name" data-value="{{row.testName}}">&ndash;&gt;-->
-            <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
-            <!--<mat-form-field >-->
-              <!--<input matInput type="text" data-value="{{row.testName}}" [(ngModel)]="row.testName" name = "test + {{i}}">-->
-            <!--</mat-form-field>-->
-            <!--</mat-cell>-->
-        <!--</ng-container>-->
-        <!--<ng-container matColumnDef="testMaxScore">-->
-          <!--<mat-header-cell *matHeaderCellDef> Max Point </mat-header-cell>-->
-          <!--<mat-cell *matCellDef="let row;let i = index">-->
-            <!--&lt;!&ndash;<mat-form-field >&ndash;&gt;-->
-            <!--&lt;!&ndash;<input matInput type="number" placeholder="Max Point" data-value="{{row.testMaxScore}}">&ndash;&gt;-->
-          <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
-            <!--<mat-form-field >-->
-              <!--<input matInput type="number" data-value="{{row.testMaxScore}}" [(ngModel)] = "row.testMaxScore" name = "testMaxScore + {{i}}">-->
-            <!--</mat-form-field>-->
-          <!--</mat-cell>-->
-        <!--</ng-container>-->
+      <!--<div class="row" style="text-align: center">-->
+        <!--<div class="col-sm-6">Test Name</div>-->
+        <!--<div class="col-sm-6">Max Point</div>-->
+      <!--</div>-->
+      <!--<div *ngIf="tests" formArrayName="testRows">-->
+        <!--<div class="row" *ngFor="let item of rForm.controls.testRows.controls; let i = index;" [formGroupName]="i">-->
 
-        <!--<ng-container matColumnDef="testId">-->
-          <!--<mat-header-cell *matHeaderCellDef> Remove Test </mat-header-cell>-->
-          <!--<mat-cell *matCellDef="let row"><button mat-button (click)="removeTest(row)">remove</button></mat-cell>-->
-        <!--</ng-container>-->
+          <!--<mat-form-field *ngIf="item.get('removed').value != true" class="col-sm-6 col-sm-6-customize">-->
+            <!--<input matInput id="testName{{i}}" type="text" name="test{{i}}" formControlName="testName">-->
+            <!--<mat-error *ngIf="item">Please enter less than 50 symbols</mat-error>-->
+          <!--</mat-form-field>-->
 
-        <!--<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
-        <!--<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="removeTest(row)"></mat-row>-->
-      <!--</mat-table>-->
-        <!--<button mat-raised-button type="submit" class="btn btn-primary" (click)="save(tests)">Save</button>-->
-        <!--<button mat-raised-button (click)="addTest();">Add test</button><br><br>-->
-      <!--</form>-->
-    <!--</div>-->
+          <!--<mat-form-field *ngIf="item.get('removed').value != true" class="col-sm-6 col-sm-6-maxscore-customize">-->
+            <!--<input matInput id="testMaxPoint{{i}}" type="number" name="testMaxScore{{i}}"-->
+                   <!--formControlName="testMaxScore">-->
+            <!--<mat-error *ngIf="item">Please enter number in range from 0 to 1000</mat-error>-->
+          <!--</mat-form-field>-->
 
- <!--working variant !!!!!!!!!!!!!!!-->
- <!--<div *ngIf="tests">-->
-<!--<div >-->
-    <!--<form #myForm="ngForm">-->
-    <!--<table>-->
-    <!--<thead>-->
-    <!--<tr>-->
-      <!--<th>Test name</th>-->
-      <!--<th>Max point</th>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--<tr *ngFor="let test of tests;let i = index">-->
-      <!--<td *ngIf="test.testMaxScore!=0">-->
-        <!--<mat-form-field >-->
-          <!--<input matInput type="text" placeholder="Test name" data-value="{{test.testName}}" [(ngModel)]="test.testName" name = "test + {{i}}">-->
-        <!--</mat-form-field>-->
-      <!--</td>-->
-      <!--<td *ngIf="test.testMaxScore!=0">-->
-        <!--<mat-form-field >-->
-          <!--<input matInput type="number" placeholder="Max Point" data-value="{{test.testMaxScore}}" [(ngModel)] = "test.testMaxScore" name = "testMaxScore + {{i}}">-->
-        <!--</mat-form-field>-->
-      <!--</td>-->
-      <!--<td *ngIf="test.testMaxScore!=0"><button type="submit" mat-button (click)="removeTest(test)">remove</button></td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-        <!--</table>-->
-          <!--<button mat-raised-button type="submit" class="btn btn-primary" (click)="save(tests)">Save</button>-->
-          <!--<button mat-raised-button (click)="addTest();">Add test</button><br><br>-->
+          <!--<button *ngIf="item.get('removed').value != true" class="col-sm-6 col-sm-6-button-custom" type="submit"-->
+                  <!--mat-button (click)="removeDialog(i,item)">remove-->
+          <!--</button>-->
+        <!--</div>-->
+      <!--</div>-->
     <!--</form>-->
-<!--</div>-->
-<!--</div>-->
-
-
-
-
-<!--<div class="container">-->
- <!--<form #myForm="ngForm">-->
-   <!--<button *ngIf="tests" mat-raised-button type="submit" class="btn btn-primary" (click)="save()">Save</button>-->
-   <!--<button mat-raised-button (click)="addTest();">Add test</button><br><br>-->
-   <!--<div class="row">-->
-     <!--<div class="col-sm-6">Test Name</div>-->
-     <!--<div class="col-sm-6">Max Point</div>-->
-   <!--</div>-->
-   <!--<div *ngIf="tests">-->
-   <!--<div class="row" *ngFor="let test of tests;let i = index">-->
-
-     <!--<mat-form-field class="col-sm-6 col-sm-6-customize" *ngIf="test.testMaxScore!=0">-->
-     <!--<input matInput type="text" [errorStateMatcher]="matcher" [formControl]="testName" data-value="{{test.testName}}" [(ngModel)]="test.testName" name = "test{{i}}">-->
-     <!--</mat-form-field>-->
-
-     <!--<mat-form-field class="col-sm-6 col-sm-6-maxscore-customize" *ngIf="test.testMaxScore!=0">-->
-     <!--<input matInput type="number" [errorStateMatcher]="matcher" [formControl]="testMaxPoint" data-value="{{test.testMaxScore}}" [(ngModel)] = "test.testMaxScore" name = "testMaxScore + {{i}}">-->
-     <!--</mat-form-field>-->
-
-     <!--<button class="col-sm-6 col-sm-6-button-custom" *ngIf="test.testMaxScore!=0" type="submit" mat-button (click)="removeTest(test)">remove</button>-->
-   <!--</div>-->
-   <!--</div>-->
-
- <!--</form>-->
+    <!--<ng-template #error></ng-template>-->
+  <!--</div>-->
 <!--</div>-->
 
 
- <!--<div class="container">-->
-   <!--<form [formGroup]="rForm" >-->
-     <!--<button mat-raised-button type="submit" class="btn btn-primary" [disabled]="!rForm.valid" (click)="save()">Save</button>-->
-     <!--<button mat-raised-button (click)="addTest();">Add test</button><br><br>-->
-     <!--<div class="row">-->
-       <!--<div class="col-sm-6">Test Name</div>-->
-       <!--<div class="col-sm-6">Max Point</div>-->
-     <!--</div>-->
-     <!--<div *ngIf="tests">-->
-       <!--<div class="row" *ngFor="let test of tests;let i = index">-->
-
-         <!--<mat-form-field class="col-sm-6 col-sm-6-customize" *ngIf="test.testMaxScore!=0">-->
-           <!--<input matInput id="testName{{i}}" type="text" [value]="test.testName" name = "test{{i}}" formControlName="testName">-->
-         <!--</mat-form-field>-->
-
-         <!--<mat-form-field class="col-sm-6 col-sm-6-maxscore-customize" *ngIf="test.testMaxScore!=0">-->
-           <!--<input matInput id="testMaxPoint{{i}}" type="number" [value]="test.testMaxScore" name = "testMaxScore{{i}}"  formControlName="testMaxPoint">-->
-         <!--</mat-form-field>-->
-
-         <!--<button class="col-sm-6 col-sm-6-button-custom" *ngIf="test.testMaxScore!=0" type="submit" mat-button (click)="removeTest(test)">remove</button>-->
-       <!--</div>-->
-     <!--</div>-->
-   <!--</form>-->
- <!--</div>-->
+<div *ngIf="testRows">
+  <div class="row">
+    <button class="col-sm-1-cust" mat-raised-button (click)="add();">Add test</button>
+    <button class="btn btn-primary" mat-raised-button type="submit" (click)="save()">Save</button>
+    <button mat-raised-button (click)="cancelChanges();">Cancel</button>
+    <br><br>
+  </div>
 
 
- <div class="container" *ngIf="rForm">
+  <p-dataTable [value]="testRows" [immutable]=false [editable]="true">
+    <p-column *ngIf="removed!=true" field="key" header="#" [editable]="true">
+      <ng-template let-col let-testRow="rowData" pTemplate="editor">
+        <input type="number" pInputText="" [(ngModel)]="testRow.key" [class]="'form-control'"
+               required="true" [min]="0" [max]="10" >
+      </ng-template>
+    </p-column>
 
-   <div class="center">
-   <form [formGroup]="rForm" *ngIf="tests; else error">
-     <div class="row">
-        <button class="col-sm-1-cust" mat-raised-button (click)="addTest();">Add test</button>
-        <button class="btn btn-primary" mat-raised-button type="submit" [disabled]="!rForm.valid" (click)="save()">Save</button>
-        <button mat-raised-button (click)="cancelChanges();">Cancel</button><br><br>
-     </div>
+    <p-column *ngIf="removed!=true" field="value.testName" header="Test Name" [editable]="true">
+      <ng-template let-col let-testRow="rowData" pTemplate="editor">
+        <input type="text" pInputText="" [(ngModel)]="testRow.value.testName" [class]="'form-control'"
+               required="true" maxlength="50" #testName="ngModel">
+        <div *ngIf="testName.invalid && (testName.dirty || testName.touched)"
+             class="alert alert-danger">
+          <div *ngIf="testName.errors.pattern">
+            Forbidden symbols
+          </div>
+          <div *ngIf="testName.errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="testName.errors.maxlength">
+            Name must be not more then 50 symbols.
+          </div>
+        </div>
+      </ng-template>
+    </p-column>
 
-     <div class="row" style="text-align: center">
-       <div class="col-sm-6">Test Name</div>
-       <div class="col-sm-6">Max Point</div>
-     </div>
-     <div *ngIf="tests" formArrayName="testRows">
-       <div class="row" *ngFor="let item of rForm.controls.testRows.controls; let i = index;" [formGroupName]="i">
+    <p-column *ngIf="removed!=true" field="value.testMaxScore" header="Max Score" [editable]="true">
+      <ng-template let-col let-testRow="rowData" pTemplate="editor">
+        <input type="number" pInputText="" [(ngModel)]="testRow.value.testMaxScore" [class]="'form-control'"
+               type="number" [min]="0" [max]="1000" pattern="^(0|[1-9][0-9]*)$" required="true"
+               #testMaxScore="ngModel">
+        <div *ngIf="testMaxScore.invalid && (testMaxScore.dirty || testMaxScore.touched)"
+             class="alert alert-danger">
+          <div *ngIf="testMaxScore.errors.pattern">
+            forbidden symbols
+          </div>
+          <div *ngIf="testMaxScore.errors.required">
+            Test score is required.
+          </div>
+          <div *ngIf="testMaxScore.errors.min || testMaxScore.errors.max">
+            Test score must be between 0 and 1000.
+          </div>
+        </div>
+      </ng-template>
+    </p-column>
+    <p-column *ngIf="removed!=true">
+      <ng-template let-i="rowIndex" let-testRow="rowData" pTemplate="body">
+          <button mat-raised-button (click)="removeDialog(i,testRow.value)">Remove</button>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+</div>
 
-         <mat-form-field *ngIf="item.get('removed').value != true" class="col-sm-6 col-sm-6-customize">
-           <input matInput id="testName{{i}}" type="text" name = "test{{i}}" formControlName="testName">
-           <mat-error *ngIf="item">Please enter less than 50 symbols</mat-error>
-         </mat-form-field>
+<p-dialog header="Removing test Name" modal="false" dismissableMask="false" [(visible)]="displayRemoveDialog"
+          width="750">
+  <div>
+    <div *ngIf="currTest">
+      <h3>Are you really want to remove {{currTest.testName}} from the
+      test list?</h3>
+    </div>
+  </div>
+  <button pButton type="button" (click)="cancelRemovingClick()" label="Cancel" class="ui-button-secondary"
+          style="margin-top: 1em; float: right"></button>
 
-         <mat-form-field *ngIf="item.get('removed').value != true" class="col-sm-6 col-sm-6-maxscore-customize">
-           <input matInput id="testMaxPoint{{i}}" type="number"  name = "testMaxScore{{i}}"  formControlName="testMaxScore">
-           <mat-error *ngIf="item">Please enter number in range from 0 to 1000</mat-error>
-         </mat-form-field>
-
-         <button *ngIf="item.get('removed').value != true" class="col-sm-6 col-sm-6-button-custom"  type="submit" mat-button (click)="removeDialog(i,item)">remove</button>
-       </div>
-     </div>
-   </form>
-     <ng-template #error></ng-template>
- </div>
- </div>
+  <button pButton type="button" (click)="removeTest()" label="Remove" class="ui-button-danger"
+          style="margin-top: 1em; float: right"></button>
+</p-dialog>
 
 
- <p-dialog header="Removing test Name" modal="false" dismissableMask="false" [(visible)]="displayRemoveDialog" width="750">
-   <div>
-     <div *ngIf="currTest">
-       <h3>Are you really want to remove {{currTest.get('testName').value}} from the
-         test list?</h3>
-     </div>
-   </div>
-   <button pButton type="button" (click)="cancelRemovingClick()"  label="Cancel" class="ui-button-secondary"
-           style="margin-top: 1em; float: right"></button>
-
-   <button pButton type="button" (click)="removeTest()"  label="Remove" class="ui-button-danger"
-           style="margin-top: 1em; float: right"></button>
- </p-dialog>
+<p-dialog header="Invalid data" modal="false" dismissableMask="false" [(visible)]="displayValidationDialog"
+          width="550">
+  <div>
+      <h3>You are trying to save invalid data. Check entered data again.</h3>
+  </div>
+  <button pButton type="button" (click)="okAndCLose()" label="OK!" class="ui-button-danger"
+          style="margin-top: 1em; float: right"></button>
+</p-dialog>

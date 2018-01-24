@@ -13,6 +13,9 @@ export class NavTabsComponent implements OnInit {
   getAppTestNamesTemplate (directId:number){
     this.child.getTestsTemplate(directId);
   }
+  updateTestNameTab(){
+    this.child.updateTab();
+  }
   constructor() {}
 
   ngOnInit() {

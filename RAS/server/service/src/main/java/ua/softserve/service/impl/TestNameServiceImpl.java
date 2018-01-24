@@ -35,7 +35,6 @@ public class TestNameServiceImpl implements TestNameService {
     @Override
     @Transactional
     public boolean saveTestNames(List<TestName> testNames, Integer academyId) {
-
         try {
             testNames.stream()
                     .filter(this::isValidTestNames)
@@ -60,7 +59,7 @@ public class TestNameServiceImpl implements TestNameService {
                 || testName.getTestName().equals("")) {
              throw new InvalidDataException("Do not send us 'null'! Try again!");
         }
-        if (testName.getTestName().length() >= 30) {
+        if (testName.getTestName().length() >= 50) {
             throw new InvalidDataException("Test name is incorrect");
         } else
             return true;

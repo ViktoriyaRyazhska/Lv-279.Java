@@ -17,7 +17,7 @@ export class DialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
     if(!this.data.err){
-    this.router.navigate(['']);
+    this.router.navigate(['ang/group/update/' + this.data.groupId]);
     }
   }
 

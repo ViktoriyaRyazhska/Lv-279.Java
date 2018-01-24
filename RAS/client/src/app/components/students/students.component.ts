@@ -22,7 +22,7 @@ export class StudentsComponent implements OnInit {
 
   private academyId: number;
 
-  private tests: Tests[];
+  private tests: any[];
 
   private students: StudentFeedback[];
 
@@ -283,10 +283,8 @@ export class StudentsComponent implements OnInit {
   mySortTrainingScore(event: any) {
     if (event.order === 1) {
       this.students.sort((a: StudentFeedback, b: StudentFeedback) => {
-
         const sortDesc = this.getTrainingScore(a) < this.getTrainingScore(b) ? -1 : 0;
         return this.getTrainingScore(a) > this.getTrainingScore(b) ? 1 : sortDesc;
-
       });
     } else {
       this.students.sort((a: StudentFeedback, b: StudentFeedback) => {
@@ -386,14 +384,15 @@ export class StudentsComponent implements OnInit {
     return true;
   }
 
-  setTests (tests : Tests[]) {
+  setTests (tests : any[]) {
     this.tests = [];
     tests.forEach(test=>{
-      if(test.isRemoved()) {
+      if(test.value.removed) {
         let i = tests.indexOf(test);
         tests.splice(i, 1);
       }
     });
+
     this.tests = tests;
   }
 }

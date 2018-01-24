@@ -165,21 +165,24 @@ export class UpdateGroupComponent implements OnInit {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogComponent, {
-      data: {message: this.resultMessage, err:false}
+      data: {message: this.resultMessage, err:false, groupId : this.groupId}
     });
 
     dialogRef.afterClosed().subscribe(result => {
      // this.router.navigate(['']);
+      this.child.updateTestNameTab();
     });
   }
 
+
   errorOpenDialog(): void {
     let dialogRef = this.dialog.open(DialogComponent, {
-      data: {message: 'Something goes wrong', err: true}
+      data: {message: 'Something goes wrong', err: true, groupId : this.groupId}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+
     });
   }
 

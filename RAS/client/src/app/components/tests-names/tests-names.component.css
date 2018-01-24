@@ -136,3 +136,30 @@ input[type=date]::-webkit-inner-spin-button {
 /*}*/
 
 
+input.ng-valid[required] {
+  border: 1px solid #42A948; /* green */
+}
+
+input.ng-invalid {
+  border: 2px solid #a92823; /* red */
+}
+
+
+
+.alert {
+  position: absolute;
+  padding: 5px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.special {
+  border: 3px solid #a92823;
+  color : red;
+}
+
+.spec{
+  border: 3px solid #a92823;
+  color : red;
+}

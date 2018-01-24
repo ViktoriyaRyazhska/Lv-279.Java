@@ -11,20 +11,20 @@ export class Tests {
     this.testName = tstName;
   }
 
-  setTestRowsWithFormGroup(item : any) {
-    this.testMaxScore = item.get('testMaxScore').value;
-    this.testName = item.get('testName').value;
-    if(item.get('testId').value!=null) {
-      this.testId = item.get('testId').value;
+  setTestRows(item : any) {
+    this.testMaxScore = item.testMaxScore;
+    this.testName = item.testName;
+    if(item.testId!=null) {
+      this.testId = item.testId;
     }
     else this.testId = null;
-    if(item.get('removed').value!=null) {
-      this.removed = item.get('removed').value;
+    if(item.removed!=null) {
+      this.removed = item.removed;
     }
     else this.removed = false;
   }
 
-  isRemoved() : boolean {
+    isRemoved():boolean {
     return this.removed;
   }
 

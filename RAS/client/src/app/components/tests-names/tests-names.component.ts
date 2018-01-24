@@ -3,9 +3,8 @@ import { Tests } from "../../models/tests";
 import { TestsService } from "../../services/tests-names/tests.service";
 import { ActivatedRoute } from "@angular/router";
 import { Constants } from "./Constants";
-import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
+import {FormBuilder, PatternValidator, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
 import {StudentsComponent} from "../students/students.component";
-
 
 @Component({
   providers:[StudentsComponent],
@@ -13,32 +12,29 @@ import {StudentsComponent} from "../students/students.component";
   templateUrl: './tests-names.component.html',
   styleUrls: ['./tests-names.component.css']
 })
+
 export class TestsNamesComponent implements OnInit {
   @Input() groupId: number;
   @Input() studRef : StudentsComponent;
   @Input() techDirect : number;
 
-  // groupId2 : number;
   private tests : Tests[];
   static counter : number = 1;
-  private rForm: FormGroup;
-  private testRows: FormArray;
-  private respStatus : string;
+  private invalidTest : Tests;
+  private testRows: any[];
   private displayRemoveDialog : boolean;
+  private displayValidationDialog : boolean;
   private currTest : any;
   private currIndex : number;
-  private testTemplate : Tests[];
+  private removedTests : Tests[];
+  private testToSave : Tests[];
+
 
   constructor(
     private testNamesService : TestsService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-  ) {
-    // this.groupId2 = +this.route.snapshot.params['id'];
-    this.rForm = new FormGroup({
-      testRows: this.fb.array([])
-    });
-  }
+  ) {}
 
   ngOnInit() {
     if(this.techDirect == null) {
@@ -47,125 +43,143 @@ export class TestsNamesComponent implements OnInit {
     this.testNamesService.getAll(this.groupId, this.techDirect).subscribe(data => {
       console.log(data);
       this.tests = data;
+      this.testRows = [];
+      this.removedTests = [];
+      this.testToSave = [];
       TestsNamesComponent.counter = this.tests.length;
-
       if (TestsNamesComponent.counter<=0){
         this.createDefaultTests();
       }
       else {
-        this.testRows = this.rForm.get('testRows') as FormArray;
         for (let i = 0; i < this.tests.length; i++) {
-          this.testRows.push(this.createTestRow(this.tests[i]));
+          let test = new Tests('',0);
+          test.setTestRows(this.tests[i]);
+          this.testRows.push({key : i+1, value : test});
         }
       }
     });
   }
 
-  createTestRow(test : Tests): FormGroup {
-    return this.fb.group({
-      'testName': new FormControl(test.testName, [Validators.required, Validators.maxLength(50)]),
-      'testMaxScore': new FormControl(test.testMaxScore, [Validators.required, Validators.min(1), Validators.max(1000), Validators.pattern("^(0|[1-9][0-9]*)$")]),
-      'testId': new FormControl(test.testId),
-      'removed': new FormControl(test.removed),
-    });
-  }
-
   save() {
-    if (this.isFormValid()) {
-      this.tests = [];
-      console.log(this.tests.length);
-      for (let i = 0; i < this.testRows.length; i++) {
-        let item = this.testRows.at(i);
-        let test = new Tests(item.get('testName').value, item.get('testMaxScore').value);
-        test.setTestRowsWithFormGroup(item);
-        this.tests.push(test);
-      }
-    }
-    this.testRows.controls = [];
-    console.log(this.testRows.length);
-    this.testNamesService.addTests(this.tests, this.groupId).subscribe(() => {
-      this.tests = null;
-      this.ngOnInit();
-    });
+    if(this.isFormValid()){
+      this.removedTests.forEach(test=>{
+        this.testToSave.push(test);
+      });
+      this.testRows.forEach(obj=>{
+          console.log(obj+"saving test forech ===");
+          this.testToSave.push(obj.value);
 
-    this.studRef.setTests(this.tests);
+      });
+      this.testNamesService.addTests(this.testToSave, this.groupId).subscribe(() => {
+        this.tests = [];
+        this.ngOnInit();
+      });
+      this.studRef.setTests(this.testToSave);
+    }
+    else{
+      this.displayValidationDialog = true;
+    }
   }
 
   isFormValid(): boolean {
-    return this.rForm.valid;
+    for(let i=0;i<this.testRows.length;i++)
+    {
+      if(this.testRows[i].value.testName.length >= 50 || this.testRows[i].value.testName == null){
+        console.log("wrong data entered");
+        return false;
+      }
+      if(this.testRows[i].value.testMaxScore>1000 || this.testRows[i].value.testMaxScore<0
+        || this.testRows[i].value.testMaxScore==null){
+        console.log("wrong data entered");
+        return false;
+      }
+    }
+    console.log("true value");
+    return true;
   }
 
-  addTest() {
+  add() {
     if(TestsNamesComponent.counter>=Constants.MaxValueOfTests) {
       return;
     }
     else {
-      this.testRows = this.rForm.get('testRows') as FormArray;
       var testNum = ++TestsNamesComponent.counter;
       let test : Tests = new Tests((Constants.DefaultTestName+(testNum)),Constants.DefaultPoint);
-      this.testRows.push(this.createTestRow(test));
+
+      var keys = this.testRows.map(function(o) { return o.key; });
+      for(let i=1; i<=10;i++){
+        if(keys.indexOf(i)>-1){
+          continue;
+        }
+        else {
+          this.testRows.push({key: i, value: test});
+          break;
+        }
+      }
     }
   }
 
   removeTest() {
     TestsNamesComponent.counter--;
-      let test : Tests = new Tests('',0);
-      this.currTest.get('removed').value = true;
-      test.setTestRowsWithFormGroup(this.currTest);
-      this.testRows.controls.splice(this.currIndex,1,this.createTestRow(test));
+      let test = new Tests('',0);
+      let index = this.tests.indexOf(this.currTest);
+      this.currTest.removed = true;
+      test.setTestRows(this.currTest);
+      this.removedTests.push(test);
+      this.testRows.splice(this.currIndex,1);
       this.displayRemoveDialog = false;
   }
 
-  removeDialog (index : number, item : any) {
+
+  removeDialog (index : number, test : any) {
       this.displayRemoveDialog = true;
       this.currIndex = index;
-      this.currTest = item;
+      this.currTest = new Tests('',0);
+      this.currTest.setTestRows(test);
   }
 
   cancelRemovingClick() {
     this.displayRemoveDialog = false;
   }
 
-  cancelChanges () {
-    this.testRows.controls = [];
+  okAndCLose() {
+    this.displayValidationDialog = false;
+  }
+
+  cancelChanges() {
+    this.testRows = [];
+    this.removedTests = [];
 
     TestsNamesComponent.counter = this.tests.length;
-    if(TestsNamesComponent.counter<=0)
-    {
+    if (TestsNamesComponent.counter <= 0) {
       this.createDefaultTests();
     }
     else {
       for (let i = 0; i < this.tests.length; i++) {
-        this.testRows.push(this.createTestRow(this.tests[i]));
+        let test = new Tests('',0);
+        test.setTestRows(this.tests[i]);
+        this.testRows.push({key : i+1, value : test});
       }
     }
   }
 
   createDefaultTests(){
     for(let i=0;i<5;i++) {
-      this.addTest();
+      this.add();
     }
   }
 
+  updateTab(){
+    this.ngOnInit();
+  }
 
   getTestsTemplate(directionId:number) {
     this.tests = [];
-    this.testRows.controls = [];
     this.testNamesService.getTestTemplates(directionId).subscribe(data => {
       console.log(data);
       this.tests = data;
 
       TestsNamesComponent.counter = this.tests.length;
-
-      if (TestsNamesComponent.counter<=0){
-        this.createDefaultTests();
-      }
-      else {
-        this.testRows = this.rForm.get('testRows') as FormArray;
-        for (let i = 0; i < this.tests.length; i++) {
-          this.testRows.push(this.createTestRow(this.tests[i]));
-        }
-      }
     });
   }
 }
