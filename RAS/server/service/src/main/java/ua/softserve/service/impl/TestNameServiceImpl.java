@@ -61,7 +61,11 @@ public class TestNameServiceImpl implements TestNameService {
         }
         if (testName.getTestName().length() >= 50) {
             throw new InvalidDataException("Test name is incorrect");
-        } else
+        }
+        if(testName.getTestSequenceNum() > 10 || testName.getTestSequenceNum() <=0 || testName.getTestSequenceNum() == null){
+            throw new InvalidDataException("Test sequence number incorrect");
+        }
+        else
             return true;
     }
 

@@ -11,10 +11,8 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-public class AcademyDropDownLists {
+public class AcademyDropDownLists extends DropDownLists{
     List<AcademyStages> academyStages;
-    Set<LanguageTranslations> cityNames;
-    List<Directions> direction;
     List<Technologies> technologie;
     List<ProfileInfo> profile;
 }

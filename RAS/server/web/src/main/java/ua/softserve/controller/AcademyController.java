@@ -1,5 +1,6 @@
 package ua.softserve.controller;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,7 @@ import ua.softserve.persistence.dto.GroupInformationDTO;
 import ua.softserve.service.AcademyService;
 import ua.softserve.service.GroupInfoService;
 import ua.softserve.service.dto.*;
-import ua.softserve.service.impl.AcademyServiceImpl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -28,19 +26,21 @@ public class AcademyController {
 
     @GetMapping(value = "/group/{id}")
     public ResponseEntity<AcademyDTO> getAcademyDTObyId(@PathVariable Integer id) {
-        logger.info("Before groupInfoService.getAcademyDTObyId("+id+")");
         return new ResponseEntity<>(groupInfoService.getAcademyDTObyId(id), HttpStatus.OK);
     }
 
     @GetMapping(value = { "/dropdown", "/get-dropdown-list" })
     public ResponseEntity<AcademyDropDownLists> getDropdownList() {
-        logger.info("Before academyService.getAcademyDTO()");
         return new ResponseEntity<>(academyService.getAcademyDTO(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/get-group-overview-dropdown")
+    public ResponseEntity<GroupOverviewDropDownLists> getDropdownLists(){
+        return new ResponseEntity<>(academyService.getGroupOverviewDTO(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/group/add")
     public ResponseEntity saveGroup(@RequestBody AcademyDTO academyDTO) {
-        logger.info("Before academyService.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO)");
         academyService.saveAcademyAndGroupInfoFromAcademyDTO(academyDTO);
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -50,7 +50,7 @@ public class AcademyController {
         long startTime = System.currentTimeMillis();
         List<GroupInformationDTO> informationAboutGroup = groupInfoService.getAllInformationAboutGroup();
         long endTime = System.currentTimeMillis();
-        logger.info("Time for executing getAllInformationAboutGroup() method in the controller : " + (float)(endTime - startTime)/1000);
+        logger.info("Time for executing method in the controller : " + (float)(endTime - startTime)/1000);
         return new ResponseEntity<>(informationAboutGroup, HttpStatus.OK);
     }
 }

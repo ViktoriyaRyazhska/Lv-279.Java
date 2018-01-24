@@ -22,7 +22,7 @@ export class StudentsComponent implements OnInit {
 
   private academyId: number;
 
-  private tests: any[];
+  private tests: Tests[];
 
   private students: StudentFeedback[];
 
@@ -384,15 +384,19 @@ export class StudentsComponent implements OnInit {
     return true;
   }
 
-  setTests (tests : any[]) {
+  setTests (tests : Tests[]) {
     this.tests = [];
-    tests.forEach(test=>{
-      if(test.value.removed) {
-        let i = tests.indexOf(test);
-        tests.splice(i, 1);
-      }
-    });
 
+    tests.sort(function (a, b) {
+      if ( a.testSequenceNum < b.testSequenceNum )
+        return -1;
+      if ( a.testSequenceNum > b.testSequenceNum )
+        return 1;
+      return 0;
+    });
+    tests.forEach(tes=>{
+      console.log(tes.testSequenceNum + "studentcompinent");
+    });
     this.tests = tests;
   }
 }

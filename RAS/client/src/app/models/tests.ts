@@ -5,6 +5,7 @@ export class Tests {
   testMaxScore: number;
   testName: string;
   removed: boolean;
+  testSequenceNum: number;
 
   constructor(tstName:string,mp:number){
     this.testMaxScore = mp;
@@ -22,6 +23,10 @@ export class Tests {
       this.removed = item.removed;
     }
     else this.removed = false;
+    if(item.testSequenceNum != null) {
+      this.testSequenceNum = item.testSequenceNum;
+    }
+    else this.testSequenceNum = null;
   }
 
     isRemoved():boolean {

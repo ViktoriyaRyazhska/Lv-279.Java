@@ -3,9 +3,11 @@
     <p-row>
       <p-column header="Name" rowspan="3" field="user.firstName" [sortable]="true"
                 [style]="{'width':'10em'}"></p-column>
+
       <p-column rowspan="3" [style]="{'width':'10em'}"></p-column>
+
       <span *ngIf="this.isAssignedAsTeacher || this.isAssignedAsExpert || this.isAssignedAsInterviewer || this.loginService.securityForProvideFeedback()">
-      <p-column rowspan="3" [style]="{'width':'10em'}"></p-column>
+        <p-column rowspan="3" [style]="{'width':'10em'}"></p-column>
       </span>
 
       <p-column header="Teacher Mark" colspan="7" [style]="{'width':'70em'}"></p-column>
@@ -158,7 +160,7 @@
   <p-column [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
       <span>
-        <a (click)="onStudentClick(student)"> {{student.user.firstName +" "+ student.user.lastName}}</a>
+        <a class="cur" (click)="onStudentClick(student)"> {{student.user.firstName +" "+ student.user.lastName}}</a>
       </span>
     </ng-template>
   </p-column>
@@ -166,7 +168,7 @@
   <p-column [style]="{'width':'10em'}">
     <ng-template let-col let-student="rowData" pTemplate="body">
       <span>
-        <a (click)="onOverallClick(student)">Overall feedback</a>
+        <a class="cur" (click)="onOverallClick(student)">Overall feedback</a>
       </span>
     </ng-template>
   </p-column>
@@ -175,7 +177,7 @@
   <p-column [style]="{'width':'10em'}">
       <ng-template let-col let-student="rowData" pTemplate="body">
         <span>
-          <a (click)="onProvideClick(student)">Provide feedback</a>
+          <a class="cur" (click)="onProvideClick(student)">Provide feedback</a>
         </span>
       </ng-template>
     </p-column>
@@ -429,7 +431,7 @@
   </div>
 </p-dialog>
 
-<p-dialog header="Edit Student Overall Feedback" [(visible)]="displayProvideFeedback" (onHide)="onSaveClose()" modal="false" width="1000">
+<p-dialog header="Edit Student Overall Feedback" [(visible)]="displayProvideFeedback" modal="false" width="1000">
   <div *ngIf="selectedStudent && selectedStudent.user">
     <h4>{{selectedStudent.user.firstName +" "+ selectedStudent.user.lastName}}</h4>
     <div class="ui-g-12">
@@ -565,8 +567,7 @@
               <div>Summary comments (risks/strangths, recommendation):</div>
             </td>
             <td colspan="2" width="75%">
-              <!--<textarea pInputTextarea formControlName="summaryTeacher" [style]="{'width':'100%', 'height':'100%'}"></textarea>-->
-              <input type="text" pInputText formControlName="summaryTeacher" style="width: 100%; height: 100%">
+              <textarea maxlength="250" formControlName="summaryTeacher"></textarea>
             </td>
           </tr>
         </table>
@@ -694,7 +695,7 @@
               <div>Summary comments (risks/strangths, recommendation):</div>
             </td>
             <td colspan="2" width="75%">
-              <input type="text" pInputText formControlName="summaryExpert" style="width: 100%; height: 100%">
+              <textarea maxlength="250" formControlName="summaryExpert"></textarea>
             </td>
           </tr>
         </table>
@@ -706,7 +707,7 @@
           </tr>
           <tr>
             <td width="100%">
-              <input type="text" pInputText formControlName="summary" style="width: 100%; height: 100%">
+              <textarea maxlength="250" formControlName="summary"></textarea>
             </td>
           </tr>
         </table>

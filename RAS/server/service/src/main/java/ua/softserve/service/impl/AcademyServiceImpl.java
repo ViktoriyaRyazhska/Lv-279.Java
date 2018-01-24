@@ -10,6 +10,7 @@ import ua.softserve.persistence.repo.AcademyRepository;
 import ua.softserve.service.*;
 import ua.softserve.service.dto.AcademyDTO;
 import ua.softserve.service.dto.AcademyDropDownLists;
+import ua.softserve.service.dto.GroupOverviewDropDownLists;
 import ua.softserve.validator.GroupValidator;
 
 import java.sql.Date;
@@ -30,7 +31,7 @@ public class AcademyServiceImpl implements AcademyService {
     DirectionService directionService;
 
     @Autowired
-    TechnologyServiceImpl technologyServiceImpl;
+    TechnologyService technologyServiceImpl;
 
     @Autowired
     ProfileService profileService;
@@ -49,7 +50,6 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Autowired
     AcademyService academyService;
-
 
     @Autowired
     CityService cityService;
@@ -120,8 +120,6 @@ public class AcademyServiceImpl implements AcademyService {
     @Transactional
     @Override
     public Academy findOne(int id) {
-        logger.info("Before academyRepository.findOne(id)");
-
         Academy findGroup = academyRepository.findOne(id);
         if (findGroup == null) {
             logger.error("Group with id " + id + " not found");
@@ -145,6 +143,21 @@ public class AcademyServiceImpl implements AcademyService {
         academyDropDownLists.setProfile(profileService.findAll());
         academyDropDownLists.setCityNames(languageTranslationsService.getAllLanguageTranslationsName());
         return academyDropDownLists;
+    }
+
+    /**
+     * Method combines information for dropdown lists on the UI to DTO.
+     *
+     * @return DTO that contains information for dropdown lists.
+     */
+    @Transactional
+    @Override
+    public GroupOverviewDropDownLists getGroupOverviewDTO() {
+        GroupOverviewDropDownLists groupOverviewDropDownLists = new GroupOverviewDropDownLists();
+        groupOverviewDropDownLists.setDirection(directionService.findAllDirectionsInIta());
+        groupOverviewDropDownLists.setCityNames(languageTranslationsService.getAllLanguageTranslationsName());
+        groupOverviewDropDownLists.setGroupNames(groupInfoService.findAllGroupsWithAcademies());
+        return groupOverviewDropDownLists;
     }
 
     /**

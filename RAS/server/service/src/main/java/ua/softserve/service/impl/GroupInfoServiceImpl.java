@@ -56,7 +56,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         long startTime = System.currentTimeMillis();
         List<GroupInformationDTO> informationAboutGroups = groupInfoCustomRepository.getAllInformationAboutGroups();
         long endTime = System.currentTimeMillis();
-        logger.info("Time for executing getAllInformationAboutGroup() method in the service : " + (float)(endTime - startTime)/1000);
+        logger.info("Time for executing getAllInformationAboutGroup() method in the service : " + (float) (endTime - startTime) / 1000);
         return informationAboutGroups;
     }
 
@@ -96,19 +96,19 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         academyDTO.setNameForSite(groupInfo.getAcademy().getName());
         academyDTO.setStartDate(groupInfo.getAcademy().getStartDate().getTime());
         academyDTO.setEndDate(groupInfo.getAcademy().getEndDate().getTime());
-        if(groupInfo.getAcademy().getTechnologies() != null) {
+        if (groupInfo.getAcademy().getTechnologies() != null) {
             academyDTO.setTechnologieId(groupInfo.getAcademy().getTechnologies().getTechnologyId());
         }
-        if(groupInfo.getAcademy().getDirections() != null){
+        if (groupInfo.getAcademy().getDirections() != null) {
             academyDTO.setDirectionId(groupInfo.getAcademy().getDirections().getDirectionId());
         }
-        if(groupInfo.getProfileInfo() != null) {
+        if (groupInfo.getProfileInfo() != null) {
             academyDTO.setProfileId(groupInfo.getProfileInfo().getProfileId());
         }
-        if(groupInfo.getAcademy().getAcademyStages() != null) {
+        if (groupInfo.getAcademy().getAcademyStages() != null) {
             academyDTO.setAcademyStagesId(groupInfo.getAcademy().getAcademyStages().getStageId());
         }
-        if(groupInfo.getAcademy().getCity() != null) {
+        if (groupInfo.getAcademy().getCity() != null) {
             academyDTO.setCityId(groupInfo.getAcademy().getCity().getCityId());
         }
         academyDTO.setPayment(groupInfo.getAcademy().getFree());
@@ -118,5 +118,10 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         academyDTO.setStudentsActual(studentService.countAllByAcademyId(groupInfo.getAcademy().getAcademyId()));
 
         return academyDTO;
+    }
+
+    @Override
+    public List<GroupInfo> findAllGroupsWithAcademies() {
+        return groupInfoRepository.findAllGroupsWithAcademies();
     }
 }

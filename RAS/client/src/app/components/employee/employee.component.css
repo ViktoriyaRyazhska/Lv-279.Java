@@ -21,3 +21,6 @@
 span .mat-raised-button{
   background: #5cb85c;
 }
+.cur {
+  cursor:pointer
+}

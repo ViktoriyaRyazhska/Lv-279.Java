@@ -61,6 +61,10 @@ import {MinValidatorDirective} from "./validators/lengthValidator/min-validator.
 import { MaxValidatorDirective } from './validators/lengthValidator/max-validator.directive';
 
 
+import { GroupOverviewByTraineesComponent } from './components/reports/group-overview-by-trainees/group-overview-by-trainees.component';
+import { GroupNamesFilterPipe } from './components/reports/group-overview-by-trainees/group-names-filter.pipe';
+import { GroupOverviewTableComponent } from './components/reports/group-overview-by-trainees/group-overview-table/group-overview-table.component';
+import { ExistValidatorDirective } from './validators/exist-validator.directive';
 
 @NgModule({
   declarations: [
@@ -96,6 +100,11 @@ import { MaxValidatorDirective } from './validators/lengthValidator/max-validato
     ItaTacticalReportComponent,
     MinValidatorDirective,
     MaxValidatorDirective,
+    ItaTacticalReportComponent,
+    GroupOverviewByTraineesComponent,
+    GroupNamesFilterPipe,
+    GroupOverviewTableComponent,
+    ExistValidatorDirective
   ],
   entryComponents: [
     ModalBackdropComponent,

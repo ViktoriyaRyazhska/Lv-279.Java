@@ -16,19 +16,9 @@ import static ua.softserve.persistence.constants.ConstantsFromDb.*;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-    Integer countAllByAcademyAndStudentStatus(Academy academy, StudentStatuses studentStatus);
+    Integer countAllByAcademyAcademyIdAndRemovedIsFalse(int academyId);
 
-    Integer countAllByAcademy_AcademyIdAndRemovedIsFalse(int academyId);
+    Student findStudentByAcademyAcademyIdAndUserId(int academyId, int userId);
 
-    Student findStudentByAcademy_AcademyIdAndUser_Id(int academyId, int userId);
-
-    List<Student> findAllByAcademy_AcademyIdAndRemovedIsFalse (int academyId);
-
-    @Modifying
-    @Query("update Student s set s.removed = :removed where s.id = :studentId")
-    void updateRemovedStatus(@Param("studentId") Integer studentId,@Param("removed") boolean removed);
-
-    @Modifying
-    @Query("update Student s set s.data.interviewerComment = :comment where s.id = :studentId")
-    void updateInterviewerComment(@Param("comment") String comment, @Param("studentId") Integer studentId);
+    List<Student> findAllByAcademyAcademyIdAndRemovedIsFalse (int academyId);
 }

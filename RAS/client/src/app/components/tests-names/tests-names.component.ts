@@ -1,9 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Tests } from "../../models/tests";
 import { TestsService } from "../../services/tests-names/tests.service";
-import { ActivatedRoute } from "@angular/router";
 import { Constants } from "./Constants";
-import {FormBuilder, PatternValidator, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
 import {StudentsComponent} from "../students/students.component";
 
 @Component({
@@ -21,19 +19,17 @@ export class TestsNamesComponent implements OnInit {
   private tests : Tests[];
   static counter : number = 1;
   private invalidTest : Tests;
-  private testRows: any[];
+  private testRows: Tests[];
   private displayRemoveDialog : boolean;
   private displayValidationDialog : boolean;
+  private displaySavedDialog : boolean;
   private currTest : any;
   private currIndex : number;
   private removedTests : Tests[];
   private testToSave : Tests[];
 
-
   constructor(
-    private testNamesService : TestsService,
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
+    private testNamesService : TestsService
   ) {}
 
   ngOnInit() {
@@ -46,34 +42,61 @@ export class TestsNamesComponent implements OnInit {
       this.testRows = [];
       this.removedTests = [];
       this.testToSave = [];
+
       TestsNamesComponent.counter = this.tests.length;
       if (TestsNamesComponent.counter<=0){
         this.createDefaultTests();
       }
       else {
-        for (let i = 0; i < this.tests.length; i++) {
+        this.tests.forEach(obj => {
           let test = new Tests('',0);
-          test.setTestRows(this.tests[i]);
-          this.testRows.push({key : i+1, value : test});
-        }
+          test.setTestRows(obj);
+          if(obj.testSequenceNum==null) {
+            let key = this.testRows.map(function (o) {
+              return o.testSequenceNum;
+            });
+            for (let i = 1; i <= 10; i++) {
+              if (key.indexOf(i) > -1) {
+                continue;
+              }
+              else {
+                test.testSequenceNum = i;
+                this.testRows.push(test);
+                break;
+              }
+            }
+          }
+          else {
+            this.testRows.push(test);
+          }
+        });
       }
     });
   }
 
+
   save() {
     if(this.isFormValid()){
+
       this.removedTests.forEach(test=>{
         this.testToSave.push(test);
       });
-      this.testRows.forEach(obj=>{
-          console.log(obj+"saving test forech ===");
-          this.testToSave.push(obj.value);
 
+      this.testRows.forEach(obj=>{
+          this.testToSave.push(obj);
       });
-      this.testNamesService.addTests(this.testToSave, this.groupId).subscribe(() => {
+
+      this.testNamesService.addTests(this.testToSave, this.groupId).subscribe(res => {
+        if(res==null || res == 200) {
+          this.displaySavedDialog = true;
+        }
+        else {
+          this.displayValidationDialog = true;
+        }
         this.tests = [];
         this.ngOnInit();
       });
+
       this.studRef.setTests(this.testToSave);
     }
     else{
@@ -84,12 +107,12 @@ export class TestsNamesComponent implements OnInit {
   isFormValid(): boolean {
     for(let i=0;i<this.testRows.length;i++)
     {
-      if(this.testRows[i].value.testName.length >= 50 || this.testRows[i].value.testName == null){
+      if(this.testRows[i].testName.length >= 50 || this.testRows[i].testName == null){
         console.log("wrong data entered");
         return false;
       }
-      if(this.testRows[i].value.testMaxScore>1000 || this.testRows[i].value.testMaxScore<0
-        || this.testRows[i].value.testMaxScore==null){
+      if(this.testRows[i].testMaxScore>1000 || this.testRows[i].testMaxScore<0
+        || this.testRows[i].testMaxScore==null){
         console.log("wrong data entered");
         return false;
       }
@@ -106,17 +129,22 @@ export class TestsNamesComponent implements OnInit {
       var testNum = ++TestsNamesComponent.counter;
       let test : Tests = new Tests((Constants.DefaultTestName+(testNum)),Constants.DefaultPoint);
 
-      var keys = this.testRows.map(function(o) { return o.key; });
+      var keys = this.testRows.map(function(o) { return o.testSequenceNum; });
       for(let i=1; i<=10;i++){
         if(keys.indexOf(i)>-1){
           continue;
         }
         else {
-          this.testRows.push({key: i, value: test});
+          test.testSequenceNum = i;
+          this.testRows.push(test);
           break;
         }
       }
     }
+  }
+
+  addUniqueSeqNum () {
+
   }
 
   removeTest() {
@@ -158,7 +186,7 @@ export class TestsNamesComponent implements OnInit {
       for (let i = 0; i < this.tests.length; i++) {
         let test = new Tests('',0);
         test.setTestRows(this.tests[i]);
-        this.testRows.push({key : i+1, value : test});
+        this.testRows.push(test);
       }
     }
   }
@@ -182,5 +210,10 @@ export class TestsNamesComponent implements OnInit {
       TestsNamesComponent.counter = this.tests.length;
     });
   }
+
+  okSaved(){
+    this.displaySavedDialog = false;
+  }
+
 }
 

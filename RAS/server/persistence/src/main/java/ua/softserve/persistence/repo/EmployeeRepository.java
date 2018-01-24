@@ -12,5 +12,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     List<Employee> findAllByOrderByLastNameEngAscFirstNameEngAsc();
 
-    Employee findEmployeesByLoginUserId(int loginUser_id);
+    Employee findEmployeesByLoginUserId(int loginUserId);
 }

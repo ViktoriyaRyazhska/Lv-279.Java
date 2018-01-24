@@ -11,10 +11,6 @@ import java.util.List;
 @Repository
 public interface AcademyRepository extends JpaRepository<Academy, Integer> {
 
-    List<Academy> findAllByStartDateBetween(Timestamp d1, Timestamp d2);
-
-    List<Academy> findAllByAcademyIdIn(List<Integer> listOfId);
-
     @Query("select a.academyId from Academy a order by a.academyId")
     List<Integer> findAllAcademyId();
 }

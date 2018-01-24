@@ -48,18 +48,30 @@
     <br><br>
   </div>
 
-
   <p-dataTable [value]="testRows" [immutable]=false [editable]="true">
-    <p-column *ngIf="removed!=true" field="key" header="#" [editable]="true">
+    <p-column *ngIf="removed!=true" field="testSequenceNum" header="#" [editable]="true">
       <ng-template let-col let-testRow="rowData" pTemplate="editor">
-        <input type="number" pInputText="" [(ngModel)]="testRow.key" [class]="'form-control'"
-               required="true" [min]="0" [max]="10" >
+        <input type="number" pInputText="" [(ngModel)]="testRow.testSequenceNum" [class]="'form-control'"
+               required="true" [min]="0" [max]="10" [exists]="testRows" #testSequenceNum="ngModel">
+        <div *ngIf="testSequenceNum.invalid && (testSequenceNum.dirty || testSequenceNum.touched)"
+             class="alert alert-danger" >
+          <div *ngIf="testSequenceNum.errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="testSequenceNum.errors.min || testSequenceNum.errors.max">
+            Test score must be between 0 and 10.
+          </div>
+          <div *ngIf="testSequenceNum.errors.exists">
+            This number already exist.
+          </div>
+
+        </div>
       </ng-template>
     </p-column>
 
-    <p-column *ngIf="removed!=true" field="value.testName" header="Test Name" [editable]="true">
+    <p-column *ngIf="removed!=true" field="testName" header="Test Name" [editable]="true">
       <ng-template let-col let-testRow="rowData" pTemplate="editor">
-        <input type="text" pInputText="" [(ngModel)]="testRow.value.testName" [class]="'form-control'"
+        <input type="text" pInputText="" [(ngModel)]="testRow.testName" [class]="'form-control'"
                required="true" maxlength="50" #testName="ngModel">
         <div *ngIf="testName.invalid && (testName.dirty || testName.touched)"
              class="alert alert-danger">
@@ -76,9 +88,9 @@
       </ng-template>
     </p-column>
 
-    <p-column *ngIf="removed!=true" field="value.testMaxScore" header="Max Score" [editable]="true">
+    <p-column *ngIf="removed!=true" field="testMaxScore" header="Max Score" [editable]="true">
       <ng-template let-col let-testRow="rowData" pTemplate="editor">
-        <input type="number" pInputText="" [(ngModel)]="testRow.value.testMaxScore" [class]="'form-control'"
+        <input type="number" pInputText="" [(ngModel)]="testRow.testMaxScore" [class]="'form-control'"
                type="number" [min]="0" [max]="1000" pattern="^(0|[1-9][0-9]*)$" required="true"
                #testMaxScore="ngModel">
         <div *ngIf="testMaxScore.invalid && (testMaxScore.dirty || testMaxScore.touched)"
@@ -97,7 +109,7 @@
     </p-column>
     <p-column *ngIf="removed!=true">
       <ng-template let-i="rowIndex" let-testRow="rowData" pTemplate="body">
-          <button mat-raised-button (click)="removeDialog(i,testRow.value)">Remove</button>
+          <button mat-raised-button (click)="removeDialog(i,testRow)">Remove</button>
       </ng-template>
     </p-column>
   </p-dataTable>
@@ -125,5 +137,15 @@
       <h3>You are trying to save invalid data. Check entered data again.</h3>
   </div>
   <button pButton type="button" (click)="okAndCLose()" label="OK!" class="ui-button-danger"
+          style="margin-top: 1em; float: right"></button>
+</p-dialog>
+
+
+<p-dialog header="Saved sucessfully" modal="false" dismissableMask="false" [(visible)]="displaySavedDialog"
+          width="550">
+  <div>
+    <h3>Saved sucessfully.</h3>
+  </div>
+  <button pButton type="button" (click)="okSaved()" label="OK!" class="ui-button-danger"
           style="margin-top: 1em; float: right"></button>
 </p-dialog>

@@ -12,6 +12,8 @@ import java.util.List;
  */
 @Repository
 public interface TestNamesTemplateRepository extends JpaRepository<TestNamesTemplate, Integer> {
+
     TestNamesTemplate findByTestTemplateId(Integer directionId);
+
     List<TestNamesTemplate> findAllByTechnologies(Technologies technologies);
 }

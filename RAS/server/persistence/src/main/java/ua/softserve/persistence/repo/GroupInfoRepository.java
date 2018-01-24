@@ -19,4 +19,8 @@ public interface GroupInfoRepository extends JpaRepository<GroupInfo, Integer> {
      * @return returns data from GroupInfo table.
      */
     GroupInfo findByAcademyAcademyId(int academyId);
+
+    @Query(value = "select * from group_info as gi left join academy as a on gi.academy_id = a.academy_id",
+            nativeQuery = true)
+    List<GroupInfo> findAllGroupsWithAcademies();
 }

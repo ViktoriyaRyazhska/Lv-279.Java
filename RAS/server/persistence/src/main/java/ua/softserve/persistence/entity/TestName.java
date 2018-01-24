@@ -28,6 +28,9 @@ public class TestName {
     @Column(name = "test_max_score")
     private Double testMaxScore;
 
+    @Column(name = "test_sequence")
+    private Integer testSequenceNum;
+
     @Transient
     private boolean removed;
 
