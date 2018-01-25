@@ -107,7 +107,7 @@
         </div>
       </ng-template>
     </p-column>
-    <p-column *ngIf="removed!=true">
+    <p-column *ngIf="removed!=true" class="additionalclass">
       <ng-template let-i="rowIndex" let-testRow="rowData" pTemplate="body">
           <button mat-raised-button class="rais-additional" (click)="removeDialog(i,testRow)">Remove</button>
       </ng-template>
@@ -123,13 +123,12 @@
       test list?</h3>
     </div>
   </div>
-  <button mat-raised-button type="button" (click)="cancelRemovingClick()" label="Cancel" class="ui-button-secondary rais-additional"
+  <button pButton type="button" (click)="cancelRemovingClick()" label="Cancel" class="ui-button-secondary"
           style="margin-top: 1em; float: right"></button>
 
-  <button  mat-raised-button type="button" (click)="removeTest()" label="Remove" class="ui-button-danger rais-additional"
+  <button   pButton type="button" (click)="removeTest()" label="Remove" class="ui-button-danger"
           style="margin-top: 1em; float: right"></button>
 </p-dialog>
-
 
 <p-dialog header="Invalid data" modal="false" dismissableMask="false" [(visible)]="displayValidationDialog"
           width="550">

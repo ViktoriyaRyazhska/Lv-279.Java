@@ -218,6 +218,10 @@ input.ng-invalid {
   background-color: #d9534f;
 }
 
-.saveColor{
-  background-color: #08bd4b;
+.row .saveColor{
+  background: #5cb85c;
+}
+
+.additionalclass .rais-additional{
+  background-color: #d9534f;
 }

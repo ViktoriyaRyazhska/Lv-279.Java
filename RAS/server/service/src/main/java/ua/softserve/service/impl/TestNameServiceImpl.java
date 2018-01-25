@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.softserve.persistence.entity.Academy;
 import ua.softserve.persistence.entity.TestName;
 import ua.softserve.persistence.entity.TestNamesTemplate;
 import ua.softserve.persistence.repo.TechnologiesRepository;
@@ -15,6 +16,10 @@ import ua.softserve.service.exception.InvalidDataException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Service processes information that returns Repositories.
+ */
 
 @Service
 public class TestNameServiceImpl implements TestNameService {
@@ -32,6 +37,14 @@ public class TestNameServiceImpl implements TestNameService {
 
     private static final Logger logger = LogManager.getLogger(TestNameServiceImpl.class);
 
+
+    /**
+     * Method remove data with appropriate flag or save data to db.
+     *
+     * @param testNames that comes from client
+     * @param academyId
+     * @return boolean
+     */
     @Override
     @Transactional
     public boolean saveTestNames(List<TestName> testNames, Integer academyId) {
@@ -74,19 +87,27 @@ public class TestNameServiceImpl implements TestNameService {
         return testNameRepository.findAll();
     }
 
+    /**
+     * Method get all tests templates for special direction and push it to testName.
+     *
+     * @param groupId that comes from client
+     * @param directionId that comes from client
+     * @return List<TestName>
+     */
     @Override
     @Transactional(readOnly = true)
     public List<TestName> findAllTestNamesByAcademyId(Integer groupId, Integer directionId) {
-        if (testNameRepository.findAllTestNamesByGroupId(academyService.findOne(groupId)).isEmpty()){
+        Academy academy = academyService.findOne(groupId);
+        if (testNameRepository.findAllTestNamesByGroupId(academy).isEmpty()){
             List<TestNamesTemplate> testNamesTemplates = testNamesTemplateService.getAllByDirectionId(directionId);
             List<TestName> testNames = new ArrayList<>();
             for (TestNamesTemplate testNamesTemplate : testNamesTemplates){
-                testNames.add(new TestName(academyService.findOne(groupId),testNamesTemplate.getTestName(),testNamesTemplate.getTestMaxScore()));
+                testNames.add(new TestName(academy,testNamesTemplate.getTestName(),testNamesTemplate.getTestMaxScore()));
             }
             return testNames;
         }
         else {
-            return testNameRepository.findAllTestNamesByGroupId(academyService.findOne(groupId));
+            return testNameRepository.findAllTestNamesByGroupId(academy);
         }
     }
 

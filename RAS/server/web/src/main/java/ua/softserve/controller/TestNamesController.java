@@ -30,6 +30,7 @@ public class TestNamesController {
             return new ResponseEntity<List<TestName>>(testNameService.findAllTestNamesByAcademyId(groupId, directionId), HttpStatus.OK);
         }
         catch (NoSuchElementException e) {
+            logger.catching(e);
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Group with id " + groupId + " not found");
@@ -55,6 +56,7 @@ public class TestNamesController {
             return new ResponseEntity<List<TestNamesTemplate>>(testNamesTemplateService.getAllByDirectionId(directionId), HttpStatus.OK);
         }
         catch (NoSuchElementException e) {
+            logger.catching(e);
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("template with id " + directionId + " not found");
