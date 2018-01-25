@@ -42,8 +42,8 @@
 
 <div *ngIf="testRows">
   <div class="row">
-    <button class="col-sm-1-cust" mat-raised-button (click)="add();">Add test</button>
-    <button class="btn btn-primary" mat-raised-button type="submit" (click)="save()">Save</button>
+    <button class="col-sm-1-cust" mat-raised-button (click)="add();" color="primary">Add test</button>
+    <button class="btn btn-primary saveColor" mat-raised-button  color="primary" type="submit" (click)="save();">Save</button>
     <button mat-raised-button (click)="cancelChanges();">Cancel</button>
     <br><br>
   </div>
@@ -109,7 +109,7 @@
     </p-column>
     <p-column *ngIf="removed!=true">
       <ng-template let-i="rowIndex" let-testRow="rowData" pTemplate="body">
-          <button mat-raised-button (click)="removeDialog(i,testRow)">Remove</button>
+          <button mat-raised-button class="rais-additional" (click)="removeDialog(i,testRow)">Remove</button>
       </ng-template>
     </p-column>
   </p-dataTable>
@@ -123,10 +123,10 @@
       test list?</h3>
     </div>
   </div>
-  <button pButton type="button" (click)="cancelRemovingClick()" label="Cancel" class="ui-button-secondary"
+  <button mat-raised-button type="button" (click)="cancelRemovingClick()" label="Cancel" class="ui-button-secondary rais-additional"
           style="margin-top: 1em; float: right"></button>
 
-  <button pButton type="button" (click)="removeTest()" label="Remove" class="ui-button-danger"
+  <button  mat-raised-button type="button" (click)="removeTest()" label="Remove" class="ui-button-danger rais-additional"
           style="margin-top: 1em; float: right"></button>
 </p-dialog>
 
