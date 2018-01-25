@@ -23,7 +23,7 @@
         <ul class="col-sm-6 form-group" id="UL_right_column">
           <div class="row">
             <mat-form-field class="col-sm-6">
-              <mat-select placeholder="Translation:" formControlName="cityIdFormControl">
+              <mat-select placeholder="Location:" formControlName="cityIdFormControl">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let city of cityNames" [value]="city.itemId">{{ city.trasnlation }}</mat-option>
               </mat-select>
